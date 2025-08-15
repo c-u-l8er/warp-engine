@@ -321,8 +321,14 @@ defmodule IsLabDB do
     # Phase 3: Create advanced spacetime shards with physics laws
     {:ok, spacetime_shards, gravitational_router} = initialize_phase3_sharding_system(opts)
 
-    # Phase 4: Initialize Event Horizon Cache System
-    {:ok, event_horizon_caches, cache_coherence_manager} = initialize_phase4_cache_system(opts)
+    # Phase 4: Initialize Event Horizon Cache System (unless disabled)
+    {event_horizon_caches, cache_coherence_manager} =
+      if Keyword.get(opts, :disable_phase4, false) do
+        {%{}, nil}
+      else
+        {:ok, caches, manager} = initialize_phase4_cache_system(opts)
+        {caches, manager}
+      end
 
     # Legacy: Create ETS tables for backward compatibility
     spacetime_tables = extract_legacy_tables(spacetime_shards)
@@ -395,8 +401,12 @@ defmodule IsLabDB do
             updated_shards = Map.put(state.spacetime_shards, shard_id, updated_shard)
             shard_updated_state = %{state | spacetime_shards: updated_shards}
 
-            # Phase 4: Store in Event Horizon Cache for ultra-fast access
-            cache_updated_state = store_in_event_horizon_cache(shard_updated_state, key, value, shard_id, opts)
+            # Phase 4: Store in Event Horizon Cache for ultra-fast access (if enabled)
+            cache_updated_state = if map_size(state.event_horizon_caches) > 0 do
+              store_in_event_horizon_cache(shard_updated_state, key, value, shard_id, opts)
+            else
+              shard_updated_state
+            end
 
             # Legacy: Also store in ETS table for compatibility
             legacy_table = Map.get(state.spacetime_tables, shard_id)
@@ -443,8 +453,14 @@ defmodule IsLabDB do
   def handle_call({:cosmic_get, key}, _from, state) do
     start_time = :os.system_time(:microsecond)
 
-    # Phase 4: Check Event Horizon Cache first for ultra-fast access
-    case check_event_horizon_cache(state, key) do
+    # Phase 4: Check Event Horizon Cache first for ultra-fast access (if enabled)
+    cache_result = if map_size(state.event_horizon_caches) > 0 do
+      check_event_horizon_cache(state, key)
+    else
+      {:cache_miss, state}
+    end
+
+    case cache_result do
       {:cache_hit, value, cache_updated_state, _cache_metadata} ->
         end_time = :os.system_time(:microsecond)
         operation_time = end_time - start_time
@@ -464,8 +480,12 @@ defmodule IsLabDB do
             updated_shards = Map.put(cache_updated_state.spacetime_shards, shard_id, updated_shard)
             shard_updated_state = %{cache_updated_state | spacetime_shards: updated_shards}
 
-            # Cache the retrieved value for future access
-            cache_retrieved_value(shard_updated_state, key, value, shard_id)
+            # Cache the retrieved value for future access (if Phase 4 enabled)
+            if map_size(shard_updated_state.event_horizon_caches) > 0 do
+              cache_retrieved_value(shard_updated_state, key, value, shard_id)
+            else
+              shard_updated_state
+            end
 
           _ ->
             cache_updated_state
@@ -559,6 +579,18 @@ defmodule IsLabDB do
       {shard, status}
     end)
 
+    # Also delete from Event Horizon Caches if Phase 4 is enabled
+    if map_size(state.event_horizon_caches) > 0 do
+      Enum.each(state.event_horizon_caches, fn {_cache_id, cache} ->
+        # Delete from all cache levels manually since there's no delete/2 function
+        :ets.delete(cache.event_horizon_table, key)
+        :ets.delete(cache.photon_sphere_table, key)
+        :ets.delete(cache.deep_cache_table, key)
+        :ets.delete(cache.singularity_storage, key)
+        :ets.delete(cache.metadata_table, key)
+      end)
+    end
+
     # Remove any quantum entanglements
     QuantumIndex.remove_entanglement(key)
 
@@ -647,7 +679,11 @@ defmodule IsLabDB do
       wormhole_network: collect_wormhole_metrics(state.wormhole_network),
       gravitational_routing: gravitational_metrics,
       event_horizon_cache: collect_event_horizon_cache_metrics(state.event_horizon_caches),
-      phase: "Phase 4: Event Horizon Cache System"
+      phase: if map_size(state.event_horizon_caches) > 0 do
+        "Phase 4: Event Horizon Cache System"
+      else
+        "Phase 3: Spacetime Sharding System"
+      end
     }
 
     {:reply, metrics, state}
@@ -898,67 +934,11 @@ defmodule IsLabDB do
     end)
   end
 
-  # Legacy function - kept for potential backward compatibility but unused in Phase 4
-  @dialyzer {:nowarn_function, create_spacetime_table: 1}
-  defp create_spacetime_table(shard_name) do
-    :ets.new(:"spacetime_#{shard_name}", [
-      :set, :public, :named_table,
-      {:read_concurrency, true},
-      {:write_concurrency, true},
-      {:decentralized_counters, true}
-    ])
-  end
 
-  # Legacy function - Phase 4 uses event horizon cache and gravitational router instead
-  @dialyzer {:nowarn_function, determine_spacetime_shard: 4}
-  defp determine_spacetime_shard(key, value, opts, state) do
-    # Legacy function - Phase 3 uses gravitational router instead
-    # This is kept for backward compatibility only
-    case GravitationalRouter.route_data(state.gravitational_router, key, value, opts) do
-      {:ok, shard_id, _metadata} -> shard_id
-      {:error, _reason} ->
-        # Fallback to original logic
-        # Use priority and key characteristics for balanced routing
-        access_pattern = Keyword.get(opts, :access_pattern, :balanced)
-        priority = Keyword.get(opts, :priority, :normal)
 
-        case access_pattern do
-          :hot -> :hot_data
-          :cold -> :cold_data
-          :warm -> :warm_data
-          :balanced ->
-            # Use priority and key characteristics for balanced routing
-            case priority do
-              p when p in [:critical, :high] -> :hot_data
-              :normal -> :warm_data
-              p when p in [:low, :background] -> :cold_data
-            end
-          _ ->
-            # Use consistent hashing for other patterns
-            shard_index = :erlang.phash2({key, value}) |> rem(3)
-            case shard_index do
-              0 -> :hot_data
-              1 -> :warm_data
-              2 -> :cold_data
-            end
-        end
-    end
-  end
 
-  # Legacy function - kept for potential backward compatibility but unused in Phase 4
-  @dialyzer {:nowarn_function, find_in_spacetime_shards: 2}
-  defp find_in_spacetime_shards(key, spacetime_tables) do
-    # Search all shards in order of likelihood (hot -> warm -> cold)
-    search_order = [:hot_data, :warm_data, :cold_data]
 
-    Enum.find_value(search_order, {:error, :not_found}, fn shard ->
-      table = Map.get(spacetime_tables, shard)
-      case :ets.lookup(table, key) do
-        [{^key, value}] -> {:ok, value, shard}
-        [] -> nil
-      end
-    end)
-  end
+
 
   defp start_persistence_coordinator() do
     # Start a background process to coordinate filesystem persistence

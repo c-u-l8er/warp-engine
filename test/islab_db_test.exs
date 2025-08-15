@@ -93,7 +93,7 @@ defmodule IsLabDBTest do
     test "cosmic_put stores data successfully" do
       assert {:ok, :stored, shard, operation_time} = IsLabDB.cosmic_put("test:key1", %{data: "value1"})
 
-      assert shard in [:hot_data, :warm_data, :cold_data]
+      assert shard in [:hot_data, :warm_data, :cold_data, :event_horizon_cache]
       assert is_integer(operation_time)
       assert operation_time > 0
     end
@@ -108,7 +108,7 @@ defmodule IsLabDBTest do
       # Retrieve it
       assert {:ok, %{important: "data", number: 42}, retrieved_shard, operation_time} = IsLabDB.cosmic_get("test:key2")
 
-      assert retrieved_shard in [:hot_data, :warm_data, :cold_data]
+      assert retrieved_shard in [:hot_data, :warm_data, :cold_data, :event_horizon_cache]
       assert is_integer(operation_time)
       assert operation_time > 0
     end
@@ -177,7 +177,7 @@ defmodule IsLabDBTest do
           physics_laws: laws
         } = region
 
-        assert shard in [:hot_data, :warm_data, :cold_data]
+        assert shard in [:hot_data, :warm_data, :cold_data, :event_horizon_cache]
         assert is_integer(items) and items >= 0
         assert is_integer(memory) and memory >= 0
         assert is_map(laws)

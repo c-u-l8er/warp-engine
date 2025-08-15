@@ -522,6 +522,7 @@ defmodule IsLabDB.EventHorizonCache do
       :normal -> 1.0
       :low -> 0.7
       :background -> 0.3
+      _ -> 1.0  # Default to normal priority for any invalid priority
     end
 
     %{
