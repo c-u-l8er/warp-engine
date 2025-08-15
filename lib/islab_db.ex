@@ -48,11 +48,13 @@ defmodule IsLabDB do
   use GenServer
   require Logger
 
-  alias IsLabDB.{CosmicPersistence, CosmicConstants, QuantumIndex}
+  alias IsLabDB.{CosmicPersistence, CosmicConstants, QuantumIndex, SpacetimeShard, GravitationalRouter}
 
   defstruct [
     :universe_state,          # :stable, :rebalancing, :expanding, :collapsing
-    :spacetime_tables,        # ETS tables for different energy levels
+    :spacetime_shards,        # Phase 3: Advanced spacetime shards with physics laws
+    :gravitational_router,    # Phase 3: Intelligent routing system
+    :spacetime_tables,        # Legacy: ETS tables for backward compatibility
     :persistence_coordinator, # Background persistence process PID
     :cosmic_metrics,          # Performance and entropy metrics
     :startup_time,            # When this universe began
@@ -314,12 +316,11 @@ defmodule IsLabDB do
     # Initialize quantum entanglement system
     QuantumIndex.initialize_quantum_system()
 
-    # Create ETS tables for different spacetime regions
-    spacetime_tables = %{
-      hot_data: create_spacetime_table(:hot_data),
-      warm_data: create_spacetime_table(:warm_data),
-      cold_data: create_spacetime_table(:cold_data)
-    }
+    # Phase 3: Create advanced spacetime shards with physics laws
+    {:ok, spacetime_shards, gravitational_router} = initialize_phase3_sharding_system(opts)
+
+    # Legacy: Create ETS tables for backward compatibility
+    spacetime_tables = extract_legacy_tables(spacetime_shards)
 
     # Initialize quantum entanglement rules
     entanglement_rules = Keyword.get(opts, :entanglement_rules, default_entanglement_rules())
@@ -342,6 +343,8 @@ defmodule IsLabDB do
 
     state = %IsLabDB{
       universe_state: :stable,
+      spacetime_shards: spacetime_shards,
+      gravitational_router: gravitational_router,
       spacetime_tables: spacetime_tables,
       persistence_coordinator: start_persistence_coordinator(),
       cosmic_metrics: initialize_cosmic_metrics(),
@@ -360,8 +363,10 @@ defmodule IsLabDB do
 
     Logger.info("✨ IsLabDB universe is stable and ready for cosmic operations")
     Logger.info("🌌 Data root: #{CosmicPersistence.data_root()}")
-    Logger.info("⚛️  Spacetime shards: #{Map.keys(spacetime_tables) |> Enum.join(", ")}")
+    Logger.info("🪐 Advanced spacetime shards: #{Map.keys(spacetime_shards) |> Enum.join(", ")}")
+    Logger.info("🎯 Gravitational routing: #{gravitational_router.routing_algorithm} algorithm")
     Logger.info("🔗 Entanglement rules: #{length(entanglement_rules)} patterns configured")
+    Logger.info("🚀 Phase 3: Spacetime Sharding System - ACTIVE")
 
     {:ok, restored_state}
   end
@@ -369,58 +374,88 @@ defmodule IsLabDB do
   def handle_call({:cosmic_put, key, value, opts}, _from, state) do
     start_time = :os.system_time(:microsecond)
 
-    # Determine appropriate spacetime shard based on access pattern and physics
-    shard = determine_spacetime_shard(key, value, opts, state)
-    table = Map.get(state.spacetime_tables, shard)
+    # Phase 3: Use gravitational router to determine optimal shard
+    case GravitationalRouter.route_data(state.gravitational_router, key, value, opts) do
+      {:ok, shard_id, routing_metadata} ->
+        # Get the spacetime shard
+        spacetime_shard = Map.get(state.spacetime_shards, shard_id)
 
-    # Store in ETS table for fast access
-    :ets.insert(table, {key, value})
+        # Phase 3: Store using advanced shard with gravitational effects
+        case SpacetimeShard.gravitational_put(spacetime_shard, key, value, opts) do
+          {:ok, updated_shard, storage_metadata} ->
+            # Update shard in state
+            updated_shards = Map.put(state.spacetime_shards, shard_id, updated_shard)
+            updated_state = %{state | spacetime_shards: updated_shards}
 
-    # Create cosmic record with metadata
-    additional_metadata = Keyword.get(opts, :custom_metadata, %{})
-    cosmic_record = CosmicPersistence.create_cosmic_record(key, value, shard, additional_metadata)
+            # Legacy: Also store in ETS table for compatibility
+            legacy_table = Map.get(state.spacetime_tables, shard_id)
+            :ets.insert(legacy_table, {key, value})
 
-    # Persist to filesystem asynchronously to avoid blocking
-    Task.start(fn ->
-      data_type = CosmicPersistence.extract_data_type(key)
-      CosmicPersistence.persist_cosmic_record(cosmic_record, data_type)
-    end)
+            # Create cosmic record with enhanced metadata
+            additional_metadata = Map.merge(
+              Keyword.get(opts, :custom_metadata, %{}),
+              %{gravitational_metadata: routing_metadata, storage_metadata: storage_metadata}
+            )
+            cosmic_record = CosmicPersistence.create_cosmic_record(key, value, shard_id, additional_metadata)
 
-    # Handle quantum entanglement if specified
-    if entangled_with = Keyword.get(opts, :entangled_with) do
-      create_entanglement_links(key, entangled_with, state)
+            # Persist to filesystem asynchronously
+            Task.start(fn ->
+              data_type = CosmicPersistence.extract_data_type(key)
+              CosmicPersistence.persist_cosmic_record(cosmic_record, data_type)
+            end)
+
+            # Handle quantum entanglement if specified
+            if entangled_with = Keyword.get(opts, :entangled_with) do
+              create_entanglement_links(key, entangled_with, updated_state)
+            end
+
+            # Apply automatic entanglement patterns
+            QuantumIndex.apply_entanglement_patterns(key, value)
+
+            end_time = :os.system_time(:microsecond)
+            total_operation_time = end_time - start_time
+
+            # Update cosmic metrics
+            update_cosmic_metrics(updated_state, :put, total_operation_time, shard_id)
+
+            {:reply, {:ok, :stored, shard_id, total_operation_time}, updated_state}
+
+          {:error, reason} ->
+            {:reply, {:error, reason}, state}
+        end
+
+      {:error, reason} ->
+        {:reply, {:error, reason}, state}
     end
-
-    # Apply automatic entanglement patterns
-    QuantumIndex.apply_entanglement_patterns(key, value)
-
-    end_time = :os.system_time(:microsecond)
-    operation_time = end_time - start_time
-
-    # Update cosmic metrics
-    update_cosmic_metrics(state, :put, operation_time, shard)
-
-    {:reply, {:ok, :stored, shard, operation_time}, state}
   end
 
   def handle_call({:cosmic_get, key}, _from, state) do
     start_time = :os.system_time(:microsecond)
 
-    # Use basic search for backward compatibility
-    result = find_in_spacetime_shards(key, state.spacetime_tables)
+    # Phase 3: Use gravitational shards for retrieval
+    result = find_in_gravitational_shards(key, state.spacetime_shards)
+
+    # Update state if shard was modified (access patterns)
+    updated_state = case result do
+      {:ok, _value, shard_id, updated_shard} ->
+        updated_shards = Map.put(state.spacetime_shards, shard_id, updated_shard)
+        %{state | spacetime_shards: updated_shards}
+      _ ->
+        state
+    end
 
     end_time = :os.system_time(:microsecond)
     operation_time = end_time - start_time
 
     # Update cosmic metrics
     case result do
-      {:ok, _value, shard} -> update_cosmic_metrics(state, :get_hit, operation_time, shard)
-      {:error, :not_found} -> update_cosmic_metrics(state, :get_miss, operation_time, :all)
+      {:ok, _value, shard, _updated_shard} -> update_cosmic_metrics(updated_state, :get_hit, operation_time, shard)
+      {:error, :not_found} -> update_cosmic_metrics(updated_state, :get_miss, operation_time, :all)
     end
 
     case result do
-      {:ok, value, shard} -> {:reply, {:ok, value, shard, operation_time}, state}
-      {:error, :not_found} -> {:reply, {:error, :not_found, operation_time}, state}
+      {:ok, value, shard, _updated_shard} -> {:reply, {:ok, value, shard, operation_time}, updated_state}
+      {:error, :not_found} -> {:reply, {:error, :not_found, operation_time}, updated_state}
     end
   end
 
@@ -508,6 +543,35 @@ defmodule IsLabDB do
     {:reply, {:ok, deletion_results, operation_time}, state}
   end
 
+  def handle_call(:force_gravitational_rebalancing, _from, state) do
+    Logger.info("🌌 Manual gravitational rebalancing initiated")
+
+    # Use Phase 3 gravitational router for intelligent rebalancing
+    analysis = GravitationalRouter.analyze_load_distribution(state.gravitational_router)
+
+    {:ok, rebalance_results} = GravitationalRouter.execute_gravitational_rebalancing(state.gravitational_router, analysis)
+    Logger.info("✅ Gravitational rebalancing completed: #{rebalance_results.successful_migrations} migrations")
+    updated_state = %{state | universe_state: :rebalancing}
+
+    # Schedule return to stable state
+    Process.send_after(self(), :rebalancing_complete, 5_000)
+
+    {:reply, {:ok, rebalance_results}, updated_state}
+  end
+
+  def handle_call(:get_spacetime_shard_metrics, _from, state) do
+    shard_metrics = Enum.map(state.spacetime_shards, fn {shard_id, shard} ->
+      {shard_id, SpacetimeShard.get_shard_metrics(shard)}
+    end) |> Enum.into(%{})
+
+    {:reply, shard_metrics, state}
+  end
+
+  def handle_call(:analyze_load_distribution, _from, state) do
+    analysis = GravitationalRouter.analyze_load_distribution(state.gravitational_router)
+    {:reply, analysis, state}
+  end
+
   def handle_call(:cosmic_metrics, _from, state) do
     current_time = :os.system_time(:millisecond)
 
@@ -532,6 +596,9 @@ defmodule IsLabDB do
     # Filesystem statistics
     persistence_stats = collect_filesystem_statistics()
 
+    # Phase 3: Enhanced metrics with gravitational router data
+    gravitational_metrics = GravitationalRouter.get_routing_metrics(state.gravitational_router)
+
     metrics = %{
       universe_state: state.universe_state,
       uptime_ms: current_time - state.startup_time,
@@ -549,7 +616,9 @@ defmodule IsLabDB do
         rules_count: length(state.entanglement_rules),
         quantum_metrics: QuantumIndex.quantum_metrics()
       },
-      wormhole_network: collect_wormhole_metrics(state.wormhole_network)
+      wormhole_network: collect_wormhole_metrics(state.wormhole_network),
+      gravitational_routing: gravitational_metrics,
+      phase: "Phase 3: Spacetime Sharding System"
     }
 
     {:reply, metrics, state}
@@ -630,8 +699,116 @@ defmodule IsLabDB do
     {:noreply, state}
   end
 
+  @doc """
+  Force cosmic rebalancing using the gravitational router.
+
+  Phase 3 enhancement that uses intelligent load analysis and migration.
+  """
+  def force_gravitational_rebalancing() do
+    GenServer.call(__MODULE__, :force_gravitational_rebalancing)
+  end
+
+  @doc """
+  Get advanced spacetime shard metrics including gravitational fields.
+
+  Phase 3 enhancement providing detailed physics-based metrics.
+  """
+  def get_spacetime_shard_metrics() do
+    GenServer.call(__MODULE__, :get_spacetime_shard_metrics)
+  end
+
+  @doc """
+  Analyze current load distribution across shards.
+
+  Returns comprehensive analysis using the gravitational router.
+  """
+  def analyze_load_distribution() do
+    GenServer.call(__MODULE__, :analyze_load_distribution)
+  end
+
   ## PRIVATE HELPER FUNCTIONS
 
+  defp initialize_phase3_sharding_system(_opts) do
+    Logger.info("🌌 Initializing Phase 3: Spacetime Sharding System...")
+
+    # Define physics laws for each shard type
+    shard_configs = [
+      {
+        :hot_data,
+        %{
+          consistency_model: :strong,
+          time_dilation: 0.5,
+          gravitational_mass: 2.0,
+          energy_threshold: 2000,
+          max_capacity: 50_000,
+          entropy_limit: 1.5
+        }
+      },
+      {
+        :warm_data,
+        %{
+          consistency_model: :eventual,
+          time_dilation: 1.0,
+          gravitational_mass: 1.0,
+          energy_threshold: 1000,
+          max_capacity: 25_000,
+          entropy_limit: 2.0
+        }
+      },
+      {
+        :cold_data,
+        %{
+          consistency_model: :weak,
+          time_dilation: 2.0,
+          gravitational_mass: 0.3,
+          energy_threshold: 500,
+          max_capacity: 10_000,
+          entropy_limit: 3.0
+        }
+      }
+    ]
+
+    # Create spacetime shards with physics laws
+    shards = Enum.reduce(shard_configs, %{}, fn {shard_id, physics_laws}, acc ->
+      {:ok, shard} = SpacetimeShard.create_shard(shard_id, physics_laws, [named_table: true])
+      Map.put(acc, shard_id, shard)
+    end)
+
+    # Initialize gravitational router
+    shard_list = Map.values(shards)
+    {:ok, router} = GravitationalRouter.initialize(shard_list, [
+      routing_algorithm: :gravitational,
+      cache_size: 1000,
+      rebalancing_threshold: 0.3
+    ])
+
+    Logger.info("✨ Phase 3 spacetime sharding system ready")
+    {:ok, shards, router}
+  end
+
+  defp extract_legacy_tables(spacetime_shards) do
+    # Extract ETS tables for backward compatibility
+    Enum.reduce(spacetime_shards, %{}, fn {shard_id, shard}, acc ->
+      Map.put(acc, shard_id, shard.ets_table)
+    end)
+  end
+
+  defp find_in_gravitational_shards(key, spacetime_shards) do
+    # Search all shards in order of likelihood (hot -> warm -> cold)
+    search_order = [:hot_data, :warm_data, :cold_data]
+
+    Enum.find_value(search_order, {:error, :not_found}, fn shard_id ->
+      shard = Map.get(spacetime_shards, shard_id)
+      case SpacetimeShard.gravitational_get(shard, key) do
+        {:ok, value, updated_shard, _metadata} -> {:ok, value, shard_id, updated_shard}
+        {:error, :not_found, _time} -> nil
+        {:error, reason, _time} -> {:error, reason}
+      end
+    end)
+  end
+
+  # Legacy function - kept for potential backward compatibility but unused in Phase 3
+  @dialyzer {:nowarn_function, create_spacetime_table: 1}
   defp create_spacetime_table(shard_name) do
     :ets.new(:"spacetime_#{shard_name}", [
       :set, :public, :named_table,
@@ -641,33 +818,44 @@ defmodule IsLabDB do
     ])
   end
 
-  defp determine_spacetime_shard(key, value, opts, _state) do
-    # Determine optimal shard based on multiple factors
-    access_pattern = Keyword.get(opts, :access_pattern, :balanced)
-    priority = Keyword.get(opts, :priority, :normal)
-
-    case access_pattern do
-      :hot -> :hot_data
-      :cold -> :cold_data
-      :warm -> :warm_data
-      :balanced ->
+  # Legacy function - Phase 3 uses gravitational router instead
+  @dialyzer {:nowarn_function, determine_spacetime_shard: 4}
+  defp determine_spacetime_shard(key, value, opts, state) do
+    # Legacy function - Phase 3 uses gravitational router instead
+    # This is kept for backward compatibility only
+    case GravitationalRouter.route_data(state.gravitational_router, key, value, opts) do
+      {:ok, shard_id, _metadata} -> shard_id
+      {:error, _reason} ->
+        # Fallback to original logic
         # Use priority and key characteristics for balanced routing
-        case priority do
-          p when p in [:critical, :high] -> :hot_data
-          :normal -> :warm_data
-          p when p in [:low, :background] -> :cold_data
-        end
-      _ ->
-        # Use consistent hashing for other patterns
-        shard_index = :erlang.phash2({key, value}) |> rem(3)
-        case shard_index do
-          0 -> :hot_data
-          1 -> :warm_data
-          2 -> :cold_data
+        access_pattern = Keyword.get(opts, :access_pattern, :balanced)
+        priority = Keyword.get(opts, :priority, :normal)
+
+        case access_pattern do
+          :hot -> :hot_data
+          :cold -> :cold_data
+          :warm -> :warm_data
+          :balanced ->
+            # Use priority and key characteristics for balanced routing
+            case priority do
+              p when p in [:critical, :high] -> :hot_data
+              :normal -> :warm_data
+              p when p in [:low, :background] -> :cold_data
+            end
+          _ ->
+            # Use consistent hashing for other patterns
+            shard_index = :erlang.phash2({key, value}) |> rem(3)
+            case shard_index do
+              0 -> :hot_data
+              1 -> :warm_data
+              2 -> :cold_data
+            end
         end
     end
   end
 
+  # Legacy function - kept for potential backward compatibility
+  @dialyzer {:nowarn_function, find_in_spacetime_shards: 2}
   defp find_in_spacetime_shards(key, spacetime_tables) do
     # Search all shards in order of likelihood (hot -> warm -> cold)
     search_order = [:hot_data, :warm_data, :cold_data]
