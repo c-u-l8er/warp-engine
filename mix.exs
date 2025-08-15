@@ -49,7 +49,7 @@ defmodule IsLabDB.MixProject do
   defp docs do
     [
       main: "IsLabDB",
-      extras: ["README.md", "docs/complete-roadmap.md", "docs/phase1-quick-start.md"]
+      extras: ["README.md", "docs/complete-roadmap.md", "docs/phase1-quick-start.md", "docs/phase3-completion-summary.md", "docs/phase4-completion-summary.md"]
     ]
   end
 end

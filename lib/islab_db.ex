@@ -33,7 +33,7 @@ defmodule IsLabDB do
 
   - **Spacetime Sharding**: Data automatically routed to appropriate energy levels (hot/warm/cold)
   - **Quantum Entanglement**: Related data can be automatically linked for smart pre-fetching
-  - **Event Horizon Caching**: Black hole mechanics for intelligent memory management
+  - **Event Horizon Caching**: Black hole mechanics with Hawking radiation eviction algorithms
   - **Entropy Monitoring**: Automatic system rebalancing when disorder increases
   - **Temporal Persistence**: All operations automatically persisted with cosmic metadata
 
@@ -48,13 +48,15 @@ defmodule IsLabDB do
   use GenServer
   require Logger
 
-  alias IsLabDB.{CosmicPersistence, CosmicConstants, QuantumIndex, SpacetimeShard, GravitationalRouter}
+  alias IsLabDB.{CosmicPersistence, CosmicConstants, QuantumIndex, SpacetimeShard, GravitationalRouter, EventHorizonCache}
 
   defstruct [
     :universe_state,          # :stable, :rebalancing, :expanding, :collapsing
     :spacetime_shards,        # Phase 3: Advanced spacetime shards with physics laws
     :gravitational_router,    # Phase 3: Intelligent routing system
     :spacetime_tables,        # Legacy: ETS tables for backward compatibility
+    :event_horizon_caches,    # Phase 4: Black hole mechanics caching system
+    :cache_coherence_manager, # Phase 4: Cross-cache consistency and synchronization
     :persistence_coordinator, # Background persistence process PID
     :cosmic_metrics,          # Performance and entropy metrics
     :startup_time,            # When this universe began
@@ -319,6 +321,9 @@ defmodule IsLabDB do
     # Phase 3: Create advanced spacetime shards with physics laws
     {:ok, spacetime_shards, gravitational_router} = initialize_phase3_sharding_system(opts)
 
+    # Phase 4: Initialize Event Horizon Cache System
+    {:ok, event_horizon_caches, cache_coherence_manager} = initialize_phase4_cache_system(opts)
+
     # Legacy: Create ETS tables for backward compatibility
     spacetime_tables = extract_legacy_tables(spacetime_shards)
 
@@ -346,6 +351,8 @@ defmodule IsLabDB do
       spacetime_shards: spacetime_shards,
       gravitational_router: gravitational_router,
       spacetime_tables: spacetime_tables,
+      event_horizon_caches: event_horizon_caches,
+      cache_coherence_manager: cache_coherence_manager,
       persistence_coordinator: start_persistence_coordinator(),
       cosmic_metrics: initialize_cosmic_metrics(),
       startup_time: startup_time,
@@ -365,8 +372,9 @@ defmodule IsLabDB do
     Logger.info("🌌 Data root: #{CosmicPersistence.data_root()}")
     Logger.info("🪐 Advanced spacetime shards: #{Map.keys(spacetime_shards) |> Enum.join(", ")}")
     Logger.info("🎯 Gravitational routing: #{gravitational_router.routing_algorithm} algorithm")
+    Logger.info("🕳️  Event horizon caches: #{Map.keys(event_horizon_caches) |> Enum.join(", ")}")
     Logger.info("🔗 Entanglement rules: #{length(entanglement_rules)} patterns configured")
-    Logger.info("🚀 Phase 3: Spacetime Sharding System - ACTIVE")
+    Logger.info("🚀 Phase 4: Event Horizon Cache System - ACTIVE")
 
     {:ok, restored_state}
   end
@@ -385,7 +393,10 @@ defmodule IsLabDB do
           {:ok, updated_shard, storage_metadata} ->
             # Update shard in state
             updated_shards = Map.put(state.spacetime_shards, shard_id, updated_shard)
-            updated_state = %{state | spacetime_shards: updated_shards}
+            shard_updated_state = %{state | spacetime_shards: updated_shards}
+
+            # Phase 4: Store in Event Horizon Cache for ultra-fast access
+            cache_updated_state = store_in_event_horizon_cache(shard_updated_state, key, value, shard_id, opts)
 
             # Legacy: Also store in ETS table for compatibility
             legacy_table = Map.get(state.spacetime_tables, shard_id)
@@ -406,7 +417,7 @@ defmodule IsLabDB do
 
             # Handle quantum entanglement if specified
             if entangled_with = Keyword.get(opts, :entangled_with) do
-              create_entanglement_links(key, entangled_with, updated_state)
+              create_entanglement_links(key, entangled_with, cache_updated_state)
             end
 
             # Apply automatic entanglement patterns
@@ -416,9 +427,9 @@ defmodule IsLabDB do
             total_operation_time = end_time - start_time
 
             # Update cosmic metrics
-            update_cosmic_metrics(updated_state, :put, total_operation_time, shard_id)
+            update_cosmic_metrics(cache_updated_state, :put, total_operation_time, shard_id)
 
-            {:reply, {:ok, :stored, shard_id, total_operation_time}, updated_state}
+            {:reply, {:ok, :stored, shard_id, total_operation_time}, cache_updated_state}
 
           {:error, reason} ->
             {:reply, {:error, reason}, state}
@@ -432,30 +443,47 @@ defmodule IsLabDB do
   def handle_call({:cosmic_get, key}, _from, state) do
     start_time = :os.system_time(:microsecond)
 
-    # Phase 3: Use gravitational shards for retrieval
-    result = find_in_gravitational_shards(key, state.spacetime_shards)
+    # Phase 4: Check Event Horizon Cache first for ultra-fast access
+    case check_event_horizon_cache(state, key) do
+      {:cache_hit, value, cache_updated_state, _cache_metadata} ->
+        end_time = :os.system_time(:microsecond)
+        operation_time = end_time - start_time
 
-    # Update state if shard was modified (access patterns)
-    updated_state = case result do
-      {:ok, _value, shard_id, updated_shard} ->
-        updated_shards = Map.put(state.spacetime_shards, shard_id, updated_shard)
-        %{state | spacetime_shards: updated_shards}
-      _ ->
-        state
-    end
+        Logger.debug("🕳️  Event horizon cache hit for #{key} (#{operation_time}μs)")
+        update_cosmic_metrics(cache_updated_state, :get_hit, operation_time, :cache)
 
-    end_time = :os.system_time(:microsecond)
-    operation_time = end_time - start_time
+        {:reply, {:ok, value, :event_horizon_cache, operation_time}, cache_updated_state}
 
-    # Update cosmic metrics
-    case result do
-      {:ok, _value, shard, _updated_shard} -> update_cosmic_metrics(updated_state, :get_hit, operation_time, shard)
-      {:error, :not_found} -> update_cosmic_metrics(updated_state, :get_miss, operation_time, :all)
-    end
+      {:cache_miss, cache_updated_state} ->
+        # Phase 3: Fallback to gravitational shards for retrieval
+        result = find_in_gravitational_shards(key, cache_updated_state.spacetime_shards)
 
-    case result do
-      {:ok, value, shard, _updated_shard} -> {:reply, {:ok, value, shard, operation_time}, updated_state}
-      {:error, :not_found} -> {:reply, {:error, :not_found, operation_time}, updated_state}
+        # Update state if shard was modified (access patterns)
+        final_updated_state = case result do
+          {:ok, value, shard_id, updated_shard} ->
+            updated_shards = Map.put(cache_updated_state.spacetime_shards, shard_id, updated_shard)
+            shard_updated_state = %{cache_updated_state | spacetime_shards: updated_shards}
+
+            # Cache the retrieved value for future access
+            cache_retrieved_value(shard_updated_state, key, value, shard_id)
+
+          _ ->
+            cache_updated_state
+        end
+
+        end_time = :os.system_time(:microsecond)
+        operation_time = end_time - start_time
+
+        # Update cosmic metrics
+        case result do
+          {:ok, _value, shard, _updated_shard} -> update_cosmic_metrics(final_updated_state, :get_hit, operation_time, shard)
+          {:error, :not_found} -> update_cosmic_metrics(final_updated_state, :get_miss, operation_time, :all)
+        end
+
+        case result do
+          {:ok, value, shard, _updated_shard} -> {:reply, {:ok, value, shard, operation_time}, final_updated_state}
+          {:error, :not_found} -> {:reply, {:error, :not_found, operation_time}, final_updated_state}
+        end
     end
   end
 
@@ -618,7 +646,8 @@ defmodule IsLabDB do
       },
       wormhole_network: collect_wormhole_metrics(state.wormhole_network),
       gravitational_routing: gravitational_metrics,
-      phase: "Phase 3: Spacetime Sharding System"
+      event_horizon_cache: collect_event_horizon_cache_metrics(state.event_horizon_caches),
+      phase: "Phase 4: Event Horizon Cache System"
     }
 
     {:reply, metrics, state}
@@ -728,6 +757,68 @@ defmodule IsLabDB do
 
   ## PRIVATE HELPER FUNCTIONS
 
+  defp initialize_phase4_cache_system(opts) do
+    Logger.info("🕳️  Initializing Phase 4: Event Horizon Cache System...")
+
+    # Create Event Horizon Caches for each spacetime shard
+    cache_configs = [
+      {
+        :hot_data_cache,
+        [
+          schwarzschild_radius: Keyword.get(opts, :hot_cache_size, 10_000),
+          hawking_temperature: Keyword.get(opts, :hot_cache_eviction_rate, 0.05),
+          enable_compression: true,
+          persistence_enabled: true
+        ]
+      },
+      {
+        :warm_data_cache,
+        [
+          schwarzschild_radius: Keyword.get(opts, :warm_cache_size, 5_000),
+          hawking_temperature: Keyword.get(opts, :warm_cache_eviction_rate, 0.1),
+          enable_compression: true,
+          persistence_enabled: true
+        ]
+      },
+      {
+        :cold_data_cache,
+        [
+          schwarzschild_radius: Keyword.get(opts, :cold_cache_size, 2_000),
+          hawking_temperature: Keyword.get(opts, :cold_cache_eviction_rate, 0.2),
+          enable_compression: true,
+          persistence_enabled: true
+        ]
+      },
+      {
+        :universal_cache,
+        [
+          schwarzschild_radius: Keyword.get(opts, :universal_cache_size, 20_000),
+          hawking_temperature: Keyword.get(opts, :universal_cache_eviction_rate, 0.08),
+          enable_compression: true,
+          persistence_enabled: true
+        ]
+      }
+    ]
+
+    # Create Event Horizon Caches
+    caches = Enum.reduce(cache_configs, %{}, fn {cache_id, cache_opts}, acc ->
+      {:ok, cache} = EventHorizonCache.create_cache(cache_id, cache_opts)
+      Map.put(acc, cache_id, cache)
+    end)
+
+    # Initialize cache coherence manager
+    cache_coherence_manager = %{
+      coherence_protocol: :eventual_consistency,
+      synchronization_interval: 60_000,
+      conflict_resolution: :last_writer_wins,
+      cross_cache_operations: %{},
+      last_coherence_check: :os.system_time(:millisecond)
+    }
+
+    Logger.info("✨ Phase 4 Event Horizon Cache System ready - #{map_size(caches)} caches active")
+    {:ok, caches, cache_coherence_manager}
+  end
+
   defp initialize_phase3_sharding_system(_opts) do
     Logger.info("🌌 Initializing Phase 3: Spacetime Sharding System...")
 
@@ -807,7 +898,7 @@ defmodule IsLabDB do
     end)
   end
 
-  # Legacy function - kept for potential backward compatibility but unused in Phase 3
+  # Legacy function - kept for potential backward compatibility but unused in Phase 4
   @dialyzer {:nowarn_function, create_spacetime_table: 1}
   defp create_spacetime_table(shard_name) do
     :ets.new(:"spacetime_#{shard_name}", [
@@ -818,7 +909,7 @@ defmodule IsLabDB do
     ])
   end
 
-  # Legacy function - Phase 3 uses gravitational router instead
+  # Legacy function - Phase 4 uses event horizon cache and gravitational router instead
   @dialyzer {:nowarn_function, determine_spacetime_shard: 4}
   defp determine_spacetime_shard(key, value, opts, state) do
     # Legacy function - Phase 3 uses gravitational router instead
@@ -854,7 +945,7 @@ defmodule IsLabDB do
     end
   end
 
-  # Legacy function - kept for potential backward compatibility
+  # Legacy function - kept for potential backward compatibility but unused in Phase 4
   @dialyzer {:nowarn_function, find_in_spacetime_shards: 2}
   defp find_in_spacetime_shards(key, spacetime_tables) do
     # Search all shards in order of likelihood (hot -> warm -> cold)
@@ -1044,6 +1135,98 @@ defmodule IsLabDB do
   end
 
 
+
+  ## PHASE 4: EVENT HORIZON CACHE HELPER FUNCTIONS
+
+  defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
+    # Determine which cache to use based on shard and data characteristics
+    cache_id = determine_cache_for_shard(shard_id)
+    cache = Map.get(state.event_horizon_caches, cache_id)
+
+    case EventHorizonCache.put(cache, key, value, opts) do
+      {:ok, updated_cache, _storage_metadata} ->
+        updated_caches = Map.put(state.event_horizon_caches, cache_id, updated_cache)
+        %{state | event_horizon_caches: updated_caches}
+
+      {:error, reason} ->
+        Logger.debug("🕳️  Cache storage failed for #{key}: #{inspect(reason)}")
+        state
+    end
+  end
+
+  defp check_event_horizon_cache(state, key) do
+    # Check all caches for the key (starting with most likely)
+    cache_order = [:universal_cache, :hot_data_cache, :warm_data_cache, :cold_data_cache]
+
+    Enum.reduce_while(cache_order, {:cache_miss, state}, fn cache_id, {_status, current_state} ->
+      cache = Map.get(current_state.event_horizon_caches, cache_id)
+
+      case EventHorizonCache.get(cache, key) do
+        {:ok, value, updated_cache, retrieval_metadata} ->
+          updated_caches = Map.put(current_state.event_horizon_caches, cache_id, updated_cache)
+          final_state = %{current_state | event_horizon_caches: updated_caches}
+          {:halt, {:cache_hit, value, final_state, retrieval_metadata}}
+
+        {:miss, updated_cache} ->
+          updated_caches = Map.put(current_state.event_horizon_caches, cache_id, updated_cache)
+          updated_state = %{current_state | event_horizon_caches: updated_caches}
+          {:cont, {:cache_miss, updated_state}}
+      end
+    end)
+  end
+
+  defp cache_retrieved_value(state, key, value, shard_id) do
+    # Cache the value that was retrieved from shards for future access
+    cache_id = determine_cache_for_shard(shard_id)
+    cache = Map.get(state.event_horizon_caches, cache_id)
+
+    case EventHorizonCache.put(cache, key, value, [priority: :normal]) do
+      {:ok, updated_cache, _metadata} ->
+        updated_caches = Map.put(state.event_horizon_caches, cache_id, updated_cache)
+        %{state | event_horizon_caches: updated_caches}
+
+      {:error, _reason} ->
+        state
+    end
+  end
+
+  defp determine_cache_for_shard(shard_id) do
+    case shard_id do
+      :hot_data -> :hot_data_cache
+      :warm_data -> :warm_data_cache
+      :cold_data -> :cold_data_cache
+      _ -> :universal_cache
+    end
+  end
+
+  defp collect_event_horizon_cache_metrics(event_horizon_caches) do
+    cache_metrics = Enum.map(event_horizon_caches, fn {cache_id, cache} ->
+      {cache_id, EventHorizonCache.get_cache_metrics(cache)}
+    end) |> Enum.into(%{})
+
+    total_items = cache_metrics
+    |> Map.values()
+    |> Enum.reduce(0, fn metrics, acc ->
+      acc + metrics.cache_statistics.event_horizon_items +
+            metrics.cache_statistics.photon_sphere_items +
+            metrics.cache_statistics.deep_cache_items +
+            metrics.cache_statistics.singularity_items
+    end)
+
+    total_memory = cache_metrics
+    |> Map.values()
+    |> Enum.reduce(0, fn metrics, acc -> acc + metrics.cache_statistics.total_memory_bytes end)
+
+    %{
+      total_caches: map_size(event_horizon_caches),
+      total_cached_items: total_items,
+      total_cache_memory_bytes: total_memory,
+      individual_cache_metrics: cache_metrics,
+      hawking_radiation_active: true,
+      spaghettification_enabled: true,
+      schwarzschild_utilization: if(total_items > 0, do: total_items / 50_000, else: 0.0)
+    }
+  end
 
   defp collect_wormhole_metrics(wormhole_network) do
     %{
