@@ -33,7 +33,7 @@ defmodule IsLabDB.MixProject do
       {:jason, "~> 1.4"},           # JSON encoding for human-readable data
       {:benchee, "~> 1.1", only: :dev}, # Performance benchmarking
       {:ex_doc, "~> 0.29", only: :dev}, # Documentation generation
-      {:dialyxir, "~> 1.3", only: :dev}, # Static analysis
+      {:dialyxir, "~> 1.3", only: :dev, runtime: false}, # Static analysis
       {:credo, "~> 1.7", only: :dev}     # Code quality
     ]
   end

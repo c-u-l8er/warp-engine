@@ -48,7 +48,7 @@ defmodule IsLabDB do
   use GenServer
   require Logger
 
-  alias IsLabDB.{CosmicPersistence, CosmicConstants}
+  alias IsLabDB.{CosmicPersistence, CosmicConstants, QuantumIndex}
 
   defstruct [
     :universe_state,          # :stable, :rebalancing, :expanding, :collapsing
@@ -157,6 +157,34 @@ defmodule IsLabDB do
   end
 
   @doc """
+  Retrieve data with full quantum entanglement information.
+
+  Similar to cosmic_get but returns complete quantum data including
+  all entangled partners and quantum metadata.
+
+  ## Parameters
+
+  - `key` - The unique identifier to retrieve
+
+  ## Returns
+
+  `{:ok, quantum_response}` where quantum_response contains:
+  - `:value` - The primary data value
+  - `:shard` - Which shard contained the data
+  - `:operation_time` - Operation time in microseconds
+  - `:quantum_data` - Entangled items and quantum metrics
+
+  ## Examples
+
+      {:ok, response} = IsLabDB.quantum_get("user:alice")
+      primary_data = response.value
+      entangled_profile = response.quantum_data.entangled_items["profile:alice"]
+  """
+  def quantum_get(key) do
+    GenServer.call(__MODULE__, {:quantum_get, key})
+  end
+
+  @doc """
   Remove data from all spacetime regions.
 
   Deletes the data from all ETS tables and removes the persistent files
@@ -250,6 +278,26 @@ defmodule IsLabDB do
     GenServer.call(__MODULE__, {:create_entanglement, primary_key, entangled_keys, strength})
   end
 
+  @doc """
+  Get quantum entanglement metrics and statistics.
+
+  Returns detailed information about the quantum entanglement system,
+  including total entanglements, quantum efficiency, and state distribution.
+
+  ## Returns
+
+  A map containing quantum system metrics and performance statistics.
+
+  ## Examples
+
+      quantum_stats = IsLabDB.quantum_entanglement_metrics()
+      IO.puts("Total entanglements: \#{quantum_stats.total_entanglements}")
+      IO.puts("Quantum efficiency: \#{quantum_stats.quantum_efficiency}")
+  """
+  def quantum_entanglement_metrics() do
+    QuantumIndex.quantum_metrics()
+  end
+
   ## GENSERVER CALLBACKS
 
     def init(opts) do
@@ -262,6 +310,9 @@ defmodule IsLabDB do
 
     # Initialize cosmic filesystem structure
     CosmicPersistence.initialize_universe()
+
+    # Initialize quantum entanglement system
+    QuantumIndex.initialize_quantum_system()
 
     # Create ETS tables for different spacetime regions
     spacetime_tables = %{
@@ -340,6 +391,9 @@ defmodule IsLabDB do
       create_entanglement_links(key, entangled_with, state)
     end
 
+    # Apply automatic entanglement patterns
+    QuantumIndex.apply_entanglement_patterns(key, value)
+
     end_time = :os.system_time(:microsecond)
     operation_time = end_time - start_time
 
@@ -352,7 +406,7 @@ defmodule IsLabDB do
   def handle_call({:cosmic_get, key}, _from, state) do
     start_time = :os.system_time(:microsecond)
 
-    # Search across spacetime shards for the data
+    # Use basic search for backward compatibility
     result = find_in_spacetime_shards(key, state.spacetime_tables)
 
     end_time = :os.system_time(:microsecond)
@@ -367,6 +421,46 @@ defmodule IsLabDB do
     case result do
       {:ok, value, shard} -> {:reply, {:ok, value, shard, operation_time}, state}
       {:error, :not_found} -> {:reply, {:error, :not_found, operation_time}, state}
+    end
+  end
+
+  def handle_call({:quantum_get, key}, _from, state) do
+    start_time = :os.system_time(:microsecond)
+
+    # Use quantum observation to get primary data and entangled partners
+    result = QuantumIndex.observe_quantum_data(key, state.spacetime_tables)
+
+    end_time = :os.system_time(:microsecond)
+    operation_time = end_time - start_time
+
+    # Update cosmic metrics
+    case result do
+      {:ok, _value, _entangled_data, quantum_metadata} ->
+        primary_shard = quantum_metadata.primary_shard
+        update_cosmic_metrics(state, :get_hit, operation_time, primary_shard)
+        update_quantum_metrics(state, :quantum_observation, quantum_metadata)
+
+      {:error, :not_found} ->
+        update_cosmic_metrics(state, :get_miss, operation_time, :all)
+    end
+
+    case result do
+      {:ok, value, entangled_data, quantum_metadata} ->
+        # Return enhanced response with quantum data
+        response = %{
+          value: value,
+          shard: quantum_metadata.primary_shard,
+          operation_time: operation_time,
+          quantum_data: %{
+            entangled_items: entangled_data,
+            entangled_count: quantum_metadata.entangled_count,
+            quantum_efficiency: quantum_metadata.entanglement_efficiency
+          }
+        }
+        {:reply, {:ok, response}, state}
+
+      {:error, :not_found} ->
+        {:reply, {:error, :not_found, operation_time}, state}
     end
   end
 
@@ -403,7 +497,7 @@ defmodule IsLabDB do
     end)
 
     # Remove any quantum entanglements
-    remove_entanglement_links(key, state)
+    QuantumIndex.remove_entanglement(key)
 
     end_time = :os.system_time(:microsecond)
     operation_time = end_time - start_time
@@ -453,7 +547,7 @@ defmodule IsLabDB do
       persistence: persistence_stats,
       entanglement: %{
         rules_count: length(state.entanglement_rules),
-        active_entanglements: count_active_entanglements(state)
+        quantum_metrics: QuantumIndex.quantum_metrics()
       },
       wormhole_network: collect_wormhole_metrics(state.wormhole_network)
     }
@@ -476,20 +570,16 @@ defmodule IsLabDB do
   end
 
   def handle_call({:create_entanglement, primary_key, entangled_keys, strength}, _from, state) do
-    # Create quantum entanglement relationships
-    entanglement_data = %{
-      primary_key: primary_key,
-      entangled_keys: entangled_keys,
-      strength: strength,
-      created_at: :os.system_time(:millisecond)
-    }
+    # Use QuantumIndex to create proper entanglement
+    case QuantumIndex.create_entanglement(primary_key, entangled_keys, strength) do
+      {:ok, entanglement_id} ->
+        Logger.debug("🔗 Created quantum entanglement: #{primary_key} <-> #{inspect(entangled_keys)}")
+        {:reply, {:ok, entanglement_id}, state}
 
-    # Store entanglement in wormhole network for fast lookups
-    :ets.insert(state.wormhole_network, {:entanglement, primary_key, entanglement_data})
-
-    Logger.debug("🔗 Created quantum entanglement: #{primary_key} <-> #{inspect(entangled_keys)}")
-
-    {:reply, {:ok, :entangled}, state}
+      {:error, reason} ->
+        Logger.warning("❌ Failed to create quantum entanglement: #{inspect(reason)}")
+        {:reply, {:error, reason}, state}
+    end
   end
 
   def handle_info(:cosmic_maintenance, state) do
@@ -693,15 +783,20 @@ defmodule IsLabDB do
     %{consistency_model: :weak, time_dilation: 2.0, attraction: 0.3, energy_level: :low}
   end
 
-  defp create_entanglement_links(_key, _entangled_keys, _state) do
-    # Placeholder for quantum entanglement creation
-    # Will be fully implemented in Phase 2
-    :ok
+  defp create_entanglement_links(key, entangled_keys, _state) do
+    # Create quantum entanglement using QuantumIndex
+    case QuantumIndex.create_entanglement(key, entangled_keys, 1.0, %{manual: true}) do
+      {:ok, _entanglement_id} -> :ok
+      {:error, reason} ->
+        Logger.warning("Failed to create manual entanglement for #{key}: #{inspect(reason)}")
+        :error
+    end
   end
 
-  defp remove_entanglement_links(_key, _state) do
-    # Placeholder for quantum entanglement removal
-    # Will be fully implemented in Phase 2
+  defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
+    # Update quantum-specific metrics
+    # For Phase 2, we'll keep this simple and log the observation
+    Logger.debug("⚛️  Quantum observation metrics updated")
     :ok
   end
 
@@ -760,11 +855,7 @@ defmodule IsLabDB do
     end
   end
 
-  defp count_active_entanglements(_state) do
-    # Count active quantum entanglements
-    # Placeholder for Phase 1
-    0
-  end
+
 
   defp collect_wormhole_metrics(wormhole_network) do
     %{
