@@ -15,10 +15,10 @@ defmodule Phase3IntegrationTest do
     test_data_dir = "/tmp/islab_db_test_phase3_integration"
     File.mkdir_p!(test_data_dir)
 
-    # Start IsLabDB with Phase 3 features enabled (disable Phase 4 for pure Phase 3 testing)
+    # Start IsLabDB with Phase 3 features enabled (disable Phase 4 and Phase 5 for pure Phase 3 testing)
     {:ok, pid} = IsLabDB.start_link([
       data_root: test_data_dir,
-      enable_entropy_monitoring: true,
+      enable_entropy_monitoring: false,  # Disable to stay in Phase 3
       disable_phase4: true
     ])
 

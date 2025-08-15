@@ -48,7 +48,7 @@ defmodule IsLabDB do
   use GenServer
   require Logger
 
-  alias IsLabDB.{CosmicPersistence, CosmicConstants, QuantumIndex, SpacetimeShard, GravitationalRouter, EventHorizonCache}
+  alias IsLabDB.{CosmicPersistence, CosmicConstants, QuantumIndex, SpacetimeShard, GravitationalRouter, EventHorizonCache, EntropyMonitor}
 
   defstruct [
     :universe_state,          # :stable, :rebalancing, :expanding, :collapsing
@@ -61,7 +61,7 @@ defmodule IsLabDB do
     :cosmic_metrics,          # Performance and entropy metrics
     :startup_time,            # When this universe began
     :entanglement_rules,      # Quantum entanglement patterns
-    :entropy_monitor,         # System entropy tracking
+    :entropy_monitor,         # Phase 5: Advanced entropy monitoring system
     :wormhole_network,        # Fast routing between shards
     :reality_anchor           # Schema validation and consistency
   ]
@@ -302,6 +302,57 @@ defmodule IsLabDB do
     QuantumIndex.quantum_metrics()
   end
 
+  @doc """
+  Get comprehensive entropy monitoring metrics and system thermodynamics.
+
+  Returns detailed entropy analysis including Shannon entropy, thermodynamic
+  entropy, system temperature, and rebalancing recommendations from the
+  Phase 5 entropy monitoring system.
+
+  ## Returns
+
+  A map containing:
+  - `:total_entropy` - Combined system entropy measurement
+  - `:shannon_entropy` - Information-theoretic entropy across shards
+  - `:thermodynamic_entropy` - Energy distribution entropy
+  - `:entropy_trend` - :increasing, :decreasing, or :stable
+  - `:system_temperature` - System activity temperature
+  - `:disorder_index` - Relative disorder compared to threshold
+  - `:stability_metric` - Overall system stability (0.0 to 1.0)
+  - `:vacuum_stability` - Vacuum state stability measurement
+  - `:rebalancing_recommended` - Whether thermodynamic rebalancing needed
+
+  ## Examples
+
+      entropy = IsLabDB.entropy_metrics()
+      IO.puts("System entropy: \#{entropy.total_entropy}")
+      IO.puts("Rebalancing needed: \#{entropy.rebalancing_recommended}")
+  """
+  def entropy_metrics() do
+    GenServer.call(__MODULE__, :entropy_metrics)
+  end
+
+  @doc """
+  Trigger thermodynamic rebalancing to reduce system entropy.
+
+  Activates Maxwell's demon optimization to intelligently migrate data
+  and reduce entropy across spacetime shards. This is automatically
+  triggered when entropy exceeds thresholds, but can be manually invoked.
+
+  ## Options
+
+  - `:force_rebalancing` - Force rebalancing even if entropy is acceptable
+  - `:migration_strategy` - :minimal, :moderate, :aggressive
+
+  ## Examples
+
+      {:ok, report} = IsLabDB.trigger_entropy_rebalancing(force_rebalancing: true)
+      IO.puts("Entropy reduced by: \#{report.entropy_reduction}")
+  """
+  def trigger_entropy_rebalancing(opts \\ []) do
+    GenServer.call(__MODULE__, {:trigger_entropy_rebalancing, opts}, 30_000)
+  end
+
   ## GENSERVER CALLBACKS
 
     def init(opts) do
@@ -336,9 +387,9 @@ defmodule IsLabDB do
     # Initialize quantum entanglement rules
     entanglement_rules = Keyword.get(opts, :entanglement_rules, default_entanglement_rules())
 
-    # Start entropy monitoring
+    # Phase 5: Initialize advanced entropy monitoring system
     entropy_monitor = if Keyword.get(opts, :enable_entropy_monitoring, true) do
-      create_entropy_monitor()
+      initialize_phase5_entropy_monitoring(opts)
     else
       nil
     end
@@ -371,6 +422,11 @@ defmodule IsLabDB do
     # Restore universe state from filesystem if it exists
     restored_state = restore_universe_from_filesystem(state)
 
+    # Phase 5: Update entropy monitor with spacetime shard information
+    if restored_state.entropy_monitor do
+      notify_entropy_monitor_of_shards(restored_state.entropy_monitor, restored_state.spacetime_shards)
+    end
+
     # Start periodic cosmic maintenance
     schedule_cosmic_maintenance()
 
@@ -381,6 +437,7 @@ defmodule IsLabDB do
     Logger.info("🕳️  Event horizon caches: #{Map.keys(event_horizon_caches) |> Enum.join(", ")}")
     Logger.info("🔗 Entanglement rules: #{length(entanglement_rules)} patterns configured")
     Logger.info("🚀 Phase 4: Event Horizon Cache System - ACTIVE")
+    Logger.info("🌡️  Phase 5: Entropy Monitoring & Thermodynamics - ACTIVE")
 
     {:ok, restored_state}
   end
@@ -679,11 +736,8 @@ defmodule IsLabDB do
       wormhole_network: collect_wormhole_metrics(state.wormhole_network),
       gravitational_routing: gravitational_metrics,
       event_horizon_cache: collect_event_horizon_cache_metrics(state.event_horizon_caches),
-      phase: if map_size(state.event_horizon_caches) > 0 do
-        "Phase 4: Event Horizon Cache System"
-      else
-        "Phase 3: Spacetime Sharding System"
-      end
+      entropy_monitoring: collect_entropy_monitoring_metrics(state.entropy_monitor),
+      phase: determine_current_phase(state)
     }
 
     {:reply, metrics, state}
@@ -713,6 +767,39 @@ defmodule IsLabDB do
       {:error, reason} ->
         Logger.warning("❌ Failed to create quantum entanglement: #{inspect(reason)}")
         {:reply, {:error, reason}, state}
+    end
+  end
+
+  def handle_call(:entropy_metrics, _from, state) do
+    # Get entropy metrics from the Phase 5 entropy monitor
+    entropy_metrics = if state.entropy_monitor do
+      try do
+        EntropyMonitor.get_entropy_metrics(state.entropy_monitor)
+      rescue
+        error ->
+          Logger.warning("❌ Failed to get entropy metrics: #{inspect(error)}")
+          %{error: "entropy_monitor_unavailable"}
+      end
+    else
+      %{error: "entropy_monitoring_disabled"}
+    end
+
+    {:reply, entropy_metrics, state}
+  end
+
+  def handle_call({:trigger_entropy_rebalancing, opts}, _from, state) do
+    # Trigger entropy rebalancing using the Phase 5 entropy monitor
+    if state.entropy_monitor do
+      case EntropyMonitor.trigger_rebalancing(state.entropy_monitor, opts) do
+        {:ok, rebalancing_report} ->
+          Logger.info("🌡️  Thermodynamic rebalancing completed successfully")
+          {:reply, {:ok, rebalancing_report}, state}
+
+        {:error, reason} ->
+          {:reply, {:error, reason}, state}
+      end
+    else
+      {:reply, {:error, :entropy_monitoring_disabled}, state}
     end
   end
 
@@ -855,6 +942,37 @@ defmodule IsLabDB do
     {:ok, caches, cache_coherence_manager}
   end
 
+  defp initialize_phase5_entropy_monitoring(opts) do
+    Logger.info("🌡️  Initializing Phase 5: Entropy Monitoring & Thermodynamics...")
+
+    # Start the entropy registry
+    case Registry.start_link(keys: :unique, name: IsLabDB.EntropyRegistry) do
+      {:ok, _} -> :ok
+      {:error, {:already_started, _}} -> :ok  # Registry already started
+    end
+
+    # Create entropy monitor configuration
+    monitor_config = [
+      monitoring_interval: Keyword.get(opts, :entropy_monitoring_interval, 5000),
+      entropy_threshold: Keyword.get(opts, :entropy_threshold, CosmicConstants.entropy_rebalance_threshold()),
+      enable_maxwell_demon: Keyword.get(opts, :enable_maxwell_demon, true),
+      vacuum_stability_checks: Keyword.get(opts, :vacuum_stability_checks, true),
+      persistence_enabled: Keyword.get(opts, :entropy_persistence, true),
+      analytics_enabled: Keyword.get(opts, :entropy_analytics, true)
+    ]
+
+    # Create the main entropy monitor
+    case EntropyMonitor.create_monitor(:cosmic_entropy, monitor_config) do
+      {:ok, _monitor_pid} ->
+        Logger.info("✨ Phase 5 Entropy Monitoring System ready - cosmic entropy monitor active")
+        :cosmic_entropy  # Return monitor ID
+
+      {:error, reason} ->
+        Logger.warning("❌ Failed to initialize entropy monitor: #{inspect(reason)}")
+        nil
+    end
+  end
+
   defp initialize_phase3_sharding_system(_opts) do
     Logger.info("🌌 Initializing Phase 3: Spacetime Sharding System...")
 
@@ -995,13 +1113,7 @@ defmodule IsLabDB do
     ]
   end
 
-  defp create_entropy_monitor() do
-    :ets.new(:entropy_monitor, [
-      :set, :public, :named_table,
-      {:write_concurrency, true},
-      {:decentralized_counters, true}
-    ])
-  end
+
 
   defp create_wormhole_network() do
     :ets.new(:wormhole_network, [
@@ -1059,8 +1171,29 @@ defmodule IsLabDB do
     :ok
   end
 
-  defp calculate_system_entropy(_state) do
-    # Simplified entropy calculation for Phase 1
+  defp calculate_system_entropy(state) do
+    # Phase 5: Use advanced entropy monitor if available, otherwise fallback
+    if state.entropy_monitor do
+      try do
+        entropy_metrics = EntropyMonitor.get_entropy_metrics(state.entropy_monitor)
+        %{
+          total_entropy: entropy_metrics.total_entropy,
+          shannon_entropy: entropy_metrics.shannon_entropy,
+          thermodynamic_entropy: entropy_metrics.thermodynamic_entropy,
+          entropy_trend: entropy_metrics.entropy_trend,
+          system_temperature: entropy_metrics.system_temperature,
+          last_calculated: entropy_metrics.last_calculated
+        }
+      rescue
+        _ -> fallback_entropy_calculation()
+      end
+    else
+      fallback_entropy_calculation()
+    end
+  end
+
+  defp fallback_entropy_calculation() do
+    # Simplified entropy calculation fallback
     %{
       total_entropy: :rand.uniform() * 2.0,
       cpu_entropy: :rand.uniform(),
@@ -1214,6 +1347,50 @@ defmodule IsLabDB do
       memory_usage: :ets.info(wormhole_network, :memory) * :erlang.system_info(:wordsize),
       active_routes: 0  # Placeholder
     }
+  end
+
+  defp collect_entropy_monitoring_metrics(entropy_monitor) do
+    if entropy_monitor do
+      try do
+        entropy_metrics = EntropyMonitor.get_entropy_metrics(entropy_monitor)
+        %{
+          monitor_active: true,
+          total_entropy: entropy_metrics.total_entropy,
+          shannon_entropy: entropy_metrics.shannon_entropy,
+          thermodynamic_entropy: entropy_metrics.thermodynamic_entropy,
+          entropy_trend: entropy_metrics.entropy_trend,
+          system_temperature: entropy_metrics.system_temperature,
+          disorder_index: entropy_metrics.disorder_index,
+          stability_metric: entropy_metrics.stability_metric,
+          rebalancing_recommended: entropy_metrics.rebalancing_recommended,
+          vacuum_stability: entropy_metrics.vacuum_stability,
+          last_calculated: entropy_metrics.last_calculated
+        }
+      rescue
+        _ -> %{monitor_active: false, error: "entropy_monitor_unavailable"}
+      end
+    else
+      %{monitor_active: false}
+    end
+  end
+
+  defp determine_current_phase(state) do
+    cond do
+      state.entropy_monitor -> "Phase 5: Entropy Monitoring & Thermodynamics"
+      map_size(state.event_horizon_caches) > 0 -> "Phase 4: Event Horizon Cache System"
+      true -> "Phase 3: Spacetime Sharding System"
+    end
+  end
+
+  defp notify_entropy_monitor_of_shards(entropy_monitor, spacetime_shards) do
+    # Notify the entropy monitor about the spacetime shards so it can monitor them
+    try do
+      GenServer.cast({:via, Registry, {IsLabDB.EntropyRegistry, entropy_monitor}},
+                     {:update_spacetime_shards, spacetime_shards})
+    rescue
+      error ->
+        Logger.warning("❌ Failed to update entropy monitor with shards: #{inspect(error)}")
+    end
   end
 
   defp perform_cosmic_rebalancing(_state) do
