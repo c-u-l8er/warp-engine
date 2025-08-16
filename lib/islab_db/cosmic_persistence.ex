@@ -76,6 +76,59 @@ defmodule IsLabDB.CosmicPersistence do
   def extract_data_type(_key), do: "general"
 
   @doc """
+  Ensure a directory exists, creating it if necessary.
+  """
+  def ensure_directory(path) do
+    case File.mkdir_p(path) do
+      :ok -> :ok
+      {:error, reason} ->
+        Logger.error("🌌 Failed to create directory #{path}: #{inspect(reason)}")
+        {:error, reason}
+    end
+  end
+
+  @doc """
+  Save arbitrary data to a file in JSON format.
+  """
+  def save_data(file_path, data) do
+    try do
+      # Ensure directory exists
+      File.mkdir_p!(Path.dirname(file_path))
+
+      # Convert data to JSON and write
+      json_data = Jason.encode!(data, pretty: true)
+      File.write!(file_path, json_data)
+      :ok
+    rescue
+      error ->
+        Logger.error("🌌 Failed to save data to #{file_path}: #{inspect(error)}")
+        {:error, error}
+    end
+  end
+
+  @doc """
+  Load data from a JSON file.
+  """
+  def load_data(file_path) do
+    case File.read(file_path) do
+      {:ok, content} ->
+        case Jason.decode(content) do
+          {:ok, data} -> {:ok, data}
+          {:error, reason} ->
+            Logger.error("🌌 Failed to decode JSON from #{file_path}: #{inspect(reason)}")
+            {:error, {:json_decode, reason}}
+        end
+
+      {:error, :enoent} ->
+        {:error, :file_not_found}
+
+      {:error, reason} ->
+        Logger.error("🌌 Failed to read file #{file_path}: #{inspect(reason)}")
+        {:error, reason}
+    end
+  end
+
+  @doc """
   Persist a cosmic record to the appropriate filesystem location.
   """
   def persist_cosmic_record(cosmic_record, data_type \\ nil) do

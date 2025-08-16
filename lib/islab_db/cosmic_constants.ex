@@ -68,6 +68,11 @@ defmodule IsLabDB.CosmicConstants do
   def avogadro_number, do: @avogadro_number
 
   @doc """
+  Speed of light constant for wormhole routing calculations.
+  """
+  def speed_of_light, do: @light_speed_ops_per_sec
+
+  @doc """
   Calculate quantum energy level for a data item based on access frequency.
   Higher frequency = higher energy level = faster access.
   """
