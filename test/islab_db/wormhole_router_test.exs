@@ -240,19 +240,19 @@ defmodule IsLabDB.WormholeRouterTest do
         test "supports connection decay over time", %{router: router} do
       source = "shard_hot"
       destination = "shard_warm"
-      
+
       :ok = WormholeRouter.establish_wormhole(router, source, destination)
-      
+
       # Get initial topology to verify connection exists
       {:ok, initial_topology} = WormholeRouter.get_topology(router)
       assert length(initial_topology.connections) > 0
-      
+
       # Trigger optimization which includes decay
       {:ok, :optimization_completed} = WormholeRouter.optimize_network(router, strategy: :minimal, force: true)
-      
+
       # After minimal optimization, route should still exist or return appropriate error
       case WormholeRouter.find_route(router, source, destination) do
-        {:ok, _route, _cost} -> 
+        {:ok, _route, _cost} ->
           # Connection survived optimization
           assert true
         {:error, :no_path} ->

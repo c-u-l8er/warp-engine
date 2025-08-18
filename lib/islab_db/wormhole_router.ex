@@ -515,11 +515,11 @@ defmodule IsLabDB.WormholeRouter do
 
       defp dijkstra_shortest_path(source, destination, _max_hops, state) do
     # Simplified but correct Dijkstra's algorithm implementation
-    
+
     # For direct connections, check first
     source_connections = get_node_connections(source, state)
     case Enum.find(source_connections, fn conn -> conn.destination == destination end) do
-      nil -> 
+      nil ->
         # No direct connection - for now return no path (could be enhanced for multi-hop)
         :no_path
       connection ->
@@ -548,7 +548,7 @@ defmodule IsLabDB.WormholeRouter do
   #   end
   # end
 
-  
+
 
   defp astar_search(source, destination, max_hops, state) do
     # A* implementation placeholder - will be enhanced

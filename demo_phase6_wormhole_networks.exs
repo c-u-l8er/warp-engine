@@ -30,15 +30,15 @@ defmodule WormholeNetworkDemo do
     original_data_root = Application.get_env(:islab_db, :data_root)
     demo_data_dir = "/tmp/islab_wormhole_demo_#{:rand.uniform(10000)}"
     Application.put_env(:islab_db, :data_root, demo_data_dir)
-    
+
     IO.puts """
     🌌====================================================================🌌
     🚀 IsLabDB Phase 6: Wormhole Network Topology Demo
     🌌====================================================================🌌
-    
+
     Welcome to the future of database networking! This demo showcases
     how theoretical wormhole physics can revolutionize data access patterns.
-    
+
     """
 
     # Clean up any existing demo data
@@ -155,7 +155,7 @@ defmodule WormholeNetworkDemo do
 
         # Demonstrate different routing algorithms on direct connections
     IO.puts "   🧮 Comparing routing algorithms on direct connections:"
-    
+
     case WormholeRouter.find_route(router, "shard_hot", "shard_warm", algorithm: :dijkstra) do
       {:ok, route_dijkstra, cost_d} ->
         case WormholeRouter.find_route(router, "shard_hot", "shard_warm", algorithm: :astar) do
