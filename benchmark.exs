@@ -20,24 +20,32 @@ This benchmark suite will validate IsLabDB's performance claims:
 Running comprehensive benchmarks across all 6 phases...
 """
 
-# Ensure we're in the right directory and can load the modules
-if File.exists?("mix.exs") do
-  System.cmd("mix", ["compile"], cd: ".")
-else
-  IO.puts "❌ Error: Please run this script from the IsLab Database root directory"
-  System.halt(1)
-end
+# Load project modules in correct order
+System.put_env("MIX_ENV", "test")
+Code.prepend_path("lib")
+Code.prepend_path("_build/test/lib/islab_db/ebin")
 
-# Load the project
-Code.require_file("lib/islab_db.ex")
+Code.require_file("lib/islab_db/cosmic_constants.ex")
+Code.require_file("lib/islab_db/cosmic_persistence.ex")
+Code.require_file("lib/islab_db/wal_entry.ex")
+Code.require_file("lib/islab_db/wal.ex")
+Code.require_file("lib/islab_db/wal_operations.ex")
+Code.require_file("lib/islab_db/quantum_index.ex")
+Code.require_file("lib/islab_db/gravitational_router.ex")
+Code.require_file("lib/islab_db/spacetime_shard.ex")
+Code.require_file("lib/islab_db/event_horizon_cache.ex")
+Code.require_file("lib/islab_db/entropy_monitor.ex")
 Code.require_file("lib/islab_db/performance_benchmark.ex")
+Code.require_file("lib/islab_db.ex")
+
+# JSON encoding issue fixed in PerformanceBenchmark module by converting structs to maps
 
 try do
-  # Start the application
-  Application.ensure_all_started(:islab_db)
-
   IO.puts "🚀 Starting IsLabDB..."
-  {:ok, _pid} = IsLabDB.start_link()
+  {:ok, _pid} = IsLabDB.start_link([
+    enable_wal: true,
+    data_root: "/tmp/islab_benchmark_test"
+  ])
 
   IO.puts "🔬 Running comprehensive benchmark suite..."
   IO.puts "   This may take several minutes to complete...\n"
@@ -74,7 +82,7 @@ try do
 
   if results.event_horizon_cache do
     cache_perf = results.event_horizon_cache.cache_level_performance[:event_horizon]
-    if cache_perf do
+    if cache_perf && Map.has_key?(cache_perf, :average_latency_us) do
       IO.puts "\n🕳️  Event Horizon Cache:"
       IO.puts "   Average latency: #{Float.round(cache_perf.average_latency_us, 0)}μs"
 
@@ -83,6 +91,10 @@ try do
       else
         IO.puts "   ⚠️  Above target of <50μs"
       end
+    else
+      IO.puts "\n🕳️  Event Horizon Cache:"
+      IO.puts "   Performance data structure: #{inspect(cache_perf, limit: 3)}"
+      IO.puts "   ⚠️  Performance metrics not available in expected format"
     end
   end
 

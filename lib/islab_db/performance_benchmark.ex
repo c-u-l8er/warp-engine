@@ -36,6 +36,7 @@ defmodule IsLabDB.PerformanceBenchmark do
   @warmup_iterations 100
   @concurrent_users [1, 5, 10, 20, 50, 100]
 
+  @derive Jason.Encoder
   defstruct [
     :start_time,
     :total_operations,
@@ -206,11 +207,12 @@ defmodule IsLabDB.PerformanceBenchmark do
     Logger.info("🕳️  Benchmarking Event Horizon Cache Performance")
 
     # Create test cache
-    {:ok, cache_id} = IsLabDB.EventHorizonCache.create_cache(%{
+    {:ok, cache} = IsLabDB.EventHorizonCache.create_cache(:benchmark_cache, [
       schwarzschild_radius: 10_000,
       hawking_temperature: 0.1,
-      time_dilation_factor: 0.8
-    })
+      enable_compression: true,
+      time_dilation_enabled: true
+    ])
 
     # Benchmark cache operations at different levels
     cache_levels = [:event_horizon, :photon_sphere, :deep_cache, :singularity]
@@ -222,12 +224,12 @@ defmodule IsLabDB.PerformanceBenchmark do
 
         # Put to cache
         {put_time, _} = :timer.tc(fn ->
-          IsLabDB.EventHorizonCache.put(cache_id, key, value, level)
+          IsLabDB.EventHorizonCache.put(cache, key, value, [priority: level])
         end)
 
         # Get from cache (placeholder - API may not exist yet)
         {get_time, _} = :timer.tc(fn ->
-          # IsLabDB.EventHorizonCache.get_from_level(cache_id, key, level)
+          # IsLabDB.EventHorizonCache.get_from_level(cache, key, level)
           {:ok, value}  # Placeholder
         end)
 
@@ -238,7 +240,7 @@ defmodule IsLabDB.PerformanceBenchmark do
     end) |> Enum.into(%{})
 
     # Test Hawking radiation eviction
-    eviction_performance = benchmark_hawking_eviction(cache_id)
+    eviction_performance = benchmark_hawking_eviction(cache)
 
     %{
       cache_level_performance: cache_results,
@@ -253,12 +255,19 @@ defmodule IsLabDB.PerformanceBenchmark do
   def benchmark_entropy_monitoring() do
     Logger.info("🌡️ Benchmarking Entropy Monitoring & Thermodynamics")
 
+    # Ensure entropy registry is started
+    case Registry.start_link(keys: :unique, name: IsLabDB.EntropyRegistry) do
+      {:ok, _} -> :ok
+      {:error, {:already_started, _}} -> :ok  # Registry already started
+    end
+
     # Create entropy monitor
-    {:ok, monitor_id} = IsLabDB.EntropyMonitor.create_monitor(%{
+    monitor_id = :benchmark_entropy_monitor
+    {:ok, _pid} = IsLabDB.EntropyMonitor.create_monitor(monitor_id, [
       monitoring_interval: 1000,
-      maxwell_demon_enabled: true,
-      vacuum_stability_monitoring: true
-    })
+      enable_maxwell_demon: true,
+      vacuum_stability_checks: true
+    ])
 
     # Benchmark entropy calculation
     entropy_calc_results = benchmark_operation("ENTROPY_CALC", fn _i ->
@@ -276,6 +285,13 @@ defmodule IsLabDB.PerformanceBenchmark do
     # Measure Maxwell's demon effectiveness
     demon_effectiveness = measure_maxwell_demon_effectiveness()
 
+    # Cleanup: Shut down the entropy monitor
+    try do
+      IsLabDB.EntropyMonitor.shutdown_monitor(monitor_id)
+    rescue
+      _ -> :ok  # Ignore shutdown errors
+    end
+
     %{
       entropy_calculation: entropy_calc_results,
       rebalancing_performance: rebalancing_results,
@@ -289,21 +305,31 @@ defmodule IsLabDB.PerformanceBenchmark do
   def benchmark_wormhole_networks() do
     Logger.info("🌀 Benchmarking Wormhole Network Performance")
 
+    # Start the wormhole router
+    {:ok, _router_pid} = IsLabDB.WormholeRouter.start_link()
+
     # Benchmark route finding
     routing_results = benchmark_operation("WORMHOLE_ROUTING", fn i ->
       source = "shard_#{rem(i, 3)}"
       destination = "shard_#{rem(i + 1, 3)}"
 
       {time, result} = :timer.tc(fn ->
-        # Use the correct wormhole router call
-        IsLabDB.WormholeRouter.find_route(IsLabDB.WormholeRouter, source, destination, %{max_hops: 3})
+        # Use the correct wormhole router call with keyword list
+        IsLabDB.WormholeRouter.find_route(IsLabDB.WormholeRouter, source, destination, [max_hops: 3])
       end)
 
       {time, result}
     end)
 
-    # Measure network throughput
-    network_throughput = measure_network_throughput()
+    # Calculate actual network throughput from routing results
+    network_throughput = calculate_network_throughput(routing_results)
+
+    # Cleanup: Stop the wormhole router
+    try do
+      GenServer.stop(IsLabDB.WormholeRouter, :normal, 5000)
+    rescue
+      _ -> :ok  # Ignore shutdown errors
+    end
 
     %{
       route_finding_performance: routing_results,
@@ -491,11 +517,31 @@ defmodule IsLabDB.PerformanceBenchmark do
   defp measure_entanglement_efficiency(), do: 85.5
   defp calculate_parallel_factor(), do: 3.2
   defp measure_routing_accuracy(), do: 94.5
-  defp benchmark_hawking_eviction(_cache_id), do: %{}
+  defp benchmark_hawking_eviction(_cache), do: %{}
   defp measure_compression_ratios(), do: %{}
   defp benchmark_rebalancing_performance(), do: %{}
   defp measure_maxwell_demon_effectiveness(), do: 78.3
-  defp measure_network_throughput(), do: 366_300
+  defp calculate_network_throughput(routing_results) do
+    # Calculate actual throughput based on routing benchmark results
+    if routing_results && routing_results.throughput_ops_per_sec do
+      # Convert routing operations per second to routes per second
+      # Each routing operation finds a route, so it's 1:1
+      round(routing_results.throughput_ops_per_sec)
+    else
+      # Fallback calculation if throughput data is missing
+      Logger.warning("Routing results missing throughput data, using fallback calculation")
+
+      # Use average latency to estimate throughput if available
+      if routing_results && routing_results.average_latency_us do
+        # Convert latency to throughput: 1_000_000 μs/sec / latency_per_operation
+        estimated_throughput = 1_000_000 / routing_results.average_latency_us
+        round(estimated_throughput)
+      else
+        Logger.warning("No routing performance data available for throughput calculation")
+        0  # Return 0 to indicate unmeasured performance
+      end
+    end
+  end
   defp measure_topology_efficiency(), do: 91.2
   defp benchmark_workload_scenario(_scenario), do: %{}
   defp benchmark_concurrent_load(_users), do: %{}
@@ -510,9 +556,44 @@ defmodule IsLabDB.PerformanceBenchmark do
     filename = "islab_db_benchmark_#{timestamp}.json"
     report_path = "/tmp/#{filename}"
 
-    report_content = Jason.encode!(results, pretty: true)
+    # Convert PerformanceBenchmark structs to maps for JSON encoding
+    serializable_results = convert_to_serializable(results)
+    report_content = Jason.encode!(serializable_results, pretty: true)
     File.write!(report_path, report_content)
 
     report_path
   end
+
+    defp convert_to_serializable(data) when is_struct(data, __MODULE__) do
+    # Convert PerformanceBenchmark struct to map, recursively converting nested data
+    data
+    |> Map.from_struct()
+    |> convert_to_serializable()
+  end
+
+  defp convert_to_serializable(%DateTime{} = datetime) do
+    DateTime.to_iso8601(datetime)
+  end
+
+  defp convert_to_serializable(data) when is_struct(data) do
+    # For other structs, convert to map
+    Map.from_struct(data)
+  end
+
+  defp convert_to_serializable(data) when is_map(data) do
+    Enum.into(data, %{}, fn {k, v} -> {k, convert_to_serializable(v)} end)
+  end
+
+    defp convert_to_serializable(data) when is_list(data) do
+    Enum.map(data, &convert_to_serializable/1)
+  end
+
+  defp convert_to_serializable(data) when is_tuple(data) do
+    # Convert tuples to lists for JSON compatibility
+    data
+    |> Tuple.to_list()
+    |> Enum.map(&convert_to_serializable/1)
+  end
+
+  defp convert_to_serializable(data), do: data
 end
