@@ -469,7 +469,7 @@ defmodule IsLabDB.QuantumIndex do
           end
         end)
 
-        File.write!(entanglements_file, Jason.encode!(updated, pretty: true))
+        File.write!(entanglements_file, safe_encode_json(updated))
 
       rescue
         error ->
@@ -487,6 +487,17 @@ defmodule IsLabDB.QuantumIndex do
 
   defp get_cached_patterns() do
     :ets.tab2list(@pattern_cache)
+  end
+
+  # Safe JSON encoding without Jason dependency
+  defp safe_encode_json(data) do
+    try do
+      Jason.encode!(data, pretty: true)
+    rescue
+      UndefinedFunctionError ->
+        # Fallback to readable Elixir format
+        inspect(data, pretty: true, limit: :infinity, printable_limit: :infinity)
+    end
   end
 
   defp key_matches_pattern?(key, pattern) do

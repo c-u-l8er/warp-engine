@@ -403,7 +403,7 @@ defmodule IsLabDB.SpacetimeShard do
           gravitational_field: shard.gravitational_field
         }
 
-        File.write!(config_path, Jason.encode!(shard_config, pretty: true))
+        File.write!(config_path, safe_encode_json(shard_config))
       rescue
         error ->
           Logger.warning("Failed to persist shard configuration: #{inspect(error)}")
@@ -657,5 +657,16 @@ defmodule IsLabDB.SpacetimeShard do
     }
 
     %{shard | entropy_tracker: updated_entropy_tracker}
+  end
+
+  # Safe JSON encoding without Jason dependency
+  defp safe_encode_json(data) do
+    try do
+      Jason.encode!(data, pretty: true)
+    rescue
+      UndefinedFunctionError ->
+        # Fallback to readable Elixir format
+        inspect(data, pretty: true, limit: :infinity, printable_limit: :infinity)
+    end
   end
 end

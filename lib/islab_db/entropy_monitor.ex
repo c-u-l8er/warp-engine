@@ -1178,7 +1178,7 @@ defmodule IsLabDB.EntropyMonitor do
       updated_data = existing_data ++ [entropy_entry]
 
       entropy_file
-      |> File.write!(Jason.encode!(updated_data))
+      |> File.write!(safe_encode_json(updated_data))
 
     rescue
       error ->
@@ -1195,11 +1195,22 @@ defmodule IsLabDB.EntropyMonitor do
       analytics_file = Path.join(analytics_dir, "analytics_#{timestamp}.json")
 
       analytics_file
-      |> File.write!(Jason.encode!(analytics_data))
+      |> File.write!(safe_encode_json(analytics_data))
 
     rescue
       error ->
         Logger.warning("❌ Failed to persist analytics data: #{inspect(error)}")
+    end
+  end
+
+  # Safe JSON encoding without Jason dependency
+  defp safe_encode_json(data) do
+    try do
+      Jason.encode!(data, pretty: true)
+    rescue
+      UndefinedFunctionError ->
+        # Fallback to readable Elixir format
+        inspect(data, pretty: true, limit: :infinity, printable_limit: :infinity)
     end
   end
 end

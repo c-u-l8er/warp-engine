@@ -95,8 +95,8 @@ defmodule IsLabDB.CosmicPersistence do
       # Ensure directory exists
       File.mkdir_p!(Path.dirname(file_path))
 
-      # Convert data to JSON and write
-      json_data = Jason.encode!(data, pretty: true)
+      # Convert data to readable format and write
+      json_data = safe_encode(data)
       File.write!(file_path, json_data)
       :ok
     rescue
@@ -112,7 +112,7 @@ defmodule IsLabDB.CosmicPersistence do
   def load_data(file_path) do
     case File.read(file_path) do
       {:ok, content} ->
-        case Jason.decode(content) do
+        case safe_decode(content) do
           {:ok, data} -> {:ok, data}
           {:error, reason} ->
             Logger.error("🌌 Failed to decode JSON from #{file_path}: #{inspect(reason)}")
@@ -151,7 +151,7 @@ defmodule IsLabDB.CosmicPersistence do
       File.mkdir_p!(Path.dirname(file_path))
 
       # Write cosmic record with pretty formatting for human readability
-      File.write!(file_path, Jason.encode!(cosmic_record, pretty: true))
+      File.write!(file_path, safe_encode(cosmic_record))
 
       # Update shard manifest
       update_shard_manifest(shard, key, file_path, cosmic_record)
@@ -336,7 +336,7 @@ defmodule IsLabDB.CosmicPersistence do
     }
 
     manifest_path = Path.join(data_root(), "universe.manifest")
-    File.write!(manifest_path, Jason.encode!(manifest, pretty: true))
+    File.write!(manifest_path, safe_encode(manifest))
   end
 
       defp create_directory_manifest(full_path, cosmic_path) do
@@ -350,7 +350,7 @@ defmodule IsLabDB.CosmicPersistence do
     }
 
     manifest_path = Path.join(full_path, "_manifest.json")
-    File.write!(manifest_path, Jason.encode!(manifest, pretty: true))
+    File.write!(manifest_path, safe_encode(manifest))
   end
 
   defp describe_cosmic_region("spacetime/hot_data" <> _),
@@ -513,7 +513,7 @@ defmodule IsLabDB.CosmicPersistence do
     end)
     |> Map.put("total_size_bytes", File.stat!(file_path).size)
 
-    File.write!(shard_manifest_path, Jason.encode!(updated_manifest, pretty: true))
+    File.write!(shard_manifest_path, safe_encode(updated_manifest))
   end
 
   defp update_shard_manifest_deletion(shard, key) do
@@ -535,7 +535,7 @@ defmodule IsLabDB.CosmicPersistence do
               [key | Enum.take(deletions, 99)]
             end)
 
-            File.write!(shard_manifest_path, Jason.encode!(updated_manifest, pretty: true))
+            File.write!(shard_manifest_path, safe_encode(updated_manifest))
           _ ->
             :ok
         end
@@ -593,5 +593,36 @@ defmodule IsLabDB.CosmicPersistence do
       cache_limit: 10_000,
       energy_level: "medium"
     }
+  end
+
+  # Safe JSON encoding/decoding without Jason dependency
+  defp safe_encode(data) do
+    # Try Jason first (if available), otherwise use inspect for readable output
+    try do
+      Jason.encode!(data, pretty: true)
+    rescue
+      UndefinedFunctionError ->
+        # Fallback to readable Elixir format
+        inspect(data, pretty: true, limit: :infinity, printable_limit: :infinity)
+    end
+  end
+
+  defp safe_decode(content) do
+    # Try Jason first (if available), otherwise use Code.eval_string
+    try do
+      case Jason.decode(content) do
+        {:ok, data} -> {:ok, data}
+        {:error, reason} -> {:error, reason}
+      end
+    rescue
+      UndefinedFunctionError ->
+        # Fallback: try to evaluate as Elixir term
+        try do
+          {data, _} = Code.eval_string(content)
+          {:ok, data}
+        rescue
+          _ -> {:error, "Unable to decode data"}
+        end
+    end
   end
 end
