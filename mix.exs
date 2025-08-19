@@ -15,17 +15,10 @@ defmodule IsLabDB.MixProject do
   end
 
   def application do
-    case Mix.env() do
-      :test ->
-        # Don't auto-start in test environment to allow proper configuration
-        [extra_applications: [:logger]]
-      _ ->
-        # Normal auto-start for dev and prod
-        [
-          extra_applications: [:logger],
-          mod: {IsLabDB.Application, []}
-        ]
-    end
+    [
+      extra_applications: [:logger],
+      mod: {IsLabDB.Application, []}
+    ]
   end
 
   defp deps do

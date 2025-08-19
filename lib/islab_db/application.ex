@@ -73,9 +73,13 @@ defmodule IsLabDB.Application do
 
     # Define supervised processes
     children = [
+      # WAL System - Must start before main database
+      {IsLabDB.WAL, config},
       # Main IsLab Database GenServer
       {IsLabDB, config}
     ]
+    
+    Logger.info("🔧 Starting supervisor with #{length(children)} children")
 
     # Supervision options
     opts = [
@@ -89,10 +93,17 @@ defmodule IsLabDB.Application do
       {:ok, pid} ->
         Logger.info("✨ IsLab Database Application started successfully")
         Logger.info("🌌 Universe supervisor PID: #{inspect(pid)}")
+        
+        # Verify children started correctly
+        Process.sleep(100)
+        children_status = Supervisor.which_children(pid)
+        Logger.info("👥 Supervisor children: #{inspect(children_status)}")
+        
         {:ok, pid}
 
       {:error, reason} ->
         Logger.error("❌ Failed to start IsLab Database Application: #{inspect(reason)}")
+        Logger.error("❌ Children that were supposed to start: #{inspect(children)}")
         {:error, reason}
     end
   end

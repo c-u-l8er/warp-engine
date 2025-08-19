@@ -48,7 +48,7 @@ defmodule IsLabDB do
   use GenServer
   require Logger
 
-  alias IsLabDB.{CosmicPersistence, CosmicConstants, QuantumIndex, SpacetimeShard, GravitationalRouter, EventHorizonCache, EntropyMonitor, WAL, WALOperations}
+  alias IsLabDB.{CosmicPersistence, CosmicConstants, QuantumIndex, SpacetimeShard, GravitationalRouter, EventHorizonCache, EntropyMonitor, WALOperations}
 
   defstruct [
     :universe_state,          # :stable, :rebalancing, :expanding, :collapsing
@@ -428,7 +428,11 @@ defmodule IsLabDB do
     entanglement_rules = Keyword.get(opts, :entanglement_rules, default_entanglement_rules())
 
     # Phase 5: Initialize advanced entropy monitoring system
-    entropy_monitor = if Keyword.get(opts, :enable_entropy_monitoring, true) do
+    # Check both opts and application environment for entropy monitoring setting
+    enable_entropy = Keyword.get(opts, :enable_entropy_monitoring,
+      Application.get_env(:islab_db, :enable_entropy_monitoring, true))
+
+    entropy_monitor = if enable_entropy do
       initialize_phase5_entropy_monitoring(opts)
     else
       nil
@@ -437,18 +441,18 @@ defmodule IsLabDB do
     # Initialize wormhole network for fast routing
     wormhole_network = create_wormhole_network()
 
-    # Phase 6.6: Initialize WAL system for 250K+ ops/sec performance
+    # Phase 6.6: Connect to WAL system (already started by supervisor)
     wal_enabled = Keyword.get(opts, :enable_wal, true)
     wal_system = if wal_enabled do
-      Logger.info("🚀 Initializing WAL Persistence Revolution...")
-      case WAL.start_link(opts) do
-        {:ok, wal_pid} -> wal_pid
-        {:error, {:already_started, wal_pid}} ->
-          Logger.info("✅ WAL system already running - using existing instance")
-          wal_pid
-        {:error, reason} ->
-          Logger.error("❌ WAL initialization failed: #{inspect(reason)}")
+      # WAL is already started by the application supervisor
+      # Just verify it's running and get its PID
+      case Process.whereis(IsLabDB.WAL) do
+        nil ->
+          Logger.error("❌ WAL system not found - ensure it's in supervisor tree")
           nil
+        wal_pid when is_pid(wal_pid) ->
+          Logger.info("✅ Connected to WAL system")
+          wal_pid
       end
     else
       Logger.info("⚠️ WAL disabled - using legacy persistence (3,500 ops/sec)")
@@ -536,9 +540,9 @@ defmodule IsLabDB do
     if state.wal_enabled do
       # Phase 6.6: WAL-powered quantum entanglement with analytics logging
       case WALOperations.quantum_get_v2(state, key) do
-        {:ok, value, shard_id, operation_time, updated_state} ->
+        {:ok, value, _shard_id, _operation_time, updated_state} ->
           {:reply, {:ok, value}, updated_state}  # Return simple 2-tuple for test compatibility
-        {:error, :not_found, operation_time, error_state} ->
+        {:error, :not_found, _operation_time, error_state} ->
           {:reply, {:error, :not_found}, error_state}  # Return simple 2-tuple for test compatibility
       end
     else
@@ -553,8 +557,6 @@ defmodule IsLabDB do
       case WALOperations.cosmic_delete_v2(state, key) do
         {:ok, delete_results, operation_time, updated_state} ->
           {:reply, {:ok, delete_results, operation_time}, updated_state}
-        {:error, error_result, error_state} ->
-          {:reply, {:error, error_result}, error_state}
       end
     else
       # Legacy: Original implementation for backward compatibility
@@ -596,11 +598,16 @@ defmodule IsLabDB do
 
     # Collect comprehensive universe metrics
     spacetime_regions = Enum.map(state.spacetime_tables, fn {shard, table} ->
+      # Safely get ETS table info, handling undefined tables
+      size = :ets.info(table, :size) || 0
+      memory_words = :ets.info(table, :memory) || 0
+      memory_bytes = if is_integer(memory_words), do: memory_words * :erlang.system_info(:wordsize), else: 0
+
       %{
         shard: shard,
-        data_items: :ets.info(table, :size),
-        memory_words: :ets.info(table, :memory),
-        memory_bytes: :ets.info(table, :memory) * :erlang.system_info(:wordsize),
+        data_items: size,
+        memory_words: memory_words,
+        memory_bytes: memory_bytes,
         physics_laws: get_shard_physics_laws(shard)
       }
     end)
@@ -941,7 +948,16 @@ defmodule IsLabDB do
   defp extract_legacy_tables(spacetime_shards) do
     # Extract ETS tables for backward compatibility
     Enum.reduce(spacetime_shards, %{}, fn {shard_id, shard}, acc ->
-      Map.put(acc, shard_id, shard.ets_table)
+      # Ensure the ETS table exists and is valid
+      table = if shard.ets_table && :ets.whereis(shard.ets_table) != :undefined do
+        shard.ets_table
+      else
+        # Create a fallback ETS table if the shard's table doesn't exist
+        Logger.warning("Creating fallback ETS table for shard #{shard_id}")
+        :ets.new(:"spacetime_shard_#{shard_id}", [:set, :public, :named_table])
+      end
+
+      Map.put(acc, shard_id, table)
     end)
   end
 
@@ -1079,7 +1095,7 @@ defmodule IsLabDB do
   end
 
   defp calculate_system_entropy(state) do
-    # Phase 5: Use advanced entropy monitor if available, otherwise fallback
+    # Phase 5: Use advanced entropy monitor if available
     if state.entropy_monitor do
       try do
         entropy_metrics = EntropyMonitor.get_entropy_metrics(state.entropy_monitor)
@@ -1089,25 +1105,20 @@ defmodule IsLabDB do
           thermodynamic_entropy: entropy_metrics.thermodynamic_entropy,
           entropy_trend: entropy_metrics.entropy_trend,
           system_temperature: entropy_metrics.system_temperature,
-          last_calculated: entropy_metrics.last_calculated
+          last_calculated: entropy_metrics.last_calculated,
+          disorder_index: entropy_metrics.disorder_index,
+          stability_metric: entropy_metrics.stability_metric,
+          rebalancing_recommended: entropy_metrics.rebalancing_recommended,
+          vacuum_stability: entropy_metrics.vacuum_stability
         }
       rescue
-        _ -> fallback_entropy_calculation()
+        error ->
+          Logger.warning("❌ Failed to get entropy metrics from monitor: #{inspect(error)}")
+          %{error: "entropy_monitor_unavailable"}
       end
     else
-      fallback_entropy_calculation()
+      %{error: "entropy_monitoring_disabled"}
     end
-  end
-
-  defp fallback_entropy_calculation() do
-    # Simplified entropy calculation fallback
-    %{
-      total_entropy: :rand.uniform() * 2.0,
-      cpu_entropy: :rand.uniform(),
-      memory_entropy: :rand.uniform(),
-      io_entropy: :rand.uniform(),
-      last_calculated: :os.system_time(:millisecond)
-    }
   end
 
   defp collect_filesystem_statistics() do

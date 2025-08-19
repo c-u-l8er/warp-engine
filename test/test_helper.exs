@@ -20,19 +20,11 @@ end
 # Start ExUnit for testing
 ExUnit.start()
 
-# Manually start the IsLabDB application with proper configuration
-# (In test environment, the application doesn't auto-start to allow proper setup)
-{:ok, _} = Application.ensure_all_started(:islab_db)
+# Let the test framework handle application startup
+# The application will be started automatically when tests run
+# Configuration is already set above, so it will use the correct settings
 
-# Wait a moment for the application to fully initialize
-Process.sleep(100)
-
-# Verify the cosmic structure was created
-if File.exists?(test_data_dir) do
-  IO.puts("✅ Test data directory created at #{test_data_dir}")
-else
-  IO.puts("❌ Test data directory NOT created at #{test_data_dir}")
-end
+IO.puts("🧪 Test environment configured with data_root: #{test_data_dir}")
 
 # Add setup callback for individual tests
 ExUnit.after_suite(fn _results ->

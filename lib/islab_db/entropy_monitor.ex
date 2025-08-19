@@ -403,6 +403,8 @@ defmodule IsLabDB.EntropyMonitor do
     entropy_dir = Path.join(CosmicPersistence.data_root(), "entropy")
     monitor_dir = Path.join(entropy_dir, to_string(monitor_id))
 
+    # Ensure parent directories exist first
+    File.mkdir_p!(Path.dirname(entropy_dir))
     File.mkdir_p!(entropy_dir)
     File.mkdir_p!(monitor_dir)
     File.mkdir_p!(Path.join(monitor_dir, "time_series"))

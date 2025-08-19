@@ -71,6 +71,9 @@ defmodule IsLabDB.QuantumIndex do
   `{:ok, entanglement_id}` on success, `{:error, reason}` on failure
   """
   def create_entanglement(primary_key, entangled_keys, strength \\ 1.0, metadata \\ %{}) do
+    # Ensure ETS tables exist
+    ensure_tables_exist()
+
     entanglement_id = generate_entanglement_id(primary_key, entangled_keys)
 
     entanglement_data = %{

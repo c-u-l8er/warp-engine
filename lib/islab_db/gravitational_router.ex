@@ -267,10 +267,22 @@ defmodule IsLabDB.GravitationalRouter do
 
     # Add per-shard routing statistics
     shard_stats = Enum.map(router.shard_topology, fn {shard_id, shard} ->
-      shard_metrics = SpacetimeShard.get_shard_metrics(shard)
-      routing_stats = get_shard_routing_stats(router, shard_id)
-
-      {shard_id, Map.merge(shard_metrics, routing_stats)}
+      try do
+        shard_metrics = SpacetimeShard.get_shard_metrics(shard)
+        routing_stats = get_shard_routing_stats(router, shard_id)
+        {shard_id, Map.merge(shard_metrics, routing_stats)}
+      rescue
+        error ->
+          Logger.warning("Failed to get metrics for shard #{shard_id}: #{inspect(error)}")
+          # Return basic fallback metrics
+          {shard_id, %{
+            shard_id: shard_id,
+            data_items: 0,
+            memory_usage: 0,
+            gravitational_field_strength: 0.0,
+            entropy_level: 0.0
+          }}
+      end
     end) |> Enum.into(%{})
 
     Map.merge(base_metrics, %{
@@ -621,8 +633,13 @@ defmodule IsLabDB.GravitationalRouter do
 
   defp calculate_total_gravitational_strength(router) do
     Enum.reduce(router.shard_topology, 0.0, fn {_id, shard}, acc ->
-      metrics = SpacetimeShard.get_shard_metrics(shard)
-      acc + metrics.gravitational_field_strength
+      try do
+        metrics = SpacetimeShard.get_shard_metrics(shard)
+        field_strength = metrics.gravitational_field_strength || 0.0
+        acc + field_strength
+      rescue
+        _ -> acc  # Skip shards that can't provide metrics
+      end
     end)
   end
 

@@ -19,15 +19,26 @@ defmodule QuantumIndexTest do
     # Clean up quantum system before each test
     cleanup_test_quantum_system()
 
-    # Ensure test data directory exists
+        # Ensure test data directory exists
     test_data_dir = "/tmp/islab_db_test_quantum"
     File.mkdir_p!(test_data_dir)
 
-    # Start fresh universe for each test with test configuration
-    {:ok, pid} = IsLabDB.start_link([
-      data_root: test_data_dir,
-      enable_entropy_monitoring: false  # Disable for simpler testing
-    ])
+    # Configure the data root for this test
+    Application.put_env(:islab_db, :data_root, test_data_dir)
+
+    # Ensure the full application is started with WAL and other components
+    Application.ensure_all_started(:islab_db)
+
+    # Ensure cosmic filesystem exists in test directory
+    IsLabDB.CosmicPersistence.initialize_universe()
+
+    # Use the existing IsLabDB process from application supervisor
+    pid = case Process.whereis(IsLabDB) do
+      nil ->
+        raise "IsLabDB should be started by application supervisor but was not found"
+      existing_pid ->
+        existing_pid
+    end
 
     # Give the universe a moment to initialize
     :timer.sleep(100)

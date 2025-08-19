@@ -15,12 +15,33 @@ defmodule Phase3IntegrationTest do
     test_data_dir = "/tmp/islab_db_test_phase3_integration"
     File.mkdir_p!(test_data_dir)
 
-    # Start IsLabDB with Phase 3 features enabled (disable Phase 4 and Phase 5 for pure Phase 3 testing)
-    {:ok, pid} = IsLabDB.start_link([
-      data_root: test_data_dir,
-      enable_entropy_monitoring: false,  # Disable to stay in Phase 3
-      disable_phase4: true
-    ])
+    # Configure for Phase 3 testing (disable Phase 4 and Phase 5 features)
+    Application.put_env(:islab_db, :enable_entropy_monitoring, false)
+    Application.put_env(:islab_db, :disable_phase4, true)
+
+    # Force application restart to ensure configuration is picked up
+    try do
+      Application.stop(:islab_db)
+    rescue
+      _ -> :ok
+    end
+
+    Process.sleep(200)
+
+    # Ensure the full application is started with WAL and other components
+    Application.ensure_all_started(:islab_db)
+    Process.sleep(500)
+
+    # Ensure cosmic filesystem exists in test directory
+    IsLabDB.CosmicPersistence.initialize_universe()
+
+    # Use the existing IsLabDB process from application supervisor
+    pid = case Process.whereis(IsLabDB) do
+      nil ->
+        raise "IsLabDB should be started by application supervisor but was not found"
+      existing_pid ->
+        existing_pid
+    end
 
     :timer.sleep(200)  # Allow Phase 3 system to fully initialize
 

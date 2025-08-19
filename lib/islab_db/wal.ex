@@ -131,34 +131,40 @@ defmodule IsLabDB.WAL do
   ## GENSERVER CALLBACKS
 
   def init(opts) do
-    Logger.info("🚀 Initializing WAL Persistence Revolution...")
+    try do
+      Logger.info("🚀 Initializing WAL Persistence Revolution...")
 
-    # Get data_root from options or use default
-    data_root = Keyword.get(opts, :data_root, CosmicPersistence.data_root())
-    wal_directory = Path.join(data_root, "wal")
+      # Get data_root from options or use default
+      data_root = Keyword.get(opts, :data_root, CosmicPersistence.data_root())
+      Logger.info("📁 WAL data_root: #{data_root}")
+      wal_directory = Path.join(data_root, "wal")
 
-    # Create WAL directory structure
-    File.mkdir_p!(wal_directory)
-    File.mkdir_p!(Path.join(wal_directory, "checkpoints"))
+      # Create WAL directory structure
+      Logger.info("📁 Creating WAL directory: #{wal_directory}")
+      File.mkdir_p!(wal_directory)
+      File.mkdir_p!(Path.join(wal_directory, "checkpoints"))
 
-    # Initialize WAL file
-    wal_file_path = Path.join(wal_directory, @current_wal_filename)
-    {:ok, wal_file_handle} = File.open(wal_file_path, [:write, :append, :binary])
+      # Initialize WAL file
+      wal_file_path = Path.join(wal_directory, @current_wal_filename)
+      Logger.info("📄 Opening WAL file: #{wal_file_path}")
+      {:ok, wal_file_handle} = File.open(wal_file_path, [:write, :append, :binary])
 
-    # Initialize atomic counter for ultra-fast sequence generation
-    sequence_counter_ref = :atomics.new(1, [])
-    last_sequence = load_last_sequence(wal_directory)
-    :atomics.put(sequence_counter_ref, 1, last_sequence)
+      # Initialize atomic counter for ultra-fast sequence generation
+      Logger.info("⚡ Setting up atomic counter...")
+      sequence_counter_ref = :atomics.new(1, [])
+      last_sequence = load_last_sequence(wal_directory)
+      :atomics.put(sequence_counter_ref, 1, last_sequence)
 
-    # Initialize state
-    state = %IsLabDB.WAL{
-      wal_file_path: wal_file_path,
-      wal_file_handle: wal_file_handle,
-      sequence_counter_ref: sequence_counter_ref,
-      write_buffer: [],
-      last_flush_time: :os.system_time(:millisecond),
-      stats: initialize_stats()
-    }
+      # Initialize state
+      Logger.info("🏗️ Building WAL state...")
+      state = %IsLabDB.WAL{
+        wal_file_path: wal_file_path,
+        wal_file_handle: wal_file_handle,
+        sequence_counter_ref: sequence_counter_ref,
+        write_buffer: [],
+        last_flush_time: :os.system_time(:millisecond),
+        stats: initialize_stats()
+      }
 
     # Start background processes
     {:ok, writer_pid} = start_writer_process()
@@ -175,10 +181,16 @@ defmodule IsLabDB.WAL do
     schedule_flush_check()
     schedule_checkpoint()
 
-    Logger.info("✅ WAL system initialized: #{wal_file_path}")
-    Logger.info("⚡ Ready for 250,000+ ops/second performance!")
+      Logger.info("✅ WAL system initialized: #{wal_file_path}")
+      Logger.info("⚡ Ready for 250,000+ ops/second performance!")
 
-    {:ok, updated_state}
+      {:ok, updated_state}
+    rescue
+      error ->
+        Logger.error("❌ WAL initialization failed: #{inspect(error)}")
+        Logger.error("❌ Stacktrace: #{Exception.format_stacktrace(__STACKTRACE__)}")
+        {:stop, {:wal_init_failed, error}}
+    end
   end
 
   def handle_cast({:append, operation}, state) do
@@ -409,10 +421,10 @@ defmodule IsLabDB.WAL do
 
       # Get current sequence number for checkpoint reference
       current_sequence = :atomics.get(state.sequence_counter_ref, 1)
-      
+
       # Save all ETS tables to checkpoint files
       ets_snapshots = save_ets_tables_to_checkpoint(checkpoint_dir)
-      
+
       # Create checkpoint metadata
       checkpoint_metadata = %{
         checkpoint_id: checkpoint_id,
@@ -422,20 +434,20 @@ defmodule IsLabDB.WAL do
         wal_file_path: state.wal_file_path,
         version: "6.6.0"
       }
-      
+
       # Save checkpoint metadata
       metadata_file = Path.join(checkpoint_dir, "metadata.json")
       File.write!(metadata_file, Jason.encode!(checkpoint_metadata, pretty: true))
-      
+
       # Clean up old checkpoints (keep last 3)
       cleanup_old_checkpoints(wal_directory)
-      
+
       checkpoint_time = :os.system_time(:millisecond) - start_time
       Logger.info("✅ Checkpoint created in #{checkpoint_time}ms: #{checkpoint_id}")
       Logger.info("📊 Checkpoint details: #{length(ets_snapshots)} ETS tables, sequence: #{current_sequence}")
 
       {:ok, checkpoint_metadata}
-      
+
     rescue
       error ->
         checkpoint_time = :os.system_time(:millisecond) - start_time
@@ -447,31 +459,31 @@ defmodule IsLabDB.WAL do
   defp perform_wal_recovery(state) do
     Logger.info("🔄 Beginning WAL recovery process...")
     start_time = :os.system_time(:millisecond)
-    
+
     try do
       # 1. Check for latest checkpoint first
       wal_directory = Path.dirname(state.wal_file_path)
       checkpoint_recovery_result = attempt_checkpoint_recovery(wal_directory)
-      
+
       case checkpoint_recovery_result do
         {:ok, checkpoint_info} ->
           Logger.info("📂 Checkpoint recovery successful, now replaying WAL from sequence #{checkpoint_info.last_sequence}")
-          
+
           # Set sequence counter to checkpoint's last sequence
           :atomics.put(state.sequence_counter_ref, 1, checkpoint_info.last_sequence + 1)
-          
+
           # Replay WAL entries after the checkpoint
           replay_wal_after_checkpoint(state, checkpoint_info.last_sequence, start_time)
-          
+
         {:error, :no_checkpoint} ->
           Logger.info("ℹ️  No checkpoint found, performing full WAL recovery")
           perform_full_wal_recovery(state, start_time)
-          
+
         {:error, reason} ->
           Logger.warning("⚠️  Checkpoint recovery failed (#{inspect(reason)}), falling back to full WAL recovery")
           perform_full_wal_recovery(state, start_time)
       end
-      
+
     rescue
       error ->
         recovery_time = :os.system_time(:millisecond) - start_time
@@ -487,7 +499,7 @@ defmodule IsLabDB.WAL do
         false ->
           Logger.info("ℹ️  No WAL file found, starting with clean state")
           {:ok, %{entries_replayed: 0, recovery_time_ms: 0}}
-          
+
         true ->
           # Load and replay WAL entries
           case load_wal_entries_from_file(state.wal_file_path) do
@@ -804,19 +816,19 @@ defmodule IsLabDB.WAL do
 
   defp attempt_checkpoint_recovery(wal_directory) do
     Logger.info("🔍 Looking for checkpoint to accelerate recovery...")
-    
+
     checkpoints_dir = Path.join(wal_directory, "checkpoints")
-    
+
     case File.exists?(checkpoints_dir) do
       false ->
         Logger.info("📁 No checkpoints directory found")
         {:error, :no_checkpoint}
-        
+
       true ->
         case find_latest_checkpoint(checkpoints_dir) do
           {:ok, checkpoint_path} ->
             load_checkpoint(checkpoint_path)
-            
+
           {:error, reason} ->
             Logger.info("📄 No valid checkpoint found: #{inspect(reason)}")
             {:error, reason}
@@ -835,21 +847,21 @@ defmodule IsLabDB.WAL do
             File.dir?(full_path) and String.starts_with?(entry, "checkpoint_")
           end)
           |> Enum.sort(:desc) # Most recent first
-          
+
           case checkpoint_dirs do
             [] ->
               {:error, :no_checkpoints}
-              
+
             [latest | _rest] ->
               latest_path = Path.join(checkpoints_dir, latest)
               Logger.info("📂 Found latest checkpoint: #{latest}")
               {:ok, latest_path}
           end
-          
+
         {:error, reason} ->
           {:error, {:ls_failed, reason}}
       end
-      
+
     rescue
       error ->
         {:error, {:find_checkpoint_failed, error}}
@@ -859,40 +871,40 @@ defmodule IsLabDB.WAL do
   defp load_checkpoint(checkpoint_path) do
     Logger.info("📥 Loading checkpoint from: #{checkpoint_path}")
     start_time = :os.system_time(:millisecond)
-    
+
     try do
       # Load checkpoint metadata
       metadata_file = Path.join(checkpoint_path, "metadata.json")
-      
+
       case File.read(metadata_file) do
         {:ok, content} ->
           case safe_decode_json(content) do
             {:ok, metadata} ->
               Logger.info("📋 Checkpoint metadata: sequence #{metadata["sequence_number"]}, #{length(metadata["ets_tables"])} tables")
-              
+
               # Restore ETS tables from checkpoint
               restored_tables = restore_ets_tables_from_checkpoint(checkpoint_path, metadata["ets_tables"])
-              
+
               load_time = :os.system_time(:millisecond) - start_time
               Logger.info("✅ Checkpoint loaded in #{load_time}ms: #{length(restored_tables)} ETS tables restored")
-              
+
               {:ok, %{
                 checkpoint_id: metadata["checkpoint_id"],
                 last_sequence: metadata["sequence_number"],
                 tables_restored: length(restored_tables),
                 load_time_ms: load_time
               }}
-              
+
             {:error, reason} ->
               Logger.error("❌ Failed to parse checkpoint metadata: #{inspect(reason)}")
               {:error, {:metadata_parse_failed, reason}}
           end
-          
+
         {:error, reason} ->
           Logger.error("❌ Failed to read checkpoint metadata: #{inspect(reason)}")
           {:error, {:metadata_read_failed, reason}}
       end
-      
+
     rescue
       error ->
         load_time = :os.system_time(:millisecond) - start_time
@@ -903,14 +915,14 @@ defmodule IsLabDB.WAL do
 
   defp save_ets_tables_to_checkpoint(checkpoint_dir) do
     Logger.info("💾 Saving ETS tables to checkpoint...")
-    
+
     # Define the standard spacetime ETS tables that should be backed up
     standard_tables = [
       :spacetime_hot_data,
       :spacetime_warm_data,
       :spacetime_cold_data
     ]
-    
+
     # Get all existing ETS tables that match our patterns
     existing_tables = standard_tables
     |> Enum.filter(fn table_name ->
@@ -919,31 +931,31 @@ defmodule IsLabDB.WAL do
         _reference -> true
       end
     end)
-    
+
     Logger.info("📊 Found #{length(existing_tables)} ETS tables to backup")
-    
+
     # Save each table
     saved_tables = existing_tables
     |> Enum.map(fn table_name ->
       table_file = Path.join(checkpoint_dir, "#{table_name}.ets")
-      
+
       try do
         # Use ETS :tab2file for maximum speed and reliability
         case :ets.tab2file(table_name, String.to_charlist(table_file)) do
           :ok ->
             table_size = :ets.info(table_name, :size)
             Logger.debug("✅ Saved #{table_name}: #{table_size} entries to #{table_file}")
-            
+
             %{
               table_name: table_name,
               file_path: table_file,
               size: table_size,
               status: :saved
             }
-            
+
           {:error, reason} ->
             Logger.error("❌ Failed to save #{table_name}: #{inspect(reason)}")
-            
+
             %{
               table_name: table_name,
               file_path: table_file,
@@ -951,11 +963,11 @@ defmodule IsLabDB.WAL do
               status: :failed
             }
         end
-        
+
       rescue
         error ->
           Logger.error("💥 Exception saving #{table_name}: #{inspect(error)}")
-          
+
           %{
             table_name: table_name,
             file_path: table_file,
@@ -964,32 +976,32 @@ defmodule IsLabDB.WAL do
           }
       end
     end)
-    
+
     successful_saves = Enum.count(saved_tables, fn table -> table.status == :saved end)
     Logger.info("💾 ETS checkpoint save complete: #{successful_saves}/#{length(saved_tables)} tables saved")
-    
+
     saved_tables
   end
 
   defp restore_ets_tables_from_checkpoint(checkpoint_path, ets_table_metadata) do
     Logger.info("📥 Restoring ETS tables from checkpoint...")
-    
+
     restored_tables = ets_table_metadata
     |> Enum.map(fn table_info ->
       table_name = String.to_atom(table_info["table_name"])
       # Use checkpoint_path as base directory for safety
       table_filename = Path.basename(table_info["file_path"])
       table_file = Path.join(checkpoint_path, table_filename)
-      
+
       try do
         # Delete existing table if it exists
         case :ets.whereis(table_name) do
           :undefined -> :ok
-          _reference -> 
+          _reference ->
             :ets.delete(table_name)
             Logger.debug("🗑️  Deleted existing table #{table_name}")
         end
-        
+
         # Restore table from file
         case :ets.file2tab(String.to_charlist(table_file)) do
           {:ok, restored_table} ->
@@ -997,7 +1009,7 @@ defmodule IsLabDB.WAL do
             if restored_table == table_name do
               restored_size = :ets.info(table_name, :size)
               Logger.debug("✅ Restored #{table_name}: #{restored_size} entries")
-              
+
               %{
                 table_name: table_name,
                 size: restored_size,
@@ -1007,39 +1019,39 @@ defmodule IsLabDB.WAL do
               Logger.warning("⚠️  Table name mismatch: expected #{table_name}, got #{restored_table}")
               %{table_name: table_name, status: :name_mismatch}
             end
-            
+
           {:error, reason} ->
             Logger.error("❌ Failed to restore #{table_name}: #{inspect(reason)}")
             %{table_name: table_name, error: reason, status: :failed}
         end
-        
+
       rescue
         error ->
           Logger.error("💥 Exception restoring #{table_name}: #{inspect(error)}")
           %{table_name: table_name, error: error, status: :exception}
       end
     end)
-    
+
     successful_restores = Enum.count(restored_tables, fn table -> table.status == :restored end)
     Logger.info("📥 ETS checkpoint restore complete: #{successful_restores}/#{length(restored_tables)} tables restored")
-    
+
     restored_tables
   end
 
   defp replay_wal_after_checkpoint(state, checkpoint_sequence, start_time) do
     Logger.info("🔄 Replaying WAL entries after checkpoint sequence #{checkpoint_sequence}")
-    
+
     case load_wal_entries_from_file(state.wal_file_path) do
       {:ok, all_entries} ->
         # Filter entries that come after the checkpoint
         entries_after_checkpoint = all_entries
         |> Enum.filter(fn entry -> entry.sequence > checkpoint_sequence end)
-        
+
         Logger.info("📂 Found #{length(entries_after_checkpoint)} WAL entries to replay after checkpoint")
-        
+
         if length(entries_after_checkpoint) > 0 do
           # Replay entries after checkpoint
-          {replayed_count, _} = 
+          {replayed_count, _} =
             entries_after_checkpoint
             |> Stream.with_index()
             |> Stream.map(fn {entry, _index} ->
@@ -1053,14 +1065,14 @@ defmodule IsLabDB.WAL do
             |> Enum.reduce({0, nil}, fn {count, entry}, {total_count, _last} ->
               {total_count + count, entry}
             end)
-          
+
           # Update sequence counter
           last_entry = List.last(entries_after_checkpoint)
           :atomics.put(state.sequence_counter_ref, 1, last_entry.sequence + 1)
-          
+
           recovery_time = :os.system_time(:millisecond) - start_time
           Logger.info("✅ Checkpoint + WAL recovery completed: #{replayed_count} entries replayed in #{recovery_time}ms")
-          
+
           {:ok, %{
             checkpoint_used: true,
             entries_replayed: replayed_count,
@@ -1071,7 +1083,7 @@ defmodule IsLabDB.WAL do
         else
           recovery_time = :os.system_time(:millisecond) - start_time
           Logger.info("✅ Checkpoint recovery completed: no WAL entries to replay (#{recovery_time}ms)")
-          
+
           {:ok, %{
             checkpoint_used: true,
             entries_replayed: 0,
@@ -1080,7 +1092,7 @@ defmodule IsLabDB.WAL do
             last_sequence: checkpoint_sequence
           }}
         end
-        
+
       {:error, reason} ->
         Logger.error("❌ Failed to load WAL entries for post-checkpoint replay: #{inspect(reason)}")
         {:error, reason}
@@ -1089,9 +1101,9 @@ defmodule IsLabDB.WAL do
 
   defp cleanup_old_checkpoints(wal_directory) do
     Logger.info("🧹 Cleaning up old checkpoints...")
-    
+
     checkpoints_dir = Path.join(wal_directory, "checkpoints")
-    
+
     try do
       case File.ls(checkpoints_dir) do
         {:ok, entries} ->
@@ -1107,13 +1119,13 @@ defmodule IsLabDB.WAL do
             {entry, full_path, stat.mtime}
           end)
           |> Enum.sort_by(fn {_entry, _path, mtime} -> mtime end, :desc)
-          
+
           # Keep the 3 most recent, delete the rest
           {keep, delete} = Enum.split(checkpoint_dirs, 3)
-          
+
           if length(delete) > 0 do
             Logger.info("🗑️  Deleting #{length(delete)} old checkpoints (keeping #{length(keep)} recent)")
-            
+
             deleted_count = delete
             |> Enum.map(fn {entry, full_path, _mtime} ->
               try do
@@ -1127,16 +1139,16 @@ defmodule IsLabDB.WAL do
               end
             end)
             |> Enum.sum()
-            
+
             Logger.info("🧹 Cleanup complete: #{deleted_count}/#{length(delete)} old checkpoints deleted")
           else
             Logger.info("🧹 No old checkpoints to clean up")
           end
-          
+
         {:error, reason} ->
           Logger.warning("⚠️  Failed to list checkpoints directory: #{inspect(reason)}")
       end
-      
+
     rescue
       error ->
         Logger.error("💥 Checkpoint cleanup failed: #{inspect(error)}")
