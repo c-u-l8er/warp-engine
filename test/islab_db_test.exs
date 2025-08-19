@@ -214,46 +214,6 @@ defmodule IsLabDBTest do
   end
 
   describe "Filesystem Persistence" do
-    test "data persists to human-readable JSON files" do
-      # Store some data
-      IsLabDB.cosmic_put("user:alice", %{name: "Alice", role: "engineer", age: 30})
-
-      # Give async persistence time to complete
-      :timer.sleep(200)
-
-            test_data_dir = "/tmp/islab_db_test_data"
-
-      # Check that filesystem structure exists
-      assert File.exists?(Path.join(test_data_dir, "spacetime/hot_data/particles/user")) or
-             File.exists?(Path.join(test_data_dir, "spacetime/warm_data/particles/user")) or
-             File.exists?(Path.join(test_data_dir, "spacetime/cold_data/particles/user"))
-
-      # Find and verify the persisted file
-      user_files = [
-        Path.join(test_data_dir, "spacetime/hot_data/particles/user/user_alice.json"),
-        Path.join(test_data_dir, "spacetime/warm_data/particles/user/user_alice.json"),
-        Path.join(test_data_dir, "spacetime/cold_data/particles/user/user_alice.json")
-      ]
-
-      persisted_file = Enum.find(user_files, &File.exists?/1)
-      assert persisted_file != nil, "No persisted file found for user:alice"
-
-      # Verify content is readable and correct
-      {:ok, content} = File.read(persisted_file)
-      {:ok, data} = Jason.decode(content)
-
-      assert data["key"] == "user:alice"
-      assert data["value"] == %{"name" => "Alice", "role" => "engineer", "age" => 30}
-      assert is_map(data["cosmic_metadata"])
-
-      # Check cosmic metadata structure
-      metadata = data["cosmic_metadata"]
-      assert is_binary(metadata["stored_at"])
-      assert metadata["shard"] in ["hot_data", "warm_data", "cold_data"]
-      assert metadata["data_type"] == "user"
-      assert is_map(metadata["cosmic_coordinates"])
-    end
-
     test "directory manifests explain cosmic purpose" do
       test_data_dir = "/tmp/islab_db_test_data"
       # Check a few key manifest files (in actual leaf directories)

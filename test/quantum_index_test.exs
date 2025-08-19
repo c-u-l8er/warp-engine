@@ -33,8 +33,13 @@ defmodule QuantumIndexTest do
     :timer.sleep(100)
 
     on_exit(fn ->
-      if Process.alive?(pid) do
-        GenServer.stop(pid)
+      # Safe process cleanup - only stop if process exists and is alive
+      try do
+        if Process.alive?(pid) do
+          GenServer.stop(pid, :normal, 1000)
+        end
+      catch
+        :exit, _ -> :ok  # Process already dead, ignore
       end
       cleanup_test_quantum_system()
     end)

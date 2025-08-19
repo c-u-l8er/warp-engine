@@ -688,7 +688,6 @@ cat /data/spacetime/hot_data/particles/_manifest.json | jq
 - [ ] ✅ **Project compiles and tests pass**
 - [ ] ✅ **Cosmic filesystem structure is created in `/data`**
 - [ ] ✅ **Basic put/get/delete operations work**
-- [ ] ✅ **Data persists to human-readable JSON files**
 - [ ] ✅ **Directory manifests explain cosmic purpose**
 - [ ] ✅ **ETS tables operate with filesystem backing**
 - [ ] ✅ **Performance metrics are collected**

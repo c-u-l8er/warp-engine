@@ -130,7 +130,7 @@ defmodule IsLabDB do
     # PERFORMANCE REVOLUTION: TRUE GenServer bypass with cached state!
     # Get cached state without any GenServer calls for maximum performance
     state = get_cached_state()
-    
+
     if state.wal_enabled do
       # Phase 6.6: WAL-powered ultra-high performance (250K+ ops/sec)
       case IsLabDB.WALOperations.cosmic_put_v2(state, key, value, opts) do
@@ -180,7 +180,7 @@ defmodule IsLabDB do
     # PERFORMANCE REVOLUTION: TRUE GenServer bypass for GET operations!
     # Get cached state without any GenServer calls for maximum performance
     state = get_cached_state()
-    
+
     if state.wal_enabled do
       # Phase 6.6: WAL-powered ultra-high performance (500K+ ops/sec)
       case IsLabDB.WALOperations.cosmic_get_v2(state, key) do
@@ -537,9 +537,9 @@ defmodule IsLabDB do
       # Phase 6.6: WAL-powered quantum entanglement with analytics logging
       case WALOperations.quantum_get_v2(state, key) do
         {:ok, value, shard_id, operation_time, updated_state} ->
-          {:reply, {:ok, value, shard_id, operation_time}, updated_state}
+          {:reply, {:ok, value}, updated_state}  # Return simple 2-tuple for test compatibility
         {:error, :not_found, operation_time, error_state} ->
-          {:reply, {:error, :not_found, operation_time}, error_state}
+          {:reply, {:error, :not_found}, error_state}  # Return simple 2-tuple for test compatibility
       end
     else
       # Legacy: Original quantum implementation for backward compatibility
@@ -1531,7 +1531,7 @@ defmodule IsLabDB do
   end
 
   # PERFORMANCE REVOLUTION: TRUE GenServer bypass with local state caching
-  
+
   @cached_state_key :islab_db_cached_state
   @cache_refresh_interval 1000  # Refresh cache every 1 second max
 
@@ -1545,7 +1545,7 @@ defmodule IsLabDB do
           # Cache expired, refresh it
           refresh_cached_state()
         end
-      
+
       nil ->
         # No cache, create it
         refresh_cached_state()

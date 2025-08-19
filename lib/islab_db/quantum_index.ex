@@ -203,6 +203,9 @@ defmodule IsLabDB.QuantumIndex do
   Get quantum index statistics and metrics.
   """
   def quantum_metrics() do
+    # Ensure tables exist before querying for test compatibility
+    ensure_tables_exist()
+
     total_entanglements = :ets.info(@primary_index, :size)
     total_relationships = :ets.info(@entanglement_map, :size)
     patterns_cached = :ets.info(@pattern_cache, :size)
@@ -565,6 +568,13 @@ defmodule IsLabDB.QuantumIndex do
       0 -> :hot_data
       1 -> :warm_data
       2 -> :cold_data
+    end
+  end
+
+  # Ensure ETS tables exist for test compatibility
+  defp ensure_tables_exist() do
+    unless :ets.whereis(@primary_index) != :undefined do
+      initialize_quantum_system()
     end
   end
 end

@@ -1,0 +1,378 @@
+     warning: variable "operation_time" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 539 │         {:ok, value, shard_id, operation_time, updated_state} ->
+     │                                ~
+     │
+     └─ lib/islab_db.ex:539:32: IsLabDB.handle_call/3
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 539 │         {:ok, value, shard_id, operation_time, updated_state} ->
+     │                      ~
+     │
+     └─ lib/islab_db.ex:539:22: IsLabDB.handle_call/3
+
+     warning: variable "operation_time" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 541 │         {:error, :not_found, operation_time, error_state} ->
+     │                              ~
+     │
+     └─ lib/islab_db.ex:541:30: IsLabDB.handle_call/3
+
+      warning: function update_quantum_metrics/3 is unused
+      │
+ 1074 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
+      │        ~
+      │
+      └─ lib/islab_db.ex:1074:8: IsLabDB (module)
+
+      warning: function store_in_event_horizon_cache/5 is unused
+      │
+ 1161 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
+      │        ~
+      │
+      └─ lib/islab_db.ex:1161:8: IsLabDB (module)
+
+      warning: function get_current_state/0 is unused
+      │
+ 1575 │   defp get_current_state() do
+      │        ~
+      │
+      └─ lib/islab_db.ex:1575:8: IsLabDB (module)
+
+     warning: the following clause will never match:
+
+         {:error, error_result, error_state}
+
+     because it attempts to match on the result of:
+
+         IsLabDB.WALOperations.cosmic_delete_v2(state, key)
+
+     which has type:
+
+         dynamic({:ok, term(), float() or integer(), term()})
+
+     typing violation found at:
+     │
+ 556 │         {:error, error_result, error_state} ->
+     │         ~
+     │
+     └─ lib/islab_db.ex:556:9: IsLabDB.handle_call/3
+
+     warning: function atomize_keys/1 is unused
+     │
+ 288 │   defp atomize_keys(map) when is_map(map) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_entry.ex:288:8: IsLabDB.WAL.Entry (module)
+
+     warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 218 │   defp ultra_fast_route_data(key, value, opts) do
+     │                                   ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:218:35: IsLabDB.WALOperations.ultra_fast_route_data/3
+
+     warning: variable "cosmic_metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
+     │                                                      ~~~~~~~~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:278:54: IsLabDB.WALOperations.update_physics_intelligence_async/4
+
+     warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
+     │                                                                       ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:278:71: IsLabDB.WALOperations.update_physics_intelligence_async/4
+
+     warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
+     │                                               ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:278:47: IsLabDB.WALOperations.update_physics_intelligence_async/4
+
+     warning: variable "cosmic_metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │                                                                    ~~~~~~~~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:68: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │                                                          ~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:58: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+
+     warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │                                                                                     ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:85: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+
+     warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │                                                   ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:51: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+
+     warning: variable "delete_results" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 374 │   defp cleanup_physics_intelligence_async(key, delete_results, state) do
+     │                                                ~~~~~~~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:374:48: IsLabDB.WALOperations.cleanup_physics_intelligence_async/3
+
+     warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 374 │   defp cleanup_physics_intelligence_async(key, delete_results, state) do
+     │                                                                ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:374:64: IsLabDB.WALOperations.cleanup_physics_intelligence_async/3
+
+     warning: function update_wormhole_usage_patterns/3 is unused
+     │
+ 481 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:481:8: IsLabDB.WALOperations (module)
+
+     warning: function update_shard_statistics/4 is unused
+     │
+ 491 │   defp update_shard_statistics(shard, operation, _key, _value) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:491:8: IsLabDB.WALOperations (module)
+
+     warning: function update_physics_intelligence_async/4 is unused
+     │
+ 278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:278:8: IsLabDB.WALOperations (module)
+
+     warning: function update_get_physics_intelligence_async/5 is unused
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:8: IsLabDB.WALOperations (module)
+
+     warning: function update_access_patterns_async/3 is unused
+     │
+ 419 │   defp update_access_patterns_async(key, access_type, _state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:419:8: IsLabDB.WALOperations (module)
+
+     warning: function ultra_fast_route_data/3 is unused
+     │
+ 218 │   defp ultra_fast_route_data(key, value, opts) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:218:8: IsLabDB.WALOperations (module)
+
+     warning: function populate_event_horizon_cache_async/4 is unused
+     │
+ 388 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:388:8: IsLabDB.WALOperations (module)
+
+     warning: function get_wormhole_metadata/2 is unused
+     │
+ 463 │   defp get_wormhole_metadata(_key, shard_id) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:463:8: IsLabDB.WALOperations (module)
+
+     warning: function determine_quantum_state/2 is unused
+     │
+ 424 │   defp determine_quantum_state(key, value) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:424:8: IsLabDB.WALOperations (module)
+
+     warning: function determine_optimal_cache_level/1 is unused
+     │
+ 472 │   defp determine_optimal_cache_level(cosmic_metadata) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:472:8: IsLabDB.WALOperations (module)
+
+     warning: function create_cosmic_metadata/5 is unused
+     │
+ 262 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:262:8: IsLabDB.WALOperations (module)
+
+     warning: function check_event_horizon_cache_v2/2 is unused
+     │
+ 323 │   defp check_event_horizon_cache_v2(state, key) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:323:8: IsLabDB.WALOperations (module)
+
+     warning: function calculate_entropy_impact/3 is unused
+     │
+ 435 │   defp calculate_entropy_impact(key, value, shard_id) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:435:8: IsLabDB.WALOperations (module)
+
+     warning: function calculate_cosmic_coordinates/2 is unused
+     │
+ 449 │   defp calculate_cosmic_coordinates(key, value) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:449:8: IsLabDB.WALOperations (module)
+
+     warning: function cache_retrieved_value_async/5 is unused
+     │
+ 401 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:401:8: IsLabDB.WALOperations (module)
+
+    warning: unused alias EntropyMonitor
+    │
+ 27 │   alias IsLabDB.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
+    │   ~
+    │
+    └─ lib/islab_db/wal_operations.ex:27:3
+
+    warning: unused alias GravitationalRouter
+    │
+ 27 │   alias IsLabDB.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
+    │   ~
+    │
+    └─ lib/islab_db/wal_operations.ex:27:3
+
+     warning: the following clause will never match:
+
+         {:error, _reason}
+
+     because it attempts to match on the result of:
+
+         IsLabDB.EventHorizonCache.get(cache, key)
+
+     which has type:
+
+         dynamic(
+           {:miss, %{..., performance_metrics: term()}} or
+             {:ok, term(), %{..., performance_metrics: term()},
+              %{
+                cache_level: term(),
+                data_decompressed: boolean(),
+                dilated_operation_time: integer(),
+                promoted: boolean(),
+                time_dilation_factor: term(),
+                wall_clock_time: float() or integer()
+              }}
+         )
+
+     typing violation found at:
+     │
+ 335 │             {:error, _reason} -> nil
+     │             ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:335: IsLabDB.WALOperations.check_event_horizon_cache_v2/2
+
+
+20:12:19.273 [info] 🚀 Starting IsLab Database Application...
+
+20:12:19.277 [info] ⚙️  Application Configuration:
+
+20:12:19.295 [info]   data_root: "/home/travis/Projects/islab-database/data"
+
+20:12:19.295 [info]   Entanglement rules: using defaults
+
+20:12:19.302 [info] 🚀 Initializing IsLabDB computational universe...
+
+20:12:19.307 [info] 🌌 Initializing cosmic filesystem structure...
+
+20:12:19.353 [info] ✨ Cosmic structure ready at /home/travis/Projects/islab-database/data
+
+20:12:19.357 [info] ⚛️  Initializing quantum entanglement system...
+
+20:12:19.362 [info] ✨ Quantum entanglement system ready for superposition
+
+20:12:19.362 [info] 🌌 Initializing Phase 3: Spacetime Sharding System...
+
+20:12:19.366 [info] 🌌 Created spacetime shard: hot_data with strong consistency
+
+20:12:19.366 [info] 🌌 Created spacetime shard: warm_data with eventual consistency
+
+20:12:19.366 [info] 🌌 Created spacetime shard: cold_data with weak consistency
+
+20:12:19.371 [info] 🌌 Initializing gravitational routing system with 3 shards
+
+20:12:19.371 [info] ✨ Gravitational router initialized with gravitational algorithm
+
+20:12:19.371 [info] ✨ Phase 3 spacetime sharding system ready
+
+20:12:19.371 [info] 🕳️  Initializing Phase 4: Event Horizon Cache System...
+
+20:12:19.377 [info] 🕳️  Creating Event Horizon Cache: hot_data_cache
+
+20:12:19.377 [info] ✨ Event Horizon Cache hot_data_cache ready - Schwarzschild radius: 10000
+
+20:12:19.377 [info] 🕳️  Creating Event Horizon Cache: warm_data_cache
+
+20:12:19.377 [info] ✨ Event Horizon Cache warm_data_cache ready - Schwarzschild radius: 5000
+
+20:12:19.377 [info] 🕳️  Creating Event Horizon Cache: cold_data_cache
+
+20:12:19.377 [info] ✨ Event Horizon Cache cold_data_cache ready - Schwarzschild radius: 2000
+
+20:12:19.377 [info] 🕳️  Creating Event Horizon Cache: universal_cache
+
+20:12:19.377 [info] ✨ Event Horizon Cache universal_cache ready - Schwarzschild radius: 20000
+
+20:12:19.378 [info] ✨ Phase 4 Event Horizon Cache System ready - 4 caches active
+
+20:12:19.378 [info] 🌡️  Initializing Phase 5: Entropy Monitoring & Thermodynamics...
+
+20:12:19.400 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
+
+20:12:19.400 [info] 💾 Entropy persistence initialized: /home/travis/Projects/islab-database/data/entropy/cosmic_entropy
+
+20:12:19.400 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 5000ms
+
+20:12:19.400 [info] ✨ Phase 5 Entropy Monitoring System ready - cosmic entropy monitor active
+
+20:12:19.400 [info] 🚀 Initializing WAL Persistence Revolution...
+
+20:12:19.404 [info] 🚀 Initializing WAL Persistence Revolution...
+
+20:12:19.405 [info] ✅ WAL system initialized: /home/travis/Projects/islab-database/data/wal/cosmic.wal
+
+20:12:19.405 [info] ⚡ Ready for 250,000+ ops/second performance!
+
+20:12:19.405 [info] ✨ IsLabDB universe is stable and ready for cosmic operations
+
+20:12:19.405 [info] 🌌 Data root: /home/travis/Projects/islab-database/data
+
+20:12:19.405 [info] 🪐 Advanced spacetime shards: cold_data, hot_data, warm_data
+
+20:12:19.405 [info] 🎯 Gravitational routing: gravitational algorithm
+
+20:12:19.405 [info] 🕳️  Event horizon caches: warm_data_cache, hot_data_cache, cold_data_cache, universal_cache
+
+20:12:19.405 [info] 🔗 Entanglement rules: 4 patterns configured
+
+20:12:19.405 [info] 🚀 Phase 4: Event Horizon Cache System - ACTIVE
+
+20:12:19.405 [info] 🌡️  Phase 5: Entropy Monitoring & Thermodynamics - ACTIVE
+
+20:12:19.405 [info] ✨ IsLab Database Application started successfully
+
+20:12:19.408 [info] 🌌 Universe supervisor PID: #PID<0.232.0>
+** (Mix) Mix.install/2 cannot be used inside a Mix project
