@@ -5,4 +5,4 @@ mix run benchmarks/optimized_redis_benchmark.exs &> benchmarks/optimized_redis_b
 mix run benchmarks/phase6_6_wal_benchmark.exs &> benchmarks/phase6_6_wal_benchmark.txt
 mix run benchmarks/rabbitmq_vs_islab_comparison.exs &> benchmarks/rabbitmq_vs_islab_comparison.txt
 mix run benchmarks/redis_vs_islab_simple.exs &> benchmarks/redis_vs_islab_simple.txt
-mix run benchmarks/benchmark.exs &> benchmarks/benchmark.txt
+elixir benchmarks/benchmark.exs &> benchmarks/benchmark.txt
