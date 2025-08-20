@@ -1,0 +1,3486 @@
+     warning: variable "meta1" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 162 │   defp transform_single_physics_field({:"::", meta1, [field_name, {:"::", meta2, [type_spec, [physics: physics_annotation]]}]}) do
+     │                                               ~~~~~
+     │
+     └─ lib/enhanced_adt.ex:162:47: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: variable "meta2" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 162 │   defp transform_single_physics_field({:"::", meta1, [field_name, {:"::", meta2, [type_spec, [physics: physics_annotation]]}]}) do
+     │                                                                           ~~~~~
+     │
+     └─ lib/enhanced_adt.ex:162:75: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: variable "meta" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 168 │   defp transform_single_physics_field({{:"::", meta, [field_name, type_spec]}, [physics: physics_annotation]}) do
+     │                                                ~~~~
+     │
+     └─ lib/enhanced_adt.ex:168:48: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: function extract_variant_name/1 is unused
+     │
+ 242 │   defp extract_variant_name({:__aliases__, _, [variant_name]}) when is_atom(variant_name), do: variant_name
+     │        ~
+     │
+     └─ lib/enhanced_adt.ex:242:8: EnhancedADT.ProductType (module)
+
+     warning: function parse_elegant_variant_fields/1 is unused
+     │
+ 450 │   defp parse_elegant_variant_fields(args) do
+     │        ~
+     │
+     └─ lib/enhanced_adt.ex:450:8: EnhancedADT.SumType (module)
+
+     warning: the underscored variable "_meta" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore
+     │
+ 564 │       {module_name, _meta, args}
+     │                     ~
+     │
+     └─ lib/enhanced_adt/bend.ex:564:21: EnhancedADT.Bend.transform_bend_adt_pattern/1
+
+     warning: function update_bend_context/2 is unused
+     │
+ 443 │   defp update_bend_context(context, updates) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:443:8: EnhancedADT.Bend (module)
+
+     warning: function transform_elegant_bend_clause/1 is unused
+     │
+ 542 │   defp transform_elegant_bend_clause({:->, meta, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:542:8: EnhancedADT.Bend (module)
+
+     warning: function transform_elegant_adt_clauses_for_bend/1 is unused
+     │
+ 533 │   defp transform_elegant_adt_clauses_for_bend(clauses) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:533:8: EnhancedADT.Bend (module)
+
+     warning: function transform_bend_adt_pattern/1 is unused
+     │
+ 548 │   defp transform_bend_adt_pattern({module_name, _meta, args}) when is_atom(module_name) and is_list(args) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:548:8: EnhancedADT.Bend (module)
+
+     warning: function record_network_connections/3 is unused
+     │
+ 447 │   defp record_network_connections(context, _node_id, _result) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:447:8: EnhancedADT.Bend (module)
+
+     warning: function inject_network_generation/2 is unused
+     │
+ 261 │   defp inject_network_generation(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:261:8: EnhancedADT.Bend (module)
+
+     warning: function inject_fork_tracking/1 is unused
+     │
+ 299 │   defp inject_fork_tracking(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:299:8: EnhancedADT.Bend (module)
+
+     warning: function get_bend_module_field_names/1 is unused
+     │
+ 574 │   defp get_bend_module_field_names(variant_name) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:574:8: EnhancedADT.Bend (module)
+
+     warning: function generate_unique_node_id/0 is unused
+     │
+ 439 │   defp generate_unique_node_id() do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:439:8: EnhancedADT.Bend (module)
+
+     warning: function find_recursive_calls_in_ast/1 is unused
+     │
+ 421 │   defp find_recursive_calls_in_ast(_body), do: []  # Simplified
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:421:8: EnhancedADT.Bend (module)
+
+     warning: function find_fork_calls_in_ast/1 is unused
+     │
+ 424 │   defp find_fork_calls_in_ast(_body), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:424:8: EnhancedADT.Bend (module)
+
+     warning: function find_connection_points/2 is unused
+     │
+ 426 │   defp find_connection_points(_patterns, _body), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:426:8: EnhancedADT.Bend (module)
+
+     warning: function extract_topology_hints/2 is unused
+     │
+ 428 │   defp extract_topology_hints(_patterns, _body), do: %{}
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:428:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_recursion_depth/1 is unused
+     │
+ 423 │   defp estimate_recursion_depth(_calls), do: 1
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:423:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_node_count/2 is unused
+     │
+ 432 │   defp estimate_node_count(fork_count, depth), do: fork_count * depth
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:432:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_max_recursion_depth/1 is unused
+     │
+ 431 │   defp estimate_max_recursion_depth(_body), do: 1
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:431:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_connection_count/1 is unused
+     │
+ 433 │   defp estimate_connection_count(fork_count), do: fork_count * 2
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:433:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_body_with_network_tracking/2 is unused
+     │
+ 290 │   defp enhance_body_with_network_tracking(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:290:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_bend_clauses/2 is unused
+     │
+ 241 │   defp enhance_bend_clauses(clauses, bend_analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:241:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_bend_clause/2 is unused
+     │
+ 254 │   defp enhance_bend_clause({:->, meta, [pattern_list, body]}, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:254:8: EnhancedADT.Bend (module)
+
+     warning: function determine_optimization_priority/2 is unused
+     │
+ 434 │   defp determine_optimization_priority(fork_count, depth), do: if(fork_count * depth > 10, do: :high, else: :normal)
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:434:8: EnhancedADT.Bend (module)
+
+     warning: function detect_recursive_calls/1 is unused
+     │
+ 197 │   defp detect_recursive_calls(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:197:8: EnhancedADT.Bend (module)
+
+     warning: function detect_fork_operations/1 is unused
+     │
+ 207 │   defp detect_fork_operations(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:207:8: EnhancedADT.Bend (module)
+
+     warning: function count_fork_operations/1 is unused
+     │
+ 430 │   defp count_fork_operations(_body), do: 0
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:430:8: EnhancedADT.Bend (module)
+
+     warning: function contains_depth_check?/1 is unused
+     │
+ 435 │   defp contains_depth_check?(_guard), do: false
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:435:8: EnhancedADT.Bend (module)
+
+     warning: function classify_recursive_calls/1 is unused
+     │
+ 422 │   defp classify_recursive_calls(_calls), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:422:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_optimization_potential/2 is unused
+     │
+ 429 │   defp calculate_optimization_potential(_patterns, _body), do: 0.5
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:429:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_network_complexity/1 is unused
+     │
+ 227 │   defp calculate_network_complexity(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:227:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_fork_connection_strength/3 is unused
+     │
+ 451 │   defp calculate_fork_connection_strength(_source, _target, _value) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:451:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_wormhole_opportunities/2 is unused
+     │
+ 217 │   defp analyze_wormhole_opportunities(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:217:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_strength_indicators/1 is unused
+     │
+ 427 │   defp analyze_strength_indicators(_body), do: %{}
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:427:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_fork_patterns/1 is unused
+     │
+ 425 │   defp analyze_fork_patterns(_calls), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:425:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_pattern/1 is unused
+     │
+ 147 │   defp analyze_bend_pattern(pattern) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:147:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_clauses/1 is unused
+     │
+ 124 │   defp analyze_bend_clauses(clauses) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:124:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_clause/1 is unused
+     │
+ 131 │   defp analyze_bend_clause({:->, _, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:131:8: EnhancedADT.Bend (module)
+
+    warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+    │
+ 60 │     defmacro fold(value, opts \\ [], do: clauses) do
+    │                          ~~~~
+    │
+    └─ lib/enhanced_adt/fold.ex:60:26: EnhancedADT.Fold.fold/3
+
+     warning: the underscored variable "_meta" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore
+     │
+ 444 │       {module_name, _meta, args}
+     │                     ~
+     │
+     └─ lib/enhanced_adt/fold.ex:444:21: EnhancedADT.Fold.transform_adt_pattern/1
+
+     warning: defp transform_adt_pattern/1 is private, @doc attribute is always discarded for private functions/macros/types
+     │
+ 422 │     @doc """
+     │     ~~~~~~~~
+     │
+     └─ lib/enhanced_adt/fold.ex:422: EnhancedADT.Fold.transform_adt_pattern/1
+
+     warning: function wrap_with_state_management/2 is unused
+     │
+ 314 │   defp wrap_with_state_management(body, mode) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:314:8: EnhancedADT.Fold (module)
+
+     warning: function inject_wormhole_analysis/2 is unused
+     │
+ 284 │   defp inject_wormhole_analysis(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:284:8: EnhancedADT.Fold (module)
+
+     warning: function inject_quantum_correlation/2 is unused
+     │
+ 299 │   defp inject_quantum_correlation(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:299:8: EnhancedADT.Fold (module)
+
+     warning: function inject_islab_operations/3 is unused
+     │
+ 267 │   defp inject_islab_operations(body, analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:267:8: EnhancedADT.Fold (module)
+
+     warning: function extract_types_from_pattern/1 is unused
+     │
+ 391 │   defp extract_types_from_pattern({module_name, _, _args}) when is_atom(module_name) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:391:8: EnhancedADT.Fold (module)
+
+     warning: function extract_physics_hints/2 is unused
+     │
+ 200 │   defp extract_physics_hints(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:200:8: EnhancedADT.Fold (module)
+
+     warning: function extract_pattern_types/1 is unused
+     │
+ 387 │   defp extract_pattern_types(patterns) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:387:8: EnhancedADT.Fold (module)
+
+     warning: function extract_body_references/1 is unused
+     │
+ 396 │   defp extract_body_references(_body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:396:8: EnhancedADT.Fold (module)
+
+     warning: function enhance_single_clause/3 is unused
+     │
+ 231 │   defp enhance_single_clause({:->, meta, [pattern_list, body]}, analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:231:8: EnhancedADT.Fold (module)
+
+     warning: function enhance_fold_clauses/3 is unused
+     │
+ 211 │   defp enhance_fold_clauses(clauses, clause_analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:211:8: EnhancedADT.Fold (module)
+
+     warning: function determine_access_pattern/2 is unused
+     │
+ 402 │   defp determine_access_pattern(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:402:8: EnhancedADT.Fold (module)
+
+     warning: function detect_cross_references/2 is unused
+     │
+ 183 │   defp detect_cross_references(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:183:8: EnhancedADT.Fold (module)
+
+     warning: function detect_adt_operations/1 is unused
+     │
+ 172 │   defp detect_adt_operations(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:172:8: EnhancedADT.Fold (module)
+
+     warning: function contains_storage_calls?/1 is unused
+     │
+ 358 │   defp contains_storage_calls?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:358:8: EnhancedADT.Fold (module)
+
+     warning: function contains_retrieval_calls?/1 is unused
+     │
+ 366 │   defp contains_retrieval_calls?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:366:8: EnhancedADT.Fold (module)
+
+     warning: function contains_cross_reference_patterns?/1 is unused
+     │
+ 373 │   defp contains_cross_reference_patterns?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:373:8: EnhancedADT.Fold (module)
+
+     warning: function calculate_operation_complexity/1 is unused
+     │
+ 381 │   defp calculate_operation_complexity(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:381:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_temporal_characteristics/1 is unused
+     │
+ 412 │   defp analyze_temporal_characteristics(_body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:412:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_single_clause/1 is unused
+     │
+ 115 │   defp analyze_single_clause({:->, _, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:115:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_pattern/1 is unused
+     │
+ 130 │   defp analyze_pattern(pattern) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:130:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_gravitational_hints/2 is unused
+     │
+ 417 │   defp analyze_gravitational_hints(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:417:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_fold_clauses/1 is unused
+     │
+ 107 │   defp analyze_fold_clauses(clauses) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:107:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_data_locality/2 is unused
+     │
+ 407 │   defp analyze_data_locality(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:407:8: EnhancedADT.Fold (module)
+
+     warning: IsLabDB.WormholeRouter.find_route/2 is undefined or private. Did you mean:
+
+           * find_route/3
+           * find_route/4
+
+     │
+ 390 │     case IsLabDB.WormholeRouter.find_route(key, "*") do
+     │                                 ~
+     │
+     └─ lib/enhanced_adt/islab_integration.ex:390:33: EnhancedADT.IsLabDBIntegration.Translators.attempt_wormhole_retrieval/1
+
+     warning: IsLabDB.WormholeRouter.traverse_route_for_data/1 is undefined or private
+     │
+ 393 │         case IsLabDB.WormholeRouter.traverse_route_for_data(route) do
+     │                                     ~
+     │
+     └─ lib/enhanced_adt/islab_integration.ex:393:37: EnhancedADT.IsLabDBIntegration.Translators.attempt_wormhole_retrieval/1
+
+     warning: the following clause will never match:
+
+         :strongly_related
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 170 │       :strongly_related -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:170: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :weakly_related
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 172 │       :weakly_related -> 0.4
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:172: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :unrelated
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 173 │       :unrelated -> 0.1
+     │       ~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:173: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :always_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 180 │       :always_together -> 0.95
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:180: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :frequently_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 181 │       :frequently_together -> 0.8
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:181: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :rarely_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 183 │       :rarely_together -> 0.2
+     │       ~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:183: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :never_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 184 │       :never_together -> 0.0
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:184: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :very_stable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 191 │       :very_stable -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:191: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: the following clause will never match:
+
+         :moderately_stable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 193 │       :moderately_stable -> 0.5
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:193: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: the following clause will never match:
+
+         :unstable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 194 │       :unstable -> 0.3
+     │       ~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:194: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: the following clause will never match:
+
+         :high_frequency
+
+     because it attempts to match on the result of:
+
+         analyze_route_pattern(route_candidate)
+
+     which has type:
+
+         dynamic(:medium_frequency)
+
+     typing violation found at:
+     │
+ 149 │       :high_frequency -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:149: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
+
+     warning: the following clause will never match:
+
+         :low_frequency
+
+     because it attempts to match on the result of:
+
+         analyze_route_pattern(route_candidate)
+
+     which has type:
+
+         dynamic(:medium_frequency)
+
+     typing violation found at:
+     │
+ 151 │       :low_frequency -> 0.3
+     │       ~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:151: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
+
+     warning: the following clause will never match:
+
+         :unknown
+
+     because it attempts to match on the result of:
+
+         analyze_route_pattern(route_candidate)
+
+     which has type:
+
+         dynamic(:medium_frequency)
+
+     typing violation found at:
+     │
+ 152 │       :unknown -> 0.4
+     │       ~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:152: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
+
+     warning: the following clause will never match:
+
+         :simple
+
+     because it attempts to match on the result of:
+
+         estimate_route_complexity(route_candidate)
+
+     which has type:
+
+         dynamic(:moderate)
+
+     typing violation found at:
+     │
+ 165 │       :simple -> 0.05
+     │       ~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:165: EnhancedADT.WormholeAnalyzer.estimate_maintenance_cost/1
+
+     warning: the following clause will never match:
+
+         :complex
+
+     because it attempts to match on the result of:
+
+         estimate_route_complexity(route_candidate)
+
+     which has type:
+
+         dynamic(:moderate)
+
+     typing violation found at:
+     │
+ 167 │       :complex -> 0.2
+     │       ~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:167: EnhancedADT.WormholeAnalyzer.estimate_maintenance_cost/1
+
+      warning: function update_quantum_metrics/3 is unused
+      │
+ 1090 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
+      │        ~
+      │
+      └─ lib/islab_db.ex:1090:8: IsLabDB (module)
+
+      warning: function store_in_event_horizon_cache/5 is unused
+      │
+ 1172 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
+      │        ~
+      │
+      └─ lib/islab_db.ex:1172:8: IsLabDB (module)
+
+      warning: function get_current_state/0 is unused
+      │
+ 1586 │   defp get_current_state() do
+      │        ~
+      │
+      └─ lib/islab_db.ex:1586:8: IsLabDB (module)
+
+     warning: function atomize_keys/1 is unused
+     │
+ 288 │   defp atomize_keys(map) when is_map(map) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_entry.ex:288:8: IsLabDB.WAL.Entry (module)
+
+     warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 218 │   defp ultra_fast_route_data(key, value, opts) do
+     │                                   ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:218:35: IsLabDB.WALOperations.ultra_fast_route_data/3
+
+     warning: variable "cosmic_metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
+     │                                                      ~~~~~~~~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:278:54: IsLabDB.WALOperations.update_physics_intelligence_async/4
+
+     warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
+     │                                                                       ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:278:71: IsLabDB.WALOperations.update_physics_intelligence_async/4
+
+     warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
+     │                                               ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:278:47: IsLabDB.WALOperations.update_physics_intelligence_async/4
+
+     warning: variable "cosmic_metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │                                                                    ~~~~~~~~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:68: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │                                                          ~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:58: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+
+     warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │                                                                                     ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:85: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+
+     warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │                                                   ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:51: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+
+     warning: variable "delete_results" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 374 │   defp cleanup_physics_intelligence_async(key, delete_results, state) do
+     │                                                ~~~~~~~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:374:48: IsLabDB.WALOperations.cleanup_physics_intelligence_async/3
+
+     warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 374 │   defp cleanup_physics_intelligence_async(key, delete_results, state) do
+     │                                                                ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:374:64: IsLabDB.WALOperations.cleanup_physics_intelligence_async/3
+
+     warning: function update_wormhole_usage_patterns/3 is unused
+     │
+ 481 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:481:8: IsLabDB.WALOperations (module)
+
+     warning: function update_shard_statistics/4 is unused
+     │
+ 491 │   defp update_shard_statistics(shard, operation, _key, _value) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:491:8: IsLabDB.WALOperations (module)
+
+     warning: function update_physics_intelligence_async/4 is unused
+     │
+ 278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:278:8: IsLabDB.WALOperations (module)
+
+     warning: function update_get_physics_intelligence_async/5 is unused
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:8: IsLabDB.WALOperations (module)
+
+     warning: function update_access_patterns_async/3 is unused
+     │
+ 419 │   defp update_access_patterns_async(key, access_type, _state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:419:8: IsLabDB.WALOperations (module)
+
+     warning: function ultra_fast_route_data/3 is unused
+     │
+ 218 │   defp ultra_fast_route_data(key, value, opts) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:218:8: IsLabDB.WALOperations (module)
+
+     warning: function populate_event_horizon_cache_async/4 is unused
+     │
+ 388 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:388:8: IsLabDB.WALOperations (module)
+
+     warning: function get_wormhole_metadata/2 is unused
+     │
+ 463 │   defp get_wormhole_metadata(_key, shard_id) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:463:8: IsLabDB.WALOperations (module)
+
+     warning: function determine_quantum_state/2 is unused
+     │
+ 424 │   defp determine_quantum_state(key, value) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:424:8: IsLabDB.WALOperations (module)
+
+     warning: function determine_optimal_cache_level/1 is unused
+     │
+ 472 │   defp determine_optimal_cache_level(cosmic_metadata) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:472:8: IsLabDB.WALOperations (module)
+
+     warning: function create_cosmic_metadata/5 is unused
+     │
+ 262 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:262:8: IsLabDB.WALOperations (module)
+
+     warning: function check_event_horizon_cache_v2/2 is unused
+     │
+ 323 │   defp check_event_horizon_cache_v2(state, key) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:323:8: IsLabDB.WALOperations (module)
+
+     warning: function calculate_entropy_impact/3 is unused
+     │
+ 435 │   defp calculate_entropy_impact(key, value, shard_id) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:435:8: IsLabDB.WALOperations (module)
+
+     warning: function calculate_cosmic_coordinates/2 is unused
+     │
+ 449 │   defp calculate_cosmic_coordinates(key, value) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:449:8: IsLabDB.WALOperations (module)
+
+     warning: function cache_retrieved_value_async/5 is unused
+     │
+ 401 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:401:8: IsLabDB.WALOperations (module)
+
+    warning: unused alias EntropyMonitor
+    │
+ 27 │   alias IsLabDB.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
+    │   ~
+    │
+    └─ lib/islab_db/wal_operations.ex:27:3
+
+    warning: unused alias GravitationalRouter
+    │
+ 27 │   alias IsLabDB.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
+    │   ~
+    │
+    └─ lib/islab_db/wal_operations.ex:27:3
+
+     warning: the following clause will never match:
+
+         {:error, _reason}
+
+     because it attempts to match on the result of:
+
+         IsLabDB.EventHorizonCache.get(cache, key)
+
+     which has type:
+
+         dynamic(
+           {:miss, %{..., performance_metrics: term()}} or
+             {:ok, term(), %{..., performance_metrics: term()},
+              %{
+                cache_level: term(),
+                data_decompressed: boolean(),
+                dilated_operation_time: integer(),
+                promoted: boolean(),
+                time_dilation_factor: term(),
+                wall_clock_time: float() or integer()
+              }}
+         )
+
+     typing violation found at:
+     │
+ 335 │             {:error, _reason} -> nil
+     │             ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:335: IsLabDB.WALOperations.check_event_horizon_cache_v2/2
+
+
+13:23:05.181 [info] 🚀 Starting IsLab Database Application...
+
+13:23:05.184 [info] ⚙️  Application Configuration:
+
+13:23:05.191 [info]   data_root: "/home/travis/Projects/islab-database/data"
+
+13:23:05.191 [info]   Entanglement rules: using defaults
+
+13:23:05.191 [info] 🔧 Starting supervisor with 2 children
+
+13:23:05.199 [info] 🚀 Initializing WAL Persistence Revolution...
+
+13:23:05.202 [info] 📁 WAL data_root: /home/travis/Projects/islab-database/data
+
+13:23:05.202 [info] 📁 Creating WAL directory: /home/travis/Projects/islab-database/data/wal
+
+13:23:05.203 [info] 📄 Opening WAL file: /home/travis/Projects/islab-database/data/wal/cosmic.wal
+
+13:23:05.203 [info] ⚡ Setting up atomic counter...
+
+13:23:05.203 [info] 🏗️ Building WAL state...
+
+13:23:05.203 [info] ✅ WAL system initialized: /home/travis/Projects/islab-database/data/wal/cosmic.wal
+
+13:23:05.203 [info] ⚡ Ready for 250,000+ ops/second performance!
+
+13:23:05.205 [info] 🚀 Initializing IsLabDB computational universe...
+
+13:23:05.205 [info] 🌌 Initializing cosmic filesystem structure...
+
+13:23:05.244 [info] ✨ Cosmic structure ready at /home/travis/Projects/islab-database/data
+
+13:23:05.248 [info] ⚛️  Initializing quantum entanglement system...
+
+13:23:05.252 [info] ✨ Quantum entanglement system ready for superposition
+
+13:23:05.252 [info] 🌌 Initializing Phase 3: Spacetime Sharding System...
+
+13:23:05.255 [info] 🌌 Created spacetime shard: hot_data with strong consistency
+
+13:23:05.255 [info] 🌌 Created spacetime shard: warm_data with eventual consistency
+
+13:23:05.255 [info] 🌌 Created spacetime shard: cold_data with weak consistency
+
+13:23:05.259 [info] 🌌 Initializing gravitational routing system with 3 shards
+
+13:23:05.259 [info] ✨ Gravitational router initialized with gravitational algorithm
+
+13:23:05.259 [info] ✨ Phase 3 spacetime sharding system ready
+
+13:23:05.259 [info] 🕳️  Initializing Phase 4: Event Horizon Cache System...
+
+13:23:05.263 [info] 🕳️  Creating Event Horizon Cache: hot_data_cache
+
+13:23:05.263 [info] ✨ Event Horizon Cache hot_data_cache ready - Schwarzschild radius: 10000
+
+13:23:05.263 [info] 🕳️  Creating Event Horizon Cache: warm_data_cache
+
+13:23:05.264 [info] ✨ Event Horizon Cache warm_data_cache ready - Schwarzschild radius: 5000
+
+13:23:05.264 [info] 🕳️  Creating Event Horizon Cache: cold_data_cache
+
+13:23:05.264 [info] ✨ Event Horizon Cache cold_data_cache ready - Schwarzschild radius: 2000
+
+13:23:05.264 [info] 🕳️  Creating Event Horizon Cache: universal_cache
+
+13:23:05.264 [info] ✨ Event Horizon Cache universal_cache ready - Schwarzschild radius: 20000
+
+13:23:05.264 [info] ✨ Phase 4 Event Horizon Cache System ready - 4 caches active
+
+13:23:05.264 [info] 🌡️  Initializing Phase 5: Entropy Monitoring & Thermodynamics...
+
+13:23:05.281 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
+
+13:23:05.282 [info] 💾 Entropy persistence initialized: /home/travis/Projects/islab-database/data/entropy/cosmic_entropy
+
+13:23:05.282 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 5000ms
+
+13:23:05.282 [info] ✨ Phase 5 Entropy Monitoring System ready - cosmic entropy monitor active
+
+13:23:05.282 [info] ✅ Connected to WAL system
+
+13:23:05.282 [info] ✨ IsLabDB universe is stable and ready for cosmic operations
+
+13:23:05.282 [info] 🌌 Data root: /home/travis/Projects/islab-database/data
+
+13:23:05.282 [info] 🪐 Advanced spacetime shards: cold_data, hot_data, warm_data
+
+13:23:05.282 [info] 🎯 Gravitational routing: gravitational algorithm
+
+13:23:05.282 [info] 🕳️  Event horizon caches: warm_data_cache, hot_data_cache, cold_data_cache, universal_cache
+
+13:23:05.282 [info] 🔗 Entanglement rules: 4 patterns configured
+
+13:23:05.282 [info] 🚀 Phase 4: Event Horizon Cache System - ACTIVE
+
+13:23:05.282 [info] 🌡️  Phase 5: Entropy Monitoring & Thermodynamics - ACTIVE
+
+13:23:05.282 [info] ✨ IsLab Database Application started successfully
+
+13:23:05.285 [info] 🌌 Universe supervisor PID: #PID<0.313.0>
+
+13:23:05.391 [info] 👥 Supervisor children: [{IsLabDB, #PID<0.319.0>, :worker, [IsLabDB]}, {IsLabDB.WAL, #PID<0.314.0>, :worker, [IsLabDB.WAL]}]
+      warning: variable "benchmark_results" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1172 │   benchmark_results = WeightedGraphBenchmark.run_comprehensive_benchmark()
+      │   ~
+      │
+      └─ benchmarks/weighted_graph_benchmark.exs:1172:3
+
+     warning: variable "standard_metrics" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 370 │       {standard_time, standard_metrics} = :timer.tc(fn ->
+     │                       ~
+     │
+     └─ benchmarks/weighted_graph_benchmark.exs:370:23: WeightedGraphBenchmark.benchmark_scaling_performance/0
+
+     warning: variable "gravitational_opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 538 │     gravitational_opts = 0
+     │     ~~~~~~~~~~~~~~~~~~
+     │
+     └─ benchmarks/weighted_graph_benchmark.exs:538:5: WeightedGraphBenchmark.benchmark_enhanced_adt_node_storage/1
+
+     warning: variable "quantum_entanglements" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 537 │     quantum_entanglements = 0
+     │     ~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ benchmarks/weighted_graph_benchmark.exs:537:5: WeightedGraphBenchmark.benchmark_enhanced_adt_node_storage/1
+
+     warning: variable "successful_count" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 535 │     successful_count = 0
+     │     ~~~~~~~~~~~~~~~~
+     │
+     └─ benchmarks/weighted_graph_benchmark.exs:535:5: WeightedGraphBenchmark.benchmark_enhanced_adt_node_storage/1
+
+     warning: variable "wormhole_routes" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 536 │     wormhole_routes = 0
+     │     ~~~~~~~~~~~~~~~
+     │
+     └─ benchmarks/weighted_graph_benchmark.exs:536:5: WeightedGraphBenchmark.benchmark_enhanced_adt_node_storage/1
+
+     warning: do not use "length(path) > 0" to check if a list is not empty since length always traverses the whole list. Prefer to pattern match on a non-empty list, such as [_ | _], or use "path != []" as a guard
+     │
+ 584 │         %{path: path} when length(path) > 0 ->
+     │                                         ~
+     │
+     └─ benchmarks/weighted_graph_benchmark.exs:584:41
+
+     warning: variable "query_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 733 │       {query_time, query_result} = :timer.tc(fn ->
+     │                    ~
+     │
+     └─ benchmarks/weighted_graph_benchmark.exs:733:20: WeightedGraphBenchmark.benchmark_entropy_optimized_query_processing/1
+
+     warning: variable "storage_results" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 805 │     storage_results = benchmark_standard_node_storage(nodes)
+     │     ~~~~~~~~~~~~~~~
+     │
+     └─ benchmarks/weighted_graph_benchmark.exs:805:5: WeightedGraphBenchmark.benchmark_standard_operations_at_scale/2
+
+
+13:23:06.019 [info] 🚀 Starting Enhanced ADT Weighted Graph Database Benchmark...
+
+13:23:06.019 [info] 🌌 Physics-Inspired Database Performance Analysis
+
+13:23:06.019 [info] 
+
+13:23:06.019 [info] 🚀 Setting up Enhanced ADT Weighted Graph Benchmark Environment...
+
+13:23:06.019 [info] ✅ IsLabDB universe already active
+
+13:23:06.019 [info] 📊 Initializing Weighted Graph Database with Enhanced ADT...
+    warning: duplicate key :"::" found in struct
+    │
+ 79 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/weighted_graph_database.ex:79: :ConnectedGraph (module)
+
+    warning: duplicate key :"::" found in struct
+    │
+ 79 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/weighted_graph_database.ex:79: :ConnectedGraph (module)
+
+    warning: duplicate key :"::" found in struct
+    │
+ 79 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/weighted_graph_database.ex:79: :ClusteredGraph (module)
+
+    warning: duplicate key :"::" found in struct
+    │
+ 79 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/weighted_graph_database.ex:79: :ClusteredGraph (module)
+
+    warning: duplicate key :"::" found in struct
+    │
+ 79 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/weighted_graph_database.ex:79: :HierarchicalGraph (module)
+
+    warning: duplicate key :"::" found in struct
+    │
+ 79 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/weighted_graph_database.ex:79: :HierarchicalGraph (module)
+
+     warning: variable "activity" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 114 │                 activity_level: activity, created_at: created_at, node_type: node_type} ->
+     │                                 ~
+     │
+     └─ examples/weighted_graph_database.ex:114:33: WeightedGraphDatabase.store_node/1
+
+     warning: variable "created_at" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 114 │                 activity_level: activity, created_at: created_at, node_type: node_type} ->
+     │                                                       ~
+     │
+     └─ examples/weighted_graph_database.ex:114:55: WeightedGraphDatabase.store_node/1
+
+     warning: variable "importance" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 113 │       %GraphNode{id: id, label: label, properties: properties, importance_score: importance,
+     │                                                                                  ~
+     │
+     └─ examples/weighted_graph_database.ex:113:82: WeightedGraphDatabase.store_node/1
+
+     warning: variable "node_type" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 114 │                 activity_level: activity, created_at: created_at, node_type: node_type} ->
+     │                                                                              ~
+     │
+     └─ examples/weighted_graph_database.ex:114:78: WeightedGraphDatabase.store_node/1
+
+     warning: variable "properties" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 113 │       %GraphNode{id: id, label: label, properties: properties, importance_score: importance,
+     │                                                    ~
+     │
+     └─ examples/weighted_graph_database.ex:113:52: WeightedGraphDatabase.store_node/1
+
+     warning: variable "created_at" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 151 │                 created_at: created_at, relationship_strength: strength} ->
+     │                             ~
+     │
+     └─ examples/weighted_graph_database.ex:151:29: WeightedGraphDatabase.store_edge/1
+
+     warning: variable "props" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 150 │                 frequency: frequency, relationship_type: rel_type, properties: props,
+     │                                                                                ~
+     │
+     └─ examples/weighted_graph_database.ex:150:80: WeightedGraphDatabase.store_edge/1
+
+     warning: variable "rel_type" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 150 │                 frequency: frequency, relationship_type: rel_type, properties: props,
+     │                                                          ~
+     │
+     └─ examples/weighted_graph_database.ex:150:58: WeightedGraphDatabase.store_edge/1
+
+     warning: variable "edge" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 218 │             traversal_results = Enum.map(next_traversals, fn {connected_id, edge} ->
+     │                                                                             ~
+     │
+     └─ examples/weighted_graph_database.ex:218:77: WeightedGraphDatabase.traverse_graph/3
+
+     warning: do not use "length(remaining_nodes) > 0" to check if a list is not empty since length always traverses the whole list. Prefer to pattern match on a non-empty list, such as [_ | _], or use "remaining_nodes != []" as a guard
+     │
+ 277 │       {[node | remaining_nodes], strategy} when length(remaining_nodes) > 0 ->
+     │                                                                         ~
+     │
+     └─ examples/weighted_graph_database.ex:277:73
+
+     warning: variable "store_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 279 │         store_result = store_node(node)
+     │         ~
+     │
+     └─ examples/weighted_graph_database.ex:279:9: WeightedGraphDatabase.generate_graph_network/2
+
+     warning: the underscored variable "_state" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore
+     │
+ 391 │                     {extended_path, _state}
+     │                                     ~
+     │
+     └─ examples/weighted_graph_database.ex:391:37: WeightedGraphDatabase.find_shortest_weighted_path/3
+
+     warning: variable "current_node" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 346 │           {:ok, current_node, shard_id, _operation_time} ->
+     │                 ~
+     │
+     └─ examples/weighted_graph_database.ex:346:17: WeightedGraphDatabase.find_shortest_weighted_path/3
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 346 │           {:ok, current_node, shard_id, _operation_time} ->
+     │                               ~
+     │
+     └─ examples/weighted_graph_database.ex:346:31: WeightedGraphDatabase.find_shortest_weighted_path/3
+
+     warning: variable "activity" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 587 │                      activity_level: activity}, :collaborative_filtering} ->
+     │                                      ~
+     │
+     └─ examples/weighted_graph_database.ex:587:38: WeightedGraphDatabase.generate_recommendations/2
+
+     warning: variable "importance" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 586 │           {%GraphNode{id: id, properties: properties, importance_score: importance,
+     │                                                                         ~
+     │
+     └─ examples/weighted_graph_database.ex:586:73: WeightedGraphDatabase.generate_recommendations/2
+
+     warning: variable "properties" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 586 │           {%GraphNode{id: id, properties: properties, importance_score: importance,
+     │                                           ~
+     │
+     └─ examples/weighted_graph_database.ex:586:43: WeightedGraphDatabase.generate_recommendations/2
+
+     warning: do not use "length(remaining_users) > 0" to check if a list is not empty since length always traverses the whole list. Prefer to pattern match on a non-empty list, such as [_ | _], or use "remaining_users != []" as a guard
+     │
+ 682 │       [user | remaining_users] when length(remaining_users) > 0 ->
+     │                                                             ~
+     │
+     └─ examples/weighted_graph_database.ex:682:61
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 729 │   defp post_store_node_optimization(node_key, node, shard_id) do
+     │                                                     ~~~~~~~~
+     │
+     └─ examples/weighted_graph_database.ex:729:53: WeightedGraphDatabase.post_store_node_optimization/3
+
+     warning: do not use "length(routes) > 0" to check if a list is not empty since length always traverses the whole list. Prefer to pattern match on a non-empty list, such as [_ | _], or use "routes != []" as a guard
+     │
+ 803 │       {:ok, routes, _total_cost} when length(routes) > 0 ->
+     │                                                      ~
+     │
+     └─ examples/weighted_graph_database.ex:803:54
+
+     warning: variable "node_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 829 │   defp find_outgoing_edges(node_id) do
+     │                            ~~~~~~~
+     │
+     └─ examples/weighted_graph_database.ex:829:28: WeightedGraphDatabase.find_outgoing_edges/1
+
+    warning: WeightedGraphDatabase.WeightedGraph."ClusteredGraph"/0 is undefined or private. Did you mean:
+
+          * "ClusteredGraph"/3
+
+    │
+ 79 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/weighted_graph_database.ex:79: WeightedGraphDatabase.WeightedGraph."ClusteredGraph"/3
+
+    warning: WeightedGraphDatabase.WeightedGraph."ConnectedGraph"/0 is undefined or private. Did you mean:
+
+          * "ConnectedGraph"/3
+
+    │
+ 79 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/weighted_graph_database.ex:79: WeightedGraphDatabase.WeightedGraph."ConnectedGraph"/3
+
+    warning: WeightedGraphDatabase.WeightedGraph."HierarchicalGraph"/0 is undefined or private. Did you mean:
+
+          * "HierarchicalGraph"/3
+
+    │
+ 79 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/weighted_graph_database.ex:79: WeightedGraphDatabase.WeightedGraph."HierarchicalGraph"/3
+
+    warning: WeightedGraphDatabase.WeightedGraph."SingleNode"/0 is undefined or private. Did you mean:
+
+          * "SingleNode"/1
+
+    │
+ 79 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/weighted_graph_database.ex:79: WeightedGraphDatabase.WeightedGraph."SingleNode"/1
+
+     warning: the following clause will never match:
+
+         {:ok, concept_node}
+
+     because it attempts to match on the result of:
+
+         find_concept_node(concept)
+
+     which has type:
+
+         dynamic({:error, :not_found})
+
+     typing violation found at:
+     │
+ 529 │           {:ok, concept_node} ->
+     │           ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ examples/weighted_graph_database.ex:529: WeightedGraphDatabase.search_knowledge_graph/3
+
+     warning: the following clause will never match:
+
+         {:ok, concept_node}
+
+     because it attempts to match on the result of:
+
+         find_concept_node(concept)
+
+     which has type:
+
+         dynamic({:error, :not_found})
+
+     typing violation found at:
+     │
+ 559 │           {:ok, concept_node} ->
+     │           ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ examples/weighted_graph_database.ex:559: WeightedGraphDatabase.search_knowledge_graph/3
+
+     warning: expected a map or struct when accessing .total_weight in expression:
+
+         existing_path.total_weight
+
+     where "existing_path" was given the type:
+
+         # type: dynamic(nil)
+         # from: examples/weighted_graph_database.ex
+         {existing_path, new_path}
+
+     hint: "var.field" (without parentheses) means "var" is a map() while "var.fun()" (with parentheses) means "var" is an atom()
+
+     typing violation found at:
+     │
+ 412 │                       if new_path.total_weight < existing_path.total_weight do
+     │                                                                ~
+     │
+     └─ examples/weighted_graph_database.ex:412:64: WeightedGraphDatabase.find_shortest_weighted_path/3
+
+
+13:23:06.570 [info] ⚡ Benchmark environment ready!
+
+13:23:06.571 [info] 🏁 Starting Comprehensive Enhanced ADT Weighted Graph Performance Benchmark
+
+13:23:06.571 [info] ================================================================================
+
+13:23:06.571 [info] 📊 BENCHMARK 1: Physics-Enhanced Node Operations
+
+13:23:06.571 [info] ------------------------------------------------------------
+
+13:23:06.594 [info] 📊 Node stored: benchmark_node_1 (Test Node 1) in cold_data shard (1μs)
+
+13:23:06.594 [info] 📊 Node stored: benchmark_node_2 (Test Node 2) in hot_data shard (1μs)
+
+13:23:06.594 [info] 📊 Node stored: benchmark_node_3 (Test Node 3) in hot_data shard (1μs)
+
+13:23:06.594 [info] 📊 Node stored: benchmark_node_4 (Test Node 4) in cold_data shard (1μs)
+
+13:23:06.594 [info] 📊 Node stored: benchmark_node_5 (Test Node 5) in warm_data shard (1μs)
+
+13:23:06.594 [info] 📊 Node stored: benchmark_node_6 (Test Node 6) in cold_data shard (1μs)
+
+13:23:06.594 [info] 📊 Node stored: benchmark_node_7 (Test Node 7) in cold_data shard (1μs)
+
+13:23:06.594 [info] 📊 Node stored: benchmark_node_8 (Test Node 8) in cold_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_9 (Test Node 9) in hot_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_10 (Test Node 10) in cold_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_11 (Test Node 11) in cold_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_12 (Test Node 12) in cold_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_13 (Test Node 13) in warm_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_14 (Test Node 14) in cold_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_15 (Test Node 15) in hot_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_16 (Test Node 16) in hot_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_17 (Test Node 17) in cold_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_18 (Test Node 18) in warm_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_19 (Test Node 19) in warm_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_20 (Test Node 20) in hot_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_21 (Test Node 21) in warm_data shard (1μs)
+
+13:23:06.595 [info] 📊 Node stored: benchmark_node_22 (Test Node 22) in warm_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_23 (Test Node 23) in warm_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_24 (Test Node 24) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_25 (Test Node 25) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_26 (Test Node 26) in warm_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_27 (Test Node 27) in warm_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_28 (Test Node 28) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_29 (Test Node 29) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_30 (Test Node 30) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_31 (Test Node 31) in warm_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_32 (Test Node 32) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_33 (Test Node 33) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_34 (Test Node 34) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_35 (Test Node 35) in warm_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_36 (Test Node 36) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_37 (Test Node 37) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_38 (Test Node 38) in warm_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_39 (Test Node 39) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_40 (Test Node 40) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_41 (Test Node 41) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_42 (Test Node 42) in warm_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_43 (Test Node 43) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_44 (Test Node 44) in cold_data shard (1μs)
+
+13:23:06.596 [info] 📊 Node stored: benchmark_node_45 (Test Node 45) in warm_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_46 (Test Node 46) in cold_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_47 (Test Node 47) in cold_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_48 (Test Node 48) in cold_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_49 (Test Node 49) in warm_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_50 (Test Node 50) in warm_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_51 (Test Node 51) in hot_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_52 (Test Node 52) in warm_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_53 (Test Node 53) in warm_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_54 (Test Node 54) in cold_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_55 (Test Node 55) in cold_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_56 (Test Node 56) in cold_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_57 (Test Node 57) in hot_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_58 (Test Node 58) in cold_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_59 (Test Node 59) in hot_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_60 (Test Node 60) in cold_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_61 (Test Node 61) in cold_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_62 (Test Node 62) in warm_data shard (1μs)
+
+13:23:06.597 [info] 📊 Node stored: benchmark_node_63 (Test Node 63) in warm_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_64 (Test Node 64) in cold_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_65 (Test Node 65) in warm_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_66 (Test Node 66) in hot_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_67 (Test Node 67) in cold_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_68 (Test Node 68) in hot_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_69 (Test Node 69) in warm_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_70 (Test Node 70) in hot_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_71 (Test Node 71) in hot_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_72 (Test Node 72) in warm_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_73 (Test Node 73) in hot_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_74 (Test Node 74) in cold_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_75 (Test Node 75) in cold_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_76 (Test Node 76) in cold_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_77 (Test Node 77) in cold_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_78 (Test Node 78) in cold_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_79 (Test Node 79) in cold_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_80 (Test Node 80) in warm_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_81 (Test Node 81) in warm_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_82 (Test Node 82) in hot_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_83 (Test Node 83) in warm_data shard (1μs)
+
+13:23:06.598 [info] 📊 Node stored: benchmark_node_84 (Test Node 84) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_85 (Test Node 85) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_86 (Test Node 86) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_87 (Test Node 87) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_88 (Test Node 88) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_89 (Test Node 89) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_90 (Test Node 90) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_91 (Test Node 91) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_92 (Test Node 92) in hot_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_93 (Test Node 93) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_94 (Test Node 94) in warm_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_95 (Test Node 95) in warm_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_96 (Test Node 96) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_97 (Test Node 97) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_98 (Test Node 98) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_99 (Test Node 99) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_100 (Test Node 100) in hot_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_101 (Test Node 101) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_102 (Test Node 102) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_103 (Test Node 103) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_104 (Test Node 104) in hot_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_105 (Test Node 105) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_106 (Test Node 106) in warm_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_107 (Test Node 107) in hot_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_108 (Test Node 108) in hot_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_109 (Test Node 109) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_110 (Test Node 110) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_111 (Test Node 111) in cold_data shard (1μs)
+
+13:23:06.599 [info] 📊 Node stored: benchmark_node_112 (Test Node 112) in cold_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_113 (Test Node 113) in cold_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_114 (Test Node 114) in warm_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_115 (Test Node 115) in cold_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_116 (Test Node 116) in hot_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_117 (Test Node 117) in warm_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_118 (Test Node 118) in hot_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_119 (Test Node 119) in warm_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_120 (Test Node 120) in cold_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_121 (Test Node 121) in cold_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_122 (Test Node 122) in warm_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_123 (Test Node 123) in warm_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_124 (Test Node 124) in cold_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_125 (Test Node 125) in cold_data shard (1μs)
+
+13:23:06.600 [info] 📊 Node stored: benchmark_node_126 (Test Node 126) in cold_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_127 (Test Node 127) in warm_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_128 (Test Node 128) in cold_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_129 (Test Node 129) in cold_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_130 (Test Node 130) in hot_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_131 (Test Node 131) in hot_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_132 (Test Node 132) in cold_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_133 (Test Node 133) in hot_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_134 (Test Node 134) in warm_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_135 (Test Node 135) in warm_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_136 (Test Node 136) in cold_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_137 (Test Node 137) in warm_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_138 (Test Node 138) in warm_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_139 (Test Node 139) in warm_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_140 (Test Node 140) in warm_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_141 (Test Node 141) in cold_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_142 (Test Node 142) in warm_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_143 (Test Node 143) in warm_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_144 (Test Node 144) in cold_data shard (1μs)
+
+13:23:06.601 [info] 📊 Node stored: benchmark_node_145 (Test Node 145) in cold_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_146 (Test Node 146) in cold_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_147 (Test Node 147) in cold_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_148 (Test Node 148) in warm_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_149 (Test Node 149) in warm_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_150 (Test Node 150) in cold_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_151 (Test Node 151) in warm_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_152 (Test Node 152) in cold_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_153 (Test Node 153) in warm_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_154 (Test Node 154) in warm_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_155 (Test Node 155) in warm_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_156 (Test Node 156) in cold_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_157 (Test Node 157) in hot_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_158 (Test Node 158) in warm_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_159 (Test Node 159) in warm_data shard (1μs)
+
+13:23:06.602 [info] 📊 Node stored: benchmark_node_160 (Test Node 160) in cold_data shard (1μs)
+
+13:23:06.603 [info] 📊 Node stored: benchmark_node_161 (Test Node 161) in warm_data shard (1μs)
+
+13:23:06.603 [info] 📊 Node stored: benchmark_node_162 (Test Node 162) in cold_data shard (1μs)
+
+13:23:06.603 [info] 📊 Node stored: benchmark_node_163 (Test Node 163) in cold_data shard (1μs)
+
+13:23:06.603 [info] 📊 Node stored: benchmark_node_164 (Test Node 164) in cold_data shard (1μs)
+
+13:23:06.603 [info] 📊 Node stored: benchmark_node_165 (Test Node 165) in warm_data shard (1μs)
+
+13:23:06.603 [info] 📊 Node stored: benchmark_node_166 (Test Node 166) in warm_data shard (1μs)
+
+13:23:06.603 [info] 📊 Node stored: benchmark_node_167 (Test Node 167) in warm_data shard (1μs)
+
+13:23:06.603 [info] 📊 Node stored: benchmark_node_168 (Test Node 168) in cold_data shard (1μs)
+
+13:23:06.603 [info] 📊 Node stored: benchmark_node_169 (Test Node 169) in cold_data shard (1μs)
+
+13:23:06.603 [info] 📊 Node stored: benchmark_node_170 (Test Node 170) in cold_data shard (1μs)
+
+13:23:06.603 [info] 📊 Node stored: benchmark_node_171 (Test Node 171) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_172 (Test Node 172) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_173 (Test Node 173) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_174 (Test Node 174) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_175 (Test Node 175) in warm_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_176 (Test Node 176) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_177 (Test Node 177) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_178 (Test Node 178) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_179 (Test Node 179) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_180 (Test Node 180) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_181 (Test Node 181) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_182 (Test Node 182) in warm_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_183 (Test Node 183) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_184 (Test Node 184) in warm_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_185 (Test Node 185) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_186 (Test Node 186) in hot_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_187 (Test Node 187) in warm_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_188 (Test Node 188) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_189 (Test Node 189) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_190 (Test Node 190) in warm_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_191 (Test Node 191) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_192 (Test Node 192) in cold_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_193 (Test Node 193) in warm_data shard (1μs)
+
+13:23:06.604 [info] 📊 Node stored: benchmark_node_194 (Test Node 194) in warm_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_195 (Test Node 195) in cold_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_196 (Test Node 196) in cold_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_197 (Test Node 197) in cold_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_198 (Test Node 198) in hot_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_199 (Test Node 199) in cold_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_200 (Test Node 200) in hot_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_201 (Test Node 201) in warm_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_202 (Test Node 202) in cold_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_203 (Test Node 203) in warm_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_204 (Test Node 204) in cold_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_205 (Test Node 205) in hot_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_206 (Test Node 206) in cold_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_207 (Test Node 207) in cold_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_208 (Test Node 208) in cold_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_209 (Test Node 209) in cold_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_210 (Test Node 210) in cold_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_211 (Test Node 211) in warm_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_212 (Test Node 212) in warm_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_213 (Test Node 213) in warm_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_214 (Test Node 214) in hot_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_215 (Test Node 215) in cold_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_216 (Test Node 216) in hot_data shard (1μs)
+
+13:23:06.605 [info] 📊 Node stored: benchmark_node_217 (Test Node 217) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_218 (Test Node 218) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_219 (Test Node 219) in hot_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_220 (Test Node 220) in hot_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_221 (Test Node 221) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_222 (Test Node 222) in warm_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_223 (Test Node 223) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_224 (Test Node 224) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_225 (Test Node 225) in warm_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_226 (Test Node 226) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_227 (Test Node 227) in warm_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_228 (Test Node 228) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_229 (Test Node 229) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_230 (Test Node 230) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_231 (Test Node 231) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_232 (Test Node 232) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_233 (Test Node 233) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_234 (Test Node 234) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_235 (Test Node 235) in warm_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_236 (Test Node 236) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_237 (Test Node 237) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_238 (Test Node 238) in hot_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_239 (Test Node 239) in warm_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_240 (Test Node 240) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_241 (Test Node 241) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_242 (Test Node 242) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_243 (Test Node 243) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_244 (Test Node 244) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_245 (Test Node 245) in hot_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_246 (Test Node 246) in hot_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_247 (Test Node 247) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_248 (Test Node 248) in warm_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_249 (Test Node 249) in cold_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_250 (Test Node 250) in hot_data shard (1μs)
+
+13:23:06.606 [info] 📊 Node stored: benchmark_node_251 (Test Node 251) in cold_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_252 (Test Node 252) in cold_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_253 (Test Node 253) in warm_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_254 (Test Node 254) in cold_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_255 (Test Node 255) in warm_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_256 (Test Node 256) in cold_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_257 (Test Node 257) in cold_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_258 (Test Node 258) in hot_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_259 (Test Node 259) in hot_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_260 (Test Node 260) in warm_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_261 (Test Node 261) in cold_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_262 (Test Node 262) in hot_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_263 (Test Node 263) in cold_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_264 (Test Node 264) in cold_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_265 (Test Node 265) in cold_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_266 (Test Node 266) in hot_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_267 (Test Node 267) in cold_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_268 (Test Node 268) in warm_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_269 (Test Node 269) in hot_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_270 (Test Node 270) in warm_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_271 (Test Node 271) in cold_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_272 (Test Node 272) in cold_data shard (1μs)
+
+13:23:06.607 [info] 📊 Node stored: benchmark_node_273 (Test Node 273) in cold_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_274 (Test Node 274) in warm_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_275 (Test Node 275) in warm_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_276 (Test Node 276) in warm_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_277 (Test Node 277) in cold_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_278 (Test Node 278) in cold_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_279 (Test Node 279) in hot_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_280 (Test Node 280) in warm_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_281 (Test Node 281) in warm_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_282 (Test Node 282) in hot_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_283 (Test Node 283) in warm_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_284 (Test Node 284) in cold_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_285 (Test Node 285) in hot_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_286 (Test Node 286) in cold_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_287 (Test Node 287) in cold_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_288 (Test Node 288) in cold_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_289 (Test Node 289) in cold_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_290 (Test Node 290) in warm_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_291 (Test Node 291) in warm_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_292 (Test Node 292) in warm_data shard (1μs)
+
+13:23:06.608 [info] 📊 Node stored: benchmark_node_293 (Test Node 293) in cold_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_294 (Test Node 294) in cold_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_295 (Test Node 295) in cold_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_296 (Test Node 296) in warm_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_297 (Test Node 297) in cold_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_298 (Test Node 298) in cold_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_299 (Test Node 299) in warm_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_300 (Test Node 300) in warm_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_301 (Test Node 301) in hot_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_302 (Test Node 302) in warm_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_303 (Test Node 303) in hot_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_304 (Test Node 304) in cold_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_305 (Test Node 305) in cold_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_306 (Test Node 306) in hot_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_307 (Test Node 307) in cold_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_308 (Test Node 308) in warm_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_309 (Test Node 309) in cold_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_310 (Test Node 310) in cold_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_311 (Test Node 311) in cold_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_312 (Test Node 312) in warm_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_313 (Test Node 313) in hot_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_314 (Test Node 314) in warm_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_315 (Test Node 315) in warm_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_316 (Test Node 316) in cold_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_317 (Test Node 317) in hot_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_318 (Test Node 318) in hot_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_319 (Test Node 319) in warm_data shard (1μs)
+
+13:23:06.609 [info] 📊 Node stored: benchmark_node_320 (Test Node 320) in warm_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_321 (Test Node 321) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_322 (Test Node 322) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_323 (Test Node 323) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_324 (Test Node 324) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_325 (Test Node 325) in hot_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_326 (Test Node 326) in hot_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_327 (Test Node 327) in hot_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_328 (Test Node 328) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_329 (Test Node 329) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_330 (Test Node 330) in hot_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_331 (Test Node 331) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_332 (Test Node 332) in warm_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_333 (Test Node 333) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_334 (Test Node 334) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_335 (Test Node 335) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_336 (Test Node 336) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_337 (Test Node 337) in warm_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_338 (Test Node 338) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_339 (Test Node 339) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_340 (Test Node 340) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_341 (Test Node 341) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_342 (Test Node 342) in hot_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_343 (Test Node 343) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_344 (Test Node 344) in warm_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_345 (Test Node 345) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_346 (Test Node 346) in warm_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_347 (Test Node 347) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_348 (Test Node 348) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_349 (Test Node 349) in cold_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_350 (Test Node 350) in hot_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_351 (Test Node 351) in warm_data shard (1μs)
+
+13:23:06.610 [info] 📊 Node stored: benchmark_node_352 (Test Node 352) in warm_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_353 (Test Node 353) in cold_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_354 (Test Node 354) in cold_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_355 (Test Node 355) in cold_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_356 (Test Node 356) in warm_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_357 (Test Node 357) in cold_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_358 (Test Node 358) in cold_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_359 (Test Node 359) in hot_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_360 (Test Node 360) in hot_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_361 (Test Node 361) in cold_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_362 (Test Node 362) in cold_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_363 (Test Node 363) in hot_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_364 (Test Node 364) in warm_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_365 (Test Node 365) in warm_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_366 (Test Node 366) in cold_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_367 (Test Node 367) in hot_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_368 (Test Node 368) in warm_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_369 (Test Node 369) in cold_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_370 (Test Node 370) in warm_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_371 (Test Node 371) in cold_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_372 (Test Node 372) in cold_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_373 (Test Node 373) in hot_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_374 (Test Node 374) in hot_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_375 (Test Node 375) in cold_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_376 (Test Node 376) in cold_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_377 (Test Node 377) in warm_data shard (1μs)
+
+13:23:06.611 [info] 📊 Node stored: benchmark_node_378 (Test Node 378) in warm_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_379 (Test Node 379) in warm_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_380 (Test Node 380) in cold_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_381 (Test Node 381) in cold_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_382 (Test Node 382) in hot_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_383 (Test Node 383) in cold_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_384 (Test Node 384) in cold_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_385 (Test Node 385) in cold_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_386 (Test Node 386) in cold_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_387 (Test Node 387) in cold_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_388 (Test Node 388) in warm_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_389 (Test Node 389) in hot_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_390 (Test Node 390) in warm_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_391 (Test Node 391) in cold_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_392 (Test Node 392) in warm_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_393 (Test Node 393) in warm_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_394 (Test Node 394) in cold_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_395 (Test Node 395) in cold_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_396 (Test Node 396) in warm_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_397 (Test Node 397) in warm_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_398 (Test Node 398) in cold_data shard (1μs)
+
+13:23:06.612 [info] 📊 Node stored: benchmark_node_399 (Test Node 399) in cold_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_400 (Test Node 400) in cold_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_401 (Test Node 401) in cold_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_402 (Test Node 402) in cold_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_403 (Test Node 403) in warm_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_404 (Test Node 404) in warm_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_405 (Test Node 405) in cold_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_406 (Test Node 406) in hot_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_407 (Test Node 407) in cold_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_408 (Test Node 408) in warm_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_409 (Test Node 409) in hot_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_410 (Test Node 410) in hot_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_411 (Test Node 411) in warm_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_412 (Test Node 412) in hot_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_413 (Test Node 413) in hot_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_414 (Test Node 414) in hot_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_415 (Test Node 415) in cold_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_416 (Test Node 416) in hot_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_417 (Test Node 417) in hot_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_418 (Test Node 418) in warm_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_419 (Test Node 419) in warm_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_420 (Test Node 420) in cold_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_421 (Test Node 421) in warm_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_422 (Test Node 422) in cold_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_423 (Test Node 423) in hot_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_424 (Test Node 424) in cold_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_425 (Test Node 425) in warm_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_426 (Test Node 426) in hot_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_427 (Test Node 427) in hot_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_428 (Test Node 428) in hot_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_429 (Test Node 429) in cold_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_430 (Test Node 430) in hot_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_431 (Test Node 431) in warm_data shard (1μs)
+
+13:23:06.613 [info] 📊 Node stored: benchmark_node_432 (Test Node 432) in warm_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_433 (Test Node 433) in warm_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_434 (Test Node 434) in cold_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_435 (Test Node 435) in cold_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_436 (Test Node 436) in warm_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_437 (Test Node 437) in hot_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_438 (Test Node 438) in hot_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_439 (Test Node 439) in warm_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_440 (Test Node 440) in hot_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_441 (Test Node 441) in warm_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_442 (Test Node 442) in warm_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_443 (Test Node 443) in cold_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_444 (Test Node 444) in warm_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_445 (Test Node 445) in hot_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_446 (Test Node 446) in cold_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_447 (Test Node 447) in cold_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_448 (Test Node 448) in cold_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_449 (Test Node 449) in cold_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_450 (Test Node 450) in warm_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_451 (Test Node 451) in cold_data shard (1μs)
+
+13:23:06.614 [info] 📊 Node stored: benchmark_node_452 (Test Node 452) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_453 (Test Node 453) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_454 (Test Node 454) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_455 (Test Node 455) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_456 (Test Node 456) in warm_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_457 (Test Node 457) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_458 (Test Node 458) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_459 (Test Node 459) in hot_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_460 (Test Node 460) in warm_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_461 (Test Node 461) in warm_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_462 (Test Node 462) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_463 (Test Node 463) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_464 (Test Node 464) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_465 (Test Node 465) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_466 (Test Node 466) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_467 (Test Node 467) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_468 (Test Node 468) in warm_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_469 (Test Node 469) in hot_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_470 (Test Node 470) in warm_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_471 (Test Node 471) in warm_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_472 (Test Node 472) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_473 (Test Node 473) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_474 (Test Node 474) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_475 (Test Node 475) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_476 (Test Node 476) in warm_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_477 (Test Node 477) in warm_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_478 (Test Node 478) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_479 (Test Node 479) in cold_data shard (1μs)
+
+13:23:06.615 [info] 📊 Node stored: benchmark_node_480 (Test Node 480) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_481 (Test Node 481) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_482 (Test Node 482) in cold_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_483 (Test Node 483) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_484 (Test Node 484) in cold_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_485 (Test Node 485) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_486 (Test Node 486) in cold_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_487 (Test Node 487) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_488 (Test Node 488) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_489 (Test Node 489) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_490 (Test Node 490) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_491 (Test Node 491) in hot_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_492 (Test Node 492) in hot_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_493 (Test Node 493) in cold_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_494 (Test Node 494) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_495 (Test Node 495) in cold_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_496 (Test Node 496) in cold_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_497 (Test Node 497) in hot_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_498 (Test Node 498) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_499 (Test Node 499) in hot_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_500 (Test Node 500) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_501 (Test Node 501) in cold_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_502 (Test Node 502) in cold_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_503 (Test Node 503) in cold_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_504 (Test Node 504) in hot_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_505 (Test Node 505) in cold_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_506 (Test Node 506) in cold_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_507 (Test Node 507) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_508 (Test Node 508) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_509 (Test Node 509) in warm_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_510 (Test Node 510) in hot_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_511 (Test Node 511) in cold_data shard (1μs)
+
+13:23:06.616 [info] 📊 Node stored: benchmark_node_512 (Test Node 512) in warm_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_513 (Test Node 513) in cold_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_514 (Test Node 514) in cold_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_515 (Test Node 515) in hot_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_516 (Test Node 516) in warm_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_517 (Test Node 517) in hot_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_518 (Test Node 518) in hot_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_519 (Test Node 519) in hot_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_520 (Test Node 520) in warm_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_521 (Test Node 521) in cold_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_522 (Test Node 522) in cold_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_523 (Test Node 523) in cold_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_524 (Test Node 524) in warm_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_525 (Test Node 525) in cold_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_526 (Test Node 526) in warm_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_527 (Test Node 527) in hot_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_528 (Test Node 528) in cold_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_529 (Test Node 529) in warm_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_530 (Test Node 530) in warm_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_531 (Test Node 531) in cold_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_532 (Test Node 532) in warm_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_533 (Test Node 533) in cold_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_534 (Test Node 534) in warm_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_535 (Test Node 535) in cold_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_536 (Test Node 536) in cold_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_537 (Test Node 537) in warm_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_538 (Test Node 538) in cold_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_539 (Test Node 539) in warm_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_540 (Test Node 540) in hot_data shard (1μs)
+
+13:23:06.617 [info] 📊 Node stored: benchmark_node_541 (Test Node 541) in hot_data shard (1μs)
+
+13:23:06.618 [info] 📊 Node stored: benchmark_node_542 (Test Node 542) in cold_data shard (1μs)
+
+13:23:06.618 [info] 📊 Node stored: benchmark_node_543 (Test Node 543) in cold_data shard (1μs)
+
+13:23:06.618 [info] 📊 Node stored: benchmark_node_544 (Test Node 544) in cold_data shard (1μs)
+
+13:23:06.618 [info] 📊 Node stored: benchmark_node_545 (Test Node 545) in cold_data shard (1μs)
+
+13:23:06.618 [info] 📊 Node stored: benchmark_node_546 (Test Node 546) in cold_data shard (1μs)
+
+13:23:06.618 [info] 📊 Node stored: benchmark_node_547 (Test Node 547) in cold_data shard (1μs)
+
+13:23:06.618 [info] 📊 Node stored: benchmark_node_548 (Test Node 548) in warm_data shard (1μs)
+
+13:23:06.618 [info] 📊 Node stored: benchmark_node_549 (Test Node 549) in cold_data shard (1μs)
+
+13:23:06.618 [info] 📊 Node stored: benchmark_node_550 (Test Node 550) in warm_data shard (1μs)
+
+13:23:06.618 [info] 📊 Node stored: benchmark_node_551 (Test Node 551) in hot_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_552 (Test Node 552) in warm_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_553 (Test Node 553) in cold_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_554 (Test Node 554) in warm_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_555 (Test Node 555) in warm_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_556 (Test Node 556) in cold_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_557 (Test Node 557) in cold_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_558 (Test Node 558) in warm_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_559 (Test Node 559) in cold_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_560 (Test Node 560) in cold_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_561 (Test Node 561) in cold_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_562 (Test Node 562) in hot_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_563 (Test Node 563) in cold_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_564 (Test Node 564) in cold_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_565 (Test Node 565) in warm_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_566 (Test Node 566) in cold_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_567 (Test Node 567) in cold_data shard (1μs)
+
+13:23:06.619 [info] 📊 Node stored: benchmark_node_568 (Test Node 568) in cold_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_569 (Test Node 569) in cold_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_570 (Test Node 570) in cold_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_571 (Test Node 571) in cold_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_572 (Test Node 572) in warm_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_573 (Test Node 573) in hot_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_574 (Test Node 574) in warm_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_575 (Test Node 575) in hot_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_576 (Test Node 576) in cold_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_577 (Test Node 577) in warm_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_578 (Test Node 578) in warm_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_579 (Test Node 579) in cold_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_580 (Test Node 580) in hot_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_581 (Test Node 581) in cold_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_582 (Test Node 582) in hot_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_583 (Test Node 583) in cold_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_584 (Test Node 584) in hot_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_585 (Test Node 585) in cold_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_586 (Test Node 586) in hot_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_587 (Test Node 587) in hot_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_588 (Test Node 588) in cold_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_589 (Test Node 589) in cold_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_590 (Test Node 590) in warm_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_591 (Test Node 591) in warm_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_592 (Test Node 592) in warm_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_593 (Test Node 593) in hot_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_594 (Test Node 594) in warm_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_595 (Test Node 595) in cold_data shard (1μs)
+
+13:23:06.620 [info] 📊 Node stored: benchmark_node_596 (Test Node 596) in cold_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_597 (Test Node 597) in warm_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_598 (Test Node 598) in warm_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_599 (Test Node 599) in hot_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_600 (Test Node 600) in cold_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_601 (Test Node 601) in hot_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_602 (Test Node 602) in hot_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_603 (Test Node 603) in cold_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_604 (Test Node 604) in warm_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_605 (Test Node 605) in warm_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_606 (Test Node 606) in cold_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_607 (Test Node 607) in warm_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_608 (Test Node 608) in warm_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_609 (Test Node 609) in cold_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_610 (Test Node 610) in hot_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_611 (Test Node 611) in warm_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_612 (Test Node 612) in cold_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_613 (Test Node 613) in warm_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_614 (Test Node 614) in cold_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_615 (Test Node 615) in cold_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_616 (Test Node 616) in hot_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_617 (Test Node 617) in warm_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_618 (Test Node 618) in warm_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_619 (Test Node 619) in warm_data shard (1μs)
+
+13:23:06.621 [info] 📊 Node stored: benchmark_node_620 (Test Node 620) in cold_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_621 (Test Node 621) in warm_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_622 (Test Node 622) in cold_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_623 (Test Node 623) in cold_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_624 (Test Node 624) in warm_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_625 (Test Node 625) in hot_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_626 (Test Node 626) in hot_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_627 (Test Node 627) in cold_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_628 (Test Node 628) in warm_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_629 (Test Node 629) in cold_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_630 (Test Node 630) in cold_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_631 (Test Node 631) in cold_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_632 (Test Node 632) in warm_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_633 (Test Node 633) in cold_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_634 (Test Node 634) in warm_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_635 (Test Node 635) in hot_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_636 (Test Node 636) in warm_data shard (1μs)
+
+13:23:06.622 [info] 📊 Node stored: benchmark_node_637 (Test Node 637) in warm_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_638 (Test Node 638) in warm_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_639 (Test Node 639) in cold_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_640 (Test Node 640) in cold_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_641 (Test Node 641) in cold_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_642 (Test Node 642) in cold_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_643 (Test Node 643) in hot_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_644 (Test Node 644) in warm_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_645 (Test Node 645) in warm_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_646 (Test Node 646) in cold_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_647 (Test Node 647) in hot_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_648 (Test Node 648) in cold_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_649 (Test Node 649) in cold_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_650 (Test Node 650) in warm_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_651 (Test Node 651) in cold_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_652 (Test Node 652) in cold_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_653 (Test Node 653) in warm_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_654 (Test Node 654) in hot_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_655 (Test Node 655) in warm_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_656 (Test Node 656) in warm_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_657 (Test Node 657) in warm_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_658 (Test Node 658) in warm_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_659 (Test Node 659) in cold_data shard (1μs)
+
+13:23:06.623 [info] 📊 Node stored: benchmark_node_660 (Test Node 660) in warm_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_661 (Test Node 661) in hot_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_662 (Test Node 662) in hot_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_663 (Test Node 663) in warm_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_664 (Test Node 664) in hot_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_665 (Test Node 665) in cold_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_666 (Test Node 666) in cold_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_667 (Test Node 667) in cold_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_668 (Test Node 668) in hot_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_669 (Test Node 669) in warm_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_670 (Test Node 670) in cold_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_671 (Test Node 671) in hot_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_672 (Test Node 672) in hot_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_673 (Test Node 673) in cold_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_674 (Test Node 674) in cold_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_675 (Test Node 675) in warm_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_676 (Test Node 676) in cold_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_677 (Test Node 677) in cold_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_678 (Test Node 678) in cold_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_679 (Test Node 679) in cold_data shard (1μs)
+
+13:23:06.624 [info] 📊 Node stored: benchmark_node_680 (Test Node 680) in cold_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_681 (Test Node 681) in cold_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_682 (Test Node 682) in cold_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_683 (Test Node 683) in cold_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_684 (Test Node 684) in hot_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_685 (Test Node 685) in warm_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_686 (Test Node 686) in warm_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_687 (Test Node 687) in cold_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_688 (Test Node 688) in hot_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_689 (Test Node 689) in cold_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_690 (Test Node 690) in cold_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_691 (Test Node 691) in warm_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_692 (Test Node 692) in cold_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_693 (Test Node 693) in cold_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_694 (Test Node 694) in cold_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_695 (Test Node 695) in hot_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_696 (Test Node 696) in cold_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_697 (Test Node 697) in warm_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_698 (Test Node 698) in hot_data shard (1μs)
+
+13:23:06.625 [info] 📊 Node stored: benchmark_node_699 (Test Node 699) in warm_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_700 (Test Node 700) in hot_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_701 (Test Node 701) in cold_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_702 (Test Node 702) in hot_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_703 (Test Node 703) in warm_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_704 (Test Node 704) in cold_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_705 (Test Node 705) in cold_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_706 (Test Node 706) in warm_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_707 (Test Node 707) in cold_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_708 (Test Node 708) in cold_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_709 (Test Node 709) in cold_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_710 (Test Node 710) in hot_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_711 (Test Node 711) in hot_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_712 (Test Node 712) in warm_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_713 (Test Node 713) in cold_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_714 (Test Node 714) in warm_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_715 (Test Node 715) in cold_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_716 (Test Node 716) in hot_data shard (1μs)
+
+13:23:06.626 [info] 📊 Node stored: benchmark_node_717 (Test Node 717) in cold_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_718 (Test Node 718) in warm_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_719 (Test Node 719) in cold_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_720 (Test Node 720) in cold_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_721 (Test Node 721) in warm_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_722 (Test Node 722) in cold_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_723 (Test Node 723) in hot_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_724 (Test Node 724) in hot_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_725 (Test Node 725) in cold_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_726 (Test Node 726) in warm_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_727 (Test Node 727) in cold_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_728 (Test Node 728) in cold_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_729 (Test Node 729) in cold_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_730 (Test Node 730) in cold_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_731 (Test Node 731) in cold_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_732 (Test Node 732) in warm_data shard (1μs)
+
+13:23:06.627 [info] 📊 Node stored: benchmark_node_733 (Test Node 733) in warm_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_734 (Test Node 734) in hot_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_735 (Test Node 735) in cold_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_736 (Test Node 736) in cold_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_737 (Test Node 737) in cold_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_738 (Test Node 738) in warm_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_739 (Test Node 739) in cold_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_740 (Test Node 740) in warm_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_741 (Test Node 741) in cold_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_742 (Test Node 742) in cold_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_743 (Test Node 743) in warm_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_744 (Test Node 744) in hot_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_745 (Test Node 745) in warm_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_746 (Test Node 746) in cold_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_747 (Test Node 747) in warm_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_748 (Test Node 748) in cold_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_749 (Test Node 749) in hot_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_750 (Test Node 750) in cold_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_751 (Test Node 751) in warm_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_752 (Test Node 752) in hot_data shard (1μs)
+
+13:23:06.628 [info] 📊 Node stored: benchmark_node_753 (Test Node 753) in warm_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_754 (Test Node 754) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_755 (Test Node 755) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_756 (Test Node 756) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_757 (Test Node 757) in hot_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_758 (Test Node 758) in warm_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_759 (Test Node 759) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_760 (Test Node 760) in hot_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_761 (Test Node 761) in warm_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_762 (Test Node 762) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_763 (Test Node 763) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_764 (Test Node 764) in warm_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_765 (Test Node 765) in hot_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_766 (Test Node 766) in hot_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_767 (Test Node 767) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_768 (Test Node 768) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_769 (Test Node 769) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_770 (Test Node 770) in hot_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_771 (Test Node 771) in hot_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_772 (Test Node 772) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_773 (Test Node 773) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_774 (Test Node 774) in warm_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_775 (Test Node 775) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_776 (Test Node 776) in hot_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_777 (Test Node 777) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_778 (Test Node 778) in warm_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_779 (Test Node 779) in cold_data shard (1μs)
+
+13:23:06.629 [info] 📊 Node stored: benchmark_node_780 (Test Node 780) in warm_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_781 (Test Node 781) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_782 (Test Node 782) in warm_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_783 (Test Node 783) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_784 (Test Node 784) in warm_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_785 (Test Node 785) in warm_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_786 (Test Node 786) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_787 (Test Node 787) in warm_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_788 (Test Node 788) in hot_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_789 (Test Node 789) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_790 (Test Node 790) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_791 (Test Node 791) in hot_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_792 (Test Node 792) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_793 (Test Node 793) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_794 (Test Node 794) in hot_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_795 (Test Node 795) in hot_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_796 (Test Node 796) in warm_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_797 (Test Node 797) in warm_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_798 (Test Node 798) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_799 (Test Node 799) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_800 (Test Node 800) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_801 (Test Node 801) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_802 (Test Node 802) in warm_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_803 (Test Node 803) in hot_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_804 (Test Node 804) in warm_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_805 (Test Node 805) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_806 (Test Node 806) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_807 (Test Node 807) in cold_data shard (1μs)
+
+13:23:06.630 [info] 📊 Node stored: benchmark_node_808 (Test Node 808) in cold_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_809 (Test Node 809) in cold_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_810 (Test Node 810) in warm_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_811 (Test Node 811) in warm_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_812 (Test Node 812) in warm_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_813 (Test Node 813) in cold_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_814 (Test Node 814) in hot_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_815 (Test Node 815) in cold_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_816 (Test Node 816) in warm_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_817 (Test Node 817) in warm_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_818 (Test Node 818) in warm_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_819 (Test Node 819) in hot_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_820 (Test Node 820) in cold_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_821 (Test Node 821) in warm_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_822 (Test Node 822) in warm_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_823 (Test Node 823) in cold_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_824 (Test Node 824) in cold_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_825 (Test Node 825) in cold_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_826 (Test Node 826) in cold_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_827 (Test Node 827) in hot_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_828 (Test Node 828) in hot_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_829 (Test Node 829) in cold_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_830 (Test Node 830) in hot_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_831 (Test Node 831) in cold_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_832 (Test Node 832) in warm_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_833 (Test Node 833) in warm_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_834 (Test Node 834) in cold_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_835 (Test Node 835) in cold_data shard (1μs)
+
+13:23:06.631 [info] 📊 Node stored: benchmark_node_836 (Test Node 836) in cold_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_837 (Test Node 837) in warm_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_838 (Test Node 838) in cold_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_839 (Test Node 839) in cold_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_840 (Test Node 840) in warm_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_841 (Test Node 841) in hot_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_842 (Test Node 842) in hot_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_843 (Test Node 843) in hot_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_844 (Test Node 844) in cold_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_845 (Test Node 845) in cold_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_846 (Test Node 846) in cold_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_847 (Test Node 847) in cold_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_848 (Test Node 848) in hot_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_849 (Test Node 849) in cold_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_850 (Test Node 850) in cold_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_851 (Test Node 851) in hot_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_852 (Test Node 852) in cold_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_853 (Test Node 853) in cold_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_854 (Test Node 854) in warm_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_855 (Test Node 855) in hot_data shard (1μs)
+
+13:23:06.632 [info] 📊 Node stored: benchmark_node_856 (Test Node 856) in cold_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_857 (Test Node 857) in warm_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_858 (Test Node 858) in hot_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_859 (Test Node 859) in cold_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_860 (Test Node 860) in cold_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_861 (Test Node 861) in warm_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_862 (Test Node 862) in warm_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_863 (Test Node 863) in cold_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_864 (Test Node 864) in cold_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_865 (Test Node 865) in cold_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_866 (Test Node 866) in cold_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_867 (Test Node 867) in warm_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_868 (Test Node 868) in warm_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_869 (Test Node 869) in cold_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_870 (Test Node 870) in cold_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_871 (Test Node 871) in warm_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_872 (Test Node 872) in cold_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_873 (Test Node 873) in warm_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_874 (Test Node 874) in warm_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_875 (Test Node 875) in warm_data shard (1μs)
+
+13:23:06.633 [info] 📊 Node stored: benchmark_node_876 (Test Node 876) in hot_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_877 (Test Node 877) in hot_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_878 (Test Node 878) in cold_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_879 (Test Node 879) in hot_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_880 (Test Node 880) in cold_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_881 (Test Node 881) in warm_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_882 (Test Node 882) in cold_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_883 (Test Node 883) in hot_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_884 (Test Node 884) in hot_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_885 (Test Node 885) in warm_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_886 (Test Node 886) in cold_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_887 (Test Node 887) in hot_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_888 (Test Node 888) in cold_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_889 (Test Node 889) in cold_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_890 (Test Node 890) in cold_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_891 (Test Node 891) in hot_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_892 (Test Node 892) in cold_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_893 (Test Node 893) in cold_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_894 (Test Node 894) in cold_data shard (1μs)
+
+13:23:06.634 [info] 📊 Node stored: benchmark_node_895 (Test Node 895) in hot_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_896 (Test Node 896) in warm_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_897 (Test Node 897) in warm_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_898 (Test Node 898) in hot_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_899 (Test Node 899) in cold_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_900 (Test Node 900) in cold_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_901 (Test Node 901) in cold_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_902 (Test Node 902) in cold_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_903 (Test Node 903) in cold_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_904 (Test Node 904) in cold_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_905 (Test Node 905) in hot_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_906 (Test Node 906) in cold_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_907 (Test Node 907) in warm_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_908 (Test Node 908) in warm_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_909 (Test Node 909) in cold_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_910 (Test Node 910) in warm_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_911 (Test Node 911) in warm_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_912 (Test Node 912) in cold_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_913 (Test Node 913) in hot_data shard (1μs)
+
+13:23:06.635 [info] 📊 Node stored: benchmark_node_914 (Test Node 914) in cold_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_915 (Test Node 915) in cold_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_916 (Test Node 916) in hot_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_917 (Test Node 917) in cold_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_918 (Test Node 918) in warm_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_919 (Test Node 919) in cold_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_920 (Test Node 920) in cold_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_921 (Test Node 921) in cold_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_922 (Test Node 922) in cold_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_923 (Test Node 923) in hot_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_924 (Test Node 924) in warm_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_925 (Test Node 925) in warm_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_926 (Test Node 926) in cold_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_927 (Test Node 927) in cold_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_928 (Test Node 928) in cold_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_929 (Test Node 929) in warm_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_930 (Test Node 930) in warm_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_931 (Test Node 931) in cold_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_932 (Test Node 932) in hot_data shard (1μs)
+
+13:23:06.636 [info] 📊 Node stored: benchmark_node_933 (Test Node 933) in warm_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_934 (Test Node 934) in warm_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_935 (Test Node 935) in warm_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_936 (Test Node 936) in warm_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_937 (Test Node 937) in cold_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_938 (Test Node 938) in cold_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_939 (Test Node 939) in warm_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_940 (Test Node 940) in warm_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_941 (Test Node 941) in warm_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_942 (Test Node 942) in cold_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_943 (Test Node 943) in warm_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_944 (Test Node 944) in hot_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_945 (Test Node 945) in warm_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_946 (Test Node 946) in hot_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_947 (Test Node 947) in cold_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_948 (Test Node 948) in cold_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_949 (Test Node 949) in cold_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_950 (Test Node 950) in hot_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_951 (Test Node 951) in cold_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_952 (Test Node 952) in hot_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_953 (Test Node 953) in cold_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_954 (Test Node 954) in cold_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_955 (Test Node 955) in cold_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_956 (Test Node 956) in cold_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_957 (Test Node 957) in cold_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_958 (Test Node 958) in warm_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_959 (Test Node 959) in cold_data shard (1μs)
+
+13:23:06.637 [info] 📊 Node stored: benchmark_node_960 (Test Node 960) in cold_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_961 (Test Node 961) in warm_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_962 (Test Node 962) in warm_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_963 (Test Node 963) in cold_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_964 (Test Node 964) in cold_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_965 (Test Node 965) in warm_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_966 (Test Node 966) in cold_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_967 (Test Node 967) in warm_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_968 (Test Node 968) in warm_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_969 (Test Node 969) in cold_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_970 (Test Node 970) in warm_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_971 (Test Node 971) in cold_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_972 (Test Node 972) in hot_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_973 (Test Node 973) in cold_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_974 (Test Node 974) in warm_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_975 (Test Node 975) in cold_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_976 (Test Node 976) in cold_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_977 (Test Node 977) in cold_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_978 (Test Node 978) in warm_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_979 (Test Node 979) in warm_data shard (1μs)
+
+13:23:06.638 [info] 📊 Node stored: benchmark_node_980 (Test Node 980) in cold_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_981 (Test Node 981) in cold_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_982 (Test Node 982) in cold_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_983 (Test Node 983) in cold_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_984 (Test Node 984) in warm_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_985 (Test Node 985) in cold_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_986 (Test Node 986) in cold_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_987 (Test Node 987) in warm_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_988 (Test Node 988) in warm_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_989 (Test Node 989) in cold_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_990 (Test Node 990) in cold_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_991 (Test Node 991) in hot_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_992 (Test Node 992) in warm_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_993 (Test Node 993) in cold_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_994 (Test Node 994) in cold_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_995 (Test Node 995) in warm_data shard (1μs)
+
+13:23:06.639 [info] 📊 Node stored: benchmark_node_996 (Test Node 996) in hot_data shard (1μs)

@@ -24,6 +24,7 @@ defmodule WeightedGraphDatabase do
   - **Organizational Charts** - Roles, reporting, departments
   """
 
+  use EnhancedADT
   use EnhancedADT.IsLabDBIntegration
 
   require Logger
@@ -50,14 +51,7 @@ defmodule WeightedGraphDatabase do
     field node_type :: atom()
   end
 
-  @doc """
-  Graph Edge - Represents weighted relationships between nodes.
-
-  Physics annotations optimize traversal and routing:
-  - weight → gravitational_mass (influences wormhole creation)
-  - frequency → quantum_entanglement_potential (access correlation)
-  - relationship_strength → wormhole route priority
-  """
+  # Graph Edge - Represents weighted relationships between nodes with physics annotations
   defproduct GraphEdge do
     field id :: String.t()
     field from_node :: String.t()
@@ -70,11 +64,7 @@ defmodule WeightedGraphDatabase do
     field relationship_strength :: float()
   end
 
-  @doc """
-  Graph Path - Represents traversal paths with physics optimization.
-
-  Paths automatically create wormhole shortcuts for frequently traversed routes.
-  """
+  # Graph Path - Represents traversal paths with physics optimization
   defproduct GraphPath do
     field id :: String.t()
     field nodes :: [String.t()]
@@ -85,11 +75,7 @@ defmodule WeightedGraphDatabase do
     field created_at :: DateTime.t(), physics: :temporal_weight
   end
 
-  @doc """
-  Weighted Graph Structure - Sum type representing different graph topologies.
-
-  Different graph structures automatically create different wormhole network topologies.
-  """
+  # Weighted Graph Structure - Sum type representing different graph topologies
   defsum WeightedGraph do
     variant EmptyGraph
     variant SingleNode, node :: GraphNode.t()
@@ -107,9 +93,7 @@ defmodule WeightedGraphDatabase do
       hierarchy_type :: atom()
   end
 
-  @doc """
-  Graph Cluster - Represents clustered subgraphs with physics optimization.
-  """
+  # Graph Cluster - Represents clustered subgraphs with physics optimization
   defproduct GraphCluster do
     field id :: String.t()
     field nodes :: [GraphNode.t()]
@@ -123,14 +107,7 @@ defmodule WeightedGraphDatabase do
   # GRAPH DATABASE OPERATIONS WITH ENHANCED ADT
   # =============================================================================
 
-  @doc """
-  Store graph node with automatic physics optimization.
-
-  Enhanced ADT automatically:
-  - Extracts physics parameters from node properties
-  - Creates quantum entanglements with related nodes
-  - Establishes wormhole routes for high-importance nodes
-  """
+  # Store graph node with automatic physics optimization and Enhanced ADT features
   def store_node(node) do
     fold node do
       %GraphNode{id: id, label: label, properties: properties, importance_score: importance,
@@ -143,7 +120,7 @@ defmodule WeightedGraphDatabase do
         # quantum_entanglement_potential: activity (correlation strength)
         # temporal_weight: created_at (lifecycle management)
 
-        case store_adt(node_key, node) do
+        case IsLabDB.cosmic_put(node_key, node, extract_node_physics(node)) do
           {:ok, :stored, shard_id, operation_time} ->
             Logger.info("📊 Node stored: #{id} (#{label}) in #{shard_id} shard (#{operation_time}μs)")
 
@@ -175,7 +152,7 @@ defmodule WeightedGraphDatabase do
         edge_key = "edge:#{id}"
 
         # Store edge with physics optimization
-        case store_adt(edge_key, edge) do
+        case IsLabDB.cosmic_put(edge_key, edge, extract_edge_physics(edge)) do
           {:ok, :stored, shard_id, operation_time} ->
             Logger.info("🔗 Edge stored: #{from_node} → #{to_node} (weight: #{weight}, #{operation_time}μs)")
 
@@ -217,16 +194,16 @@ defmodule WeightedGraphDatabase do
       quantum_correlations_found: 0
     }
 
-    fold {start_node_id, max_depth, traversal_strategy}, state: initial_state do
-      {node_id, depth, strategy} when depth > 0 ->
+    fold {start_node_id, max_depth, traversal_strategy, initial_state} do
+      {node_id, depth, strategy, current_state} when depth > 0 ->
         # Enhanced ADT automatically analyzes optimal retrieval strategy
-        case retrieve_adt("node:#{node_id}", GraphNode) do
+        case IsLabDB.cosmic_get("node:#{node_id}") do
           {:ok, node, shard_id, operation_time} ->
             # Update traversal state
-            updated_state = %{fold_state |
-              visited: MapSet.put(fold_state.visited, node_id),
-              current_depth: fold_state.current_depth + 1,
-              traversal_path: [node_id | fold_state.traversal_path]
+            updated_state = %{current_state |
+              visited: MapSet.put(current_state.visited, node_id),
+              current_depth: current_state.current_depth + 1,
+              traversal_path: [node_id | current_state.traversal_path]
             }
 
             # Find connected nodes with wormhole optimization
@@ -246,7 +223,7 @@ defmodule WeightedGraphDatabase do
             {
               %{
                 node: node,
-                depth: fold_state.current_depth,
+                depth: current_state.current_depth,
                 shard: shard_id,
                 operation_time: operation_time,
                 connected_traversals: traversal_results
@@ -256,23 +233,23 @@ defmodule WeightedGraphDatabase do
 
           {:error, :not_found, _time} ->
             Logger.warning("🔍 Node not found during traversal: #{node_id}")
-            {nil, fold_state}
+            {nil, current_state}
 
           error ->
             Logger.error("❌ Traversal error for node #{node_id}: #{inspect(error)}")
-            {nil, fold_state}
+            {nil, current_state}
         end
 
-      {node_id, 0, _strategy} ->
+      {node_id, 0, _strategy, current_state} ->
         # Base case - maximum depth reached
-        case retrieve_adt("node:#{node_id}", GraphNode) do
+        case IsLabDB.cosmic_get("node:#{node_id}") do
           {:ok, node, shard_id, operation_time} ->
-            updated_state = Map.update!(fold_state, :traversal_path, &[node_id | &1])
+            updated_state = Map.update!(current_state, :traversal_path, &[node_id | &1])
 
             {
               %{
                 node: node,
-                depth: fold_state.current_depth,
+                depth: current_state.current_depth,
                 shard: shard_id,
                 operation_time: operation_time,
                 leaf_node: true
@@ -282,7 +259,7 @@ defmodule WeightedGraphDatabase do
 
           error ->
             Logger.error("❌ Base case traversal error: #{inspect(error)}")
-            {nil, fold_state}
+            {nil, current_state}
         end
     end
   end
@@ -362,14 +339,14 @@ defmodule WeightedGraphDatabase do
       quantum_correlations_used: 0
     }
 
-    fold {from_node_id, max_hops}, state: pathfinding_state do
-      {current_node_id, hops_remaining} when hops_remaining > 0 ->
+    fold {from_node_id, max_hops, pathfinding_state} do
+      {current_node_id, hops_remaining, current_state} when hops_remaining > 0 ->
         # Enhanced ADT automatically uses optimal node retrieval
-        case retrieve_adt("node:#{current_node_id}", GraphNode) do
+        case IsLabDB.cosmic_get("node:#{current_node_id}") do
           {:ok, current_node, shard_id, _operation_time} ->
 
             # Check if we've reached the target
-            if current_node_id == fold_state.target do
+            if current_node_id == current_state.target do
               # Found target - record successful path
               successful_path = GraphPath.new(
                 "path_#{:crypto.strong_rand_bytes(4) |> Base.encode16()}",
@@ -381,9 +358,9 @@ defmodule WeightedGraphDatabase do
                 DateTime.utc_now()
               )
 
-              updated_state = %{fold_state |
+              updated_state = %{current_state |
                 best_path: successful_path,
-                discovered_paths: [successful_path | fold_state.discovered_paths]
+                discovered_paths: [successful_path | current_state.discovered_paths]
               }
 
               {successful_path, updated_state}
@@ -413,7 +390,7 @@ defmodule WeightedGraphDatabase do
                     extended_path = extend_graph_path(path, current_node_id, edge_weight)
                     {extended_path, _state}
 
-                  _ -> {nil, fold_state}
+                  _ -> {nil, current_state}
                 end
               end)
 
@@ -427,28 +404,35 @@ defmodule WeightedGraphDatabase do
                   path.total_weight
                 end) |> elem(0)
 
-                final_state = %{fold_state |
-                  discovered_paths: [best_recursive_path | fold_state.discovered_paths],
-                  best_path: if(is_nil(fold_state.best_path) or
-                               best_recursive_path.total_weight < fold_state.best_path.total_weight,
-                               do: best_recursive_path, else: fold_state.best_path)
+                final_state = %{current_state |
+                  discovered_paths: [best_recursive_path | current_state.discovered_paths],
+                                    best_path: case {current_state.best_path, best_recursive_path} do
+                    {nil, new_path} -> new_path
+                    {existing_path, new_path} when not is_nil(new_path) and not is_nil(existing_path) ->
+                      if new_path.total_weight < existing_path.total_weight do
+                        new_path
+                      else
+                        existing_path
+                      end
+                    {existing_path, _} -> existing_path
+                  end
                 }
 
                 {best_recursive_path, final_state}
               else
                 # No path found from this node
-                {nil, fold_state}
+                {nil, current_state}
               end
             end
 
           error ->
             Logger.error("❌ Pathfinding error for node #{current_node_id}: #{inspect(error)}")
-            {nil, fold_state}
+            {nil, current_state}
         end
 
-      {current_node_id, 0} ->
+      {current_node_id, 0, current_state} ->
         # Maximum hops reached - check if we're at target
-        if current_node_id == fold_state.target do
+        if current_node_id == current_state.target do
           target_path = GraphPath.new(
             "target_#{current_node_id}",
             [current_node_id],
@@ -459,9 +443,9 @@ defmodule WeightedGraphDatabase do
             DateTime.utc_now()
           )
 
-          {target_path, Map.put(fold_state, :best_path, target_path)}
+          {target_path, Map.put(current_state, :best_path, target_path)}
         else
-          {nil, fold_state}
+          {nil, current_state}
         end
     end
   end
@@ -491,7 +475,7 @@ defmodule WeightedGraphDatabase do
         influential_users = rank_users_by_physics_influence(nodes, centrality_scores)
 
         # 4. Generate recommendations using wormhole network traversal
-        recommendations = generate_physics_enhanced_recommendations(nodes, edges, communities)
+        recommendations = generate_recommendations("sample_user_id")
 
         %{
           network_type: topology_type,
@@ -557,7 +541,7 @@ defmodule WeightedGraphDatabase do
             end) |> Enum.reject(&is_nil/1)
 
             # Enhanced ADT automatically creates knowledge graph topology
-            KnowledgeSearchResult.new(
+            WeightedGraphDatabase.KnowledgeSearchResult.new(
               concept_node,
               related_concepts,
               deeper_results,
@@ -566,17 +550,17 @@ defmodule WeightedGraphDatabase do
             )
 
           {:error, :not_found} ->
-            KnowledgeSearchResult.empty(concept)
+            WeightedGraphDatabase.KnowledgeSearchResult.empty(concept)
         end
 
       {concept, 0, _threshold} ->
         # Base case - leaf concept
         case find_concept_node(concept) do
           {:ok, concept_node} ->
-            KnowledgeSearchResult.leaf(concept_node)
+            WeightedGraphDatabase.KnowledgeSearchResult.leaf(concept_node)
 
           error ->
-            KnowledgeSearchResult.error(concept, error)
+            WeightedGraphDatabase.KnowledgeSearchResult.error(concept, error)
         end
     end
 
@@ -594,7 +578,7 @@ defmodule WeightedGraphDatabase do
   """
   def generate_recommendations(user_id, recommendation_type \\ :collaborative_filtering) do
     # Get user node with Enhanced ADT optimization
-    case retrieve_adt("node:#{user_id}", GraphNode) do
+    case IsLabDB.cosmic_get("node:#{user_id}") do
       {:ok, user_node, _shard_id, _operation_time} ->
 
         # Generate recommendations using Enhanced ADT fold
@@ -1079,7 +1063,7 @@ defmodule WeightedGraphDatabase do
 
         # Retrieve entangled users
         similar_users = Enum.map(entangled_keys, fn user_key ->
-          case retrieve_adt(user_key, GraphNode) do
+          case IsLabDB.cosmic_get(user_key) do
             {:ok, user, _shard, _time} -> user
             _ -> nil
           end
@@ -1216,4 +1200,36 @@ defmodule WeightedGraphDatabase do
     def leaf(concept_node), do: %__MODULE__{concept_node: concept_node, depth: 0}
     def error(concept, error), do: %__MODULE__{concept_node: %{concept: concept, error: error}}
   end
+
+  # Physics extraction functions for Enhanced ADT integration
+  defp extract_node_physics(node) do
+    [
+      gravitational_mass: node.importance_score,
+      quantum_entanglement_potential: node.activity_level,
+      temporal_weight: calculate_temporal_weight(node.created_at),
+      access_pattern: determine_access_pattern(node.importance_score)
+    ]
+  end
+
+  defp extract_edge_physics(edge) do
+    [
+      gravitational_mass: edge.weight,
+      quantum_entanglement_potential: edge.frequency,
+      temporal_weight: calculate_temporal_weight(edge.created_at),
+      access_pattern: determine_edge_access_pattern(edge.weight)
+    ]
+  end
+
+  defp calculate_temporal_weight(datetime) do
+    days_ago = DateTime.diff(DateTime.utc_now(), datetime, :day)
+    # Exponential decay: more recent = higher temporal weight
+    :math.exp(-days_ago / 30.0)  # 30-day half-life
+  end
+
+  defp determine_access_pattern(score) when score >= 0.8, do: :hot
+  defp determine_access_pattern(score) when score >= 0.5, do: :warm
+  defp determine_access_pattern(_), do: :cold
+
+  defp determine_edge_access_pattern(weight) when weight >= 0.7, do: :hot
+  defp determine_edge_access_pattern(_), do: :warm
 end
