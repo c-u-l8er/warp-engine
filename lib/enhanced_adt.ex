@@ -62,6 +62,9 @@ defmodule EnhancedADT do
       import EnhancedADT.Bend
       import EnhancedADT.Physics
 
+      # Import elegant variant syntax
+      import EnhancedADT.VariantSyntax
+
       # Enable compile-time ADT analysis for optimization
       @before_compile EnhancedADT.Optimizer
     end
@@ -307,8 +310,11 @@ defmodule EnhancedADT.SumType do
   ```
   """
   defmacro defsum(name, do: variants) do
-    # Extract variant specifications
-    variant_specs = extract_variant_specifications(variants)
+    # Transform elegant design doc syntax before processing
+    transformed_variants = transform_elegant_defsum_syntax(variants)
+    
+    # Extract variant specifications from transformed syntax
+    variant_specs = extract_variant_specifications(transformed_variants)
 
     quote do
       defmodule unquote(name) do
@@ -332,29 +338,51 @@ defmodule EnhancedADT.SumType do
 
   defp extract_variant_specifications(variants) do
     case variants do
-      {:__block__, _, variant_list} -> parse_variant_keyword_list(variant_list)
-      single_variant -> parse_variant_keyword_list([single_variant])
+      {:__block__, _, variant_list} -> parse_elegant_variant_list(variant_list)
+      single_variant -> parse_elegant_variant_list([single_variant])
     end
   end
 
-  defp parse_variant_keyword_list(variant_list) do
-    # Parse tuple-style variant definitions: {:VariantName, [:field1, :field2]}
-    Enum.map(variant_list, fn
-      # Tuple pair: {:VariantName, [:field1, :field2]}
-      {:{}, _, [variant_name, field_list]} when is_atom(variant_name) and is_list(field_list) ->
-        %{name: variant_name, fields: parse_variant_field_list(field_list)}
+  defp transform_elegant_defsum_syntax(variants) do
+    # The variant macro has already transformed the syntax, so just pass through
+    variants
+  end
 
-      # Two-element tuple: {VariantName, [:field1, :field2]}
+  defp parse_elegant_variant_list(variant_list) do
+    # Parse transformed variant definitions
+    Enum.map(variant_list, fn
+      # Transformed syntax: {VariantName, [field1, field2]}
       {variant_name, field_list} when is_atom(variant_name) and is_list(field_list) ->
         %{name: variant_name, fields: parse_variant_field_list(field_list)}
 
-      # Simple atom: VariantName (for backwards compatibility)
-      variant_name when is_atom(variant_name) ->
-        %{name: variant_name, fields: []}
+      # Tuple pair: {:VariantName, [:field1, :field2]} (backward compatibility)
+      {:{}, _, [variant_name, field_list]} when is_atom(variant_name) and is_list(field_list) ->
+        %{name: variant_name, fields: parse_variant_field_list(field_list)}
 
       # Error case
       other ->
-        raise "Invalid variant specification: #{inspect(other)}. Expected {:VariantName, [:field1, :field2]} or VariantName"
+        raise "Invalid variant specification: #{inspect(other)}. Expected transformed variant format"
+    end)
+  end
+
+  defp parse_elegant_variant_fields(args) do
+    # Parse elegant design doc variant field definitions
+    Enum.with_index(args) |> Enum.map(fn {field_spec, index} ->
+      case field_spec do
+        # Named field with type: field :: Type.t()
+        {"::", _, [field_name, type_spec]} when is_atom(field_name) ->
+          %{name: field_name, type: type_spec}
+          
+        # Named field without type annotation: field_name
+        field_name when is_atom(field_name) ->
+          %{name: field_name, type: :any}
+          
+        # Just a type without field name: Type.t()
+        type_spec ->
+          # Generate field name from position if no name provided
+          field_name = String.to_atom("field_#{index}")
+          %{name: field_name, type: type_spec}
+      end
     end)
   end
 
@@ -495,6 +523,55 @@ defmodule EnhancedADT.SumType do
 end
 
 
+
+defmodule EnhancedADT.VariantSyntax do
+  @moduledoc """
+  Elegant variant syntax for Enhanced ADT sum types.
+  
+  Provides the `variant` macro for beautiful mathematical ADT definitions:
+  
+  ```elixir
+  defsum Result do
+    variant Success(value)
+    variant Error(message)
+    variant Pending
+  end
+  ```
+  """
+
+  @doc """
+  Define a sum type variant with elegant mathematical syntax.
+  
+  This macro enables beautiful ADT syntax:
+  - `variant Success, value` for single field
+  - `variant Transform, input, output` for multiple fields  
+  - `variant Empty` for no fields
+  """
+  defmacro variant(variant_name, field1) when is_atom(variant_name) do
+    # Single field variant: variant Success, value
+    {variant_name, [field1]}
+  end
+
+  defmacro variant(variant_name, field1, field2) when is_atom(variant_name) do
+    # Two field variant: variant Transform, input, output
+    {variant_name, [field1, field2]}
+  end
+
+  defmacro variant(variant_name, field1, field2, field3) when is_atom(variant_name) do
+    # Three field variant: variant Connection, person, friends, strength
+    {variant_name, [field1, field2, field3]}
+  end
+
+  defmacro variant(variant_name, field1, field2, field3, field4) when is_atom(variant_name) do
+    # Four field variant
+    {variant_name, [field1, field2, field3, field4]}
+  end
+
+  defmacro variant(variant_name) when is_atom(variant_name) do
+    # No field variant: variant Empty
+    {variant_name, []}
+  end
+end
 
 defmodule EnhancedADT.Optimizer do
   @moduledoc """

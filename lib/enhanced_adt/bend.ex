@@ -69,8 +69,11 @@ defmodule EnhancedADT.Bend do
     connection_threshold = Keyword.get(opts, :connection_threshold, 0.3)
     wormhole_strength_override = Keyword.get(opts, :wormhole_strength, nil)
 
+    # Transform elegant ADT pattern syntax first
+    transformed_clauses = transform_elegant_adt_clauses_for_bend(clauses)
+
     # Analyze clauses for recursive patterns and wormhole opportunities
-    bend_analysis = analyze_bend_clauses(clauses)
+    bend_analysis = analyze_bend_clauses(transformed_clauses)
 
     # Generate enhanced bend implementation
     quote do
@@ -94,17 +97,17 @@ defmodule EnhancedADT.Bend do
         performance_metrics: %{}
       }
 
-      # Execute mathematical bend with wormhole network generation
-      {bend_result, final_context} = execute_bend_with_network_generation(
-        unquote(from_value),
-        unquote(Macro.escape(bend_analysis)),
-        bend_context,
-        fn value, context ->
-          case value do
-            unquote_splicing(enhance_bend_clauses(clauses, bend_analysis))
+              # Execute mathematical bend with wormhole network generation
+        {bend_result, final_context} = execute_bend_with_network_generation(
+          unquote(from_value),
+          unquote(Macro.escape(bend_analysis)),
+          bend_context,
+          fn value, context ->
+            case value do
+              unquote_splicing(enhance_bend_clauses(transformed_clauses, bend_analysis))
+            end
           end
-        end
-      )
+        )
 
       # Apply generated wormhole network to IsLabDB
       if unquote(network_analysis) and length(final_context.created_connections) > 0 do
@@ -558,6 +561,61 @@ defmodule EnhancedADT.Bend do
     base_gain = strong_connections * 0.15  # 15% gain per strong connection
     network_effect = if length(connections) > 5, do: 0.1, else: 0.0
     min(0.5, base_gain + network_effect)  # Max 50% gain
+  end
+
+  # Transform elegant ADT clauses for bend operations
+  defp transform_elegant_adt_clauses_for_bend(clauses) do
+    case clauses do
+      {:__block__, _, clause_list} -> 
+        {:__block__, [], Enum.map(clause_list, &transform_elegant_bend_clause/1)}
+      single_clause -> 
+        transform_elegant_bend_clause(single_clause)
+    end
+  end
+
+  defp transform_elegant_bend_clause({:->, meta, [pattern_list, body]}) do
+    # Transform elegant ADT patterns in bend clauses
+    transformed_patterns = Enum.map(pattern_list, &transform_bend_adt_pattern/1)
+    {:->, meta, [transformed_patterns, body]}
+  end
+
+  defp transform_bend_adt_pattern({module_name, _meta, args}) when is_atom(module_name) and is_list(args) do
+    # Transform elegant patterns like UserBranch(user, connections) to proper struct patterns
+    field_names = get_bend_module_field_names(module_name)
+    
+    if length(args) <= length(field_names) do
+      # Create struct pattern with field assignments
+      field_assignments = Enum.zip(field_names, args)
+      |> Enum.map(fn {field_name, var} -> {field_name, var} end)
+      
+      # Generate struct pattern for bend
+      all_assignments = [{:__variant__, module_name} | field_assignments]
+      quote do
+        %{unquote_splicing(all_assignments)}
+      end
+    else
+      # If we can't match field count, pass through as-is
+      {module_name, _meta, args}
+    end
+  end
+
+  defp transform_bend_adt_pattern(other_pattern) do
+    # Pass through non-ADT patterns unchanged
+    other_pattern
+  end
+
+  # Helper to get field names for bend operations (sum type variants)
+  defp get_bend_module_field_names(variant_name) do
+    case variant_name do
+      :UserBranch -> [:user, :connections]
+      :UserLeaf -> [:user]
+      :ConnectedUsers -> [:primary, :connections, :connection_type]
+      :RegionalCluster -> [:region, :users, :inter_region_bridges]
+      :CategoryNode -> [:category, :products, :subcategories]
+      :CrossCategoryBridge -> [:category_a, :category_b, :bridge_strength]
+      :Community -> [:name, :members, :community_bridges]
+      _ -> []  # Unknown variant, return empty list
+    end
   end
 
   @doc """

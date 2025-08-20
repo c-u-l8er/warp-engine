@@ -30,17 +30,17 @@ defproduct Product do
 end
 
 defsum UserNetwork do
-  IsolatedUser(User.t())
+  variant IsolatedUser, user :: User.t()
   # Recursive connections automatically create wormhole topology in IsLabDB!
-  ConnectedUsers(primary :: User.t(), connections :: [rec(UserNetwork)], connection_type :: ConnectionType.t())
-  RegionalCluster(region :: String.t(), users :: [User.t()], inter_region_bridges :: [String.t()])
+  variant ConnectedUsers, primary :: User.t(), connections :: [rec(UserNetwork)], connection_type :: ConnectionType.t()
+  variant RegionalCluster, region :: String.t(), users :: [User.t()], inter_region_bridges :: [String.t()]
 end
 
 defsum ProductCatalog do
-  EmptyCatalog
+  variant EmptyCatalog
   # Category hierarchies automatically create wormhole routing hierarchy
-  CategoryNode(category :: String.t(), products :: [Product.t()], subcategories :: [rec(ProductCatalog)])
-  CrossCategoryBridge(category_a :: String.t(), category_b :: String.t(), bridge_strength :: float())
+  variant CategoryNode, category :: String.t(), products :: [Product.t()], subcategories :: [rec(ProductCatalog)]
+  variant CrossCategoryBridge, category_a :: String.t(), category_b :: String.t(), bridge_strength :: float()
 end
 ```
 
@@ -259,16 +259,16 @@ end
 ```elixir
 # Recursive connections in ADT automatically create wormhole infrastructure
 defsum SocialNetwork do
-  Person(user :: User.t())
+  variant Person, user :: User.t()
   # Friendship connections automatically create wormhole routes for fast social traversal
-  FriendConnection(person :: User.t(), friends :: [rec(SocialNetwork)], connection_strength :: float())
+  variant FriendConnection, person :: User.t(), friends :: [rec(SocialNetwork)], connection_strength :: float()
   # Community structures automatically create community wormhole hubs
-  Community(name :: String.t(), members :: [rec(SocialNetwork)], community_bridges :: [String.t()])
+  variant Community, name :: String.t(), members :: [rec(SocialNetwork)], community_bridges :: [String.t()]
 end
 
 def build_social_network(people) do
   fold social_network_structure do
-    FriendConnection(person, friends, strength) ->
+    %{__variant__: :FriendConnection, person: person, friends: friends, connection_strength: strength} ->
       person_key = "user:#{person.id}"
       
       # Enhanced ADT automatically detects:

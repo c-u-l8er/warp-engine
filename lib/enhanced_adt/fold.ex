@@ -65,8 +65,11 @@ defmodule EnhancedADT.Fold do
     enable_wormhole_analysis = Keyword.get(opts, :wormhole_analysis, true)
     enable_quantum_correlation = Keyword.get(opts, :quantum_correlation, true)
 
+    # Transform elegant ADT pattern syntax first
+    transformed_clauses = transform_elegant_adt_clauses(clauses)
+
     # Analyze clauses for ADT patterns and database operations
-    clause_analysis = analyze_fold_clauses(clauses)
+    clause_analysis = analyze_fold_clauses(transformed_clauses)
 
     # Generate enhanced fold implementation
     quote do
@@ -83,7 +86,7 @@ defmodule EnhancedADT.Fold do
 
       # Execute mathematical fold with IsLabDB integration
       fold_result = case unquote(value) do
-        unquote_splicing(enhance_fold_clauses(clauses, clause_analysis, %{
+        unquote_splicing(enhance_fold_clauses(transformed_clauses, clause_analysis, %{
           mode: mode,
           physics_override: physics_override,
           enable_wormhole_analysis: enable_wormhole_analysis,
@@ -109,6 +112,22 @@ defmodule EnhancedADT.Fold do
           fold_result
       end
     end
+  end
+
+  # Transform elegant ADT clauses to proper Elixir syntax
+  defp transform_elegant_adt_clauses(clauses) do
+    case clauses do
+      {:__block__, _, clause_list} -> 
+        {:__block__, [], Enum.map(clause_list, &transform_elegant_adt_clause/1)}
+      single_clause -> 
+        transform_elegant_adt_clause(single_clause)
+    end
+  end
+
+  defp transform_elegant_adt_clause({:->, meta, [pattern_list, body]}) do
+    # Transform each pattern in the clause
+    transformed_patterns = Enum.map(pattern_list, &transform_adt_pattern/1)
+    {:->, meta, [transformed_patterns, body]}
   end
 
   # Analyze fold clauses to detect ADT patterns and database operations
@@ -214,7 +233,7 @@ defmodule EnhancedADT.Fold do
     }
   end
 
-  # Enhanced clause generation with IsLabDB integration
+  # Enhanced clause generation with IsLabDB integration and elegant pattern transformation
   defp enhance_fold_clauses(clauses, clause_analysis, config) do
     case clauses do
       {:__block__, _, clause_list} ->
@@ -229,6 +248,9 @@ defmodule EnhancedADT.Fold do
   end
 
   defp enhance_single_clause({:->, meta, [pattern_list, body]}, analysis, config) do
+    # Transform elegant ADT patterns to proper Elixir patterns
+    transformed_patterns = Enum.map(pattern_list, &transform_adt_pattern/1)
+    
     # Generate enhanced clause with IsLabDB integration
     enhanced_body = if analysis.adt_operations.has_storage_operations or
                       analysis.adt_operations.has_retrieval_operations do
@@ -258,7 +280,7 @@ defmodule EnhancedADT.Fold do
       enhanced_body
     end
 
-    {:->, meta, [pattern_list, final_body]}
+    {:->, meta, [transformed_patterns, final_body]}
   end
 
   defp inject_islab_operations(body, analysis, config) do
@@ -414,6 +436,50 @@ defmodule EnhancedADT.Fold do
   defp analyze_gravitational_hints(_patterns, _body) do
     # Analyze gravitational routing hints
     :balanced
+  end
+
+  @doc """
+  Transform elegant ADT patterns to proper Elixir patterns.
+  
+  Converts design doc syntax like Person(id, name, ...) to proper struct patterns.
+  This enables the mathematical elegance of Enhanced ADT.
+  """
+  defp transform_adt_pattern({module_name, _meta, args}) when is_atom(module_name) and is_list(args) do
+    # Transform Person(id, name, ...) to %Person{id: id, name: name, ...}
+    field_names = get_module_field_names(module_name)
+    
+    if length(args) <= length(field_names) do
+      # Create struct pattern with field assignments
+      field_assignments = Enum.zip(field_names, args)
+      |> Enum.map(fn {field_name, var} -> {field_name, var} end)
+      
+      # Generate struct pattern
+      quote do
+        %unquote(module_name){unquote_splicing(field_assignments)}
+      end
+    else
+      # If we can't match field count, pass through as-is
+      {module_name, _meta, args}
+    end
+  end
+
+  defp transform_adt_pattern(other_pattern) do
+    # Pass through non-ADT patterns unchanged
+    other_pattern
+  end
+
+  # Helper to get field names for a module (simplified for demo)
+  defp get_module_field_names(module_name) do
+    case module_name do
+      :Person -> [:id, :name, :email, :influence_score, :social_activity, :joined_at, :interests]
+      :Connection -> [:id, :from_person, :to_person, :strength, :interaction_frequency, :connection_type, :created_at]
+      :User -> [:id, :name, :email, :loyalty_score, :activity_level, :created_at]
+      :Customer -> [:id, :loyalty_score, :activity_level, :region, :created_at]
+      :Order -> [:id, :customer_id, :product_ids, :total]
+      :GraphNode -> [:id, :label, :properties, :importance_score, :activity_level, :created_at, :node_type]
+      :GraphEdge -> [:id, :from_node, :to_node, :weight, :frequency, :relationship_type, :properties, :created_at, :relationship_strength]
+      _ -> []  # Unknown module, return empty list
+    end
   end
 
   @doc """

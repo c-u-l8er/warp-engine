@@ -8,6 +8,26 @@
 
 ## ⚛️ **Core Concept: ADT Schemas + Mathematical Database Operations**
 
+### **Enhanced ADT Elegant Syntax:**
+
+Enhanced ADT uses the beautiful `variant` syntax for mathematical elegance:
+
+```elixir
+defsum Result do
+  variant Success, value
+  variant Error, message  
+  variant Pending
+end
+
+defsum UserNetwork do
+  variant IsolatedUser, user :: User.t()
+  variant ConnectedUsers, primary :: User.t(), connections :: [rec(UserNetwork)]
+  variant Community, name :: String.t(), members :: [User.t()]
+end
+```
+
+This achieves **mathematical beauty** while being **valid Elixir syntax**! 🔬✨
+
 ### **Define Your Domain with Enhanced ADT:**
 ```elixir
 use EnhancedADT
@@ -28,25 +48,23 @@ defproduct UserPreferences do
 end
 
 defsum UserTree do
-  UserLeaf(User.t())
-  UserBranch(user :: User.t(), connections :: [rec(UserTree)])
-  QuantumSuperposition(users :: [User.t()], coherence :: float())
+  variant UserLeaf, user :: User.t()
+  variant UserBranch, user :: User.t(), connections :: [rec(UserTree)]
+  variant QuantumSuperposition, users :: [User.t()], coherence :: float()
 end
 
 defsum RecommendationNetwork do
-  EmptyRecommendations
-  UserRecommendations(user :: User.t(), products :: [Product.t()])
-  QuantumEntangledRecommendations(
+  variant EmptyRecommendations
+  variant UserRecommendations, user :: User.t(), products :: [Product.t()]
+  variant QuantumEntangledRecommendations, 
     primary :: User.t(), 
     entangled_users :: [User.t()], 
     shared_products :: [Product.t()]
-  )
-  TemporalRecommendations(
+  variant TemporalRecommendations,
     user :: User.t(),
     recent :: [Product.t()],
     historical :: [Product.t()],
     predicted :: [Product.t()]
-  )
 end
 ```
 
@@ -298,10 +316,10 @@ defproduct Product do
 end
 
 defsum CustomerJourney do
-  NewCustomer(Customer.t())
-  ReturningCustomer(customer :: Customer.t(), purchase_history :: [Product.t()])
-  LoyalCustomer(customer :: Customer.t(), preferences :: CustomerPreferences.t(), 
-                recommendations :: rec(CustomerJourney))
+  variant NewCustomer, customer :: Customer.t()
+  variant ReturningCustomer, customer :: Customer.t(), purchase_history :: [Product.t()]
+  variant LoyalCustomer, customer :: Customer.t(), preferences :: CustomerPreferences.t(), 
+                recommendations :: rec(CustomerJourney)
 end
 
 defproduct Order do
@@ -531,10 +549,10 @@ end
 ```elixir
 # Temporal domain model with automatic IsLabDB temporal shard integration
 defsum SensorReading do
-  LiveReading(sensor_id :: String.t(), value :: float(), timestamp :: DateTime.t())
-  RecentReading(sensor_id :: String.t(), hourly_avg :: float(), time_window :: TimeWindow.t())
-  HistoricalReading(sensor_id :: String.t(), daily_summary :: DailySummary.t(), compression :: CompressionMetadata.t())
-  DeepTimeReading(sensor_id :: String.t(), monthly_archive :: MonthlyArchive.t())
+  variant LiveReading, sensor_id :: String.t(), value :: float(), timestamp :: DateTime.t()
+  variant RecentReading, sensor_id :: String.t(), hourly_avg :: float(), time_window :: TimeWindow.t()
+  variant HistoricalReading, sensor_id :: String.t(), daily_summary :: DailySummary.t(), compression :: CompressionMetadata.t()
+  variant DeepTimeReading, sensor_id :: String.t(), monthly_archive :: MonthlyArchive.t()
 end
 
 defproduct SensorNetwork do
@@ -628,25 +646,22 @@ end
 ```elixir
 # Recommendation domain with automatic quantum entanglement + wormholes
 defsum RecommendationEngine do
-  EmptyRecommendations
-  SimpleRecommendations(user :: User.t(), products :: [Product.t()])
-  QuantumEnhancedRecommendations(
+  variant EmptyRecommendations
+  variant SimpleRecommendations, user :: User.t(), products :: [Product.t()]
+  variant QuantumEnhancedRecommendations,
     user :: User.t(),
     quantum_similar_users :: [User.t()],
     entangled_products :: [Product.t()],
     coherence_score :: float()
-  )
-  WormholeOptimizedRecommendations(
+  variant WormholeOptimizedRecommendations,
     user :: User.t(),
     wormhole_discovered_products :: [Product.t()],
     route_efficiency :: float()
-  )
-  UltimateRecommendations(
+  variant UltimateRecommendations,
     quantum :: QuantumEnhancedRecommendations.t(),
     wormhole :: WormholeOptimizedRecommendations.t(),
     temporal :: TemporalRecommendations.t(),
     entropy_optimized :: boolean()
-  )
 end
 
 # Fold over recommendation ADT automatically orchestrates all IsLabDB physics
