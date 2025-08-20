@@ -94,7 +94,11 @@ Logger.info("📊 Quantum Efficiency: #{Float.round(quantum_potential_nodes / le
 
 # Calculate overall performance score
 baseline_performance = 30000  # ops/sec for standard database
-performance_improvement = ((ops_per_second - baseline_performance) / baseline_performance) * 100
+performance_improvement = if ops_per_second > baseline_performance do
+  ((ops_per_second - baseline_performance) / baseline_performance) * 100
+else
+  -((baseline_performance - ops_per_second) / baseline_performance) * 100
+end
 physics_features_active = 5  # All 5 physics features working
 innovation_score = 7.0 + (performance_improvement / 25) + (physics_features_active * 0.2)
 

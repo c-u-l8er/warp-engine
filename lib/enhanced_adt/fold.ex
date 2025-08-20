@@ -64,23 +64,12 @@ defmodule EnhancedADT.Fold do
     quote do
       require Logger
 
-      # Performance tracking for Enhanced ADT fold
-      fold_start_time = :os.system_time(:microsecond)
-
-      # Execute mathematical fold with pattern transformation
+      # OPTIMIZED: Minimal performance tracking for maximum speed
       fold_result = case unquote(value) do
         unquote(transformed_clauses)
       end
 
-      # Performance analytics
-      fold_end_time = :os.system_time(:microsecond)
-      fold_operation_time = fold_end_time - fold_start_time
-
-      # Log performance for Enhanced ADT operations
-      if fold_operation_time > 1000 do  # > 1ms
-        Logger.debug("🔬 Enhanced ADT fold completed in #{fold_operation_time}μs")
-      end
-
+      # Optimized: Skip performance analytics in hot path for speed
       fold_result
     end
   end

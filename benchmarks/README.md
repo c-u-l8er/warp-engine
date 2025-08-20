@@ -13,3 +13,5 @@ elixir benchmarks/benchmark.exs &> benchmarks/benchmark.txt
 ### examples
 
 mix run benchmarks/weighted_graph_benchmark.exs &> benchmarks/weighted_graph_benchmark.txt
+mix run benchmarks/optimized_weighted_benchmark.exs &> benchmarks/optimized_weighted_benchmark.txt
+mix run benchmarks/simple_weighted_graph_benchmark.exs &> benchmarks/simple_weighted_graph_benchmark.txt
