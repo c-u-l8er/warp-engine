@@ -57,68 +57,41 @@ defmodule EnhancedADT.Fold do
   4. Applies optimal physics parameters
   5. Generates performance analytics
   """
-  defmacro fold(value, opts \\ [], do: clauses) do
-    # Extract fold configuration
-    state_init = Keyword.get(opts, :state, nil)
-    mode = Keyword.get(opts, :mode, :standard)
-    physics_override = Keyword.get(opts, :physics, %{})
-    enable_wormhole_analysis = Keyword.get(opts, :wormhole_analysis, true)
-    enable_quantum_correlation = Keyword.get(opts, :quantum_correlation, true)
-
-    # Transform elegant ADT pattern syntax first
+    defmacro fold(value, opts \\ [], do: clauses) do
+    # Transform elegant ADT pattern syntax to proper patterns
     transformed_clauses = transform_elegant_adt_clauses(clauses)
-
-    # Analyze clauses for ADT patterns and database operations
-    clause_analysis = analyze_fold_clauses(transformed_clauses)
-
-    # Generate enhanced fold implementation
+    
     quote do
       require Logger
 
-      # Performance tracking
+      # Performance tracking for Enhanced ADT fold
       fold_start_time = :os.system_time(:microsecond)
 
-      # Initialize fold state if provided
-      fold_state = case unquote(state_init) do
-        nil -> nil
-        initial_state -> initial_state
-      end
-
-      # Execute mathematical fold with IsLabDB integration
+      # Execute mathematical fold with pattern transformation
       fold_result = case unquote(value) do
-        unquote_splicing(enhance_fold_clauses(transformed_clauses, clause_analysis, %{
-          mode: mode,
-          physics_override: physics_override,
-          enable_wormhole_analysis: enable_wormhole_analysis,
-          enable_quantum_correlation: enable_quantum_correlation,
-          has_state: state_init != nil
-        }))
+        unquote(transformed_clauses)
       end
 
       # Performance analytics
       fold_end_time = :os.system_time(:microsecond)
       fold_operation_time = fold_end_time - fold_start_time
 
-      # Log performance if significant operation
+      # Log performance for Enhanced ADT operations
       if fold_operation_time > 1000 do  # > 1ms
-        Logger.debug("🔬 Enhanced ADT fold completed in #{fold_operation_time}μs with #{unquote(mode)} mode")
+        Logger.debug("🔬 Enhanced ADT fold completed in #{fold_operation_time}μs")
       end
 
-      # Return result with optional performance metadata
-      case unquote(mode) do
-        :performance_analysis ->
-          {fold_result, %{operation_time_us: fold_operation_time, mode: unquote(mode)}}
-        _ ->
-          fold_result
-      end
+      fold_result
     end
   end
 
   # Transform elegant ADT clauses to proper Elixir syntax
   defp transform_elegant_adt_clauses(clauses) do
     case clauses do
-      {:__block__, _, clause_list} -> 
-        {:__block__, [], Enum.map(clause_list, &transform_elegant_adt_clause/1)}
+      {:__block__, meta, clause_list} -> 
+        {:__block__, meta, Enum.map(clause_list, &transform_elegant_adt_clause/1)}
+      [{:->, _, _} | _] = clause_list ->
+        Enum.map(clause_list, &transform_elegant_adt_clause/1)
       single_clause -> 
         transform_elegant_adt_clause(single_clause)
     end
@@ -134,6 +107,7 @@ defmodule EnhancedADT.Fold do
   defp analyze_fold_clauses(clauses) do
     case clauses do
       {:__block__, _, clause_list} -> Enum.map(clause_list, &analyze_single_clause/1)
+      [{:->, _, _} | _] = clause_list -> Enum.map(clause_list, &analyze_single_clause/1)
       single_clause -> [analyze_single_clause(single_clause)]
     end
   end
@@ -242,6 +216,13 @@ defmodule EnhancedADT.Fold do
           enhance_single_clause(clause, analysis, config)
         end)
 
+      [{:->, _, _} | _] = clause_list ->
+        # Handle list of clauses directly
+        Enum.zip(clause_list, clause_analysis)
+        |> Enum.map(fn {clause, analysis} ->
+          enhance_single_clause(clause, analysis, config)
+        end)
+
       single_clause ->
         [enhance_single_clause(single_clause, List.first(clause_analysis), config)]
     end
@@ -250,7 +231,7 @@ defmodule EnhancedADT.Fold do
   defp enhance_single_clause({:->, meta, [pattern_list, body]}, analysis, config) do
     # Transform elegant ADT patterns to proper Elixir patterns
     transformed_patterns = Enum.map(pattern_list, &transform_adt_pattern/1)
-    
+
     # Generate enhanced clause with IsLabDB integration
     enhanced_body = if analysis.adt_operations.has_storage_operations or
                       analysis.adt_operations.has_retrieval_operations do
@@ -438,24 +419,25 @@ defmodule EnhancedADT.Fold do
     :balanced
   end
 
-  @doc """
+    @doc """
   Transform elegant ADT patterns to proper Elixir patterns.
   
-  Converts design doc syntax like Person(id, name, ...) to proper struct patterns.
+  Converts design doc syntax like ConnectedPeople(primary, connections, metrics) to proper variant patterns.
   This enables the mathematical elegance of Enhanced ADT.
   """
   defp transform_adt_pattern({module_name, _meta, args}) when is_atom(module_name) and is_list(args) do
-    # Transform Person(id, name, ...) to %Person{id: id, name: name, ...}
-    field_names = get_module_field_names(module_name)
+    # Transform elegant patterns to variant patterns
+    field_names = get_variant_field_names(module_name)
     
     if length(args) <= length(field_names) do
-      # Create struct pattern with field assignments
+      # Create variant pattern with field assignments
       field_assignments = Enum.zip(field_names, args)
       |> Enum.map(fn {field_name, var} -> {field_name, var} end)
       
-      # Generate struct pattern
+      # Generate variant pattern: %{__variant__: :ConnectedPeople, primary: primary, ...}
+      all_assignments = [{:__variant__, module_name} | field_assignments]
       quote do
-        %unquote(module_name){unquote_splicing(field_assignments)}
+        %{unquote_splicing(all_assignments)}
       end
     else
       # If we can't match field count, pass through as-is
@@ -468,23 +450,31 @@ defmodule EnhancedADT.Fold do
     other_pattern
   end
 
-  # Helper to get field names for a module (simplified for demo)
-  defp get_module_field_names(module_name) do
-    case module_name do
+  # Helper to get field names for variant patterns
+  defp get_variant_field_names(variant_name) do
+    case variant_name do
+      # Sum type variants
+      :ConnectedPeople -> [:primary, :connections, :network_metrics]
+      :SinglePerson -> [:person]
+      :EmptyNetwork -> []
+      :ConnectedUsers -> [:primary, :connections, :connection_type]
+      :RegionalCluster -> [:region, :users, :inter_region_bridges]
+      :Success -> [:value]
+      :Error -> [:message]
+      :Pending -> []
+      
+      # Product type fields (for fold over product types)
       :Person -> [:id, :name, :email, :influence_score, :social_activity, :joined_at, :interests]
       :Connection -> [:id, :from_person, :to_person, :strength, :interaction_frequency, :connection_type, :created_at]
-      :User -> [:id, :name, :email, :loyalty_score, :activity_level, :created_at]
-      :Customer -> [:id, :loyalty_score, :activity_level, :region, :created_at]
-      :Order -> [:id, :customer_id, :product_ids, :total]
       :GraphNode -> [:id, :label, :properties, :importance_score, :activity_level, :created_at, :node_type]
-      :GraphEdge -> [:id, :from_node, :to_node, :weight, :frequency, :relationship_type, :properties, :created_at, :relationship_strength]
-      _ -> []  # Unknown module, return empty list
+      
+      _ -> []  # Unknown variant, return empty list
     end
   end
 
   @doc """
   Simple execute_fold function for testing purposes.
-  
+
   This is a simplified version of the fold functionality for unit tests.
   """
   def execute_fold(_data, _clauses, _opts \\ []) do

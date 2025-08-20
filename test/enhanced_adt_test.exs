@@ -110,26 +110,30 @@ defmodule EnhancedADTTest do
         use EnhancedADT
 
         defproduct Customer do
-          id :: String.t()
-          loyalty_score :: float()
-          activity_level :: float()
-          region :: String.t()
-          created_at :: DateTime.t()
+          field id :: String.t()
+          field loyalty_score :: float(), physics: :gravitational_mass
+          field activity_level :: float(), physics: :quantum_entanglement_potential
+          field region :: String.t(), physics: :spacetime_shard_hint
+          field created_at :: DateTime.t(), physics: :temporal_weight
         end
       end
 
-      # Test physics configuration (no physics annotations in this simplified version)
+      # Test physics configuration with elegant field syntax
       physics_config = TestCustomer.Customer.__adt_physics_config__()
-      assert physics_config == %{}  # No physics annotations
+      assert physics_config[:loyalty_score] == :gravitational_mass
+      assert physics_config[:activity_level] == :quantum_entanglement_potential
+      assert physics_config[:region] == :spacetime_shard_hint
+      assert physics_config[:created_at] == :temporal_weight
 
       # Test creating customer
       customer = TestCustomer.Customer.new("cust1", 0.9, 0.8, "us-west", DateTime.utc_now())
       assert customer.id == "cust1"
       assert customer.loyalty_score == 0.9
 
-      # Test physics context extraction (should return empty since no annotations)
+      # Test physics context extraction with elegant annotations
       physics_context = TestCustomer.Customer.extract_physics_context(customer)
-      assert physics_context == %{}  # No physics annotations to extract
+      assert physics_context[:gravitational_mass] == 0.9
+      assert physics_context[:quantum_entanglement_potential] == 0.8
     end
 
     test "defproduct constructor functions work properly" do
@@ -509,6 +513,36 @@ defmodule EnhancedADTTest do
       assert perfect_integration.revolutionary_physics.gravitational_optimization == true
       assert perfect_integration.revolutionary_physics.quantum_entanglement == true
       assert perfect_integration.perfect_marriage.result == :revolutionary_system
+    end
+
+    test "Enhanced ADT field syntax enables elegant physics annotations" do
+      # Test the beautiful field syntax with physics annotations
+      defmodule TestElegantPhysics do
+        use EnhancedADT
+
+        defproduct ElegantCustomer do
+          field id :: String.t()
+          field loyalty_score :: float(), physics: :gravitational_mass
+          field activity_level :: float(), physics: :quantum_entanglement_potential
+          field region :: String.t(), physics: :spacetime_shard_hint
+          field created_at :: DateTime.t(), physics: :temporal_weight
+        end
+      end
+
+      # Test that physics annotations are properly parsed
+      physics_config = TestElegantPhysics.ElegantCustomer.__adt_physics_config__()
+
+      assert physics_config[:loyalty_score] == :gravitational_mass
+      assert physics_config[:activity_level] == :quantum_entanglement_potential
+      assert physics_config[:region] == :spacetime_shard_hint
+      assert physics_config[:created_at] == :temporal_weight
+
+      # Test mathematical elegance + physics power
+      customer = TestElegantPhysics.ElegantCustomer.new("elegant_1", 0.95, 0.88, "physics_realm", DateTime.utc_now())
+      physics_context = TestElegantPhysics.ElegantCustomer.extract_physics_context(customer)
+
+      assert physics_context[:gravitational_mass] == 0.95
+      assert physics_context[:quantum_entanglement_potential] == 0.88
     end
   end
 

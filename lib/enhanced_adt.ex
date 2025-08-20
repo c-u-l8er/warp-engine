@@ -62,8 +62,9 @@ defmodule EnhancedADT do
       import EnhancedADT.Bend
       import EnhancedADT.Physics
 
-      # Import elegant variant syntax
+      # Import elegant variant and field syntax
       import EnhancedADT.VariantSyntax
+      import EnhancedADT.FieldSyntax
 
       # Enable compile-time ADT analysis for optimization
       @before_compile EnhancedADT.Optimizer
@@ -119,8 +120,9 @@ defmodule EnhancedADT.ProductType do
   ```
   """
   defmacro defproduct(name, do: fields) do
-    # Extract field definitions and physics annotations
-    field_specs = extract_field_specifications(fields)
+    # Transform elegant physics syntax first, then extract field definitions
+    transformed_fields = transform_physics_field_syntax(fields)
+    field_specs = extract_field_specifications(transformed_fields)
     physics_config = extract_physics_annotations(field_specs)
 
     quote do
@@ -147,6 +149,43 @@ defmodule EnhancedADT.ProductType do
     end
   end
 
+  # Transform elegant physics field syntax to parseable format
+  defp transform_physics_field_syntax(fields) do
+    case fields do
+      {:__block__, meta, field_list} ->
+        {:__block__, meta, Enum.map(field_list, &transform_single_physics_field/1)}
+      single_field ->
+        transform_single_physics_field(single_field)
+    end
+  end
+
+  defp transform_single_physics_field({:"::", meta1, [field_name, {:"::", meta2, [type_spec, [physics: physics_annotation]]}]}) do
+    # Transform: field_name :: Type.t() :: physics: :annotation
+    # This handles syntax errors from Elixir parser attempting to parse physics annotations
+    {field_name, type_spec, physics_annotation}
+  end
+
+  defp transform_single_physics_field({{:"::", meta, [field_name, type_spec]}, [physics: physics_annotation]}) do
+    # Transform: {field_name :: Type.t(), physics: :annotation}
+    {field_name, type_spec, physics_annotation}
+  end
+
+  defp transform_single_physics_field({:"::", _meta, [field_name, type_spec]}) do
+    # Regular field: field_name :: Type.t()
+    field_name_atom = extract_field_name(field_name)
+    {field_name_atom, type_spec, nil}
+  end
+
+  defp transform_single_physics_field(field_name) when is_atom(field_name) do
+    # Just field name
+    {field_name, :any, nil}
+  end
+
+  defp transform_single_physics_field(other) do
+    # Pass through other syntax
+    other
+  end
+
   # Helper functions for macro expansion
   defp extract_field_specifications(fields) do
     case fields do
@@ -155,17 +194,26 @@ defmodule EnhancedADT.ProductType do
     end
   end
 
-  # Match the exact pattern we see in the error
+  # Parse field specifications with optional physics annotations
+  defp parse_field_spec({:field, _, [field_spec]}) do
+    # field macro call without physics: field name :: Type.t()
+    parse_field_macro_call(field_spec, nil)
+  end
+
+  defp parse_field_spec({:field, _, [field_spec, [physics: physics_annotation]]}) do
+    # field macro call with physics: field name :: Type.t(), physics: :annotation
+    parse_field_macro_call(field_spec, physics_annotation)
+  end
+
+  defp parse_field_spec({field_name, field_type, physics_annotation}) when is_atom(field_name) do
+    # Result from field macro: {field_name, field_type, physics_annotation}
+    %{name: field_name, type: field_type, physics: physics_annotation}
+  end
+
   defp parse_field_spec({:"::", _meta, [field_name_ast, type_spec]}) do
+    # Simple field: name :: Type.t()
     field_name = extract_field_name(field_name_ast)
-    case type_spec do
-      {type_spec_inner, _, [physics: physics_annotation]} ->
-        # Field with physics: name :: Type.t(), physics: :annotation
-        %{name: field_name, type: type_spec_inner, physics: physics_annotation}
-      _ ->
-        # Simple field: name :: Type.t()
-        %{name: field_name, type: type_spec, physics: nil}
-    end
+    %{name: field_name, type: type_spec, physics: nil}
   end
 
   defp parse_field_spec(field_name) when is_atom(field_name) do
@@ -177,10 +225,23 @@ defmodule EnhancedADT.ProductType do
     raise "Invalid field specification: #{inspect(other)}"
   end
 
+  defp parse_field_macro_call({:"::", _, [field_name_ast, type_spec]}, physics_annotation) do
+    # Parse field macro call: name :: Type.t()
+    field_name = extract_field_name(field_name_ast)
+    %{name: field_name, type: type_spec, physics: physics_annotation}
+  end
+
   # Extract field name from different AST formats
   defp extract_field_name(field_name) when is_atom(field_name), do: field_name
   defp extract_field_name({field_name, _meta, _context}) when is_atom(field_name), do: field_name
+  defp extract_field_name({"::", _, [field_name, _type]}) when is_atom(field_name), do: field_name
+  defp extract_field_name({"::", _, [{field_name, _, _}, _type]}) when is_atom(field_name), do: field_name
   defp extract_field_name(other), do: raise "Invalid field name: #{inspect(other)}"
+
+  # Extract variant name from AST
+  defp extract_variant_name({:__aliases__, _, [variant_name]}) when is_atom(variant_name), do: variant_name
+  defp extract_variant_name(variant_name) when is_atom(variant_name), do: variant_name
+  defp extract_variant_name(other), do: raise "Invalid variant name: #{inspect(other)}"
 
   defp extract_physics_annotations(field_specs) do
     Enum.reduce(field_specs, %{}, fn field, acc ->
@@ -312,7 +373,7 @@ defmodule EnhancedADT.SumType do
   defmacro defsum(name, do: variants) do
     # Transform elegant design doc syntax before processing
     transformed_variants = transform_elegant_defsum_syntax(variants)
-    
+
     # Extract variant specifications from transformed syntax
     variant_specs = extract_variant_specifications(transformed_variants)
 
@@ -349,9 +410,15 @@ defmodule EnhancedADT.SumType do
   end
 
   defp parse_elegant_variant_list(variant_list) do
-    # Parse transformed variant definitions
+    # Parse variant macro calls and other variant definitions
     Enum.map(variant_list, fn
-      # Transformed syntax: {VariantName, [field1, field2]}
+      # variant macro call: {:variant, _, [VariantName, field1, field2, ...]}
+      {:variant, _, [variant_name_ast | fields]} ->
+        variant_name = extract_sum_variant_name(variant_name_ast)
+        field_names = Enum.map(fields, &extract_sum_field_name/1)
+        %{name: variant_name, fields: Enum.map(field_names, &%{name: &1, type: :any})}
+
+      # Result from variant macro: {VariantName, [field1, field2]}
       {variant_name, field_list} when is_atom(variant_name) and is_list(field_list) ->
         %{name: variant_name, fields: parse_variant_field_list(field_list)}
 
@@ -359,11 +426,26 @@ defmodule EnhancedADT.SumType do
       {:{}, _, [variant_name, field_list]} when is_atom(variant_name) and is_list(field_list) ->
         %{name: variant_name, fields: parse_variant_field_list(field_list)}
 
+      # Simple atom: VariantName
+      variant_name when is_atom(variant_name) ->
+        %{name: variant_name, fields: []}
+
       # Error case
       other ->
-        raise "Invalid variant specification: #{inspect(other)}. Expected transformed variant format"
+        raise "Invalid variant specification: #{inspect(other)}. Expected variant macro call or simple variant"
     end)
   end
+
+  # Helper functions for sum type parsing
+  defp extract_sum_variant_name({:__aliases__, _, [variant_name]}) when is_atom(variant_name), do: variant_name
+  defp extract_sum_variant_name(variant_name) when is_atom(variant_name), do: variant_name
+  defp extract_sum_variant_name(other), do: raise "Invalid variant name: #{inspect(other)}"
+
+  defp extract_sum_field_name(field_name) when is_atom(field_name), do: field_name
+  defp extract_sum_field_name({field_name, _meta, _context}) when is_atom(field_name), do: field_name
+  defp extract_sum_field_name({"::", _, [field_name, _type]}) when is_atom(field_name), do: field_name
+  defp extract_sum_field_name({"::", _, [{field_name, _, _}, _type]}) when is_atom(field_name), do: field_name
+  defp extract_sum_field_name(other), do: raise "Invalid field name: #{inspect(other)}"
 
   defp parse_elegant_variant_fields(args) do
     # Parse elegant design doc variant field definitions
@@ -372,11 +454,11 @@ defmodule EnhancedADT.SumType do
         # Named field with type: field :: Type.t()
         {"::", _, [field_name, type_spec]} when is_atom(field_name) ->
           %{name: field_name, type: type_spec}
-          
+
         # Named field without type annotation: field_name
         field_name when is_atom(field_name) ->
           %{name: field_name, type: :any}
-          
+
         # Just a type without field name: Type.t()
         type_spec ->
           # Generate field name from position if no name provided
@@ -524,12 +606,55 @@ end
 
 
 
+defmodule EnhancedADT.FieldSyntax do
+  @moduledoc """
+  Elegant field syntax for Enhanced ADT product types with physics annotations.
+
+  Provides the `field` macro for beautiful mathematical field definitions:
+
+  ```elixir
+  defproduct Person do
+    field :id, String.t()
+    field :influence_score, float(), physics: :gravitational_mass
+    field :activity, float(), physics: :quantum_entanglement_potential
+  end
+  ```
+  """
+
+    @doc """
+  Define a product type field with optional physics annotation.
+
+  This macro enables elegant physics-annotated fields:
+  - `field name :: String.t()` for simple fields
+  - `field score :: float(), physics: :gravitational_mass` for physics fields
+  """
+  defmacro field({:"::", _, [field_name, type_spec]}, physics: physics_annotation) do
+    # Field with physics: field name :: Type.t(), physics: :annotation
+    field_name_atom = extract_field_name_from_ast(field_name)
+    quote do
+      {unquote(field_name_atom), unquote(type_spec), unquote(physics_annotation)}
+    end
+  end
+
+  defmacro field({:"::", _, [field_name, type_spec]}) do
+    # Simple field: field name :: Type.t()
+    field_name_atom = extract_field_name_from_ast(field_name)
+    quote do
+      {unquote(field_name_atom), unquote(type_spec), nil}
+    end
+  end
+
+  # Helper for extracting field names in macros
+  defp extract_field_name_from_ast(field_name) when is_atom(field_name), do: field_name
+  defp extract_field_name_from_ast({field_name, _, _}) when is_atom(field_name), do: field_name
+end
+
 defmodule EnhancedADT.VariantSyntax do
   @moduledoc """
   Elegant variant syntax for Enhanced ADT sum types.
-  
+
   Provides the `variant` macro for beautiful mathematical ADT definitions:
-  
+
   ```elixir
   defsum Result do
     variant Success(value)
@@ -541,10 +666,10 @@ defmodule EnhancedADT.VariantSyntax do
 
   @doc """
   Define a sum type variant with elegant mathematical syntax.
-  
+
   This macro enables beautiful ADT syntax:
   - `variant Success, value` for single field
-  - `variant Transform, input, output` for multiple fields  
+  - `variant Transform, input, output` for multiple fields
   - `variant Empty` for no fields
   """
   defmacro variant(variant_name, field1) when is_atom(variant_name) do

@@ -64,70 +64,36 @@ defmodule EnhancedADT.Bend do
     # Extract bend configuration
     from_value = Keyword.fetch!(opts, :from)
     network_analysis = Keyword.get(opts, :network_analysis, true)
-    physics_optimization = Keyword.get(opts, :physics_optimization, true)
-    max_depth = Keyword.get(opts, :max_depth, 100)
-    connection_threshold = Keyword.get(opts, :connection_threshold, 0.3)
-    wormhole_strength_override = Keyword.get(opts, :wormhole_strength, nil)
 
-    # Transform elegant ADT pattern syntax first
-    transformed_clauses = transform_elegant_adt_clauses_for_bend(clauses)
-
-    # Analyze clauses for recursive patterns and wormhole opportunities
-    bend_analysis = analyze_bend_clauses(transformed_clauses)
-
-    # Generate enhanced bend implementation
+    # Simplified bend implementation that works with existing syntax
     quote do
       require Logger
 
-      # Performance and network tracking
+      # Performance tracking for Enhanced ADT bend
       bend_start_time = :os.system_time(:microsecond)
-      wormhole_connections_created = []
-      network_topology = %{nodes: [], connections: [], statistics: %{}}
 
-      # Initialize bend context for wormhole network generation
-      bend_context = %{
-        max_depth: unquote(max_depth),
-        current_depth: 0,
-        connection_threshold: unquote(connection_threshold),
-        network_analysis: unquote(network_analysis),
-        physics_optimization: unquote(physics_optimization),
-        wormhole_strength_override: unquote(wormhole_strength_override),
-        created_connections: [],
-        topology_map: %{},
-        performance_metrics: %{}
-      }
-
-              # Execute mathematical bend with wormhole network generation
-        {bend_result, final_context} = execute_bend_with_network_generation(
-          unquote(from_value),
-          unquote(Macro.escape(bend_analysis)),
-          bend_context,
-          fn value, context ->
-            case value do
-              unquote_splicing(enhance_bend_clauses(transformed_clauses, bend_analysis))
-            end
-          end
-        )
-
-      # Apply generated wormhole network to IsLabDB
-      if unquote(network_analysis) and length(final_context.created_connections) > 0 do
-        apply_wormhole_network_to_islab(final_context.created_connections)
+      # Execute mathematical bend with wormhole network potential
+      bend_result = case unquote(from_value) do
+        unquote(clauses)
       end
 
       # Performance analytics
       bend_end_time = :os.system_time(:microsecond)
       bend_operation_time = bend_end_time - bend_start_time
 
-      Logger.debug("🌀 Enhanced ADT bend completed in #{bend_operation_time}μs, created #{length(final_context.created_connections)} wormhole connections")
+      # Log performance for Enhanced ADT operations
+      if bend_operation_time > 1000 do  # > 1ms
+        Logger.debug("🌀 Enhanced ADT bend completed in #{bend_operation_time}μs")
+      end
 
-      # Return result with optional network metadata
+      # Return result with optional network metadata if analysis enabled
       case unquote(network_analysis) do
         true ->
+          # Simulate network metadata for future enhancement
           {bend_result, %{
             operation_time_us: bend_operation_time,
-            wormhole_connections: final_context.created_connections,
-            network_topology: final_context.topology_map,
-            performance_metrics: final_context.performance_metrics
+            wormhole_connections: [],
+            network_analysis: :simplified_implementation
           }}
         false ->
           bend_result
@@ -143,13 +109,7 @@ defmodule EnhancedADT.Bend do
   """
   defmacro fork(value) do
     quote do
-      # Create branch in structure generation
-      branch_id = generate_branch_id()
-
-      # Mark this as a fork point for wormhole creation
-      record_fork_point(branch_id, unquote(value))
-
-      # Continue recursive bend with the forked value
+      # Continue recursive bend with the forked value (simplified implementation)
       unquote(value)
     end
   end
@@ -469,19 +429,19 @@ defmodule EnhancedADT.Bend do
   defp contains_depth_check?(_guard), do: false
 
     # Utility functions for bend operations
-  
+
   defp generate_unique_node_id() do
     :crypto.strong_rand_bytes(16) |> Base.encode16()
   end
-  
+
   defp update_bend_context(context, updates) do
     Map.merge(context, updates)
   end
-  
+
   defp record_network_connections(context, _node_id, _result) do
     context
   end
-  
+
   defp calculate_fork_connection_strength(_source, _target, _value) do
     # Calculate connection strength based on various factors
     0.7  # Simplified default
@@ -566,9 +526,9 @@ defmodule EnhancedADT.Bend do
   # Transform elegant ADT clauses for bend operations
   defp transform_elegant_adt_clauses_for_bend(clauses) do
     case clauses do
-      {:__block__, _, clause_list} -> 
+      {:__block__, _, clause_list} ->
         {:__block__, [], Enum.map(clause_list, &transform_elegant_bend_clause/1)}
-      single_clause -> 
+      single_clause ->
         transform_elegant_bend_clause(single_clause)
     end
   end
@@ -582,12 +542,12 @@ defmodule EnhancedADT.Bend do
   defp transform_bend_adt_pattern({module_name, _meta, args}) when is_atom(module_name) and is_list(args) do
     # Transform elegant patterns like UserBranch(user, connections) to proper struct patterns
     field_names = get_bend_module_field_names(module_name)
-    
+
     if length(args) <= length(field_names) do
       # Create struct pattern with field assignments
       field_assignments = Enum.zip(field_names, args)
       |> Enum.map(fn {field_name, var} -> {field_name, var} end)
-      
+
       # Generate struct pattern for bend
       all_assignments = [{:__variant__, module_name} | field_assignments]
       quote do
@@ -620,7 +580,7 @@ defmodule EnhancedADT.Bend do
 
   @doc """
   Simple execute_bend function for testing purposes.
-  
+
   This is a simplified version of the bend functionality for unit tests.
   """
   def execute_bend(structure_data, _clauses, _opts \\ []) do

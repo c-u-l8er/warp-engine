@@ -268,7 +268,7 @@ end
 
 def build_social_network(people) do
   fold social_network_structure do
-    %{__variant__: :FriendConnection, person: person, friends: friends, connection_strength: strength} ->
+    FriendConnection(person, friends, strength) ->
       person_key = "user:#{person.id}"
       
       # Enhanced ADT automatically detects:

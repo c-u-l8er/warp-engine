@@ -41,13 +41,13 @@ defmodule WeightedGraphDatabase do
   - created_at → temporal_weight (lifecycle management)
   """
   defproduct GraphNode do
-    id :: String.t()
-    label :: String.t()
-    properties :: map(), physics: :quantum_entanglement_group
-    importance_score :: float(), physics: :gravitational_mass
-    activity_level :: float(), physics: :quantum_entanglement_potential
-    created_at :: DateTime.t(), physics: :temporal_weight
-    node_type :: atom()
+    field id :: String.t()
+    field label :: String.t()
+    field properties :: map(), physics: :quantum_entanglement_group
+    field importance_score :: float(), physics: :gravitational_mass
+    field activity_level :: float(), physics: :quantum_entanglement_potential
+    field created_at :: DateTime.t(), physics: :temporal_weight
+    field node_type :: atom()
   end
 
   @doc """
@@ -59,15 +59,15 @@ defmodule WeightedGraphDatabase do
   - relationship_strength → wormhole route priority
   """
   defproduct GraphEdge do
-    id :: String.t()
-    from_node :: String.t()
-    to_node :: String.t()
-    weight :: float(), physics: :gravitational_mass
-    frequency :: float(), physics: :quantum_entanglement_potential
-    relationship_type :: atom()
-    properties :: map()
-    created_at :: DateTime.t(), physics: :temporal_weight
-    relationship_strength :: float()
+    field id :: String.t()
+    field from_node :: String.t()
+    field to_node :: String.t()
+    field weight :: float(), physics: :gravitational_mass
+    field frequency :: float(), physics: :quantum_entanglement_potential
+    field relationship_type :: atom()
+    field properties :: map()
+    field created_at :: DateTime.t(), physics: :temporal_weight
+    field relationship_strength :: float()
   end
 
   @doc """
@@ -76,13 +76,13 @@ defmodule WeightedGraphDatabase do
   Paths automatically create wormhole shortcuts for frequently traversed routes.
   """
   defproduct GraphPath do
-    id :: String.t()
-    nodes :: [String.t()]
-    edges :: [String.t()]
-    total_weight :: float(), physics: :gravitational_mass
-    traversal_frequency :: float(), physics: :quantum_entanglement_potential
-    path_efficiency :: float()
-    created_at :: DateTime.t(), physics: :temporal_weight
+    field id :: String.t()
+    field nodes :: [String.t()]
+    field edges :: [String.t()]
+    field total_weight :: float(), physics: :gravitational_mass
+    field traversal_frequency :: float(), physics: :quantum_entanglement_potential
+    field path_efficiency :: float()
+    field created_at :: DateTime.t(), physics: :temporal_weight
   end
 
   @doc """
@@ -91,35 +91,32 @@ defmodule WeightedGraphDatabase do
   Different graph structures automatically create different wormhole network topologies.
   """
   defsum WeightedGraph do
-    EmptyGraph
-    SingleNode(node :: GraphNode.t())
-    ConnectedGraph(
+    variant EmptyGraph
+    variant SingleNode, node :: GraphNode.t()
+    variant ConnectedGraph,
       nodes :: [GraphNode.t()],
       edges :: [GraphEdge.t()],
       topology_type :: atom()
-    )
-    ClusteredGraph(
+    variant ClusteredGraph,
       clusters :: [GraphCluster.t()],
       inter_cluster_edges :: [GraphEdge.t()],
       clustering_algorithm :: atom()
-    )
-    HierarchicalGraph(
+    variant HierarchicalGraph,
       root :: GraphNode.t(),
       children :: [rec(WeightedGraph)],
       hierarchy_type :: atom()
-    )
   end
 
   @doc """
   Graph Cluster - Represents clustered subgraphs with physics optimization.
   """
   defproduct GraphCluster do
-    id :: String.t()
-    nodes :: [GraphNode.t()]
-    internal_edges :: [GraphEdge.t()]
-    cluster_weight :: float(), physics: :gravitational_mass
-    coherence_score :: float(), physics: :quantum_entanglement_potential
-    cluster_type :: atom()
+    field id :: String.t()
+    field nodes :: [GraphNode.t()]
+    field internal_edges :: [GraphEdge.t()]
+    field cluster_weight :: float(), physics: :gravitational_mass
+    field coherence_score :: float(), physics: :quantum_entanglement_potential
+    field cluster_type :: atom()
   end
 
   # =============================================================================
@@ -136,7 +133,8 @@ defmodule WeightedGraphDatabase do
   """
   def store_node(node) do
     fold node do
-      GraphNode(id, label, properties, importance, activity, created_at, node_type) ->
+      %GraphNode{id: id, label: label, properties: properties, importance_score: importance,
+                activity_level: activity, created_at: created_at, node_type: node_type} ->
         # Enhanced ADT automatically translates to optimized IsLabDB operation
         node_key = "node:#{id}"
 
@@ -171,7 +169,9 @@ defmodule WeightedGraphDatabase do
   """
   def store_edge(edge) do
     fold edge do
-      GraphEdge(id, from_node, to_node, weight, frequency, rel_type, props, created_at, strength) ->
+      %GraphEdge{id: id, from_node: from_node, to_node: to_node, weight: weight,
+                frequency: frequency, relationship_type: rel_type, properties: props,
+                created_at: created_at, relationship_strength: strength} ->
         edge_key = "edge:#{id}"
 
         # Store edge with physics optimization
@@ -329,19 +329,20 @@ defmodule WeightedGraphDatabase do
         # 2. Hub nodes with many connections (detected by bend operation)
         # 3. Clustered nodes with similar properties (physics analysis)
 
-        WeightedGraph.ConnectedGraph(
-          [node | extract_nodes_from_network(remaining_network)],
-          extract_edges_from_results(edge_creation_results),
-          :auto_generated
-        )
+        %{
+          __variant__: :ConnectedGraph,
+          nodes: [node | extract_nodes_from_network(remaining_network)],
+          edges: extract_edges_from_results(edge_creation_results),
+          topology_type: :auto_generated
+        }
 
       {[node], _strategy} ->
         # Single node - simple storage
         store_node(node)
-        WeightedGraph.SingleNode(node)
+        %{__variant__: :SingleNode, node: node}
 
       {[], _strategy} ->
-        WeightedGraph.EmptyGraph
+        %{__variant__: :EmptyGraph}
     end
   end
 
@@ -477,7 +478,7 @@ defmodule WeightedGraphDatabase do
 
     # Analyze network properties with Enhanced ADT fold
     network_analysis = fold social_network do
-      WeightedGraph.ConnectedGraph(nodes, edges, topology_type) ->
+      %{__variant__: :ConnectedGraph, nodes: nodes, edges: edges, topology_type: topology_type} ->
         # Enhanced ADT automatically optimizes complex graph analytics
 
         # 1. Calculate centrality measures with quantum enhancement
@@ -508,7 +509,7 @@ defmodule WeightedGraphDatabase do
           }
         }
 
-      WeightedGraph.EmptyGraph ->
+      %{__variant__: :EmptyGraph} ->
         %{
           network_type: :empty,
           total_nodes: 0,
@@ -516,7 +517,7 @@ defmodule WeightedGraphDatabase do
           message: "Empty social network - no analysis possible"
         }
 
-      WeightedGraph.SingleNode(node) ->
+      %{__variant__: :SingleNode, node: node} ->
         %{
           network_type: :isolated,
           total_nodes: 1,
@@ -598,7 +599,8 @@ defmodule WeightedGraphDatabase do
 
         # Generate recommendations using Enhanced ADT fold
         recommendations = fold {user_node, recommendation_type} do
-          {GraphNode(id, _, properties, importance, activity, _, _), :collaborative_filtering} ->
+          {%GraphNode{id: id, properties: properties, importance_score: importance,
+                     activity_level: activity}, :collaborative_filtering} ->
             # Enhanced ADT automatically uses quantum entanglement for user correlation
             similar_users = find_similar_users_with_quantum_correlation(user_node)
 
@@ -627,7 +629,8 @@ defmodule WeightedGraphDatabase do
               }
             }
 
-          {GraphNode(id, _, properties, importance, activity, _, _), :content_based} ->
+          {%GraphNode{id: id, properties: properties, importance_score: importance,
+                     activity_level: activity}, :content_based} ->
             # Enhanced ADT automatically uses gravitational attraction for content similarity
             content_items = find_content_items_by_gravitational_attraction(properties, importance)
 
@@ -650,7 +653,7 @@ defmodule WeightedGraphDatabase do
               }
             }
 
-          {GraphNode(id, _, _, _, _, _, _), :hybrid} ->
+          {%GraphNode{id: id}, :hybrid} ->
             # Hybrid approach using both collaborative and content-based with physics
             collaborative_result = generate_recommendations(id, :collaborative_filtering)
             content_result = generate_recommendations(id, :content_based)
@@ -724,17 +727,18 @@ defmodule WeightedGraphDatabase do
         # 2. Frequent interactions (quantum entanglements)
         # 3. Community clusters (gravitational hubs)
 
-        WeightedGraph.ConnectedGraph(
-          [user | extract_nodes_from_network(remaining_network)],
-          social_edges ++ extract_edges_from_network(remaining_network),
-          :social_network
-        )
+        %{
+          __variant__: :ConnectedGraph,
+          nodes: [user | extract_nodes_from_network(remaining_network)],
+          edges: social_edges ++ extract_edges_from_network(remaining_network),
+          topology_type: :social_network
+        }
 
       [user] ->
-        WeightedGraph.SingleNode(user)
+        %{__variant__: :SingleNode, node: user}
 
       [] ->
-        WeightedGraph.EmptyGraph
+        %{__variant__: :EmptyGraph}
     end
   end
 

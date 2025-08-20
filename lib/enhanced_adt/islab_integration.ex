@@ -40,15 +40,11 @@ defmodule EnhancedADT.IsLabDBIntegration do
     quote do
       import EnhancedADT
       import EnhancedADT.IsLabDBIntegration.Translators
-      import EnhancedADT.IsLabDBIntegration.PhysicsConfig
-      import EnhancedADT.IsLabDBIntegration.WormholeAnalyzer
-      import EnhancedADT.IsLabDBIntegration.QuantumAnalyzer
+      import EnhancedADT.WormholeAnalyzer
+      import EnhancedADT.QuantumAnalyzer
+      import EnhancedADT.Physics
 
-      # Override Enhanced ADT operations to include IsLabDB integration
-      require EnhancedADT.IsLabDBIntegration.Macros
-      import EnhancedADT.IsLabDBIntegration.Macros
-
-      @before_compile EnhancedADT.IsLabDBIntegration.Optimizer
+      # Enhanced ADT operations with automatic IsLabDB integration
     end
   end
 end

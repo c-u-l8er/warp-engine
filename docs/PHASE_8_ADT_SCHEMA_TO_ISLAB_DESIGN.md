@@ -34,17 +34,17 @@ use EnhancedADT
 
 # Define your data model using scientific ADT structures
 defproduct User do
-  id :: String.t()
-  name :: String.t() 
-  email :: String.t()
-  preferences :: UserPreferences.t()
-  created_at :: DateTime.t()
+  field id :: String.t()
+  field name :: String.t() 
+  field email :: String.t()
+  field preferences :: UserPreferences.t(), physics: :quantum_entanglement_group
+  field created_at :: DateTime.t(), physics: :temporal_weight
 end
 
 defproduct UserPreferences do
-  categories :: [String.t()]
-  quantum_affinity :: float()  # 0.0-1.0, affects entanglement strength
-  temporal_weight :: float()   # affects gravitational data placement
+  field categories :: [String.t()]
+  field quantum_affinity :: float(), physics: :quantum_entanglement_potential
+  field temporal_weight :: float(), physics: :gravitational_mass
 end
 
 defsum UserTree do
@@ -299,20 +299,20 @@ use EnhancedADT.IsLabDBIntegration
 
 # Define your business domain using mathematical structures
 defproduct Customer do
-  id :: String.t()
-  name :: String.t()
-  email :: String.t()
-  loyalty_score :: float()  # affects gravitational_mass in IsLabDB
-  activity_level :: float() # affects quantum_entanglement_potential
+  field id :: String.t()
+  field name :: String.t()
+  field email :: String.t()
+  field loyalty_score :: float(), physics: :gravitational_mass
+  field activity_level :: float(), physics: :quantum_entanglement_potential
 end
 
 defproduct Product do
-  id :: String.t()
-  name :: String.t()
-  category :: String.t()
-  price :: float()
-  popularity :: float()    # affects gravitational attraction
-  trending_score :: float() # affects spacetime shard placement
+  field id :: String.t()
+  field name :: String.t()
+  field category :: String.t(), physics: :quantum_entanglement_group
+  field price :: float(), physics: :temporal_weight
+  field popularity :: float(), physics: :gravitational_mass
+  field trending_score :: float(), physics: :spacetime_shard_hint
 end
 
 defsum CustomerJourney do
@@ -323,11 +323,11 @@ defsum CustomerJourney do
 end
 
 defproduct Order do
-  id :: String.t()
-  customer :: Customer.t()
-  products :: [Product.t()]
-  timestamp :: DateTime.t()
-  total :: float()
+  field id :: String.t()
+  field customer :: Customer.t(), physics: :quantum_entanglement_group
+  field products :: [Product.t()], physics: :quantum_entanglement_group
+  field timestamp :: DateTime.t(), physics: :temporal_weight
+  field total :: float(), physics: :gravitational_mass
 end
 
 # Your fold operations automatically become IsLabDB operations!

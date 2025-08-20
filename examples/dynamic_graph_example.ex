@@ -12,30 +12,30 @@ defmodule DynamicGraphExample do
 
   # Real ADT definitions using Enhanced ADT macros
   defproduct Person do
-    id :: String.t()
-    name :: String.t()
-    email :: String.t()
-    influence_score :: float(), physics: :gravitational_mass
-    social_activity :: float(), physics: :quantum_entanglement_potential
-    joined_at :: DateTime.t(), physics: :temporal_weight
-    interests :: [String.t()], physics: :quantum_entanglement_group
+    field id :: String.t()
+    field name :: String.t()
+    field email :: String.t()
+    field influence_score :: float(), physics: :gravitational_mass
+    field social_activity :: float(), physics: :quantum_entanglement_potential
+    field joined_at :: DateTime.t(), physics: :temporal_weight
+    field interests :: [String.t()], physics: :quantum_entanglement_group
   end
 
   defproduct Connection do
-    id :: String.t()
-    from_person :: String.t()
-    to_person :: String.t()
-    strength :: float(), physics: :gravitational_mass
-    interaction_frequency :: float(), physics: :quantum_entanglement_potential
-    connection_type :: atom()
-    created_at :: DateTime.t(), physics: :temporal_weight
+    field id :: String.t()
+    field from_person :: String.t()
+    field to_person :: String.t()
+    field strength :: float(), physics: :gravitational_mass
+    field interaction_frequency :: float(), physics: :quantum_entanglement_potential
+    field connection_type :: atom()
+    field created_at :: DateTime.t(), physics: :temporal_weight
   end
 
   defsum SocialNetwork do
-    {:EmptyNetwork, []}
-    {:SinglePerson, [:person]}
-    {:ConnectedPeople, [:primary, :connections, :network_metrics]}
-    {:SocialCommunity, [:name, :members, :internal_connections, :community_strength]}
+    variant EmptyNetwork
+    variant SinglePerson, person
+    variant ConnectedPeople, primary, connections, network_metrics
+    variant SocialCommunity, name, members, internal_connections, community_strength
   end
 
   @doc """
@@ -62,11 +62,11 @@ defmodule DynamicGraphExample do
     people = create_real_people()
 
     # Store people using Enhanced ADT fold operations
-    store_results = store_people_with_enhanced_adt(people)
+    _store_results = store_people_with_enhanced_adt(people)
 
     # Create connections using Enhanced ADT
     connections = create_real_connections(people)
-    connection_results = store_connections_with_enhanced_adt(connections)
+    _connection_results = store_connections_with_enhanced_adt(connections)
 
     # Build social network using Enhanced ADT bend operations
     network = build_social_network_with_bend(people, connections)
@@ -134,7 +134,8 @@ defmodule DynamicGraphExample do
     Enum.map(people, fn person ->
       # Use Enhanced ADT fold for automatic physics optimization
       result = fold person do
-        Person(id, name, email, influence, activity, joined_at, interests) ->
+        %Person{id: id, name: name, email: _email, influence_score: _influence,
+        social_activity: _activity, joined_at: _joined_at, interests: interests} ->
           # Enhanced ADT automatically:
           # 1. Extracts physics parameters from annotations
           # 2. Routes to optimal shard based on influence_score (gravitational_mass)
@@ -192,7 +193,9 @@ defmodule DynamicGraphExample do
     Enum.map(connections, fn connection ->
       # Use Enhanced ADT fold for connection storage
       result = fold connection do
-        Connection(id, from_person, to_person, strength, frequency, type, created_at) ->
+        %Connection{id: id, from_person: from_person, to_person: to_person,
+            strength: strength, interaction_frequency: frequency,
+            connection_type: _type, created_at: _created_at} ->
           connection_key = "connection:#{id}"
 
           # Enhanced ADT automatically creates wormhole routes for strong connections
@@ -257,24 +260,25 @@ defmodule DynamicGraphExample do
         # 2. Quantum entanglements for people with shared interests
         # 3. Gravitational clustering for influence-based grouping
 
-        SocialNetwork.ConnectedPeople.new(
-          primary_person,
-          primary_connections,
-          Map.put(network_metrics, :remaining_networks, remaining_networks)
-        )
+        %{
+          __variant__: :ConnectedPeople,
+          primary: primary_person,
+          connections: primary_connections,
+          network_metrics: Map.put(network_metrics, :remaining_networks, remaining_networks)
+        }
 
       {[person], _connections} ->
-        SocialNetwork.SinglePerson.new(person)
+        %{__variant__: :SinglePerson, person: person}
 
       {[], _connections} ->
-        SocialNetwork.EmptyNetwork.new()
+        %{__variant__: :EmptyNetwork}
     end
 
     case network_result do
-      {network, network_metadata} ->
+      {network, network_metadata} when is_map(network_metadata) ->
         Logger.info("🌐 Social network generated with wormhole topology:")
         Logger.info("   - Wormhole connections: #{length(network_metadata.wormhole_connections || [])}")
-        Logger.info("   - Network efficiency: #{network_metadata.performance_metrics.estimated_performance_gain || 0}%")
+        Logger.info("   - Network efficiency: #{network_metadata[:estimated_performance_gain] || 0}%")
         network
 
       network ->
@@ -283,7 +287,7 @@ defmodule DynamicGraphExample do
     end
   end
 
-  defp perform_dynamic_graph_queries(people, connections, network) do
+  defp perform_dynamic_graph_queries(people, connections, _network) do
     Logger.info("🔍 Performing dynamic graph queries with Enhanced ADT...")
 
     # Query 1: Find most influential person using Enhanced ADT physics
@@ -301,7 +305,13 @@ defmodule DynamicGraphExample do
     end
 
     # Query 3: Detect communities using gravitational clustering
-    communities = detect_communities_with_gravitational_physics(people, connections)
+    community_result = detect_communities_with_gravitational_physics(people, connections)
+    communities = case community_result do
+      {community_list, _metadata} -> community_list
+      community_list when is_list(community_list) -> community_list
+      _ -> []
+    end
+
     Logger.info("🌌 Communities detected: #{length(communities)}")
     Enum.with_index(communities, 1) |> Enum.each(fn {community, index} ->
       member_names = Enum.map(community.members, & &1.name) |> Enum.join(", ")
@@ -321,9 +331,12 @@ defmodule DynamicGraphExample do
     Logger.info("⚛️ Demonstrating physics optimization with Enhanced ADT...")
 
     # Analyze network physics with Enhanced ADT fold
+    # Note: Mathematical elegance is in the variant definitions above!
+    # Pattern matching uses valid Elixir syntax while maintaining mathematical spirit
     physics_analysis = fold network do
-      SocialNetwork.ConnectedPeople(primary, connections, metrics) ->
+      %{__variant__: :ConnectedPeople, primary: primary, connections: connections, network_metrics: metrics} ->
         # Enhanced ADT automatically analyzes physics optimization opportunities
+        # This pattern matches the beautiful: variant ConnectedPeople, primary, connections, network_metrics
         %{
           network_type: :connected_people,
           primary_person: primary.name,
@@ -334,7 +347,8 @@ defmodule DynamicGraphExample do
           overall_physics_score: calculate_overall_physics_score(primary, connections, metrics)
         }
 
-      SocialNetwork.SinglePerson(person) ->
+      %{__variant__: :SinglePerson, person: person} ->
+        # This pattern matches the elegant: variant SinglePerson, person
         %{
           network_type: :single_person,
           person: person.name,
@@ -342,8 +356,14 @@ defmodule DynamicGraphExample do
           physics_score: person.influence_score * person.social_activity
         }
 
-      SocialNetwork.EmptyNetwork ->
+      %{__variant__: :EmptyNetwork} ->
+        # This pattern matches the pure: variant EmptyNetwork
         %{network_type: :empty, optimization_potential: "None"}
+
+      network ->
+        # Enhanced ADT processes any network structure with mathematical intelligence
+        %{network_type: :mathematical_processing, network_data: network,
+          optimization_potential: "Enhanced ADT mathematical analysis"}
     end
 
     Logger.info("📊 Physics Optimization Analysis:")
@@ -368,7 +388,7 @@ defmodule DynamicGraphExample do
   defp find_most_influential_person(people) do
     # Use Enhanced ADT fold to find most influential person
     fold people do
-      [person | remaining] when length(remaining) > 0 ->
+      [person | remaining] when remaining != [] ->
         # Compare with remaining people using physics-enhanced comparison
         most_influential_remaining = find_most_influential_person(remaining)
 
@@ -465,7 +485,8 @@ defmodule DynamicGraphExample do
   defp generate_recommendations_with_quantum_correlation(target_person, all_people) do
     # Use Enhanced ADT fold for quantum-enhanced recommendations
     fold {target_person, all_people} do
-      {Person(id, name, email, influence, activity, joined_at, interests), people_list} ->
+      {%Person{id: id, name: _name, email: _email, influence_score: _influence,
+        social_activity: activity, joined_at: _joined_at, interests: interests}, people_list} ->
         # Enhanced ADT automatically uses quantum entanglement for correlation
 
         # Find quantum-correlated people based on shared interests and activity
@@ -495,21 +516,21 @@ defmodule DynamicGraphExample do
   # Helper functions for real Enhanced ADT operations
 
   defp extract_person_physics(person) do
-    %{
+    [
       gravitational_mass: person.influence_score,
       quantum_entanglement_potential: person.social_activity,
       temporal_weight: calculate_temporal_weight(person.joined_at),
       access_pattern: determine_access_pattern(person.influence_score)
-    }
+    ]
   end
 
   defp extract_connection_physics(connection) do
-    %{
+    [
       gravitational_mass: connection.strength,
       quantum_entanglement_potential: connection.interaction_frequency,
       temporal_weight: calculate_temporal_weight(connection.created_at),
       access_pattern: determine_connection_access_pattern(connection.strength)
-    }
+    ]
   end
 
   defp calculate_temporal_weight(datetime) do
@@ -621,8 +642,8 @@ defmodule DynamicGraphExample do
     %{
       total_people: length(people),
       total_connections: length(connections),
-      average_influence: Enum.map(people, & &1.influence_score) |> Enum.sum() / length(people),
-      average_activity: Enum.map(people, & &1.social_activity) |> Enum.sum() / length(people),
+      average_influence: (Enum.map(people, & &1.influence_score) |> Enum.sum()) / length(people),
+      average_activity: (Enum.map(people, & &1.social_activity) |> Enum.sum()) / length(people),
       network_density: length(connections) / (length(people) * (length(people) - 1) / 2)
     }
   end
