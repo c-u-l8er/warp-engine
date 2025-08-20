@@ -234,7 +234,7 @@ defmodule DynamicGraphExample do
     Logger.info("🌐 Building social network using Enhanced ADT bend operations...")
 
     # Use Enhanced ADT bend to generate network topology with automatic wormhole creation
-    network_result = bend from: {people, connections} do
+    network_result = bend from: {people, connections}, network_analysis: true do
       {person_list, connection_list} when length(person_list) > 1 ->
         # Primary person with highest influence
         primary_person = Enum.max_by(person_list, & &1.influence_score)
@@ -274,7 +274,7 @@ defmodule DynamicGraphExample do
         %{__variant__: :EmptyNetwork}
     end
 
-    case network_result do
+        case network_result do
       {network, network_metadata} when is_map(network_metadata) ->
         Logger.info("🌐 Social network generated with wormhole topology:")
         Logger.info("   - Wormhole connections: #{length(network_metadata.wormhole_connections || [])}")
@@ -439,7 +439,7 @@ defmodule DynamicGraphExample do
 
   defp detect_communities_with_gravitational_physics(people, connections) do
     # Use Enhanced ADT bend to detect communities with gravitational clustering
-    bend from: {people, connections} do
+    bend from: {people, connections}, network_analysis: true do
       {person_list, connection_list} when length(person_list) >= 3 ->
         # Find high-influence people who act as gravitational centers
         gravitational_centers = Enum.filter(person_list, fn person ->
@@ -492,7 +492,7 @@ defmodule DynamicGraphExample do
         # Find quantum-correlated people based on shared interests and activity
         correlated_people = Enum.filter(people_list, fn other_person ->
           other_person.id != id and
-          calculate_quantum_correlation(target_person, other_person) >= 0.5
+          calculate_quantum_correlation(target_person, other_person) >= 0.3
         end)
 
         # Generate recommendations based on quantum correlations
@@ -768,7 +768,7 @@ defmodule DynamicGraphExample do
     activity_weight = 0.3
     temporal_weight = 0.2
 
-    (shared_interests / 5.0) * interest_weight +
+    (shared_interests / 3.0) * interest_weight +  # Changed from 5.0 to 3.0 for better correlation
     activity_correlation * activity_weight +
     temporal_correlation * temporal_weight
   end

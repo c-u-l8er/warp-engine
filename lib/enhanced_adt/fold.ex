@@ -60,7 +60,7 @@ defmodule EnhancedADT.Fold do
     defmacro fold(value, opts \\ [], do: clauses) do
     # Transform elegant ADT pattern syntax to proper patterns
     transformed_clauses = transform_elegant_adt_clauses(clauses)
-    
+
     quote do
       require Logger
 
@@ -88,11 +88,11 @@ defmodule EnhancedADT.Fold do
   # Transform elegant ADT clauses to proper Elixir syntax
   defp transform_elegant_adt_clauses(clauses) do
     case clauses do
-      {:__block__, meta, clause_list} -> 
+      {:__block__, meta, clause_list} ->
         {:__block__, meta, Enum.map(clause_list, &transform_elegant_adt_clause/1)}
       [{:->, _, _} | _] = clause_list ->
         Enum.map(clause_list, &transform_elegant_adt_clause/1)
-      single_clause -> 
+      single_clause ->
         transform_elegant_adt_clause(single_clause)
     end
   end
@@ -421,19 +421,19 @@ defmodule EnhancedADT.Fold do
 
     @doc """
   Transform elegant ADT patterns to proper Elixir patterns.
-  
+
   Converts design doc syntax like ConnectedPeople(primary, connections, metrics) to proper variant patterns.
   This enables the mathematical elegance of Enhanced ADT.
   """
   defp transform_adt_pattern({module_name, _meta, args}) when is_atom(module_name) and is_list(args) do
     # Transform elegant patterns to variant patterns
     field_names = get_variant_field_names(module_name)
-    
+
     if length(args) <= length(field_names) do
       # Create variant pattern with field assignments
       field_assignments = Enum.zip(field_names, args)
       |> Enum.map(fn {field_name, var} -> {field_name, var} end)
-      
+
       # Generate variant pattern: %{__variant__: :ConnectedPeople, primary: primary, ...}
       all_assignments = [{:__variant__, module_name} | field_assignments]
       quote do
@@ -462,12 +462,12 @@ defmodule EnhancedADT.Fold do
       :Success -> [:value]
       :Error -> [:message]
       :Pending -> []
-      
+
       # Product type fields (for fold over product types)
       :Person -> [:id, :name, :email, :influence_score, :social_activity, :joined_at, :interests]
       :Connection -> [:id, :from_person, :to_person, :strength, :interaction_frequency, :connection_type, :created_at]
       :GraphNode -> [:id, :label, :properties, :importance_score, :activity_level, :created_at, :node_type]
-      
+
       _ -> []  # Unknown variant, return empty list
     end
   end
