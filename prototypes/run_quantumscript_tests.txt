@@ -1,0 +1,2449 @@
+    warning: variable "end_pos" is unused (if the variable is not meant to be used, prefix it with an underscore)
+    │
+ 63 │           end_pos = min(start_pos + count, length(stream.tokens))
+    │           ~
+    │
+    └─ test_quantum_parser.exs:63:11: StandaloneQuantumParser.TokenStream.peek/3
+
+     warning: variable "spawned_fsms" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+     │
+ 273 │           spawned_fsms = [brace_fsm | spawned_fsms]
+     │           ~
+     │
+     └─ test_quantum_parser.exs:273:11: StandaloneQuantumParser.test_fsm_spawning/0
+
+     warning: variable "spawned_fsms" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+     │
+ 278 │           spawned_fsms = [func_fsm | spawned_fsms]
+     │           ~
+     │
+     └─ test_quantum_parser.exs:278:11: StandaloneQuantumParser.test_fsm_spawning/0
+
+     warning: variable "spawned_fsms" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+     │
+ 283 │           spawned_fsms = [expr_fsm | spawned_fsms]
+     │           ~
+     │
+     └─ test_quantum_parser.exs:283:11: StandaloneQuantumParser.test_fsm_spawning/0
+
+
+22:27:24.702 [info] 🚀 STANDALONE QUANTUM PARSER TESTING
+
+22:27:24.714 [info] ============================================================
+
+22:27:24.714 [info] 
+
+22:27:24.714 [info] 🤖 TEST 1: FSMs as First-Class Variables
+
+22:27:24.714 [info] 
+
+22:27:24.714 [info] Created FSM Variables:
+
+22:27:24.718 [info] • brace_fsm = BraceMatchingFSM (confidence: 0.9)
+
+22:27:24.722 [info] • json_fsm = JSONParserFSM (can_spawn: true)
+
+22:27:24.722 [info] • expression_fsm = ExpressionFSM (backtrack: true, spawn: true)
+
+22:27:24.722 [info] 
+
+22:27:24.722 [info] FSMs stored in library:
+
+22:27:24.722 [info] • data: 1 FSMs
+
+22:27:24.722 [info] • structural: 1 FSMs
+
+22:27:24.723 [info] • mathematical: 1 FSMs
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] Enhanced brace_fsm:
+
+22:27:24.723 [info] • Original confidence: 0.9
+
+22:27:24.723 [info] • Enhanced confidence: 0.95
+
+22:27:24.723 [info] • Pattern memory: 2 patterns
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] ✅ FSMs as Variables: WORKING
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] ↔️ TEST 2: Bidirectional Token Stream Navigation
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] Ambiguous tokens: Time flies like an arrow
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] Bidirectional parsing simulation:
+
+22:27:24.723 [info] Position 2: 'like' - ambiguous!
+
+22:27:24.723 [info] Backward context: flies Time
+
+22:27:24.723 [info] Forward context: like an
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] Analysis:
+
+22:27:24.723 [info] • Backward: 'Time flies' suggests subject + verb
+
+22:27:24.723 [info] • Forward: 'like an arrow' suggests prepositional phrase
+
+22:27:24.723 [info] • Conclusion: 'like' = preposition (Time flies [like an arrow])
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] Stream navigation test:
+
+22:27:24.723 [info] Reset to position: 0
+
+22:27:24.723 [info] Forward 3 → position: 3
+
+22:27:24.723 [info] Backward 1 → position: 2
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] ✅ Bidirectional Parsing: WORKING
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] 👶 TEST 3: FSM Spawning Based on Patterns
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] Complex input: { function calculate ( x + 42 ) }
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] FSM Spawning Simulation:
+
+22:27:24.723 [info] Position 0: '{' → Spawned BraceMatchingFSM
+
+22:27:24.723 [info] Position 1: 'function' → Spawned FunctionFSM
+
+22:27:24.723 [info] Position 2: 'calculate' → Processed by existing FSM
+
+22:27:24.723 [info] Position 3: '(' → Spawned ExpressionFSM
+
+22:27:24.723 [info] Position 4: 'x' → Processed by existing FSM
+
+22:27:24.723 [info] Position 5: '+' → Processed by existing FSM
+
+22:27:24.723 [info] Position 6: '42' → Processed by existing FSM
+
+22:27:24.723 [info] Position 7: ')' → Processed by existing FSM
+
+22:27:24.723 [info] Position 8: '}' → Processed by existing FSM
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] Final FSM Hierarchy:
+
+22:27:24.723 [info] MasterParserFSM
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] Spawning Results:
+
+22:27:24.723 [info] • Master FSM: MasterParserFSM
+
+22:27:24.723 [info] • Spawned FSMs: 0
+
+22:27:24.723 [info] • Specialization: Each FSM handles its domain
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] ✅ FSM Spawning: WORKING
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] 🤝 TEST 4: Collaborative FSM Parsing
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] Collaborative FSM Network:
+
+22:27:24.723 [info] • NounPhraseFSM: linked to 2 FSMs
+
+22:27:24.723 [info] • VerbPhraseFSM: linked to 2 FSMs
+
+22:27:24.723 [info] • SentenceFSM: linked to 2 FSMs
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] Sentence: The brilliant scientist discovered quantum mechanics
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] Collaborative Parsing Process:
+
+22:27:24.723 [info] NounPhraseFSM analysis:
+
+22:27:24.723 [info]   Found: The brilliant scientist, quantum mechanics
+
+22:27:24.723 [info] VerbPhraseFSM analysis:
+
+22:27:24.723 [info]   Found: discovered (past)
+
+22:27:24.723 [info] SentenceFSM coordination:
+
+22:27:24.723 [info]   Structure: simple_sentence
+
+22:27:24.723 [info]   Subject: The brilliant scientist
+
+22:27:24.723 [info]   Predicate: discovered quantum mechanics
+
+22:27:24.723 [info] 
+
+22:27:24.723 [info] Collaboration Results:
+
+22:27:24.723 [info] • Individual FSM insights combined
+
+22:27:24.723 [info] • Cross-validation between FSMs
+
+22:27:24.729 [info] • Combined confidence: 0.89
+
+22:27:24.729 [info] • Collaborative understanding achieved
+
+22:27:24.729 [info] 
+
+22:27:24.729 [info] ✅ Collaborative Parsing: WORKING
+
+22:27:24.729 [info] 
+
+22:27:24.729 [info] 🧠 TEST 5: Adaptive FSM Learning
+
+22:27:24.729 [info] 
+
+22:27:24.729 [info] Initial Adaptive FSM:
+
+22:27:24.729 [info] • Known patterns: 2
+
+22:27:24.729 [info] • Patterns: function_declaration, variable_assignment
+
+22:27:24.729 [info] 
+
+22:27:24.729 [info] Learning from input patterns:
+
+22:27:24.729 [info] Processing: class MyClass
+
+22:27:24.729 [info]   → Learned new pattern: class_declaration
+
+22:27:24.729 [info]   → Confidence increased: 0.6 → 0.65
+
+22:27:24.729 [info] Processing: import library
+
+22:27:24.729 [info]   → Learned new pattern: import_statement
+
+22:27:24.729 [info]   → Confidence increased: 0.65 → 0.7
+
+22:27:24.729 [info] Processing: for i
+
+22:27:24.729 [info]   → Learned new pattern: for_loop
+
+22:27:24.729 [info]   → Confidence increased: 0.7 → 0.75
+
+22:27:24.729 [info] Processing: class AnotherClass
+
+22:27:24.729 [info]   → Pattern already known: class_declaration
+
+22:27:24.729 [info] 
+
+22:27:24.729 [info] Adaptive Learning Results:
+
+22:27:24.729 [info] • Initial patterns: 2
+
+22:27:24.729 [info] • Final patterns: 5
+
+22:27:24.729 [info] • New patterns learned: 3
+
+22:27:24.729 [info] • Initial confidence: 0.6
+
+22:27:24.729 [info] • Final confidence: 0.76
+
+22:27:24.729 [info] 
+
+22:27:24.729 [info] All learned patterns:
+
+22:27:24.729 [info]   • for_loop
+
+22:27:24.729 [info]   • import_statement
+
+22:27:24.729 [info]   • class_declaration
+
+22:27:24.729 [info]   • function_declaration
+
+22:27:24.729 [info]   • variable_assignment
+
+22:27:24.729 [info] 
+
+22:27:24.729 [info] ✅ Adaptive FSM: WORKING
+
+22:27:24.729 [info] 
+
+22:27:24.729 [info] 
+
+22:27:24.729 [info] ============================================================
+
+22:27:24.729 [info] ✨ ALL QUANTUM PARSING CONCEPTS VERIFIED!
+
+22:27:24.729 [info] 🎯 Ready to build the future programming language!
+     warning: variable "current_fsm" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 412 │   defp process_with_current_fsm(stream, current_fsm, token) do
+     │                                         ~~~~~~~~~~~
+     │
+     └─ quantumscript_parser.ex:412:41: QuantumScriptParser.process_with_current_fsm/3
+
+     warning: variable "fsm" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 424 │   defp handle_bidirectional_parsing(stream, fsm, ambiguous_token) do
+     │                                             ~~~
+     │
+     └─ quantumscript_parser.ex:424:45: QuantumScriptParser.handle_bidirectional_parsing/3
+
+     warning: variable "token" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 452 │   defp resolve_bidirectional_ambiguity(token, backward_context, forward_context) do
+     │                                        ~~~~~
+     │
+     └─ quantumscript_parser.ex:452:40: QuantumScriptParser.resolve_bidirectional_ambiguity/3
+
+    warning: unused alias Token
+    │
+ 19 │   alias StandaloneQuantumParser.{Token, TokenStream, QuantumFSM}
+    │   ~
+    │
+    └─ quantumscript_parser.ex:19:3
+
+     warning: the following clause will never match:
+
+         {:backtrack, reason}
+
+     because it attempts to match on the result of:
+
+         should_spawn_fsm?(current_token, current_fsm)
+
+     which has type:
+
+         dynamic(
+           {:continue, :enhanced or :normal} or
+             {:spawn,
+              :adaptive_fsm or :class_fsm or :collaboration_fsm or :data_context_fsm or :function_fsm or
+                :math_context_fsm or :module_fsm or :natural_language_fsm or :physics_fsm or
+                :ui_context_fsm}
+         )
+
+     typing violation found at:
+     │
+ 304 │         {:backtrack, reason} ->
+     │         ~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ quantumscript_parser.ex:304: QuantumScriptParser.process_tokens_recursively/4
+
+     warning: variable "expected_types" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 277 │     expected_types = [:module, :collaboration, :adaptive, :function, :physics]
+     │     ~~~~~~~~~~~~~~
+     │
+     └─ quantumscript_test_suite.ex:277:5: QuantumScriptTestSuite.test_multiple_fsm_coordination/0
+
+     warning: variable "parse_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 547 │     parse_result = QuantumScriptParser.parse(tokens)
+     │     ~~~~~~~~~~~~
+     │
+     └─ quantumscript_test_suite.ex:547:5: QuantumScriptTestSuite.test_context_sharing/0
+
+     warning: variable "parse_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 601 │     parse_result = QuantumScriptParser.parse(tokens)
+     │     ~~~~~~~~~~~~
+     │
+     └─ quantumscript_test_suite.ex:601:5: QuantumScriptTestSuite.test_collaboration_performance/0
+
+      warning: variable "parse_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1045 │     parse_result = QuantumScriptParser.parse(tokens)
+      │     ~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1045:5: QuantumScriptTestSuite.test_large_input/0
+
+      warning: variable "parse_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1109 │     parse_result = QuantumScriptParser.parse(tokens)
+      │     ~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1109:5: QuantumScriptTestSuite.test_parse_speed/0
+
+      warning: variable "no_spawn_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1128 │     no_spawn_result = QuantumScriptParser.parse(no_spawn_tokens)
+      │     ~~~~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1128:5: QuantumScriptTestSuite.test_spawning_overhead/0
+
+      warning: variable "spawn_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1134 │     spawn_result = QuantumScriptParser.parse(spawn_tokens)
+      │     ~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1134:5: QuantumScriptTestSuite.test_spawning_overhead/0
+
+      warning: variable "parse_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1173 │       parse_result = QuantumScriptParser.parse(tokens)
+      │       ~
+      │
+      └─ quantumscript_test_suite.ex:1173:7: QuantumScriptTestSuite.test_scaling_behavior/0
+
+      warning: variable "tokens" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1184 │     scaling_details = Enum.map(scaling_results, fn {size, time, tokens} ->
+      │                                                                 ~
+      │
+      └─ quantumscript_test_suite.ex:1184:65: QuantumScriptTestSuite.test_scaling_behavior/0
+
+      warning: variable "parse_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1212 │     parse_result = QuantumScriptParser.parse(tokens)
+      │     ~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1212:5: QuantumScriptTestSuite.test_bidirectional_performance/0
+
+      warning: variable "collab_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1236 │     collab_result = QuantumScriptParser.parse(collab_tokens)
+      │     ~~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1236:5: QuantumScriptTestSuite.test_collaborative_overhead/0
+
+      warning: variable "simple_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1230 │     simple_result = QuantumScriptParser.parse(simple_tokens)
+      │     ~~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1230:5: QuantumScriptTestSuite.test_collaborative_overhead/0
+
+    warning: unused alias QuantumFSM
+    │
+ 22 │   alias StandaloneQuantumParser.{Token, TokenStream, QuantumFSM}
+    │   ~
+    │
+    └─ quantumscript_test_suite.ex:22:3
+
+    warning: unused alias Token
+    │
+ 22 │   alias StandaloneQuantumParser.{Token, TokenStream, QuantumFSM}
+    │   ~
+    │
+    └─ quantumscript_test_suite.ex:22:3
+
+
+22:27:25.404 [info] 🧪 STARTING QUANTUMSCRIPT COMPREHENSIVE TEST SUITE
+
+22:27:25.404 [info] ================================================================================
+
+22:27:25.405 [info] 
+
+22:27:25.405 [info] Testing the world's first quantum FSM-based programming language
+
+22:27:25.405 [info] Validating revolutionary features for production deployment
+
+22:27:25.405 [info] 
+
+22:27:25.405 [info] 🧪 QUANTUMSCRIPT COMPREHENSIVE TEST SUITE
+
+22:27:25.405 [info] ======================================================================
+
+22:27:25.405 [info] 
+
+22:27:25.405 [info] Testing Revolutionary Quantum FSM Programming Language
+
+22:27:25.405 [info] Validating all groundbreaking features for production readiness
+
+22:27:25.405 [info] 
+
+22:27:25.405 [info] 🔬 TEST CATEGORY 1: Basic Parsing Functionality
+
+22:27:25.405 [info] 
+
+22:27:25.405 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.408 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.408 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.408 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:27:25.408 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.408 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.408 [debug] Processing token: function (function_def) at position 0
+
+22:27:25.409 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.409 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.409 [debug] Processing token: greet(name) (unknown) at position 1
+
+22:27:25.409 [debug] Processing token: -> (forward_op) at position 2
+
+22:27:25.409 [debug] Processing token: { (brace_open) at position 3
+
+22:27:25.409 [debug] Processing token: return (identifier) at position 4
+
+22:27:25.409 [debug] Processing token: name (identifier) at position 5
+
+22:27:25.409 [debug] Processing token: } (brace_close) at position 6
+
+22:27:25.409 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.409 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.409 [info] 🤖 FSMs spawned: 1
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 4 QuantumScript tokens
+
+22:27:25.409 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.409 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.409 [debug] Processing token: quantum_module (quantum_module) at position 0
+
+22:27:25.409 [info] 👶 Spawned ModuleFSM for quantum_module
+
+22:27:25.409 [debug] 🎯 Processing with ModuleFSM
+
+22:27:25.409 [debug] Processing token: TestModule (identifier) at position 1
+
+22:27:25.409 [debug] Processing token: { (brace_open) at position 2
+
+22:27:25.409 [debug] Processing token: } (brace_close) at position 3
+
+22:27:25.409 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.409 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.409 [info] 🤖 FSMs spawned: 1
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:27:25.409 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.409 [info] 📝 Tokenized 8 QuantumScript tokens
+
+22:27:25.409 [info] ✅ Simple identifier: Parsed 1 tokens
+
+22:27:25.409 [info] ✅ Basic function definition: Confidence: 0.5, FSMs: 1
+
+22:27:25.410 [info] ✅ Quantum module structure: Module FSMs spawned: 1
+
+22:27:25.410 [info] ✅ Operator parsing: Operators tested: 6
+
+22:27:25.410 [info] ✅ String literals: String literals tested: 3
+
+22:27:25.410 [info] ✅ Number literals: Number literals tested: 4
+
+22:27:25.410 [info] ✅ Brace matching: Opens: 2, Closes: 2
+
+22:27:25.410 [info] ✅ Token classification: Token types matched: true
+
+22:27:25.410 [info] 
+
+22:27:25.410 [info] 📊 Basic Parsing Tests: 8/8 passed (100.0%) in 340μs
+
+22:27:25.410 [info] 
+
+22:27:25.410 [info] 👶 TEST CATEGORY 2: FSM Spawning Behavior
+
+22:27:25.410 [info] 
+
+22:27:25.410 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.410 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:27:25.410 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.410 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.410 [debug] Processing token: quantum_module (quantum_module) at position 0
+
+22:27:25.410 [info] 👶 Spawned ModuleFSM for quantum_module
+
+22:27:25.410 [debug] 🎯 Processing with ModuleFSM
+
+22:27:25.410 [debug] Processing token: MyModule (identifier) at position 1
+
+22:27:25.410 [debug] Processing token: { (brace_open) at position 2
+
+22:27:25.410 [debug] Processing token: content (identifier) at position 3
+
+22:27:25.410 [debug] Processing token: here (identifier) at position 4
+
+22:27:25.410 [debug] Processing token: } (brace_close) at position 5
+
+22:27:25.410 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.410 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.410 [info] 🤖 FSMs spawned: 1
+
+22:27:25.410 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.410 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:27:25.410 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.410 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.410 [debug] Processing token: function (function_def) at position 0
+
+22:27:25.410 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.411 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.411 [debug] Processing token: test() (unknown) at position 1
+
+22:27:25.411 [debug] Processing token: -> (forward_op) at position 2
+
+22:27:25.411 [debug] Processing token: { (brace_open) at position 3
+
+22:27:25.411 [debug] Processing token: body (identifier) at position 4
+
+22:27:25.411 [debug] Processing token: } (brace_close) at position 5
+
+22:27:25.411 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.411 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.411 [info] 🤖 FSMs spawned: 1
+
+22:27:25.411 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.411 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:27:25.411 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.411 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.411 [debug] Processing token: collaborate (collaborate_block) at position 0
+
+22:27:25.411 [info] 👶 Spawned CollaborationFSM for collaborate
+
+22:27:25.411 [debug] 🎯 Processing with CollaborationFSM
+
+22:27:25.411 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.411 [debug] Processing token: task1: (unknown) at position 2
+
+22:27:25.411 [debug] Processing token: action1 (identifier) at position 3
+
+22:27:25.411 [debug] Processing token: -> (forward_op) at position 4
+
+22:27:25.411 [debug] Processing token: result1 (identifier) at position 5
+
+22:27:25.411 [debug] Processing token: } (brace_close) at position 6
+
+22:27:25.411 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.411 [info] 📊 Parse result: 0.55 confidence
+
+22:27:25.411 [info] 🤖 FSMs spawned: 1
+
+22:27:25.411 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.411 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:27:25.411 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.411 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.411 [debug] Processing token: natural_language (natural_lang_block) at position 0
+
+22:27:25.411 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+22:27:25.411 [debug] 🎯 Processing with NaturalLanguageFSM
+
+22:27:25.411 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.411 [debug] Processing token: "Test description" (string) at position 2
+
+22:27:25.411 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.411 [debug] Processing token: code (identifier) at position 4
+
+22:27:25.411 [debug] Processing token: } (brace_close) at position 5
+
+22:27:25.411 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.411 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.411 [info] 🤖 FSMs spawned: 1
+
+22:27:25.411 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.411 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:27:25.411 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.411 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.411 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.411 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.411 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.411 [debug] Processing token: function (function_def) at position 1
+
+22:27:25.411 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.411 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.411 [debug] Processing token: process() (unknown) at position 2
+
+22:27:25.411 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.411 [debug] Processing token: { (brace_open) at position 4
+
+22:27:25.411 [debug] Processing token: body (identifier) at position 5
+
+22:27:25.411 [debug] Processing token: } (brace_close) at position 6
+
+22:27:25.411 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.411 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.411 [info] 🤖 FSMs spawned: 2
+
+22:27:25.411 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.411 [info] 📝 Tokenized 5 QuantumScript tokens
+
+22:27:25.411 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.411 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.411 [debug] Processing token: gravitate (gravitation_block) at position 0
+
+22:27:25.411 [info] 👶 Spawned PhysicsFSM for gravitate
+
+22:27:25.411 [debug] 🎯 Processing with PhysicsFSM
+
+22:27:25.411 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.412 [debug] Processing token: high_probability: (unknown) at position 2
+
+22:27:25.412 [debug] Processing token: action() (unknown) at position 3
+
+22:27:25.412 [debug] Processing token: } (brace_close) at position 4
+
+22:27:25.412 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.412 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.412 [info] 🤖 FSMs spawned: 1
+
+22:27:25.412 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.412 [info] 📝 Tokenized 20 QuantumScript tokens
+
+22:27:25.412 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.412 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.412 [debug] Processing token: quantum_module (quantum_module) at position 0
+
+22:27:25.412 [info] 👶 Spawned ModuleFSM for quantum_module
+
+22:27:25.412 [debug] 🎯 Processing with ModuleFSM
+
+22:27:25.412 [debug] Processing token: Test (identifier) at position 1
+
+22:27:25.412 [debug] Processing token: { (brace_open) at position 2
+
+22:27:25.412 [debug] Processing token: collaborate (collaborate_block) at position 3
+
+22:27:25.412 [info] 👶 Spawned CollaborationFSM for collaborate
+
+22:27:25.412 [debug] 🎯 Processing with CollaborationFSM
+
+22:27:25.412 [debug] Processing token: { (brace_open) at position 4
+
+22:27:25.412 [debug] Processing token: task: (unknown) at position 5
+
+22:27:25.412 [debug] Processing token: action (identifier) at position 6
+
+22:27:25.412 [debug] Processing token: } (brace_close) at position 7
+
+22:27:25.412 [debug] Processing token: adaptive (adaptive_modifier) at position 8
+
+22:27:25.412 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.412 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.412 [debug] Processing token: function (function_def) at position 9
+
+22:27:25.412 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.412 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.412 [debug] Processing token: process() (unknown) at position 10
+
+22:27:25.412 [debug] Processing token: -> (forward_op) at position 11
+
+22:27:25.412 [debug] Processing token: { (brace_open) at position 12
+
+22:27:25.412 [debug] Processing token: } (brace_close) at position 13
+
+22:27:25.412 [debug] Processing token: gravitate (gravitation_block) at position 14
+
+22:27:25.412 [info] 👶 Spawned PhysicsFSM for gravitate
+
+22:27:25.412 [debug] 🎯 Processing with PhysicsFSM
+
+22:27:25.412 [debug] Processing token: { (brace_open) at position 15
+
+22:27:25.412 [debug] Processing token: option: (unknown) at position 16
+
+22:27:25.412 [debug] Processing token: result (identifier) at position 17
+
+22:27:25.412 [debug] Processing token: } (brace_close) at position 18
+
+22:27:25.412 [debug] Processing token: } (brace_close) at position 19
+
+22:27:25.412 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.412 [info] 📊 Parse result: 0.5175 confidence
+
+22:27:25.412 [info] 🤖 FSMs spawned: 5
+
+22:27:25.415 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.415 [info] 📝 Tokenized 9 QuantumScript tokens
+
+22:27:25.415 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.415 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.415 [debug] Processing token: quantum_module (quantum_module) at position 0
+
+22:27:25.415 [info] 👶 Spawned ModuleFSM for quantum_module
+
+22:27:25.415 [debug] 🎯 Processing with ModuleFSM
+
+22:27:25.415 [debug] Processing token: Parent (identifier) at position 1
+
+22:27:25.415 [debug] Processing token: { (brace_open) at position 2
+
+22:27:25.415 [debug] Processing token: function (function_def) at position 3
+
+22:27:25.415 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.415 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.415 [debug] Processing token: child() (unknown) at position 4
+
+22:27:25.415 [debug] Processing token: -> (forward_op) at position 5
+
+22:27:25.415 [debug] Processing token: { (brace_open) at position 6
+
+22:27:25.415 [debug] Processing token: } (brace_close) at position 7
+
+22:27:25.415 [debug] Processing token: } (brace_close) at position 8
+
+22:27:25.415 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.416 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.416 [info] 🤖 FSMs spawned: 2
+
+22:27:25.416 [info] ✅ Module FSM spawning: Module FSMs: 1
+
+22:27:25.416 [info] ✅ Function FSM spawning: Function FSMs: 1
+
+22:27:25.416 [info] ✅ Collaboration FSM spawning: Collaboration FSMs: 1
+
+22:27:25.416 [info] ✅ Natural language FSM spawning: Natural Language FSMs: 1
+
+22:27:25.416 [info] ✅ Adaptive FSM spawning: Adaptive FSMs: 1
+
+22:27:25.416 [info] ✅ Physics FSM spawning: Physics FSMs: 1
+
+22:27:25.416 [info] ✅ Multiple FSM coordination: FSM types spawned: [:physics, :function, :adaptive, :collaboration, :module]
+
+22:27:25.416 [info] ✅ FSM hierarchy validation: Module: true, Function: true
+
+22:27:25.416 [info] 
+
+22:27:25.416 [info] 📊 FSM Spawning Tests: 8/8 passed (100.0%) in 49μs
+
+22:27:25.416 [info] 
+
+22:27:25.416 [info] ↔️ TEST CATEGORY 3: Bidirectional Parsing
+
+22:27:25.416 [info] 
+
+22:27:25.416 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.416 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.416 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.416 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.416 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.416 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.416 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.416 [info] 📝 Tokenized 5 QuantumScript tokens
+
+22:27:25.416 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.416 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.416 [debug] Processing token: time (identifier) at position 0
+
+22:27:25.416 [debug] Processing token: flies (identifier) at position 1
+
+22:27:25.416 [debug] Processing token: like (identifier) at position 2
+
+22:27:25.416 [debug] Processing token: an (identifier) at position 3
+
+22:27:25.416 [debug] Processing token: arrow (identifier) at position 4
+
+22:27:25.416 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.416 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.416 [info] 🤖 FSMs spawned: 0
+
+22:27:25.416 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.416 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:27:25.416 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.416 [info] 📝 Tokenized 9 QuantumScript tokens
+
+22:27:25.416 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.416 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.416 [debug] Processing token: function (function_def) at position 0
+
+22:27:25.416 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.416 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.416 [debug] Processing token: calculate(x) (unknown) at position 1
+
+22:27:25.416 [debug] Processing token: <-> (bidirectional_op) at position 2
+
+22:27:25.416 [debug] Processing token: { (brace_open) at position 3
+
+22:27:25.416 [debug] Processing token: process (identifier) at position 4
+
+22:27:25.416 [debug] Processing token: x (identifier) at position 5
+
+22:27:25.416 [debug] Processing token: -> (forward_op) at position 6
+
+22:27:25.416 [debug] Processing token: result (identifier) at position 7
+
+22:27:25.416 [debug] Processing token: } (brace_close) at position 8
+
+22:27:25.416 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.416 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.417 [info] 🤖 FSMs spawned: 1
+
+22:27:25.417 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.417 [info] 📝 Tokenized 8 QuantumScript tokens
+
+22:27:25.417 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.417 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.417 [debug] Processing token: function (function_def) at position 0
+
+22:27:25.417 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.417 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.417 [debug] Processing token: process(input) (unknown) at position 1
+
+22:27:25.417 [debug] Processing token: <-> (bidirectional_op) at position 2
+
+22:27:25.417 [debug] Processing token: { (brace_open) at position 3
+
+22:27:25.417 [debug] Processing token: forward_logic (identifier) at position 4
+
+22:27:25.417 [debug] Processing token: -> (forward_op) at position 5
+
+22:27:25.417 [debug] Processing token: backward_trace (identifier) at position 6
+
+22:27:25.417 [debug] Processing token: } (brace_close) at position 7
+
+22:27:25.417 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.417 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.417 [info] 🤖 FSMs spawned: 1
+
+22:27:25.417 [info] ✅ Bidirectional operators: Bidirectional operators recognized: 3
+
+22:27:25.417 [info] ✅ Backward context analysis: Backward context tokens: 2
+
+22:27:25.417 [info] ✅ Forward context analysis: Forward context tokens: 3
+
+22:27:25.417 [info] ✅ Ambiguity resolution: Ambiguity confidence: 0.5
+
+22:27:25.417 [info] ✅ Trace statements: Backward operators found: 2
+
+22:27:25.417 [info] ✅ Stream navigation: Navigation: F5, B3, R0
+
+22:27:25.417 [info] ✅ Context reconstruction: Bidirectional tokens: 1
+
+22:27:25.417 [info] ✅ Bidirectional functions: Function FSMs: 1, Bidirectional: true
+
+22:27:25.417 [info] 
+
+22:27:25.417 [info] 📊 Bidirectional Parsing Tests: 8/8 passed (100.0%) in 54μs
+
+22:27:25.417 [info] 
+
+22:27:25.417 [info] 🤝 TEST CATEGORY 4: Collaborative Programming Blocks
+
+22:27:25.417 [info] 
+
+22:27:25.417 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.417 [info] 📝 Tokenized 11 QuantumScript tokens
+
+22:27:25.417 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.417 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.417 [debug] Processing token: collaborate (collaborate_block) at position 0
+
+22:27:25.417 [info] 👶 Spawned CollaborationFSM for collaborate
+
+22:27:25.417 [debug] 🎯 Processing with CollaborationFSM
+
+22:27:25.417 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.417 [debug] Processing token: task1: (unknown) at position 2
+
+22:27:25.417 [debug] Processing token: action1() (unknown) at position 3
+
+22:27:25.417 [debug] Processing token: -> (forward_op) at position 4
+
+22:27:25.417 [debug] Processing token: result1 (identifier) at position 5
+
+22:27:25.417 [debug] Processing token: task2: (unknown) at position 6
+
+22:27:25.417 [debug] Processing token: action2() (unknown) at position 7
+
+22:27:25.417 [debug] Processing token: -> (forward_op) at position 8
+
+22:27:25.417 [debug] Processing token: result2 (identifier) at position 9
+
+22:27:25.417 [debug] Processing token: } (brace_close) at position 10
+
+22:27:25.417 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.417 [info] 📊 Parse result: 0.5318181818181817 confidence
+
+22:27:25.417 [info] 🤖 FSMs spawned: 1
+
+22:27:25.417 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.417 [info] 📝 Tokenized 15 QuantumScript tokens
+
+22:27:25.417 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.417 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.417 [debug] Processing token: collaborate (collaborate_block) at position 0
+
+22:27:25.417 [info] 👶 Spawned CollaborationFSM for collaborate
+
+22:27:25.417 [debug] 🎯 Processing with CollaborationFSM
+
+22:27:25.417 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.417 [debug] Processing token: frontend: (unknown) at position 2
+
+22:27:25.417 [debug] Processing token: { (brace_open) at position 3
+
+22:27:25.417 [debug] Processing token: ui_logic() (unknown) at position 4
+
+22:27:25.417 [debug] Processing token: } (brace_close) at position 5
+
+22:27:25.417 [debug] Processing token: backend: (unknown) at position 6
+
+22:27:25.417 [debug] Processing token: { (brace_open) at position 7
+
+22:27:25.417 [debug] Processing token: business_logic() (unknown) at position 8
+
+22:27:25.417 [debug] Processing token: } (brace_close) at position 9
+
+22:27:25.417 [debug] Processing token: database: (unknown) at position 10
+
+22:27:25.417 [debug] Processing token: { (brace_open) at position 11
+
+22:27:25.417 [debug] Processing token: persistence_logic() (unknown) at position 12
+
+22:27:25.417 [debug] Processing token: } (brace_close) at position 13
+
+22:27:25.417 [debug] Processing token: } (brace_close) at position 14
+
+22:27:25.418 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.418 [info] 📊 Parse result: 0.5233333333333333 confidence
+
+22:27:25.418 [info] 🤖 FSMs spawned: 1
+
+22:27:25.418 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.418 [info] 📝 Tokenized 11 QuantumScript tokens
+
+22:27:25.418 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.418 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.418 [debug] Processing token: collaborate (collaborate_block) at position 0
+
+22:27:25.418 [info] 👶 Spawned CollaborationFSM for collaborate
+
+22:27:25.418 [debug] 🎯 Processing with CollaborationFSM
+
+22:27:25.418 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.418 [debug] Processing token: outer: (unknown) at position 2
+
+22:27:25.418 [debug] Processing token: { (brace_open) at position 3
+
+22:27:25.418 [debug] Processing token: collaborate (collaborate_block) at position 4
+
+22:27:25.418 [info] 👶 Spawned CollaborationFSM for collaborate
+
+22:27:25.418 [debug] 🎯 Processing with CollaborationFSM
+
+22:27:25.418 [debug] Processing token: { (brace_open) at position 5
+
+22:27:25.418 [debug] Processing token: inner: (unknown) at position 6
+
+22:27:25.418 [debug] Processing token: nested_action() (unknown) at position 7
+
+22:27:25.418 [debug] Processing token: } (brace_close) at position 8
+
+22:27:25.418 [debug] Processing token: } (brace_close) at position 9
+
+22:27:25.418 [debug] Processing token: } (brace_close) at position 10
+
+22:27:25.418 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.419 [info] 📊 Parse result: 0.5636363636363636 confidence
+
+22:27:25.419 [info] 🤖 FSMs spawned: 2
+
+22:27:25.419 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.419 [info] 📝 Tokenized 4 QuantumScript tokens
+
+22:27:25.419 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.419 [info] 📝 Tokenized 11 QuantumScript tokens
+
+22:27:25.419 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.419 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.419 [debug] Processing token: collaborate (collaborate_block) at position 0
+
+22:27:25.419 [info] 👶 Spawned CollaborationFSM for collaborate
+
+22:27:25.419 [debug] 🎯 Processing with CollaborationFSM
+
+22:27:25.419 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.419 [debug] Processing token: context_a: (unknown) at position 2
+
+22:27:25.419 [debug] Processing token: shared_data (identifier) at position 3
+
+22:27:25.419 [debug] Processing token: -> (forward_op) at position 4
+
+22:27:25.419 [debug] Processing token: result_a (identifier) at position 5
+
+22:27:25.419 [debug] Processing token: context_b: (unknown) at position 6
+
+22:27:25.419 [debug] Processing token: shared_data (identifier) at position 7
+
+22:27:25.419 [debug] Processing token: -> (forward_op) at position 8
+
+22:27:25.419 [debug] Processing token: result_b (identifier) at position 9
+
+22:27:25.419 [debug] Processing token: } (brace_close) at position 10
+
+22:27:25.419 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.419 [info] 📊 Parse result: 0.5318181818181817 confidence
+
+22:27:25.419 [info] 🤖 FSMs spawned: 1
+
+22:27:25.419 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.419 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:27:25.419 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.419 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.419 [debug] Processing token: collaborate (collaborate_block) at position 0
+
+22:27:25.419 [info] 👶 Spawned CollaborationFSM for collaborate
+
+22:27:25.419 [debug] 🎯 Processing with CollaborationFSM
+
+22:27:25.419 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.419 [debug] Processing token: task1: (unknown) at position 2
+
+22:27:25.419 [debug] Processing token: action1 (identifier) at position 3
+
+22:27:25.419 [debug] Processing token: task2: (unknown) at position 4
+
+22:27:25.419 [debug] Processing token: action2 (identifier) at position 5
+
+22:27:25.420 [debug] Processing token: } (brace_close) at position 6
+
+22:27:25.420 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.420 [info] 📊 Parse result: 0.55 confidence
+
+22:27:25.420 [info] 🤖 FSMs spawned: 1
+
+22:27:25.420 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.420 [info] 📝 Tokenized 11 QuantumScript tokens
+
+22:27:25.420 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.420 [info] 📝 Tokenized 33 QuantumScript tokens
+
+22:27:25.420 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.420 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.420 [debug] Processing token: collaborate (collaborate_block) at position 0
+
+22:27:25.420 [info] 👶 Spawned CollaborationFSM for collaborate
+
+22:27:25.420 [debug] 🎯 Processing with CollaborationFSM
+
+22:27:25.420 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.420 [debug] Processing token: service1: (unknown) at position 2
+
+22:27:25.420 [debug] Processing token: { (brace_open) at position 3
+
+22:27:25.420 [debug] Processing token: action1() (unknown) at position 4
+
+22:27:25.420 [debug] Processing token: -> (forward_op) at position 5
+
+22:27:25.420 [debug] Processing token: result1 (identifier) at position 6
+
+22:27:25.420 [debug] Processing token: } (brace_close) at position 7
+
+22:27:25.420 [debug] Processing token: service2: (unknown) at position 8
+
+22:27:25.420 [debug] Processing token: { (brace_open) at position 9
+
+22:27:25.420 [debug] Processing token: action2() (unknown) at position 10
+
+22:27:25.420 [debug] Processing token: -> (forward_op) at position 11
+
+22:27:25.420 [debug] Processing token: result2 (identifier) at position 12
+
+22:27:25.420 [debug] Processing token: } (brace_close) at position 13
+
+22:27:25.420 [debug] Processing token: service3: (unknown) at position 14
+
+22:27:25.420 [debug] Processing token: { (brace_open) at position 15
+
+22:27:25.420 [debug] Processing token: action3() (unknown) at position 16
+
+22:27:25.420 [debug] Processing token: -> (forward_op) at position 17
+
+22:27:25.420 [debug] Processing token: result3 (identifier) at position 18
+
+22:27:25.420 [debug] Processing token: } (brace_close) at position 19
+
+22:27:25.420 [debug] Processing token: service4: (unknown) at position 20
+
+22:27:25.421 [debug] Processing token: { (brace_open) at position 21
+
+22:27:25.421 [debug] Processing token: action4() (unknown) at position 22
+
+22:27:25.421 [debug] Processing token: -> (forward_op) at position 23
+
+22:27:25.421 [debug] Processing token: result4 (identifier) at position 24
+
+22:27:25.421 [debug] Processing token: } (brace_close) at position 25
+
+22:27:25.421 [debug] Processing token: service5: (unknown) at position 26
+
+22:27:25.421 [debug] Processing token: { (brace_open) at position 27
+
+22:27:25.421 [debug] Processing token: action5() (unknown) at position 28
+
+22:27:25.421 [debug] Processing token: -> (forward_op) at position 29
+
+22:27:25.421 [debug] Processing token: result5 (identifier) at position 30
+
+22:27:25.421 [debug] Processing token: } (brace_close) at position 31
+
+22:27:25.421 [debug] Processing token: } (brace_close) at position 32
+
+22:27:25.421 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.421 [info] 📊 Parse result: 0.5106060606060606 confidence
+
+22:27:25.421 [info] 🤖 FSMs spawned: 1
+
+22:27:25.421 [info] ✅ Basic collaboration block: Collaboration FSMs: 1
+
+22:27:25.421 [info] ✅ Multi-context collaboration: Multi-context confidence: 0.52
+
+22:27:25.421 [info] ✅ Nested collaboration: Nested collaboration FSMs: 2
+
+22:27:25.421 [info] ✅ Quantum sync operations: Quantum sync detected: true
+
+22:27:25.421 [info] ✅ Context sharing: Shared variable instances: 2
+
+22:27:25.421 [info] ✅ Collaborative FSM linking: Linked collaboration FSMs: 1
+
+22:27:25.421 [info] ✅ Cross-context variables: Cross-context variable refs: 2
+
+22:27:25.421 [info] ✅ Collaboration performance: Parse time: 975μs, Tokens: 33
+
+22:27:25.421 [info] 
+
+22:27:25.421 [info] 📊 Collaborative Blocks Tests: 8/8 passed (100.0%) in 211μs
+
+22:27:25.421 [info] 
+
+22:27:25.421 [info] 💬 TEST CATEGORY 5: Natural Language Integration
+
+22:27:25.421 [info] 
+
+22:27:25.421 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.421 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:27:25.421 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.421 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.421 [debug] Processing token: natural_language (natural_lang_block) at position 0
+
+22:27:25.421 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+22:27:25.421 [debug] 🎯 Processing with NaturalLanguageFSM
+
+22:27:25.421 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.421 [debug] Processing token: "When user clicks button, save data" (string) at position 2
+
+22:27:25.421 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.421 [debug] Processing token: save_user_data() (unknown) at position 4
+
+22:27:25.421 [debug] Processing token: } (brace_close) at position 5
+
+22:27:25.421 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.421 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.421 [info] 🤖 FSMs spawned: 1
+
+22:27:25.421 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.421 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:27:25.421 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.422 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:27:25.422 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.422 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.422 [debug] Processing token: natural_language (natural_lang_block) at position 0
+
+22:27:25.422 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+22:27:25.422 [debug] 🎯 Processing with NaturalLanguageFSM
+
+22:27:25.422 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.422 [debug] Processing token: "When user submits form with invalid data, show error message and highlight problematic fields for better user experience" (string) at position 2
+
+22:27:25.422 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.422 [debug] Processing token: complex_validation_handler() (unknown) at position 4
+
+22:27:25.422 [debug] Processing token: } (brace_close) at position 5
+
+22:27:25.422 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.422 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.422 [info] 🤖 FSMs spawned: 1
+
+22:27:25.422 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.422 [info] 📝 Tokenized 22 QuantumScript tokens
+
+22:27:25.422 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.422 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.422 [debug] Processing token: function (function_def) at position 0
+
+22:27:25.422 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.422 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.422 [debug] Processing token: process_order(order) (unknown) at position 1
+
+22:27:25.422 [debug] Processing token: -> (forward_op) at position 2
+
+22:27:25.422 [debug] Processing token: { (brace_open) at position 3
+
+22:27:25.422 [debug] Processing token: "Validate order details" (string) at position 4
+
+22:27:25.422 [debug] Processing token: -> (forward_op) at position 5
+
+22:27:25.422 [debug] Processing token: validate(order) (unknown) at position 6
+
+22:27:25.422 [debug] Processing token: -> (forward_op) at position 7
+
+22:27:25.422 [debug] Processing token: validation_result (identifier) at position 8
+
+22:27:25.422 [debug] Processing token: when (conditional_when) at position 9
+
+22:27:25.422 [debug] Processing token: validation_result.success: (unknown) at position 10
+
+22:27:25.422 [debug] Processing token: "Process payment" (string) at position 11
+
+22:27:25.422 [debug] Processing token: -> (forward_op) at position 12
+
+22:27:25.422 [debug] Processing token: charge_payment(order.amount) (unknown) at position 13
+
+22:27:25.422 [debug] Processing token: -> (forward_op) at position 14
+
+22:27:25.422 [debug] Processing token: payment_result (identifier) at position 15
+
+22:27:25.422 [debug] Processing token: "Send confirmation email" (string) at position 16
+
+22:27:25.422 [debug] Processing token: -> (forward_op) at position 17
+
+22:27:25.422 [debug] Processing token: send_email(order.customer) (unknown) at position 18
+
+22:27:25.422 [debug] Processing token: -> (forward_op) at position 19
+
+22:27:25.422 [debug] Processing token: email_sent (identifier) at position 20
+
+22:27:25.422 [debug] Processing token: } (brace_close) at position 21
+
+22:27:25.422 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.422 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.422 [info] 🤖 FSMs spawned: 1
+
+22:27:25.422 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.422 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:27:25.422 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.422 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.422 [debug] Processing token: natural_language (natural_lang_block) at position 0
+
+22:27:25.422 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+22:27:25.422 [debug] 🎯 Processing with NaturalLanguageFSM
+
+22:27:25.422 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.422 [debug] Processing token: "Test requirement" (string) at position 2
+
+22:27:25.422 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.422 [debug] Processing token: implementation (identifier) at position 4
+
+22:27:25.422 [debug] Processing token: } (brace_close) at position 5
+
+22:27:25.422 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.422 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.422 [info] 🤖 FSMs spawned: 1
+
+22:27:25.422 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.422 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.423 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.423 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.423 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.423 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.423 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.423 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.423 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.423 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:27:25.423 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.423 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.423 [debug] Processing token: natural_language (natural_lang_block) at position 0
+
+22:27:25.423 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+22:27:25.423 [debug] 🎯 Processing with NaturalLanguageFSM
+
+22:27:25.423 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.423 [debug] Processing token: "First, validate the user input. Then, process the data. Finally, return the results." (string) at position 2
+
+22:27:25.423 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.423 [debug] Processing token: multi_step_process() (unknown) at position 4
+
+22:27:25.423 [debug] Processing token: } (brace_close) at position 5
+
+22:27:25.423 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.423 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.423 [info] 🤖 FSMs spawned: 1
+
+22:27:25.423 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.423 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.423 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.423 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.423 [debug] Processing token: "Simple requirement" (string) at position 0
+
+22:27:25.423 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.423 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.423 [info] 🤖 FSMs spawned: 0
+
+22:27:25.423 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.423 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.423 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.423 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.423 [debug] Processing token: "Complex requirement with multiple conditions and outcomes" (string) at position 0
+
+22:27:25.423 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.423 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.423 [info] 🤖 FSMs spawned: 0
+
+22:27:25.423 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.423 [info] 📝 Tokenized 1 QuantumScript tokens
+
+22:27:25.423 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.423 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.423 [debug] Processing token: "Very complex requirement with nested conditions, multiple stakeholders, and complex business logic" (string) at position 0
+
+22:27:25.423 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.423 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.423 [info] 🤖 FSMs spawned: 0
+
+22:27:25.423 [info] ✅ Basic natural language block: NL FSMs: 1, NL blocks: true
+
+22:27:25.423 [info] ✅ Natural language to code mapping: String: true, Function: true, Mapping: true
+
+22:27:25.423 [info] ✅ Complex natural language: Complex NL confidence: 0.5
+
+22:27:25.423 [info] ✅ Mixed natural and code: NL strings: 3, Function FSMs: 1
+
+22:27:25.423 [info] ✅ Natural language FSM behavior: NL FSM confidence: 0.9
+
+22:27:25.423 [info] ✅ English requirement parsing: Requirements parsed: 4
+
+22:27:25.423 [info] ✅ Multi-sentence natural language: Multi-sentence confidence: 0.5
+
+22:27:25.423 [info] ✅ Natural language confidence: NL confidence tests passed: 2/3
+
+22:27:25.423 [info] 
+
+22:27:25.423 [info] 📊 Natural Language Tests: 8/8 passed (100.0%) in 73μs
+
+22:27:25.423 [info] 
+
+22:27:25.423 [info] 🧠 TEST CATEGORY 6: Adaptive FSM Behavior
+
+22:27:25.423 [info] 
+
+22:27:25.423 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.423 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:27:25.423 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.423 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.423 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.423 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.423 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.423 [debug] Processing token: function (function_def) at position 1
+
+22:27:25.423 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.423 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.423 [debug] Processing token: process(data) (unknown) at position 2
+
+22:27:25.423 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.423 [debug] Processing token: { (brace_open) at position 4
+
+22:27:25.423 [debug] Processing token: dynamic_logic (identifier) at position 5
+
+22:27:25.423 [debug] Processing token: } (brace_close) at position 6
+
+22:27:25.423 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.423 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.423 [info] 🤖 FSMs spawned: 2
+
+22:27:25.423 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.423 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:27:25.423 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.423 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.423 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.423 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.423 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.423 [debug] Processing token: class (class_def) at position 1
+
+22:27:25.423 [info] 👶 Spawned GenericFSM for class
+
+22:27:25.423 [debug] 🎯 Processing with GenericFSM
+
+22:27:25.423 [debug] Processing token: SmartClass (identifier) at position 2
+
+22:27:25.423 [debug] Processing token: { (brace_open) at position 3
+
+22:27:25.423 [debug] Processing token: spawn (spawn_keyword) at position 4
+
+22:27:25.423 [debug] Processing token: intelligent_behavior (identifier) at position 5
+
+22:27:25.423 [debug] Processing token: } (brace_close) at position 6
+
+22:27:25.423 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.423 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.423 [info] 🤖 FSMs spawned: 2
+
+22:27:25.423 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.423 [info] 📝 Tokenized 21 QuantumScript tokens
+
+22:27:25.423 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.423 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.423 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.423 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.423 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.423 [debug] Processing token: function (function_def) at position 1
+
+22:27:25.423 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.423 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.423 [debug] Processing token: process_a(data) (unknown) at position 2
+
+22:27:25.424 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.424 [debug] Processing token: { (brace_open) at position 4
+
+22:27:25.424 [debug] Processing token: logic (identifier) at position 5
+
+22:27:25.424 [debug] Processing token: } (brace_close) at position 6
+
+22:27:25.424 [debug] Processing token: adaptive (adaptive_modifier) at position 7
+
+22:27:25.424 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.424 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.424 [debug] Processing token: function (function_def) at position 8
+
+22:27:25.424 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.424 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.424 [debug] Processing token: process_b(data) (unknown) at position 9
+
+22:27:25.424 [debug] Processing token: -> (forward_op) at position 10
+
+22:27:25.424 [debug] Processing token: { (brace_open) at position 11
+
+22:27:25.424 [debug] Processing token: logic (identifier) at position 12
+
+22:27:25.424 [debug] Processing token: } (brace_close) at position 13
+
+22:27:25.424 [debug] Processing token: adaptive (adaptive_modifier) at position 14
+
+22:27:25.424 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.424 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.424 [debug] Processing token: function (function_def) at position 15
+
+22:27:25.424 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.424 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.424 [debug] Processing token: process_c(data) (unknown) at position 16
+
+22:27:25.424 [debug] Processing token: -> (forward_op) at position 17
+
+22:27:25.424 [debug] Processing token: { (brace_open) at position 18
+
+22:27:25.424 [debug] Processing token: logic (identifier) at position 19
+
+22:27:25.424 [debug] Processing token: } (brace_close) at position 20
+
+22:27:25.424 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.424 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.424 [info] 🤖 FSMs spawned: 6
+
+22:27:25.424 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.424 [info] 📝 Tokenized 2 QuantumScript tokens
+
+22:27:25.424 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.424 [info] 📝 Tokenized 8 QuantumScript tokens
+
+22:27:25.424 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.424 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.424 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.424 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.424 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.424 [debug] Processing token: simple_pattern (identifier) at position 1
+
+22:27:25.424 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.424 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.424 [info] 🤖 FSMs spawned: 1
+
+22:27:25.424 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.424 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.424 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.424 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.424 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.424 [debug] Processing token: complex_pattern (identifier) at position 1
+
+22:27:25.424 [debug] Processing token: with (identifier) at position 2
+
+22:27:25.424 [debug] Processing token: multiple (identifier) at position 3
+
+22:27:25.424 [debug] Processing token: conditions (identifier) at position 4
+
+22:27:25.424 [debug] Processing token: and (identifier) at position 5
+
+22:27:25.424 [debug] Processing token: nested (identifier) at position 6
+
+22:27:25.424 [debug] Processing token: structures (identifier) at position 7
+
+22:27:25.424 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.424 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.424 [info] 🤖 FSMs spawned: 1
+
+22:27:25.424 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.424 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:27:25.424 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.424 [info] 📝 Tokenized 2 QuantumScript tokens
+
+22:27:25.424 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.424 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.424 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.424 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.424 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.424 [debug] Processing token: simple (identifier) at position 1
+
+22:27:25.424 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.424 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.424 [info] 🤖 FSMs spawned: 1
+
+22:27:25.424 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.424 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:27:25.424 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.424 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.424 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.424 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.424 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.424 [debug] Processing token: medium (identifier) at position 1
+
+22:27:25.425 [debug] Processing token: complexity (identifier) at position 2
+
+22:27:25.425 [debug] Processing token: with (identifier) at position 3
+
+22:27:25.425 [debug] Processing token: some (identifier) at position 4
+
+22:27:25.425 [debug] Processing token: patterns (identifier) at position 5
+
+22:27:25.425 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.425 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.425 [info] 🤖 FSMs spawned: 1
+
+22:27:25.425 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.425 [info] 📝 Tokenized 12 QuantumScript tokens
+
+22:27:25.425 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.425 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.425 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.425 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.425 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.425 [debug] Processing token: very (identifier) at position 1
+
+22:27:25.425 [debug] Processing token: complex (identifier) at position 2
+
+22:27:25.425 [debug] Processing token: pattern (identifier) at position 3
+
+22:27:25.425 [debug] Processing token: with (identifier) at position 4
+
+22:27:25.425 [debug] Processing token: multiple (identifier) at position 5
+
+22:27:25.425 [debug] Processing token: nested (identifier) at position 6
+
+22:27:25.425 [debug] Processing token: conditions (identifier) at position 7
+
+22:27:25.425 [debug] Processing token: and (identifier) at position 8
+
+22:27:25.425 [debug] Processing token: sophisticated (identifier) at position 9
+
+22:27:25.425 [debug] Processing token: logic (identifier) at position 10
+
+22:27:25.425 [debug] Processing token: structures (identifier) at position 11
+
+22:27:25.425 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.425 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.425 [info] 🤖 FSMs spawned: 1
+
+22:27:25.425 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.425 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:27:25.425 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.425 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.425 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.425 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.425 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.425 [debug] Processing token: function (function_def) at position 1
+
+22:27:25.425 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.425 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.425 [debug] Processing token: pattern(x) (unknown) at position 2
+
+22:27:25.425 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.425 [debug] Processing token: { (brace_open) at position 4
+
+22:27:25.425 [debug] Processing token: x (identifier) at position 5
+
+22:27:25.425 [debug] Processing token: } (brace_close) at position 6
+
+22:27:25.425 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.425 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.425 [info] 🤖 FSMs spawned: 2
+
+22:27:25.425 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.425 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:27:25.425 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.426 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.426 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.426 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.426 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.426 [debug] Processing token: function (function_def) at position 1
+
+22:27:25.426 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.426 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.426 [debug] Processing token: pattern(x) (unknown) at position 2
+
+22:27:25.426 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.426 [debug] Processing token: { (brace_open) at position 4
+
+22:27:25.426 [debug] Processing token: x (identifier) at position 5
+
+22:27:25.426 [debug] Processing token: } (brace_close) at position 6
+
+22:27:25.426 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.426 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.426 [info] 🤖 FSMs spawned: 2
+
+22:27:25.426 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.426 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:27:25.426 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.426 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.426 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.426 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.426 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.426 [debug] Processing token: function (function_def) at position 1
+
+22:27:25.426 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.426 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.426 [debug] Processing token: pattern(x) (unknown) at position 2
+
+22:27:25.426 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.426 [debug] Processing token: { (brace_open) at position 4
+
+22:27:25.426 [debug] Processing token: x (identifier) at position 5
+
+22:27:25.426 [debug] Processing token: } (brace_close) at position 6
+
+22:27:25.426 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.426 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.426 [info] 🤖 FSMs spawned: 2
+
+22:27:25.426 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.426 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:27:25.426 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.426 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.426 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.426 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.426 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.426 [debug] Processing token: function (function_def) at position 1
+
+22:27:25.426 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.426 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.426 [debug] Processing token: pattern(x) (unknown) at position 2
+
+22:27:25.426 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.426 [debug] Processing token: { (brace_open) at position 4
+
+22:27:25.426 [debug] Processing token: x (identifier) at position 5
+
+22:27:25.426 [debug] Processing token: } (brace_close) at position 6
+
+22:27:25.426 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.426 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.426 [info] 🤖 FSMs spawned: 2
+
+22:27:25.426 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.426 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:27:25.426 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.426 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.426 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+22:27:25.426 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:27:25.426 [debug] 🎯 Processing with AdaptiveFSM
+
+22:27:25.426 [debug] Processing token: function (function_def) at position 1
+
+22:27:25.426 [info] 👶 Spawned FunctionFSM for function
+
+22:27:25.426 [debug] 🎯 Processing with FunctionFSM
+
+22:27:25.426 [debug] Processing token: pattern(x) (unknown) at position 2
+
+22:27:25.426 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.426 [debug] Processing token: { (brace_open) at position 4
+
+22:27:25.426 [debug] Processing token: x (identifier) at position 5
+
+22:27:25.426 [debug] Processing token: } (brace_close) at position 6
+
+22:27:25.426 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.426 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.426 [info] 🤖 FSMs spawned: 2
+
+22:27:25.426 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.426 [info] 📝 Tokenized 2 QuantumScript tokens
+
+22:27:25.426 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.426 [info] 📝 Tokenized 2 QuantumScript tokens
+
+22:27:25.426 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.426 [info] 📝 Tokenized 2 QuantumScript tokens
+
+22:27:25.426 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.426 [info] 📝 Tokenized 2 QuantumScript tokens
+
+22:27:25.426 [info] ✅ Basic adaptive function: Adaptive FSMs: 1
+
+22:27:25.426 [info] ✅ Adaptive spawning behavior: Adaptive: 1, Spawn: true
+
+22:27:25.426 [info] ✅ Pattern learning: Pattern recognition - Adaptive: 3, Function: 3
+
+22:27:25.426 [info] ✅ Confidence adaptation: Simple: 0.5, Complex: 0.5
+
+22:27:25.426 [info] ✅ Self-modifying syntax: Adaptive: true, Modification: true
+
+22:27:25.427 [info] ✅ Adaptive performance: Max parse time: 529μs
+
+22:27:25.427 [info] ✅ Learning convergence: Confidence stability: true
+
+22:27:25.427 [info] ✅ Adaptation triggers: High-weight triggers: 4/4
+
+22:27:25.427 [info] 
+
+22:27:25.427 [info] 📊 Adaptive FSM Tests: 8/8 passed (100.0%) in 293μs
+
+22:27:25.427 [info] 
+
+22:27:25.427 [info] ⚠️ TEST CATEGORY 7: Error Handling and Edge Cases
+
+22:27:25.427 [info] 
+
+22:27:25.427 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.427 [info] 📝 Tokenized 0 QuantumScript tokens
+
+22:27:25.427 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.427 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.427 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.427 [info] 📊 Parse result: 0.0 confidence
+
+22:27:25.427 [info] 🤖 FSMs spawned: 0
+
+22:27:25.427 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.427 [info] 📝 Tokenized 5 QuantumScript tokens
+
+22:27:25.427 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.427 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.427 [debug] Processing token: @@@ (unknown) at position 0
+
+22:27:25.427 [debug] Processing token: invalid (identifier) at position 1
+
+22:27:25.427 [debug] Processing token: &&& (unknown) at position 2
+
+22:27:25.427 [debug] Processing token: syntax (identifier) at position 3
+
+22:27:25.427 [debug] Processing token: ### (unknown) at position 4
+
+22:27:25.427 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.427 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.427 [info] 🤖 FSMs spawned: 0
+
+22:27:25.427 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.427 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:27:25.427 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.427 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.427 [debug] Processing token: { (brace_open) at position 0
+
+22:27:25.427 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.427 [debug] Processing token: { (brace_open) at position 2
+
+22:27:25.427 [debug] Processing token: no (identifier) at position 3
+
+22:27:25.427 [debug] Processing token: closing (identifier) at position 4
+
+22:27:25.427 [debug] Processing token: braces (identifier) at position 5
+
+22:27:25.427 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.427 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.427 [info] 🤖 FSMs spawned: 0
+
+22:27:25.427 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.427 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:27:25.427 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.427 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.427 [debug] Processing token: <-> (bidirectional_op) at position 0
+
+22:27:25.427 [debug] Processing token: <-> (bidirectional_op) at position 1
+
+22:27:25.427 [debug] Processing token: <- (backward_op) at position 2
+
+22:27:25.427 [debug] Processing token: -> (forward_op) at position 3
+
+22:27:25.427 [debug] Processing token: <-> (bidirectional_op) at position 4
+
+22:27:25.427 [debug] Processing token: invalid (identifier) at position 5
+
+22:27:25.427 [debug] Processing token: flow (identifier) at position 6
+
+22:27:25.427 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.427 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.427 [info] 🤖 FSMs spawned: 0
+
+22:27:25.427 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.427 [info] 📝 Tokenized 8 QuantumScript tokens
+
+22:27:25.427 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.427 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.427 [debug] Processing token: natural_language (natural_lang_block) at position 0
+
+22:27:25.427 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+22:27:25.427 [debug] 🎯 Processing with NaturalLanguageFSM
+
+22:27:25.427 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.427 [debug] Processing token: "Incomplete (unknown) at position 2
+
+22:27:25.427 [debug] Processing token: sentence (identifier) at position 3
+
+22:27:25.427 [debug] Processing token: without (identifier) at position 4
+
+22:27:25.427 [debug] Processing token: -> (forward_op) at position 5
+
+22:27:25.427 [debug] Processing token: incomplete_mapping (identifier) at position 6
+
+22:27:25.427 [debug] Processing token: } (brace_close) at position 7
+
+22:27:25.427 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.427 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.427 [info] 🤖 FSMs spawned: 1
+
+22:27:25.427 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.427 [info] 📝 Tokenized 41 QuantumScript tokens
+
+22:27:25.427 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.427 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.427 [debug] Processing token: { (brace_open) at position 0
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 1
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 2
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 3
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 4
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 5
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 6
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 7
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 8
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 9
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 10
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 11
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 12
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 13
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 14
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 15
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 16
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 17
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 18
+
+22:27:25.428 [debug] Processing token: { (brace_open) at position 19
+
+22:27:25.428 [debug] Processing token: core (identifier) at position 20
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 21
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 22
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 23
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 24
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 25
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 26
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 27
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 28
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 29
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 30
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 31
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 32
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 33
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 34
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 35
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 36
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 37
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 38
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 39
+
+22:27:25.428 [debug] Processing token: } (brace_close) at position 40
+
+22:27:25.428 [info] ✨ QuantumScript parsing complete!
+
+22:27:25.428 [info] 📊 Parse result: 0.5 confidence
+
+22:27:25.428 [info] 🤖 FSMs spawned: 0
+
+22:27:25.428 [info] 🔬 Tokenizing QuantumScript source...
+
+22:27:25.431 [info] 📝 Tokenized 1000 QuantumScript tokens
+
+22:27:25.431 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:27:25.431 [info] 🧠 Starting quantum FSM parsing...
+
+22:27:25.431 [debug] Processing token: token1 (identifier) at position 0
+
+22:27:25.431 [debug] Processing token: token2 (identifier) at position 1
+
+22:27:25.431 [debug] Processing token: token3 (identifier) at position 2
+
+22:27:25.431 [debug] Processing token: token4 (identifier) at position 3

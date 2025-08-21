@@ -1,0 +1,1601 @@
+     warning: variable "meta1" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 162 │   defp transform_single_physics_field({:"::", meta1, [field_name, {:"::", meta2, [type_spec, [physics: physics_annotation]]}]}) do
+     │                                               ~~~~~
+     │
+     └─ lib/enhanced_adt.ex:162:47: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: variable "meta2" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 162 │   defp transform_single_physics_field({:"::", meta1, [field_name, {:"::", meta2, [type_spec, [physics: physics_annotation]]}]}) do
+     │                                                                           ~~~~~
+     │
+     └─ lib/enhanced_adt.ex:162:75: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: variable "meta" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 168 │   defp transform_single_physics_field({{:"::", meta, [field_name, type_spec]}, [physics: physics_annotation]}) do
+     │                                                ~~~~
+     │
+     └─ lib/enhanced_adt.ex:168:48: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: function extract_variant_name/1 is unused
+     │
+ 242 │   defp extract_variant_name({:__aliases__, _, [variant_name]}) when is_atom(variant_name), do: variant_name
+     │        ~
+     │
+     └─ lib/enhanced_adt.ex:242:8: EnhancedADT.ProductType (module)
+
+     warning: function parse_elegant_variant_fields/1 is unused
+     │
+ 450 │   defp parse_elegant_variant_fields(args) do
+     │        ~
+     │
+     └─ lib/enhanced_adt.ex:450:8: EnhancedADT.SumType (module)
+
+     warning: the underscored variable "_meta" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore
+     │
+ 548 │       {module_name, _meta, args}
+     │                     ~
+     │
+     └─ lib/enhanced_adt/bend.ex:548:21: EnhancedADT.Bend.transform_bend_adt_pattern/1
+
+     warning: function update_bend_context/2 is unused
+     │
+ 427 │   defp update_bend_context(context, updates) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:427:8: EnhancedADT.Bend (module)
+
+     warning: function transform_elegant_bend_clause/1 is unused
+     │
+ 526 │   defp transform_elegant_bend_clause({:->, meta, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:526:8: EnhancedADT.Bend (module)
+
+     warning: function transform_elegant_adt_clauses_for_bend/1 is unused
+     │
+ 517 │   defp transform_elegant_adt_clauses_for_bend(clauses) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:517:8: EnhancedADT.Bend (module)
+
+     warning: function transform_bend_adt_pattern/1 is unused
+     │
+ 532 │   defp transform_bend_adt_pattern({module_name, _meta, args}) when is_atom(module_name) and is_list(args) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:532:8: EnhancedADT.Bend (module)
+
+     warning: function record_network_connections/3 is unused
+     │
+ 431 │   defp record_network_connections(context, _node_id, _result) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:431:8: EnhancedADT.Bend (module)
+
+     warning: function inject_network_generation/2 is unused
+     │
+ 245 │   defp inject_network_generation(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:245:8: EnhancedADT.Bend (module)
+
+     warning: function inject_fork_tracking/1 is unused
+     │
+ 283 │   defp inject_fork_tracking(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:283:8: EnhancedADT.Bend (module)
+
+     warning: function get_bend_module_field_names/1 is unused
+     │
+ 558 │   defp get_bend_module_field_names(variant_name) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:558:8: EnhancedADT.Bend (module)
+
+     warning: function generate_unique_node_id/0 is unused
+     │
+ 423 │   defp generate_unique_node_id() do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:423:8: EnhancedADT.Bend (module)
+
+     warning: function find_recursive_calls_in_ast/1 is unused
+     │
+ 405 │   defp find_recursive_calls_in_ast(_body), do: []  # Simplified
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:405:8: EnhancedADT.Bend (module)
+
+     warning: function find_fork_calls_in_ast/1 is unused
+     │
+ 408 │   defp find_fork_calls_in_ast(_body), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:408:8: EnhancedADT.Bend (module)
+
+     warning: function find_connection_points/2 is unused
+     │
+ 410 │   defp find_connection_points(_patterns, _body), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:410:8: EnhancedADT.Bend (module)
+
+     warning: function extract_topology_hints/2 is unused
+     │
+ 412 │   defp extract_topology_hints(_patterns, _body), do: %{}
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:412:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_recursion_depth/1 is unused
+     │
+ 407 │   defp estimate_recursion_depth(_calls), do: 1
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:407:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_node_count/2 is unused
+     │
+ 416 │   defp estimate_node_count(fork_count, depth), do: fork_count * depth
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:416:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_max_recursion_depth/1 is unused
+     │
+ 415 │   defp estimate_max_recursion_depth(_body), do: 1
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:415:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_connection_count/1 is unused
+     │
+ 417 │   defp estimate_connection_count(fork_count), do: fork_count * 2
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:417:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_body_with_network_tracking/2 is unused
+     │
+ 274 │   defp enhance_body_with_network_tracking(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:274:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_bend_clauses/2 is unused
+     │
+ 225 │   defp enhance_bend_clauses(clauses, bend_analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:225:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_bend_clause/2 is unused
+     │
+ 238 │   defp enhance_bend_clause({:->, meta, [pattern_list, body]}, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:238:8: EnhancedADT.Bend (module)
+
+     warning: function determine_optimization_priority/2 is unused
+     │
+ 418 │   defp determine_optimization_priority(fork_count, depth), do: if(fork_count * depth > 10, do: :high, else: :normal)
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:418:8: EnhancedADT.Bend (module)
+
+     warning: function detect_recursive_calls/1 is unused
+     │
+ 181 │   defp detect_recursive_calls(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:181:8: EnhancedADT.Bend (module)
+
+     warning: function detect_fork_operations/1 is unused
+     │
+ 191 │   defp detect_fork_operations(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:191:8: EnhancedADT.Bend (module)
+
+     warning: function count_fork_operations/1 is unused
+     │
+ 414 │   defp count_fork_operations(_body), do: 0
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:414:8: EnhancedADT.Bend (module)
+
+     warning: function contains_depth_check?/1 is unused
+     │
+ 419 │   defp contains_depth_check?(_guard), do: false
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:419:8: EnhancedADT.Bend (module)
+
+     warning: function classify_recursive_calls/1 is unused
+     │
+ 406 │   defp classify_recursive_calls(_calls), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:406:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_optimization_potential/2 is unused
+     │
+ 413 │   defp calculate_optimization_potential(_patterns, _body), do: 0.5
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:413:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_network_complexity/1 is unused
+     │
+ 211 │   defp calculate_network_complexity(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:211:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_fork_connection_strength/3 is unused
+     │
+ 435 │   defp calculate_fork_connection_strength(_source, _target, _value) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:435:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_wormhole_opportunities/2 is unused
+     │
+ 201 │   defp analyze_wormhole_opportunities(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:201:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_strength_indicators/1 is unused
+     │
+ 411 │   defp analyze_strength_indicators(_body), do: %{}
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:411:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_fork_patterns/1 is unused
+     │
+ 409 │   defp analyze_fork_patterns(_calls), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:409:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_pattern/1 is unused
+     │
+ 131 │   defp analyze_bend_pattern(pattern) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:131:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_clauses/1 is unused
+     │
+ 108 │   defp analyze_bend_clauses(clauses) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:108:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_clause/1 is unused
+     │
+ 115 │   defp analyze_bend_clause({:->, _, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:115:8: EnhancedADT.Bend (module)
+
+    warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+    │
+ 60 │     defmacro fold(value, opts \\ [], do: clauses) do
+    │                          ~~~~
+    │
+    └─ lib/enhanced_adt/fold.ex:60:26: EnhancedADT.Fold.fold/3
+
+     warning: the underscored variable "_meta" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore
+     │
+ 433 │       {module_name, _meta, args}
+     │                     ~
+     │
+     └─ lib/enhanced_adt/fold.ex:433:21: EnhancedADT.Fold.transform_adt_pattern/1
+
+     warning: defp transform_adt_pattern/1 is private, @doc attribute is always discarded for private functions/macros/types
+     │
+ 411 │     @doc """
+     │     ~~~~~~~~
+     │
+     └─ lib/enhanced_adt/fold.ex:411: EnhancedADT.Fold.transform_adt_pattern/1
+
+     warning: function wrap_with_state_management/2 is unused
+     │
+ 303 │   defp wrap_with_state_management(body, mode) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:303:8: EnhancedADT.Fold (module)
+
+     warning: function inject_wormhole_analysis/2 is unused
+     │
+ 273 │   defp inject_wormhole_analysis(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:273:8: EnhancedADT.Fold (module)
+
+     warning: function inject_quantum_correlation/2 is unused
+     │
+ 288 │   defp inject_quantum_correlation(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:288:8: EnhancedADT.Fold (module)
+
+     warning: function inject_islab_operations/3 is unused
+     │
+ 256 │   defp inject_islab_operations(body, analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:256:8: EnhancedADT.Fold (module)
+
+     warning: function extract_types_from_pattern/1 is unused
+     │
+ 380 │   defp extract_types_from_pattern({module_name, _, _args}) when is_atom(module_name) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:380:8: EnhancedADT.Fold (module)
+
+     warning: function extract_physics_hints/2 is unused
+     │
+ 189 │   defp extract_physics_hints(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:189:8: EnhancedADT.Fold (module)
+
+     warning: function extract_pattern_types/1 is unused
+     │
+ 376 │   defp extract_pattern_types(patterns) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:376:8: EnhancedADT.Fold (module)
+
+     warning: function extract_body_references/1 is unused
+     │
+ 385 │   defp extract_body_references(_body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:385:8: EnhancedADT.Fold (module)
+
+     warning: function enhance_single_clause/3 is unused
+     │
+ 220 │   defp enhance_single_clause({:->, meta, [pattern_list, body]}, analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:220:8: EnhancedADT.Fold (module)
+
+     warning: function enhance_fold_clauses/3 is unused
+     │
+ 200 │   defp enhance_fold_clauses(clauses, clause_analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:200:8: EnhancedADT.Fold (module)
+
+     warning: function determine_access_pattern/2 is unused
+     │
+ 391 │   defp determine_access_pattern(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:391:8: EnhancedADT.Fold (module)
+
+     warning: function detect_cross_references/2 is unused
+     │
+ 172 │   defp detect_cross_references(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:172:8: EnhancedADT.Fold (module)
+
+     warning: function detect_adt_operations/1 is unused
+     │
+ 161 │   defp detect_adt_operations(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:161:8: EnhancedADT.Fold (module)
+
+     warning: function contains_storage_calls?/1 is unused
+     │
+ 347 │   defp contains_storage_calls?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:347:8: EnhancedADT.Fold (module)
+
+     warning: function contains_retrieval_calls?/1 is unused
+     │
+ 355 │   defp contains_retrieval_calls?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:355:8: EnhancedADT.Fold (module)
+
+     warning: function contains_cross_reference_patterns?/1 is unused
+     │
+ 362 │   defp contains_cross_reference_patterns?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:362:8: EnhancedADT.Fold (module)
+
+     warning: function calculate_operation_complexity/1 is unused
+     │
+ 370 │   defp calculate_operation_complexity(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:370:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_temporal_characteristics/1 is unused
+     │
+ 401 │   defp analyze_temporal_characteristics(_body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:401:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_single_clause/1 is unused
+     │
+ 104 │   defp analyze_single_clause({:->, _, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:104:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_pattern/1 is unused
+     │
+ 119 │   defp analyze_pattern(pattern) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:119:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_gravitational_hints/2 is unused
+     │
+ 406 │   defp analyze_gravitational_hints(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:406:8: EnhancedADT.Fold (module)
+
+    warning: function analyze_fold_clauses/1 is unused
+    │
+ 96 │   defp analyze_fold_clauses(clauses) do
+    │        ~
+    │
+    └─ lib/enhanced_adt/fold.ex:96:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_data_locality/2 is unused
+     │
+ 396 │   defp analyze_data_locality(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:396:8: EnhancedADT.Fold (module)
+
+     warning: IsLabDB.WormholeRouter.find_route/2 is undefined or private. Did you mean:
+
+           * find_route/3
+           * find_route/4
+
+     │
+ 390 │     case IsLabDB.WormholeRouter.find_route(key, "*") do
+     │                                 ~
+     │
+     └─ lib/enhanced_adt/islab_integration.ex:390:33: EnhancedADT.IsLabDBIntegration.Translators.attempt_wormhole_retrieval/1
+
+     warning: IsLabDB.WormholeRouter.traverse_route_for_data/1 is undefined or private
+     │
+ 393 │         case IsLabDB.WormholeRouter.traverse_route_for_data(route) do
+     │                                     ~
+     │
+     └─ lib/enhanced_adt/islab_integration.ex:393:37: EnhancedADT.IsLabDBIntegration.Translators.attempt_wormhole_retrieval/1
+
+     warning: the following clause will never match:
+
+         :strongly_related
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 170 │       :strongly_related -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:170: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :weakly_related
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 172 │       :weakly_related -> 0.4
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:172: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :unrelated
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 173 │       :unrelated -> 0.1
+     │       ~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:173: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :always_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 180 │       :always_together -> 0.95
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:180: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :frequently_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 181 │       :frequently_together -> 0.8
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:181: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :rarely_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 183 │       :rarely_together -> 0.2
+     │       ~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:183: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :never_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 184 │       :never_together -> 0.0
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:184: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :very_stable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 191 │       :very_stable -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:191: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: the following clause will never match:
+
+         :moderately_stable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 193 │       :moderately_stable -> 0.5
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:193: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: the following clause will never match:
+
+         :unstable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 194 │       :unstable -> 0.3
+     │       ~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:194: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: the following clause will never match:
+
+         :high_frequency
+
+     because it attempts to match on the result of:
+
+         analyze_route_pattern(route_candidate)
+
+     which has type:
+
+         dynamic(:medium_frequency)
+
+     typing violation found at:
+     │
+ 149 │       :high_frequency -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:149: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
+
+     warning: the following clause will never match:
+
+         :low_frequency
+
+     because it attempts to match on the result of:
+
+         analyze_route_pattern(route_candidate)
+
+     which has type:
+
+         dynamic(:medium_frequency)
+
+     typing violation found at:
+     │
+ 151 │       :low_frequency -> 0.3
+     │       ~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:151: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
+
+     warning: the following clause will never match:
+
+         :unknown
+
+     because it attempts to match on the result of:
+
+         analyze_route_pattern(route_candidate)
+
+     which has type:
+
+         dynamic(:medium_frequency)
+
+     typing violation found at:
+     │
+ 152 │       :unknown -> 0.4
+     │       ~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:152: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
+
+     warning: the following clause will never match:
+
+         :simple
+
+     because it attempts to match on the result of:
+
+         estimate_route_complexity(route_candidate)
+
+     which has type:
+
+         dynamic(:moderate)
+
+     typing violation found at:
+     │
+ 165 │       :simple -> 0.05
+     │       ~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:165: EnhancedADT.WormholeAnalyzer.estimate_maintenance_cost/1
+
+     warning: the following clause will never match:
+
+         :complex
+
+     because it attempts to match on the result of:
+
+         estimate_route_complexity(route_candidate)
+
+     which has type:
+
+         dynamic(:moderate)
+
+     typing violation found at:
+     │
+ 167 │       :complex -> 0.2
+     │       ~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:167: EnhancedADT.WormholeAnalyzer.estimate_maintenance_cost/1
+
+      warning: function update_quantum_metrics/3 is unused
+      │
+ 1090 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
+      │        ~
+      │
+      └─ lib/islab_db.ex:1090:8: IsLabDB (module)
+
+      warning: function store_in_event_horizon_cache/5 is unused
+      │
+ 1172 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
+      │        ~
+      │
+      └─ lib/islab_db.ex:1172:8: IsLabDB (module)
+
+      warning: function get_current_state/0 is unused
+      │
+ 1586 │   defp get_current_state() do
+      │        ~
+      │
+      └─ lib/islab_db.ex:1586:8: IsLabDB (module)
+
+     warning: function atomize_keys/1 is unused
+     │
+ 288 │   defp atomize_keys(map) when is_map(map) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_entry.ex:288:8: IsLabDB.WAL.Entry (module)
+
+     warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 218 │   defp ultra_fast_route_data(key, value, opts) do
+     │                                   ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:218:35: IsLabDB.WALOperations.ultra_fast_route_data/3
+
+     warning: variable "cosmic_metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
+     │                                                      ~~~~~~~~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:278:54: IsLabDB.WALOperations.update_physics_intelligence_async/4
+
+     warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
+     │                                                                       ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:278:71: IsLabDB.WALOperations.update_physics_intelligence_async/4
+
+     warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
+     │                                               ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:278:47: IsLabDB.WALOperations.update_physics_intelligence_async/4
+
+     warning: variable "cosmic_metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │                                                                    ~~~~~~~~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:68: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │                                                          ~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:58: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+
+     warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │                                                                                     ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:85: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+
+     warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │                                                   ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:51: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+
+     warning: variable "delete_results" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 374 │   defp cleanup_physics_intelligence_async(key, delete_results, state) do
+     │                                                ~~~~~~~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:374:48: IsLabDB.WALOperations.cleanup_physics_intelligence_async/3
+
+     warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 374 │   defp cleanup_physics_intelligence_async(key, delete_results, state) do
+     │                                                                ~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:374:64: IsLabDB.WALOperations.cleanup_physics_intelligence_async/3
+
+     warning: function update_wormhole_usage_patterns/3 is unused
+     │
+ 481 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:481:8: IsLabDB.WALOperations (module)
+
+     warning: function update_shard_statistics/4 is unused
+     │
+ 491 │   defp update_shard_statistics(shard, operation, _key, _value) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:491:8: IsLabDB.WALOperations (module)
+
+     warning: function update_physics_intelligence_async/4 is unused
+     │
+ 278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:278:8: IsLabDB.WALOperations (module)
+
+     warning: function update_get_physics_intelligence_async/5 is unused
+     │
+ 309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:309:8: IsLabDB.WALOperations (module)
+
+     warning: function update_access_patterns_async/3 is unused
+     │
+ 419 │   defp update_access_patterns_async(key, access_type, _state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:419:8: IsLabDB.WALOperations (module)
+
+     warning: function ultra_fast_route_data/3 is unused
+     │
+ 218 │   defp ultra_fast_route_data(key, value, opts) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:218:8: IsLabDB.WALOperations (module)
+
+     warning: function populate_event_horizon_cache_async/4 is unused
+     │
+ 388 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:388:8: IsLabDB.WALOperations (module)
+
+     warning: function get_wormhole_metadata/2 is unused
+     │
+ 463 │   defp get_wormhole_metadata(_key, shard_id) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:463:8: IsLabDB.WALOperations (module)
+
+     warning: function determine_quantum_state/2 is unused
+     │
+ 424 │   defp determine_quantum_state(key, value) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:424:8: IsLabDB.WALOperations (module)
+
+     warning: function determine_optimal_cache_level/1 is unused
+     │
+ 472 │   defp determine_optimal_cache_level(cosmic_metadata) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:472:8: IsLabDB.WALOperations (module)
+
+     warning: function create_cosmic_metadata/5 is unused
+     │
+ 262 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:262:8: IsLabDB.WALOperations (module)
+
+     warning: function check_event_horizon_cache_v2/2 is unused
+     │
+ 323 │   defp check_event_horizon_cache_v2(state, key) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:323:8: IsLabDB.WALOperations (module)
+
+     warning: function calculate_entropy_impact/3 is unused
+     │
+ 435 │   defp calculate_entropy_impact(key, value, shard_id) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:435:8: IsLabDB.WALOperations (module)
+
+     warning: function calculate_cosmic_coordinates/2 is unused
+     │
+ 449 │   defp calculate_cosmic_coordinates(key, value) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:449:8: IsLabDB.WALOperations (module)
+
+     warning: function cache_retrieved_value_async/5 is unused
+     │
+ 401 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/islab_db/wal_operations.ex:401:8: IsLabDB.WALOperations (module)
+
+    warning: unused alias EntropyMonitor
+    │
+ 27 │   alias IsLabDB.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
+    │   ~
+    │
+    └─ lib/islab_db/wal_operations.ex:27:3
+
+    warning: unused alias GravitationalRouter
+    │
+ 27 │   alias IsLabDB.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
+    │   ~
+    │
+    └─ lib/islab_db/wal_operations.ex:27:3
+
+     warning: the following clause will never match:
+
+         {:error, _reason}
+
+     because it attempts to match on the result of:
+
+         IsLabDB.EventHorizonCache.get(cache, key)
+
+     which has type:
+
+         dynamic(
+           {:miss, %{..., performance_metrics: term()}} or
+             {:ok, term(), %{..., performance_metrics: term()},
+              %{
+                cache_level: term(),
+                data_decompressed: boolean(),
+                dilated_operation_time: integer(),
+                promoted: boolean(),
+                time_dilation_factor: term(),
+                wall_clock_time: float() or integer()
+              }}
+         )
+
+     typing violation found at:
+     │
+ 335 │             {:error, _reason} -> nil
+     │             ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/islab_db/wal_operations.ex:335: IsLabDB.WALOperations.check_event_horizon_cache_v2/2
+
+
+22:40:56.099 [info] 🚀 Starting IsLab Database Application...
+
+22:40:56.103 [info] ⚙️  Application Configuration:
+
+22:40:56.109 [info]   data_root: "/home/travis/Projects/islab-database/data"
+
+22:40:56.110 [info]   Entanglement rules: using defaults
+
+22:40:56.110 [info] 🔧 Starting supervisor with 2 children
+
+22:40:56.119 [info] 🚀 Initializing WAL Persistence Revolution...
+
+22:40:56.122 [info] 📁 WAL data_root: /home/travis/Projects/islab-database/data
+
+22:40:56.122 [info] 📁 Creating WAL directory: /home/travis/Projects/islab-database/data/wal
+
+22:40:56.122 [info] 📄 Opening WAL file: /home/travis/Projects/islab-database/data/wal/cosmic.wal
+
+22:40:56.122 [info] ⚡ Setting up atomic counter...
+
+22:40:56.122 [info] 🏗️ Building WAL state...
+
+22:40:56.122 [info] ✅ WAL system initialized: /home/travis/Projects/islab-database/data/wal/cosmic.wal
+
+22:40:56.122 [info] ⚡ Ready for 250,000+ ops/second performance!
+
+22:40:56.123 [info] 🚀 Initializing IsLabDB computational universe...
+
+22:40:56.124 [info] 🌌 Initializing cosmic filesystem structure...
+
+22:40:56.153 [info] ✨ Cosmic structure ready at /home/travis/Projects/islab-database/data
+
+22:40:56.156 [info] ⚛️  Initializing quantum entanglement system...
+
+22:40:56.160 [info] ✨ Quantum entanglement system ready for superposition
+
+22:40:56.160 [info] 🌌 Initializing Phase 3: Spacetime Sharding System...
+
+22:40:56.164 [info] 🌌 Created spacetime shard: hot_data with strong consistency
+
+22:40:56.164 [info] 🌌 Created spacetime shard: warm_data with eventual consistency
+
+22:40:56.164 [info] 🌌 Created spacetime shard: cold_data with weak consistency
+
+22:40:56.168 [info] 🌌 Initializing gravitational routing system with 3 shards
+
+22:40:56.168 [info] ✨ Gravitational router initialized with gravitational algorithm
+
+22:40:56.168 [info] ✨ Phase 3 spacetime sharding system ready
+
+22:40:56.168 [info] 🕳️  Initializing Phase 4: Event Horizon Cache System...
+
+22:40:56.172 [info] 🕳️  Creating Event Horizon Cache: hot_data_cache
+
+22:40:56.172 [info] ✨ Event Horizon Cache hot_data_cache ready - Schwarzschild radius: 10000
+
+22:40:56.172 [info] 🕳️  Creating Event Horizon Cache: warm_data_cache
+
+22:40:56.172 [info] ✨ Event Horizon Cache warm_data_cache ready - Schwarzschild radius: 5000
+
+22:40:56.172 [info] 🕳️  Creating Event Horizon Cache: cold_data_cache
+
+22:40:56.173 [info] ✨ Event Horizon Cache cold_data_cache ready - Schwarzschild radius: 2000
+
+22:40:56.173 [info] 🕳️  Creating Event Horizon Cache: universal_cache
+
+22:40:56.173 [info] ✨ Event Horizon Cache universal_cache ready - Schwarzschild radius: 20000
+
+22:40:56.173 [info] ✨ Phase 4 Event Horizon Cache System ready - 4 caches active
+
+22:40:56.173 [info] 🌡️  Initializing Phase 5: Entropy Monitoring & Thermodynamics...
+
+22:40:56.187 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
+
+22:40:56.187 [info] 💾 Entropy persistence initialized: /home/travis/Projects/islab-database/data/entropy/cosmic_entropy
+
+22:40:56.187 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 5000ms
+
+22:40:56.187 [info] ✨ Phase 5 Entropy Monitoring System ready - cosmic entropy monitor active
+
+22:40:56.187 [info] ✅ Connected to WAL system
+
+22:40:56.187 [info] ✨ IsLabDB universe is stable and ready for cosmic operations
+
+22:40:56.188 [info] 🌌 Data root: /home/travis/Projects/islab-database/data
+
+22:40:56.188 [info] 🪐 Advanced spacetime shards: cold_data, hot_data, warm_data
+
+22:40:56.188 [info] 🎯 Gravitational routing: gravitational algorithm
+
+22:40:56.188 [info] 🕳️  Event horizon caches: warm_data_cache, hot_data_cache, cold_data_cache, universal_cache
+
+22:40:56.188 [info] 🔗 Entanglement rules: 4 patterns configured
+
+22:40:56.188 [info] 🚀 Phase 4: Event Horizon Cache System - ACTIVE
+
+22:40:56.188 [info] 🌡️  Phase 5: Entropy Monitoring & Thermodynamics - ACTIVE
+
+22:40:56.188 [info] ✨ IsLab Database Application started successfully
+
+22:40:56.190 [info] 🌌 Universe supervisor PID: #PID<0.313.0>
+
+22:40:56.296 [info] 👥 Supervisor children: [{IsLabDB, #PID<0.319.0>, :worker, [IsLabDB]}, {IsLabDB.WAL, #PID<0.314.0>, :worker, [IsLabDB.WAL]}]
+    warning: variable "end_pos" is unused (if the variable is not meant to be used, prefix it with an underscore)
+    │
+ 63 │           end_pos = min(start_pos + count, length(stream.tokens))
+    │           ~
+    │
+    └─ prototypes/test_quantum_parser.exs:63:11: StandaloneQuantumParser.TokenStream.peek/3
+
+     warning: variable "spawned_fsms" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+     │
+ 273 │           spawned_fsms = [brace_fsm | spawned_fsms]
+     │           ~
+     │
+     └─ prototypes/test_quantum_parser.exs:273:11: StandaloneQuantumParser.test_fsm_spawning/0
+
+     warning: variable "spawned_fsms" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+     │
+ 278 │           spawned_fsms = [func_fsm | spawned_fsms]
+     │           ~
+     │
+     └─ prototypes/test_quantum_parser.exs:278:11: StandaloneQuantumParser.test_fsm_spawning/0
+
+     warning: variable "spawned_fsms" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+     │
+ 283 │           spawned_fsms = [expr_fsm | spawned_fsms]
+     │           ~
+     │
+     └─ prototypes/test_quantum_parser.exs:283:11: StandaloneQuantumParser.test_fsm_spawning/0
+
+
+22:40:56.690 [info] 🚀 STANDALONE QUANTUM PARSER TESTING
+
+22:40:56.690 [info] ============================================================
+
+22:40:56.690 [info] 
+
+22:40:56.690 [info] 🤖 TEST 1: FSMs as First-Class Variables
+
+22:40:56.690 [info] 
+
+22:40:56.690 [info] Created FSM Variables:
+
+22:40:56.692 [info] • brace_fsm = BraceMatchingFSM (confidence: 0.9)
+
+22:40:56.692 [info] • json_fsm = JSONParserFSM (can_spawn: true)
+
+22:40:56.692 [info] • expression_fsm = ExpressionFSM (backtrack: true, spawn: true)
+
+22:40:56.692 [info] 
+
+22:40:56.692 [info] FSMs stored in library:
+
+22:40:56.693 [info] • data: 1 FSMs
+
+22:40:56.693 [info] • structural: 1 FSMs
+
+22:40:56.693 [info] • mathematical: 1 FSMs
+
+22:40:56.693 [info] 
+
+22:40:56.693 [info] Enhanced brace_fsm:
+
+22:40:56.693 [info] • Original confidence: 0.9
+
+22:40:56.693 [info] • Enhanced confidence: 0.95
+
+22:40:56.693 [info] • Pattern memory: 2 patterns
+
+22:40:56.693 [info] 
+
+22:40:56.693 [info] ✅ FSMs as Variables: WORKING
+
+22:40:56.693 [info] 
+
+22:40:56.693 [info] ↔️ TEST 2: Bidirectional Token Stream Navigation
+
+22:40:56.693 [info] 
+
+22:40:56.693 [info] Ambiguous tokens: Time flies like an arrow
+
+22:40:56.693 [info] 
+
+22:40:56.693 [info] Bidirectional parsing simulation:
+
+22:40:56.693 [info] Position 2: 'like' - ambiguous!
+
+22:40:56.693 [info] Backward context: flies Time
+
+22:40:56.693 [info] Forward context: like an
+
+22:40:56.693 [info] 
+
+22:40:56.693 [info] Analysis:
+
+22:40:56.693 [info] • Backward: 'Time flies' suggests subject + verb
+
+22:40:56.693 [info] • Forward: 'like an arrow' suggests prepositional phrase
+
+22:40:56.693 [info] • Conclusion: 'like' = preposition (Time flies [like an arrow])
+
+22:40:56.693 [info] 
+
+22:40:56.693 [info] Stream navigation test:
+
+22:40:56.694 [info] Reset to position: 0
+
+22:40:56.694 [info] Forward 3 → position: 3
+
+22:40:56.694 [info] Backward 1 → position: 2
+
+22:40:56.694 [info] 
+
+22:40:56.694 [info] ✅ Bidirectional Parsing: WORKING
+
+22:40:56.694 [info] 
+
+22:40:56.694 [info] 👶 TEST 3: FSM Spawning Based on Patterns
+
+22:40:56.694 [info] 
+
+22:40:56.694 [info] Complex input: { function calculate ( x + 42 ) }
+
+22:40:56.694 [info] 
+
+22:40:56.694 [info] FSM Spawning Simulation:
+
+22:40:56.694 [info] Position 0: '{' → Spawned BraceMatchingFSM
+
+22:40:56.694 [info] Position 1: 'function' → Spawned FunctionFSM
+
+22:40:56.694 [info] Position 2: 'calculate' → Processed by existing FSM
+
+22:40:56.694 [info] Position 3: '(' → Spawned ExpressionFSM
+
+22:40:56.694 [info] Position 4: 'x' → Processed by existing FSM
+
+22:40:56.694 [info] Position 5: '+' → Processed by existing FSM
+
+22:40:56.694 [info] Position 6: '42' → Processed by existing FSM
+
+22:40:56.694 [info] Position 7: ')' → Processed by existing FSM
+
+22:40:56.694 [info] Position 8: '}' → Processed by existing FSM
+
+22:40:56.694 [info] 
+
+22:40:56.694 [info] Final FSM Hierarchy:
+
+22:40:56.694 [info] MasterParserFSM
+
+22:40:56.694 [info] 
+
+22:40:56.694 [info] Spawning Results:
+
+22:40:56.694 [info] • Master FSM: MasterParserFSM
+
+22:40:56.694 [info] • Spawned FSMs: 0
+
+22:40:56.694 [info] • Specialization: Each FSM handles its domain
+
+22:40:56.694 [info] 
+
+22:40:56.694 [info] ✅ FSM Spawning: WORKING
+
+22:40:56.694 [info] 
+
+22:40:56.694 [info] 🤝 TEST 4: Collaborative FSM Parsing
+
+22:40:56.694 [info] 
+
+22:40:56.694 [info] Collaborative FSM Network:
+
+22:40:56.694 [info] • NounPhraseFSM: linked to 2 FSMs
+
+22:40:56.694 [info] • VerbPhraseFSM: linked to 2 FSMs
+
+22:40:56.694 [info] • SentenceFSM: linked to 2 FSMs
+
+22:40:56.694 [info] 
+
+22:40:56.694 [info] Sentence: The brilliant scientist discovered quantum mechanics
+
+22:40:56.694 [info] 
+
+22:40:56.694 [info] Collaborative Parsing Process:
+
+22:40:56.695 [info] NounPhraseFSM analysis:
+
+22:40:56.695 [info]   Found: The brilliant scientist, quantum mechanics
+
+22:40:56.695 [info] VerbPhraseFSM analysis:
+
+22:40:56.695 [info]   Found: discovered (past)
+
+22:40:56.695 [info] SentenceFSM coordination:
+
+22:40:56.695 [info]   Structure: simple_sentence
+
+22:40:56.695 [info]   Subject: The brilliant scientist
+
+22:40:56.695 [info]   Predicate: discovered quantum mechanics
+
+22:40:56.695 [info] 
+
+22:40:56.695 [info] Collaboration Results:
+
+22:40:56.695 [info] • Individual FSM insights combined
+
+22:40:56.695 [info] • Cross-validation between FSMs
+
+22:40:56.699 [info] • Combined confidence: 0.89
+
+22:40:56.700 [info] • Collaborative understanding achieved
+
+22:40:56.700 [info] 
+
+22:40:56.700 [info] ✅ Collaborative Parsing: WORKING
+
+22:40:56.700 [info] 
+
+22:40:56.700 [info] 🧠 TEST 5: Adaptive FSM Learning
+
+22:40:56.700 [info] 
+
+22:40:56.700 [info] Initial Adaptive FSM:
+
+22:40:56.700 [info] • Known patterns: 2
+
+22:40:56.700 [info] • Patterns: function_declaration, variable_assignment
+
+22:40:56.700 [info] 
+
+22:40:56.700 [info] Learning from input patterns:
+
+22:40:56.700 [info] Processing: class MyClass
+
+22:40:56.700 [info]   → Learned new pattern: class_declaration
+
+22:40:56.700 [info]   → Confidence increased: 0.6 → 0.65
+
+22:40:56.700 [info] Processing: import library
+
+22:40:56.700 [info]   → Learned new pattern: import_statement
+
+22:40:56.700 [info]   → Confidence increased: 0.65 → 0.7
+
+22:40:56.700 [info] Processing: for i
+
+22:40:56.700 [info]   → Learned new pattern: for_loop
+
+22:40:56.700 [info]   → Confidence increased: 0.7 → 0.75
+
+22:40:56.700 [info] Processing: class AnotherClass
+
+22:40:56.700 [info]   → Pattern already known: class_declaration
+
+22:40:56.701 [info] 
+
+22:40:56.701 [info] Adaptive Learning Results:
+
+22:40:56.701 [info] • Initial patterns: 2
+
+22:40:56.701 [info] • Final patterns: 5
+
+22:40:56.701 [info] • New patterns learned: 3
+
+22:40:56.701 [info] • Initial confidence: 0.6
+
+22:40:56.701 [info] • Final confidence: 0.76
+
+22:40:56.701 [info] 
+
+22:40:56.701 [info] All learned patterns:
+
+22:40:56.701 [info]   • for_loop
+
+22:40:56.701 [info]   • import_statement
+
+22:40:56.701 [info]   • class_declaration
+
+22:40:56.701 [info]   • function_declaration
+
+22:40:56.701 [info]   • variable_assignment
+
+22:40:56.701 [info] 
+
+22:40:56.701 [info] ✅ Adaptive FSM: WORKING
+
+22:40:56.701 [info] 
+
+22:40:56.701 [info] 
+
+22:40:56.701 [info] ============================================================
+
+22:40:56.701 [info] ✨ ALL QUANTUM PARSING CONCEPTS VERIFIED!
+
+22:40:56.701 [info] 🎯 Ready to build the future programming language!
+     warning: variable "current_fsm" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 412 │   defp process_with_current_fsm(stream, current_fsm, token) do
+     │                                         ~~~~~~~~~~~
+     │
+     └─ prototypes/quantumscript_parser.ex:412:41: QuantumScriptParser.process_with_current_fsm/3
+
+     warning: variable "fsm" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 424 │   defp handle_bidirectional_parsing(stream, fsm, ambiguous_token) do
+     │                                             ~~~
+     │
+     └─ prototypes/quantumscript_parser.ex:424:45: QuantumScriptParser.handle_bidirectional_parsing/3
+
+     warning: variable "token" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 452 │   defp resolve_bidirectional_ambiguity(token, backward_context, forward_context) do
+     │                                        ~~~~~
+     │
+     └─ prototypes/quantumscript_parser.ex:452:40: QuantumScriptParser.resolve_bidirectional_ambiguity/3
+
+    warning: unused alias Token
+    │
+ 19 │   alias StandaloneQuantumParser.{Token, TokenStream, QuantumFSM}
+    │   ~
+    │
+    └─ prototypes/quantumscript_parser.ex:19:3
+
+     warning: the following clause will never match:
+
+         {:backtrack, reason}
+
+     because it attempts to match on the result of:
+
+         should_spawn_fsm?(current_token, current_fsm)
+
+     which has type:
+
+         dynamic(
+           {:continue, :enhanced or :normal} or
+             {:spawn,
+              :adaptive_fsm or :class_fsm or :collaboration_fsm or :data_context_fsm or :function_fsm or
+                :math_context_fsm or :module_fsm or :natural_language_fsm or :physics_fsm or
+                :ui_context_fsm}
+         )
+
+     typing violation found at:
+     │
+ 304 │         {:backtrack, reason} ->
+     │         ~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ prototypes/quantumscript_parser.ex:304: QuantumScriptParser.process_tokens_recursively/4
+
+     warning: variable "parse_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 134 │       parse_result = QuantumScriptParser.parse(tokens)
+     │       ~
+     │
+     └─ prototypes/simple_test_runner.exs:134:7: SimpleQuantumScriptTest.test_natural_language/0
+
+
+22:40:57.004 [info] 🧪 SIMPLE QUANTUMSCRIPT VALIDATION
+
+22:40:57.004 [info] ==================================================
+
+22:40:57.004 [info] 
+
+22:40:57.004 [info] 🔬 Tokenizing QuantumScript source...
+
+22:40:57.007 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:40:57.007 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:40:57.007 [info] 🧠 Starting quantum FSM parsing...
+
+22:40:57.007 [info] 👶 Spawned FunctionFSM for function
+
+22:40:57.007 [info] ✨ QuantumScript parsing complete!
+
+22:40:57.007 [info] 📊 Parse result: 0.5 confidence
+
+22:40:57.007 [info] 🤖 FSMs spawned: 1
+
+22:40:57.007 [info] 🔬 Tokenizing QuantumScript source...
+
+22:40:57.007 [info] 📝 Tokenized 9 QuantumScript tokens
+
+22:40:57.007 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:40:57.008 [info] 🧠 Starting quantum FSM parsing...
+
+22:40:57.008 [info] 👶 Spawned ModuleFSM for quantum_module
+
+22:40:57.008 [info] 👶 Spawned FunctionFSM for function
+
+22:40:57.008 [info] ✨ QuantumScript parsing complete!
+
+22:40:57.008 [info] 📊 Parse result: 0.5 confidence
+
+22:40:57.008 [info] 🤖 FSMs spawned: 2
+
+22:40:57.008 [info] 🔬 Tokenizing QuantumScript source...
+
+22:40:57.008 [info] 📝 Tokenized 13 QuantumScript tokens
+
+22:40:57.008 [info] 🔬 Tokenizing QuantumScript source...
+
+22:40:57.008 [info] 📝 Tokenized 7 QuantumScript tokens
+
+22:40:57.008 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:40:57.008 [info] 🧠 Starting quantum FSM parsing...
+
+22:40:57.008 [info] 👶 Spawned CollaborationFSM for collaborate
+
+22:40:57.008 [info] ✨ QuantumScript parsing complete!
+
+22:40:57.008 [info] 📊 Parse result: 0.55 confidence
+
+22:40:57.008 [info] 🤖 FSMs spawned: 1
+
+22:40:57.008 [info] 🔬 Tokenizing QuantumScript source...
+
+22:40:57.008 [info] 📝 Tokenized 6 QuantumScript tokens
+
+22:40:57.008 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:40:57.008 [info] 🧠 Starting quantum FSM parsing...
+
+22:40:57.008 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+22:40:57.008 [info] ✨ QuantumScript parsing complete!
+
+22:40:57.008 [info] 📊 Parse result: 0.5 confidence
+
+22:40:57.008 [info] 🤖 FSMs spawned: 1
+
+22:40:57.008 [info] 🔬 Tokenizing QuantumScript source...
+
+22:40:57.009 [info] 📝 Tokenized 46 QuantumScript tokens
+
+22:40:57.009 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+22:40:57.009 [info] 🧠 Starting quantum FSM parsing...
+
+22:40:57.009 [info] 👶 Spawned ModuleFSM for quantum_module
+
+22:40:57.009 [info] 👶 Spawned CollaborationFSM for collaborate
+
+22:40:57.009 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+22:40:57.009 [info] 👶 Spawned FunctionFSM for function
+
+22:40:57.009 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+22:40:57.009 [info] ✨ QuantumScript parsing complete!
+
+22:40:57.009 [info] 📊 Parse result: 0.5076086956521739 confidence
+
+22:40:57.009 [info] 🤖 FSMs spawned: 5
+
+22:40:57.009 [info] ✅ Basic parsing: 7 tokens, 0.5 confidence
+
+22:40:57.009 [info] ✅ FSM spawning: 2 FSMs spawned
+
+22:40:57.009 [info] ✅ Bidirectional syntax: 2 bidirectional operators found
+
+22:40:57.009 [info] ✅ Collaborative blocks: 1 collaboration FSMs
+
+22:40:57.009 [info] ✅ Natural language: 1 natural language blocks
+
+22:40:57.009 [info] ✅ Real-world example: 46 tokens, 0.51 confidence, 5 FSMs in 300μs
+
+22:40:57.009 [info] 
+
+22:40:57.009 [info] 📊 Results: 6/6 tests passed (100.0%)
+
+22:40:57.009 [info] 🎉 SUCCESS: QuantumScript core features validated!
+
+22:40:57.009 [info] 🚀 Ready to build the future of programming!
+
+22:40:57.009 [info] 

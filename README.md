@@ -436,6 +436,7 @@ MIX_ENV=test mix test --no-start --max-cases 1  # Run without OTP
 - [`docs/phase5-completion-summary.md`](docs/phase5-completion-summary.md) - Phase 5 implementation summary
 - [`docs/phase6-completion-summary.md`](docs/phase6-completion-summary.md) - Phase 6 implementation summary
 - [`docs/phase6.6-completion-summary.md`](docs/phase6.6-completion-summary.md) - Phase 6.6 WAL Revolution summary
+- [`docs/phase8-completion-summary.md`](docs/phase8-completion-summary.md) - **Phase 8 Enhanced ADT Revolution summary**
 - [`docs/phase7-temporal-management-planning.md`](docs/phase7-temporal-management-planning.md) - Phase 7 implementation planning
 - [`docs/persistence-architecture.md`](docs/persistence-architecture.md) - Filesystem design
 - [`prototypes/`](prototypes/) - Advanced prototype implementations

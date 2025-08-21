@@ -1,0 +1,284 @@
+     warning: variable "expected_types" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 277 │     expected_types = [:module, :collaboration, :adaptive, :function, :physics]
+     │     ~~~~~~~~~~~~~~
+     │
+     └─ quantumscript_test_suite.ex:277:5: QuantumScriptTestSuite.test_multiple_fsm_coordination/0
+
+     warning: variable "parse_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 547 │     parse_result = QuantumScriptParser.parse(tokens)
+     │     ~~~~~~~~~~~~
+     │
+     └─ quantumscript_test_suite.ex:547:5: QuantumScriptTestSuite.test_context_sharing/0
+
+     warning: variable "parse_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 601 │     parse_result = QuantumScriptParser.parse(tokens)
+     │     ~~~~~~~~~~~~
+     │
+     └─ quantumscript_test_suite.ex:601:5: QuantumScriptTestSuite.test_collaboration_performance/0
+
+      warning: variable "parse_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1045 │     parse_result = QuantumScriptParser.parse(tokens)
+      │     ~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1045:5: QuantumScriptTestSuite.test_large_input/0
+
+      warning: variable "parse_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1109 │     parse_result = QuantumScriptParser.parse(tokens)
+      │     ~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1109:5: QuantumScriptTestSuite.test_parse_speed/0
+
+      warning: variable "no_spawn_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1128 │     no_spawn_result = QuantumScriptParser.parse(no_spawn_tokens)
+      │     ~~~~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1128:5: QuantumScriptTestSuite.test_spawning_overhead/0
+
+      warning: variable "spawn_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1134 │     spawn_result = QuantumScriptParser.parse(spawn_tokens)
+      │     ~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1134:5: QuantumScriptTestSuite.test_spawning_overhead/0
+
+      warning: variable "parse_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1173 │       parse_result = QuantumScriptParser.parse(tokens)
+      │       ~
+      │
+      └─ quantumscript_test_suite.ex:1173:7: QuantumScriptTestSuite.test_scaling_behavior/0
+
+      warning: variable "tokens" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1184 │     scaling_details = Enum.map(scaling_results, fn {size, time, tokens} ->
+      │                                                                 ~
+      │
+      └─ quantumscript_test_suite.ex:1184:65: QuantumScriptTestSuite.test_scaling_behavior/0
+
+      warning: variable "parse_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1212 │     parse_result = QuantumScriptParser.parse(tokens)
+      │     ~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1212:5: QuantumScriptTestSuite.test_bidirectional_performance/0
+
+      warning: variable "collab_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1236 │     collab_result = QuantumScriptParser.parse(collab_tokens)
+      │     ~~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1236:5: QuantumScriptTestSuite.test_collaborative_overhead/0
+
+      warning: variable "simple_result" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1230 │     simple_result = QuantumScriptParser.parse(simple_tokens)
+      │     ~~~~~~~~~~~~~
+      │
+      └─ quantumscript_test_suite.ex:1230:5: QuantumScriptTestSuite.test_collaborative_overhead/0
+
+    warning: unused alias QuantumFSM
+    │
+ 22 │   alias StandaloneQuantumParser.{Token, TokenStream, QuantumFSM}
+    │   ~
+    │
+    └─ quantumscript_test_suite.ex:22:3
+
+    warning: unused alias Token
+    │
+ 22 │   alias StandaloneQuantumParser.{Token, TokenStream, QuantumFSM}
+    │   ~
+    │
+    └─ quantumscript_test_suite.ex:22:3
+
+    warning: QuantumScriptParser.tokenize/1 is undefined (module QuantumScriptParser is not available or is yet to be defined). Make sure the module name is correct and has been specified in full (or that an alias has been defined)
+    │
+ 83 │     tokens = QuantumScriptParser.tokenize(code)
+    │                                  ~
+    │
+    └─ quantumscript_test_suite.ex:83:34: QuantumScriptTestSuite.test_simple_identifier/0
+    └─ quantumscript_test_suite.ex:94:34: QuantumScriptTestSuite.test_basic_function/0
+    └─ quantumscript_test_suite.ex:105:34: QuantumScriptTestSuite.test_quantum_module/0
+    └─ quantumscript_test_suite.ex:119:36: QuantumScriptTestSuite.test_operators/0
+    └─ quantumscript_test_suite.ex:131:36: QuantumScriptTestSuite.test_string_literals/0
+    └─ quantumscript_test_suite.ex:143:36: QuantumScriptTestSuite.test_number_literals/0
+    └─ quantumscript_test_suite.ex:153:34: QuantumScriptTestSuite.test_brace_matching/0
+    └─ quantumscript_test_suite.ex:164:34: QuantumScriptTestSuite.test_token_classification/0
+    └─ quantumscript_test_suite.ex:199:34: QuantumScriptTestSuite.test_module_fsm_spawning/0
+    └─ quantumscript_test_suite.ex:211:34: QuantumScriptTestSuite.test_function_fsm_spawning/0
+    └─ quantumscript_test_suite.ex:222:34: QuantumScriptTestSuite.test_collaboration_fsm_spawning/0
+    └─ quantumscript_test_suite.ex:233:34: QuantumScriptTestSuite.test_natural_language_fsm_spawning/0
+    └─ quantumscript_test_suite.ex:244:34: QuantumScriptTestSuite.test_adaptive_fsm_spawning/0
+    └─ quantumscript_test_suite.ex:255:34: QuantumScriptTestSuite.test_physics_fsm_spawning/0
+    └─ quantumscript_test_suite.ex:273:34: QuantumScriptTestSuite.test_multiple_fsm_coordination/0
+    └─ quantumscript_test_suite.ex:286:34: QuantumScriptTestSuite.test_fsm_hierarchy/0
+    └─ quantumscript_test_suite.ex:324:36: QuantumScriptTestSuite.test_bidirectional_operators/0
+    └─ quantumscript_test_suite.ex:376:34: QuantumScriptTestSuite.test_ambiguity_resolution/0
+    └─ quantumscript_test_suite.ex:388:34: QuantumScriptTestSuite.test_trace_statements/0
+    └─ quantumscript_test_suite.ex:420:34: QuantumScriptTestSuite.test_context_reconstruction/0
+    └─ quantumscript_test_suite.ex:435:34: QuantumScriptTestSuite.test_bidirectional_functions/0
+    └─ quantumscript_test_suite.ex:477:34: QuantumScriptTestSuite.test_basic_collaboration/0
+    └─ quantumscript_test_suite.ex:495:34: QuantumScriptTestSuite.test_multi_context_collaboration/0
+    └─ quantumscript_test_suite.ex:515:34: QuantumScriptTestSuite.test_nested_collaboration/0
+    └─ quantumscript_test_suite.ex:527:34: QuantumScriptTestSuite.test_quantum_sync/0
+    └─ quantumscript_test_suite.ex:546:34: QuantumScriptTestSuite.test_context_sharing/0
+    └─ quantumscript_test_suite.ex:558:34: QuantumScriptTestSuite.test_collaborative_fsm_linking/0
+    └─ quantumscript_test_suite.ex:578:34: QuantumScriptTestSuite.test_cross_context_variables/0
+    └─ quantumscript_test_suite.ex:600:34: QuantumScriptTestSuite.test_collaboration_performance/0
+    └─ quantumscript_test_suite.ex:640:34: QuantumScriptTestSuite.test_basic_natural_language/0
+    └─ quantumscript_test_suite.ex:656:34: QuantumScriptTestSuite.test_nl_to_code_mapping/0
+    └─ quantumscript_test_suite.ex:676:34: QuantumScriptTestSuite.test_complex_natural_language/0
+    └─ quantumscript_test_suite.ex:695:34: QuantumScriptTestSuite.test_mixed_nl_code/0
+    └─ quantumscript_test_suite.ex:712:34: QuantumScriptTestSuite.test_nl_fsm_behavior/0
+    └─ quantumscript_test_suite.ex:737:36: QuantumScriptTestSuite.test_english_requirements/0
+    └─ quantumscript_test_suite.ex:753:34: QuantumScriptTestSuite.test_multi_sentence_nl/0
+    └─ quantumscript_test_suite.ex:770:36: QuantumScriptTestSuite.test_nl_confidence/0
+    └─ quantumscript_test_suite.ex:804:34: QuantumScriptTestSuite.test_basic_adaptive/0
+    └─ quantumscript_test_suite.ex:815:34: QuantumScriptTestSuite.test_adaptive_spawning/0
+    └─ quantumscript_test_suite.ex:834:34: QuantumScriptTestSuite.test_pattern_learning/0
+    └─ quantumscript_test_suite.ex:851:41: QuantumScriptTestSuite.test_confidence_adaptation/0
+    └─ quantumscript_test_suite.ex:852:42: QuantumScriptTestSuite.test_confidence_adaptation/0
+    └─ quantumscript_test_suite.ex:865:34: QuantumScriptTestSuite.test_self_modifying/0
+    └─ quantumscript_test_suite.ex:888:36: QuantumScriptTestSuite.test_adaptive_performance/0
+    └─ quantumscript_test_suite.ex:909:36: QuantumScriptTestSuite.test_learning_convergence/0
+    └─ quantumscript_test_suite.ex:926:36: QuantumScriptTestSuite.test_adaptation_triggers/0
+    └─ quantumscript_test_suite.ex:960:34: QuantumScriptTestSuite.test_empty_input/0
+    └─ quantumscript_test_suite.ex:972:34: QuantumScriptTestSuite.test_invalid_syntax/0
+    └─ quantumscript_test_suite.ex:983:34: QuantumScriptTestSuite.test_unmatched_braces/0
+    └─ quantumscript_test_suite.ex:994:34: QuantumScriptTestSuite.test_invalid_bidirectional/0
+    └─ quantumscript_test_suite.ex:1011:34: QuantumScriptTestSuite.test_malformed_nl/0
+    └─ quantumscript_test_suite.ex:1025:34: QuantumScriptTestSuite.test_recursion_prevention/0
+    └─ quantumscript_test_suite.ex:1044:34: QuantumScriptTestSuite.test_large_input/0
+    └─ quantumscript_test_suite.ex:1057:34: QuantumScriptTestSuite.test_unicode_handling/0
+    └─ quantumscript_test_suite.ex:1093:34: QuantumScriptTestSuite.test_tokenization_speed/0
+    └─ quantumscript_test_suite.ex:1108:34: QuantumScriptTestSuite.test_parse_speed/0
+    └─ quantumscript_test_suite.ex:1127:43: QuantumScriptTestSuite.test_spawning_overhead/0
+    └─ quantumscript_test_suite.ex:1133:40: QuantumScriptTestSuite.test_spawning_overhead/0
+    └─ quantumscript_test_suite.ex:1152:34: QuantumScriptTestSuite.test_memory_usage/0
+    └─ quantumscript_test_suite.ex:1172:36: QuantumScriptTestSuite.test_scaling_behavior/0
+    └─ quantumscript_test_suite.ex:1195:34: QuantumScriptTestSuite.test_quantum_optimization/0
+    └─ quantumscript_test_suite.ex:1211:34: QuantumScriptTestSuite.test_bidirectional_performance/0
+    └─ quantumscript_test_suite.ex:1229:41: QuantumScriptTestSuite.test_collaborative_overhead/0
+    └─ quantumscript_test_suite.ex:1235:41: QuantumScriptTestSuite.test_collaborative_overhead/0
+    └─ quantumscript_test_suite.ex:1322:34: QuantumScriptTestSuite.test_complete_program/0
+    └─ quantumscript_test_suite.ex:1368:34: QuantumScriptTestSuite.test_real_world_example/0
+    └─ quantumscript_test_suite.ex:1403:34: QuantumScriptTestSuite.test_complex_interaction/0
+    └─ quantumscript_test_suite.ex:1441:34: QuantumScriptTestSuite.test_end_to_end/0
+    └─ quantumscript_test_suite.ex:1467:36: QuantumScriptTestSuite.test_production_features/0
+    └─ quantumscript_test_suite.ex:1494:36: QuantumScriptTestSuite.test_language_completeness/0
+    └─ quantumscript_test_suite.ex:1516:34: QuantumScriptTestSuite.test_cross_feature_compatibility/0
+    └─ quantumscript_test_suite.ex:1565:34: QuantumScriptTestSuite.test_full_syntax_coverage/0
+
+    warning: QuantumScriptParser.parse/1 is undefined (module QuantumScriptParser is not available or is yet to be defined). Make sure the module name is correct and has been specified in full (or that an alias has been defined)
+    │
+ 95 │     parse_result = QuantumScriptParser.parse(tokens)
+    │                                        ~
+    │
+    └─ quantumscript_test_suite.ex:95:40: QuantumScriptTestSuite.test_basic_function/0
+    └─ quantumscript_test_suite.ex:106:40: QuantumScriptTestSuite.test_quantum_module/0
+    └─ quantumscript_test_suite.ex:200:40: QuantumScriptTestSuite.test_module_fsm_spawning/0
+    └─ quantumscript_test_suite.ex:212:40: QuantumScriptTestSuite.test_function_fsm_spawning/0
+    └─ quantumscript_test_suite.ex:223:40: QuantumScriptTestSuite.test_collaboration_fsm_spawning/0
+    └─ quantumscript_test_suite.ex:234:40: QuantumScriptTestSuite.test_natural_language_fsm_spawning/0
+    └─ quantumscript_test_suite.ex:245:40: QuantumScriptTestSuite.test_adaptive_fsm_spawning/0
+    └─ quantumscript_test_suite.ex:256:40: QuantumScriptTestSuite.test_physics_fsm_spawning/0
+    └─ quantumscript_test_suite.ex:274:40: QuantumScriptTestSuite.test_multiple_fsm_coordination/0
+    └─ quantumscript_test_suite.ex:287:40: QuantumScriptTestSuite.test_fsm_hierarchy/0
+    └─ quantumscript_test_suite.ex:377:40: QuantumScriptTestSuite.test_ambiguity_resolution/0
+    └─ quantumscript_test_suite.ex:421:40: QuantumScriptTestSuite.test_context_reconstruction/0
+    └─ quantumscript_test_suite.ex:436:40: QuantumScriptTestSuite.test_bidirectional_functions/0
+    └─ quantumscript_test_suite.ex:478:40: QuantumScriptTestSuite.test_basic_collaboration/0
+    └─ quantumscript_test_suite.ex:496:40: QuantumScriptTestSuite.test_multi_context_collaboration/0
+    └─ quantumscript_test_suite.ex:516:40: QuantumScriptTestSuite.test_nested_collaboration/0
+    └─ quantumscript_test_suite.ex:547:40: QuantumScriptTestSuite.test_context_sharing/0
+    └─ quantumscript_test_suite.ex:559:40: QuantumScriptTestSuite.test_collaborative_fsm_linking/0
+    └─ quantumscript_test_suite.ex:601:40: QuantumScriptTestSuite.test_collaboration_performance/0
+    └─ quantumscript_test_suite.ex:641:40: QuantumScriptTestSuite.test_basic_natural_language/0
+    └─ quantumscript_test_suite.ex:677:40: QuantumScriptTestSuite.test_complex_natural_language/0
+    └─ quantumscript_test_suite.ex:696:40: QuantumScriptTestSuite.test_mixed_nl_code/0
+    └─ quantumscript_test_suite.ex:713:40: QuantumScriptTestSuite.test_nl_fsm_behavior/0
+    └─ quantumscript_test_suite.ex:754:40: QuantumScriptTestSuite.test_multi_sentence_nl/0
+    └─ quantumscript_test_suite.ex:771:42: QuantumScriptTestSuite.test_nl_confidence/0
+    └─ quantumscript_test_suite.ex:805:40: QuantumScriptTestSuite.test_basic_adaptive/0
+    └─ quantumscript_test_suite.ex:816:40: QuantumScriptTestSuite.test_adaptive_spawning/0
+    └─ quantumscript_test_suite.ex:835:40: QuantumScriptTestSuite.test_pattern_learning/0
+    └─ quantumscript_test_suite.ex:854:41: QuantumScriptTestSuite.test_confidence_adaptation/0
+    └─ quantumscript_test_suite.ex:855:42: QuantumScriptTestSuite.test_confidence_adaptation/0
+    └─ quantumscript_test_suite.ex:889:42: QuantumScriptTestSuite.test_adaptive_performance/0
+    └─ quantumscript_test_suite.ex:910:42: QuantumScriptTestSuite.test_learning_convergence/0
+    └─ quantumscript_test_suite.ex:961:40: QuantumScriptTestSuite.test_empty_input/0
+    └─ quantumscript_test_suite.ex:973:40: QuantumScriptTestSuite.test_invalid_syntax/0
+    └─ quantumscript_test_suite.ex:984:40: QuantumScriptTestSuite.test_unmatched_braces/0
+    └─ quantumscript_test_suite.ex:995:40: QuantumScriptTestSuite.test_invalid_bidirectional/0
+    └─ quantumscript_test_suite.ex:1012:40: QuantumScriptTestSuite.test_malformed_nl/0
+    └─ quantumscript_test_suite.ex:1026:40: QuantumScriptTestSuite.test_recursion_prevention/0
+    └─ quantumscript_test_suite.ex:1045:40: QuantumScriptTestSuite.test_large_input/0
+    └─ quantumscript_test_suite.ex:1109:40: QuantumScriptTestSuite.test_parse_speed/0
+    └─ quantumscript_test_suite.ex:1128:43: QuantumScriptTestSuite.test_spawning_overhead/0
+    └─ quantumscript_test_suite.ex:1134:40: QuantumScriptTestSuite.test_spawning_overhead/0
+    └─ quantumscript_test_suite.ex:1153:40: QuantumScriptTestSuite.test_memory_usage/0
+    └─ quantumscript_test_suite.ex:1173:42: QuantumScriptTestSuite.test_scaling_behavior/0
+    └─ quantumscript_test_suite.ex:1196:40: QuantumScriptTestSuite.test_quantum_optimization/0
+    └─ quantumscript_test_suite.ex:1212:40: QuantumScriptTestSuite.test_bidirectional_performance/0
+    └─ quantumscript_test_suite.ex:1230:41: QuantumScriptTestSuite.test_collaborative_overhead/0
+    └─ quantumscript_test_suite.ex:1236:41: QuantumScriptTestSuite.test_collaborative_overhead/0
+    └─ quantumscript_test_suite.ex:1323:40: QuantumScriptTestSuite.test_complete_program/0
+    └─ quantumscript_test_suite.ex:1369:40: QuantumScriptTestSuite.test_real_world_example/0
+    └─ quantumscript_test_suite.ex:1404:40: QuantumScriptTestSuite.test_complex_interaction/0
+    └─ quantumscript_test_suite.ex:1442:40: QuantumScriptTestSuite.test_end_to_end/0
+    └─ quantumscript_test_suite.ex:1517:40: QuantumScriptTestSuite.test_cross_feature_compatibility/0
+    └─ quantumscript_test_suite.ex:1566:40: QuantumScriptTestSuite.test_full_syntax_coverage/0
+
+     warning: QuantumScriptParser.QSToken.new/3 is undefined (module QuantumScriptParser.QSToken is not available or is yet to be defined)
+     │
+ 336 │       QuantumScriptParser.QSToken.new("function", :function_def, 0),
+     │                                   ~
+     │
+     └─ quantumscript_test_suite.ex:336:35: QuantumScriptTestSuite.test_backward_context/0
+     └─ quantumscript_test_suite.ex:337:35: QuantumScriptTestSuite.test_backward_context/0
+     └─ quantumscript_test_suite.ex:338:35: QuantumScriptTestSuite.test_backward_context/0
+     └─ quantumscript_test_suite.ex:339:35: QuantumScriptTestSuite.test_backward_context/0
+     └─ quantumscript_test_suite.ex:356:35: QuantumScriptTestSuite.test_forward_context/0
+     └─ quantumscript_test_suite.ex:357:35: QuantumScriptTestSuite.test_forward_context/0
+     └─ quantumscript_test_suite.ex:358:35: QuantumScriptTestSuite.test_forward_context/0
+     └─ quantumscript_test_suite.ex:359:35: QuantumScriptTestSuite.test_forward_context/0
+     └─ quantumscript_test_suite.ex:398:35: QuantumScriptTestSuite.test_stream_navigation/0
+
+     warning: StandaloneQuantumParser.TokenStream.new/1 is undefined (module StandaloneQuantumParser.TokenStream is not available or is yet to be defined)
+     │
+ 342 │     stream = TokenStream.new(tokens)
+     │                          ~
+     │
+     └─ quantumscript_test_suite.ex:342:26: QuantumScriptTestSuite.test_backward_context/0
+     └─ quantumscript_test_suite.ex:362:26: QuantumScriptTestSuite.test_forward_context/0
+     └─ quantumscript_test_suite.ex:401:26: QuantumScriptTestSuite.test_stream_navigation/0
+
+     warning: StandaloneQuantumParser.TokenStream.move/3 is undefined (module StandaloneQuantumParser.TokenStream is not available or is yet to be defined)
+     │
+ 345 │     stream = TokenStream.move(stream, :forward, 3)
+     │                          ~
+     │
+     └─ quantumscript_test_suite.ex:345:26: QuantumScriptTestSuite.test_backward_context/0
+     └─ quantumscript_test_suite.ex:404:26: QuantumScriptTestSuite.test_stream_navigation/0
+     └─ quantumscript_test_suite.ex:407:26: QuantumScriptTestSuite.test_stream_navigation/0
+
+     warning: StandaloneQuantumParser.TokenStream.peek/3 is undefined (module StandaloneQuantumParser.TokenStream is not available or is yet to be defined)
+     │
+ 346 │     backward_tokens = TokenStream.peek(stream, :backward, 2)
+     │                                   ~
+     │
+     └─ quantumscript_test_suite.ex:346:35: QuantumScriptTestSuite.test_backward_context/0
+     └─ quantumscript_test_suite.ex:365:34: QuantumScriptTestSuite.test_forward_context/0
+
+     warning: StandaloneQuantumParser.TokenStream.move/2 is undefined (module StandaloneQuantumParser.TokenStream is not available or is yet to be defined)
+     │
+ 410 │     stream = TokenStream.move(stream, :reset)  # Position 0
+     │                          ~
+     │
+     └─ quantumscript_test_suite.ex:410:26: QuantumScriptTestSuite.test_stream_navigation/0
+
