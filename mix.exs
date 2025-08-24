@@ -8,7 +8,7 @@ defmodule IsLabDB.MixProject do
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      description: "Physics-inspired database with elegant filesystem persistence",
+      description: "Revolutionary physics-inspired graph database with quantum entanglement, spacetime sharding, and 23,742 ops/sec performance",
       package: package(),
       docs: docs()
     ]
@@ -33,16 +33,62 @@ defmodule IsLabDB.MixProject do
 
   defp package do
     [
+      name: "warp_engine",
+      description: "Revolutionary physics-inspired graph database with 23,742 ops/sec performance",
       maintainers: ["IsLab Team"],
-      licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/company/islab_database"}
+      licenses: ["Apache-2.0"],
+      links: %{
+        "GitHub" => "https://github.com/company/islab_database",
+        "Documentation" => "https://hexdocs.pm/warp_engine",
+        "Benchmarks" => "https://github.com/company/islab_database/tree/main/benchmarks"
+      },
+      files: [
+        "lib",
+        "mix.exs",
+        "README.md",
+        "CHANGELOG.md",
+        "LICENSE",
+        "docs/complete-roadmap.md",
+        "docs/phase*-*.md",
+        "examples/weighted_graph_database.ex",
+        "benchmarks/simple_weighted_graph_benchmark.exs"
+      ]
     ]
   end
 
   defp docs do
     [
       main: "IsLabDB",
-      extras: ["README.md", "docs/complete-roadmap.md", "docs/phase1-quick-start.md", "docs/phase3-completion-summary.md", "docs/phase4-completion-summary.md"]
+      source_url: "https://github.com/company/islab_database",
+      homepage_url: "https://github.com/company/islab_database",
+      extras: [
+        "README.md",
+        "CHANGELOG.md",
+        "docs/complete-roadmap.md",
+        "docs/phase1-quick-start.md",
+        "docs/phase3-completion-summary.md",
+        "docs/phase4-completion-summary.md",
+        "docs/phase5-completion-summary.md",
+        "docs/phase6-completion-summary.md",
+        "docs/phase7-temporal-management-planning.md",
+        "docs/phase8-completion-summary.md"
+      ],
+      groups_for_extras: [
+        "Getting Started": [
+          "README.md",
+          "CHANGELOG.md",
+          "docs/complete-roadmap.md",
+          "docs/phase1-quick-start.md"
+        ],
+        "Phase Documentation": [
+          "docs/phase3-completion-summary.md",
+          "docs/phase4-completion-summary.md",
+          "docs/phase5-completion-summary.md",
+          "docs/phase6-completion-summary.md",
+          "docs/phase7-temporal-management-planning.md",
+          "docs/phase8-completion-summary.md"
+        ]
+      ]
     ]
   end
 end

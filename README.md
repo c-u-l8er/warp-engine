@@ -6,7 +6,7 @@
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
 [![Elixir Version](https://img.shields.io/badge/elixir-1.15+-blue.svg)]()
-[![License](https://img.shields.io/badge/license-MIT-green.svg)]()
+[![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](https://github.com/company/islab_database/blob/main/LICENSE)
 [![Phase 1](https://img.shields.io/badge/Phase%201-COMPLETE-success.svg)]()
 [![Phase 2](https://img.shields.io/badge/Phase%202-COMPLETE-success.svg)]()
 [![Phase 3](https://img.shields.io/badge/Phase%203-COMPLETE-success.svg)]()
@@ -454,7 +454,25 @@ mix test
 
 ## 📄 License
 
-MIT License - Building elegant data universes for everyone.
+**Apache License 2.0** - Open source license that allows commercial use while protecting the WarpEngine trademark and providing patent protection.
+
+**🚀 Perfect for:**
+- Commercial applications and SaaS platforms
+- Enterprise deployments  
+- Research and development projects
+- Educational institutions
+- Open source contributions
+- Personal and startup projects
+
+**💼 Enterprise support and custom implementations available.**
+
+**🌟 Commercial Opportunities:**
+- Custom physics optimizations for your use case
+- Enterprise-grade support and SLA
+- Training and consulting services
+- Custom integrations and extensions
+
+Contact: license@islab.team
 
 ---
 
