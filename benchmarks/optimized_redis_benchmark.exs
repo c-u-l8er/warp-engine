@@ -9,8 +9,8 @@ to measure realistic Redis performance.
 """
 
 # Load compiled application
-Code.prepend_path("_build/dev/lib/islab_db/ebin")
-Application.ensure_all_started(:islab_db)
+Code.prepend_path("_build/dev/lib/warp_engine/ebin")
+Application.ensure_all_started(:warp_engine)
 
 defmodule OptimizedRedisBenchmark do
 
@@ -19,11 +19,11 @@ defmodule OptimizedRedisBenchmark do
 
     # Generate all commands first
     set_commands = for i <- 1..10000 do
-      "SET islabdb:fast:#{i} \"benchmark_data_#{i}\""
+      "SET warp_enginedb:fast:#{i} \"benchmark_data_#{i}\""
     end
 
     get_commands = for i <- 1..10000 do
-      "GET islabdb:fast:#{i}"
+      "GET warp_enginedb:fast:#{i}"
     end
 
     # Write commands to temp file for pipelining
@@ -70,15 +70,15 @@ defmodule OptimizedRedisBenchmark do
     }
   end
 
-  def benchmark_islab_db_comparable() do
-    IO.puts "\n🌌 Benchmarking IsLabDB (10,000 operations for comparison)..."
+  def benchmark_warp_engine_comparable() do
+    IO.puts "\n🌌 Benchmarking WarpEngine (10,000 operations for comparison)..."
 
     # PUT benchmark
     {put_time_us, _} = :timer.tc(fn ->
       for i <- 1..10000 do
-        key = "islabdb:fast:#{i}"
+        key = "warp_enginedb:fast:#{i}"
         value = %{id: i, data: "benchmark_data_#{i}", timestamp: :os.system_time()}
-        IsLabDB.cosmic_put(key, value)
+        WarpEngine.cosmic_put(key, value)
       end
     end)
 
@@ -88,16 +88,16 @@ defmodule OptimizedRedisBenchmark do
     # GET benchmark
     {get_time_us, _} = :timer.tc(fn ->
       for i <- 1..10000 do
-        key = "islabdb:fast:#{i}"
-        IsLabDB.cosmic_get(key)
+        key = "warp_enginedb:fast:#{i}"
+        WarpEngine.cosmic_get(key)
       end
     end)
 
     get_throughput = 10000 * 1_000_000 / get_time_us
     get_latency = get_time_us / 10000.0
 
-    IO.puts "   ✅ IsLabDB PUT: #{Float.round(put_throughput, 0)} ops/sec, #{Float.round(put_latency, 1)}μs avg"
-    IO.puts "   ✅ IsLabDB GET: #{Float.round(get_throughput, 0)} ops/sec, #{Float.round(get_latency, 1)}μs avg"
+    IO.puts "   ✅ WarpEngine PUT: #{Float.round(put_throughput, 0)} ops/sec, #{Float.round(put_latency, 1)}μs avg"
+    IO.puts "   ✅ WarpEngine GET: #{Float.round(get_throughput, 0)} ops/sec, #{Float.round(get_latency, 1)}μs avg"
 
     %{
       put_throughput: Float.round(put_throughput, 0),
@@ -107,7 +107,7 @@ defmodule OptimizedRedisBenchmark do
     }
   end
 
-  def generate_comparison_report(redis_results, islab_results) do
+  def generate_comparison_report(redis_results, warp_engine_results) do
     IO.puts "\n📊 OPTIMIZED PERFORMANCE COMPARISON"
     IO.puts "=" |> String.duplicate(45)
 
@@ -118,35 +118,35 @@ defmodule OptimizedRedisBenchmark do
     IO.puts format_row("Redis (Pipelined)", redis_results.set_throughput,
                       redis_results.get_throughput, redis_results.set_latency, "Persistent connection")
 
-    # IsLabDB results
-    IO.puts format_row("IsLabDB (Current)", islab_results.put_throughput,
-                      islab_results.get_throughput, islab_results.put_latency, "Physics + persistence")
+    # WarpEngine results
+    IO.puts format_row("WarpEngine (Current)", warp_engine_results.put_throughput,
+                      warp_engine_results.get_throughput, warp_engine_results.put_latency, "Physics + persistence")
 
     # Analysis
     redis_put = redis_results.set_throughput
-    islab_put = islab_results.put_throughput
-    performance_ratio = islab_put / redis_put * 100
+    warp_engine_put = warp_engine_results.put_throughput
+    performance_ratio = warp_engine_put / redis_put * 100
 
     IO.puts "\n🎯 **REALISTIC PERFORMANCE ANALYSIS**:"
-    IO.puts "   • IsLabDB vs Redis PUT: #{Float.round(performance_ratio, 1)}%"
-    IO.puts "   • Performance gap: #{Float.round(redis_put / islab_put, 1)}x"
+    IO.puts "   • WarpEngine vs Redis PUT: #{Float.round(performance_ratio, 1)}%"
+    IO.puts "   • Performance gap: #{Float.round(redis_put / warp_engine_put, 1)}x"
 
     redis_get = redis_results.get_throughput
-    islab_get = islab_results.get_throughput
-    get_ratio = islab_get / redis_get * 100
+    warp_engine_get = warp_engine_results.get_throughput
+    get_ratio = warp_engine_get / redis_get * 100
 
-    IO.puts "   • IsLabDB vs Redis GET: #{Float.round(get_ratio, 1)}%"
-    IO.puts "   • GET performance gap: #{Float.round(redis_get / islab_get, 1)}x"
+    IO.puts "   • WarpEngine vs Redis GET: #{Float.round(get_ratio, 1)}%"
+    IO.puts "   • GET performance gap: #{Float.round(redis_get / warp_engine_get, 1)}x"
 
     IO.puts """
 
     💡 **Key Insights**:
        • Redis optimized for pure speed (no persistence by default)
-       • IsLabDB adds persistence + physics intelligence
+       • WarpEngine adds persistence + physics intelligence
        • #{Float.round(performance_ratio, 0)}% of Redis performance with 100x more features
        • Excellent trade-off for intelligent database
 
-    🚀 **IsLabDB Competitive Advantages**:
+    🚀 **WarpEngine Competitive Advantages**:
        • Automatic quantum entanglement (3x query efficiency)
        • Self-optimizing entropy monitoring
        • Physics-inspired intelligent routing
@@ -173,9 +173,9 @@ end
 # Run optimized benchmarks
 try do
   redis_results = OptimizedRedisBenchmark.benchmark_redis_pipelined()
-  islab_results = OptimizedRedisBenchmark.benchmark_islab_db_comparable()
+  warp_engine_results = OptimizedRedisBenchmark.benchmark_warp_engine_comparable()
 
-  OptimizedRedisBenchmark.generate_comparison_report(redis_results, islab_results)
+  OptimizedRedisBenchmark.generate_comparison_report(redis_results, warp_engine_results)
 rescue
   error ->
     IO.puts "\n❌ Benchmark failed: #{inspect(error)}"

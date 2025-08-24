@@ -5,7 +5,7 @@ defmodule EnhancedADT.Bend do
   Bend operations for Enhanced ADT with automatic wormhole network generation.
 
   Bend operations generate complex data structures while automatically creating
-  optimal wormhole networks in IsLabDB for efficient traversal. Mathematical
+  optimal wormhole networks in WarpEngine for efficient traversal. Mathematical
   structure generation becomes intelligent network topology creation.
 
   ## Automatic Wormhole Network Features
@@ -380,12 +380,12 @@ defmodule EnhancedADT.Bend do
     end
   end
 
-  def apply_wormhole_network_to_islab(connections) do
-    # Apply generated wormhole network to IsLabDB
-    Logger.info("🌀 Applying #{length(connections)} wormhole connections to IsLabDB")
+  def apply_wormhole_network_to_warp_engine(connections) do
+    # Apply generated wormhole network to WarpEngine
+    Logger.info("🌀 Applying #{length(connections)} wormhole connections to WarpEngine")
 
     Enum.each(connections, fn connection ->
-      case IsLabDB.WormholeRouter.establish_wormhole(
+      case WarpEngine.WormholeRouter.establish_wormhole(
         connection.source,
         connection.target,
         connection.strength

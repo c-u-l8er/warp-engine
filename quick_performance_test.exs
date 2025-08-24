@@ -5,7 +5,7 @@ Mix.install([
 ])
 
 # Quick Performance Test - Validate Phase 6.6 Claims
-# Start IsLabDB and run immediate performance benchmarks
+# Start WarpEngine and run immediate performance benchmarks
 
 IO.puts """
 🚀 Phase 6.6 Performance Validation
@@ -24,33 +24,33 @@ Let's prove it! ⚡
 # Load project modules in correct order
 System.put_env("MIX_ENV", "test")
 Code.prepend_path("lib")
-Code.prepend_path("_build/test/lib/islab_db/ebin")
+Code.prepend_path("_build/test/lib/warp_engine/ebin")
 
-Code.require_file("lib/islab_db/cosmic_constants.ex")
-Code.require_file("lib/islab_db/cosmic_persistence.ex")
-Code.require_file("lib/islab_db/wal_entry.ex")
-Code.require_file("lib/islab_db/wal.ex")
-Code.require_file("lib/islab_db/wal_operations.ex")
-Code.require_file("lib/islab_db/quantum_index.ex")
-Code.require_file("lib/islab_db/gravitational_router.ex")
-Code.require_file("lib/islab_db/spacetime_shard.ex")
-Code.require_file("lib/islab_db/event_horizon_cache.ex")
-Code.require_file("lib/islab_db/entropy_monitor.ex")
-Code.require_file("lib/islab_db.ex")
+Code.require_file("lib/warp_engine/cosmic_constants.ex")
+Code.require_file("lib/warp_engine/cosmic_persistence.ex")
+Code.require_file("lib/warp_engine/wal_entry.ex")
+Code.require_file("lib/warp_engine/wal.ex")
+Code.require_file("lib/warp_engine/wal_operations.ex")
+Code.require_file("lib/warp_engine/quantum_index.ex")
+Code.require_file("lib/warp_engine/gravitational_router.ex")
+Code.require_file("lib/warp_engine/spacetime_shard.ex")
+Code.require_file("lib/warp_engine/event_horizon_cache.ex")
+Code.require_file("lib/warp_engine/entropy_monitor.ex")
+Code.require_file("lib/warp_engine.ex")
 
 defmodule QuickBench do
   def run_validation() do
     IO.puts "\n📊 Starting Performance Validation..."
 
-    # Test 1: Start IsLabDB and test basic functionality
-    IO.puts "\n🔬 Test 1: Initialize IsLabDB Universe"
+    # Test 1: Start WarpEngine and test basic functionality
+    IO.puts "\n🔬 Test 1: Initialize WarpEngine Universe"
 
-    {:ok, _pid} = IsLabDB.start_link([
+    {:ok, _pid} = WarpEngine.start_link([
       enable_wal: true,
       data_root: "/tmp/quick_bench_test"
     ])
 
-    IO.puts "✅ IsLabDB started with WAL enabled"
+    IO.puts "✅ WarpEngine started with WAL enabled"
 
     # Test 2: Basic operation validation
     IO.puts "\n🔬 Test 2: Basic Operations Test"
@@ -70,15 +70,15 @@ defmodule QuickBench do
   defp test_basic_operations() do
     try do
       # Test PUT
-      result = IsLabDB.cosmic_put("test:key1", %{data: "benchmark_test", timestamp: :os.system_time(:microsecond)})
+      result = WarpEngine.cosmic_put("test:key1", %{data: "benchmark_test", timestamp: :os.system_time(:microsecond)})
       IO.puts "  ✅ PUT operation: #{inspect(result)}"
 
       # Test GET
-      result = IsLabDB.cosmic_get("test:key1")
+      result = WarpEngine.cosmic_get("test:key1")
       IO.puts "  ✅ GET operation: #{inspect(result)}"
 
       # Test metrics
-      metrics = IsLabDB.cosmic_metrics()
+      metrics = WarpEngine.cosmic_metrics()
       IO.puts "  ✅ Metrics available: #{map_size(metrics)} categories"
 
     rescue
@@ -92,7 +92,7 @@ defmodule QuickBench do
 
     # Warm up
     for i <- 1..100 do
-      IsLabDB.cosmic_put("warmup:#{i}", %{value: i})
+      WarpEngine.cosmic_put("warmup:#{i}", %{value: i})
     end
 
     # Measure PUT performance
@@ -100,7 +100,7 @@ defmodule QuickBench do
     put_start = :os.system_time(:microsecond)
 
     for i <- 1..put_count do
-      IsLabDB.cosmic_put("perf:put:#{i}", %{
+      WarpEngine.cosmic_put("perf:put:#{i}", %{
         data: "performance_test_data_#{i}",
         number: i,
         timestamp: :os.system_time(:microsecond)
@@ -125,7 +125,7 @@ defmodule QuickBench do
 
     for i <- 1..get_count do
       key = "perf:put:#{rem(i, put_count) + 1}"
-      IsLabDB.cosmic_get(key)
+      WarpEngine.cosmic_get(key)
     end
 
     get_time = :os.system_time(:microsecond) - get_start

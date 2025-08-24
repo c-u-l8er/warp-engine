@@ -4,7 +4,7 @@
 
 IO.puts """
 🌌 ═══════════════════════════════════════════════════════════════
-   IsLab Database - Phase 2: Quantum Entanglement Demo
+   WarpEngine Database - Phase 2: Quantum Entanglement Demo
 ═══════════════════════════════════════════════════════════════ 🌌
 
 Quick demonstration of quantum entanglement features in IEx...
@@ -18,22 +18,22 @@ Then copy and paste these commands:
 
 IO.puts """
 # 🚀 Start the universe with custom data directory
-{:ok, _pid} = IsLabDB.start_link([data_root: "/tmp/demo_quantum"])
+{:ok, _pid} = WarpEngine.start_link([data_root: "/tmp/demo_quantum"])
 
 # 📦 Store some basic user data
-{:ok, :stored, shard, time} = IsLabDB.cosmic_put("user:alice", %{name: "Alice", age: 30})
+{:ok, :stored, shard, time} = WarpEngine.cosmic_put("user:alice", %{name: "Alice", age: 30})
 IO.puts "✅ Alice stored in \#{shard} shard (\#{time}μs)"
 
 # 🔗 Store related data that will be auto-entangled
-IsLabDB.cosmic_put("profile:alice", %{bio: "Engineer", skills: ["Elixir", "Physics"]})
-IsLabDB.cosmic_put("settings:alice", %{theme: "cosmic-dark", notifications: true})
+WarpEngine.cosmic_put("profile:alice", %{bio: "Engineer", skills: ["Elixir", "Physics"]})
+WarpEngine.cosmic_put("settings:alice", %{theme: "cosmic-dark", notifications: true})
 
 # ⚛️  Basic retrieval (Phase 1)
-{:ok, alice_basic, shard, time} = IsLabDB.cosmic_get("user:alice")
+{:ok, alice_basic, shard, time} = WarpEngine.cosmic_get("user:alice")
 IO.puts "📖 Basic get: \#{inspect(alice_basic)} from \#{shard} (\#{time}μs)"
 
 # 🌟 Quantum retrieval (Phase 2) - gets entangled data automatically!
-{:ok, response} = IsLabDB.quantum_get("user:alice")
+{:ok, response} = WarpEngine.quantum_get("user:alice")
 IO.puts "✨ Quantum get retrieved \#{response.quantum_data.entangled_count} entangled items!"
 
 # Show the entangled data
@@ -45,19 +45,19 @@ response.quantum_data.entangled_items |> Enum.each(fn {key, result} ->
 end)
 
 # 📊 View quantum metrics
-quantum_stats = IsLabDB.quantum_entanglement_metrics()
+quantum_stats = WarpEngine.quantum_entanglement_metrics()
 IO.puts "⚛️  Quantum Stats:"
 IO.puts "   Entanglements: \#{quantum_stats.total_entanglements}"
 IO.puts "   Efficiency: \#{Float.round(quantum_stats.quantum_efficiency * 100, 1)}%"
 
 # 🔬 Create manual entanglement
-{:ok, entanglement_id} = IsLabDB.create_quantum_entanglement("user:alice",
+{:ok, entanglement_id} = WarpEngine.create_quantum_entanglement("user:alice",
   ["profile:alice", "settings:alice"], 0.95)
 IO.puts "🔗 Manual entanglement created: \#{entanglement_id}"
 
 # 📈 Performance comparison
-{basic_time, _} = :timer.tc(fn -> IsLabDB.cosmic_get("user:alice") end)
-{quantum_time, _} = :timer.tc(fn -> IsLabDB.quantum_get("user:alice") end)
+{basic_time, _} = :timer.tc(fn -> WarpEngine.cosmic_get("user:alice") end)
+{quantum_time, _} = :timer.tc(fn -> WarpEngine.quantum_get("user:alice") end)
 IO.puts "⚡ Basic: \#{basic_time}μs, Quantum: \#{quantum_time}μs"
 
 IO.puts "🎉 Phase 2 Quantum Entanglement Engine working perfectly!"

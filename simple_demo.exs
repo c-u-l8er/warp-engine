@@ -3,11 +3,11 @@
 # Simple Phase 1 Demo - Manual compilation and execution
 Mix.install([{:jason, "~> 1.4"}])
 
-defmodule IsLabDBDemo do
+defmodule WarpEngineDemo do
   def run do
     IO.puts """
     🌌 ===================================================
-       IsLab Database - Phase 1: Cosmic Foundation Demo
+       WarpEngine Database - Phase 1: Cosmic Foundation Demo
        ===================================================
     """
 
@@ -43,7 +43,7 @@ defmodule IsLabDBDemo do
     IO.puts "      - Gravitational attraction algorithms"
     IO.puts "      - Entropy rate computations"
     IO.puts ""
-    IO.puts "   🌌 Main IsLabDB GenServer:"
+    IO.puts "   🌌 Main WarpEngine GenServer:"
     IO.puts "      - Universe controller with cosmic state management"
     IO.puts "      - ETS tables for hot/warm/cold data shards"
     IO.puts "      - Async persistence coordination"
@@ -76,4 +76,4 @@ defmodule IsLabDBDemo do
   end
 end
 
-IsLabDBDemo.run()
+WarpEngineDemo.run()

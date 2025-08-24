@@ -3,7 +3,7 @@ defmodule EnhancedADT.Physics do
   Physics configuration and optimization for Enhanced ADT operations.
 
   This module provides physics-based configuration and optimization utilities
-  for Enhanced ADT operations with IsLabDB integration. It translates mathematical
+  for Enhanced ADT operations with WarpEngine integration. It translates mathematical
   ADT annotations into optimal physics parameters for database operations.
 
   ## Physics Annotations

@@ -1,9 +1,9 @@
 defmodule EnhancedADT do
   @moduledoc """
-  Enhanced Algebraic Data Types with automatic IsLabDB integration.
+  Enhanced Algebraic Data Types with automatic WarpEngine integration.
 
   This module provides mathematical ADT definitions that automatically translate
-  to optimized IsLabDB operations with physics intelligence. Domain models become
+  to optimized WarpEngine operations with physics intelligence. Domain models become
   pure mathematical expressions while transparently leveraging quantum entanglement,
   wormhole routing, and spacetime optimization.
 
@@ -11,7 +11,7 @@ defmodule EnhancedADT do
 
   - **defproduct**: Define product types (records) with physics annotations
   - **defsum**: Define sum types (unions) with automatic topology generation
-  - **fold**: Pattern match with automatic IsLabDB translation
+  - **fold**: Pattern match with automatic WarpEngine translation
   - **bend**: Generate structures with automatic wormhole network creation
 
   ## Physics Integration
@@ -39,17 +39,17 @@ defmodule EnhancedADT do
     ConnectedUsers(primary :: User.t(), connections :: [rec(UserNetwork)])
   end
 
-  # Mathematical operations automatically become IsLabDB commands
+  # Mathematical operations automatically become WarpEngine commands
   fold user do
     User(id, name, preferences, score) ->
-      # Automatically translates to IsLabDB.cosmic_put with physics configuration
+      # Automatically translates to WarpEngine.cosmic_put with physics configuration
       store_user_with_physics(id, name, preferences, score)
   end
   ```
   """
 
   @doc """
-  Initialize Enhanced ADT system with IsLabDB integration.
+  Initialize Enhanced ADT system with WarpEngine integration.
 
   This macro sets up the mathematical ADT environment and imports all
   necessary functions for domain modeling.
@@ -96,13 +96,13 @@ defmodule EnhancedADT.ProductType do
   Product type definitions with physics annotations.
 
   Product types represent record-like structures where all fields are present.
-  Physics annotations allow automatic configuration of IsLabDB behavior.
+  Physics annotations allow automatic configuration of WarpEngine behavior.
   """
 
   @doc """
   Define a product type with optional physics annotations.
 
-  Physics annotations control how the data interacts with IsLabDB:
+  Physics annotations control how the data interacts with WarpEngine:
   - `:gravitational_mass` - Affects shard placement and routing
   - `:quantum_entanglement_group` - Creates automatic entanglements
   - `:temporal_weight` - Influences data lifecycle management
@@ -283,13 +283,13 @@ defmodule EnhancedADT.ProductType do
 
   defp generate_physics_integration(_name, field_specs, physics_config) do
     quote do
-      @doc "Get physics configuration for IsLabDB integration"
+      @doc "Get physics configuration for WarpEngine integration"
       def __adt_physics_config__, do: unquote(Macro.escape(physics_config))
 
-      @doc "Get field specifications for IsLabDB optimization"
+      @doc "Get field specifications for WarpEngine optimization"
       def __adt_field_specs__, do: unquote(Macro.escape(field_specs))
 
-      @doc "Extract physics parameters for IsLabDB cosmic_put operation"
+      @doc "Extract physics parameters for WarpEngine cosmic_put operation"
       def extract_physics_context(data) do
         physics_config = __adt_physics_config__()
 

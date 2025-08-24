@@ -1,10 +1,10 @@
 defmodule EventHorizonCacheTest do
   use ExUnit.Case
-  doctest IsLabDB.EventHorizonCache
+  doctest WarpEngine.EventHorizonCache
 
   require Logger
 
-  alias IsLabDB.EventHorizonCache
+  alias WarpEngine.EventHorizonCache
 
   setup_all do
     cleanup_test_cache_system()

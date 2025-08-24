@@ -1,10 +1,10 @@
-defmodule IsLabDB do
+defmodule WarpEngine do
   @moduledoc """
-  IsLab Database - A physics-inspired database with elegant filesystem persistence.
+  WarpEngine Database - A physics-inspired database with elegant filesystem persistence.
 
   ## Overview
 
-  IsLabDB treats data storage as a computational universe, using physics principles
+  WarpEngine treats data storage as a computational universe, using physics principles
   like quantum entanglement for smart pre-fetching, spacetime sharding for optimal
   data placement, and black hole mechanics for intelligent caching.
 
@@ -15,19 +15,19 @@ defmodule IsLabDB do
   ## Basic Usage
 
       # Start the universe
-      {:ok, _pid} = IsLabDB.start_link()
+      {:ok, _pid} = WarpEngine.start_link()
 
       # Store data in the cosmic structure with automatic persistence
-      {:ok, :stored, shard, time} = IsLabDB.cosmic_put("user:alice", %{name: "Alice", age: 30})
+      {:ok, :stored, shard, time} = WarpEngine.cosmic_put("user:alice", %{name: "Alice", age: 30})
 
       # Retrieve data with potential entangled relationships
-      {:ok, user_data, shard, time} = IsLabDB.cosmic_get("user:alice")
+      {:ok, user_data, shard, time} = WarpEngine.cosmic_get("user:alice")
 
       # Delete data from all spacetime regions
-      {:ok, deleted_from, time} = IsLabDB.cosmic_delete("user:alice")
+      {:ok, deleted_from, time} = WarpEngine.cosmic_delete("user:alice")
 
       # Get comprehensive universe metrics
-      metrics = IsLabDB.cosmic_metrics()
+      metrics = WarpEngine.cosmic_metrics()
 
   ## Physics-Inspired Features
 
@@ -48,7 +48,7 @@ defmodule IsLabDB do
   use GenServer
   require Logger
 
-  alias IsLabDB.{CosmicPersistence, CosmicConstants, QuantumIndex, SpacetimeShard, GravitationalRouter, EventHorizonCache, EntropyMonitor, WALOperations}
+  alias WarpEngine.{CosmicPersistence, CosmicConstants, QuantumIndex, SpacetimeShard, GravitationalRouter, EventHorizonCache, EntropyMonitor, WALOperations}
 
   defstruct [
     :universe_state,          # :stable, :rebalancing, :expanding, :collapsing
@@ -71,7 +71,7 @@ defmodule IsLabDB do
   ## PUBLIC API
 
   @doc """
-  Start the IsLab Database universe with optional configuration.
+  Start the WarpEngine Database universe with optional configuration.
 
   ## Options
 
@@ -113,16 +113,16 @@ defmodule IsLabDB do
   ## Examples
 
       # Basic storage
-      IsLabDB.cosmic_put("user:alice", %{name: "Alice", age: 30})
+      WarpEngine.cosmic_put("user:alice", %{name: "Alice", age: 30})
 
       # Hot data with high priority
-      IsLabDB.cosmic_put("trending:post:123", post_data,
+      WarpEngine.cosmic_put("trending:post:123", post_data,
         access_pattern: :hot,
         priority: :critical
       )
 
       # Data with quantum entanglement
-      IsLabDB.cosmic_put("profile:alice", profile_data,
+      WarpEngine.cosmic_put("profile:alice", profile_data,
         entangled_with: ["user:alice", "settings:alice"]
       )
   """
@@ -133,7 +133,7 @@ defmodule IsLabDB do
 
     if state.wal_enabled do
       # Phase 6.6: WAL-powered ultra-high performance (250K+ ops/sec)
-      case IsLabDB.WALOperations.cosmic_put_v2(state, key, value, opts) do
+      case WarpEngine.WALOperations.cosmic_put_v2(state, key, value, opts) do
         {:ok, :stored, shard_id, operation_time, updated_state} ->
           # Update local cache and server state asynchronously
           update_cached_state(updated_state)
@@ -168,10 +168,10 @@ defmodule IsLabDB do
   ## Examples
 
       # Basic retrieval
-      {:ok, user_data, :hot_data, 150} = IsLabDB.cosmic_get("user:alice")
+      {:ok, user_data, :hot_data, 150} = WarpEngine.cosmic_get("user:alice")
 
       # Handle not found
-      case IsLabDB.cosmic_get("nonexistent:key") do
+      case WarpEngine.cosmic_get("nonexistent:key") do
         {:ok, data, shard, time} -> process_data(data)
         {:error, :not_found, time} -> handle_not_found()
       end
@@ -183,7 +183,7 @@ defmodule IsLabDB do
 
     if state.wal_enabled do
       # Phase 6.6: WAL-powered ultra-high performance (500K+ ops/sec)
-      case IsLabDB.WALOperations.cosmic_get_v2(state, key) do
+      case WarpEngine.WALOperations.cosmic_get_v2(state, key) do
         {:ok, value, shard_id, operation_time, updated_state} ->
           # Update local cache and server state asynchronously
           update_cached_state(updated_state)
@@ -220,7 +220,7 @@ defmodule IsLabDB do
 
   ## Examples
 
-      {:ok, response} = IsLabDB.quantum_get("user:alice")
+      {:ok, response} = WarpEngine.quantum_get("user:alice")
       primary_data = response.value
       entangled_profile = response.quantum_data.entangled_items["profile:alice"]
   """
@@ -246,7 +246,7 @@ defmodule IsLabDB do
 
   ## Examples
 
-      {:ok, results, time} = IsLabDB.cosmic_delete("user:alice")
+      {:ok, results, time} = WarpEngine.cosmic_delete("user:alice")
       # results might be: [{:hot_data, :deleted}, {:warm_data, :not_found}, {:cold_data, :not_found}]
   """
   def cosmic_delete(key) do
@@ -272,7 +272,7 @@ defmodule IsLabDB do
 
     ## Examples
 
-      metrics = IsLabDB.cosmic_metrics()
+      metrics = WarpEngine.cosmic_metrics()
 
       IO.puts("Universe has been stable for \#{metrics.uptime_ms}ms")
       IO.puts("Hot data shard contains \#{get_shard_size(metrics, :hot_data)} items")
@@ -313,7 +313,7 @@ defmodule IsLabDB do
   ## Examples
 
       # Create user profile entanglement
-      IsLabDB.create_quantum_entanglement("user:alice",
+      WarpEngine.create_quantum_entanglement("user:alice",
         ["profile:alice", "settings:alice", "sessions:alice"],
         strength: 0.9
       )
@@ -334,7 +334,7 @@ defmodule IsLabDB do
 
   ## Examples
 
-      quantum_stats = IsLabDB.quantum_entanglement_metrics()
+      quantum_stats = WarpEngine.quantum_entanglement_metrics()
       IO.puts("Total entanglements: \#{quantum_stats.total_entanglements}")
       IO.puts("Quantum efficiency: \#{quantum_stats.quantum_efficiency}")
   """
@@ -364,7 +364,7 @@ defmodule IsLabDB do
 
   ## Examples
 
-      entropy = IsLabDB.entropy_metrics()
+      entropy = WarpEngine.entropy_metrics()
       IO.puts("System entropy: \#{entropy.total_entropy}")
       IO.puts("Rebalancing needed: \#{entropy.rebalancing_recommended}")
   """
@@ -386,7 +386,7 @@ defmodule IsLabDB do
 
   ## Examples
 
-      {:ok, report} = IsLabDB.trigger_entropy_rebalancing(force_rebalancing: true)
+      {:ok, report} = WarpEngine.trigger_entropy_rebalancing(force_rebalancing: true)
       IO.puts("Entropy reduced by: \#{report.entropy_reduction}")
   """
   def trigger_entropy_rebalancing(opts \\ []) do
@@ -396,11 +396,11 @@ defmodule IsLabDB do
   ## GENSERVER CALLBACKS
 
     def init(opts) do
-    Logger.info("🚀 Initializing IsLabDB computational universe...")
+    Logger.info("🚀 Initializing WarpEngine computational universe...")
 
     # Set data_root from options if provided
     if data_root = Keyword.get(opts, :data_root) do
-      Application.put_env(:islab_db, :data_root, data_root)
+      Application.put_env(:warp_engine, :data_root, data_root)
     end
 
     # Initialize cosmic filesystem structure
@@ -430,7 +430,7 @@ defmodule IsLabDB do
     # Phase 5: Initialize advanced entropy monitoring system
     # Check both opts and application environment for entropy monitoring setting
     enable_entropy = Keyword.get(opts, :enable_entropy_monitoring,
-      Application.get_env(:islab_db, :enable_entropy_monitoring, true))
+      Application.get_env(:warp_engine, :enable_entropy_monitoring, true))
 
     entropy_monitor = if enable_entropy do
       initialize_phase5_entropy_monitoring(opts)
@@ -446,7 +446,7 @@ defmodule IsLabDB do
     wal_system = if wal_enabled do
       # WAL is already started by the application supervisor
       # Just verify it's running and get its PID
-      case Process.whereis(IsLabDB.WAL) do
+      case Process.whereis(WarpEngine.WAL) do
         nil ->
           Logger.error("❌ WAL system not found - ensure it's in supervisor tree")
           nil
@@ -465,7 +465,7 @@ defmodule IsLabDB do
     # Initialize state
     startup_time = :os.system_time(:millisecond)
 
-    state = %IsLabDB{
+    state = %WarpEngine{
       universe_state: :stable,
       spacetime_shards: spacetime_shards,
       gravitational_router: gravitational_router,
@@ -494,7 +494,7 @@ defmodule IsLabDB do
     # Start periodic cosmic maintenance
     schedule_cosmic_maintenance()
 
-    Logger.info("✨ IsLabDB universe is stable and ready for cosmic operations")
+    Logger.info("✨ WarpEngine universe is stable and ready for cosmic operations")
     Logger.info("🌌 Data root: #{CosmicPersistence.data_root()}")
     Logger.info("🪐 Advanced spacetime shards: #{Map.keys(spacetime_shards) |> Enum.join(", ")}")
     Logger.info("🎯 Gravitational routing: #{gravitational_router.routing_algorithm} algorithm")
@@ -860,7 +860,7 @@ defmodule IsLabDB do
     Logger.info("🌡️  Initializing Phase 5: Entropy Monitoring & Thermodynamics...")
 
     # Start the entropy registry
-    case Registry.start_link(keys: :unique, name: IsLabDB.EntropyRegistry) do
+    case Registry.start_link(keys: :unique, name: WarpEngine.EntropyRegistry) do
       {:ok, _} -> :ok
       {:error, {:already_started, _}} -> :ok  # Registry already started
     end
@@ -993,7 +993,7 @@ defmodule IsLabDB do
       {:persist, key, cosmic_record} ->
         data_type = CosmicPersistence.extract_data_type(key)
         result = CosmicPersistence.persist_cosmic_record(cosmic_record, data_type)
-        send(IsLabDB, {:persistence_complete, key, result})
+        send(WarpEngine, {:persistence_complete, key, result})
       _ ->
         :ok
     after
@@ -1303,7 +1303,7 @@ defmodule IsLabDB do
   defp notify_entropy_monitor_of_shards(entropy_monitor, spacetime_shards) do
     # Notify the entropy monitor about the spacetime shards so it can monitor them
     try do
-      GenServer.cast({:via, Registry, {IsLabDB.EntropyRegistry, entropy_monitor}},
+      GenServer.cast({:via, Registry, {WarpEngine.EntropyRegistry, entropy_monitor}},
                      {:update_spacetime_shards, spacetime_shards})
     rescue
       error ->
@@ -1543,7 +1543,7 @@ defmodule IsLabDB do
 
   # PERFORMANCE REVOLUTION: TRUE GenServer bypass with local state caching
 
-  @cached_state_key :islab_db_cached_state
+  @cached_state_key :warp_engine_cached_state
   @cache_refresh_interval 1000  # Refresh cache every 1 second max
 
   defp get_cached_state() do

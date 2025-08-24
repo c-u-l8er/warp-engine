@@ -1,15 +1,15 @@
-defmodule IsLabDB.WormholeRouterTest do
+defmodule WarpEngine.WormholeRouterTest do
   use ExUnit.Case, async: false
-  doctest IsLabDB.WormholeRouter
+  doctest WarpEngine.WormholeRouter
 
-  alias IsLabDB.WormholeRouter
+  alias WarpEngine.WormholeRouter
 
     setup do
     # Use test-specific data directory
-    test_data_dir = "/tmp/islab_wormhole_test_#{:rand.uniform(10000)}"
+    test_data_dir = "/tmp/warp_engine_wormhole_test_#{:rand.uniform(10000)}"
 
     # Set up test environment
-    Application.put_env(:islab_db, :data_root, test_data_dir)
+    Application.put_env(:warp_engine, :data_root, test_data_dir)
 
     # Clean up any existing wormhole data
     File.rm_rf!(test_data_dir)

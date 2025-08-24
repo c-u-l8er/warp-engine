@@ -10,7 +10,7 @@
 
 ### **⚡ Current Measured Performance (PX13 Laptop)**
 
-| **Metric** | **Enhanced ADT + IsLabDB** | **Industry Context** |
+| **Metric** | **Enhanced ADT + WarpEngine** | **Industry Context** |
 |------------|---------------------------|---------------------|
 | **Complex Graph Operations** | **23,742 ops/sec** | Excellent for laptop |
 | **Simple Node Storage** | **42.1μs per operation** | Competitive |

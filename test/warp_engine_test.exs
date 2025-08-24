@@ -1,6 +1,6 @@
-defmodule IsLabDBTest do
+defmodule WarpEngineTest do
   use ExUnit.Case
-  doctest IsLabDB
+  doctest WarpEngine
 
   require Logger
 
@@ -18,22 +18,22 @@ defmodule IsLabDBTest do
     cleanup_test_universe()
 
         # Ensure test data directory exists
-    test_data_dir = "/tmp/islab_db_test_data"
+    test_data_dir = "/tmp/warp_engine_test_data"
     File.mkdir_p!(test_data_dir)
 
     # Configure the data root for this test
-    Application.put_env(:islab_db, :data_root, test_data_dir)
+    Application.put_env(:warp_engine, :data_root, test_data_dir)
 
     # Ensure the full application is started with WAL and other components
-    Application.ensure_all_started(:islab_db)
+    Application.ensure_all_started(:warp_engine)
 
     # Ensure cosmic filesystem exists in test directory
-    IsLabDB.CosmicPersistence.initialize_universe()
+    WarpEngine.CosmicPersistence.initialize_universe()
 
-    # Use the existing IsLabDB process from application supervisor
-    pid = case Process.whereis(IsLabDB) do
+    # Use the existing WarpEngine process from application supervisor
+    pid = case Process.whereis(WarpEngine) do
       nil ->
-        raise "IsLabDB should be started by application supervisor but was not found"
+        raise "WarpEngine should be started by application supervisor but was not found"
       existing_pid ->
         existing_pid
     end
@@ -55,14 +55,14 @@ defmodule IsLabDBTest do
     test "universe starts successfully with stable state", %{universe_pid: pid} do
       assert Process.alive?(pid)
 
-      metrics = IsLabDB.cosmic_metrics()
+      metrics = WarpEngine.cosmic_metrics()
       assert metrics.universe_state == :stable
       assert is_integer(metrics.uptime_ms)
       assert metrics.uptime_ms >= 0
     end
 
             test "cosmic filesystem structure is created" do
-      test_data_dir = "/tmp/islab_db_test_data"
+      test_data_dir = "/tmp/warp_engine_test_data"
 
       # Check that the cosmic filesystem structure exists
       assert File.exists?(test_data_dir)
@@ -83,12 +83,12 @@ defmodule IsLabDBTest do
     end
 
     test "universe manifest contains correct cosmic constants" do
-      test_data_dir = "/tmp/islab_db_test_data"
+      test_data_dir = "/tmp/warp_engine_test_data"
       {:ok, content} = File.read(Path.join(test_data_dir, "universe.manifest"))
       {:ok, manifest} = Jason.decode(content)
 
       assert manifest["universe_version"] == "1.0.0"
-      assert manifest["physics_engine"] == "IsLabDB v1.0"
+      assert manifest["physics_engine"] == "WarpEngine v1.0"
       assert is_map(manifest["cosmic_constants"])
 
       # Check key cosmic constants
@@ -102,7 +102,7 @@ defmodule IsLabDBTest do
 
   describe "Basic Operations API" do
     test "cosmic_put stores data successfully" do
-      assert {:ok, :stored, shard, operation_time} = IsLabDB.cosmic_put("test:key1", %{data: "value1"})
+      assert {:ok, :stored, shard, operation_time} = WarpEngine.cosmic_put("test:key1", %{data: "value1"})
 
       assert shard in [:hot_data, :warm_data, :cold_data, :event_horizon_cache]
       assert is_integer(operation_time)
@@ -111,13 +111,13 @@ defmodule IsLabDBTest do
 
     test "cosmic_get retrieves stored data" do
       # Store data first
-      {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put("test:key2", %{important: "data", number: 42})
+      {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put("test:key2", %{important: "data", number: 42})
 
       # Give persistence time to complete
       :timer.sleep(50)
 
       # Retrieve it
-      assert {:ok, %{important: "data", number: 42}, retrieved_shard, operation_time} = IsLabDB.cosmic_get("test:key2")
+      assert {:ok, %{important: "data", number: 42}, retrieved_shard, operation_time} = WarpEngine.cosmic_get("test:key2")
 
       assert retrieved_shard in [:hot_data, :warm_data, :cold_data, :event_horizon_cache]
       assert is_integer(operation_time)
@@ -125,18 +125,18 @@ defmodule IsLabDBTest do
     end
 
     test "cosmic_get returns not_found for nonexistent keys" do
-      assert {:error, :not_found, operation_time} = IsLabDB.cosmic_get("nonexistent:key")
+      assert {:error, :not_found, operation_time} = WarpEngine.cosmic_get("nonexistent:key")
       assert is_integer(operation_time)
       assert operation_time > 0
     end
 
     test "cosmic_delete removes data from universe" do
       # Store and verify data exists
-      {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put("test:key3", %{temp: "data"})
-      assert {:ok, %{temp: "data"}, _shard, _time} = IsLabDB.cosmic_get("test:key3")
+      {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put("test:key3", %{temp: "data"})
+      assert {:ok, %{temp: "data"}, _shard, _time} = WarpEngine.cosmic_get("test:key3")
 
       # Delete and verify it's gone
-      {:ok, deleted_from, operation_time} = IsLabDB.cosmic_delete("test:key3")
+      {:ok, deleted_from, operation_time} = WarpEngine.cosmic_delete("test:key3")
 
       assert is_list(deleted_from)
       assert length(deleted_from) == 3  # Should check all three shards
@@ -146,11 +146,11 @@ defmodule IsLabDBTest do
       assert is_integer(operation_time)
 
       # Verify data is gone
-      assert {:error, :not_found, _time} = IsLabDB.cosmic_get("test:key3")
+      assert {:error, :not_found, _time} = WarpEngine.cosmic_get("test:key3")
     end
 
     test "cosmic_metrics returns comprehensive universe state" do
-      metrics = IsLabDB.cosmic_metrics()
+      metrics = WarpEngine.cosmic_metrics()
 
       # Check top-level structure
       assert %{
@@ -198,14 +198,14 @@ defmodule IsLabDBTest do
 
   describe "Access Patterns and Shard Routing" do
     test "hot access pattern routes to hot_data shard" do
-      {:ok, :stored, shard, _time} = IsLabDB.cosmic_put("hot:key", %{value: "hot"},
+      {:ok, :stored, shard, _time} = WarpEngine.cosmic_put("hot:key", %{value: "hot"},
         access_pattern: :hot, priority: :critical)
 
       assert shard == :hot_data
     end
 
     test "cold access pattern routes to cold_data shard" do
-      {:ok, :stored, shard, _time} = IsLabDB.cosmic_put("cold:key", %{value: "cold"},
+      {:ok, :stored, shard, _time} = WarpEngine.cosmic_put("cold:key", %{value: "cold"},
         access_pattern: :cold, priority: :background)
 
       assert shard == :cold_data
@@ -213,12 +213,12 @@ defmodule IsLabDBTest do
 
     test "balanced access pattern uses priority for routing" do
       # High priority should go to hot shard
-      {:ok, :stored, hot_shard, _} = IsLabDB.cosmic_put("priority:high", %{},
+      {:ok, :stored, hot_shard, _} = WarpEngine.cosmic_put("priority:high", %{},
         access_pattern: :balanced, priority: :critical)
       assert hot_shard == :hot_data
 
       # Low priority should go to cold shard
-      {:ok, :stored, cold_shard, _} = IsLabDB.cosmic_put("priority:low", %{},
+      {:ok, :stored, cold_shard, _} = WarpEngine.cosmic_put("priority:low", %{},
         access_pattern: :balanced, priority: :background)
       assert cold_shard == :cold_data
     end
@@ -226,7 +226,7 @@ defmodule IsLabDBTest do
 
   describe "Filesystem Persistence" do
     test "directory manifests explain cosmic purpose" do
-      test_data_dir = "/tmp/islab_db_test_data"
+      test_data_dir = "/tmp/warp_engine_test_data"
       # Check a few key manifest files (in actual leaf directories)
       hot_manifest_path = Path.join(test_data_dir, "spacetime/hot_data/particles/users/_manifest.json")
       assert File.exists?(hot_manifest_path)
@@ -243,13 +243,13 @@ defmodule IsLabDBTest do
 
     test "shard manifests are updated with record counts" do
       # Store some data in different shards
-      IsLabDB.cosmic_put("test:item1", %{data: 1}, access_pattern: :hot)
-      IsLabDB.cosmic_put("test:item2", %{data: 2}, access_pattern: :hot)
+      WarpEngine.cosmic_put("test:item1", %{data: 1}, access_pattern: :hot)
+      WarpEngine.cosmic_put("test:item2", %{data: 2}, access_pattern: :hot)
 
       # Give persistence time to complete
       :timer.sleep(200)
 
-      test_data_dir = "/tmp/islab_db_test_data"
+      test_data_dir = "/tmp/warp_engine_test_data"
       # Check that shard manifest exists and has been updated
       shard_manifest_path = Path.join(test_data_dir, "spacetime/hot_data/_shard_manifest.json")
 
@@ -270,7 +270,7 @@ defmodule IsLabDBTest do
     test "operations complete within reasonable time limits" do
       # Store operation should be fast
       {time, {:ok, :stored, _shard, op_time}} = :timer.tc(fn ->
-        IsLabDB.cosmic_put("perf:test", %{data: "performance test"})
+        WarpEngine.cosmic_put("perf:test", %{data: "performance test"})
       end)
 
       assert time < 10_000  # Less than 10ms
@@ -278,7 +278,7 @@ defmodule IsLabDBTest do
 
       # Get operation should be fast
       {time, {:ok, _value, _shard, op_time}} = :timer.tc(fn ->
-        IsLabDB.cosmic_get("perf:test")
+        WarpEngine.cosmic_get("perf:test")
       end)
 
       assert time < 5_000   # Less than 5ms
@@ -288,12 +288,12 @@ defmodule IsLabDBTest do
     test "metrics collection works without errors" do
       # Store some data to generate metrics
       for i <- 1..10 do
-        IsLabDB.cosmic_put("metric:test#{i}", %{index: i})
+        WarpEngine.cosmic_put("metric:test#{i}", %{index: i})
       end
 
       # Collect metrics multiple times to ensure stability
       for _ <- 1..3 do
-        metrics = IsLabDB.cosmic_metrics()
+        metrics = WarpEngine.cosmic_metrics()
         assert is_map(metrics)
         assert metrics.universe_state in [:stable, :rebalancing]
         :timer.sleep(10)
@@ -308,10 +308,10 @@ defmodule IsLabDBTest do
           value = %{index: i, data: "concurrent test"}
 
           # Store data
-          {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put(key, value)
+          {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put(key, value)
 
           # Retrieve data
-          {:ok, retrieved_value, _shard, _time} = IsLabDB.cosmic_get(key)
+          {:ok, retrieved_value, _shard, _time} = WarpEngine.cosmic_get(key)
 
           assert retrieved_value == value
           :ok
@@ -329,9 +329,9 @@ defmodule IsLabDBTest do
   describe "Error Handling and Edge Cases" do
     test "handles invalid keys gracefully" do
       # Test with various key types
-      assert {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put(:atom_key, %{data: "atom key"})
-      assert {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put(123, %{data: "number key"})
-      assert {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put("", %{data: "empty string key"})
+      assert {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put(:atom_key, %{data: "atom key"})
+      assert {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put(123, %{data: "number key"})
+      assert {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put("", %{data: "empty string key"})
     end
 
     test "handles large data values" do
@@ -347,13 +347,13 @@ defmodule IsLabDBTest do
         }
       }
 
-      assert {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put("large:data", large_data)
-      assert {:ok, retrieved_data, _shard, _time} = IsLabDB.cosmic_get("large:data")
+      assert {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put("large:data", large_data)
+      assert {:ok, retrieved_data, _shard, _time} = WarpEngine.cosmic_get("large:data")
       assert retrieved_data == large_data
     end
 
     test "delete operations on non-existent keys don't crash" do
-      {:ok, deletion_results, _time} = IsLabDB.cosmic_delete("non_existent:key")
+      {:ok, deletion_results, _time} = WarpEngine.cosmic_delete("non_existent:key")
 
       assert is_list(deletion_results)
       assert Enum.all?(deletion_results, fn {_shard, status} -> status == :not_found end)
@@ -363,8 +363,8 @@ defmodule IsLabDBTest do
   ## HELPER FUNCTIONS
 
     defp cleanup_test_universe() do
-    # Stop any running IsLabDB process
-    case Process.whereis(IsLabDB) do
+    # Stop any running WarpEngine process
+    case Process.whereis(WarpEngine) do
       nil -> :ok
       pid ->
         if Process.alive?(pid) do
@@ -373,7 +373,7 @@ defmodule IsLabDBTest do
     end
 
     # Clean up test data directory
-    test_data_dir = "/tmp/islab_db_test_data"
+    test_data_dir = "/tmp/warp_engine_test_data"
     if File.exists?(test_data_dir) do
       try do
         File.rm_rf!(test_data_dir)

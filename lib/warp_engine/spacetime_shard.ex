@@ -1,4 +1,4 @@
-defmodule IsLabDB.SpacetimeShard do
+defmodule WarpEngine.SpacetimeShard do
   @moduledoc """
   Advanced Spacetime Shard Management with Physics-Based Routing
 
@@ -23,7 +23,7 @@ defmodule IsLabDB.SpacetimeShard do
   """
 
   require Logger
-  alias IsLabDB.{CosmicPersistence, CosmicConstants}
+  alias WarpEngine.{CosmicPersistence, CosmicConstants}
 
   defstruct [
     :shard_id,                    # Unique shard identifier (:hot_data, :warm_data, etc.)

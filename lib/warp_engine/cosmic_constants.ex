@@ -1,4 +1,4 @@
-defmodule IsLabDB.CosmicConstants do
+defmodule WarpEngine.CosmicConstants do
   @moduledoc """
   Fundamental physics constants for the computational universe.
 

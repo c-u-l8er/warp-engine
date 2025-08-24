@@ -11,7 +11,7 @@
 ### **1. Domain ADTs with Implicit Wormhole Topology**
 
 ```elixir
-use EnhancedADT.IsLabDBIntegration
+use EnhancedADT.WarpEngineIntegration
 
 # Your business domain ADTs automatically create wormhole network topology
 defproduct User do
@@ -31,7 +31,7 @@ end
 
 defsum UserNetwork do
   variant IsolatedUser, user :: User.t()
-  # Recursive connections automatically create wormhole topology in IsLabDB!
+  # Recursive connections automatically create wormhole topology in WarpEngine!
   variant ConnectedUsers, primary :: User.t(), connections :: [rec(UserNetwork)], connection_type :: ConnectionType.t()
   variant RegionalCluster, region :: String.t(), users :: [User.t()], inter_region_bridges :: [String.t()]
 end
@@ -49,7 +49,7 @@ end
 ```elixir
 # Fold operations automatically detect when wormhole routing is beneficial
 defmodule AutomaticWormholeIntegration do
-  use EnhancedADT.IsLabDBIntegration
+  use EnhancedADT.WarpEngineIntegration
   
   @doc "Fold over User ADT automatically uses wormholes for cross-region access"
   def find_user_recommendations(user) do
@@ -62,20 +62,20 @@ defmodule AutomaticWormholeIntegration do
         recommendation_space = "recommendations:#{region}"  # Different spacetime region
         
         # Automatic wormhole route analysis by Enhanced ADT integration:
-        wormhole_analysis = IsLabDBIntegration.analyze_cross_region_access(user_key, recommendation_space)
+        wormhole_analysis = WarpEngineIntegration.analyze_cross_region_access(user_key, recommendation_space)
         
         case wormhole_analysis do
           {:wormhole_beneficial, route} ->
             # Enhanced ADT automatically translates to wormhole traversal:
-            # IsLabDB.WormholeRouter.find_route(user_key, recommendation_space)
-            # IsLabDB.WormholeRouter.traverse_route_for_data(route)
+            # WarpEngine.WormholeRouter.find_route(user_key, recommendation_space)
+            # WarpEngine.WormholeRouter.traverse_route_for_data(route)
             
             wormhole_recommendations = traverse_via_wormhole(user_key, recommendation_space, route)
             enhance_user_with_wormhole_recommendations(user, wormhole_recommendations)
           
           :direct_access_optimal ->
-            # Enhanced ADT uses direct IsLabDB access
-            recommendations = IsLabDB.cosmic_get("recommendations:#{id}")
+            # Enhanced ADT uses direct WarpEngine access
+            recommendations = WarpEngine.cosmic_get("recommendations:#{id}")
             enhance_user_with_direct_recommendations(user, recommendations)
         end
     end
@@ -86,15 +86,15 @@ defmodule AutomaticWormholeIntegration do
     fold network do
       IsolatedUser(user) ->
         # Store user with potential for future wormhole connections
-        IsLabDB.cosmic_put("user:#{user.id}", user)
+        WarpEngine.cosmic_put("user:#{user.id}", user)
         
         # Enhanced ADT marks this user as available for wormhole connection discovery
-        IsLabDBIntegration.mark_for_wormhole_discovery("user:#{user.id}", user.connection_strength)
+        WarpEngineIntegration.mark_for_wormhole_discovery("user:#{user.id}", user.connection_strength)
       
       ConnectedUsers(primary, connections, connection_type) ->
         # Store primary user
         primary_key = "user:#{primary.id}"
-        IsLabDB.cosmic_put(primary_key, primary)
+        WarpEngine.cosmic_put(primary_key, primary)
         
         # Recursively process connections
         connection_results = Enum.map(connections, &build_user_network/1)
@@ -106,7 +106,7 @@ defmodule AutomaticWormholeIntegration do
             # Strong connections → direct wormholes with high strength
             Enum.each(connection_keys, fn conn_key ->
               # Automatically translates to:
-              # IsLabDB.WormholeRouter.establish_wormhole(primary_key, conn_key, 0.9)
+              # WarpEngine.WormholeRouter.establish_wormhole(primary_key, conn_key, 0.9)
               establish_strong_wormhole(primary_key, conn_key)
             end)
           
@@ -121,7 +121,7 @@ defmodule AutomaticWormholeIntegration do
         
         # Create quantum entanglements for connected users
         if length(connection_keys) > 0 do
-          IsLabDB.create_quantum_entanglement(primary_key, connection_keys, primary.connection_strength)
+          WarpEngine.create_quantum_entanglement(primary_key, connection_keys, primary.connection_strength)
         end
         
         {primary, connection_results}
@@ -136,13 +136,13 @@ defmodule AutomaticWormholeIntegration do
         
         # Enhanced ADT automatically creates regional wormhole hub:
         # 1. Central regional wormhole hub
-        IsLabDBIntegration.create_regional_wormhole_hub(region_key, user_keys)
+        WarpEngineIntegration.create_regional_wormhole_hub(region_key, user_keys)
         
         # 2. Inter-region wormhole bridges
         Enum.each(inter_region_bridges, fn bridge_region ->
           bridge_strength = calculate_inter_region_strength(region, bridge_region)
           # Automatically translates to:
-          # IsLabDB.WormholeRouter.establish_wormhole(region_key, "region:#{bridge_region}", bridge_strength)
+          # WarpEngine.WormholeRouter.establish_wormhole(region_key, "region:#{bridge_region}", bridge_strength)
           establish_inter_region_wormhole(region_key, "region:#{bridge_region}", bridge_strength)
         end)
         
@@ -177,7 +177,7 @@ def generate_optimal_wormhole_topology(user_regions) do
         connection_strength = calculate_regional_affinity(region, target_region)
         
         # This fork automatically creates:
-        # IsLabDB.WormholeRouter.establish_wormhole("region:#{region}", "region:#{target_region}", connection_strength)
+        # WarpEngine.WormholeRouter.establish_wormhole("region:#{region}", "region:#{target_region}", connection_strength)
         fork(WormholeConnection.new(region, target_region, connection_strength))
       end)
       
@@ -194,7 +194,7 @@ def generate_optimal_wormhole_topology(user_regions) do
   end
 end
 
-# The bend operation result automatically creates the entire wormhole network in IsLabDB!
+# The bend operation result automatically creates the entire wormhole network in WarpEngine!
 ```
 
 ### **Mathematical Queries → Automatic Wormhole Optimization:**
@@ -219,20 +219,20 @@ def find_cross_regional_recommendations(user_id, target_regions) do
       # 3. Chooses optimal wormhole routing strategy
       
       results = Enum.map(targets, fn target_region ->
-        # This automatically becomes IsLabDB wormhole traversal:
-        wormhole_route_analysis = IsLabDBIntegration.analyze_wormhole_route(source, target_region)
+        # This automatically becomes WarpEngine wormhole traversal:
+        wormhole_route_analysis = WarpEngineIntegration.analyze_wormhole_route(source, target_region)
         
         case wormhole_route_analysis do
           {:optimal_wormhole, route} ->
             # Automatic translation to:
-            # {:ok, route, cost} = IsLabDB.WormholeRouter.find_route("region:#{source}", "region:#{target_region}")
-            # recommendations = IsLabDB.WormholeRouter.traverse_route_for_data(route, "recommendations:*")
+            # {:ok, route, cost} = WarpEngine.WormholeRouter.find_route("region:#{source}", "region:#{target_region}")
+            # recommendations = WarpEngine.WormholeRouter.traverse_route_for_data(route, "recommendations:*")
             
             traverse_wormhole_for_recommendations(route, target_region, user_context)
           
           {:establish_new_wormhole, connection_config} ->
             # Automatic translation to:
-            # IsLabDB.WormholeRouter.establish_wormhole("region:#{source}", "region:#{target_region}", strength)
+            # WarpEngine.WormholeRouter.establish_wormhole("region:#{source}", "region:#{target_region}", strength)
             # Then traverse the newly created wormhole
             
             new_route = establish_and_traverse_wormhole(source, target_region, connection_config)
@@ -284,10 +284,10 @@ def build_social_network(people) do
         # 2. Establishes wormhole routes to all friends
         # 3. Sets route strength based on connection_strength from ADT
         
-        IsLabDBIntegration.create_social_wormhole_hub(person_key, friend_keys, strength)
+        WarpEngineIntegration.create_social_wormhole_hub(person_key, friend_keys, strength)
       else
         # Direct quantum entanglements for small friend groups
-        IsLabDB.create_quantum_entanglement(person_key, friend_keys, strength)
+        WarpEngine.create_quantum_entanglement(person_key, friend_keys, strength)
       end
       
       {person, friend_results}
@@ -304,7 +304,7 @@ def build_social_network(people) do
       # 2. Connects all members to community hub
       # 3. Establishes inter-community bridges
       
-      IsLabDBIntegration.create_community_wormhole_infrastructure(
+      WarpEngineIntegration.create_community_wormhole_infrastructure(
         community_key, 
         member_keys, 
         bridges
@@ -340,7 +340,7 @@ def store_customer_with_orders(customer) do
       customer_key = "customer:#{id}"
       
       # Store customer
-      IsLabDB.cosmic_put(customer_key, customer)
+      WarpEngine.cosmic_put(customer_key, customer)
       
       # Enhanced ADT integration automatically detects cross-references:
       # "This customer references orders and products - wormhole routes would optimize access"
@@ -350,8 +350,8 @@ def store_customer_with_orders(customer) do
         order_keys = Enum.map(order_history, &("order:#{&1}"))
         
         # Enhanced ADT automatically:
-        # IsLabDB.WormholeRouter.establish_wormhole_group(customer_key, order_keys, 0.8)
-        IsLabDBIntegration.establish_customer_order_wormholes(customer_key, order_keys)
+        # WarpEngine.WormholeRouter.establish_wormhole_group(customer_key, order_keys, 0.8)
+        WarpEngineIntegration.establish_customer_order_wormholes(customer_key, order_keys)
       end
       
       # Automatic wormhole establishment for product recommendations:
@@ -359,8 +359,8 @@ def store_customer_with_orders(customer) do
         product_keys = Enum.map(recommended_products, &("product:#{&1}"))
         
         # Enhanced ADT automatically:
-        # IsLabDB.WormholeRouter.establish_wormhole_group(customer_key, product_keys, 0.7)
-        IsLabDBIntegration.establish_customer_product_wormholes(customer_key, product_keys)
+        # WarpEngine.WormholeRouter.establish_wormhole_group(customer_key, product_keys, 0.7)
+        WarpEngineIntegration.establish_customer_product_wormholes(customer_key, product_keys)
       end
       
       # Return clean mathematical result
@@ -382,12 +382,12 @@ def get_customer_with_full_context(customer_id) do
       # 2. Detects wormhole routes to orders and products  
       # 3. Uses optimal routing for all related data access
       
-      {:ok, customer_data} = IsLabDB.cosmic_get(customer_key)
+      {:ok, customer_data} = WarpEngine.cosmic_get(customer_key)
       
       # Automatic wormhole traversal for orders (if wormholes exist):
-      order_data = case IsLabDBIntegration.find_wormhole_routes(customer_key, "order:*") do
+      order_data = case WarpEngineIntegration.find_wormhole_routes(customer_key, "order:*") do
         {:wormholes_available, routes} ->
-          # Automatically uses: IsLabDB.WormholeRouter.traverse_routes_for_data(routes)
+          # Automatically uses: WarpEngine.WormholeRouter.traverse_routes_for_data(routes)
           traverse_wormholes_for_order_data(routes)
         
         :no_wormholes ->
@@ -396,7 +396,7 @@ def get_customer_with_full_context(customer_id) do
       end
       
       # Automatic wormhole traversal for products:
-      product_data = case IsLabDBIntegration.find_wormhole_routes(customer_key, "product:*") do
+      product_data = case WarpEngineIntegration.find_wormhole_routes(customer_key, "product:*") do
         {:wormholes_available, routes} ->
           traverse_wormholes_for_product_data(routes)
         
@@ -409,7 +409,7 @@ def get_customer_with_full_context(customer_id) do
         customer: customer_data,
         orders: order_data,
         products: product_data,
-        wormhole_metadata: IsLabDBIntegration.get_wormhole_performance_stats()
+        wormhole_metadata: WarpEngineIntegration.get_wormhole_performance_stats()
       )
   end
 end
@@ -449,7 +449,7 @@ def generate_recommendation_wormhole_network(users, products) do
         )
         
         # This automatically translates to:
-        # IsLabDB.WormholeRouter.establish_wormhole("user:#{user.id}", "product:#{product.id}", affinity)
+        # WarpEngine.WormholeRouter.establish_wormhole("user:#{user.id}", "product:#{product.id}", affinity)
         
         {wormhole_config, affinity}
       end)
@@ -464,8 +464,8 @@ def generate_recommendation_wormhole_network(users, products) do
     
     {[], _products, final_wormhole_map} ->
       # Base case - create final wormhole network
-      # Enhanced ADT automatically applies all accumulated wormhole connections to IsLabDB
-      IsLabDBIntegration.apply_wormhole_topology(final_wormhole_map)
+      # Enhanced ADT automatically applies all accumulated wormhole connections to WarpEngine
+      WarpEngineIntegration.apply_wormhole_topology(final_wormhole_map)
       
       RecommendationTopology.CompleteNetwork(final_wormhole_map)
   end
@@ -491,7 +491,7 @@ def discover_cross_category_products(starting_category, exploration_depth) do
           related_exploration = fork({related_cat, depth - 1})
           
           # Enhanced ADT automatically:
-          # IsLabDB.WormholeRouter.establish_wormhole("category:#{category}", "category:#{related_cat}", relationship_strength)
+          # WarpEngine.WormholeRouter.establish_wormhole("category:#{category}", "category:#{related_cat}", relationship_strength)
           
           CategoryWormhole.new(related_cat, relationship_strength, related_exploration)
         else
@@ -527,7 +527,7 @@ def process_customer_order(order_adt) do
       order_key = "order:#{id}"
       
       # Enhanced ADT integration automatically analyzes data access patterns:
-      access_analysis = IsLabDBIntegration.analyze_order_access_pattern(customer_id, product_ids)
+      access_analysis = WarpEngineIntegration.analyze_order_access_pattern(customer_id, product_ids)
       
       case access_analysis do
         {:wormhole_beneficial, optimal_routes} ->
@@ -536,9 +536,9 @@ def process_customer_order(order_adt) do
           # 1. Customer data via wormhole (if available)
           customer_data = case Map.get(optimal_routes, :customer) do
             nil -> 
-              IsLabDB.cosmic_get(customer_key)
+              WarpEngine.cosmic_get(customer_key)
             customer_route ->
-              # Automatic: IsLabDB.WormholeRouter.traverse_route_for_data(customer_route)
+              # Automatic: WarpEngine.WormholeRouter.traverse_route_for_data(customer_route)
               traverse_customer_wormhole(customer_route)
           end
           
@@ -549,26 +549,26 @@ def process_customer_order(order_adt) do
               get_products_in_parallel(product_ids)
             product_routes ->
               # Automatic: parallel wormhole traversal for all products
-              # IsLabDB.WormholeRouter.parallel_traverse_routes(product_routes)
+              # WarpEngine.WormholeRouter.parallel_traverse_routes(product_routes)
               traverse_product_wormholes_in_parallel(product_routes)
           end
           
           # 3. Store order with wormhole route metadata
           order_data = Order.new(id, customer_data, product_data, timestamp, total)
-          IsLabDB.cosmic_put(order_key, order_data, 
+          WarpEngine.cosmic_put(order_key, order_data, 
             wormhole_metadata: extract_wormhole_performance_stats(optimal_routes))
         
         :direct_access_optimal ->
-          # Enhanced ADT uses standard IsLabDB operations without wormholes
-          customer_data = IsLabDB.cosmic_get(customer_key)
+          # Enhanced ADT uses standard WarpEngine operations without wormholes
+          customer_data = WarpEngine.cosmic_get(customer_key)
           product_data = get_products_in_parallel(product_ids)
           
           order_data = Order.new(id, customer_data, product_data, timestamp, total)
-          IsLabDB.cosmic_put(order_key, order_data)
+          WarpEngine.cosmic_put(order_key, order_data)
       end
       
       # Automatically establish future wormhole routes based on this order pattern
-      IsLabDBIntegration.learn_from_order_pattern(customer_id, product_ids, access_analysis)
+      WarpEngineIntegration.learn_from_order_pattern(customer_id, product_ids, access_analysis)
       
       # Return clean mathematical result
       order_data
@@ -595,7 +595,7 @@ def generate_personalized_dashboard(user_id) do
       # "This query requires data from multiple regions - wormhole network optimization beneficial"
       
       # Analyze optimal wormhole routing for dashboard data gathering
-      wormhole_strategy = IsLabDBIntegration.plan_multi_region_data_access([
+      wormhole_strategy = WarpEngineIntegration.plan_multi_region_data_access([
         {:user_space, "user:#{user_id}"},
         {:order_space, "orders:recent:#{user_id}"},
         {:product_space, "recommendations:#{user_id}"},
@@ -688,8 +688,8 @@ defmodule IntelligentWormholeIntegration do
          
          # Enhanced ADT automatically creates wormholes in batch:
          wormhole_creation_results = Enum.map(beneficial_wormholes, fn wormhole ->
-           # Automatic: IsLabDB.WormholeRouter.establish_wormhole(wormhole.source, wormhole.destination, wormhole.strength)
-           IsLabDBIntegration.create_wormhole_from_pattern(wormhole)
+           # Automatic: WarpEngine.WormholeRouter.establish_wormhole(wormhole.source, wormhole.destination, wormhole.strength)
+           WarpEngineIntegration.create_wormhole_from_pattern(wormhole)
          end)
          
          {interaction_results, wormhole_creation_results}
@@ -710,17 +710,17 @@ def evolve_wormhole_network_intelligence(usage_data) do
       case {usage_frequency, performance_metrics.efficiency} do
         {freq, eff} when freq > 100 and eff > 0.8 ->
           # High usage + high efficiency → strengthen wormhole
-          # Automatic: IsLabDB.WormholeRouter.strengthen_connection(route.source, route.destination)
+          # Automatic: WarpEngine.WormholeRouter.strengthen_connection(route.source, route.destination)
           strengthen_wormhole_connection(route)
         
         {freq, eff} when freq < 10 and eff < 0.5 ->
           # Low usage + low efficiency → decay wormhole
-          # Automatic: IsLabDB.WormholeRouter.decay_connection(route.source, route.destination, 0.1)
+          # Automatic: WarpEngine.WormholeRouter.decay_connection(route.source, route.destination, 0.1)
           decay_wormhole_connection(route)
         
         {freq, eff} when freq > 50 and eff < 0.6 ->
           # High usage but low efficiency → optimize route
-          # Automatic: IsLabDB.WormholeRouter.optimize_route(route.source, route.destination)
+          # Automatic: WarpEngine.WormholeRouter.optimize_route(route.source, route.destination)
           optimize_wormhole_route(route)
         
         _ ->
@@ -729,7 +729,7 @@ def evolve_wormhole_network_intelligence(usage_data) do
       end
       
       # Enhanced ADT automatically learns from patterns for future wormhole creation
-      IsLabDBIntegration.learn_wormhole_pattern(route, usage_frequency, performance_metrics)
+      WarpEngineIntegration.learn_wormhole_pattern(route, usage_frequency, performance_metrics)
   end
 end
 ```
@@ -742,7 +742,7 @@ end
 
 ✅ **ADT Structure Analysis** - Enhanced ADT automatically detects cross-references and connection patterns  
 ✅ **Automatic Route Discovery** - Fold operations automatically check for beneficial wormhole routes  
-✅ **Transparent Translation** - Mathematical operations transparently become optimized IsLabDB wormhole commands  
+✅ **Transparent Translation** - Mathematical operations transparently become optimized WarpEngine wormhole commands  
 ✅ **Intelligent Network Creation** - Bend operations automatically generate optimal wormhole topology  
 ✅ **Performance Learning** - ADT operations automatically learn and improve wormhole efficiency  
 
@@ -764,10 +764,10 @@ end
 # 1. Detects cross-reference to orders (different data region)
 # 2. Analyzes if wormhole route would be beneficial
 # 3. Either uses existing wormhole or creates new one
-# 4. Translates to optimal IsLabDB.WormholeRouter commands
+# 4. Translates to optimal WarpEngine.WormholeRouter commands
 # 5. Returns clean mathematical result with wormhole performance metadata
 ```
 
 **Your mathematical ADT operations become intelligent wormhole-enhanced database operations automatically!** 🔬🕳️⚛️🚀
 
-The **Enhanced ADT system** acts as an **intelligent translation layer** that understands your domain structure and automatically leverages IsLabDB's revolutionary wormhole network for optimal performance! 🌟
+The **Enhanced ADT system** acts as an **intelligent translation layer** that understands your domain structure and automatically leverages WarpEngine's revolutionary wormhole network for optimal performance! 🌟

@@ -1,6 +1,6 @@
-defmodule IsLabDB.PerformanceBenchmark do
+defmodule WarpEngine.PerformanceBenchmark do
   @moduledoc """
-  Comprehensive performance benchmarking suite for IsLab Database.
+  Comprehensive performance benchmarking suite for WarpEngine Database.
 
   This module provides scientific-grade benchmarking to validate the physics-inspired
   database performance claims and establish baselines for future development.
@@ -15,19 +15,19 @@ defmodule IsLabDB.PerformanceBenchmark do
   - **Wormhole Networks**: Network topology routing performance
   - **Mixed Workloads**: Realistic application scenarios
   - **Scalability**: Performance under increasing load
-  - **Comparison**: IsLabDB vs traditional database systems
+  - **Comparison**: WarpEngine vs traditional database systems
 
   ## Usage
 
       # Run complete benchmark suite
-      IsLabDB.PerformanceBenchmark.run_full_suite()
+      WarpEngine.PerformanceBenchmark.run_full_suite()
 
       # Run specific benchmark categories
-      IsLabDB.PerformanceBenchmark.benchmark_core_operations()
-      IsLabDB.PerformanceBenchmark.benchmark_quantum_entanglement()
+      WarpEngine.PerformanceBenchmark.benchmark_core_operations()
+      WarpEngine.PerformanceBenchmark.benchmark_quantum_entanglement()
 
       # Compare against baseline
-      IsLabDB.PerformanceBenchmark.compare_against_baseline("/path/to/baseline.json")
+      WarpEngine.PerformanceBenchmark.compare_against_baseline("/path/to/baseline.json")
   """
 
   require Logger
@@ -57,7 +57,7 @@ defmodule IsLabDB.PerformanceBenchmark do
   Run the complete performance benchmark suite.
   """
   def run_full_suite(_opts \\ []) do
-    Logger.info("🚀 Starting IsLabDB Comprehensive Performance Benchmark Suite")
+    Logger.info("🚀 Starting WarpEngine Comprehensive Performance Benchmark Suite")
     Logger.info("=" |> String.duplicate(80))
 
     # Initialize system
@@ -105,7 +105,7 @@ defmodule IsLabDB.PerformanceBenchmark do
       }
 
       {time, result} = :timer.tc(fn ->
-        IsLabDB.cosmic_put(key, value)
+        WarpEngine.cosmic_put(key, value)
       end)
 
       {time, result}
@@ -116,7 +116,7 @@ defmodule IsLabDB.PerformanceBenchmark do
       key = "benchmark_put:#{i}"
 
       {time, result} = :timer.tc(fn ->
-        IsLabDB.cosmic_get(key)
+        WarpEngine.cosmic_get(key)
       end)
 
       {time, result}
@@ -127,7 +127,7 @@ defmodule IsLabDB.PerformanceBenchmark do
       key = "benchmark_put:#{i}"
 
       {time, result} = :timer.tc(fn ->
-        IsLabDB.cosmic_delete(key)
+        WarpEngine.cosmic_delete(key)
       end)
 
       {time, result}
@@ -154,7 +154,7 @@ defmodule IsLabDB.PerformanceBenchmark do
       key = "user:#{rem(i, 100)}"  # Cycle through 100 users
 
       {time, result} = :timer.tc(fn ->
-        IsLabDB.quantum_get(key)
+        WarpEngine.quantum_get(key)
       end)
 
       {time, result}
@@ -183,7 +183,7 @@ defmodule IsLabDB.PerformanceBenchmark do
 
       {time, result} = :timer.tc(fn ->
         # This will trigger gravitational routing
-        IsLabDB.cosmic_put(key, value, access_pattern: value.access_pattern)
+        WarpEngine.cosmic_put(key, value, access_pattern: value.access_pattern)
       end)
 
       {time, result}
@@ -191,7 +191,7 @@ defmodule IsLabDB.PerformanceBenchmark do
 
     # Measure routing accuracy
     routing_accuracy = measure_routing_accuracy()
-    load_balance_score = IsLabDB.analyze_load_distribution()
+    load_balance_score = WarpEngine.analyze_load_distribution()
 
     %{
       routing_performance: routing_results,
@@ -207,7 +207,7 @@ defmodule IsLabDB.PerformanceBenchmark do
     Logger.info("🕳️  Benchmarking Event Horizon Cache Performance")
 
     # Create test cache
-    {:ok, cache} = IsLabDB.EventHorizonCache.create_cache(:benchmark_cache, [
+    {:ok, cache} = WarpEngine.EventHorizonCache.create_cache(:benchmark_cache, [
       schwarzschild_radius: 10_000,
       hawking_temperature: 0.1,
       enable_compression: true,
@@ -224,12 +224,12 @@ defmodule IsLabDB.PerformanceBenchmark do
 
         # Put to cache
         {put_time, _} = :timer.tc(fn ->
-          IsLabDB.EventHorizonCache.put(cache, key, value, [priority: level])
+          WarpEngine.EventHorizonCache.put(cache, key, value, [priority: level])
         end)
 
         # Get from cache (placeholder - API may not exist yet)
         {get_time, _} = :timer.tc(fn ->
-          # IsLabDB.EventHorizonCache.get_from_level(cache, key, level)
+          # WarpEngine.EventHorizonCache.get_from_level(cache, key, level)
           {:ok, value}  # Placeholder
         end)
 
@@ -256,14 +256,14 @@ defmodule IsLabDB.PerformanceBenchmark do
     Logger.info("🌡️ Benchmarking Entropy Monitoring & Thermodynamics")
 
     # Ensure entropy registry is started
-    case Registry.start_link(keys: :unique, name: IsLabDB.EntropyRegistry) do
+    case Registry.start_link(keys: :unique, name: WarpEngine.EntropyRegistry) do
       {:ok, _} -> :ok
       {:error, {:already_started, _}} -> :ok  # Registry already started
     end
 
     # Create entropy monitor
     monitor_id = :benchmark_entropy_monitor
-    {:ok, _pid} = IsLabDB.EntropyMonitor.create_monitor(monitor_id, [
+    {:ok, _pid} = WarpEngine.EntropyMonitor.create_monitor(monitor_id, [
       monitoring_interval: 1000,
       enable_maxwell_demon: true,
       vacuum_stability_checks: true
@@ -273,7 +273,7 @@ defmodule IsLabDB.PerformanceBenchmark do
     entropy_calc_results = benchmark_operation("ENTROPY_CALC", fn _i ->
       {time, result} = :timer.tc(fn ->
         # Use the correct API method name
-        IsLabDB.EntropyMonitor.get_entropy_metrics(monitor_id)
+        WarpEngine.EntropyMonitor.get_entropy_metrics(monitor_id)
       end)
 
       {time, result}
@@ -287,7 +287,7 @@ defmodule IsLabDB.PerformanceBenchmark do
 
     # Cleanup: Shut down the entropy monitor
     try do
-      IsLabDB.EntropyMonitor.shutdown_monitor(monitor_id)
+      WarpEngine.EntropyMonitor.shutdown_monitor(monitor_id)
     rescue
       _ -> :ok  # Ignore shutdown errors
     end
@@ -306,7 +306,7 @@ defmodule IsLabDB.PerformanceBenchmark do
     Logger.info("🌀 Benchmarking Wormhole Network Performance")
 
     # Start the wormhole router
-    {:ok, _router_pid} = IsLabDB.WormholeRouter.start_link()
+    {:ok, _router_pid} = WarpEngine.WormholeRouter.start_link()
 
     # Benchmark route finding
     routing_results = benchmark_operation("WORMHOLE_ROUTING", fn i ->
@@ -315,7 +315,7 @@ defmodule IsLabDB.PerformanceBenchmark do
 
       {time, result} = :timer.tc(fn ->
         # Use the correct wormhole router call with keyword list
-        IsLabDB.WormholeRouter.find_route(IsLabDB.WormholeRouter, source, destination, [max_hops: 3])
+        WarpEngine.WormholeRouter.find_route(WarpEngine.WormholeRouter, source, destination, [max_hops: 3])
       end)
 
       {time, result}
@@ -326,7 +326,7 @@ defmodule IsLabDB.PerformanceBenchmark do
 
     # Cleanup: Stop the wormhole router
     try do
-      GenServer.stop(IsLabDB.WormholeRouter, :normal, 5000)
+      GenServer.stop(WarpEngine.WormholeRouter, :normal, 5000)
     rescue
       _ -> :ok  # Ignore shutdown errors
     end
@@ -370,7 +370,7 @@ defmodule IsLabDB.PerformanceBenchmark do
   end
 
   @doc """
-  Compare IsLabDB performance against traditional database operations.
+  Compare WarpEngine performance against traditional database operations.
   """
   def benchmark_vs_traditional_db() do
     Logger.info("⚖️  Benchmarking vs Traditional Database Operations")
@@ -381,12 +381,12 @@ defmodule IsLabDB.PerformanceBenchmark do
     # Benchmark raw ETS operations as baseline
     raw_ets_results = benchmark_raw_ets_operations()
 
-    # Compare with IsLabDB cosmic operations
+    # Compare with WarpEngine cosmic operations
     cosmic_results = benchmark_core_operations()
 
     %{
       raw_ets_baseline: raw_ets_results,
-      islab_db_cosmic: cosmic_results,
+      warp_engine_cosmic: cosmic_results,
       overhead_analysis: calculate_overhead_analysis(raw_ets_results, cosmic_results)
     }
   end
@@ -395,8 +395,8 @@ defmodule IsLabDB.PerformanceBenchmark do
 
   defp ensure_clean_system() do
     # Clean restart to ensure clean benchmarking environment
-    if Process.whereis(IsLabDB) do
-      GenServer.stop(IsLabDB)
+    if Process.whereis(WarpEngine) do
+      GenServer.stop(WarpEngine)
     end
 
     # Clean data directory for fresh start
@@ -405,7 +405,7 @@ defmodule IsLabDB.PerformanceBenchmark do
     end
 
     # Start fresh system
-    {:ok, _pid} = IsLabDB.start_link()
+    {:ok, _pid} = WarpEngine.start_link()
 
     # Wait for initialization
     :timer.sleep(1000)
@@ -430,7 +430,7 @@ defmodule IsLabDB.PerformanceBenchmark do
       memory_total: get_total_system_memory(),
       elixir_version: System.version(),
       erlang_version: :erlang.system_info(:version),
-      islab_db_version: get_islab_version()
+      warp_engine_version: get_warp_engine_version()
     }
   end
 
@@ -548,12 +548,12 @@ defmodule IsLabDB.PerformanceBenchmark do
   defp benchmark_raw_ets_operations(), do: %{}
   defp calculate_overhead_analysis(_raw, _cosmic), do: %{}
   defp get_total_system_memory(), do: 16_000_000_000
-  defp get_islab_version(), do: "1.0.0"
+  defp get_warp_engine_version(), do: "1.0.0"
   defp estimate_cpu_usage(), do: 45.2
 
   defp generate_benchmark_report(results) do
     timestamp = DateTime.utc_now() |> DateTime.to_iso8601()
-    filename = "islab_db_benchmark_#{timestamp}.json"
+    filename = "warp_engine_benchmark_#{timestamp}.json"
     report_path = "/tmp/#{filename}"
 
     # Convert PerformanceBenchmark structs to maps for JSON encoding

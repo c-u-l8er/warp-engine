@@ -1,4 +1,4 @@
-# 🌌 IsLab Database: System Architecture Specification
+# 🌌 WarpEngine Database: System Architecture Specification
 
 **Version:** 6.0.0  
 **Status:** Production Ready  
@@ -9,10 +9,10 @@
 
 ## 📖 Executive Summary
 
-IsLab Database is a revolutionary database system that uses fundamental physics principles as computational primitives. The system treats data storage as a computational universe, implementing quantum mechanics, relativity, thermodynamics, and theoretical physics concepts to achieve unprecedented performance, intelligent optimization, and elegant data organization.
+WarpEngine Database is a revolutionary database system that uses fundamental physics principles as computational primitives. The system treats data storage as a computational universe, implementing quantum mechanics, relativity, thermodynamics, and theoretical physics concepts to achieve unprecedented performance, intelligent optimization, and elegant data organization.
 
 ### 🎯 **Core Innovation**
-Instead of traditional database abstractions, IsLab DB implements:
+Instead of traditional database abstractions, WarpEngine DB implements:
 - **Quantum Entanglement** for smart pre-fetching and relationship management
 - **Spacetime Sharding** with gravitational routing for optimal data placement
 - **Black Hole Mechanics** for intelligent caching with Hawking radiation eviction
@@ -33,7 +33,7 @@ Instead of traditional database abstractions, IsLab DB implements:
 
 ### **Architectural Philosophy**
 
-IsLab DB follows four core architectural principles:
+WarpEngine DB follows four core architectural principles:
 
 1. **Physics-First Design**: Every component must have a valid physics analogy
 2. **Persistence-Aware Architecture**: All operations designed with filesystem elegance
@@ -43,7 +43,7 @@ IsLab DB follows four core architectural principles:
 ### **System Hierarchy**
 
 ```
-IsLab Database Computational Universe
+WarpEngine Database Computational Universe
 ├── Quantum Scale     → Individual records and small data structures
 ├── Atomic Scale      → Related data clusters and cache units
 ├── Molecular Scale   → Shard-level data organization and routing
@@ -57,7 +57,7 @@ IsLab Database Computational Universe
 ```mermaid
 graph TB
     subgraph "Galactic Scale - Universe Controller"
-        IsLabDB[IsLabDB GenServer]
+        WarpEngine[WarpEngine GenServer]
         CosmicConstants[Cosmic Constants]
         UniverseManifest[Universe Manifest]
     end
@@ -87,9 +87,9 @@ graph TB
         CosmicPersistence[Cosmic Persistence]
     end
     
-    IsLabDB --> EntropyMonitor
-    IsLabDB --> WormholeRouter
-    IsLabDB --> SpacetimeShard
+    WarpEngine --> EntropyMonitor
+    WarpEngine --> WormholeRouter
+    WarpEngine --> SpacetimeShard
     EntropyMonitor --> MaxwellDemon
     WormholeRouter --> GravitationalRouter
     SpacetimeShard --> EventHorizonCache
@@ -103,13 +103,13 @@ graph TB
 
 ## 🧬 **Core Components Architecture**
 
-### **1. Universe Controller (IsLabDB GenServer)**
+### **1. Universe Controller (WarpEngine GenServer)**
 
 **Purpose**: Central coordinator managing the computational universe
 
 **Architecture**:
 ```elixir
-defmodule IsLabDB do
+defmodule WarpEngine do
   use GenServer
   
   defstruct [
@@ -136,7 +136,7 @@ end
 
 **Architecture**:
 ```elixir
-defmodule IsLabDB.SpacetimeShard do
+defmodule WarpEngine.SpacetimeShard do
   defstruct [
     :shard_id,              # :hot_data, :warm_data, :cold_data
     :ets_table,             # ETS table for in-memory storage
@@ -171,7 +171,7 @@ Optimal_Shard = argmax(Gravitational_Score) for all available shards
 
 **Architecture**:
 ```elixir
-defmodule IsLabDB.QuantumIndex do
+defmodule WarpEngine.QuantumIndex do
   defstruct [
     :entanglement_table,    # ETS table storing quantum relationships
     :pattern_rules,         # Configurable entanglement patterns
@@ -210,7 +210,7 @@ end
 
 **Architecture**:
 ```elixir
-defmodule IsLabDB.EventHorizonCache do
+defmodule WarpEngine.EventHorizonCache do
   defstruct [
     :cache_id,              # Unique identifier for cache instance
     :ets_tables,            # Multi-level ETS table hierarchy
@@ -242,7 +242,7 @@ eviction_probability = base_rate × (1 - access_frequency) × time_since_access 
 
 **Architecture**:
 ```elixir
-defmodule IsLabDB.EntropyMonitor do
+defmodule WarpEngine.EntropyMonitor do
   defstruct [
     :monitor_id,            # Unique entropy monitor identifier
     :entropy_table,         # ETS table for entropy measurements
@@ -272,7 +272,7 @@ where p(x) = access_frequency(x) / total_accesses
 
 **Architecture**:
 ```elixir
-defmodule IsLabDB.WormholeRouter do
+defmodule WarpEngine.WormholeRouter do
   defstruct [
     :network_graph,         # Graph of nodes and connections
     :routing_cache,         # ETS table for cached optimal routes
@@ -310,7 +310,7 @@ optimal_route = dijkstra_shortest_path(source, destination, max_hops)
 
 ### **Cosmic Filesystem Structure**
 
-IsLab DB implements a **physics-inspired filesystem hierarchy** that mirrors the structure of the universe:
+WarpEngine DB implements a **physics-inspired filesystem hierarchy** that mirrors the structure of the universe:
 
 ```
 /data/
@@ -416,7 +416,7 @@ end
 
 **WAL Implementation Pattern:**
 ```elixir
-defmodule IsLabDB.WAL do
+defmodule WarpEngine.WAL do
   @moduledoc "Write-Ahead Log for ultra-high performance persistence"
   
   def cosmic_put_v2(key, value, shard_id) do
@@ -545,25 +545,25 @@ end
 
 ```elixir
 # Basic cosmic operations
-{:ok, :stored, shard, operation_time} = IsLabDB.cosmic_put(key, value, opts)
-{:ok, value, shard, operation_time} = IsLabDB.cosmic_get(key)
-{:ok, deleted_from, operation_time} = IsLabDB.cosmic_delete(key)
+{:ok, :stored, shard, operation_time} = WarpEngine.cosmic_put(key, value, opts)
+{:ok, value, shard, operation_time} = WarpEngine.cosmic_get(key)
+{:ok, deleted_from, operation_time} = WarpEngine.cosmic_delete(key)
 
 # Quantum operations
-{:ok, entangled_data, quantum_metrics} = IsLabDB.quantum_get(key)
-:ok = IsLabDB.entangle_keys(primary_key, [related_keys])
+{:ok, entangled_data, quantum_metrics} = WarpEngine.quantum_get(key)
+:ok = WarpEngine.entangle_keys(primary_key, [related_keys])
 
 # System operations
-metrics = IsLabDB.cosmic_metrics()
-{:ok, :rebalanced, entropy_reduction} = IsLabDB.trigger_entropy_rebalancing(strategy)
+metrics = WarpEngine.cosmic_metrics()
+{:ok, :rebalanced, entropy_reduction} = WarpEngine.trigger_entropy_rebalancing(strategy)
 ```
 
 ### **Advanced Operations**
 
 ```elixir
 # Spacetime shard operations
-shard_metrics = IsLabDB.get_spacetime_shard_metrics()
-{:ok, :optimized} = IsLabDB.force_gravitational_rebalancing()
+shard_metrics = WarpEngine.get_spacetime_shard_metrics()
+{:ok, :optimized} = WarpEngine.force_gravitational_rebalancing()
 
 # Wormhole network operations  
 {:ok, route, cost} = WormholeRouter.find_route(source, destination, opts)
@@ -583,8 +583,8 @@ entropy_metrics = EntropyMonitor.entropy_metrics(monitor_id)
 
 ```elixir
 # Physics constants configuration
-IsLabDB.update_cosmic_constant(:entropy_rebalance_threshold, 2.8)
-IsLabDB.get_physics_laws(:hot_data_shard)
+WarpEngine.update_cosmic_constant(:entropy_rebalance_threshold, 2.8)
+WarpEngine.get_physics_laws(:hot_data_shard)
 
 # Entanglement pattern configuration
 pattern = %{
@@ -592,7 +592,7 @@ pattern = %{
   entangled_keys: ["profile:{user_id}", "settings:{user_id}"],
   strength: 0.8
 }
-IsLabDB.configure_entanglement_pattern("user_profile", pattern)
+WarpEngine.configure_entanglement_pattern("user_profile", pattern)
 ```
 
 ---
@@ -645,7 +645,7 @@ IsLabDB.configure_entanglement_pattern("user_profile", pattern)
 
 **Process Hierarchy**:
 ```
-IsLabDB (GenServer)
+WarpEngine (GenServer)
 ├── EntropyMonitor (GenServer)
 │   └── MaxwellDemon (Task)
 ├── WormholeRouter (GenServer)
@@ -807,7 +807,7 @@ Wormhole Network│   -    │   -    │   -    │   -    │   -    │   ✓
 **Database Integration Patterns**:
 ```elixir
 # Traditional database integration
-defmodule IsLabDB.Adapters.PostgreSQL do
+defmodule WarpEngine.Adapters.PostgreSQL do
   def sync_from_postgres(table, opts \\ []) do
     # Migrate traditional data to cosmic structure
     data = fetch_postgres_data(table)
@@ -817,7 +817,7 @@ defmodule IsLabDB.Adapters.PostgreSQL do
       value = transform_to_cosmic_format(row)
       shard = determine_optimal_shard(key, value)
       
-      IsLabDB.cosmic_put(key, value, shard: shard)
+      WarpEngine.cosmic_put(key, value, shard: shard)
     end)
   end
 end
@@ -826,7 +826,7 @@ end
 **Message Queue Integration**:
 ```elixir
 # Real-time data streaming
-defmodule IsLabDB.Streams.Kafka do
+defmodule WarpEngine.Streams.Kafka do
   def consume_stream(topic, consumer_group) do
     KafkaEx.stream(topic, consumer_group)
     |> Stream.each(fn message ->
@@ -843,7 +843,7 @@ end
 
 **Machine Learning Integration**:
 ```elixir
-defmodule IsLabDB.ML.PredictiveOptimization do
+defmodule WarpEngine.ML.PredictiveOptimization do
   def train_routing_model(historical_data) do
     features = extract_features(historical_data)
     model = ML.train_neural_network(features, optimization_outcomes)
@@ -872,7 +872,7 @@ end
 
 **Core Metrics Collection**:
 ```elixir
-defmodule IsLabDB.Metrics.Collector do
+defmodule WarpEngine.Metrics.Collector do
   @metrics [
     # Performance metrics
     :cosmic_operation_latency,
@@ -930,7 +930,7 @@ end
 
 **Health Check Implementation**:
 ```elixir
-defmodule IsLabDB.Health do
+defmodule WarpEngine.Health do
   def cosmic_health_check() do
     %{
       universe_stability: check_universe_stability(),
@@ -943,7 +943,7 @@ defmodule IsLabDB.Health do
   end
   
   defp check_universe_stability() do
-    case IsLabDB.cosmic_metrics() do
+    case WarpEngine.cosmic_metrics() do
       %{universe_state: :stable} -> :healthy
       %{universe_state: :expanding} -> :warning  
       %{universe_state: :contracting} -> :critical
@@ -984,7 +984,7 @@ RUN MIX_ENV=prod mix compile
 RUN MIX_ENV=prod mix release
 
 # Cosmic entrypoint
-CMD ["_build/prod/rel/islab_db/bin/islab_db", "start"]
+CMD ["_build/prod/rel/warp_engine/bin/warp_engine", "start"]
 ```
 
 **Kubernetes Configuration**:
@@ -992,17 +992,17 @@ CMD ["_build/prod/rel/islab_db/bin/islab_db", "start"]
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: islab-db
+  name: warp-engine-db
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: islab-db
+      app: warp-engine-db
   template:
     spec:
       containers:
-      - name: islab-db
-        image: islab-db:latest
+      - name: warp-engine-db
+        image: warp-engine-db:latest
         env:
         - name: COSMIC_DATA_ROOT
           value: "/data"
@@ -1028,7 +1028,7 @@ spec:
 
 **Cosmic Snapshot Creation**:
 ```elixir
-defmodule IsLabDB.CosmicBackup do
+defmodule WarpEngine.CosmicBackup do
   def create_universe_snapshot(snapshot_name) do
     timestamp = DateTime.utc_now() |> DateTime.to_iso8601()
     snapshot_path = "/data/backups/snapshots/#{snapshot_name}_#{timestamp}"
@@ -1056,7 +1056,7 @@ end
 
 **Horizontal Scaling Architecture**:
 ```elixir
-defmodule IsLabDB.CosmicCluster do
+defmodule WarpEngine.CosmicCluster do
   # Multi-universe coordination
   def coordinate_universes(universe_nodes) do
     Enum.each(universe_nodes, fn node ->
@@ -1122,7 +1122,7 @@ end
 
 **Quantum Encryption Integration**:
 ```elixir
-defmodule IsLabDB.QuantumSecurity do
+defmodule WarpEngine.QuantumSecurity do
   def encrypt_cosmic_data(data, key, quantum_state \\ :superposition) do
     case quantum_state do
       :superposition -> 
@@ -1184,7 +1184,7 @@ defmodule QuantumMechanicsPropertyTest do
               strength <- float(min: 0.0, max: 1.0) do
       
       # Create entanglement
-      :ok = IsLabDB.entangle_keys(key1, [key2], strength)
+      :ok = WarpEngine.entangle_keys(key1, [key2], strength)
       
       # Validate quantum properties
       assert entanglement_strength(key1, key2) == strength
@@ -1315,7 +1315,7 @@ docs/
 
 ### **For AI Systems and LLMs**
 
-When integrating with IsLab Database, consider these key points:
+When integrating with WarpEngine Database, consider these key points:
 
 1. **Physics-Aware Operations**: Understand that all operations follow physics principles
 2. **Asynchronous Nature**: Most operations are non-blocking with async persistence
@@ -1343,7 +1343,7 @@ defmodule MigrationHelper do
       shard_hint = analyze_access_patterns(row)
       
       # Store in cosmic structure
-      IsLabDB.cosmic_put(cosmic_key, cosmic_value, shard: shard_hint)
+      WarpEngine.cosmic_put(cosmic_key, cosmic_value, shard: shard_hint)
     end)
   end
 end
@@ -1377,7 +1377,7 @@ end
 
 **Document Version**: 6.0.0  
 **Last Updated**: January 2025  
-**Maintained By**: IsLab Database Architecture Team  
-**Contact**: architecture@islab-db.com
+**Maintained By**: WarpEngine Database Architecture Team  
+**Contact**: architecture@warp-engine-db.com
 
-*This specification represents the complete architectural vision of IsLab Database as a physics-inspired computational universe.* 🌌✨
+*This specification represents the complete architectural vision of WarpEngine Database as a physics-inspired computational universe.* 🌌✨

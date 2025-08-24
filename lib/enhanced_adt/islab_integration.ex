@@ -1,14 +1,14 @@
-defmodule EnhancedADT.IsLabDBIntegration do
+defmodule EnhancedADT.WarpEngineIntegration do
   @moduledoc """
-  Automatic IsLabDB integration for Enhanced ADT operations.
+  Automatic WarpEngine integration for Enhanced ADT operations.
 
   This module provides seamless translation from mathematical ADT operations
-  to optimized IsLabDB physics commands. Domain models become intelligent
+  to optimized WarpEngine physics commands. Domain models become intelligent
   database operations while preserving mathematical elegance.
 
   ## Integration Features
 
-  - **Automatic Translation**: ADT operations become IsLabDB physics commands
+  - **Automatic Translation**: ADT operations become WarpEngine physics commands
   - **Physics Configuration**: ADT annotations configure quantum/gravitational behavior
   - **Wormhole Integration**: Cross-references automatically create wormhole routes
   - **Quantum Entanglement**: Related data automatically creates entanglements
@@ -17,12 +17,12 @@ defmodule EnhancedADT.IsLabDBIntegration do
   ## Usage Pattern
 
   ```elixir
-  use EnhancedADT.IsLabDBIntegration
+  use EnhancedADT.WarpEngineIntegration
 
-  # Enhanced ADT operations automatically translate to IsLabDB
+  # Enhanced ADT operations automatically translate to WarpEngine
   fold user do
     User(id, name, preferences, score) ->
-      # Automatically becomes: IsLabDB.cosmic_put("user:\#{id}", user, physics_context)
+      # Automatically becomes: WarpEngine.cosmic_put("user:\#{id}", user, physics_context)
       store_user_with_automatic_physics(user)
   end
   ```
@@ -31,36 +31,36 @@ defmodule EnhancedADT.IsLabDBIntegration do
   require Logger
 
   @doc """
-  Enable Enhanced ADT with complete IsLabDB integration.
+  Enable Enhanced ADT with complete WarpEngine integration.
 
   This macro sets up automatic translation from mathematical ADT operations
-  to optimized IsLabDB physics commands.
+  to optimized WarpEngine physics commands.
   """
   defmacro __using__(_opts) do
     quote do
       import EnhancedADT
-      import EnhancedADT.IsLabDBIntegration.Translators
+      import EnhancedADT.WarpEngineIntegration.Translators
       import EnhancedADT.WormholeAnalyzer
       import EnhancedADT.QuantumAnalyzer
       import EnhancedADT.Physics
 
-      # Enhanced ADT operations with automatic IsLabDB integration
+      # Enhanced ADT operations with automatic WarpEngine integration
     end
   end
 end
 
-defmodule EnhancedADT.IsLabDBIntegration.Translators do
+defmodule EnhancedADT.WarpEngineIntegration.Translators do
   @moduledoc """
-  Translation functions from Enhanced ADT operations to IsLabDB commands.
+  Translation functions from Enhanced ADT operations to WarpEngine commands.
   """
 
   require Logger
 
   @doc """
-  Translate Enhanced ADT data to IsLabDB cosmic_put operation.
+  Translate Enhanced ADT data to WarpEngine cosmic_put operation.
 
   Automatically extracts physics parameters from ADT structure and annotations,
-  then executes optimized IsLabDB storage with intelligent routing.
+  then executes optimized WarpEngine storage with intelligent routing.
   """
   def cosmic_put_from_adt(key, %module{} = adt_data, opts \\ []) do
     # Extract physics configuration from ADT
@@ -72,8 +72,8 @@ defmodule EnhancedADT.IsLabDBIntegration.Translators do
     # Analyze for automatic wormhole creation
     wormhole_analysis = analyze_wormhole_opportunities(key, adt_data, final_physics)
 
-    # Execute IsLabDB operation with physics enhancement
-    result = case IsLabDB.cosmic_put(key, adt_data, final_physics) do
+    # Execute WarpEngine operation with physics enhancement
+    result = case WarpEngine.cosmic_put(key, adt_data, final_physics) do
       {:ok, :stored, shard_id, operation_time} ->
         # Post-storage optimizations
         post_storage_optimization(key, adt_data, shard_id, wormhole_analysis)
@@ -88,7 +88,7 @@ defmodule EnhancedADT.IsLabDBIntegration.Translators do
   end
 
   @doc """
-  Translate Enhanced ADT query to IsLabDB cosmic_get operation.
+  Translate Enhanced ADT query to WarpEngine cosmic_get operation.
 
   Automatically detects optimal retrieval strategy and applies quantum
   entanglement for related data pre-fetching.
@@ -110,7 +110,7 @@ defmodule EnhancedADT.IsLabDBIntegration.Translators do
   end
 
   @doc """
-  Translate Enhanced ADT batch operations to optimized IsLabDB batch commands.
+  Translate Enhanced ADT batch operations to optimized WarpEngine batch commands.
 
   Automatically groups related operations and applies batch optimization
   strategies based on ADT structure analysis.
@@ -309,7 +309,7 @@ defmodule EnhancedADT.IsLabDBIntegration.Translators do
   defp create_wormholes_from_analysis(source_key, beneficial_routes) do
     Enum.each(beneficial_routes, fn route ->
       Enum.each(route.target_keys, fn target_key ->
-        case IsLabDB.WormholeRouter.establish_wormhole(source_key, target_key, route.strength) do
+        case WarpEngine.WormholeRouter.establish_wormhole(source_key, target_key, route.strength) do
           {:ok, _route_id} ->
             Logger.debug("🌀 Wormhole established: #{source_key} -> #{target_key} (strength: #{route.strength})")
 
@@ -325,7 +325,7 @@ defmodule EnhancedADT.IsLabDBIntegration.Translators do
     entanglement_candidates = find_entanglement_candidates(adt_data)
 
     if length(entanglement_candidates) > 0 do
-      case IsLabDB.create_quantum_entanglement(key, entanglement_candidates, 0.8) do
+      case WarpEngine.create_quantum_entanglement(key, entanglement_candidates, 0.8) do
         {:ok, _entanglement_id} ->
           Logger.debug("⚛️ Quantum entanglement created: #{key} <-> #{inspect(entanglement_candidates)}")
 
@@ -387,10 +387,10 @@ defmodule EnhancedADT.IsLabDBIntegration.Translators do
 
   defp attempt_wormhole_retrieval(key) do
     # Check if there are any wormhole routes for this key
-    case IsLabDB.WormholeRouter.find_route(key, "*") do
+    case WarpEngine.WormholeRouter.find_route(key, "*") do
       {:ok, route, _cost} ->
         # Use wormhole route for retrieval
-        case IsLabDB.WormholeRouter.traverse_route_for_data(route) do
+        case WarpEngine.WormholeRouter.traverse_route_for_data(route) do
           {:ok, data} ->
             {:ok, data, :wormhole_route, 50}  # Assume 50μs for wormhole traversal
           error ->
@@ -404,9 +404,9 @@ defmodule EnhancedADT.IsLabDBIntegration.Translators do
 
   defp fallback_to_standard_retrieval(key, context) do
     if context.quantum_enhancement do
-      IsLabDB.quantum_get(key)
+      WarpEngine.quantum_get(key)
     else
-      IsLabDB.cosmic_get(key)
+      WarpEngine.cosmic_get(key)
     end
   end
 
@@ -509,7 +509,7 @@ defmodule EnhancedADT.IsLabDBIntegration.Translators do
 
   defp execute_single_operation({:put, key, value}), do: cosmic_put_from_adt(key, value)
   defp execute_single_operation({:get, key}), do: cosmic_get_for_adt(key)
-  defp execute_single_operation({:delete, key}), do: IsLabDB.cosmic_delete(key)
+  defp execute_single_operation({:delete, key}), do: WarpEngine.cosmic_delete(key)
   defp execute_single_operation(op), do: {:error, {:unknown_operation, op}}
 
   defp estimate_batch_performance_gain(operations) do

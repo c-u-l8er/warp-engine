@@ -1,8 +1,8 @@
-# RabbitMQ vs IsLabDB Performance Comparison
+# RabbitMQ vs WarpEngine Performance Comparison
 # Using proper RabbitMQ tools and realistic benchmarks
 
 IO.puts """
-🐰 RabbitMQ vs IsLabDB: Message/Data Performance Analysis
+🐰 RabbitMQ vs WarpEngine: Message/Data Performance Analysis
 ═══════════════════════════════════════════════════════════
 
 RABBITMQ RESULTS (using official tools):
@@ -54,7 +54,7 @@ defmodule RabbitMQBenchmark do
     IO.puts "   🚀 Running RabbitMQ benchmarks with available tools..."
 
     # Create a test queue
-    queue_name = "islabdb_perf_test_#{:rand.uniform(10000)}"
+    queue_name = "warp_enginedb_perf_test_#{:rand.uniform(10000)}"
 
     # Use explicit case-based result building to avoid variable scoping issues
     result =
@@ -189,16 +189,16 @@ defmodule RabbitMQBenchmark do
     }
   end
 
-  def benchmark_islab_messaging() do
-    IO.puts "\n🌌 Benchmarking IsLabDB as a message store..."
+  def benchmark_warp_engine_messaging() do
+    IO.puts "\n🌌 Benchmarking WarpEngine as a message store..."
 
-    # Check if IsLabDB is available
-    case GenServer.whereis(IsLabDB) do
+    # Check if WarpEngine is available
+    case GenServer.whereis(WarpEngine) do
       nil ->
-        IO.puts "   ⚠️ IsLabDB not available, using previous benchmark results:"
-        IO.puts "   🌌 IsLabDB PUT (messaging): 23,492 msgs/sec (measured)"
-        IO.puts "   🌌 IsLabDB GET (retrieval): 219,587 msgs/sec (measured)"
-        IO.puts "   🌌 IsLabDB Quantum: 37,244 msgs/sec (measured)"
+        IO.puts "   ⚠️ WarpEngine not available, using previous benchmark results:"
+        IO.puts "   🌌 WarpEngine PUT (messaging): 23,492 msgs/sec (measured)"
+        IO.puts "   🌌 WarpEngine GET (retrieval): 219,587 msgs/sec (measured)"
+        IO.puts "   🌌 WarpEngine Quantum: 37,244 msgs/sec (measured)"
 
         %{
           publish_throughput: 23492.0,
@@ -210,8 +210,8 @@ defmodule RabbitMQBenchmark do
 
       _pid ->
         try do
-          # Simulate messaging pattern with IsLabDB
-          IO.puts "   📊 Testing message-like operations with IsLabDB..."
+          # Simulate messaging pattern with WarpEngine
+          IO.puts "   📊 Testing message-like operations with WarpEngine..."
 
           # Message publishing simulation (PUT operations)
           {put_time_us, _} = :timer.tc(fn ->
@@ -225,7 +225,7 @@ defmodule RabbitMQBenchmark do
                 timestamp: :os.system_time(),
                 headers: %{content_type: "text/plain", priority: 5}
               }
-              IsLabDB.cosmic_put(message_key, message_value, access_pattern: :hot)
+              WarpEngine.cosmic_put(message_key, message_value, access_pattern: :hot)
             end
           end)
 
@@ -237,7 +237,7 @@ defmodule RabbitMQBenchmark do
             for i <- 1..1000 do
               queue_name = "message_queue_#{rem(i, 10)}"
               message_key = "msg:#{queue_name}:#{i}"
-              IsLabDB.cosmic_get(message_key)
+              WarpEngine.cosmic_get(message_key)
             end
           end)
 
@@ -250,7 +250,7 @@ defmodule RabbitMQBenchmark do
               queue_name = "message_queue_#{rem(i, 10)}"
               message_key = "msg:#{queue_name}:#{i}"
               try do
-                IsLabDB.quantum_get(message_key)
+                WarpEngine.quantum_get(message_key)
               rescue
                 _ -> :ok
               end
@@ -259,9 +259,9 @@ defmodule RabbitMQBenchmark do
 
           quantum_throughput = 100 * 1_000_000 / quantum_time_us
 
-          IO.puts "   ✅ IsLabDB MESSAGE STORE: #{Float.round(publish_throughput, 0)} msgs/sec"
-          IO.puts "   ✅ IsLabDB MESSAGE CONSUME: #{Float.round(consume_throughput, 0)} msgs/sec"
-          IO.puts "   ✅ IsLabDB QUANTUM MESSAGES: #{Float.round(quantum_throughput, 0)} msgs/sec"
+          IO.puts "   ✅ WarpEngine MESSAGE STORE: #{Float.round(publish_throughput, 0)} msgs/sec"
+          IO.puts "   ✅ WarpEngine MESSAGE CONSUME: #{Float.round(consume_throughput, 0)} msgs/sec"
+          IO.puts "   ✅ WarpEngine QUANTUM MESSAGES: #{Float.round(quantum_throughput, 0)} msgs/sec"
           IO.puts "   ✅ Publish latency: #{Float.round(publish_latency, 1)}μs"
           IO.puts "   ✅ Consume latency: #{Float.round(consume_latency, 1)}μs"
 
@@ -275,10 +275,10 @@ defmodule RabbitMQBenchmark do
 
         rescue
           error ->
-            IO.puts "   ⚠️ IsLabDB messaging test failed: #{inspect(error)}"
+            IO.puts "   ⚠️ WarpEngine messaging test failed: #{inspect(error)}"
             IO.puts "   💡 Using previous benchmark results:"
-            IO.puts "   🌌 IsLabDB PUT (messaging): 23,492 msgs/sec (measured)"
-            IO.puts "   🌌 IsLabDB GET (retrieval): 219,587 msgs/sec (measured)"
+            IO.puts "   🌌 WarpEngine PUT (messaging): 23,492 msgs/sec (measured)"
+            IO.puts "   🌌 WarpEngine GET (retrieval): 219,587 msgs/sec (measured)"
 
             %{
               publish_throughput: 23492.0,
@@ -291,7 +291,7 @@ defmodule RabbitMQBenchmark do
     end
   end
 
-  def generate_comparison_report(rabbitmq_results, islab_results) do
+  def generate_comparison_report(rabbitmq_results, warp_engine_results) do
     IO.puts "\n📊 RABBITMQ vs ISLABDB COMPARISON"
     IO.puts "=" |> String.duplicate(50)
 
@@ -318,13 +318,13 @@ defmodule RabbitMQBenchmark do
     IO.puts format_row("RabbitMQ", actual_pub, actual_con, actual_lat,
                       "#{rabbitmq_results.method} - #{status}")
 
-    # IsLabDB results
-    IO.puts format_row("IsLabDB (Messages)", islab_results.publish_throughput,
-                      islab_results.consume_throughput, islab_results.publish_latency,
+    # WarpEngine results
+    IO.puts format_row("WarpEngine (Messages)", warp_engine_results.publish_throughput,
+                      warp_engine_results.consume_throughput, warp_engine_results.publish_latency,
                       "Physics + persistence")
 
-    IO.puts format_row("IsLabDB (Quantum)", islab_results.quantum_throughput,
-                      islab_results.quantum_throughput, "N/A",
+    IO.puts format_row("WarpEngine (Quantum)", warp_engine_results.quantum_throughput,
+                      warp_engine_results.quantum_throughput, "N/A",
                       "Entangled retrieval")
 
     # Analysis - use ACTUAL measured values for comparison
@@ -333,36 +333,36 @@ defmodule RabbitMQBenchmark do
     rabbit_pub_typical = 25000.0  # Industry standard
     rabbit_con_typical = 35000.0   # Industry standard
 
-    islab_pub = islab_results.publish_throughput
-    islab_con = islab_results.consume_throughput
+    warp_engine_pub = warp_engine_results.publish_throughput
+    warp_engine_con = warp_engine_results.consume_throughput
 
     # Compare against both measured and typical
-    pub_vs_measured = islab_pub / rabbit_pub_measured * 100
-    con_vs_measured = islab_con / rabbit_con_measured * 100
-    pub_vs_typical = islab_pub / rabbit_pub_typical * 100
-    con_vs_typical = islab_con / rabbit_con_typical * 100
+    pub_vs_measured = warp_engine_pub / rabbit_pub_measured * 100
+    con_vs_measured = warp_engine_con / rabbit_con_measured * 100
+    pub_vs_typical = warp_engine_pub / rabbit_pub_typical * 100
+    con_vs_typical = warp_engine_con / rabbit_con_typical * 100
 
     IO.puts """
 
     🎯 **MESSAGING PERFORMANCE COMPARISON**:
     ═══════════════════════════════════════════════════════════════
 
-    ✅ **IsLabDB vs RabbitMQ Performance**:
+    ✅ **WarpEngine vs RabbitMQ Performance**:
 
     📊 **vs Measured RabbitMQ (with tool overhead)**:
-       • Message Store: #{Float.round(pub_vs_measured, 1)}% (#{if pub_vs_measured > 100, do: "#{Float.round(pub_vs_measured / 100, 1)}x FASTER!", else: "#{Float.round(rabbit_pub_measured / islab_pub, 1)}x slower"})
-       • Message Retrieve: #{Float.round(con_vs_measured, 1)}% (#{Float.round(rabbit_con_measured / islab_con, 1)}x slower)
+       • Message Store: #{Float.round(pub_vs_measured, 1)}% (#{if pub_vs_measured > 100, do: "#{Float.round(pub_vs_measured / 100, 1)}x FASTER!", else: "#{Float.round(rabbit_pub_measured / warp_engine_pub, 1)}x slower"})
+       • Message Retrieve: #{Float.round(con_vs_measured, 1)}% (#{Float.round(rabbit_con_measured / warp_engine_con, 1)}x slower)
 
     📊 **vs Typical RabbitMQ (realistic performance)**:
-       • Message Store: #{Float.round(pub_vs_typical, 1)}% of RabbitMQ (#{Float.round(rabbit_pub_typical / islab_pub, 1)}x gap)
-       • Message Retrieve: #{Float.round(con_vs_typical, 1)}% of RabbitMQ (#{Float.round(rabbit_con_typical / islab_con, 1)}x gap)
+       • Message Store: #{Float.round(pub_vs_typical, 1)}% of RabbitMQ (#{Float.round(rabbit_pub_typical / warp_engine_pub, 1)}x gap)
+       • Message Retrieve: #{Float.round(con_vs_typical, 1)}% of RabbitMQ (#{Float.round(rabbit_con_typical / warp_engine_con, 1)}x gap)
 
     💡 **Tool Overhead Analysis**:
        • RabbitMQ measured publish: #{Float.round(rabbit_pub_measured, 0)} msgs/sec (tool limited)
        • RabbitMQ typical publish: #{Float.round(rabbit_pub_typical, 0)} msgs/sec (realistic)
        • Tool overhead impact: #{Float.round(rabbit_pub_typical / rabbit_pub_measured, 1)}x performance loss!
 
-    🌟 **IsLabDB Messaging Advantages**:
+    🌟 **WarpEngine Messaging Advantages**:
        • Persistent message storage (RabbitMQ can lose messages if not configured)
        • Quantum entanglement for related message retrieval
        • Physics-inspired message routing and optimization
@@ -378,7 +378,7 @@ defmodule RabbitMQBenchmark do
        • Microservice communication
        • Fire-and-forget message delivery
 
-    🌌 **IsLabDB Best For**:
+    🌌 **WarpEngine Best For**:
        • Intelligent message storage with relationships
        • Messages that need complex querying
        • Long-term message persistence and analytics
@@ -387,15 +387,15 @@ defmodule RabbitMQBenchmark do
 
     🚀 **Architectural Trade-offs**:
        • RabbitMQ: Specialized message broker (optimized for throughput)
-       • IsLabDB: Intelligent database with messaging capabilities
+       • WarpEngine: Intelligent database with messaging capabilities
        • Trade-off: ~#{Float.round((100 - pub_vs_typical), 0)}% speed for 10x more intelligence
 
-    💡 **Key Insight**: IsLabDB achieves #{Float.round(pub_vs_typical, 0)}% of realistic
+    💡 **Key Insight**: WarpEngine achieves #{Float.round(pub_vs_typical, 0)}% of realistic
     RabbitMQ throughput while providing full database capabilities,
     persistence, and physics-inspired intelligence features!
 
     🔧 **Benchmarking Lesson**: Tool overhead (rabbitmqadmin) reduced measured
-    RabbitMQ performance by #{Float.round((1 - rabbit_pub_measured / rabbit_pub_typical) * 100, 0)}%, making IsLabDB look
+    RabbitMQ performance by #{Float.round((1 - rabbit_pub_measured / rabbit_pub_typical) * 100, 0)}%, making WarpEngine look
     #{Float.round(pub_vs_measured, 0)}% faster than measured but #{Float.round(pub_vs_typical, 0)}% of realistic performance.
     """
 
@@ -404,11 +404,11 @@ defmodule RabbitMQBenchmark do
 
     📊 **Performance Context**:
        • RabbitMQ: Purpose-built message broker (10+ years optimized)
-       • IsLabDB: Full database with messaging capabilities
+       • WarpEngine: Full database with messaging capabilities
        • RabbitMQ strength: Pure message throughput
-       • IsLabDB strength: Intelligent data + messaging hybrid
+       • WarpEngine strength: Intelligent data + messaging hybrid
 
-    🏆 **Competitive Position**: IsLabDB successfully bridges the gap
+    🏆 **Competitive Position**: WarpEngine successfully bridges the gap
     between traditional message brokers and intelligent databases,
     offering competitive messaging performance with revolutionary
     data intelligence features.
@@ -430,38 +430,38 @@ defmodule RabbitMQBenchmark do
   end
 end
 
-# Load IsLabDB for comparison
-Code.prepend_path("_build/dev/lib/islab_db/ebin")
+# Load WarpEngine for comparison
+Code.prepend_path("_build/dev/lib/warp_engine/ebin")
 
-# Create a safe temp directory for IsLabDB
-temp_dir = "/tmp/islab_messaging_test"
+# Create a safe temp directory for WarpEngine
+temp_dir = "/tmp/warp_engine_messaging_test"
 File.mkdir_p!(temp_dir)
 
-# Try to start IsLabDB with minimal configuration
+# Try to start WarpEngine with minimal configuration
 try do
-  Application.put_env(:islab_db, :data_dir, temp_dir)
-  Application.ensure_all_started(:islab_db)
+  Application.put_env(:warp_engine, :data_dir, temp_dir)
+  Application.ensure_all_started(:warp_engine)
 
-  # Ensure IsLabDB is properly started
-  case GenServer.whereis(IsLabDB) do
+  # Ensure WarpEngine is properly started
+  case GenServer.whereis(WarpEngine) do
     nil ->
-      IO.puts "🔧 Starting IsLabDB manually..."
-      {:ok, _pid} = IsLabDB.start_link([data_dir: temp_dir])
+      IO.puts "🔧 Starting WarpEngine manually..."
+      {:ok, _pid} = WarpEngine.start_link([data_dir: temp_dir])
     _pid ->
-      IO.puts "✅ IsLabDB already running"
+      IO.puts "✅ WarpEngine already running"
   end
 
   Process.sleep(1000)
 rescue
   error ->
-    IO.puts "⚠️ IsLabDB startup failed: #{inspect(error)}"
+    IO.puts "⚠️ WarpEngine startup failed: #{inspect(error)}"
     IO.puts "💡 Will use previous benchmark results for comparison"
 end
 
 # Run benchmarks
 rabbitmq_results = RabbitMQBenchmark.check_rabbitmq_status()
-islab_results = RabbitMQBenchmark.benchmark_islab_messaging()
+warp_engine_results = RabbitMQBenchmark.benchmark_warp_engine_messaging()
 
-RabbitMQBenchmark.generate_comparison_report(rabbitmq_results, islab_results)
+RabbitMQBenchmark.generate_comparison_report(rabbitmq_results, warp_engine_results)
 
-IO.puts "\n✨ RabbitMQ vs IsLabDB messaging comparison completed! 🎯"
+IO.puts "\n✨ RabbitMQ vs WarpEngine messaging comparison completed! 🎯"

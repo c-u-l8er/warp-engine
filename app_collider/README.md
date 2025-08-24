@@ -1,10 +1,10 @@
 # 🚀 AppCollider: Aurora-Powered Spatial Intelligence Platform
 
-**Revolutionary showcase of Autogentic + IsLabDB integration for autonomous spatial intelligence**
+**Revolutionary showcase of Autogentic + WarpEngine integration for autonomous spatial intelligence**
 
 AppCollider demonstrates the power of combining two revolutionary technologies:
 - **🧠 Autogentic**: Multi-agent AI architecture with collaborative reasoning and autonomous intelligence
-- **⚡ IsLabDB**: Physics-enhanced database with gravitational routing, quantum entanglement, and wormhole networks  
+- **⚡ WarpEngine**: Physics-enhanced database with gravitational routing, quantum entanglement, and wormhole networks  
 - **🌟 Aurora Architecture**: AI-first spatial intelligence for the autonomous economy
 
 ## 🌊 The Aurora Paradigm
@@ -15,7 +15,7 @@ AppCollider showcases how **Aurora's AI-first architecture** transforms spatial 
 - **Physics-Enhanced Performance**: Sub-microsecond operations through quantum optimization  
 - **Autonomous Intelligence Generation**: Self-discovering insights without explicit queries
 
-## ⚡ Autogentic + IsLabDB Integration Showcase
+## ⚡ Autogentic + WarpEngine Integration Showcase
 
 ### 🧠 Autogentic Multi-Agent Intelligence
 - **Collaborative Spatial Reasoning**: Agents coordinate to solve complex spatial problems
@@ -30,11 +30,11 @@ AppCollider showcases how **Aurora's AI-first architecture** transforms spatial 
 - **Agent Effects System**: Seamless integration with external systems and databases
 - **Behavioral Pattern Learning**: Agents evolve and improve over time
 
-### ⚡ IsLabDB Physics-Enhanced Storage
+### ⚡ WarpEngine Physics-Enhanced Storage
 - **Gravitational Routing**: Data placement based on access patterns and importance
   ```elixir
   # High-importance entities automatically routed to hot shards
-  IsLabDB.cosmic_put("critical_entity", entity_data, [
+  WarpEngine.cosmic_put("critical_entity", entity_data, [
     gravitational_mass: 2.0,      # High importance
     access_pattern: :hot           # Frequent access
   ])
@@ -59,7 +59,7 @@ app_collider/
 ├── COMPETITIVE_ANALYSIS.md              # vs HiveKit, Tile38, and others
 ├── ARCHITECTURE_OVERVIEW.md            # System architecture deep dive
 ├── API_SPECIFICATION.md                # REST, WebSocket, and native APIs
-├── PHYSICS_INTEGRATION.md              # IsLabDB physics integration details
+├── PHYSICS_INTEGRATION.md              # WarpEngine physics integration details
 ├── AI_COORDINATION.md                  # Autogentic agent coordination
 ├── DEPLOYMENT_GUIDE.md                 # Production deployment strategies
 ├── examples/
@@ -111,7 +111,7 @@ app_collider/
 
 ## 🔧 Core Technologies
 
-### IsLabDB Physics Engine
+### WarpEngine Physics Engine
 - **Enhanced ADT** with mathematical elegance and automatic physics translation
 - **Gravitational Routing** for optimal data placement and retrieval
 - **Quantum Entanglement** for instant data correlations
@@ -243,7 +243,7 @@ AppCollider doesn't just track where things are—it predicts where they're goin
 
 ### Multi-Agent + Physics Coordination
 ```elixir
-# Real-time delivery optimization using Autogentic agents + IsLabDB physics
+# Real-time delivery optimization using Autogentic agents + WarpEngine physics
 defmodule AppCollider.FleetOptimizer do
   use Autogentic.Agent, name: :fleet_optimizer
 
@@ -275,7 +275,7 @@ defmodule AppCollider.FleetOptimizer do
           %{agent: :demand_predictor, task: "Forecast delivery demand patterns"}
         ], collaboration_type: :real_time)
         
-        call_islab_db(:cosmic_query, %{
+        call_warp_engine(:cosmic_query, %{
           query: """
             MATCH (vehicle:DeliveryVehicle)-[:NEAR]->(destination:DeliveryPoint)
             WHERE vehicle.status = 'active'
@@ -293,7 +293,7 @@ defmodule AppCollider.FleetOptimizer do
           optimization_target: optimization_target
         })
         
-        call_islab_db(:deploy_optimized_routes, %{
+        call_warp_engine(:deploy_optimized_routes, %{
           routes: get_data(:optimized_routes),
           physics_enhancement: true
         })
@@ -312,7 +312,7 @@ end
 
 ### Physics-Enhanced AI Learning
 ```elixir
-# Morphic geofences that learn and evolve using IsLabDB's physics + Autogentic intelligence
+# Morphic geofences that learn and evolve using WarpEngine's physics + Autogentic intelligence
 defmodule AppCollider.GeofenceLearningAgent do
   use Autogentic.Agent, name: :geofence_learning_agent
 
@@ -338,7 +338,7 @@ defmodule AppCollider.GeofenceLearningAgent do
 
       # Parallel geofence creation and physics optimization
       parallel do
-        call_islab_db(:cosmic_put, %{
+        call_warp_engine(:cosmic_put, %{
           key: "morphic_fence:sf_delivery",
           value: %{
             geometry: get_data(:optimized_geometry),
@@ -415,7 +415,7 @@ defmodule AppCollider.GeofenceLearningAgent do
           physics_insights: get_data(:physics_analysis)
         })
         
-        call_islab_db(:cosmic_update, %{
+        call_warp_engine(:cosmic_update, %{
           key: "morphic_fence:#{get_data(:fence_id)}",
           updates: %{
             geometry: get_data(:updated_geometry),
@@ -440,7 +440,7 @@ end
 
 ## 🚀 The Future of Autonomous Spatial Intelligence
 
-AppCollider demonstrates how **Autogentic + IsLabDB integration** creates unprecedented capabilities:
+AppCollider demonstrates how **Autogentic + WarpEngine integration** creates unprecedented capabilities:
 
 - **🧠 AI agents that understand space and time** through physics-enhanced reasoning
 - **⚡ Quantum-scale performance** with collaborative intelligence optimization  

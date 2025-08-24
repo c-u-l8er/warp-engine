@@ -1,9 +1,9 @@
-defmodule IsLabDB.WALOperations do
+defmodule WarpEngine.WALOperations do
   @moduledoc """
   Ultra-high performance database operations using Write-Ahead Log persistence.
 
   This module implements the Phase 6.6 WAL Persistence Revolution, transforming
-  IsLabDB from 3,500 ops/sec to 250,000+ ops/sec while maintaining 100% of
+  WarpEngine from 3,500 ops/sec to 250,000+ ops/sec while maintaining 100% of
   physics intelligence features.
 
   ## Revolutionary Architecture
@@ -24,8 +24,8 @@ defmodule IsLabDB.WALOperations do
 
   require Logger
 
-  alias IsLabDB.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
-  alias IsLabDB.WAL.Entry, as: WALEntry
+  alias WarpEngine.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
+  alias WarpEngine.WAL.Entry, as: WALEntry
 
   # Cache for atomic counter reference (loaded once on first use)
   @wal_sequence_ref_key :wal_sequence_counter_cache
@@ -329,7 +329,7 @@ defmodule IsLabDB.WALOperations do
 
       Enum.find_value(cache_order, :cache_miss, fn cache_id ->
         if cache = Map.get(state.event_horizon_caches, cache_id) do
-          case IsLabDB.EventHorizonCache.get(cache, key) do
+          case WarpEngine.EventHorizonCache.get(cache, key) do
             {:ok, value, _cache_state, metadata} -> {:cache_hit, value, metadata}
             {:miss, _cache_state} -> nil
             {:error, _reason} -> nil
@@ -390,7 +390,7 @@ defmodule IsLabDB.WALOperations do
     cache_level = determine_optimal_cache_level(cosmic_metadata)
 
     if cache = Map.get(state.event_horizon_caches, cache_level) do
-      IsLabDB.EventHorizonCache.put(cache, key, value, [
+      WarpEngine.EventHorizonCache.put(cache, key, value, [
         source_shard: cosmic_metadata.shard,
         cached_at: DateTime.utc_now(),
         access_pattern: :write_through
@@ -408,7 +408,7 @@ defmodule IsLabDB.WALOperations do
     end
 
     if cache = Map.get(state.event_horizon_caches, cache_level) do
-      IsLabDB.EventHorizonCache.put(cache, key, value, [
+      WarpEngine.EventHorizonCache.put(cache, key, value, [
         source_shard: shard_id,
         cached_at: DateTime.utc_now(),
         access_pattern: :read_through

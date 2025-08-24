@@ -1,10 +1,10 @@
-# 🚀 Aurora Design Specification: Autogentic + IsLabDB Integration
+# 🚀 Aurora Design Specification: Autogentic + WarpEngine Integration
 
 **Revolutionary Spatial Intelligence Through Physics-Enhanced Multi-Agent AI**
 
 ## 🎯 Executive Summary
 
-Aurora showcases the transformative power of integrating **Autogentic's multi-agent intelligence** with **IsLabDB's physics-enhanced database**. This creates autonomous spatial intelligence that understands, predicts, and optimizes spatial relationships through collaborative AI reasoning powered by quantum-scale physics optimization.
+Aurora showcases the transformative power of integrating **Autogentic's multi-agent intelligence** with **WarpEngine's physics-enhanced database**. This creates autonomous spatial intelligence that understands, predicts, and optimizes spatial relationships through collaborative AI reasoning powered by quantum-scale physics optimization.
 
 **Key Innovation**: Aurora doesn't just store location data—it creates **intelligent spatial entities** that reason about relationships, predict future states, and continuously optimize through physics-enhanced AI collaboration.
 

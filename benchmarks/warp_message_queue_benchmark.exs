@@ -54,10 +54,10 @@ defmodule WarpMessageQueueBenchmark do
   end
 
   defp ensure_warp_engine_started do
-    case Process.whereis(IsLabDB) do
+    case Process.whereis(WarpEngine) do
       nil ->
         Logger.info("🌌 Starting WarpEngine database for benchmark...")
-        {:ok, _pid} = IsLabDB.start_link([])
+        {:ok, _pid} = WarpEngine.start_link([])
       _pid ->
         Logger.info("✅ WarpEngine database already running")
     end

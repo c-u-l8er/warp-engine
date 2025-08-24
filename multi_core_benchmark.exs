@@ -1,7 +1,7 @@
-# IsLab Database Multi-Core Performance Analysis
+# WarpEngine Database Multi-Core Performance Analysis
 
 IO.puts """
-🚀 IsLab Database Multi-Core Performance Analysis
+🚀 WarpEngine Database Multi-Core Performance Analysis
 ══════════════════════════════════════════════════
 
 Current Environment Analysis:
@@ -19,7 +19,7 @@ Target Environment (Your Ryzen AI 9 HX 370):
 """
 
 # Start the system
-Application.ensure_all_started(:islab_db)
+Application.ensure_all_started(:warp_engine)
 Process.sleep(2000)
 
 # Multi-core concurrency test
@@ -50,12 +50,12 @@ results = Enum.map(concurrency_levels, fn concurrency ->
 
         # PUT operation
         {put_time, _} = :timer.tc(fn ->
-          IsLabDB.cosmic_put(key, value)
+          WarpEngine.cosmic_put(key, value)
         end)
 
         # GET operation
         {get_time, _} = :timer.tc(fn ->
-          IsLabDB.cosmic_get(key)
+          WarpEngine.cosmic_get(key)
         end)
 
         {put_time, get_time}
@@ -134,13 +134,13 @@ Redis Benchmark Reference (typical performance):
 • Memory: In-memory only (no persistence)
 • Features: Basic key-value with minimal intelligence
 
-IsLabDB vs Redis Comparison (Current WSL2 Environment):
+WarpEngine vs Redis Comparison (Current WSL2 Environment):
 """
 
 best_get = Enum.min_by(results, & &1.avg_get_us)
 best_throughput = Enum.max_by(results, & &1.throughput)
 
-IO.puts "IsLabDB Performance (Current Environment):"
+IO.puts "WarpEngine Performance (Current Environment):"
 IO.puts "   • Best GET latency: #{Float.round(best_get.avg_get_us, 0)}μs (#{best_get.concurrency} cores)"
 IO.puts "   • Best throughput: #{Float.round(best_throughput.throughput, 0)} ops/sec (#{best_throughput.concurrency} cores)"
 IO.puts "   • Features: Quantum entanglement, entropy monitoring, physics optimization"
@@ -165,21 +165,21 @@ projected_max_throughput = best_throughput.throughput * 2.0  # 2x due to better 
 projected_get_latency = best_get.avg_get_us / 2.5  # 2.5x faster single operations
 
 IO.puts """
-Projected IsLabDB Performance on Ryzen AI 9 HX 370:
+Projected WarpEngine Performance on Ryzen AI 9 HX 370:
 • Single-core: ~#{Float.round(projected_single_core, 0)} ops/sec (vs #{Float.round(single_core_throughput, 0)} current)
 • Multi-core: ~#{Float.round(projected_max_throughput, 0)} ops/sec (vs #{Float.round(best_throughput.throughput, 0)} current)
 • GET latency: ~#{Float.round(projected_get_latency, 0)}μs (vs #{Float.round(best_get.avg_get_us, 0)}μs current)
 • Additional: NPU acceleration potential for AI/ML features
 
 Projected vs Redis on Ryzen AI 9 HX 370:
-• IsLabDB: ~#{Float.round(projected_max_throughput, 0)} ops/sec with physics intelligence
+• WarpEngine: ~#{Float.round(projected_max_throughput, 0)} ops/sec with physics intelligence
 • Redis: ~600,000-800,000 ops/sec basic caching
-• Advantage: IsLabDB provides quantum entanglement (3x data efficiency),
+• Advantage: WarpEngine provides quantum entanglement (3x data efficiency),
   automatic optimization, and scientific data organization
 """
 
 IO.puts "\n💡 Key Insights:"
-IO.puts "   • IsLabDB scales well across cores (#{Float.round(scaling_efficiency * 100, 1)}% efficiency)"
+IO.puts "   • WarpEngine scales well across cores (#{Float.round(scaling_efficiency * 100, 1)}% efficiency)"
 IO.puts "   • Physics-based intelligence adds value beyond raw speed"
 IO.puts "   • Quantum entanglement provides 3x data retrieval efficiency"
 IO.puts "   • On Ryzen AI 9 HX 370: Competitive with Redis + intelligent features"

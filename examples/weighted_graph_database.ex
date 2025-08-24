@@ -1,6 +1,6 @@
 defmodule WeightedGraphDatabase do
   @moduledoc """
-  Weighted Property Graph Database using Enhanced ADT with IsLabDB Integration
+  Weighted Property Graph Database using Enhanced ADT with WarpEngine Integration
 
   This example demonstrates how Enhanced ADT transforms complex graph database
   operations into intelligent physics-enhanced database commands. Graph structures
@@ -25,7 +25,7 @@ defmodule WeightedGraphDatabase do
   """
 
   use EnhancedADT
-  use EnhancedADT.IsLabDBIntegration
+  use EnhancedADT.WarpEngineIntegration
 
   require Logger
 
@@ -112,7 +112,7 @@ defmodule WeightedGraphDatabase do
     fold node do
       %GraphNode{id: id, label: label, properties: properties, importance_score: importance,
                 activity_level: activity, created_at: created_at, node_type: node_type} ->
-        # Enhanced ADT automatically translates to optimized IsLabDB operation
+        # Enhanced ADT automatically translates to optimized WarpEngine operation
         node_key = "node:#{id}"
 
         # Physics context automatically extracted from annotations
@@ -120,7 +120,7 @@ defmodule WeightedGraphDatabase do
         # quantum_entanglement_potential: activity (correlation strength)
         # temporal_weight: created_at (lifecycle management)
 
-        case IsLabDB.cosmic_put(node_key, node, extract_node_physics(node)) do
+        case WarpEngine.cosmic_put(node_key, node, extract_node_physics(node)) do
           {:ok, :stored, shard_id, operation_time} ->
             # Logger.info("📊 Node stored: #{id} (#{label}) in #{shard_id} shard (#{operation_time}μs)")  # Disabled for performance
 
@@ -152,7 +152,7 @@ defmodule WeightedGraphDatabase do
         edge_key = "edge:#{id}"
 
         # Store edge with physics optimization
-        case IsLabDB.cosmic_put(edge_key, edge, extract_edge_physics(edge)) do
+        case WarpEngine.cosmic_put(edge_key, edge, extract_edge_physics(edge)) do
           {:ok, :stored, shard_id, operation_time} ->
             # Logger.info("🔗 Edge stored: #{from_node} → #{to_node} (weight: #{weight}, #{operation_time}μs)")  # Disabled for performance
 
@@ -197,7 +197,7 @@ defmodule WeightedGraphDatabase do
     fold {start_node_id, max_depth, traversal_strategy, initial_state} do
       {node_id, depth, strategy, current_state} when depth > 0 ->
         # Enhanced ADT automatically analyzes optimal retrieval strategy
-        case IsLabDB.cosmic_get("node:#{node_id}") do
+        case WarpEngine.cosmic_get("node:#{node_id}") do
           {:ok, node, shard_id, operation_time} ->
             # Update traversal state
             updated_state = %{current_state |
@@ -242,7 +242,7 @@ defmodule WeightedGraphDatabase do
 
       {node_id, 0, _strategy, current_state} ->
         # Base case - maximum depth reached
-        case IsLabDB.cosmic_get("node:#{node_id}") do
+        case WarpEngine.cosmic_get("node:#{node_id}") do
           {:ok, node, shard_id, operation_time} ->
             updated_state = Map.update!(current_state, :traversal_path, &[node_id | &1])
 
@@ -342,7 +342,7 @@ defmodule WeightedGraphDatabase do
     fold {from_node_id, max_hops, pathfinding_state} do
       {current_node_id, hops_remaining, current_state} when hops_remaining > 0 ->
         # Enhanced ADT automatically uses optimal node retrieval
-        case IsLabDB.cosmic_get("node:#{current_node_id}") do
+        case WarpEngine.cosmic_get("node:#{current_node_id}") do
           {:ok, current_node, shard_id, _operation_time} ->
 
             # Check if we've reached the target
@@ -578,7 +578,7 @@ defmodule WeightedGraphDatabase do
   """
   def generate_recommendations(user_id, recommendation_type \\ :collaborative_filtering) do
     # Get user node with Enhanced ADT optimization
-    case IsLabDB.cosmic_get("node:#{user_id}") do
+    case WarpEngine.cosmic_get("node:#{user_id}") do
       {:ok, user_node, _shard_id, _operation_time} ->
 
         # Generate recommendations using Enhanced ADT fold
@@ -754,7 +754,7 @@ defmodule WeightedGraphDatabase do
     # Create wormhole route for high-weight edges
     wormhole_strength = (weight + strength) / 2
 
-    case IsLabDB.WormholeRouter.establish_wormhole("node:#{from_node}", "node:#{to_node}", wormhole_strength) do
+    case WarpEngine.WormholeRouter.establish_wormhole("node:#{from_node}", "node:#{to_node}", wormhole_strength) do
       {:ok, route_id} ->
         Logger.debug("🌀 Wormhole route created: #{from_node} → #{to_node} (strength: #{wormhole_strength})")
         {:ok, route_id}
@@ -769,7 +769,7 @@ defmodule WeightedGraphDatabase do
     # Create quantum entanglement for frequent relationships
     entanglement_strength = min(1.0, frequency * 1.2)
 
-    case IsLabDB.create_quantum_entanglement("node:#{from_node}", ["node:#{to_node}", edge_key], entanglement_strength) do
+    case WarpEngine.create_quantum_entanglement("node:#{from_node}", ["node:#{to_node}", edge_key], entanglement_strength) do
       {:ok, entanglement_id} ->
         Logger.debug("⚛️ Quantum entanglement created: #{from_node} <-> #{to_node} (strength: #{entanglement_strength})")
         {:ok, entanglement_id}
@@ -799,7 +799,7 @@ defmodule WeightedGraphDatabase do
 
   defp attempt_wormhole_traversal(node_id) do
     # Try to use existing wormhole routes for graph traversal
-    case IsLabDB.WormholeRouter.find_route("node:#{node_id}", "node:*", %{max_cost: 1.0}) do
+    case WarpEngine.WormholeRouter.find_route("node:#{node_id}", "node:*", %{max_cost: 1.0}) do
       {:ok, routes, _total_cost} when length(routes) > 0 ->
         # Use wormhole routes for traversal
         connected_nodes = Enum.map(routes, fn route ->
@@ -828,7 +828,7 @@ defmodule WeightedGraphDatabase do
 
   defp find_outgoing_edges(node_id) do
     # Simulate finding outgoing edges
-    # In a real implementation, this would query IsLabDB for edges
+    # In a real implementation, this would query WarpEngine for edges
     []
   end
 
@@ -1056,14 +1056,14 @@ defmodule WeightedGraphDatabase do
   # Recommendation system helpers
   defp find_similar_users_with_quantum_correlation(user_node) do
     # Use quantum entanglement to find correlated users
-    case IsLabDB.quantum_get("node:#{user_node.id}") do
+    case WarpEngine.quantum_get("node:#{user_node.id}") do
       {:ok, quantum_response} ->
         # Extract quantum-entangled users from response
         entangled_keys = extract_entangled_user_keys(quantum_response)
 
         # Retrieve entangled users
         similar_users = Enum.map(entangled_keys, fn user_key ->
-          case IsLabDB.cosmic_get(user_key) do
+          case WarpEngine.cosmic_get(user_key) do
             {:ok, user, _shard, _time} -> user
             _ -> nil
           end

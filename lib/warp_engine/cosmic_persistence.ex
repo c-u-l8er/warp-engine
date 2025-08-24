@@ -1,4 +1,4 @@
-defmodule IsLabDB.CosmicPersistence do
+defmodule WarpEngine.CosmicPersistence do
   @moduledoc """
   Elegant filesystem persistence that mirrors the structure of the universe.
 
@@ -23,7 +23,7 @@ defmodule IsLabDB.CosmicPersistence do
   Get the configured data root directory, with fallback to default.
   """
   def data_root do
-    Application.get_env(:islab_db, :data_root, @default_data_root)
+    Application.get_env(:warp_engine, :data_root, @default_data_root)
   end
 
   @doc """
@@ -294,8 +294,8 @@ defmodule IsLabDB.CosmicPersistence do
     manifest = %{
       universe_version: "1.0.0",
       created_at: DateTime.utc_now() |> DateTime.to_iso8601(),
-      physics_engine: "IsLabDB v1.0",
-      cosmic_constants: IsLabDB.CosmicConstants.all_constants(),
+      physics_engine: "WarpEngine v1.0",
+      cosmic_constants: WarpEngine.CosmicConstants.all_constants(),
       spacetime_shards: [
         %{
           name: "hot_data",
@@ -429,7 +429,7 @@ defmodule IsLabDB.CosmicPersistence do
 
   defp calculate_energy_level(key, value) do
     # Calculate quantum energy level based on data characteristics
-    base_energy = IsLabDB.CosmicConstants.quantum_energy_level(1.0)
+    base_energy = WarpEngine.CosmicConstants.quantum_energy_level(1.0)
 
     # Factor in key complexity and value size
     key_complexity = byte_size(to_string(key)) / 100.0

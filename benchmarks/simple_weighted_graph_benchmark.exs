@@ -7,12 +7,12 @@ Logger.info("🚀 Enhanced ADT Weighted Graph Database - ACTUAL PERFORMANCE BENC
 Logger.info("=" |> String.duplicate(80))
 
 # Start system
-case Process.whereis(IsLabDB) do
+case Process.whereis(WarpEngine) do
   nil ->
-    Logger.info("🌌 Starting IsLabDB...")
-    {:ok, _pid} = IsLabDB.start_link()
+    Logger.info("🌌 Starting WarpEngine...")
+    {:ok, _pid} = WarpEngine.start_link()
   _pid ->
-    Logger.info("✅ IsLabDB operational")
+    Logger.info("✅ WarpEngine operational")
 end
 
 Code.compile_file("examples/weighted_graph_database.ex")

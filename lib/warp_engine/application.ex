@@ -1,8 +1,8 @@
-defmodule IsLabDB.Application do
+defmodule WarpEngine.Application do
   @moduledoc """
-  IsLab Database Application Supervisor
+  WarpEngine Database Application Supervisor
 
-  Supervises the main IsLab Database GenServer and any associated processes
+  Supervises the main WarpEngine Database GenServer and any associated processes
   that make up the computational universe. The application uses a one-for-one
   supervision strategy, ensuring that if the main database process crashes,
   it will be restarted while maintaining system stability.
@@ -10,8 +10,8 @@ defmodule IsLabDB.Application do
   ## Supervision Tree
 
   ```
-  IsLabDB.Application (Supervisor)
-  └── IsLabDB (GenServer) - Main database universe controller
+  WarpEngine.Application (Supervisor)
+  └── WarpEngine (GenServer) - Main database universe controller
       ├── Cosmic Persistence Layer
       ├── Spacetime Shard Management
       ├── Quantum Entanglement Engine
@@ -47,7 +47,7 @@ defmodule IsLabDB.Application do
   Example configuration:
 
   ```elixir
-  config :islab_db,
+  config :warp_engine,
     data_root: "/custom/data/path",
     enable_entropy_monitoring: true,
     cosmic_maintenance_interval: 30_000,
@@ -63,10 +63,10 @@ defmodule IsLabDB.Application do
 
   @impl true
   def start(_type, _args) do
-    Logger.info("🚀 Starting IsLab Database Application...")
+    Logger.info("🚀 Starting WarpEngine Database Application...")
 
     # Get configuration from application environment
-    config = Application.get_all_env(:islab_db)
+    config = Application.get_all_env(:warp_engine)
 
     # Log startup configuration
     log_startup_config(config)
@@ -74,35 +74,35 @@ defmodule IsLabDB.Application do
     # Define supervised processes
     children = [
       # WAL System - Must start before main database
-      {IsLabDB.WAL, config},
-      # Main IsLab Database GenServer
-      {IsLabDB, config}
+      {WarpEngine.WAL, config},
+      # Main WarpEngine Database GenServer
+      {WarpEngine, config}
     ]
-    
+
     Logger.info("🔧 Starting supervisor with #{length(children)} children")
 
     # Supervision options
     opts = [
       strategy: :one_for_one,
-      name: IsLabDB.Supervisor,
+      name: WarpEngine.Supervisor,
       max_restarts: 10,
       max_seconds: 60
     ]
 
     case Supervisor.start_link(children, opts) do
       {:ok, pid} ->
-        Logger.info("✨ IsLab Database Application started successfully")
+        Logger.info("✨ WarpEngine Database Application started successfully")
         Logger.info("🌌 Universe supervisor PID: #{inspect(pid)}")
-        
+
         # Verify children started correctly
         Process.sleep(100)
         children_status = Supervisor.which_children(pid)
         Logger.info("👥 Supervisor children: #{inspect(children_status)}")
-        
+
         {:ok, pid}
 
       {:error, reason} ->
-        Logger.error("❌ Failed to start IsLab Database Application: #{inspect(reason)}")
+        Logger.error("❌ Failed to start WarpEngine Database Application: #{inspect(reason)}")
         Logger.error("❌ Children that were supposed to start: #{inspect(children)}")
         {:error, reason}
     end
@@ -110,13 +110,13 @@ defmodule IsLabDB.Application do
 
   @impl true
   def stop(_state) do
-    Logger.info("🛑 Stopping IsLab Database Application...")
+    Logger.info("🛑 Stopping WarpEngine Database Application...")
 
     # Perform graceful shutdown operations
     try do
       # Get final metrics before shutdown
-      if Process.whereis(IsLabDB) do
-        final_metrics = IsLabDB.cosmic_metrics()
+      if Process.whereis(WarpEngine) do
+        final_metrics = WarpEngine.cosmic_metrics()
         log_shutdown_metrics(final_metrics)
       end
     rescue
@@ -124,7 +124,7 @@ defmodule IsLabDB.Application do
         Logger.warning("⚠️  Error collecting final metrics: #{inspect(error)}")
     end
 
-    Logger.info("🌌 IsLab Database universe has been gracefully shut down")
+    Logger.info("🌌 WarpEngine Database universe has been gracefully shut down")
     :ok
   end
 
@@ -132,32 +132,32 @@ defmodule IsLabDB.Application do
   Get the current application configuration.
   """
   def config do
-    Application.get_all_env(:islab_db)
+    Application.get_all_env(:warp_engine)
   end
 
   @doc """
   Get a specific configuration value with an optional default.
   """
   def config(key, default \\ nil) do
-    Application.get_env(:islab_db, key, default)
+    Application.get_env(:warp_engine, key, default)
   end
 
   @doc """
   Update application configuration at runtime.
 
   Note: This only affects the application environment.
-  The running IsLabDB GenServer will need to be restarted
+  The running WarpEngine GenServer will need to be restarted
   or explicitly reconfigured to pick up the changes.
   """
   def put_config(key, value) do
-    Application.put_env(:islab_db, key, value)
+    Application.put_env(:warp_engine, key, value)
   end
 
   @doc """
   Get information about the current supervision tree.
   """
   def supervisor_info do
-    case Process.whereis(IsLabDB.Supervisor) do
+    case Process.whereis(WarpEngine.Supervisor) do
       nil -> {:error, :not_running}
       pid ->
         children = Supervisor.which_children(pid)
@@ -174,25 +174,25 @@ defmodule IsLabDB.Application do
   end
 
   @doc """
-  Restart the main IsLabDB GenServer.
+  Restart the main WarpEngine GenServer.
 
   This will trigger a controlled restart of the database universe
   while preserving all persistent data in the filesystem.
   """
   def restart_universe do
-    case Process.whereis(IsLabDB.Supervisor) do
+    case Process.whereis(WarpEngine.Supervisor) do
       nil ->
         {:error, :supervisor_not_running}
       supervisor_pid ->
-        Logger.info("🔄 Restarting IsLab Database universe...")
+        Logger.info("🔄 Restarting WarpEngine Database universe...")
 
-        # Terminate the current IsLabDB process
-        case Supervisor.terminate_child(supervisor_pid, IsLabDB) do
+        # Terminate the current WarpEngine process
+        case Supervisor.terminate_child(supervisor_pid, WarpEngine) do
           :ok ->
-            # Restart the IsLabDB process
-            case Supervisor.restart_child(supervisor_pid, IsLabDB) do
+            # Restart the WarpEngine process
+            case Supervisor.restart_child(supervisor_pid, WarpEngine) do
               {:ok, _pid} ->
-                Logger.info("✨ IsLab Database universe restarted successfully")
+                Logger.info("✨ WarpEngine Database universe restarted successfully")
                 {:ok, :restarted}
               {:error, reason} ->
                 Logger.error("❌ Failed to restart universe: #{inspect(reason)}")
@@ -206,10 +206,10 @@ defmodule IsLabDB.Application do
   end
 
   @doc """
-  Check if the IsLab Database is currently running and healthy.
+  Check if the WarpEngine Database is currently running and healthy.
   """
   def health_check do
-    case Process.whereis(IsLabDB) do
+    case Process.whereis(WarpEngine) do
       nil ->
         %{
           status: :not_running,
@@ -220,7 +220,7 @@ defmodule IsLabDB.Application do
 
       _pid ->
         try do
-          metrics = IsLabDB.cosmic_metrics()
+          metrics = WarpEngine.cosmic_metrics()
           %{
             status: :running,
             universe_state: metrics.universe_state,

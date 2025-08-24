@@ -1,8 +1,8 @@
-defmodule IsLabDB.TemporalShard do
+defmodule WarpEngine.TemporalShard do
   @moduledoc """
-  Physics-Inspired Temporal Data Management for IsLab Database
+  Physics-Inspired Temporal Data Management for WarpEngine Database
 
-  This module implements Phase 7 temporal data management, extending IsLabDB's
+  This module implements Phase 7 temporal data management, extending WarpEngine's
   physics-inspired architecture with time-series optimization, historical analytics,
   and real-time stream processing. Built on the solid WAL + Checkpoint foundation
   from Phase 6.6.
@@ -41,8 +41,8 @@ defmodule IsLabDB.TemporalShard do
   use GenServer
   require Logger
 
-  alias IsLabDB.{CosmicPersistence, WAL}
-  alias IsLabDB.WAL.Entry, as: WALEntry
+  alias WarpEngine.{CosmicPersistence, WAL}
+  alias WarpEngine.WAL.Entry, as: WALEntry
 
   defstruct [
     :temporal_id,                # Unique temporal shard identifier

@@ -1,16 +1,16 @@
 # 🚀 AppCollider: Aurora-Powered Integration Showcase
 
-**The Revolutionary Integration of Autogentic + IsLabDB for Autonomous Spatial Intelligence**
+**The Revolutionary Integration of Autogentic + WarpEngine for Autonomous Spatial Intelligence**
 
 ## 🎯 Executive Summary
 
 AppCollider showcases the **transformative power** of combining two revolutionary technologies:
 - **🧠 Autogentic**: Multi-agent AI architecture with collaborative reasoning
-- **⚡ IsLabDB**: Physics-enhanced database with quantum-scale performance
+- **⚡ WarpEngine**: Physics-enhanced database with quantum-scale performance
 
 Together, they create Aurora's spatial intelligence platform—a system that doesn't just process location data, but **understands, predicts, and optimizes** spatial relationships through autonomous AI reasoning powered by physics-enhanced storage.
 
-## 🌊 The Aurora Integration: Autogentic + IsLabDB
+## 🌊 The Aurora Integration: Autogentic + WarpEngine
 
 ### Two Revolutionary Technologies, Infinite Possibilities
 
@@ -30,10 +30,10 @@ coordinate_agents([
 - **Behavioral Pattern Learning**: Continuous improvement through agent evolution
 - **Effects-Based Integration**: Seamless connection to external systems and databases
 
-**⚡ IsLabDB Physics-Enhanced Storage**
+**⚡ WarpEngine Physics-Enhanced Storage**
 ```elixir
 # Physics-optimized spatial entity storage
-IsLabDB.cosmic_put("critical_delivery_vehicle", entity_data, [
+WarpEngine.cosmic_put("critical_delivery_vehicle", entity_data, [
   gravitational_mass: 2.0,              # High importance = hot shard
   quantum_entanglement_potential: 0.9,  # Strong correlations
   access_pattern: :hot,                  # Optimized for frequent access
@@ -207,7 +207,7 @@ smart_city_network = SpatialNetwork.HierarchicalRegion(
 
 ### Current State: Revolutionary Foundation
 - ✅ Enhanced ADT mathematical modeling
-- ✅ IsLabDB physics engine integration
+- ✅ WarpEngine physics engine integration
 - ✅ Autogentic multi-agent coordination
 - ✅ Basic spatial operations with physics enhancement
 - ✅ Predictive analytics with AI reasoning
@@ -278,7 +278,7 @@ smart_city_network = SpatialNetwork.HierarchicalRegion(
 
 ## 🌟 The Vision: Transforming How We Understand Space and Time
 
-AppCollider isn't just another geospatial database—it's the foundation for a new era of **spatial intelligence**. By combining the mathematical elegance of Enhanced ADT, the revolutionary physics of IsLabDB, and the collaborative reasoning of Autogentic, we're creating a platform that:
+AppCollider isn't just another geospatial database—it's the foundation for a new era of **spatial intelligence**. By combining the mathematical elegance of Enhanced ADT, the revolutionary physics of WarpEngine, and the collaborative reasoning of Autogentic, we're creating a platform that:
 
 - **Makes the impossible routine**: Predictive geofencing, quantum-correlation spatial search, physics-optimized route planning
 - **Transforms complexity into simplicity**: Complex spatial operations become elegant mathematical expressions

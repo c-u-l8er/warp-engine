@@ -1,11 +1,11 @@
 #!/usr/bin/env elixir
 
-# 🌌 IsLab Database Phase 3: Spacetime Sharding System Demo
+# 🌌 WarpEngine Database Phase 3: Spacetime Sharding System Demo
 # This script demonstrates the advanced spacetime sharding with gravitational routing
 
 IO.puts """
 🌌 ═══════════════════════════════════════════════════════════════
-   IsLab Database - Phase 3: Spacetime Sharding System Demo
+   WarpEngine Database - Phase 3: Spacetime Sharding System Demo
 ═══════════════════════════════════════════════════════════════ 🌌
 
 Welcome to the advanced physics-inspired database with intelligent
@@ -13,12 +13,12 @@ spacetime sharding and gravitational routing!
 """
 
 # Set up data directory
-demo_data_dir = "/tmp/islab_demo_phase3"
-Application.put_env(:islab_db, :data_root, demo_data_dir)
+demo_data_dir = "/tmp/warp_engine_demo_phase3"
+Application.put_env(:warp_engine, :data_root, demo_data_dir)
 
-# Start the IsLab Database universe
+# Start the WarpEngine Database universe
 IO.puts "🚀 Initializing the Phase 3 computational universe..."
-case IsLabDB.start_link([data_root: demo_data_dir]) do
+case WarpEngine.start_link([data_root: demo_data_dir]) do
   {:ok, _pid} ->
     IO.puts "✨ Started Phase 3 universe with advanced spacetime sharding"
   {:error, {:already_started, _pid}} ->
@@ -42,7 +42,7 @@ IO.puts "─" |> String.duplicate(60)
 
 # Get initial spacetime shard metrics
 IO.puts "🔍 Initial Spacetime Shard Status:"
-shard_metrics = IsLabDB.get_spacetime_shard_metrics()
+shard_metrics = WarpEngine.get_spacetime_shard_metrics()
 
 Enum.each(shard_metrics, fn {shard_id, metrics} ->
   IO.puts "   #{shard_id}:"
@@ -99,7 +99,7 @@ test_data = [
 
 IO.puts "📦 Storing data with gravitational routing decisions:"
 placement_results = Enum.map(test_data, fn {key, value, opts, description} ->
-  {:ok, :stored, shard_id, operation_time} = IsLabDB.cosmic_put(key, value, opts)
+  {:ok, :stored, shard_id, operation_time} = WarpEngine.cosmic_put(key, value, opts)
 
   IO.puts "   🔹 #{key}"
   IO.puts "      #{description}"
@@ -130,7 +130,7 @@ IO.puts "⚖️  LOAD DISTRIBUTION ANALYSIS"
 IO.puts "─" |> String.duplicate(60)
 
 # Analyze current load distribution
-analysis = IsLabDB.analyze_load_distribution()
+analysis = WarpEngine.analyze_load_distribution()
 
 IO.puts "🔍 Current Load Analysis:"
 IO.puts "   Total Items: #{analysis.total_data_items}"
@@ -182,7 +182,7 @@ IO.puts "📖 Retrieving data with physics tracking:"
 sample_keys = ["critical:user_session", "user:bob", "product:trending_item"]
 
 Enum.each(sample_keys, fn key ->
-  case IsLabDB.cosmic_get(key) do
+  case WarpEngine.cosmic_get(key) do
     {:ok, value, shard, operation_time} ->
       IO.puts "   🔹 #{key}"
       IO.puts "      Retrieved from: #{shard}"
@@ -210,28 +210,28 @@ orders_key = "orders:enterprise_alice"
 IO.puts "🔗 Creating quantum-entangled enterprise customer data:"
 
 # Store related data with different priorities but related content
-IsLabDB.cosmic_put(customer_key, %{
+WarpEngine.cosmic_put(customer_key, %{
   id: "alice",
   name: "Alice Enterprise",
   tier: "premium",
   account_value: 50000
 }, [access_pattern: :hot, priority: :critical])
 
-IsLabDB.cosmic_put(profile_key, %{
+WarpEngine.cosmic_put(profile_key, %{
   company: "Alice Corp",
   industry: "Technology",
   employees: 500,
   contract_date: "2025-01-01"
 }, [access_pattern: :warm, priority: :high])
 
-IsLabDB.cosmic_put(settings_key, %{
+WarpEngine.cosmic_put(settings_key, %{
   notifications: true,
   billing_cycle: "monthly",
   support_level: "premium",
   integrations: ["api", "webhook", "sso"]
 }, [access_pattern: :warm, priority: :normal])
 
-IsLabDB.cosmic_put(orders_key, %{
+WarpEngine.cosmic_put(orders_key, %{
   total_orders: 125,
   last_order: "2025-01-14",
   avg_order_value: 1200.50,
@@ -239,7 +239,7 @@ IsLabDB.cosmic_put(orders_key, %{
 }, [access_pattern: :cold, priority: :normal])
 
 # Create quantum entanglement
-{:ok, entanglement_id} = IsLabDB.create_quantum_entanglement(customer_key,
+{:ok, entanglement_id} = WarpEngine.create_quantum_entanglement(customer_key,
   [profile_key, settings_key, orders_key], 0.95)
 
 IO.puts "✨ Quantum entanglement created: #{entanglement_id}"
@@ -249,7 +249,7 @@ IO.puts ""
 
 # Use quantum retrieval to get entangled data
 IO.puts "🌟 Quantum retrieval with gravitational sharding:"
-{:ok, quantum_response} = IsLabDB.quantum_get(customer_key)
+{:ok, quantum_response} = WarpEngine.quantum_get(customer_key)
 
 IO.puts "   Primary Data: #{inspect(quantum_response.value)}"
 IO.puts "   Retrieved from shard: #{quantum_response.shard}"
@@ -290,7 +290,7 @@ put_times = for i <- 1..20 do
   value = %{index: i, data: "performance test", timestamp: :os.system_time(:microsecond)}
 
   {time, {:ok, :stored, _shard, operation_time}} = :timer.tc(fn ->
-    IsLabDB.cosmic_put(key, value, [access_pattern: :balanced, priority: :normal])
+    WarpEngine.cosmic_put(key, value, [access_pattern: :balanced, priority: :normal])
   end)
 
   {time, operation_time}
@@ -305,7 +305,7 @@ get_times = for i <- 1..20 do
   key = "perf_put:#{i}"
 
   {time, {:ok, _value, _shard, operation_time}} = :timer.tc(fn ->
-    IsLabDB.cosmic_get(key)
+    WarpEngine.cosmic_get(key)
   end)
 
   {time, operation_time}
@@ -320,7 +320,7 @@ quantum_times = for i <- 1..10 do
   key = "perf_put:#{i}"
 
   {time, {:ok, _response}} = :timer.tc(fn ->
-    IsLabDB.quantum_get(key)
+    WarpEngine.quantum_get(key)
   end)
 
   time
@@ -352,7 +352,7 @@ IO.puts "📈 COMPREHENSIVE SYSTEM METRICS"
 IO.puts "─" |> String.duplicate(60)
 
 # Get complete system metrics including Phase 3 enhancements
-metrics = IsLabDB.cosmic_metrics()
+metrics = WarpEngine.cosmic_metrics()
 
 IO.puts "🌌 Universe Overview:"
 IO.puts "   Phase: #{metrics.phase}"
@@ -371,7 +371,7 @@ IO.puts "   Total gravitational field strength: #{Float.round(gravitational_metr
 IO.puts ""
 
 # Quantum entanglement metrics
-quantum_stats = IsLabDB.quantum_entanglement_metrics()
+quantum_stats = WarpEngine.quantum_entanglement_metrics()
 IO.puts "⚛️  Quantum Entanglement Statistics:"
 IO.puts "   Total entanglements: #{quantum_stats.total_entanglements}"
 IO.puts "   Quantum relationships: #{quantum_stats.total_quantum_relationships}"
@@ -485,7 +485,7 @@ IO.puts """
 🔮 Next: Phase 4 will add Event Horizon Cache System with black
    hole mechanics for ultimate performance optimization!
 
-Thanks for exploring the Phase 3 enhanced IsLab Database! 🌟
+Thanks for exploring the Phase 3 enhanced WarpEngine Database! 🌟
 """
 
 IO.puts "\n🧹 Demo cleanup: #{demo_data_dir} directory can be safely deleted.\n"

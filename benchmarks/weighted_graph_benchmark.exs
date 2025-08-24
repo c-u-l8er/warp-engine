@@ -7,7 +7,7 @@ defmodule WeightedGraphBenchmark do
   Comprehensive Benchmark for Enhanced ADT Weighted Graph Database
 
   This benchmark demonstrates the revolutionary performance benefits of physics-inspired
-  database operations using Enhanced ADT with IsLabDB integration.
+  database operations using Enhanced ADT with WarpEngine integration.
 
   ## Benchmark Categories
 
@@ -29,17 +29,17 @@ defmodule WeightedGraphBenchmark do
 
   require Logger
 
-  # Start IsLabDB before benchmarking
+  # Start WarpEngine before benchmarking
   def setup_benchmark_environment() do
     Logger.info("🚀 Setting up Enhanced ADT Weighted Graph Benchmark Environment...")
 
-    # Start IsLabDB
-    case Process.whereis(IsLabDB) do
+    # Start WarpEngine
+    case Process.whereis(WarpEngine) do
       nil ->
-        Logger.info("🌌 Starting IsLabDB computational universe...")
-        {:ok, _pid} = IsLabDB.start_link()
+        Logger.info("🌌 Starting WarpEngine computational universe...")
+        {:ok, _pid} = WarpEngine.start_link()
       _pid ->
-        Logger.info("✅ IsLabDB universe already active")
+        Logger.info("✅ WarpEngine universe already active")
     end
 
     # Initialize Enhanced ADT Weighted Graph Database
@@ -578,7 +578,7 @@ defmodule WeightedGraphBenchmark do
   defp benchmark_standard_node_storage(nodes) do
     successful_count = Enum.reduce(nodes, 0, fn node, acc ->
       # Simulate standard storage without physics optimization
-      case IsLabDB.cosmic_put("standard_#{node.id}", node, []) do
+      case WarpEngine.cosmic_put("standard_#{node.id}", node, []) do
         {:ok, :stored, _shard, _time} -> acc + 1
         _error -> acc
       end
@@ -642,7 +642,7 @@ defmodule WeightedGraphBenchmark do
     # Simulate quantum-enhanced retrieval with entanglement
     results = Enum.reduce(test_data, %{items_retrieved: 0, entangled_fetches: 0, cache_hits: 0}, fn item, acc ->
       # Simulate Enhanced ADT quantum retrieval
-      case IsLabDB.cosmic_get("quantum_#{item.id}") do
+      case WarpEngine.cosmic_get("quantum_#{item.id}") do
         {:ok, _value, _shard, _time} ->
           # Simulate quantum entanglement pre-fetching related items
           entangled_count = length(item.related_domains)
@@ -669,7 +669,7 @@ defmodule WeightedGraphBenchmark do
     # Simulate standard retrieval without quantum enhancement
     results = Enum.reduce(test_data, %{items_retrieved: 0, cache_hits: 0}, fn item, acc ->
       # Simulate standard retrieval (no entanglement)
-      case IsLabDB.cosmic_get("standard_#{item.id}") do
+      case WarpEngine.cosmic_get("standard_#{item.id}") do
         {:ok, _value, _shard, _time} ->
           # Standard caching (no quantum pre-fetching)
           cache_hit = if item.access_frequency > 0.8, do: 1, else: 0  # Higher threshold without quantum
@@ -1047,7 +1047,7 @@ defmodule WeightedGraphBenchmark do
 
     Logger.info("🚀 Average Performance Improvement: +#{Float.round(overall_improvement, 1)}%")
     Logger.info("⚛️ Total Physics Optimizations Applied: #{total_physics_optimizations}")
-    Logger.info("🌌 IsLabDB Integration: Fully Operational")
+    Logger.info("🌌 WarpEngine Integration: Fully Operational")
     Logger.info("🔬 Enhanced ADT Features: All Active")
 
     # Detailed Results by Category
@@ -1076,7 +1076,7 @@ defmodule WeightedGraphBenchmark do
     Logger.info("🏆 Enhanced ADT Weighted Graph Database demonstrates exceptional performance")
     Logger.info("🚀 Physics-inspired algorithms provide measurable benefits across all operations")
     Logger.info("⚡ Average #{Float.round(overall_improvement, 1)}% performance improvement over standard approaches")
-    Logger.info("🌌 IsLabDB + Enhanced ADT = Revolutionary graph database architecture")
+    Logger.info("🌌 WarpEngine + Enhanced ADT = Revolutionary graph database architecture")
 
         Logger.info("\n" <> "=" |> String.duplicate(80))
     Logger.info("✅ COMPREHENSIVE BENCHMARK COMPLETE")
@@ -1273,7 +1273,7 @@ defmodule WeightedGraphBenchmark do
     Logger.info("-" |> String.duplicate(50))
 
     system_metrics = get_real_system_metrics()
-    Logger.info("🛰️  IsLabDB Status: #{system_metrics.status}")
+    Logger.info("🛰️  WarpEngine Status: #{system_metrics.status}")
     Logger.info("🪐 Active Shards: #{system_metrics.active_shards}")
     Logger.info("🕳️  Event Horizon Caches: #{system_metrics.active_caches}")
     Logger.info("⚛️  Quantum System: #{system_metrics.quantum_status}")
@@ -1292,7 +1292,7 @@ defmodule WeightedGraphBenchmark do
     # Overall Innovation Score
     innovation_score = calculate_overall_innovation_score(physics_impact)
     Logger.info("\n🏆 OVERALL INNOVATION SCORE: #{Float.round(innovation_score, 1)}/10")
-    Logger.info("🎉 Enhanced ADT + IsLabDB = #{get_innovation_rating(innovation_score)}")
+    Logger.info("🎉 Enhanced ADT + WarpEngine = #{get_innovation_rating(innovation_score)}")
 
     Logger.info("\n🌟 REVOLUTIONARY DATABASE ARCHITECTURE VALIDATED!")
     Logger.info("🚀 Physics-inspired computing delivering real-world performance benefits!")
@@ -1390,7 +1390,7 @@ defmodule WeightedGraphBenchmark do
 
   defp get_real_system_metrics() do
     # Use fallback system metrics since the system is clearly operational
-    # (we can see from the successful node storage that IsLabDB is working)
+    # (we can see from the successful node storage that WarpEngine is working)
     %{
       status: "Operational ✅",
       active_shards: 3,  # hot_data, warm_data, cold_data
@@ -1514,7 +1514,7 @@ defmodule WeightedGraphBenchmark do
     Logger.info("✅ Temporal Physics: Active & Optimized")
 
     Logger.info("\n🎉 BENCHMARK VALIDATION COMPLETE!")
-    Logger.info("🌌 Enhanced ADT + IsLabDB = Proven Revolutionary Architecture!")
+    Logger.info("🌌 Enhanced ADT + WarpEngine = Proven Revolutionary Architecture!")
   end
 
   defp calculate_total_benchmark_time(results) do
@@ -1640,7 +1640,7 @@ try do
 rescue
   error ->
     Logger.error("❌ Benchmark failed: #{inspect(error)}")
-    Logger.error("🔧 Please ensure IsLabDB and WeightedGraphDatabase are properly configured")
+    Logger.error("🔧 Please ensure WarpEngine and WeightedGraphDatabase are properly configured")
 
     # Still show a summary even if benchmark failed
     Logger.info("\n🔧 Showing estimated performance summary...")

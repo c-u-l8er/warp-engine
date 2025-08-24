@@ -1,9 +1,9 @@
-defmodule IsLabDB.MixProject do
+defmodule WarpEngine.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :islab_db,
+      app: :warp_engine,
       version: "1.0.0",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
@@ -17,7 +17,7 @@ defmodule IsLabDB.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {IsLabDB.Application, []}
+      mod: {WarpEngine.Application, []}
     ]
   end
 
@@ -35,12 +35,12 @@ defmodule IsLabDB.MixProject do
     [
       name: "warp_engine",
       description: "Revolutionary physics-inspired graph database with 23,742 ops/sec performance",
-      maintainers: ["IsLab Team"],
+      maintainers: ["WarpEngine Team"],
       licenses: ["Apache-2.0"],
       links: %{
-        "GitHub" => "https://github.com/company/islab_database",
+        "GitHub" => "https://github.com/company/warp_engine_database",
         "Documentation" => "https://hexdocs.pm/warp_engine",
-        "Benchmarks" => "https://github.com/company/islab_database/tree/main/benchmarks"
+        "Benchmarks" => "https://github.com/company/warp_engine_database/tree/main/benchmarks"
       },
       files: [
         "lib",
@@ -58,9 +58,9 @@ defmodule IsLabDB.MixProject do
 
   defp docs do
     [
-      main: "IsLabDB",
-      source_url: "https://github.com/company/islab_database",
-      homepage_url: "https://github.com/company/islab_database",
+      main: "WarpEngine",
+      source_url: "https://github.com/company/warp_engine_database",
+      homepage_url: "https://github.com/company/warp_engine_database",
       extras: [
         "README.md",
         "CHANGELOG.md",

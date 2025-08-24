@@ -1,11 +1,11 @@
 import Config
 
-# Test configuration for IsLab Database
+# Test configuration for WarpEngine Database
 # Uses temporary test data directory
 
-config :islab_db,
+config :warp_engine,
   # Use a test-specific data directory (matches test_helper.exs)
-  data_root: "/tmp/islab_db_test_data"
+  data_root: "/tmp/warp_engine_test_data"
 
 # Configure logging for testing
 config :logger,

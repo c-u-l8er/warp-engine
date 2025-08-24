@@ -1,4 +1,4 @@
-defmodule IsLabDB.WAL.Entry do
+defmodule WarpEngine.WAL.Entry do
   @moduledoc """
   WAL Entry structure for high-performance operation logging.
 

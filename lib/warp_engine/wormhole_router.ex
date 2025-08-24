@@ -1,4 +1,4 @@
-defmodule IsLabDB.WormholeRouter do
+defmodule WarpEngine.WormholeRouter do
   @moduledoc """
   Wormhole Network Topology Router - Dynamic connection management for cosmic data traversal.
 
@@ -58,7 +58,7 @@ defmodule IsLabDB.WormholeRouter do
 
   use GenServer
   require Logger
-  alias IsLabDB.{CosmicConstants, CosmicPersistence, EntropyMonitor}
+  alias WarpEngine.{CosmicConstants, CosmicPersistence, EntropyMonitor}
 
   # Wormhole physics constants
   @connection_decay_rate 0.95    # Connection strength decay per time unit

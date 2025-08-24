@@ -12,16 +12,16 @@ defmodule Phase3IntegrationTest do
   setup do
     cleanup_test_phase3_integration()
 
-    test_data_dir = "/tmp/islab_db_test_phase3_integration"
+    test_data_dir = "/tmp/warp_engine_test_phase3_integration"
     File.mkdir_p!(test_data_dir)
 
     # Configure for Phase 3 testing (disable Phase 4 and Phase 5 features)
-    Application.put_env(:islab_db, :enable_entropy_monitoring, false)
-    Application.put_env(:islab_db, :disable_phase4, true)
+    Application.put_env(:warp_engine, :enable_entropy_monitoring, false)
+    Application.put_env(:warp_engine, :disable_phase4, true)
 
     # Force application restart to ensure configuration is picked up
     try do
-      Application.stop(:islab_db)
+      Application.stop(:warp_engine)
     rescue
       _ -> :ok
     end
@@ -29,16 +29,16 @@ defmodule Phase3IntegrationTest do
     Process.sleep(200)
 
     # Ensure the full application is started with WAL and other components
-    Application.ensure_all_started(:islab_db)
+    Application.ensure_all_started(:warp_engine)
     Process.sleep(500)
 
     # Ensure cosmic filesystem exists in test directory
-    IsLabDB.CosmicPersistence.initialize_universe()
+    WarpEngine.CosmicPersistence.initialize_universe()
 
-    # Use the existing IsLabDB process from application supervisor
-    pid = case Process.whereis(IsLabDB) do
+    # Use the existing WarpEngine process from application supervisor
+    pid = case Process.whereis(WarpEngine) do
       nil ->
-        raise "IsLabDB should be started by application supervisor but was not found"
+        raise "WarpEngine should be started by application supervisor but was not found"
       existing_pid ->
         existing_pid
     end
@@ -60,7 +60,7 @@ defmodule Phase3IntegrationTest do
       assert Process.alive?(pid)
 
       # Get cosmic metrics to verify Phase 3 integration
-      metrics = IsLabDB.cosmic_metrics()
+      metrics = WarpEngine.cosmic_metrics()
 
       assert metrics.universe_state == :stable
       assert Map.has_key?(metrics, :gravitational_routing)
@@ -68,7 +68,7 @@ defmodule Phase3IntegrationTest do
       assert is_map(metrics.gravitational_routing)
 
       # Should have advanced spacetime shards
-      spacetime_shard_metrics = IsLabDB.get_spacetime_shard_metrics()
+      spacetime_shard_metrics = WarpEngine.get_spacetime_shard_metrics()
       assert is_map(spacetime_shard_metrics)
       assert Map.has_key?(spacetime_shard_metrics, :hot_data)
       assert Map.has_key?(spacetime_shard_metrics, :warm_data)
@@ -92,7 +92,7 @@ defmodule Phase3IntegrationTest do
       ]
 
       placement_results = Enum.map(test_data, fn {key, value, opts} ->
-        {:ok, :stored, shard_id, operation_time} = IsLabDB.cosmic_put(key, value, opts)
+        {:ok, :stored, shard_id, operation_time} = WarpEngine.cosmic_put(key, value, opts)
         {key, shard_id, operation_time, opts}
       end)
 
@@ -120,11 +120,11 @@ defmodule Phase3IntegrationTest do
       test_key = "phase3:retrieval_test"
       test_value = %{data: "phase3 retrieval", importance: "high"}
 
-      {:ok, :stored, storage_shard, _time} = IsLabDB.cosmic_put(test_key, test_value,
+      {:ok, :stored, storage_shard, _time} = WarpEngine.cosmic_put(test_key, test_value,
         [access_pattern: :hot, priority: :high])
 
       # Retrieve the data
-      {:ok, retrieved_value, retrieval_shard, retrieval_time} = IsLabDB.cosmic_get(test_key)
+      {:ok, retrieved_value, retrieval_shard, retrieval_time} = WarpEngine.cosmic_get(test_key)
 
       assert retrieved_value == test_value
       assert retrieval_shard == storage_shard
@@ -138,16 +138,16 @@ defmodule Phase3IntegrationTest do
       primary_key = "user:phase3_quantum"
       profile_key = "profile:phase3_quantum"
 
-      IsLabDB.cosmic_put(primary_key, %{name: "Phase3 User", role: "tester"})
-      IsLabDB.cosmic_put(profile_key, %{bio: "Testing Phase 3", skills: ["Physics", "Databases"]})
+      WarpEngine.cosmic_put(primary_key, %{name: "Phase3 User", role: "tester"})
+      WarpEngine.cosmic_put(profile_key, %{bio: "Testing Phase 3", skills: ["Physics", "Databases"]})
 
       # Create manual entanglement
-      {:ok, _entanglement_id} = IsLabDB.create_quantum_entanglement(primary_key, [profile_key], 0.9)
+      {:ok, _entanglement_id} = WarpEngine.create_quantum_entanglement(primary_key, [profile_key], 0.9)
 
       :timer.sleep(100)  # Allow entanglement to be processed
 
       # Use quantum_get to retrieve with entanglement
-      {:ok, response} = IsLabDB.quantum_get(primary_key)
+      {:ok, response} = WarpEngine.quantum_get(primary_key)
 
       assert response.value == %{name: "Phase3 User", role: "tester"}
       assert response.shard in [:hot_data, :warm_data, :cold_data]
@@ -174,14 +174,14 @@ defmodule Phase3IntegrationTest do
           2 -> :cold
         end
 
-        IsLabDB.cosmic_put("load_test:#{i}", %{index: i, data: "load test"},
+        WarpEngine.cosmic_put("load_test:#{i}", %{index: i, data: "load test"},
           [priority: priority, access_pattern: access_pattern])
       end
 
       :timer.sleep(100)  # Allow data to be processed
 
       # Analyze load distribution
-      analysis = IsLabDB.analyze_load_distribution()
+      analysis = WarpEngine.analyze_load_distribution()
 
       assert is_integer(analysis.total_data_items)
       assert analysis.total_data_items >= 20  # We stored 20 items
@@ -201,14 +201,14 @@ defmodule Phase3IntegrationTest do
     test "force_gravitational_rebalancing executes successfully" do
       # Store some test data to create imbalance
       for i <- 1..10 do
-        IsLabDB.cosmic_put("rebalance_test:#{i}", %{index: i},
+        WarpEngine.cosmic_put("rebalance_test:#{i}", %{index: i},
           [access_pattern: :hot, priority: :critical])  # All to hot shard
       end
 
       :timer.sleep(100)
 
       # Force rebalancing
-      case IsLabDB.force_gravitational_rebalancing() do
+      case WarpEngine.force_gravitational_rebalancing() do
         {:ok, rebalance_results} ->
           assert is_integer(rebalance_results.successful_migrations)
           assert is_integer(rebalance_results.failed_migrations)
@@ -233,12 +233,12 @@ defmodule Phase3IntegrationTest do
       ]
 
       Enum.each(test_keys, fn {key, value, opts} ->
-        IsLabDB.cosmic_put(key, value, opts)
+        WarpEngine.cosmic_put(key, value, opts)
       end)
 
       :timer.sleep(100)
 
-      shard_metrics = IsLabDB.get_spacetime_shard_metrics()
+      shard_metrics = WarpEngine.get_spacetime_shard_metrics()
 
       # Check each shard has comprehensive metrics
       Enum.each([:hot_data, :warm_data, :cold_data], fn shard_id ->
@@ -268,7 +268,7 @@ defmodule Phase3IntegrationTest do
     end
 
     test "cosmic_metrics includes Phase 3 gravitational routing data" do
-      metrics = IsLabDB.cosmic_metrics()
+      metrics = WarpEngine.cosmic_metrics()
 
       # Verify Phase 3 specific metrics
       assert Map.has_key?(metrics, :gravitational_routing)
@@ -300,11 +300,11 @@ defmodule Phase3IntegrationTest do
         value = %{index: i, data: "performance test", timestamp: :os.system_time(:millisecond)}
 
         {put_time, {:ok, :stored, _shard, put_operation_time}} = :timer.tc(fn ->
-          IsLabDB.cosmic_put(key, value, [priority: :normal])
+          WarpEngine.cosmic_put(key, value, [priority: :normal])
         end)
 
         {get_time, {:ok, _retrieved_value, _shard, get_operation_time}} = :timer.tc(fn ->
-          IsLabDB.cosmic_get(key)
+          WarpEngine.cosmic_get(key)
         end)
 
         %{
@@ -344,11 +344,11 @@ defmodule Phase3IntegrationTest do
           priority = Enum.random([:critical, :high, :normal, :low, :background])
 
           # Store data
-          {:ok, :stored, storage_shard, _time} = IsLabDB.cosmic_put(key, value,
+          {:ok, :stored, storage_shard, _time} = WarpEngine.cosmic_put(key, value,
             [access_pattern: access_pattern, priority: priority])
 
           # Retrieve data
-          {:ok, retrieved_value, retrieval_shard, _time} = IsLabDB.cosmic_get(key)
+          {:ok, retrieved_value, retrieval_shard, _time} = WarpEngine.cosmic_get(key)
 
           # Verify consistency
           assert retrieved_value == value
@@ -392,14 +392,14 @@ defmodule Phase3IntegrationTest do
         }
       }
 
-      {:ok, :stored, shard, operation_time} = IsLabDB.cosmic_put("large:data", large_value,
+      {:ok, :stored, shard, operation_time} = WarpEngine.cosmic_put("large:data", large_value,
         [access_pattern: :warm, priority: :normal])
 
       assert shard in [:hot_data, :warm_data, :cold_data]
       assert is_integer(operation_time)
 
       # Retrieve large data
-      {:ok, retrieved_value, retrieval_shard, retrieval_time} = IsLabDB.cosmic_get("large:data")
+      {:ok, retrieved_value, retrieval_shard, retrieval_time} = WarpEngine.cosmic_get("large:data")
 
       assert retrieved_value == large_value
       assert retrieval_shard == shard
@@ -418,7 +418,7 @@ defmodule Phase3IntegrationTest do
       ]
 
       Enum.each(test_cases, fn opts ->
-        result = IsLabDB.cosmic_put("invalid_test:#{:rand.uniform(1000)}", %{data: "test"}, opts)
+        result = WarpEngine.cosmic_put("invalid_test:#{:rand.uniform(1000)}", %{data: "test"}, opts)
 
         case result do
           {:ok, :stored, shard, operation_time} ->
@@ -436,8 +436,8 @@ defmodule Phase3IntegrationTest do
   ## HELPER FUNCTIONS
 
   defp cleanup_test_phase3_integration() do
-    # Stop any running IsLabDB process
-    case Process.whereis(IsLabDB) do
+    # Stop any running WarpEngine process
+    case Process.whereis(WarpEngine) do
       nil -> :ok
       pid ->
         if Process.alive?(pid) do
@@ -446,7 +446,7 @@ defmodule Phase3IntegrationTest do
     end
 
     # Clean up test data directory
-    test_data_dir = "/tmp/islab_db_test_phase3_integration"
+    test_data_dir = "/tmp/warp_engine_test_phase3_integration"
     if File.exists?(test_data_dir) do
       try do
         File.rm_rf!(test_data_dir)

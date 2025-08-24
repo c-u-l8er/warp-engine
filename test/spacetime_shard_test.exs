@@ -1,10 +1,10 @@
 defmodule SpacetimeShardTest do
   use ExUnit.Case
-  doctest IsLabDB.SpacetimeShard
+  doctest WarpEngine.SpacetimeShard
 
   require Logger
 
-  alias IsLabDB.SpacetimeShard
+  alias WarpEngine.SpacetimeShard
 
   setup_all do
     # Ensure clean state before all tests
@@ -20,9 +20,9 @@ defmodule SpacetimeShardTest do
     cleanup_test_system()
 
     # Ensure test data directory exists
-    test_data_dir = "/tmp/islab_db_test_phase3_shards"
+    test_data_dir = "/tmp/warp_engine_test_phase3_shards"
     File.mkdir_p!(test_data_dir)
-    Application.put_env(:islab_db, :data_root, test_data_dir)
+    Application.put_env(:warp_engine, :data_root, test_data_dir)
 
     on_exit(fn ->
       cleanup_test_system()
@@ -397,7 +397,7 @@ defmodule SpacetimeShardTest do
     end)
 
     # Clean up test data directory
-    test_data_dir = "/tmp/islab_db_test_phase3_shards"
+    test_data_dir = "/tmp/warp_engine_test_phase3_shards"
     if File.exists?(test_data_dir) do
       try do
         File.rm_rf!(test_data_dir)

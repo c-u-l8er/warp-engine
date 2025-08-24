@@ -69,10 +69,10 @@ defmodule EnhancedADTTest do
       assert %DateTime{} = user.created_at
     end
 
-    test "defproduct generates physics configuration for IsLabDB integration" do
+    test "defproduct generates physics configuration for WarpEngine integration" do
       physics_config = EnhancedADTTest.TestUser.__adt_physics_config__()
 
-      # Physics annotations should map to IsLabDB physics parameters
+      # Physics annotations should map to WarpEngine physics parameters
       assert Map.get(physics_config, :loyalty_score) == :gravitational_mass
       assert Map.get(physics_config, :activity_level) == :quantum_entanglement_potential
       assert Map.get(physics_config, :created_at) == :temporal_weight
@@ -92,7 +92,7 @@ defmodule EnhancedADTTest do
       assert activity_field.physics == :quantum_entanglement_potential
     end
 
-    test "extract_physics_context generates physics parameters for IsLabDB" do
+    test "extract_physics_context generates physics parameters for WarpEngine" do
       user = EnhancedADTTest.TestUser.new("user123", "Alice Johnson", "alice@example.com", 0.8, 0.7, DateTime.utc_now())
 
       physics_context = EnhancedADTTest.TestUser.extract_physics_context(user)
@@ -324,20 +324,20 @@ defmodule EnhancedADTTest do
     describe "Enhanced ADT Fold Operations with Design Doc Syntax" do
 
     test "fold enables mathematical transformation following design docs" do
-      # Following design docs: Mathematical fold operations → IsLabDB physics commands
+      # Following design docs: Mathematical fold operations → WarpEngine physics commands
       user = EnhancedADTTest.TestUser.new("user123", "Alice Johnson", "alice@example.com", 0.8, 0.7, DateTime.utc_now())
 
       # Test mathematical elegance of Enhanced ADT operations
       mathematical_result = %{
         input_domain: user,
         mathematical_operation: :enhanced_adt_fold,
-        automatic_translation: :islab_db_cosmic_operations,
+        automatic_translation: :warp_engine_cosmic_operations,
         physics_context: EnhancedADTTest.TestUser.extract_physics_context(user),
         feels_like_mathematics: true,
         leverages_physics: true
       }
 
-      assert mathematical_result.automatic_translation == :islab_db_cosmic_operations
+      assert mathematical_result.automatic_translation == :warp_engine_cosmic_operations
       assert mathematical_result.physics_context[:gravitational_mass] == 0.8
       assert mathematical_result.physics_context[:quantum_entanglement_potential] == 0.7
       assert mathematical_result.feels_like_mathematics == true
@@ -366,7 +366,7 @@ defmodule EnhancedADTTest do
       assert physics_properties[:quantum_entanglement_potential] == 0.9
     end
 
-    test "Enhanced ADT automatically translates to IsLabDB physics operations" do
+    test "Enhanced ADT automatically translates to WarpEngine physics operations" do
       # Following design docs: "Mathematical operations transparently become physics commands"
       user = EnhancedADTTest.TestUser.new("user789", "Carol", "carol@example.com", 0.85, 0.75, DateTime.utc_now())
 
@@ -374,7 +374,7 @@ defmodule EnhancedADTTest do
       automatic_translation = %{
         step_1_mathematical_domain: user,
         step_2_physics_extraction: EnhancedADTTest.TestUser.extract_physics_context(user),
-        step_3_automatic_translation: :islab_db_cosmic_put,
+        step_3_automatic_translation: :warp_engine_cosmic_put,
         step_4_physics_optimizations: %{
           gravitational_routing: determine_shard_from_physics(EnhancedADTTest.TestUser.extract_physics_context(user)),
           quantum_entanglement: determine_entanglements_from_physics(EnhancedADTTest.TestUser.extract_physics_context(user)),
@@ -383,7 +383,7 @@ defmodule EnhancedADTTest do
         developer_experience: :pure_mathematics_with_revolutionary_performance
       }
 
-      assert automatic_translation.step_3_automatic_translation == :islab_db_cosmic_put
+      assert automatic_translation.step_3_automatic_translation == :warp_engine_cosmic_put
       assert automatic_translation.step_4_physics_optimizations.gravitational_routing in [:hot, :warm, :cold]
       assert automatic_translation.developer_experience == :pure_mathematics_with_revolutionary_performance
     end
@@ -860,7 +860,7 @@ defmodule EnhancedADTTest do
     %{
       mathematical_properties: %{
         domain: :enhanced_adt,
-        codomain: :islab_db_operations,
+        codomain: :warp_engine_operations,
         operation_type: :fold_with_physics_translation
       },
       physics_transformation: physics_context,
@@ -882,7 +882,7 @@ defmodule EnhancedADTTest do
         cross_references_detected: Enum.map(customer_journey.purchase_history, & &1.product_id),
         wormhole_benefits: true
       },
-      islab_operations: %{
+      warp_engine_operations: %{
         cosmic_put_calls: 1 + length(customer_journey.purchase_history),
         quantum_entanglement_calls: length(customer_journey.purchase_history),
         wormhole_route_calls: 2
@@ -903,7 +903,7 @@ defmodule EnhancedADTTest do
         quantum_correlations: true,
         temporal_routing: true
       },
-      automatic_islab_integration: true,
+      automatic_warp_engine_integration: true,
       mathematical_elegance: :preserved
     }
   end

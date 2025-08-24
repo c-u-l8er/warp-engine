@@ -3,42 +3,42 @@
  539 │         {:ok, value, shard_id, operation_time, updated_state} ->
      │                                ~
      │
-     └─ lib/islab_db.ex:539:32: IsLabDB.handle_call/3
+     └─ lib/warp_engine.ex:539:32: WarpEngine.handle_call/3
 
      warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  539 │         {:ok, value, shard_id, operation_time, updated_state} ->
      │                      ~
      │
-     └─ lib/islab_db.ex:539:22: IsLabDB.handle_call/3
+     └─ lib/warp_engine.ex:539:22: WarpEngine.handle_call/3
 
      warning: variable "operation_time" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  541 │         {:error, :not_found, operation_time, error_state} ->
      │                              ~
      │
-     └─ lib/islab_db.ex:541:30: IsLabDB.handle_call/3
+     └─ lib/warp_engine.ex:541:30: WarpEngine.handle_call/3
 
       warning: function update_quantum_metrics/3 is unused
       │
  1074 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
       │        ~
       │
-      └─ lib/islab_db.ex:1074:8: IsLabDB (module)
+      └─ lib/warp_engine.ex:1074:8: WarpEngine (module)
 
       warning: function store_in_event_horizon_cache/5 is unused
       │
  1161 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
       │        ~
       │
-      └─ lib/islab_db.ex:1161:8: IsLabDB (module)
+      └─ lib/warp_engine.ex:1161:8: WarpEngine (module)
 
       warning: function get_current_state/0 is unused
       │
  1575 │   defp get_current_state() do
       │        ~
       │
-      └─ lib/islab_db.ex:1575:8: IsLabDB (module)
+      └─ lib/warp_engine.ex:1575:8: WarpEngine (module)
 
      warning: the following clause will never match:
 
@@ -46,7 +46,7 @@
 
      because it attempts to match on the result of:
 
-         IsLabDB.WALOperations.cosmic_delete_v2(state, key)
+         WarpEngine.WALOperations.cosmic_delete_v2(state, key)
 
      which has type:
 
@@ -57,203 +57,203 @@
  556 │         {:error, error_result, error_state} ->
      │         ~
      │
-     └─ lib/islab_db.ex:556:9: IsLabDB.handle_call/3
+     └─ lib/warp_engine.ex:556:9: WarpEngine.handle_call/3
 
      warning: function atomize_keys/1 is unused
      │
  288 │   defp atomize_keys(map) when is_map(map) do
      │        ~
      │
-     └─ lib/islab_db/wal_entry.ex:288:8: IsLabDB.WAL.Entry (module)
+     └─ lib/warp_engine/wal_entry.ex:288:8: WarpEngine.WAL.Entry (module)
 
      warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  218 │   defp ultra_fast_route_data(key, value, opts) do
      │                                   ~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:218:35: IsLabDB.WALOperations.ultra_fast_route_data/3
+     └─ lib/warp_engine/wal_operations.ex:218:35: WarpEngine.WALOperations.ultra_fast_route_data/3
 
      warning: variable "cosmic_metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
      │                                                      ~~~~~~~~~~~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:278:54: IsLabDB.WALOperations.update_physics_intelligence_async/4
+     └─ lib/warp_engine/wal_operations.ex:278:54: WarpEngine.WALOperations.update_physics_intelligence_async/4
 
      warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
      │                                                                       ~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:278:71: IsLabDB.WALOperations.update_physics_intelligence_async/4
+     └─ lib/warp_engine/wal_operations.ex:278:71: WarpEngine.WALOperations.update_physics_intelligence_async/4
 
      warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
      │                                               ~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:278:47: IsLabDB.WALOperations.update_physics_intelligence_async/4
+     └─ lib/warp_engine/wal_operations.ex:278:47: WarpEngine.WALOperations.update_physics_intelligence_async/4
 
      warning: variable "cosmic_metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
      │                                                                    ~~~~~~~~~~~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:309:68: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+     └─ lib/warp_engine/wal_operations.ex:309:68: WarpEngine.WALOperations.update_get_physics_intelligence_async/5
 
      warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
      │                                                          ~~~~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:309:58: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+     └─ lib/warp_engine/wal_operations.ex:309:58: WarpEngine.WALOperations.update_get_physics_intelligence_async/5
 
      warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
      │                                                                                     ~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:309:85: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+     └─ lib/warp_engine/wal_operations.ex:309:85: WarpEngine.WALOperations.update_get_physics_intelligence_async/5
 
      warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
      │                                                   ~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:309:51: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+     └─ lib/warp_engine/wal_operations.ex:309:51: WarpEngine.WALOperations.update_get_physics_intelligence_async/5
 
      warning: variable "delete_results" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  374 │   defp cleanup_physics_intelligence_async(key, delete_results, state) do
      │                                                ~~~~~~~~~~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:374:48: IsLabDB.WALOperations.cleanup_physics_intelligence_async/3
+     └─ lib/warp_engine/wal_operations.ex:374:48: WarpEngine.WALOperations.cleanup_physics_intelligence_async/3
 
      warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  374 │   defp cleanup_physics_intelligence_async(key, delete_results, state) do
      │                                                                ~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:374:64: IsLabDB.WALOperations.cleanup_physics_intelligence_async/3
+     └─ lib/warp_engine/wal_operations.ex:374:64: WarpEngine.WALOperations.cleanup_physics_intelligence_async/3
 
      warning: function update_wormhole_usage_patterns/3 is unused
      │
  481 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:481:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:481:8: WarpEngine.WALOperations (module)
 
      warning: function update_shard_statistics/4 is unused
      │
  491 │   defp update_shard_statistics(shard, operation, _key, _value) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:491:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:491:8: WarpEngine.WALOperations (module)
 
      warning: function update_physics_intelligence_async/4 is unused
      │
  278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:278:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:278:8: WarpEngine.WALOperations (module)
 
      warning: function update_get_physics_intelligence_async/5 is unused
      │
  309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:309:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:309:8: WarpEngine.WALOperations (module)
 
      warning: function update_access_patterns_async/3 is unused
      │
  419 │   defp update_access_patterns_async(key, access_type, _state) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:419:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:419:8: WarpEngine.WALOperations (module)
 
      warning: function ultra_fast_route_data/3 is unused
      │
  218 │   defp ultra_fast_route_data(key, value, opts) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:218:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:218:8: WarpEngine.WALOperations (module)
 
      warning: function populate_event_horizon_cache_async/4 is unused
      │
  388 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:388:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:388:8: WarpEngine.WALOperations (module)
 
      warning: function get_wormhole_metadata/2 is unused
      │
  463 │   defp get_wormhole_metadata(_key, shard_id) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:463:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:463:8: WarpEngine.WALOperations (module)
 
      warning: function determine_quantum_state/2 is unused
      │
  424 │   defp determine_quantum_state(key, value) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:424:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:424:8: WarpEngine.WALOperations (module)
 
      warning: function determine_optimal_cache_level/1 is unused
      │
  472 │   defp determine_optimal_cache_level(cosmic_metadata) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:472:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:472:8: WarpEngine.WALOperations (module)
 
      warning: function create_cosmic_metadata/5 is unused
      │
  262 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:262:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:262:8: WarpEngine.WALOperations (module)
 
      warning: function check_event_horizon_cache_v2/2 is unused
      │
  323 │   defp check_event_horizon_cache_v2(state, key) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:323:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:323:8: WarpEngine.WALOperations (module)
 
      warning: function calculate_entropy_impact/3 is unused
      │
  435 │   defp calculate_entropy_impact(key, value, shard_id) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:435:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:435:8: WarpEngine.WALOperations (module)
 
      warning: function calculate_cosmic_coordinates/2 is unused
      │
  449 │   defp calculate_cosmic_coordinates(key, value) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:449:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:449:8: WarpEngine.WALOperations (module)
 
      warning: function cache_retrieved_value_async/5 is unused
      │
  401 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:401:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:401:8: WarpEngine.WALOperations (module)
 
     warning: unused alias EntropyMonitor
     │
- 27 │   alias IsLabDB.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
+ 27 │   alias WarpEngine.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
     │   ~
     │
-    └─ lib/islab_db/wal_operations.ex:27:3
+    └─ lib/warp_engine/wal_operations.ex:27:3
 
     warning: unused alias GravitationalRouter
     │
- 27 │   alias IsLabDB.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
+ 27 │   alias WarpEngine.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
     │   ~
     │
-    └─ lib/islab_db/wal_operations.ex:27:3
+    └─ lib/warp_engine/wal_operations.ex:27:3
 
      warning: the following clause will never match:
 
@@ -261,7 +261,7 @@
 
      because it attempts to match on the result of:
 
-         IsLabDB.EventHorizonCache.get(cache, key)
+         WarpEngine.EventHorizonCache.get(cache, key)
 
      which has type:
 
@@ -283,22 +283,22 @@
  335 │             {:error, _reason} -> nil
      │             ~~~~~~~~~~~~~~~~~~~~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:335: IsLabDB.WALOperations.check_event_horizon_cache_v2/2
+     └─ lib/warp_engine/wal_operations.ex:335: WarpEngine.WALOperations.check_event_horizon_cache_v2/2
 
 
-20:12:10.929 [info] 🚀 Starting IsLab Database Application...
+20:12:10.929 [info] 🚀 Starting WarpEngine Database Application...
 
 20:12:10.933 [info] ⚙️  Application Configuration:
 
-20:12:10.943 [info]   data_root: "/home/travis/Projects/islab-database/data"
+20:12:10.943 [info]   data_root: "/home/travis/Projects/warp-engine-database/data"
 
 20:12:10.943 [info]   Entanglement rules: using defaults
 
-20:12:10.949 [info] 🚀 Initializing IsLabDB computational universe...
+20:12:10.949 [info] 🚀 Initializing WarpEngine computational universe...
 
 20:12:10.954 [info] 🌌 Initializing cosmic filesystem structure...
 
-20:12:10.993 [info] ✨ Cosmic structure ready at /home/travis/Projects/islab-database/data
+20:12:10.993 [info] ✨ Cosmic structure ready at /home/travis/Projects/warp-engine-database/data
 
 20:12:10.997 [info] ⚛️  Initializing quantum entanglement system...
 
@@ -342,7 +342,7 @@
 
 20:12:11.040 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
 
-20:12:11.041 [info] 💾 Entropy persistence initialized: /home/travis/Projects/islab-database/data/entropy/cosmic_entropy
+20:12:11.041 [info] 💾 Entropy persistence initialized: /home/travis/Projects/warp-engine-database/data/entropy/cosmic_entropy
 
 20:12:11.041 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 5000ms
 
@@ -352,13 +352,13 @@
 
 20:12:11.046 [info] 🚀 Initializing WAL Persistence Revolution...
 
-20:12:11.046 [info] ✅ WAL system initialized: /home/travis/Projects/islab-database/data/wal/cosmic.wal
+20:12:11.046 [info] ✅ WAL system initialized: /home/travis/Projects/warp-engine-database/data/wal/cosmic.wal
 
 20:12:11.046 [info] ⚡ Ready for 250,000+ ops/second performance!
 
-20:12:11.046 [info] ✨ IsLabDB universe is stable and ready for cosmic operations
+20:12:11.046 [info] ✨ WarpEngine universe is stable and ready for cosmic operations
 
-20:12:11.046 [info] 🌌 Data root: /home/travis/Projects/islab-database/data
+20:12:11.046 [info] 🌌 Data root: /home/travis/Projects/warp-engine-database/data
 
 20:12:11.046 [info] 🪐 Advanced spacetime shards: cold_data, hot_data, warm_data
 
@@ -372,7 +372,7 @@
 
 20:12:11.046 [info] 🌡️  Phase 5: Entropy Monitoring & Thermodynamics - ACTIVE
 
-20:12:11.046 [info] ✨ IsLab Database Application started successfully
+20:12:11.046 [info] ✨ WarpEngine Database Application started successfully
 
 20:12:11.050 [info] 🌌 Universe supervisor PID: #PID<0.232.0>
 🔥 Optimized Redis Benchmark - Persistent Connections
@@ -385,7 +385,7 @@ to measure realistic Redis performance.
 🔴 Testing Redis with pipelined commands...
    📝 Generated 10,000 SET and GET commands
 
-❌ Benchmark failed: %ArgumentError{message: "invalid option :stdin with value \"SET islabdb:fast:1 \\\"benchmark_data_1\\\"\\nSET islabdb:fast:2 \\\"benchmark_data_2\\\"\\nSET islabdb:fast:3 \\\"benchmark_data_3\\\"\\nSET islabdb:fast:4 \\\"benchmark_data_4\\\"\\nSET islabdb:fast:5 \\\"benchmark_data_5\\\"\\nSET islabdb:fast:6 \\\"benchmark_data_6\\\"\\nSET islabdb:fast:7 \\\"benchmark_data_7\\\"\\nSET islabdb:fast:8 \\\"benchmark_data_8\\\"\\nSET islabdb:fast:9 \\\"benchmark_data_9\\\"\\nSET islabdb:fast:10 \\\"benchmark_data_10\\\"\\nSET islabdb:fast:11 \\\"benchmark_data_11\\\"\\nSET islabdb:fast:12 \\\"benchmark_data_12\\\"\\nSET islabdb:fast:13 \\\"benchmark_data_13\\\"\\nSET islabdb:fast:14 \\\"benchmark_data_14\\\"\\nSET islabdb:fast:15 \\\"benchmark_data_15\\\"\\nSET islabdb:fast:16 \\\"benchmark_data_16\\\"\\nSET islabdb:fast:17 \\\"benchmark_data_17\\\"\\nSET islabdb:fast:18 \\\"benchmark_data_18\\\"\\nSET islabdb:fast:19 \\\"benchmark_data_19\\\"\\nSET islabdb:fast:20 \\\"benchmark_data_20\\\"\\nSET islabdb:fast:21 \\\"benchmark_data_21\\\"\\nSET islabdb:fast:22 \\\"benchmark_data_22\\\"\\nSET islabdb:fast:23 \\\"benchmark_data_23\\\"\\nSET islabdb:fast:24 \\\"benchmark_data_24\\\"\\nSET islabdb:fast:25 \\\"benchmark_data_25\\\"\\nSET islabdb:fast:26 \\\"benchmark_data_26\\\"\\nSET islabdb:fast:27 \\\"benchmark_data_27\\\"\\nSET islabdb:fast:28 \\\"benchmark_data_28\\\"\\nSET islabdb:fast:29 \\\"benchmark_data_29\\\"\\nSET islabdb:fast:30 \\\"benchmark_data_30\\\"\\nSET islabdb:fast:31 \\\"benchmark_data_31\\\"\\nSET islabdb:fast:32 \\\"benchmark_data_32\\\"\\nSET islabdb:fast:33 \\\"benchmark_data_33\\\"\\nSET islabdb:fast:34 \\\"benchmark_data_34\\\"\\nSET islabdb:fast:35 \\\"benchmark_data_35\\\"\\nSET islabdb:fast:36 \\\"benchmark_data_36\\\"\\nSET islabdb:fast:37 \\\"benchmark_data_37\\\"\\nSET islabdb:fast:38 \\\"benchmark_data_38\\\"\\nSET islabdb:fast:39 \\\"benchmark_data_39\\\"\\nSET islabdb:fast:40 \\\"benchmark_data_40\\\"\\nSET islabdb:fast:41 \\\"benchmark_data_41\\\"\\nSET islabdb:fast:42 \\\"benchmark_data_42\\\"\\nSET islabdb:fast:43 \\\"benchmark_data_43\\\"\\nSET islabdb:fast:44 \\\"benchmark_data_44\\\"\\nSET islabdb:fast:45 \\\"benchmark_data_45\\\"\\nSET islabdb:fast:46 \\\"benchmark_data_46\\\"\\nSET islabdb:fast:47 \\\"benchmark_data_47\\\"\\nSET islabdb:fast:48 \\\"benchmark_data_48\\\"\\nSET islabdb:fast:49 \\\"benchmark_data_49\\\"\\nSET islabdb:fast:50 \\\"benchmark_data_50\\\"\\nSET islabdb:fast:51 \\\"benchmark_data_51\\\"\\nSET islabdb:fast:52 \\\"benchmark_data_52\\\"\\nSET islabdb:fast:53 \\\"benchmark_data_53\\\"\\nSET islabdb:fast:54 \\\"benchmark_data_54\\\"\\nSET islabdb:fast:55 \\\"benchmark_data_55\\\"\\nSET islabdb:fast:56 \\\"benchmark_data_56\\\"\\nSET islabdb:fast:57 \\\"benchmark_data_57\\\"\\nSET islabdb:fast:58 \\\"benchmark_data_58\\\"\\nSET islabdb:fast:59 \\\"benchmark_data_59\\\"\\nSET islabdb:fast:60 \\\"benchmark_data_60\\\"\\nSET islabdb:fast:61 \\\"benchmark_data_61\\\"\\nSET islabdb:fast:62 \\\"benchmark_data_62\\\"\\nSET islabdb:fast:63 \\\"benchmark_data_63\\\"\\nSET islabdb:fast:64 \\\"benchmark_data_64\\\"\\nSET islabdb:fast:65 \\\"benchmark_data_65\\\"\\nSET islabdb:fast:66 \\\"benchmark_data_66\\\"\\nSET islabdb:fast:67 \\\"benchmark_data_67\\\"\\nSET islabdb:fast:68 \\\"benchmark_data_68\\\"\\nSET islabdb:fast:69 \\\"benchmark_data_69\\\"\\nSET islabdb:fast:70 \\\"benchmark_data_70\\\"\\nSET islabdb:fast:71 \\\"benchmark_data_71\\\"\\nSET islabdb:fast:72 \\\"benchmark_data_72\\\"\\nSET islabdb:fast:73 \\\"benchmark_data_73\\\"\\nSET islabdb:fast:74 \\\"benchmark_data_74\\\"\\nSET islabdb:fast:75 \\\"benchmark_data_75\\\"\\nSET islabdb:fast:76 \\\"benchmark_data_76\\\"\\nSET islabdb:fast:77 \\\"benchmark_data_77\\\"\\nSET islabdb:fast:78 \\\"benchmark_data_78\\\"\\nSET islabdb:fast:79 \\\"benchmark_data_79\\\"\\nSET islabdb:fast:80 \\\"benchmark_data_80\\\"\\nSET islabdb:fast:81 \\\"benchmark_data_81\\\"\\nSET islabdb:fast:82 \\\"benchmark_data_82\\\"\\nSET islabdb:fast:83 \\\"benchmark_data_83\\\"\\nSET islabdb:fast:84 \\\"benchmark_data_84\\\"\\nSET islabdb:fast:85 \\\"benchmark_data_85\\\"\\nSET islabdb:fast:86 \\\"benchmark_data_86\\\"\\nSET islabdb:fast:87 \\\"benchmark_data_87\\\"\\nSET islabdb:fast:88 \\\"benchmark_data_88\\\"\\nSET islabdb:fast:89 \\\"benchmark_data_89\\\"\\nSET islabdb:fast:90 \\\"benchmark_data_90\\\"\\nSET islabdb:fast:91 \\\"benchmark_data_91\\\"\\nSET islabdb:fast:92 \\\"benchmark_data_92\\\"\\nSET islabdb:fast:93 \\\"benchmark_data_93\\\"\\nSET islabdb:fast:94 \\\"benchmark_data_94\\\"\\nSET islabdb:fast:95 \\\"benchmark_data_9" <> ...}
+❌ Benchmark failed: %ArgumentError{message: "invalid option :stdin with value \"SET warp_enginedb:fast:1 \\\"benchmark_data_1\\\"\\nSET warp_enginedb:fast:2 \\\"benchmark_data_2\\\"\\nSET warp_enginedb:fast:3 \\\"benchmark_data_3\\\"\\nSET warp_enginedb:fast:4 \\\"benchmark_data_4\\\"\\nSET warp_enginedb:fast:5 \\\"benchmark_data_5\\\"\\nSET warp_enginedb:fast:6 \\\"benchmark_data_6\\\"\\nSET warp_enginedb:fast:7 \\\"benchmark_data_7\\\"\\nSET warp_enginedb:fast:8 \\\"benchmark_data_8\\\"\\nSET warp_enginedb:fast:9 \\\"benchmark_data_9\\\"\\nSET warp_enginedb:fast:10 \\\"benchmark_data_10\\\"\\nSET warp_enginedb:fast:11 \\\"benchmark_data_11\\\"\\nSET warp_enginedb:fast:12 \\\"benchmark_data_12\\\"\\nSET warp_enginedb:fast:13 \\\"benchmark_data_13\\\"\\nSET warp_enginedb:fast:14 \\\"benchmark_data_14\\\"\\nSET warp_enginedb:fast:15 \\\"benchmark_data_15\\\"\\nSET warp_enginedb:fast:16 \\\"benchmark_data_16\\\"\\nSET warp_enginedb:fast:17 \\\"benchmark_data_17\\\"\\nSET warp_enginedb:fast:18 \\\"benchmark_data_18\\\"\\nSET warp_enginedb:fast:19 \\\"benchmark_data_19\\\"\\nSET warp_enginedb:fast:20 \\\"benchmark_data_20\\\"\\nSET warp_enginedb:fast:21 \\\"benchmark_data_21\\\"\\nSET warp_enginedb:fast:22 \\\"benchmark_data_22\\\"\\nSET warp_enginedb:fast:23 \\\"benchmark_data_23\\\"\\nSET warp_enginedb:fast:24 \\\"benchmark_data_24\\\"\\nSET warp_enginedb:fast:25 \\\"benchmark_data_25\\\"\\nSET warp_enginedb:fast:26 \\\"benchmark_data_26\\\"\\nSET warp_enginedb:fast:27 \\\"benchmark_data_27\\\"\\nSET warp_enginedb:fast:28 \\\"benchmark_data_28\\\"\\nSET warp_enginedb:fast:29 \\\"benchmark_data_29\\\"\\nSET warp_enginedb:fast:30 \\\"benchmark_data_30\\\"\\nSET warp_enginedb:fast:31 \\\"benchmark_data_31\\\"\\nSET warp_enginedb:fast:32 \\\"benchmark_data_32\\\"\\nSET warp_enginedb:fast:33 \\\"benchmark_data_33\\\"\\nSET warp_enginedb:fast:34 \\\"benchmark_data_34\\\"\\nSET warp_enginedb:fast:35 \\\"benchmark_data_35\\\"\\nSET warp_enginedb:fast:36 \\\"benchmark_data_36\\\"\\nSET warp_enginedb:fast:37 \\\"benchmark_data_37\\\"\\nSET warp_enginedb:fast:38 \\\"benchmark_data_38\\\"\\nSET warp_enginedb:fast:39 \\\"benchmark_data_39\\\"\\nSET warp_enginedb:fast:40 \\\"benchmark_data_40\\\"\\nSET warp_enginedb:fast:41 \\\"benchmark_data_41\\\"\\nSET warp_enginedb:fast:42 \\\"benchmark_data_42\\\"\\nSET warp_enginedb:fast:43 \\\"benchmark_data_43\\\"\\nSET warp_enginedb:fast:44 \\\"benchmark_data_44\\\"\\nSET warp_enginedb:fast:45 \\\"benchmark_data_45\\\"\\nSET warp_enginedb:fast:46 \\\"benchmark_data_46\\\"\\nSET warp_enginedb:fast:47 \\\"benchmark_data_47\\\"\\nSET warp_enginedb:fast:48 \\\"benchmark_data_48\\\"\\nSET warp_enginedb:fast:49 \\\"benchmark_data_49\\\"\\nSET warp_enginedb:fast:50 \\\"benchmark_data_50\\\"\\nSET warp_enginedb:fast:51 \\\"benchmark_data_51\\\"\\nSET warp_enginedb:fast:52 \\\"benchmark_data_52\\\"\\nSET warp_enginedb:fast:53 \\\"benchmark_data_53\\\"\\nSET warp_enginedb:fast:54 \\\"benchmark_data_54\\\"\\nSET warp_enginedb:fast:55 \\\"benchmark_data_55\\\"\\nSET warp_enginedb:fast:56 \\\"benchmark_data_56\\\"\\nSET warp_enginedb:fast:57 \\\"benchmark_data_57\\\"\\nSET warp_enginedb:fast:58 \\\"benchmark_data_58\\\"\\nSET warp_enginedb:fast:59 \\\"benchmark_data_59\\\"\\nSET warp_enginedb:fast:60 \\\"benchmark_data_60\\\"\\nSET warp_enginedb:fast:61 \\\"benchmark_data_61\\\"\\nSET warp_enginedb:fast:62 \\\"benchmark_data_62\\\"\\nSET warp_enginedb:fast:63 \\\"benchmark_data_63\\\"\\nSET warp_enginedb:fast:64 \\\"benchmark_data_64\\\"\\nSET warp_enginedb:fast:65 \\\"benchmark_data_65\\\"\\nSET warp_enginedb:fast:66 \\\"benchmark_data_66\\\"\\nSET warp_enginedb:fast:67 \\\"benchmark_data_67\\\"\\nSET warp_enginedb:fast:68 \\\"benchmark_data_68\\\"\\nSET warp_enginedb:fast:69 \\\"benchmark_data_69\\\"\\nSET warp_enginedb:fast:70 \\\"benchmark_data_70\\\"\\nSET warp_enginedb:fast:71 \\\"benchmark_data_71\\\"\\nSET warp_enginedb:fast:72 \\\"benchmark_data_72\\\"\\nSET warp_enginedb:fast:73 \\\"benchmark_data_73\\\"\\nSET warp_enginedb:fast:74 \\\"benchmark_data_74\\\"\\nSET warp_enginedb:fast:75 \\\"benchmark_data_75\\\"\\nSET warp_enginedb:fast:76 \\\"benchmark_data_76\\\"\\nSET warp_enginedb:fast:77 \\\"benchmark_data_77\\\"\\nSET warp_enginedb:fast:78 \\\"benchmark_data_78\\\"\\nSET warp_enginedb:fast:79 \\\"benchmark_data_79\\\"\\nSET warp_enginedb:fast:80 \\\"benchmark_data_80\\\"\\nSET warp_enginedb:fast:81 \\\"benchmark_data_81\\\"\\nSET warp_enginedb:fast:82 \\\"benchmark_data_82\\\"\\nSET warp_enginedb:fast:83 \\\"benchmark_data_83\\\"\\nSET warp_enginedb:fast:84 \\\"benchmark_data_84\\\"\\nSET warp_enginedb:fast:85 \\\"benchmark_data_85\\\"\\nSET warp_enginedb:fast:86 \\\"benchmark_data_86\\\"\\nSET warp_enginedb:fast:87 \\\"benchmark_data_87\\\"\\nSET warp_enginedb:fast:88 \\\"benchmark_data_88\\\"\\nSET warp_enginedb:fast:89 \\\"benchmark_data_89\\\"\\nSET warp_enginedb:fast:90 \\\"benchmark_data_90\\\"\\nSET warp_enginedb:fast:91 \\\"benchmark_data_91\\\"\\nSET warp_enginedb:fast:92 \\\"benchmark_data_92\\\"\\nSET warp_enginedb:fast:93 \\\"benchmark_data_93\\\"\\nSET warp_enginedb:fast:94 \\\"benchmark_data_94\\\"\\nSET warp_enginedb:fast:95 \\\"benchmark_data_9" <> ...}
 💡 Ensure Redis is running on localhost:6379
 
 ✨ Optimized Redis benchmark completed!

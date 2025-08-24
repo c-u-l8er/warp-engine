@@ -1,13 +1,13 @@
 #!/usr/bin/env elixir
 
-# 🕳️ IsLab Database Phase 4: Event Horizon Cache System Demo
+# 🕳️ WarpEngine Database Phase 4: Event Horizon Cache System Demo
 # This script demonstrates the advanced black hole mechanics for ultimate performance
 
 # Note: This script should be run with: mix run demo_phase4_event_horizon.exs
 # If running standalone, it will try to load the project context
 
 # Check if we're in a Mix project context, if not try to set it up
-unless Code.ensure_loaded?(IsLabDB) do
+unless Code.ensure_loaded?(WarpEngine) do
   IO.puts("⚠️  Running outside Mix context. For best results, use: mix run demo_phase4_event_horizon.exs")
   IO.puts("🔄 Attempting to load project modules...")
 
@@ -23,14 +23,14 @@ unless Code.ensure_loaded?(IsLabDB) do
         ])
 
         # Load modules in dependency order
-        Code.compile_file("lib/islab_db/cosmic_constants.ex")
-        Code.compile_file("lib/islab_db/cosmic_persistence.ex")
-        Code.compile_file("lib/islab_db/quantum_index.ex")
-        Code.compile_file("lib/islab_db/spacetime_shard.ex")
-        Code.compile_file("lib/islab_db/gravitational_router.ex")
-        Code.compile_file("lib/islab_db/event_horizon_cache.ex")
-        Code.compile_file("lib/islab_db/application.ex")
-        Code.compile_file("lib/islab_db.ex")
+        Code.compile_file("lib/warp_engine/cosmic_constants.ex")
+        Code.compile_file("lib/warp_engine/cosmic_persistence.ex")
+        Code.compile_file("lib/warp_engine/quantum_index.ex")
+        Code.compile_file("lib/warp_engine/spacetime_shard.ex")
+        Code.compile_file("lib/warp_engine/gravitational_router.ex")
+        Code.compile_file("lib/warp_engine/event_horizon_cache.ex")
+        Code.compile_file("lib/warp_engine/application.ex")
+        Code.compile_file("lib/warp_engine.ex")
       rescue
         error ->
           IO.puts("❌ Could not load modules: #{inspect(error)}")
@@ -42,7 +42,7 @@ end
 
 IO.puts """
 🕳️ ═══════════════════════════════════════════════════════════════
-   IsLab Database - Phase 4: Event Horizon Cache System Demo
+   WarpEngine Database - Phase 4: Event Horizon Cache System Demo
 ═══════════════════════════════════════════════════════════════ 🕳️
 
 Welcome to the ultimate physics-inspired database with Event Horizon
@@ -50,12 +50,12 @@ Caching using black hole mechanics and Hawking radiation!
 """
 
 # Set up data directory
-demo_data_dir = "/tmp/islab_demo_phase4"
-Application.put_env(:islab_db, :data_root, demo_data_dir)
+demo_data_dir = "/tmp/warp_engine_demo_phase4"
+Application.put_env(:warp_engine, :data_root, demo_data_dir)
 
-# Start the IsLab Database universe
+# Start the WarpEngine Database universe
 IO.puts "🚀 Initializing the Phase 4 computational universe..."
-case IsLabDB.start_link([data_root: demo_data_dir]) do
+case WarpEngine.start_link([data_root: demo_data_dir]) do
   {:ok, _pid} ->
     IO.puts "✨ Started Phase 4 universe with Event Horizon Cache System"
   {:error, {:already_started, _pid}} ->
@@ -80,7 +80,7 @@ IO.puts "─" |> String.duplicate(60)
 IO.puts "🔬 Creating standalone Event Horizon Cache with black hole physics..."
 
 # Create a demonstration cache with custom black hole parameters
-{:ok, demo_cache} = IsLabDB.EventHorizonCache.create_cache(:demo_blackhole, [
+{:ok, demo_cache} = WarpEngine.EventHorizonCache.create_cache(:demo_blackhole, [
   schwarzschild_radius: 50,        # Small radius for demo
   hawking_temperature: 0.2,        # Higher temperature = more aggressive eviction
   enable_compression: true,        # Enable spaghettification compression
@@ -139,7 +139,7 @@ test_data_sets = [
 ]
 
 cached_data = Enum.map(test_data_sets, fn {key, value, opts, description} ->
-  {:ok, updated_cache, storage_metadata} = IsLabDB.EventHorizonCache.put(demo_cache, key, value, opts)
+  {:ok, updated_cache, storage_metadata} = WarpEngine.EventHorizonCache.put(demo_cache, key, value, opts)
   _demo_cache = updated_cache  # Update our reference (unused in this iteration)
 
   IO.puts "   🔸 #{key}"
@@ -184,7 +184,7 @@ retrieval_tests = [
 ]
 
 Enum.each(retrieval_tests, fn key ->
-  case IsLabDB.EventHorizonCache.get(demo_cache, key) do
+  case WarpEngine.EventHorizonCache.get(demo_cache, key) do
     {:ok, value, updated_cache, metadata} ->
       _demo_cache = updated_cache  # Updated cache state (unused in this context)
       IO.puts "   ✅ #{key}"
@@ -209,7 +209,7 @@ IO.puts "📏 SCHWARZSCHILD RADIUS: Capacity Management"
 IO.puts "─" |> String.duplicate(60)
 
 IO.puts "🔬 Current cache state before capacity test:"
-metrics = IsLabDB.EventHorizonCache.get_cache_metrics(demo_cache)
+metrics = WarpEngine.EventHorizonCache.get_cache_metrics(demo_cache)
 IO.puts "   Total items: #{metrics.physics_metrics.total_items}"
 IO.puts "   Schwarzschild radius: #{demo_cache.physics_laws.schwarzschild_radius}"
 IO.puts "   Memory usage: #{Float.round(metrics.cache_statistics.total_memory_bytes / 1024, 1)}KB"
@@ -221,14 +221,14 @@ IO.puts "📦 Filling cache to approach Schwarzschild radius (#{demo_cache.physi
 
 # Fill cache to near capacity to demonstrate Hawking radiation
 filled_cache = Enum.reduce(1..45, demo_cache, fn i, cache_acc ->
-  {:ok, updated_cache, _metadata} = IsLabDB.EventHorizonCache.put(cache_acc, "filler:#{i}", %{
+  {:ok, updated_cache, _metadata} = WarpEngine.EventHorizonCache.put(cache_acc, "filler:#{i}", %{
     index: i,
     data: "filler data",
     timestamp: :os.system_time(:millisecond)
   })
 
   if rem(i, 10) == 0 do
-    current_items = IsLabDB.EventHorizonCache.get_cache_metrics(updated_cache).physics_metrics.total_items
+    current_items = WarpEngine.EventHorizonCache.get_cache_metrics(updated_cache).physics_metrics.total_items
     IO.puts "   📊 #{i} items stored, total: #{current_items}/#{demo_cache.physics_laws.schwarzschild_radius}"
   end
 
@@ -253,13 +253,13 @@ radiation_tests = [:mild, :normal, :high, :emergency]
 Enum.each(radiation_tests, fn intensity ->
   IO.puts "   🌟 Emitting #{intensity} intensity Hawking radiation..."
 
-  pre_metrics = IsLabDB.EventHorizonCache.get_cache_metrics(filled_cache)
+  pre_metrics = WarpEngine.EventHorizonCache.get_cache_metrics(filled_cache)
   pre_items = pre_metrics.physics_metrics.total_items
 
-  {:ok, reduced_cache, eviction_report} = IsLabDB.EventHorizonCache.emit_hawking_radiation(filled_cache, intensity)
+  {:ok, reduced_cache, eviction_report} = WarpEngine.EventHorizonCache.emit_hawking_radiation(filled_cache, intensity)
   _filled_cache = reduced_cache  # Update cache state (unused in this iteration context)
 
-  post_metrics = IsLabDB.EventHorizonCache.get_cache_metrics(reduced_cache)
+  post_metrics = WarpEngine.EventHorizonCache.get_cache_metrics(reduced_cache)
   post_items = post_metrics.physics_metrics.total_items
 
   IO.puts "      🔹 Items before: #{pre_items}, after: #{post_items}"
@@ -282,7 +282,7 @@ IO.puts "📈 Testing automatic Hawking radiation when approaching Schwarzschild
 # Try to add more data than the cache can hold
 IO.puts "   📦 Adding data beyond Schwarzschild radius..."
 overflow_results = for i <- 1..10 do
-  result = IsLabDB.EventHorizonCache.put(filled_cache, "overflow:#{i}", %{
+  result = WarpEngine.EventHorizonCache.put(filled_cache, "overflow:#{i}", %{
     overflow_data: i,
     large_payload: String.duplicate("overflow ", 50)
   })
@@ -290,7 +290,7 @@ overflow_results = for i <- 1..10 do
   case result do
     {:ok, updated_cache, metadata} ->
       _filled_cache = updated_cache  # Update cache state (unused in this loop iteration)
-      current_items = IsLabDB.EventHorizonCache.get_cache_metrics(updated_cache).physics_metrics.total_items
+      current_items = WarpEngine.EventHorizonCache.get_cache_metrics(updated_cache).physics_metrics.total_items
       IO.puts "      ✅ overflow:#{i} stored successfully, total items: #{current_items}"
       {:success, metadata.cache_level}
     {:error, reason} ->
@@ -310,7 +310,7 @@ IO.puts ""
 IO.puts "📊 PERFORMANCE METRICS: Black Hole Physics Analysis"
 IO.puts "─" |> String.duplicate(60)
 
-final_metrics = IsLabDB.EventHorizonCache.get_cache_metrics(filled_cache)
+final_metrics = WarpEngine.EventHorizonCache.get_cache_metrics(filled_cache)
 
 IO.puts "🔬 Final Cache Physics State:"
 IO.puts "   📏 Schwarzschild Radius: #{filled_cache.physics_laws.schwarzschild_radius} items"
@@ -350,15 +350,15 @@ IO.puts "   Total memory: #{total_memory_kb}KB"
 IO.puts ""
 
 # ═══════════════════════════════════════════════════════════════
-# Phase 4 Feature: Integration with Main IsLabDB
+# Phase 4 Feature: Integration with Main WarpEngine
 # ═══════════════════════════════════════════════════════════════
 
 IO.puts "🔗 INTEGRATED OPERATION: Event Horizon + Spacetime Shards"
 IO.puts "─" |> String.duplicate(60)
 
-IO.puts "🌌 Using Event Horizon Cache through main IsLabDB interface:"
+IO.puts "🌌 Using Event Horizon Cache through main WarpEngine interface:"
 
-# Store data through main IsLabDB - should now use Event Horizon Cache
+# Store data through main WarpEngine - should now use Event Horizon Cache
 integration_data = [
   {"enterprise:customer_001", %{name: "Acme Corp", tier: "platinum", value: 1000000}},
   {"product:quantum_widget", %{name: "Quantum Widget", price: 299.99, inventory: 500}},
@@ -366,7 +366,7 @@ integration_data = [
 ]
 
 Enum.each(integration_data, fn {key, value} ->
-  {:ok, :stored, shard, operation_time} = IsLabDB.cosmic_put(key, value, [priority: :critical])
+  {:ok, :stored, shard, operation_time} = WarpEngine.cosmic_put(key, value, [priority: :critical])
   IO.puts "   🔸 #{key} → #{shard} (#{operation_time}μs)"
 end)
 
@@ -374,7 +374,7 @@ IO.puts ""
 IO.puts "🔍 Retrieving through integrated system (should hit Event Horizon Cache):"
 
 Enum.each(integration_data, fn {key, _value} ->
-  {:ok, retrieved_value, source, operation_time} = IsLabDB.cosmic_get(key)
+  {:ok, retrieved_value, source, operation_time} = WarpEngine.cosmic_get(key)
 
   source_info = case source do
     :event_horizon_cache -> "🕳️ Event Horizon Cache"
@@ -419,7 +419,7 @@ IO.puts """
       • Seamless integration with existing spacetime shards
 
    🔗 Seamless Integration:
-      • Event Horizon Cache integrated into main IsLabDB
+      • Event Horizon Cache integrated into main WarpEngine
       • Transparent operation through existing cosmic_put/get API
       • Fallback to spacetime shards for cache misses
       • Unified performance metrics and monitoring
@@ -438,7 +438,7 @@ IO.puts """
    and efficient as the event horizon itself.
 
 🔮 Phase 4 brings unprecedented performance optimization through
-   physics-inspired cache management, making IsLabDB the most
+   physics-inspired cache management, making WarpEngine the most
    advanced database system in the computational cosmos!
 
 Thanks for exploring the Event Horizon Cache System! 🌟

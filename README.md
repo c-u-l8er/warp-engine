@@ -1,4 +1,4 @@
-# 🌟 WarpEngine (IsLab Database) - Revolutionary Physics-Inspired Graph Database
+# 🌟 WarpEngine (WarpEngine Database) - Revolutionary Physics-Inspired Graph Database
 
 **A physics-inspired, high-performance database engine that warps spacetime for unprecedented graph database performance.**
 
@@ -6,7 +6,7 @@
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
 [![Elixir Version](https://img.shields.io/badge/elixir-1.15+-blue.svg)]()
-[![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](https://github.com/company/islab_database/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](https://github.com/company/warp_engine_database/blob/main/LICENSE)
 [![Phase 1](https://img.shields.io/badge/Phase%201-COMPLETE-success.svg)]()
 [![Phase 2](https://img.shields.io/badge/Phase%202-COMPLETE-success.svg)]()
 [![Phase 3](https://img.shields.io/badge/Phase%203-COMPLETE-success.svg)]()
@@ -140,48 +140,507 @@ cat benchmarks/SCALING_PERFORMANCE_ANALYSIS.md
 
 ---
 
-## 🚀 **WarpEngine Quick Start**
+## 🚀 **Getting Started with WarpEngine**
 
-### **⚡ Basic Physics-Enhanced Operations**
+### **📦 Installation**
+
+Add WarpEngine to your `mix.exs` dependencies:
+
 ```elixir
-# Start the WarpEngine universe
-{:ok, _pid} = IsLabDB.start_link([data_root: "/your/data/path"])
-
-# Store data with gravitational routing (automatically warps to optimal shard)
-{:ok, :stored, shard, time} = IsLabDB.cosmic_put("user:alice", 
-  %{name: "Alice", age: 30}, 
-  [gravitational_mass: 0.8, access_pattern: :hot])
-
-# Store related data (automatically quantum-entangled!)
-IsLabDB.cosmic_put("profile:alice", %{bio: "Engineer", skills: ["Elixir"]})
-IsLabDB.cosmic_put("settings:alice", %{theme: "cosmic", notifications: true})
-
-# Basic retrieval (Phase 1)
-{:ok, data, shard, time} = IsLabDB.cosmic_get("user:alice")
-
-# Quantum retrieval with entangled data (Phase 2) ⚛️
-{:ok, response} = IsLabDB.quantum_get("user:alice")
-# Gets primary data + all quantum-entangled partners in parallel!
-
-# Create custom quantum entanglements
-IsLabDB.create_quantum_entanglement("user:alice", 
-  ["profile:alice", "settings:alice"], strength: 0.95)
-
-# Get comprehensive universe metrics including quantum and entropy stats
-metrics = IsLabDB.cosmic_metrics()
-quantum_stats = IsLabDB.quantum_entanglement_metrics()
-
-# Enhanced ADT Graph Database Operations (WarpEngine)
-alias WeightedGraphDatabase, as: WarpEngine
-
-# Create physics-enhanced graph nodes
-person = WarpEngine.GraphNode.new("alice", "Alice Johnson", %{}, 0.85, 0.90, DateTime.utc_now(), :person)
-{:ok, node_key, shard_id, operation_time} = WarpEngine.store_node(person)
-
-# Enhanced ADT mathematical operations
-traversal = WarpEngine.traverse_graph("alice", 3, :breadth_first)
-recommendations = WarpEngine.generate_recommendations("alice", :collaborative_filtering)
+def deps do
+  [
+    {:warp_engine, "~> 1.0"}
+  ]
+end
 ```
+
+Then run:
+```bash
+mix deps.get
+mix compile
+```
+
+### **⚙️ Configuration**
+
+Add WarpEngine configuration to your `config/config.exs`:
+
+```elixir
+config :warp_engine,
+  # Data storage location
+  data_root: "/path/to/your/data",
+  
+  # Enable physics-based optimizations
+  enable_quantum_entanglement: true,
+  enable_wormhole_networks: true,
+  enable_gravitational_routing: true,
+  enable_event_horizon_cache: true,
+  enable_temporal_management: true,
+  
+  # Automatic entanglement patterns for smart pre-fetching
+  entanglement_rules: [
+    {"user:*", ["profile:*", "settings:*", "preferences:*"]},
+    {"order:*", ["customer:*", "products:*", "shipping:*"]},
+    {"session:*", ["user:*", "cart:*"]},
+    {"product:*", ["category:*", "reviews:*", "inventory:*"]}
+  ]
+```
+
+### **🌟 Basic Usage**
+
+#### **1. Starting WarpEngine in Your Application**
+
+Add to your application supervisor (e.g., `lib/your_app/application.ex`):
+
+```elixir
+defmodule YourApp.Application do
+  use Application
+
+  def start(_type, _args) do
+    children = [
+      # Start WarpEngine
+      {WarpEngine, Application.get_all_env(:warp_engine)},
+      
+      # Your other processes
+      YourApp.Repo,
+      YourAppWeb.Endpoint
+    ]
+
+    opts = [strategy: :one_for_one, name: YourApp.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
+end
+```
+
+#### **2. Basic Physics-Enhanced Operations**
+
+```elixir
+defmodule YourApp.UserService do
+  @doc "Store user data with automatic physics optimization"
+  def create_user(user_data) do
+    # WarpEngine automatically routes to optimal shard based on access patterns
+    {:ok, :stored, shard, time} = WarpEngine.cosmic_put(
+      "user:#{user_data.id}", 
+      user_data,
+      [gravitational_mass: 0.8, access_pattern: :hot]
+    )
+    
+    # Related data gets automatically quantum-entangled for faster retrieval
+    WarpEngine.cosmic_put("profile:#{user_data.id}", %{
+      bio: user_data.bio, 
+      skills: user_data.skills
+    })
+    
+    {:ok, user_data}
+  end
+
+  @doc "Retrieve user with all related data in parallel"
+  def get_user_complete(user_id) do
+    # Quantum entanglement automatically fetches related data
+    case WarpEngine.quantum_get("user:#{user_id}") do
+      {:ok, response} ->
+        # Response includes user + profile + settings in parallel
+        {:ok, response}
+      {:error, :not_found} ->
+        {:error, :user_not_found}
+    end
+  end
+
+  @doc "Get user with basic retrieval"
+  def get_user(user_id) do
+    case WarpEngine.cosmic_get("user:#{user_id}") do
+      {:ok, data, _shard, _time} -> {:ok, data}
+      {:error, reason} -> {:error, reason}
+    end
+  end
+end
+```
+
+#### **3. Enhanced ADT Graph Operations**
+
+```elixir
+defmodule YourApp.SocialGraph do
+  alias WeightedGraphDatabase, as: WarpEngine
+
+  @doc "Create a person node in the social graph"
+  def add_person(id, name, metadata \\ %{}) do
+    person = WarpEngine.GraphNode.new(
+      id, 
+      name, 
+      metadata, 
+      0.85,  # influence_score
+      0.90,  # connection_strength
+      DateTime.utc_now(), 
+      :person
+    )
+    
+    WarpEngine.store_node(person)
+  end
+
+  @doc "Find recommendations using collaborative filtering"
+  def get_recommendations(person_id) do
+    WarpEngine.generate_recommendations(person_id, :collaborative_filtering)
+  end
+
+  @doc "Traverse social network"
+  def explore_network(person_id, depth \\ 3) do
+    WarpEngine.traverse_graph(person_id, depth, :breadth_first)
+  end
+
+  @doc "Enhanced ADT mathematical operations"
+  def analyze_social_network(users, connections) do
+    # Use beautiful mathematical syntax with physics optimization
+    fold social_network do
+      ConnectedPeople(users, connections, metrics) ->
+        # Automatically optimized with wormhole networks
+        analyze_community_with_wormhole_optimization(users, connections)
+    end
+  end
+end
+```
+
+### **📊 Monitoring & Metrics**
+
+```elixir
+defmodule YourApp.WarpEngineMonitor do
+  @doc "Get comprehensive WarpEngine performance metrics"
+  def get_metrics do
+    %{
+      universe: WarpEngine.cosmic_metrics(),
+      quantum: WarpEngine.quantum_entanglement_metrics(),
+      performance: %{
+        operations_per_second: get_ops_per_second(),
+        cache_hit_rate: get_cache_performance(),
+        physics_features: get_physics_status()
+      }
+    }
+  end
+
+  defp get_ops_per_second do
+    # WarpEngine provides built-in performance tracking
+    WarpEngine.cosmic_metrics()[:operations_per_second] || 0
+  end
+
+  defp get_cache_performance do
+    # Event horizon cache statistics
+    WarpEngine.cosmic_metrics()[:cache_statistics] || %{}
+  end
+
+  defp get_physics_status do
+    %{
+      quantum_entanglement: true,
+      wormhole_networks: true,
+      gravitational_routing: true,
+      event_horizon_cache: true,
+      temporal_management: true
+    }
+  end
+end
+```
+
+### **🔧 Production Configuration**
+
+For production deployments, update `config/prod.exs`:
+
+```elixir
+config :warp_engine,
+  # Production data directory
+  data_root: System.get_env("WARP_ENGINE_DATA_ROOT") || "/opt/warpengine/data",
+  
+  # Performance tuning
+  cosmic_maintenance_interval: 30_000,
+  
+  # WAL configuration for high-performance persistence
+  wal_config: %{
+    log_rotation_size: 100_000_000,  # 100MB
+    max_log_files: 10,
+    sync_interval: 1000,  # 1 second
+    checkpoint_interval: 300_000  # 5 minutes
+  },
+  
+  # Spacetime shard optimization
+  spacetime_shards: %{
+    hot_data: %{access_pattern: :frequent, consistency: :strong},
+    warm_data: %{access_pattern: :moderate, consistency: :eventual},
+    cold_data: %{access_pattern: :rare, compression: true}
+  }
+
+# Production logging
+config :logger, level: :info
+```
+
+### **🚀 Why Choose WarpEngine?**
+
+- **🏆 23,742 ops/sec** measured performance
+- **⚡ Zero-tuning** physics-based optimization
+- **🌌 Automatic** quantum entanglement for smart pre-fetching
+- **🌀 Wormhole networks** for ultra-fast routing
+- **📊 Built-in metrics** and monitoring
+- **🔧 Production-ready** with comprehensive testing (217 tests)
+
+## 🧮 **Enhanced ADT Demo - Simple Data Structures**
+
+WarpEngine's Enhanced ADT provides beautiful mathematical syntax that automatically optimizes with physics-based intelligence. Here's how to use it with simple data structures:
+
+### **📋 Linked List with Enhanced ADT**
+
+```elixir
+defmodule LinkedListDemo do
+  use EnhancedADT
+  
+  # Define a linked list using Enhanced ADT sum type (real syntax)
+  defsum LinkedList do
+    variant Empty
+    variant Node, value :: integer(), next :: rec(LinkedList)
+  end
+
+  @doc "Create and manipulate a linked list using beautiful Enhanced ADT syntax"
+  def demo_linked_list do
+    # Create a linked list: 1 -> 2 -> 3 -> Empty using Enhanced ADT macro syntax
+    list = Node(
+      value: 1,
+      next: Node(
+        value: 2,
+        next: Node(
+          value: 3,
+          next: Empty()
+        )
+      )
+    )
+
+    # Use Enhanced ADT fold to sum all values with automatic physics optimization
+    sum = fold list do
+      Empty() -> 
+        # Base case: empty list
+        0
+        
+      Node(value: val, next: rest) ->
+        # Recursive case with automatic wormhole routing
+        val + fold(rest)
+    end
+
+    IO.puts("Sum of linked list: #{sum}")  # Output: 6
+
+    # Use bend to create a new optimized list structure
+    doubled_list = bend from: list, optimization: :wormhole_network do
+      Node(value: val, next: rest) ->
+        # Automatically creates quantum entanglement for faster traversal
+        Node(value: val * 2, next: bend(rest))
+        
+      Empty() -> 
+        Empty()
+    end
+
+    doubled_list
+  end
+end
+```
+
+### **🌳 Binary Tree with Physics Optimization**
+
+```elixir
+defmodule BinaryTreeDemo do
+  use EnhancedADT
+  
+  # Define a binary tree using Enhanced ADT sum type with recursive variants
+  defsum BinaryTree do
+    variant Leaf
+    variant Branch, value :: integer(), left :: rec(BinaryTree), right :: rec(BinaryTree)
+  end
+
+  def demo_tree_operations do
+    # Create a simple binary tree using Enhanced ADT macro syntax
+    tree = Branch(
+      value: 10,
+      left: Branch(
+        value: 5, 
+        left: Leaf(), 
+        right: Leaf()
+      ),
+      right: Branch(
+        value: 15, 
+        left: Leaf(), 
+        right: Leaf()
+      )
+    )
+
+    # Enhanced ADT automatically optimizes tree traversal with gravitational routing
+    tree_sum = fold tree do
+      Leaf() ->
+        # Base case: leaf node
+        0
+        
+      Branch(value: val, left: left, right: right) ->
+        # Internal node - physics optimization for parallel processing
+        val + fold(left) + fold(right)
+    end
+
+    IO.puts("Tree sum: #{tree_sum}")  # Output: 30
+
+    # Use bend to create balanced tree with wormhole connections
+    balanced_tree = bend from: tree, network_analysis: true do
+      Branch(value: val, left: l, right: r) ->
+        # Automatically analyzes and optimizes tree structure with physics
+        Branch(
+          value: val * 2,  # Double values for demo
+          left: bend(l),
+          right: bend(r)
+        )
+      
+      Leaf() -> 
+        Leaf()
+    end
+
+    balanced_tree
+  end
+end
+```
+
+### **📚 Stack Operations with Quantum Entanglement**
+
+```elixir
+defmodule StackDemo do
+  use EnhancedADT
+  
+  # Define a stack using Enhanced ADT sum type with rec macro
+  defsum Stack do
+    variant Empty
+    variant Push, item :: integer(), rest :: rec(Stack)
+  end
+
+  def demo_stack_with_quantum_features do
+    # Create stack using Enhanced ADT macro syntax: 5 -> 4 -> 3 -> 2 -> 1 -> Empty
+    stack = Push(
+      item: 5, 
+      rest: Push(
+        item: 4, 
+        rest: Push(
+          item: 3,
+          rest: Push(
+            item: 2,
+            rest: Push(
+              item: 1, 
+              rest: Empty()
+            )
+          )
+        )
+      )
+    )
+    
+    # Enhanced ADT fold with automatic quantum entanglement
+    result = fold stack do
+      Empty() -> 
+        # Empty stack base case
+        0
+        
+      Push(item: val, rest: rest) ->
+        # Physics-enhanced processing with quantum correlations
+        case val > 3 do
+          true -> 
+            # High-energy items get quantum enhancement
+            val * 2 + fold(rest)
+          false -> 
+            # Regular processing
+            val + fold(rest)
+        end
+    end
+    
+    IO.puts("Enhanced stack result: #{result}")  # Output: 23
+    
+    # Use bend to create optimized parallel processing
+    processed_stack = bend from: stack, quantum_correlation: true do
+      Push(item: val, rest: rest) when val > 2 ->
+        # Automatically creates quantum entanglement for high-value items
+        Push(item: val * val, rest: bend(rest))
+        
+      Push(item: val, rest: rest) ->
+        Push(item: val, rest: bend(rest))
+        
+      Empty() -> 
+        Empty()
+    end
+    
+    processed_stack  # Push(item: 25, rest: Push(...))
+  end
+end
+```
+
+### **🚀 Quick Demo Setup**
+
+Try it in `iex`:
+
+```elixir
+# Start WarpEngine with Enhanced ADT
+{:ok, _} = WarpEngine.start_link([])
+
+# Run the demos
+LinkedListDemo.demo_linked_list()
+BinaryTreeDemo.demo_tree_operations()  
+StackDemo.demo_stack_with_quantum_features()
+
+# Check physics optimization status
+WarpEngine.cosmic_metrics()[:enhanced_adt_performance]
+```
+
+### **💡 Enhanced ADT with Product Types and Recursive Variants**
+
+You can also combine sum and product types for more complex structures:
+
+```elixir
+defmodule PersonDemo do
+  use EnhancedADT
+  
+  # Define a person using Enhanced ADT product type
+  defproduct Person do
+    field name :: String.t()
+    field age :: integer()
+    field email :: String.t()
+  end
+  
+  # Define a team using sum types with rec macro for recursion
+  defsum Team do
+    variant EmptyTeam
+    variant TeamMember, person :: Person.t(), next :: rec(Team)
+  end
+
+  def demo_team_operations do
+    # Create team using Enhanced ADT macro syntax
+    team = TeamMember(
+      person: Person.new(name: "Alice", age: 30, email: "alice@example.com"),
+      next: TeamMember(
+        person: Person.new(name: "Bob", age: 25, email: "bob@example.com"),
+        next: EmptyTeam()
+      )
+    )
+    
+    # Enhanced ADT fold with automatic physics optimization
+    average_age = fold team do
+      EmptyTeam() -> 
+        {0, 0}  # {total_age, count}
+      
+      TeamMember(person: person, next: rest) ->
+        {rest_total, rest_count} = fold(rest)
+        {person.age + rest_total, 1 + rest_count}
+    end
+    
+    case average_age do
+      {total, count} when count > 0 -> 
+        IO.puts("Average team age: #{total / count}")
+      _ -> 
+        IO.puts("Empty team")
+    end
+  end
+end
+```
+
+### **⚡ What Makes This Special?**
+
+1. **🧮 True Algebraic Data Types** - `defsum` and `defproduct` create proper ADTs
+2. **🌌 Pattern Matching Power** - Rich pattern matching with physics optimization  
+3. **⚛️ Automatic Type Safety** - Enhanced ADT provides compile-time guarantees
+4. **🌀 Physics Integration** - Quantum entanglement and wormhole routing built-in
+5. **📊 Zero-Cost Abstractions** - Beautiful syntax with no performance penalty
+
+**The Enhanced ADT makes complex data operations both mathematically beautiful and blazingly fast with automatic physics optimization!**
 
 ## 🌌 Physics-Inspired Features
 
@@ -288,7 +747,7 @@ Add to your `mix.exs`:
 ```elixir
 def deps do
   [
-    {:islab_db, "~> 1.0.0"},
+    {:warp_engine, "~> 1.0.0"},
     {:jason, "~> 1.4"}  # For JSON serialization
   ]
 end
@@ -441,15 +900,58 @@ MIX_ENV=test mix test --no-start --max-cases 1  # Run without OTP
 - [`docs/persistence-architecture.md`](docs/persistence-architecture.md) - Filesystem design
 - [`prototypes/`](prototypes/) - Advanced prototype implementations
 
+## 💡 **Example Use Cases**
+
+### **🛒 E-Commerce Platform**
+```elixir
+# Automatic entanglement: user ↔ cart ↔ orders ↔ products
+WarpEngine.cosmic_put("user:123", user_data, [access_pattern: :hot])
+WarpEngine.cosmic_put("cart:123", cart_items)  # Auto-entangled with user
+WarpEngine.cosmic_put("order:456", order_data) # Smart routing to warm shard
+```
+
+### **📱 Social Network**
+```elixir
+# Physics-enhanced graph operations
+WarpEngine.add_person("alice", "Alice Johnson")
+WarpEngine.add_connection("alice", "bob", %{strength: 0.8, type: :friend})
+recommendations = WarpEngine.get_recommendations("alice")
+```
+
+### **📊 Analytics Dashboard**
+```elixir
+# Temporal data with automatic lifecycle management
+WarpEngine.temporal_put("metrics:#{timestamp}", analytics_data)
+# Old data automatically compressed and archived
+```
+
 ## 🤝 Contributing
 
 We welcome contributions to expand the computational universe!
 
 ```bash
-git clone https://github.com/company/islab_database.git
-cd islab_database
+# Clone WarpEngine source
+git clone https://github.com/company/warp_engine_database.git
+cd warp_engine_database
 mix deps.get
 mix test
+
+# All 217 tests should pass!
+```
+
+### **Development Setup**
+```bash
+# Install dependencies
+mix deps.get
+
+# Run the full test suite
+mix test
+
+# Run performance benchmarks
+mix run benchmarks/simple_weighted_graph_benchmark.exs
+
+# Generate documentation
+mix docs
 ```
 
 ## 📄 License
@@ -472,7 +974,7 @@ mix test
 - Training and consulting services
 - Custom integrations and extensions
 
-Contact: license@islab.team
+Contact: travis.burandt@gmail.com
 
 ---
 
@@ -480,4 +982,4 @@ Contact: license@islab.team
 
 *🚀 Revolutionary graph database • 🧮 Enhanced ADT mathematics • ⚛️ Quantum-inspired optimization*
 
-**Built with ❤️, ⚛️, and revolutionary physics by the IsLab Team**
+**Built with ❤️, ⚛️, and revolutionary physics by the WarpEngine Team**

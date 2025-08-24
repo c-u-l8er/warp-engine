@@ -1,7 +1,7 @@
-# Simple IsLab Database Performance Benchmark
+# Simple WarpEngine Database Performance Benchmark
 
 IO.puts """
-🚀 IsLab Database Performance Benchmark
+🚀 WarpEngine Database Performance Benchmark
 ═══════════════════════════════════════
 
 Testing the computational universe's performance claims:
@@ -12,7 +12,7 @@ Testing the computational universe's performance claims:
 """
 
 # Start the system
-Application.ensure_all_started(:islab_db)
+Application.ensure_all_started(:warp_engine)
 Process.sleep(2000)  # Give it time to fully initialize
 
 IO.puts "✅ System started successfully!"
@@ -26,7 +26,7 @@ put_times = for i <- 1..1000 do
   value = %{id: i, data: :crypto.strong_rand_bytes(100) |> Base.encode64(), timestamp: :os.system_time(:microsecond)}
 
   {time, {:ok, :stored, shard, op_time}} = :timer.tc(fn ->
-    IsLabDB.cosmic_put(key, value)
+    WarpEngine.cosmic_put(key, value)
   end)
 
   {time, op_time, shard}
@@ -50,7 +50,7 @@ get_times = for i <- 1..1000 do
   key = "benchmark:put:#{i}"
 
   {time, result} = :timer.tc(fn ->
-    IsLabDB.cosmic_get(key)
+    WarpEngine.cosmic_get(key)
   end)
 
   case result do
@@ -82,9 +82,9 @@ for i <- 1..100 do
   profile_key = "profile:#{i}"
   settings_key = "settings:#{i}"
 
-  IsLabDB.cosmic_put(user_key, %{id: i, name: "User#{i}", email: "user#{i}@test.com"})
-  IsLabDB.cosmic_put(profile_key, %{user_id: i, bio: "Test user #{i}", skills: ["elixir", "physics"]})
-  IsLabDB.cosmic_put(settings_key, %{user_id: i, theme: "cosmic", notifications: true})
+  WarpEngine.cosmic_put(user_key, %{id: i, name: "User#{i}", email: "user#{i}@test.com"})
+  WarpEngine.cosmic_put(profile_key, %{user_id: i, bio: "Test user #{i}", skills: ["elixir", "physics"]})
+  WarpEngine.cosmic_put(settings_key, %{user_id: i, theme: "cosmic", notifications: true})
 
   # The quantum entanglement should happen automatically via patterns
 end
@@ -94,7 +94,7 @@ quantum_times = for i <- 1..100 do
   key = "user:#{i}"
 
   {time, result} = :timer.tc(fn ->
-    IsLabDB.quantum_get(key)
+    WarpEngine.quantum_get(key)
   end)
 
   case result do
@@ -127,7 +127,7 @@ IO.puts "   • Efficiency factor: #{Float.round(avg_entangled, 1)}x data retrie
 # Test 3: System Metrics and Status
 IO.puts "\n📊 Test 3: System Performance Metrics"
 
-metrics = IsLabDB.cosmic_metrics()
+metrics = WarpEngine.cosmic_metrics()
 
 IO.puts "   Universe Status:"
 IO.puts "   • State: #{metrics.universe_state}"
@@ -142,7 +142,7 @@ end)
 # Test 4: Load Distribution Analysis
 IO.puts "\n🌌 Test 4: Load Distribution Analysis"
 
-load_analysis = IsLabDB.analyze_load_distribution()
+load_analysis = WarpEngine.analyze_load_distribution()
 IO.puts "   Load Balance Score: #{Float.round(load_analysis.balance_score * 100, 1)}%"
 IO.puts "   Entropy Level: #{Float.round(load_analysis.system_entropy, 2)}"
 IO.puts "   Recommendations: #{length(load_analysis.recommendations)} optimization suggestions"
@@ -186,7 +186,7 @@ end
 overall_performance = put_target_met and get_target_met and quantum_efficient
 
 IO.puts "\n🏆 OVERALL ASSESSMENT:"
-IO.puts "   #{if overall_performance, do: "✅ EXCELLENT", else: "⚠️  NEEDS OPTIMIZATION"} - IsLab Database is #{if overall_performance, do: "exceeding", else: "approaching"} performance targets"
+IO.puts "   #{if overall_performance, do: "✅ EXCELLENT", else: "⚠️  NEEDS OPTIMIZATION"} - WarpEngine Database is #{if overall_performance, do: "exceeding", else: "approaching"} performance targets"
 
 if overall_performance do
   IO.puts "   🌌 The computational universe is performing optimally!"

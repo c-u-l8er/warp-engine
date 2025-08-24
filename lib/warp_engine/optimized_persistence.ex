@@ -1,9 +1,9 @@
-defmodule IsLabDB.OptimizedPersistence do
+defmodule WarpEngine.OptimizedPersistence do
   @moduledoc """
   High-performance persistence layer inspired by Redis architecture.
 
   Implements Redis-style performance optimizations while maintaining
-  IsLabDB's physics-inspired elegance:
+  WarpEngine's physics-inspired elegance:
 
   1. Write-Ahead Log (WAL) for durability
   2. Background batch persistence
@@ -78,7 +78,7 @@ defmodule IsLabDB.OptimizedPersistence do
         batch_buffer_add(key, value, shard)
 
       :full_persistence ->
-        # Immediate persistence (current IsLabDB behavior)
+        # Immediate persistence (current WarpEngine behavior)
         persist_immediately(key, value, shard)
     end
   end
@@ -102,7 +102,7 @@ defmodule IsLabDB.OptimizedPersistence do
   defp wal_append(key, value, shard) do
     # Redis AOF-style: single sequential write
     wal_entry = :erlang.term_to_binary({:put, key, value, shard, :os.system_time()})
-    File.write!("/data/islab.wal", wal_entry, [:append, :raw])
+    File.write!("/data/warp_engine.wal", wal_entry, [:append, :raw])
   end
 
   defp batch_buffer_add(key, value, shard) do
@@ -111,7 +111,7 @@ defmodule IsLabDB.OptimizedPersistence do
   end
 
   defp persist_immediately(key, value, shard) do
-    # Current IsLabDB behavior (slowest but most durable)
+    # Current WarpEngine behavior (slowest but most durable)
     cosmic_record = create_minimal_record(key, value, shard)
 
     # Use compact binary format instead of pretty JSON

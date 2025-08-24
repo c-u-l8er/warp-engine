@@ -46,7 +46,7 @@ defmodule QuantumParsingEngine do
   """
 
   use EnhancedADT
-  use EnhancedADT.IsLabDBIntegration
+  use EnhancedADT.WarpEngineIntegration
   require Logger
 
   # =============================================================================
@@ -181,7 +181,7 @@ defmodule QuantumParsingEngine do
 
     # Store FSM with physics optimization
     fsm_key = "fsm:#{fsm_id}"
-    case IsLabDB.cosmic_put(fsm_key, fsm, extract_fsm_physics(fsm)) do
+    case WarpEngine.cosmic_put(fsm_key, fsm, extract_fsm_physics(fsm)) do
       {:ok, :stored, shard_id, operation_time} ->
         Logger.info("🤖 FSM created: #{name} in #{shard_id} (#{operation_time}μs)")
 

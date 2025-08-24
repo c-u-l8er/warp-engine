@@ -1,6 +1,6 @@
 # 🚀 Aurora API Specification: AI-First Spatial Intelligence
 
-**Revolutionary Spatial Intelligence APIs Powered by Autogentic + IsLabDB**
+**Revolutionary Spatial Intelligence APIs Powered by Autogentic + WarpEngine**
 
 ## 🎯 API Philosophy
 

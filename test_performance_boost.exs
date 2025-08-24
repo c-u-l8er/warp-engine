@@ -10,20 +10,20 @@ Mix.install([
 Code.prepend_path("lib")
 
 # Load required modules
-Code.require_file("lib/islab_db/cosmic_constants.ex")
-Code.require_file("lib/islab_db/cosmic_persistence.ex")
-Code.require_file("lib/islab_db/wal_entry.ex")
-Code.require_file("lib/islab_db/wal.ex")
-Code.require_file("lib/islab_db/wal_operations.ex")
-Code.require_file("lib/islab_db/quantum_index.ex")
-Code.require_file("lib/islab_db/gravitational_router.ex")
-Code.require_file("lib/islab_db/spacetime_shard.ex")
-Code.require_file("lib/islab_db/event_horizon_cache.ex")
-Code.require_file("lib/islab_db/entropy_monitor.ex")
-Code.require_file("lib/islab_db.ex")
+Code.require_file("lib/warp_engine/cosmic_constants.ex")
+Code.require_file("lib/warp_engine/cosmic_persistence.ex")
+Code.require_file("lib/warp_engine/wal_entry.ex")
+Code.require_file("lib/warp_engine/wal.ex")
+Code.require_file("lib/warp_engine/wal_operations.ex")
+Code.require_file("lib/warp_engine/quantum_index.ex")
+Code.require_file("lib/warp_engine/gravitational_router.ex")
+Code.require_file("lib/warp_engine/spacetime_shard.ex")
+Code.require_file("lib/warp_engine/event_horizon_cache.ex")
+Code.require_file("lib/warp_engine/entropy_monitor.ex")
+Code.require_file("lib/warp_engine.ex")
 
 IO.puts """
-🚀 IsLabDB Phase 1 Optimization Validation Test
+🚀 WarpEngine Phase 1 Optimization Validation Test
 ════════════════════════════════════════════════
 
 Testing GenServer bypass optimization for cosmic_put/get operations.
@@ -36,9 +36,9 @@ Running quick performance validation...
 """
 
 try do
-  # Start IsLabDB with WAL enabled
-  IO.puts "🌌 Starting IsLabDB with WAL optimizations..."
-  {:ok, _pid} = IsLabDB.start_link([
+  # Start WarpEngine with WAL enabled
+  IO.puts "🌌 Starting WarpEngine with WAL optimizations..."
+  {:ok, _pid} = WarpEngine.start_link([
     enable_wal: true,
     data_root: "/tmp/performance_test"
   ])
@@ -56,7 +56,7 @@ try do
     key = "perf_test:#{i}"
     value = %{id: i, data: "test_data_#{i}", timestamp: :os.system_time(:microsecond)}
 
-    case IsLabDB.cosmic_put(key, value) do
+    case WarpEngine.cosmic_put(key, value) do
       {:ok, :stored, _shard, _time} -> :ok
       error -> IO.puts "PUT error: #{inspect(error)}"
     end
@@ -81,7 +81,7 @@ try do
   for i <- 1..test_count do
     key = "perf_test:#{i}"
 
-    case IsLabDB.cosmic_get(key) do
+    case WarpEngine.cosmic_get(key) do
       {:ok, _value, _shard, _time} -> :ok
       {:error, :not_found, _time} -> :ok  # Acceptable
       error -> IO.puts "GET error: #{inspect(error)}"
@@ -169,4 +169,4 @@ rescue
     System.halt(1)
 end
 
-IO.puts "\n🚀 IsLabDB Phase 1 optimization validation complete!"
+IO.puts "\n🚀 WarpEngine Phase 1 optimization validation complete!"

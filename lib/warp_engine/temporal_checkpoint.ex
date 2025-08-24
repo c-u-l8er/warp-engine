@@ -1,6 +1,6 @@
-defmodule IsLabDB.TemporalCheckpoint do
+defmodule WarpEngine.TemporalCheckpoint do
   @moduledoc """
-  Temporal Data Checkpoint Integration for IsLab Database Phase 7
+  Temporal Data Checkpoint Integration for WarpEngine Database Phase 7
 
   This module extends the existing WAL checkpoint system to include temporal data,
   enabling fast recovery of time-series data, live streams, and historical analytics
@@ -24,7 +24,7 @@ defmodule IsLabDB.TemporalCheckpoint do
   """
 
   require Logger
-  alias IsLabDB.{WAL, TemporalShard}
+  alias WarpEngine.{WAL, TemporalShard}
 
   defstruct [
     :checkpoint_id,              # Unique checkpoint identifier
@@ -620,7 +620,7 @@ defmodule IsLabDB.TemporalCheckpoint do
 
   defp get_temporal_checkpoints_path() do
     Path.join([
-      IsLabDB.CosmicPersistence.data_root(),
+      WarpEngine.CosmicPersistence.data_root(),
       "wal",
       "temporal_checkpoints"
     ])

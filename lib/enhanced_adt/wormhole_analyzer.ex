@@ -3,7 +3,7 @@ defmodule EnhancedADT.WormholeAnalyzer do
   Wormhole route analysis and automatic creation for Enhanced ADT.
 
   This module analyzes ADT structures and data access patterns to automatically
-  create optimal wormhole networks in IsLabDB. It provides intelligent routing
+  create optimal wormhole networks in WarpEngine. It provides intelligent routing
   decisions based on mathematical structure analysis.
 
   ## Analysis Features
@@ -68,7 +68,7 @@ defmodule EnhancedADT.WormholeAnalyzer do
     # Generate optimal wormhole network
     network_topology = generate_network_topology(structure_analysis, instance_analysis)
 
-    # Create wormhole routes in IsLabDB
+    # Create wormhole routes in WarpEngine
     creation_results = create_wormhole_routes(network_topology.routes)
 
     %{
@@ -576,7 +576,7 @@ defmodule EnhancedADT.WormholeAnalyzer do
     source_key = convert_route_node_to_key(route.source)
     target_key = convert_route_node_to_key(route.target)
 
-    IsLabDB.WormholeRouter.establish_wormhole(source_key, target_key, route.strength)
+    WarpEngine.WormholeRouter.establish_wormhole(source_key, target_key, route.strength)
   end
 
   defp convert_route_node_to_key(node) when is_binary(node), do: node

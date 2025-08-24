@@ -1,27 +1,27 @@
-defmodule EnhancedADT.IsLabDBIntegration.Macros do
+defmodule EnhancedADT.WarpEngineIntegration.Macros do
   @moduledoc """
-  Integration macros for Enhanced ADT with automatic IsLabDB translation.
+  Integration macros for Enhanced ADT with automatic WarpEngine translation.
 
   This module provides enhanced versions of Enhanced ADT macros that automatically
-  integrate with IsLabDB physics operations. The macros transform mathematical
+  integrate with WarpEngine physics operations. The macros transform mathematical
   ADT operations into intelligent database commands while preserving elegance.
   """
 
   @doc """
-  Enhanced fold operation with automatic IsLabDB integration.
+  Enhanced fold operation with automatic WarpEngine integration.
 
   This macro extends the base Enhanced ADT fold operation with automatic
-  translation to IsLabDB physics commands and optimization.
+  translation to WarpEngine physics commands and optimization.
   """
   defmacro fold(value, opts \\ [], do: clauses) do
-    # Extract IsLabDB integration options
-    enable_islab_integration = Keyword.get(opts, :enable_islab_integration, true)
+    # Extract WarpEngine integration options
+    enable_warp_engine_integration = Keyword.get(opts, :enable_warp_engine_integration, true)
     auto_physics_optimization = Keyword.get(opts, :auto_physics_optimization, true)
     wormhole_analysis = Keyword.get(opts, :wormhole_analysis, true)
     quantum_correlation = Keyword.get(opts, :quantum_correlation, true)
 
-    if enable_islab_integration do
-      # Use enhanced fold with IsLabDB integration
+    if enable_warp_engine_integration do
+      # Use enhanced fold with WarpEngine integration
       quote do
         require Logger
 
@@ -31,9 +31,9 @@ defmodule EnhancedADT.IsLabDBIntegration.Macros do
         # Execute base Enhanced ADT fold
         base_result = EnhancedADT.Fold.fold(unquote(value), unquote(opts), do: unquote(clauses))
 
-        # Apply IsLabDB integration enhancements
+        # Apply WarpEngine integration enhancements
         enhanced_result = if unquote(auto_physics_optimization) do
-          EnhancedADT.IsLabDBIntegration.apply_physics_optimization(base_result, unquote(value))
+          EnhancedADT.WarpEngineIntegration.apply_physics_optimization(base_result, unquote(value))
         else
           base_result
         end
@@ -74,16 +74,16 @@ defmodule EnhancedADT.IsLabDBIntegration.Macros do
   Enhanced bend operation with automatic wormhole network generation.
 
   This macro extends the base Enhanced ADT bend operation with automatic
-  wormhole network creation and IsLabDB topology optimization.
+  wormhole network creation and WarpEngine topology optimization.
   """
   defmacro bend(opts, do: clauses) do
-    # Extract IsLabDB integration options
-    enable_islab_integration = Keyword.get(opts, :enable_islab_integration, true)
+    # Extract WarpEngine integration options
+    enable_warp_engine_integration = Keyword.get(opts, :enable_warp_engine_integration, true)
     auto_wormhole_creation = Keyword.get(opts, :auto_wormhole_creation, true)
     network_optimization = Keyword.get(opts, :network_optimization, true)
 
-    if enable_islab_integration do
-      # Use enhanced bend with IsLabDB integration
+    if enable_warp_engine_integration do
+      # Use enhanced bend with WarpEngine integration
       quote do
         require Logger
 
@@ -161,8 +161,8 @@ defmodule EnhancedADT.IsLabDBIntegration.Macros do
       # Merge with manual overrides
       final_physics = Map.merge(physics_config, Keyword.get(unquote(opts), :physics, %{}))
 
-      # Store with automatic IsLabDB integration
-      case EnhancedADT.IsLabDBIntegration.Translators.cosmic_put_from_adt(
+      # Store with automatic WarpEngine integration
+      case EnhancedADT.WarpEngineIntegration.Translators.cosmic_put_from_adt(
         unquote(key),
         unquote(adt_data),
         Keyword.put(unquote(opts), :physics, final_physics)
@@ -188,8 +188,8 @@ defmodule EnhancedADT.IsLabDBIntegration.Macros do
     quote do
       require Logger
 
-      # Retrieve with automatic IsLabDB integration
-      case EnhancedADT.IsLabDBIntegration.Translators.cosmic_get_for_adt(
+      # Retrieve with automatic WarpEngine integration
+      case EnhancedADT.WarpEngineIntegration.Translators.cosmic_get_for_adt(
         unquote(key),
         unquote(expected_type),
         unquote(opts)
@@ -220,7 +220,7 @@ defmodule EnhancedADT.IsLabDBIntegration.Macros do
 
       batch_start_time = :os.system_time(:microsecond)
 
-      case EnhancedADT.IsLabDBIntegration.Translators.batch_operations_from_adt(
+      case EnhancedADT.WarpEngineIntegration.Translators.batch_operations_from_adt(
         unquote(operations),
         unquote(opts)
       ) do
@@ -244,12 +244,12 @@ defmodule EnhancedADT.IsLabDBIntegration.Macros do
   end
 end
 
-defmodule EnhancedADT.IsLabDBIntegration.Optimizer do
+defmodule EnhancedADT.WarpEngineIntegration.Optimizer do
   @moduledoc """
-  Compile-time optimizer for Enhanced ADT with IsLabDB integration.
+  Compile-time optimizer for Enhanced ADT with WarpEngine integration.
 
   This module provides compile-time analysis and optimization of Enhanced ADT
-  definitions to generate optimal IsLabDB integration code.
+  definitions to generate optimal WarpEngine integration code.
   """
 
   defmacro __before_compile__(_env) do
@@ -274,12 +274,12 @@ defmodule EnhancedADT.IsLabDBIntegration.Optimizer do
   end
 end
 
-defmodule EnhancedADT.IsLabDBIntegration.PhysicsConfig do
+defmodule EnhancedADT.WarpEngineIntegration.PhysicsConfig do
   @moduledoc """
   Physics configuration helpers for Enhanced ADT integration.
 
   Provides utility functions for configuring physics parameters and
-  optimizing Enhanced ADT operations for IsLabDB.
+  optimizing Enhanced ADT operations for WarpEngine.
   """
 
   @doc """
@@ -295,7 +295,7 @@ defmodule EnhancedADT.IsLabDBIntegration.PhysicsConfig do
   Analyze ADT module and generate optimal physics configuration.
 
   Examines an ADT module's structure and generates recommended physics
-  configuration for optimal IsLabDB performance.
+  configuration for optimal WarpEngine performance.
   """
   def analyze_and_configure(adt_module) do
     EnhancedADT.Physics.analyze_adt_physics(adt_module)

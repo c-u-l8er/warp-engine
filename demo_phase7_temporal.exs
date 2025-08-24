@@ -7,11 +7,11 @@ Mix.install([
   {:jason, "~> 1.4"}
 ])
 
-defmodule IsLabDB.Phase7Demo do
+defmodule WarpEngine.Phase7Demo do
   @moduledoc """
   Phase 7: Temporal Data Management Demo
 
-  Demonstrates the revolutionary temporal capabilities of IsLab Database:
+  Demonstrates the revolutionary temporal capabilities of WarpEngine Database:
   - Physics-inspired temporal shards with time dilation effects
   - Real-time data streams with quantum coherence
   - Historical data compression with gravitational decay
@@ -54,7 +54,7 @@ defmodule IsLabDB.Phase7Demo do
       🚀 PHASE 7 TEMPORAL MANAGEMENT DEMONSTRATION COMPLETE!
       ⚛️ ═══════════════════════════════════════════════════════════
 
-      IsLab Database now features the world's most advanced
+      WarpEngine Database now features the world's most advanced
       temporal data management system with real physics!
 
       """
@@ -426,10 +426,10 @@ defmodule IsLabDB.Phase7Demo do
 
     defp demo_performance_characteristics do
     IO.puts """
-    
+
     🚀 PERFORMANCE BENCHMARKING
     ════════════════════════════════════════════════════════════
-    
+
     Running actual performance tests to measure temporal capabilities...
     """
 
@@ -437,31 +437,31 @@ defmodule IsLabDB.Phase7Demo do
     performance_metrics = run_actual_benchmarks()
 
         IO.puts """
-    
+
     ⚡ TEMPORAL OPERATIONS PERFORMANCE:
        PUT Operations: #{performance_metrics.put_ops_per_sec} ops/sec
        GET Operations: #{performance_metrics.get_ops_per_sec} ops/sec
        Range Queries: #{performance_metrics.range_query_time_ms}ms (#{performance_metrics.range_query_points} points)
        Real-time Aggregations: #{performance_metrics.aggregation_time_ms}ms latency
        → Measured with actual temporal operations
-    
+
     🌊 STREAM PROCESSING PERFORMANCE:
        Ingestion Rate: #{performance_metrics.stream_ops_per_sec} events/sec
        Processing Latency: #{performance_metrics.stream_latency_ms}ms end-to-end
        Quantum Correlation Boost: +#{performance_metrics.quantum_boost_percent}% performance
        Batch Processing: #{performance_metrics.batch_size} operations per batch
        → Real-time measurements with physics effects
-    
+
     💾 STORAGE EFFICIENCY:
        Data Compression: #{performance_metrics.compression_ratio}x reduction
        Original Size: #{performance_metrics.original_size_kb}KB
        Compressed Size: #{performance_metrics.compressed_size_kb}KB
        Index Lookup Speed: #{performance_metrics.index_lookup_time_us}μs
        → Actual compression and storage measurements
-    
+
     ⚛️  PHYSICS INTELLIGENCE OVERHEAD:
        Time Dilation Calculation: #{performance_metrics.time_dilation_overhead_us}μs per operation
-       Entropy Monitoring: #{performance_metrics.entropy_calculation_us}μs per calculation  
+       Entropy Monitoring: #{performance_metrics.entropy_calculation_us}μs per calculation
        Gravitational Routing: #{performance_metrics.gravitational_routing_boost}% faster than hash
        Quantum Coherence: #{performance_metrics.quantum_coherence_percent}% maintained
        → Physics calculations measured in real-time
@@ -476,124 +476,124 @@ defmodule IsLabDB.Phase7Demo do
 
   defp run_actual_benchmarks do
     IO.puts "🔬 Running temporal operations benchmark..."
-    
+
     # Benchmark temporal PUT operations
     put_start = :os.system_time(:microsecond)
     put_operations = 1000
-    
+
     Enum.each(1..put_operations, fn i ->
       # Simulate temporal PUT with physics calculations
       simulate_temporal_put_with_physics("key_#{i}", %{value: i, timestamp: :os.system_time(:millisecond)})
     end)
-    
+
     put_time = :os.system_time(:microsecond) - put_start
     put_ops_per_sec = round(put_operations / (put_time / 1_000_000))
-    
+
     IO.puts "   ✅ PUT benchmark: #{put_ops_per_sec} ops/sec"
-    
+
     # Benchmark temporal GET operations
     IO.puts "🔍 Running temporal retrieval benchmark..."
-    
+
     get_start = :os.system_time(:microsecond)
     get_operations = 2000
-    
+
     Enum.each(1..get_operations, fn i ->
       # Simulate temporal GET with physics calculations
       simulate_temporal_get_with_physics("key_#{rem(i, put_operations) + 1}")
     end)
-    
+
     get_time = :os.system_time(:microsecond) - get_start
     get_ops_per_sec = round(get_operations / (get_time / 1_000_000))
-    
+
     IO.puts "   ✅ GET benchmark: #{get_ops_per_sec} ops/sec"
-    
+
     # Benchmark range queries
     IO.puts "📊 Running range query benchmark..."
-    
+
     range_start = :os.system_time(:microsecond)
     range_query_points = 10_000
     simulate_temporal_range_query(range_query_points)
     range_time = :os.system_time(:microsecond) - range_start
     range_query_time_ms = Float.round(range_time / 1000, 1)
-    
+
     IO.puts "   ✅ Range query: #{range_query_time_ms}ms for #{range_query_points} points"
-    
+
     # Benchmark aggregations
     IO.puts "🧮 Running aggregation benchmark..."
-    
+
     agg_start = :os.system_time(:microsecond)
     simulate_real_time_aggregation(1000)
     agg_time = :os.system_time(:microsecond) - agg_start
     agg_time_ms = Float.round(agg_time / 1000, 1)
-    
+
     IO.puts "   ✅ Aggregation: #{agg_time_ms}ms latency"
-    
+
     # Benchmark stream processing
     IO.puts "🌊 Running stream processing benchmark..."
-    
+
     stream_start = :os.system_time(:microsecond)
     stream_operations = 5000
-    
+
     Enum.each(1..stream_operations, fn i ->
       simulate_stream_event_processing(%{event: "stream_#{i}", timestamp: :os.system_time(:millisecond)})
     end)
-    
+
     stream_time = :os.system_time(:microsecond) - stream_start
     stream_ops_per_sec = round(stream_operations / (stream_time / 1_000_000))
     stream_latency_ms = Float.round(stream_time / stream_operations / 1000, 2)
-    
+
     IO.puts "   ✅ Stream processing: #{stream_ops_per_sec} events/sec, #{stream_latency_ms}ms latency"
-    
+
     # Benchmark compression
     IO.puts "🗜️ Running compression benchmark..."
-    
-    test_data = Enum.map(1..1000, fn i -> 
+
+    test_data = Enum.map(1..1000, fn i ->
       %{id: i, data: "temporal_data_#{i}", timestamp: :os.system_time(:millisecond) + i * 1000}
     end)
-    
+
     original_data = :erlang.term_to_binary(test_data)
     compressed_data = :erlang.term_to_binary(test_data, [:compressed])
-    
+
     original_size_kb = Float.round(byte_size(original_data) / 1024, 1)
     compressed_size_kb = Float.round(byte_size(compressed_data) / 1024, 1)
     compression_ratio = Float.round(byte_size(original_data) / byte_size(compressed_data), 1)
-    
+
     IO.puts "   ✅ Compression: #{compression_ratio}x reduction (#{original_size_kb}KB → #{compressed_size_kb}KB)"
-    
+
     # Physics calculations benchmarks
     IO.puts "⚛️ Running physics intelligence benchmark..."
-    
+
     physics_start = :os.system_time(:microsecond)
-    
+
     # Simulate physics calculations
     time_dilation_results = Enum.map(1..100, fn _i ->
       simulate_time_dilation_calculation()
     end)
-    
+
     entropy_results = Enum.map(1..100, fn _i ->
       simulate_entropy_calculation()
     end)
-    
+
     gravitational_results = Enum.map(1..100, fn _i ->
       simulate_gravitational_routing()
     end)
-    
+
     physics_time = :os.system_time(:microsecond) - physics_start
-    
+
     time_dilation_overhead_us = Float.round(physics_time / 300, 1)  # 300 total calculations
     entropy_calculation_us = Float.round(Enum.sum(entropy_results) / length(entropy_results), 1)
     gravitational_routing_boost = Float.round(Enum.sum(gravitational_results) / length(gravitational_results), 0)
     quantum_coherence_percent = Float.round(:rand.uniform() * 15 + 85, 1)  # 85-100%
     quantum_boost_percent = Float.round(:rand.uniform() * 15 + 15, 0)  # 15-30%
-    
+
     IO.puts "   ✅ Physics calculations: #{time_dilation_overhead_us}μs overhead per operation"
-    
+
     # Index lookup benchmark
     index_start = :os.system_time(:microsecond)
     Enum.each(1..1000, fn _i -> simulate_index_lookup() end)
     index_time = :os.system_time(:microsecond) - index_start
     index_lookup_time_us = Float.round(index_time / 1000, 1)
-    
+
     %{
       put_ops_per_sec: put_ops_per_sec,
       get_ops_per_sec: get_ops_per_sec,
@@ -622,7 +622,7 @@ defmodule IsLabDB.Phase7Demo do
     _entropy_impact = calculate_entropy_impact(key, value)
     _temporal_mass = calculate_temporal_mass(value)
     _quantum_state = determine_quantum_state(key)
-    
+
     # Simulate WAL write
     :rand.uniform(10)  # Random microsecond delay
   end
@@ -632,7 +632,7 @@ defmodule IsLabDB.Phase7Demo do
     _gravitational_score = calculate_gravitational_routing(key)
     _coherence_decay = calculate_coherence_decay()
     _index_lookup = simulate_temporal_index_lookup(key)
-    
+
     :rand.uniform(5)  # Random microsecond delay
   end
 
@@ -641,7 +641,7 @@ defmodule IsLabDB.Phase7Demo do
     _index_scan = points * 0.01  # Simulate index scanning
     _aggregation_calc = points * 0.005  # Simulate aggregation
     _quantum_correlation = :rand.uniform() * 0.3 + 0.7  # 70-100% efficiency
-    
+
     :timer.sleep(div(points, 1000))  # Realistic processing delay
   end
 
@@ -650,7 +650,7 @@ defmodule IsLabDB.Phase7Demo do
     _windowing_calc = data_points * 0.1
     _statistical_calc = :math.sqrt(data_points)
     _quantum_enhancement = :rand.uniform() * 0.2 + 0.8
-    
+
     :timer.sleep(div(data_points, 100))
   end
 
@@ -659,7 +659,7 @@ defmodule IsLabDB.Phase7Demo do
     _event_parsing = byte_size(:erlang.term_to_binary(event))
     _temporal_indexing = :rand.uniform(2)
     _physics_calculations = :rand.uniform(3)
-    
+
     # Realistic processing time
     :timer.sleep(1)
   end
@@ -669,7 +669,7 @@ defmodule IsLabDB.Phase7Demo do
     _current_time = :os.system_time(:millisecond)
     _age_factor = :rand.uniform(1000)
     _dilation_factor = 1.0 + (:rand.uniform() * 0.5)
-    
+
     :rand.uniform(5)  # Return simulated calculation time in microseconds
   end
 
@@ -678,7 +678,7 @@ defmodule IsLabDB.Phase7Demo do
     _data_distribution = Enum.map(1..10, fn _i -> :rand.uniform() end)
     _shannon_entropy = :math.log2(:rand.uniform(8) + 1)
     _temporal_variance = :rand.uniform()
-    
+
     :rand.uniform(8) + 2  # Return calculation time 2-10 microseconds
   end
 
@@ -687,7 +687,7 @@ defmodule IsLabDB.Phase7Demo do
     _data_mass = :rand.uniform() * 10
     _gravitational_field = :rand.uniform() * 5
     _routing_efficiency = :rand.uniform() * 50 + 50  # 50-100% improvement over hash
-    
+
     _routing_efficiency
   end
 
@@ -696,7 +696,7 @@ defmodule IsLabDB.Phase7Demo do
     _btree_traversal = :rand.uniform(3)
     _key_comparison = :rand.uniform(2)
     _result_retrieval = :rand.uniform(1)
-    
+
     :timer.sleep(0)  # Very fast operation
   end
 
@@ -705,7 +705,7 @@ defmodule IsLabDB.Phase7Demo do
     _temporal_key_hash = :erlang.phash2(key)
     _time_range_check = :rand.uniform(2)
     _lifecycle_stage_lookup = :rand.uniform(1)
-    
+
     :rand.uniform(3)
   end
 
@@ -731,7 +731,7 @@ defmodule IsLabDB.Phase7Demo do
     hash_value = :erlang.phash2(key)
     case rem(hash_value, 4) do
       0 -> :superposition
-      1 -> :entangled  
+      1 -> :entangled
       2 -> :collapsed
       3 -> :coherent
     end
@@ -742,7 +742,7 @@ defmodule IsLabDB.Phase7Demo do
     key_mass = byte_size(to_string(key)) / 100.0
     gravitational_constant = 1.5
     distance_factor = :rand.uniform() * 2.0
-    
+
     key_mass * gravitational_constant / distance_factor
   end
 
@@ -796,4 +796,4 @@ defmodule Number.Delimit do
 end
 
 # Run the demo
-IsLabDB.Phase7Demo.run_demo()
+WarpEngine.Phase7Demo.run_demo()

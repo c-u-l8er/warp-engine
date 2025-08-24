@@ -35,7 +35,7 @@ defmodule WarpFlowAI do
   """
 
   use EnhancedADT
-  use EnhancedADT.IsLabDBIntegration
+  use EnhancedADT.WarpEngineIntegration
   require Logger
 
   # =============================================================================
@@ -191,10 +191,10 @@ defmodule WarpFlowAI do
     Logger.info("🚀 Starting WarpFlow AI Workflow Automation Universe...")
 
     # Start WarpEngine database if not running
-    case Process.whereis(IsLabDB) do
+    case Process.whereis(WarpEngine) do
       nil ->
         Logger.info("🌌 Initializing WarpEngine database for AI workflows...")
-        {:ok, _pid} = IsLabDB.start_link(opts)
+        {:ok, _pid} = WarpEngine.start_link(opts)
       _pid ->
         Logger.info("✅ WarpEngine database already running")
     end
@@ -868,6 +868,6 @@ defmodule WarpFlowAI do
 end
 
 # Demonstration runner
-if Code.ensure_loaded?(IsLabDB) do
+if Code.ensure_loaded?(WarpEngine) do
   WarpFlowAI.start_universe()
 end

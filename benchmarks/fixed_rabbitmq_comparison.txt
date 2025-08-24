@@ -3,42 +3,42 @@
  539 │         {:ok, value, shard_id, operation_time, updated_state} ->
      │                                ~
      │
-     └─ lib/islab_db.ex:539:32: IsLabDB.handle_call/3
+     └─ lib/warp_engine.ex:539:32: WarpEngine.handle_call/3
 
      warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  539 │         {:ok, value, shard_id, operation_time, updated_state} ->
      │                      ~
      │
-     └─ lib/islab_db.ex:539:22: IsLabDB.handle_call/3
+     └─ lib/warp_engine.ex:539:22: WarpEngine.handle_call/3
 
      warning: variable "operation_time" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  541 │         {:error, :not_found, operation_time, error_state} ->
      │                              ~
      │
-     └─ lib/islab_db.ex:541:30: IsLabDB.handle_call/3
+     └─ lib/warp_engine.ex:541:30: WarpEngine.handle_call/3
 
       warning: function update_quantum_metrics/3 is unused
       │
  1074 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
       │        ~
       │
-      └─ lib/islab_db.ex:1074:8: IsLabDB (module)
+      └─ lib/warp_engine.ex:1074:8: WarpEngine (module)
 
       warning: function store_in_event_horizon_cache/5 is unused
       │
  1161 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
       │        ~
       │
-      └─ lib/islab_db.ex:1161:8: IsLabDB (module)
+      └─ lib/warp_engine.ex:1161:8: WarpEngine (module)
 
       warning: function get_current_state/0 is unused
       │
  1575 │   defp get_current_state() do
       │        ~
       │
-      └─ lib/islab_db.ex:1575:8: IsLabDB (module)
+      └─ lib/warp_engine.ex:1575:8: WarpEngine (module)
 
      warning: the following clause will never match:
 
@@ -46,7 +46,7 @@
 
      because it attempts to match on the result of:
 
-         IsLabDB.WALOperations.cosmic_delete_v2(state, key)
+         WarpEngine.WALOperations.cosmic_delete_v2(state, key)
 
      which has type:
 
@@ -57,203 +57,203 @@
  556 │         {:error, error_result, error_state} ->
      │         ~
      │
-     └─ lib/islab_db.ex:556:9: IsLabDB.handle_call/3
+     └─ lib/warp_engine.ex:556:9: WarpEngine.handle_call/3
 
      warning: function atomize_keys/1 is unused
      │
  288 │   defp atomize_keys(map) when is_map(map) do
      │        ~
      │
-     └─ lib/islab_db/wal_entry.ex:288:8: IsLabDB.WAL.Entry (module)
+     └─ lib/warp_engine/wal_entry.ex:288:8: WarpEngine.WAL.Entry (module)
 
      warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  218 │   defp ultra_fast_route_data(key, value, opts) do
      │                                   ~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:218:35: IsLabDB.WALOperations.ultra_fast_route_data/3
+     └─ lib/warp_engine/wal_operations.ex:218:35: WarpEngine.WALOperations.ultra_fast_route_data/3
 
      warning: variable "cosmic_metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
      │                                                      ~~~~~~~~~~~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:278:54: IsLabDB.WALOperations.update_physics_intelligence_async/4
+     └─ lib/warp_engine/wal_operations.ex:278:54: WarpEngine.WALOperations.update_physics_intelligence_async/4
 
      warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
      │                                                                       ~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:278:71: IsLabDB.WALOperations.update_physics_intelligence_async/4
+     └─ lib/warp_engine/wal_operations.ex:278:71: WarpEngine.WALOperations.update_physics_intelligence_async/4
 
      warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
      │                                               ~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:278:47: IsLabDB.WALOperations.update_physics_intelligence_async/4
+     └─ lib/warp_engine/wal_operations.ex:278:47: WarpEngine.WALOperations.update_physics_intelligence_async/4
 
      warning: variable "cosmic_metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
      │                                                                    ~~~~~~~~~~~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:309:68: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+     └─ lib/warp_engine/wal_operations.ex:309:68: WarpEngine.WALOperations.update_get_physics_intelligence_async/5
 
      warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
      │                                                          ~~~~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:309:58: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+     └─ lib/warp_engine/wal_operations.ex:309:58: WarpEngine.WALOperations.update_get_physics_intelligence_async/5
 
      warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
      │                                                                                     ~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:309:85: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+     └─ lib/warp_engine/wal_operations.ex:309:85: WarpEngine.WALOperations.update_get_physics_intelligence_async/5
 
      warning: variable "value" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
      │                                                   ~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:309:51: IsLabDB.WALOperations.update_get_physics_intelligence_async/5
+     └─ lib/warp_engine/wal_operations.ex:309:51: WarpEngine.WALOperations.update_get_physics_intelligence_async/5
 
      warning: variable "delete_results" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  374 │   defp cleanup_physics_intelligence_async(key, delete_results, state) do
      │                                                ~~~~~~~~~~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:374:48: IsLabDB.WALOperations.cleanup_physics_intelligence_async/3
+     └─ lib/warp_engine/wal_operations.ex:374:48: WarpEngine.WALOperations.cleanup_physics_intelligence_async/3
 
      warning: variable "state" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  374 │   defp cleanup_physics_intelligence_async(key, delete_results, state) do
      │                                                                ~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:374:64: IsLabDB.WALOperations.cleanup_physics_intelligence_async/3
+     └─ lib/warp_engine/wal_operations.ex:374:64: WarpEngine.WALOperations.cleanup_physics_intelligence_async/3
 
      warning: function update_wormhole_usage_patterns/3 is unused
      │
  481 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:481:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:481:8: WarpEngine.WALOperations (module)
 
      warning: function update_shard_statistics/4 is unused
      │
  491 │   defp update_shard_statistics(shard, operation, _key, _value) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:491:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:491:8: WarpEngine.WALOperations (module)
 
      warning: function update_physics_intelligence_async/4 is unused
      │
  278 │   defp update_physics_intelligence_async(key, value, cosmic_metadata, state) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:278:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:278:8: WarpEngine.WALOperations (module)
 
      warning: function update_get_physics_intelligence_async/5 is unused
      │
  309 │   defp update_get_physics_intelligence_async(key, value, shard_id, cosmic_metadata, state) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:309:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:309:8: WarpEngine.WALOperations (module)
 
      warning: function update_access_patterns_async/3 is unused
      │
  419 │   defp update_access_patterns_async(key, access_type, _state) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:419:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:419:8: WarpEngine.WALOperations (module)
 
      warning: function ultra_fast_route_data/3 is unused
      │
  218 │   defp ultra_fast_route_data(key, value, opts) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:218:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:218:8: WarpEngine.WALOperations (module)
 
      warning: function populate_event_horizon_cache_async/4 is unused
      │
  388 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:388:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:388:8: WarpEngine.WALOperations (module)
 
      warning: function get_wormhole_metadata/2 is unused
      │
  463 │   defp get_wormhole_metadata(_key, shard_id) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:463:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:463:8: WarpEngine.WALOperations (module)
 
      warning: function determine_quantum_state/2 is unused
      │
  424 │   defp determine_quantum_state(key, value) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:424:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:424:8: WarpEngine.WALOperations (module)
 
      warning: function determine_optimal_cache_level/1 is unused
      │
  472 │   defp determine_optimal_cache_level(cosmic_metadata) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:472:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:472:8: WarpEngine.WALOperations (module)
 
      warning: function create_cosmic_metadata/5 is unused
      │
  262 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:262:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:262:8: WarpEngine.WALOperations (module)
 
      warning: function check_event_horizon_cache_v2/2 is unused
      │
  323 │   defp check_event_horizon_cache_v2(state, key) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:323:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:323:8: WarpEngine.WALOperations (module)
 
      warning: function calculate_entropy_impact/3 is unused
      │
  435 │   defp calculate_entropy_impact(key, value, shard_id) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:435:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:435:8: WarpEngine.WALOperations (module)
 
      warning: function calculate_cosmic_coordinates/2 is unused
      │
  449 │   defp calculate_cosmic_coordinates(key, value) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:449:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:449:8: WarpEngine.WALOperations (module)
 
      warning: function cache_retrieved_value_async/5 is unused
      │
  401 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
      │        ~
      │
-     └─ lib/islab_db/wal_operations.ex:401:8: IsLabDB.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:401:8: WarpEngine.WALOperations (module)
 
     warning: unused alias EntropyMonitor
     │
- 27 │   alias IsLabDB.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
+ 27 │   alias WarpEngine.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
     │   ~
     │
-    └─ lib/islab_db/wal_operations.ex:27:3
+    └─ lib/warp_engine/wal_operations.ex:27:3
 
     warning: unused alias GravitationalRouter
     │
- 27 │   alias IsLabDB.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
+ 27 │   alias WarpEngine.{WAL, GravitationalRouter, QuantumIndex, EntropyMonitor}
     │   ~
     │
-    └─ lib/islab_db/wal_operations.ex:27:3
+    └─ lib/warp_engine/wal_operations.ex:27:3
 
      warning: the following clause will never match:
 
@@ -261,7 +261,7 @@
 
      because it attempts to match on the result of:
 
-         IsLabDB.EventHorizonCache.get(cache, key)
+         WarpEngine.EventHorizonCache.get(cache, key)
 
      which has type:
 
@@ -283,22 +283,22 @@
  335 │             {:error, _reason} -> nil
      │             ~~~~~~~~~~~~~~~~~~~~~~~~
      │
-     └─ lib/islab_db/wal_operations.ex:335: IsLabDB.WALOperations.check_event_horizon_cache_v2/2
+     └─ lib/warp_engine/wal_operations.ex:335: WarpEngine.WALOperations.check_event_horizon_cache_v2/2
 
 
-20:11:49.213 [info] 🚀 Starting IsLab Database Application...
+20:11:49.213 [info] 🚀 Starting WarpEngine Database Application...
 
 20:11:49.218 [info] ⚙️  Application Configuration:
 
-20:11:49.228 [info]   data_root: "/home/travis/Projects/islab-database/data"
+20:11:49.228 [info]   data_root: "/home/travis/Projects/warp-engine-database/data"
 
 20:11:49.228 [info]   Entanglement rules: using defaults
 
-20:11:49.234 [info] 🚀 Initializing IsLabDB computational universe...
+20:11:49.234 [info] 🚀 Initializing WarpEngine computational universe...
 
 20:11:49.238 [info] 🌌 Initializing cosmic filesystem structure...
 
-20:11:49.278 [info] ✨ Cosmic structure ready at /home/travis/Projects/islab-database/data
+20:11:49.278 [info] ✨ Cosmic structure ready at /home/travis/Projects/warp-engine-database/data
 
 20:11:49.282 [info] ⚛️  Initializing quantum entanglement system...
 
@@ -342,7 +342,7 @@
 
 20:11:49.330 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
 
-20:11:49.330 [info] 💾 Entropy persistence initialized: /home/travis/Projects/islab-database/data/entropy/cosmic_entropy
+20:11:49.330 [info] 💾 Entropy persistence initialized: /home/travis/Projects/warp-engine-database/data/entropy/cosmic_entropy
 
 20:11:49.331 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 5000ms
 
@@ -352,13 +352,13 @@
 
 20:11:49.335 [info] 🚀 Initializing WAL Persistence Revolution...
 
-20:11:49.336 [info] ✅ WAL system initialized: /home/travis/Projects/islab-database/data/wal/cosmic.wal
+20:11:49.336 [info] ✅ WAL system initialized: /home/travis/Projects/warp-engine-database/data/wal/cosmic.wal
 
 20:11:49.336 [info] ⚡ Ready for 250,000+ ops/second performance!
 
-20:11:49.336 [info] ✨ IsLabDB universe is stable and ready for cosmic operations
+20:11:49.336 [info] ✨ WarpEngine universe is stable and ready for cosmic operations
 
-20:11:49.336 [info] 🌌 Data root: /home/travis/Projects/islab-database/data
+20:11:49.336 [info] 🌌 Data root: /home/travis/Projects/warp-engine-database/data
 
 20:11:49.336 [info] 🪐 Advanced spacetime shards: cold_data, hot_data, warm_data
 
@@ -372,10 +372,10 @@
 
 20:11:49.336 [info] 🌡️  Phase 5: Entropy Monitoring & Thermodynamics - ACTIVE
 
-20:11:49.336 [info] ✨ IsLab Database Application started successfully
+20:11:49.336 [info] ✨ WarpEngine Database Application started successfully
 
 20:11:49.339 [info] 🌌 Universe supervisor PID: #PID<0.232.0>
-🐰 CORRECTED RabbitMQ vs IsLabDB Performance Analysis
+🐰 CORRECTED RabbitMQ vs WarpEngine Performance Analysis
 ═══════════════════════════════════════════════════════
 
 Fixing the number inconsistencies and tool overhead issues.
@@ -388,7 +388,7 @@ Fixing the number inconsistencies and tool overhead issues.
    • CONSUME: 130758 msgs/sec
    • Publish latency: 74540.1μs
 
-🌌 **IsLabDB Measured Results** (direct API calls):
+🌌 **WarpEngine Measured Results** (direct API calls):
    • MESSAGE STORE: 15679 msgs/sec  
    • MESSAGE CONSUME: 112956 msgs/sec
    • QUANTUM MESSAGES: 134590 msgs/sec
@@ -399,9 +399,9 @@ Fixing the number inconsistencies and tool overhead issues.
 ═══════════════════════════════════════════════════════════════
 
 ✅ **Direct Measured Comparison**:
-   • IsLabDB vs RabbitMQ PUBLISH: 1168.3% 
+   • WarpEngine vs RabbitMQ PUBLISH: 1168.3% 
      (11.7x FASTER!)
-   • IsLabDB vs RabbitMQ CONSUME: 86.4%
+   • WarpEngine vs RabbitMQ CONSUME: 86.4%
      (1.2x slower)
 
 🤔 **Why These Results are Misleading**:
@@ -412,8 +412,8 @@ Fixing the number inconsistencies and tool overhead issues.
    • Real RabbitMQ latency should be ~40μs (0.04ms)
    • Tool overhead is 1,800x the actual operation time!
 
-✅ **IsLabDB Direct API Problem**:
-   • We call IsLabDB functions directly (no tool overhead)
+✅ **WarpEngine Direct API Problem**:
+   • We call WarpEngine functions directly (no tool overhead)
    • 63.8μs latency is real application performance
    • Fair comparison would use AMQP client for RabbitMQ
 
@@ -425,25 +425,25 @@ System                 | Publish/sec | Consume/sec |  Latency μs | Notes
 RabbitMQ (Realistic)   |     25000 |     35000 |        40.0 | Industry standard persistent
 RabbitMQ (Memory)      |     80000 |     88000 |        12.5 | Non-persistent mode  
 RabbitMQ (Measured)    |      1342 |    130758 |     74540.0 | Tool overhead issue
-IsLabDB (Messages)     |     15679 |    112956 |        63.8 | Physics + persistence
-IsLabDB (Quantum)      |    134590 |    134590 |         8.9 | Entangled operations
+WarpEngine (Messages)     |     15679 |    112956 |        63.8 | Physics + persistence
+WarpEngine (Quantum)      |    134590 |    134590 |         8.9 | Entangled operations
 
 🎯 **REALISTIC PERFORMANCE COMPARISON**:
 ═══════════════════════════════════════════════════════════════
 
-✅ **IsLabDB vs RabbitMQ (Realistic)**:
+✅ **WarpEngine vs RabbitMQ (Realistic)**:
    • Message Store: 62.7% of RabbitMQ persistent
    • Message Consume: 322.7% of RabbitMQ 
    • vs Memory-mode: 19.6% of RabbitMQ non-persistent
 
-✅ **IsLabDB vs RabbitMQ (Measured with tool overhead)**:
+✅ **WarpEngine vs RabbitMQ (Measured with tool overhead)**:
    • Message Store: 1168.3% (11.7x FASTER!)
    • Message Consume: 86.4% (1.2x slower)
 
 💡 **KEY INSIGHTS**:
 ═══════════════════════════════════════════════════════════════
 
-🚀 **IsLabDB Achievements**:
+🚀 **WarpEngine Achievements**:
    • 63.0% of RabbitMQ performance with 100x more features
    • Superior latency: 63.8μs vs 2.5e4μs
    • Quantum messaging: 134590 msgs/sec unique capability
@@ -456,15 +456,15 @@ IsLabDB (Quantum)      |    134590 |    134590 |         8.9 | Entangled operati
    • Direct API calls vs tool scripts = completely different performance
 
 🏆 **Market Position Validated**:
-   • IsLabDB: 63.0% of specialized message broker performance
+   • WarpEngine: 63.0% of specialized message broker performance
    • RabbitMQ: 100% message broker, 0% database capabilities  
-   • IsLabDB: 63.0% message broker + 100% intelligent database
+   • WarpEngine: 63.0% message broker + 100% intelligent database
    • **Excellent trade-off**: ~37.0% speed for 1000% more features
 
 🎯 **EXECUTIVE SUMMARY**:
 ═══════════════════════════════════════════════════════════════
 
-✅ **IsLabDB successfully achieves:**
+✅ **WarpEngine successfully achieves:**
    • 63.0% of RabbitMQ messaging performance  
    • Full database persistence and intelligence
    • Quantum entanglement for related message retrieval
@@ -473,11 +473,11 @@ IsLabDB (Quantum)      |    134590 |    134590 |         8.9 | Entangled operati
 
 ✅ **Performance vs Features Trade-off Validated:**
    • Traditional approach: Choose messaging OR database
-   • IsLabDB approach: Get both with excellent performance
+   • WarpEngine approach: Get both with excellent performance
    • Result: 15679 msgs/sec + full database capabilities
 
-🌟 **IsLabDB bridges the gap between high-performance messaging and 
+🌟 **WarpEngine bridges the gap between high-performance messaging and 
 intelligent databases - delivering the best of both worlds! 🚀**
 
 
-✨ Corrected RabbitMQ vs IsLabDB analysis completed with accurate numbers! 🎯
+✨ Corrected RabbitMQ vs WarpEngine analysis completed with accurate numbers! 🎯

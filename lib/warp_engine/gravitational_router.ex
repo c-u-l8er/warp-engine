@@ -1,4 +1,4 @@
-defmodule IsLabDB.GravitationalRouter do
+defmodule WarpEngine.GravitationalRouter do
   @moduledoc """
   Physics-Based Data Routing Engine for Spacetime Shards
 
@@ -22,7 +22,7 @@ defmodule IsLabDB.GravitationalRouter do
   """
 
   require Logger
-  alias IsLabDB.{SpacetimeShard}
+  alias WarpEngine.{SpacetimeShard}
 
   defstruct [
     :shard_topology,              # Map of available shards

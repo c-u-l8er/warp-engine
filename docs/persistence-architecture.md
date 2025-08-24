@@ -1,10 +1,10 @@
-# 🌌 IsLab DB Filesystem Persistence Architecture
+# 🌌 WarpEngine DB Filesystem Persistence Architecture
 
 *Making data persistence as elegant as the cosmic microwave background.*
 
 ## 📖 Overview
 
-IsLab DB employs a **physics-inspired filesystem persistence layer** that mirrors the structure of the universe itself. Data is organized into cosmic hierarchies, from quantum-scale individual records to galactic-scale shard clusters, with each level optimized for both performance and human readability.
+WarpEngine DB employs a **physics-inspired filesystem persistence layer** that mirrors the structure of the universe itself. Data is organized into cosmic hierarchies, from quantum-scale individual records to galactic-scale shard clusters, with each level optimized for both performance and human readability.
 
 ## 🗂️ Cosmic Filesystem Structure
 
@@ -244,7 +244,7 @@ File.write!("/data/temporal/historical/#{month}/compressed.lz4", compressed_data
 
 ### **Universe Bootstrap Process**
 ```elixir
-defmodule IsLabDB.CosmicPersistence do
+defmodule WarpEngine.CosmicPersistence do
   @data_root "/data"
   
   def initialize_universe() do
@@ -280,7 +280,7 @@ end
 
 ### **Real-Time Persistence**
 ```elixir
-defmodule IsLabDB.QuantumPersistence do
+defmodule WarpEngine.QuantumPersistence do
   # Asynchronous persistence to avoid blocking operations
   def persist_quantum_state(key, value, shard_id) do
     Task.start(fn ->
@@ -316,7 +316,7 @@ end
 
 ### **Periodic Cosmic Maintenance**
 ```elixir
-defmodule IsLabDB.CosmicMaintenance do
+defmodule WarpEngine.CosmicMaintenance do
   # Runs every 30 seconds like quantum maintenance
   def perform_cosmic_cleanup() do
     compress_historical_data()
@@ -344,7 +344,7 @@ end
 
 ### **Cosmic Disaster Recovery**
 ```elixir
-defmodule IsLabDB.CosmicRecovery do
+defmodule WarpEngine.CosmicRecovery do
   def restore_universe_from_backup(snapshot_path) do
     Logger.info("🌌 Beginning universe restoration from #{snapshot_path}")
     
@@ -388,7 +388,7 @@ end
 
 ### **Intelligent Write Batching**
 ```elixir
-defmodule IsLabDB.BatchWriter do
+defmodule WarpEngine.BatchWriter do
   # Batch writes by cosmic region for efficiency
   def batch_cosmic_writes(writes_queue) do
     writes_queue
@@ -461,7 +461,7 @@ def generate_cosmic_dashboard() do
 end
 ```
 
-This persistence architecture ensures that IsLab DB's cosmic data remains both performant and beautifully organized, making it as elegant to explore as the universe itself.
+This persistence architecture ensures that WarpEngine DB's cosmic data remains both performant and beautifully organized, making it as elegant to explore as the universe itself.
 
 ---
 

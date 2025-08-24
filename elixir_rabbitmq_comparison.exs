@@ -1,7 +1,7 @@
-# IsLabDB vs Elixir/OTP Ecosystem Performance Analysis
+# WarpEngine vs Elixir/OTP Ecosystem Performance Analysis
 
 IO.puts """
-🧬 IsLabDB Performance in Elixir/OTP Context
+🧬 WarpEngine Performance in Elixir/OTP Context
 ═══════════════════════════════════════════════
 
 Platform Analysis:
@@ -11,7 +11,7 @@ Platform Analysis:
 • Strengths: Concurrency, fault tolerance, hot code reloading
 • Persistence: Typically relies on external databases
 
-Comparing IsLabDB against other high-performance BEAM applications:
+Comparing WarpEngine against other high-performance BEAM applications:
 • RabbitMQ (message broker)
 • Phoenix LiveView (web framework)
 • Riak (distributed database)
@@ -145,11 +145,11 @@ RabbitMQ (Erlang/OTP message broker) typical performance:
 5. **Connection pooling** - Reuse network connections
 6. **Binary protocol** - Efficient wire format
 
-**RabbitMQ vs IsLabDB Architecture**:
+**RabbitMQ vs WarpEngine Architecture**:
 """
 
 # Performance comparison table
-current_islab = 3500  # From our previous benchmarks
+current_warp_engine = 3500  # From our previous benchmarks
 ets_perf = trunc(Float.round(1_000_000 / avg_ets_put, 0))
 genserver_perf = trunc(Float.round(1_000_000 / avg_gs_put, 0))
 file_perf = trunc(Float.round(1_000_000 / avg_file_write, 0))
@@ -165,7 +165,7 @@ comparisons = [
   %{name: "Pure ETS (BEAM)", ops: ets_perf, latency: "#{Float.round(avg_ets_put, 1)}μs", notes: "In-memory only"},
   %{name: "GenServer (Elixir)", ops: genserver_perf, latency: "#{Float.round(avg_gs_put, 1)}μs", notes: "Actor model"},
   %{name: "File I/O (Raw)", ops: file_perf, latency: "#{Float.round(avg_file_write, 0)}μs", notes: "Filesystem bound"},
-  %{name: "IsLabDB (Current)", ops: current_islab, latency: "727μs", notes: "Physics + heavy persist"},
+  %{name: "WarpEngine (Current)", ops: current_warp_engine, latency: "727μs", notes: "Physics + heavy persist"},
   %{name: "RabbitMQ (Memory)", ops: 100_000, latency: "10μs", notes: "Optimized message broker"},
   %{name: "RabbitMQ (Persistent)", ops: 25_000, latency: "40μs", notes: "WAL + batching"},
   %{name: "Redis (C)", ops: 100_000, latency: "10μs", notes: "Native C implementation"}
@@ -180,13 +180,13 @@ Enum.each(comparisons, fn comp ->
   IO.puts "   #{name} | #{ops} | #{latency} | #{notes}"
 end)
 
-IO.puts "\n🎯 IsLabDB Performance Analysis in Elixir Context:"
+IO.puts "\n🎯 WarpEngine Performance Analysis in Elixir Context:"
 IO.puts "═" |> String.duplicate(50)
 
 file_io_factor = ets_perf / file_perf
 
 IO.puts """
-**Current IsLabDB Performance Assessment**:
+**Current WarpEngine Performance Assessment**:
 
 ✅ **Good for Elixir/OTP Context**:
 • 3,500 ops/sec is SOLID for a persistent Elixir application
@@ -195,7 +195,7 @@ IO.puts """
 • Comparable to other BEAM databases (Riak, CouchDB)
 
 ⚠️  **Performance vs Raw BEAM Capabilities**:
-• ETS (pure BEAM): #{ets_perf} ops/sec - IsLabDB is #{Float.round(ets_perf / current_islab, 1)}x slower
+• ETS (pure BEAM): #{ets_perf} ops/sec - WarpEngine is #{Float.round(ets_perf / current_warp_engine, 1)}x slower
 • File I/O overhead: #{Float.round(file_io_factor, 0)}x slower than pure memory
 • Physics overhead: Additional computation per operation
 
@@ -205,7 +205,7 @@ IO.puts """
 • Binary serialization: 2-3x improvement → 35,000-105,000 ops/sec
 • **Total optimized**: 50,000-100,000 ops/sec (RabbitMQ territory!)
 
-🏆 **IsLabDB's Unique Value in BEAM Ecosystem**:
+🏆 **WarpEngine's Unique Value in BEAM Ecosystem**:
 """
 
 IO.puts """
@@ -217,7 +217,7 @@ IO.puts """
 • Battle-tested in production
 • Excellent tooling and monitoring
 
-🌌 **IsLabDB Advantages**:
+🌌 **WarpEngine Advantages**:
 • Physics-inspired intelligence (quantum entanglement = 3x efficiency)
 • Self-optimizing system (entropy monitoring)
 • Human-readable persistence
@@ -225,17 +225,17 @@ IO.puts """
 • Future NPU acceleration potential
 
 **Performance Verdict for Elixir**:
-✅ **Current IsLabDB (3,500 ops/sec) is GOOD for complex Elixir apps**
-✅ **Optimized IsLabDB (50,000+ ops/sec) would be EXCELLENT for BEAM**
+✅ **Current WarpEngine (3,500 ops/sec) is GOOD for complex Elixir apps**
+✅ **Optimized WarpEngine (50,000+ ops/sec) would be EXCELLENT for BEAM**
 ✅ **Competitive with RabbitMQ while adding intelligence features**
 
 **Real-World Context**:
-• Typical Elixir web app: 1,000-5,000 req/sec → IsLabDB fits well
-• High-performance Phoenix: 10,000-50,000 req/sec → Optimized IsLabDB competitive
-• RabbitMQ message broker: 25,000-100,000 msgs/sec → IsLabDB can reach this
+• Typical Elixir web app: 1,000-5,000 req/sec → WarpEngine fits well
+• High-performance Phoenix: 10,000-50,000 req/sec → Optimized WarpEngine competitive
+• RabbitMQ message broker: 25,000-100,000 msgs/sec → WarpEngine can reach this
 • Discord (Elixir): Handles millions of concurrent users → BEAM scales well
 
-**Recommendation**: IsLabDB's current performance is solid for Elixir ecosystem,
+**Recommendation**: WarpEngine's current performance is solid for Elixir ecosystem,
 and with optimizations, could be among the fastest BEAM databases while
 providing unique physics-inspired intelligence features.
 """

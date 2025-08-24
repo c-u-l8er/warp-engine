@@ -1,4 +1,4 @@
-defmodule IsLabDB.QuantumIndex do
+defmodule WarpEngine.QuantumIndex do
   @moduledoc """
   Quantum Index system for managing entangled data relationships.
 
@@ -23,7 +23,7 @@ defmodule IsLabDB.QuantumIndex do
   """
 
   require Logger
-  alias IsLabDB.CosmicPersistence
+  alias WarpEngine.CosmicPersistence
 
   # ETS table names for quantum indices
   @primary_index :quantum_primary_index

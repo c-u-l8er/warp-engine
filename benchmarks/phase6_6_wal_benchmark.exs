@@ -20,7 +20,7 @@ IO.puts """
 🚀 Phase 6.6: WAL Persistence Revolution - Benchmark Suite
 ================================================================
 
-Mission: Transform IsLabDB from 3,500 ops/sec to 250,000+ ops/sec!
+Mission: Transform WarpEngine from 3,500 ops/sec to 250,000+ ops/sec!
 
 Testing Revolutionary Features:
 - Memory-First Operations (leveraging 8.2M ops/sec BEAM capability)
@@ -41,20 +41,20 @@ Testing Revolutionary Features:
 # Add project to path
 System.put_env("MIX_ENV", "test")
 Code.prepend_path("lib")
-Code.prepend_path("_build/test/lib/islab_db/ebin")
+Code.prepend_path("_build/test/lib/warp_engine/ebin")
 
 # Load project modules in correct order
-Code.require_file("lib/islab_db/cosmic_constants.ex")
-Code.require_file("lib/islab_db/cosmic_persistence.ex")
-Code.require_file("lib/islab_db/wal_entry.ex")
-Code.require_file("lib/islab_db/wal.ex")
-Code.require_file("lib/islab_db/wal_operations.ex")
-Code.require_file("lib/islab_db/quantum_index.ex")
-Code.require_file("lib/islab_db/gravitational_router.ex")
-Code.require_file("lib/islab_db/spacetime_shard.ex")
-Code.require_file("lib/islab_db/event_horizon_cache.ex")
-Code.require_file("lib/islab_db/entropy_monitor.ex")
-Code.require_file("lib/islab_db.ex")
+Code.require_file("lib/warp_engine/cosmic_constants.ex")
+Code.require_file("lib/warp_engine/cosmic_persistence.ex")
+Code.require_file("lib/warp_engine/wal_entry.ex")
+Code.require_file("lib/warp_engine/wal.ex")
+Code.require_file("lib/warp_engine/wal_operations.ex")
+Code.require_file("lib/warp_engine/quantum_index.ex")
+Code.require_file("lib/warp_engine/gravitational_router.ex")
+Code.require_file("lib/warp_engine/spacetime_shard.ex")
+Code.require_file("lib/warp_engine/event_horizon_cache.ex")
+Code.require_file("lib/warp_engine/entropy_monitor.ex")
+Code.require_file("lib/warp_engine.ex")
 
 defmodule WALBenchmark do
   @moduledoc """
@@ -91,7 +91,7 @@ defmodule WALBenchmark do
 
   defp start_wal_universe() do
     # Start universe with WAL enabled (default)
-    IsLabDB.start_link(enable_wal: true, data_root: "/tmp/islab_wal_test")
+    WarpEngine.start_link(enable_wal: true, data_root: "/tmp/warp_engine_wal_test")
   end
 
   defp benchmark_core_operations() do
@@ -102,7 +102,7 @@ defmodule WALBenchmark do
 
     # Benchmark PUT operations
     put_results = benchmark_operation("PUT", 10_000, fn i ->
-      IsLabDB.cosmic_put("bench:key_#{i}", %{
+      WarpEngine.cosmic_put("bench:key_#{i}", %{
         data: "benchmark_value_#{i}",
         number: i,
         timestamp: :os.system_time(:microsecond)
@@ -113,7 +113,7 @@ defmodule WALBenchmark do
 
     # Benchmark GET operations
     get_results = benchmark_operation("GET", 10_000, fn i ->
-      IsLabDB.cosmic_get("bench:key_#{rem(i, 5000) + 1}")
+      WarpEngine.cosmic_get("bench:key_#{rem(i, 5000) + 1}")
     end)
 
     display_operation_results("PUT", put_results)
@@ -161,10 +161,10 @@ defmodule WALBenchmark do
     IO.puts "  🧠 Validating physics intelligence preservation..."
 
     # Test quantum entanglement
-    {:ok, _} = IsLabDB.cosmic_put("physics:test1", %{type: "quantum"}, entangled_with: ["physics:test2"])
-    {:ok, _} = IsLabDB.cosmic_put("physics:test2", %{type: "quantum"})
+    {:ok, _} = WarpEngine.cosmic_put("physics:test1", %{type: "quantum"}, entangled_with: ["physics:test2"])
+    {:ok, _} = WarpEngine.cosmic_put("physics:test2", %{type: "quantum"})
 
-    case IsLabDB.quantum_get("physics:test1") do
+    case WarpEngine.quantum_get("physics:test1") do
       {:ok, response} ->
         if Map.has_key?(response, :quantum_data) do
           IO.puts "  ✅ Quantum entanglement: PRESERVED"
@@ -176,7 +176,7 @@ defmodule WALBenchmark do
     end
 
     # Test entropy metrics
-    case IsLabDB.entropy_metrics() do
+    case WarpEngine.entropy_metrics() do
       metrics when is_map(metrics) ->
         if Map.has_key?(metrics, :total_entropy) do
           IO.puts "  ✅ Entropy monitoring: PRESERVED"
@@ -188,7 +188,7 @@ defmodule WALBenchmark do
     end
 
     # Test cosmic metrics
-    case IsLabDB.cosmic_metrics() do
+    case WarpEngine.cosmic_metrics() do
       metrics when is_map(metrics) ->
         if Map.has_key?(metrics, :spacetime_regions) do
           IO.puts "  ✅ Cosmic metrics: PRESERVED"
@@ -208,7 +208,7 @@ defmodule WALBenchmark do
 
     # Generate high-frequency operations to test WAL
     for i <- 1..10_000 do
-      IsLabDB.cosmic_put("wal:stress_#{i}", %{value: i, batch: "wal_test"})
+      WarpEngine.cosmic_put("wal:stress_#{i}", %{value: i, batch: "wal_test"})
     end
 
     wal_time = :os.system_time(:microsecond) - wal_start
@@ -235,15 +235,15 @@ defmodule WALBenchmark do
 
   defp warmup_operations(count) do
     for i <- 1..count do
-      IsLabDB.cosmic_put("warmup:#{i}", %{warmup: true})
+      WarpEngine.cosmic_put("warmup:#{i}", %{warmup: true})
       if rem(i, 100) == 0 do
-        IsLabDB.cosmic_get("warmup:#{i}")
+        WarpEngine.cosmic_get("warmup:#{i}")
       end
     end
 
     # Clean up warmup data
     for i <- 1..count do
-      IsLabDB.cosmic_delete("warmup:#{i}")
+      WarpEngine.cosmic_delete("warmup:#{i}")
     end
   end
 
@@ -295,17 +295,17 @@ defmodule WALBenchmark do
       case operation_type do
         n when n in 0..6 ->
           # 70% reads
-          IsLabDB.cosmic_get("sustained:key_#{rem(operations, 1000) + 1}")
+          WarpEngine.cosmic_get("sustained:key_#{rem(operations, 1000) + 1}")
         n when n in 7..8 ->
           # 20% writes
-          IsLabDB.cosmic_put("sustained:key_#{operations}", %{
+          WarpEngine.cosmic_put("sustained:key_#{operations}", %{
             worker: worker_id,
             operation: operations,
             timestamp: current_time
           })
         9 ->
           # 10% deletes
-          IsLabDB.cosmic_delete("sustained:key_#{rem(operations, 500) + 1}")
+          WarpEngine.cosmic_delete("sustained:key_#{rem(operations, 500) + 1}")
       end
 
       run_sustained_operations(worker_id, run_until, operations + 1)

@@ -1,4 +1,4 @@
-# 🚀 Aurora Architecture: Autogentic + IsLabDB Integration
+# 🚀 Aurora Architecture: Autogentic + WarpEngine Integration
 
 **Revolutionary Spatial Intelligence Through Physics-Enhanced Multi-Agent AI**
 
@@ -7,7 +7,7 @@
 Aurora's architecture demonstrates the transformative power of combining two revolutionary technologies:
 
 1. **🧠 Autogentic Multi-Agent Intelligence**: AI agents that collaborate to solve complex spatial problems
-2. **⚡ IsLabDB Physics Engine**: Quantum-scale performance through physics-enhanced storage
+2. **⚡ WarpEngine Physics Engine**: Quantum-scale performance through physics-enhanced storage
 3. **🌊 Autonomous Spatial Intelligence**: Self-evolving systems that understand, predict, and optimize spatial relationships
 
 This creates capabilities impossible with traditional architectures—a platform that doesn't just process location data, but **reasons about spatial relationships** through collaborative AI powered by physics-optimized storage.
@@ -65,7 +65,7 @@ spatial_intelligence = Aurora.IntelligenceOrchestrator.coordinate_spatial_intell
 )
 ```
 
-### Layer 2: IsLabDB Physics-Enhanced Storage Layer
+### Layer 2: WarpEngine Physics-Enhanced Storage Layer
 
 The storage layer uses physics principles to optimize data placement, access, and relationships.
 
@@ -81,7 +81,7 @@ defmodule Aurora.IntelligentEntityManager do
     physics_optimization = Aurora.Agents.DataPlacementOptimizer.optimize_storage(entity_data)
     
     # Store with AI-optimized physics context
-    {:ok, :stored, shard_id, operation_time} = IsLabDB.cosmic_put(
+    {:ok, :stored, shard_id, operation_time} = WarpEngine.cosmic_put(
       "aurora_entity:#{entity_data.id}",
       entity_data,
       [
@@ -93,7 +93,7 @@ defmodule Aurora.IntelligentEntityManager do
     )
     
     # Create AI-identified quantum entanglements
-    {:ok, _entanglement_id} = IsLabDB.create_quantum_entanglement(
+    {:ok, _entanglement_id} = WarpEngine.create_quantum_entanglement(
       "aurora_entity:#{entity_data.id}",
       physics_optimization.entanglement_candidates,
       physics_optimization.entanglement_strength
@@ -118,7 +118,7 @@ end
 - **Automatic Translation Engine**: Converts mathematical operations to optimized database commands
 - **Physics Parameter Extraction**: Automatically derives physics properties from domain data
 
-### Layer 2: IsLabDB Physics Data Engine
+### Layer 2: WarpEngine Physics Data Engine
 
 The physics data layer implements revolutionary storage and retrieval mechanisms based on fundamental physics principles.
 
@@ -201,7 +201,7 @@ defmodule QuantumEntanglementEngine do
     
     # Create bidirectional quantum entanglement
     if entanglement_strength >= 0.6 do
-      IsLabDB.create_quantum_entanglement(
+      WarpEngine.create_quantum_entanglement(
         "entity:#{entity_a.id}", 
         ["entity:#{entity_b.id}"], 
         entanglement_strength
@@ -265,8 +265,8 @@ defmodule WormholeNetworkManager do
     if efficiency >= 0.5 do
       wormhole_id = "spatial_wormhole_#{:crypto.strong_rand_bytes(8) |> Base.encode16()}"
       
-      # Register wormhole route in IsLabDB's wormhole network
-      IsLabDB.WormholeRouter.establish_wormhole(
+      # Register wormhole route in WarpEngine's wormhole network
+      WarpEngine.WormholeRouter.establish_wormhole(
         spatial_key(source),
         spatial_key(dest), 
         strength,
@@ -359,7 +359,7 @@ defmodule SpatialEventHorizonCache do
       compression_ratio: calculate_compression_by_level(cache_level)
     }
     
-    IsLabDB.EventHorizonCache.put(
+    WarpEngine.EventHorizonCache.put(
       :spatial_cache,
       "entity:#{entity.id}",
       entity,
@@ -731,7 +731,7 @@ Spatial Data Input
 - Quantum entanglement establishment
 - Wormhole route optimization
        ↓
-[IsLabDB Storage]
+[WarpEngine Storage]
 - Physics-optimized storage placement
 - Automatic correlation creation
 - Cache lifecycle management
@@ -762,7 +762,7 @@ Query Request
 - Quantum correlation utilization
 - Wormhole network traversal
        ↓
-[IsLabDB Query Execution]
+[WarpEngine Query Execution]
 - Physics-enhanced query execution
 - Multi-shard coordination
 - Result aggregation

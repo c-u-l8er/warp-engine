@@ -1,6 +1,6 @@
-defmodule IsLabDB.TemporalFilesystem do
+defmodule WarpEngine.TemporalFilesystem do
   @moduledoc """
-  Temporal Data Filesystem Management for IsLab Database Phase 7
+  Temporal Data Filesystem Management for WarpEngine Database Phase 7
 
   This module implements the enhanced filesystem structure for temporal data management,
   extending the existing cosmic filesystem with time-based hierarchical organization.
@@ -51,7 +51,7 @@ defmodule IsLabDB.TemporalFilesystem do
   """
 
   require Logger
-  alias IsLabDB.CosmicPersistence
+  alias WarpEngine.CosmicPersistence
 
   ## FILESYSTEM STRUCTURE CONSTANTS
 

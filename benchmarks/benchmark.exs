@@ -1,6 +1,6 @@
 #!/usr/bin/env elixir
 
-# IsLab Database Performance Benchmark Runner
+# WarpEngine Database Performance Benchmark Runner
 # Run this script to execute comprehensive performance benchmarks
 
 Mix.install([
@@ -8,10 +8,10 @@ Mix.install([
 ])
 
 IO.puts """
-🌌 IsLab Database Performance Benchmark Suite
+🌌 WarpEngine Database Performance Benchmark Suite
 ═══════════════════════════════════════════════════════════════
 
-This benchmark suite will validate IsLabDB's performance claims:
+This benchmark suite will validate WarpEngine's performance claims:
 • 366,000+ routes/second (wormhole network)
 • Sub-millisecond operations (core API)
 • <50 microsecond cache hits (event horizon)
@@ -23,35 +23,35 @@ Running comprehensive benchmarks across all 6 phases...
 # Load project modules in correct order
 System.put_env("MIX_ENV", "test")
 Code.prepend_path("lib")
-Code.prepend_path("_build/test/lib/islab_db/ebin")
+Code.prepend_path("_build/test/lib/warp_engine/ebin")
 
-Code.require_file("lib/islab_db/cosmic_constants.ex")
-Code.require_file("lib/islab_db/cosmic_persistence.ex")
-Code.require_file("lib/islab_db/wal_entry.ex")
-Code.require_file("lib/islab_db/wal.ex")
-Code.require_file("lib/islab_db/wal_operations.ex")
-Code.require_file("lib/islab_db/quantum_index.ex")
-Code.require_file("lib/islab_db/gravitational_router.ex")
-Code.require_file("lib/islab_db/spacetime_shard.ex")
-Code.require_file("lib/islab_db/event_horizon_cache.ex")
-Code.require_file("lib/islab_db/entropy_monitor.ex")
-Code.require_file("lib/islab_db/performance_benchmark.ex")
-Code.require_file("lib/islab_db.ex")
+Code.require_file("lib/warp_engine/cosmic_constants.ex")
+Code.require_file("lib/warp_engine/cosmic_persistence.ex")
+Code.require_file("lib/warp_engine/wal_entry.ex")
+Code.require_file("lib/warp_engine/wal.ex")
+Code.require_file("lib/warp_engine/wal_operations.ex")
+Code.require_file("lib/warp_engine/quantum_index.ex")
+Code.require_file("lib/warp_engine/gravitational_router.ex")
+Code.require_file("lib/warp_engine/spacetime_shard.ex")
+Code.require_file("lib/warp_engine/event_horizon_cache.ex")
+Code.require_file("lib/warp_engine/entropy_monitor.ex")
+Code.require_file("lib/warp_engine/performance_benchmark.ex")
+Code.require_file("lib/warp_engine.ex")
 
 # JSON encoding issue fixed in PerformanceBenchmark module by converting structs to maps
 
 try do
-  IO.puts "🚀 Starting IsLabDB..."
-  {:ok, _pid} = IsLabDB.start_link([
+  IO.puts "🚀 Starting WarpEngine..."
+  {:ok, _pid} = WarpEngine.start_link([
     enable_wal: true,
-    data_root: "/tmp/islab_benchmark_test"
+    data_root: "/tmp/warp_engine_benchmark_test"
   ])
 
   IO.puts "🔬 Running comprehensive benchmark suite..."
   IO.puts "   This may take several minutes to complete...\n"
 
   # Run the full benchmark suite
-  results = IsLabDB.PerformanceBenchmark.run_full_suite()
+  results = WarpEngine.PerformanceBenchmark.run_full_suite()
 
   # Display key results
   IO.puts "\n🎉 BENCHMARK RESULTS SUMMARY"
@@ -131,5 +131,5 @@ rescue
     System.halt(1)
 end
 
-IO.puts "\n🌌 IsLab Database benchmarking complete!"
+IO.puts "\n🌌 WarpEngine Database benchmarking complete!"
 IO.puts "   The computational universe is performing optimally ✨"

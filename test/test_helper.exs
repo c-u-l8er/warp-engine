@@ -1,12 +1,12 @@
 # Configure test environment BEFORE starting ExUnit and the application
-# This ensures the data_root is set before IsLabDB tries to initialize
+# This ensures the data_root is set before WarpEngine tries to initialize
 
 # Test environment configuration
-Application.put_env(:islab_db, :test_mode, true)
-Application.put_env(:islab_db, :data_root, "/tmp/islab_db_test_data")
+Application.put_env(:warp_engine, :test_mode, true)
+Application.put_env(:warp_engine, :data_root, "/tmp/warp_engine_test_data")
 
 # Ensure clean test environment before starting
-test_data_dir = "/tmp/islab_db_test_data"
+test_data_dir = "/tmp/warp_engine_test_data"
 if File.exists?(test_data_dir) do
   try do
     File.rm_rf!(test_data_dir)

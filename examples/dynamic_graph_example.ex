@@ -1,13 +1,13 @@
 defmodule DynamicGraphExample do
   @moduledoc """
-  Dynamic Weighted Property Graph using Enhanced ADT with real IsLabDB integration.
+  Dynamic Weighted Property Graph using Enhanced ADT with real WarpEngine integration.
 
   This example demonstrates actual working Enhanced ADT functionality with
   real database operations, physics optimization, and dynamic behavior.
   """
 
   use EnhancedADT
-  use EnhancedADT.IsLabDBIntegration
+  use EnhancedADT.WarpEngineIntegration
   require Logger
 
   # Real ADT definitions using Enhanced ADT macros
@@ -39,16 +39,16 @@ defmodule DynamicGraphExample do
   end
 
   @doc """
-  Start the dynamic graph example with real IsLabDB integration.
+  Start the dynamic graph example with real WarpEngine integration.
   """
   def start_example() do
-    # Start IsLabDB if not already running
-    case Process.whereis(IsLabDB) do
+    # Start WarpEngine if not already running
+    case Process.whereis(WarpEngine) do
       nil ->
-        Logger.info("🚀 Starting IsLabDB for Enhanced ADT Graph Example...")
-        {:ok, _pid} = IsLabDB.start_link()
+        Logger.info("🚀 Starting WarpEngine for Enhanced ADT Graph Example...")
+        {:ok, _pid} = WarpEngine.start_link()
       _pid ->
-        Logger.info("✅ IsLabDB already running")
+        Logger.info("✅ WarpEngine already running")
     end
 
     # Run dynamic examples
@@ -144,8 +144,8 @@ defmodule DynamicGraphExample do
 
           person_key = "person:#{id}"
 
-          # This automatically becomes IsLabDB.cosmic_put with physics context
-          case IsLabDB.cosmic_put(person_key, person, extract_person_physics(person)) do
+          # This automatically becomes WarpEngine.cosmic_put with physics context
+          case WarpEngine.cosmic_put(person_key, person, extract_person_physics(person)) do
             {:ok, :stored, shard_id, operation_time} ->
               Logger.debug("✅ Person stored: #{name} in #{shard_id} (#{operation_time}μs)")
 
@@ -199,7 +199,7 @@ defmodule DynamicGraphExample do
           connection_key = "connection:#{id}"
 
           # Enhanced ADT automatically creates wormhole routes for strong connections
-          case IsLabDB.cosmic_put(connection_key, connection, extract_connection_physics(connection)) do
+          case WarpEngine.cosmic_put(connection_key, connection, extract_connection_physics(connection)) do
             {:ok, :stored, shard_id, operation_time} ->
               Logger.debug("🔗 Connection stored: #{from_person} → #{to_person} (strength: #{strength})")
 
@@ -551,7 +551,7 @@ defmodule DynamicGraphExample do
     interest_keys = Enum.map(interests, &"interest:#{&1}")
 
     if length(interest_keys) > 0 do
-      case IsLabDB.create_quantum_entanglement(person_key, interest_keys, 0.8) do
+      case WarpEngine.create_quantum_entanglement(person_key, interest_keys, 0.8) do
         {:ok, _entanglement_id} ->
           Logger.debug("⚛️ Interest entanglements created for #{person_key}")
 
@@ -562,7 +562,7 @@ defmodule DynamicGraphExample do
   end
 
   defp create_connection_wormhole(from_key, to_key, strength) do
-    case IsLabDB.WormholeRouter.establish_wormhole(from_key, to_key, strength) do
+    case WarpEngine.WormholeRouter.establish_wormhole(from_key, to_key, strength) do
       {:ok, _route_id} ->
         Logger.debug("🌀 Wormhole route created: #{from_key} → #{to_key}")
         :ok
@@ -576,7 +576,7 @@ defmodule DynamicGraphExample do
   end
 
   defp create_connection_quantum_entanglement(from_key, to_key, connection_key, frequency) do
-    case IsLabDB.create_quantum_entanglement(from_key, [to_key, connection_key], frequency) do
+    case WarpEngine.create_quantum_entanglement(from_key, [to_key, connection_key], frequency) do
       {:ok, _entanglement_id} ->
         Logger.debug("⚛️ Connection entanglement created: #{from_key} <-> #{to_key}")
         :ok

@@ -1,10 +1,10 @@
 defmodule QuantumIndexTest do
   use ExUnit.Case
-  doctest IsLabDB.QuantumIndex
+  doctest WarpEngine.QuantumIndex
 
   require Logger
 
-  alias IsLabDB.QuantumIndex
+  alias WarpEngine.QuantumIndex
 
   setup_all do
     # Ensure clean state before all tests
@@ -20,22 +20,22 @@ defmodule QuantumIndexTest do
     cleanup_test_quantum_system()
 
         # Ensure test data directory exists
-    test_data_dir = "/tmp/islab_db_test_quantum"
+    test_data_dir = "/tmp/warp_engine_test_quantum"
     File.mkdir_p!(test_data_dir)
 
     # Configure the data root for this test
-    Application.put_env(:islab_db, :data_root, test_data_dir)
+    Application.put_env(:warp_engine, :data_root, test_data_dir)
 
     # Ensure the full application is started with WAL and other components
-    Application.ensure_all_started(:islab_db)
+    Application.ensure_all_started(:warp_engine)
 
     # Ensure cosmic filesystem exists in test directory
-    IsLabDB.CosmicPersistence.initialize_universe()
+    WarpEngine.CosmicPersistence.initialize_universe()
 
-    # Use the existing IsLabDB process from application supervisor
-    pid = case Process.whereis(IsLabDB) do
+    # Use the existing WarpEngine process from application supervisor
+    pid = case Process.whereis(WarpEngine) do
       nil ->
-        raise "IsLabDB should be started by application supervisor but was not found"
+        raise "WarpEngine should be started by application supervisor but was not found"
       existing_pid ->
         existing_pid
     end
@@ -129,7 +129,7 @@ defmodule QuantumIndexTest do
 
     test "automatic entanglement patterns are applied" do
       # Store some user data - should trigger automatic entanglement
-      {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put("user:charlie", %{name: "Charlie", age: 25})
+      {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put("user:charlie", %{name: "Charlie", age: 25})
 
       # Give pattern application time to complete
       :timer.sleep(100)
@@ -164,9 +164,9 @@ defmodule QuantumIndexTest do
       settings_key = "settings:eve"
 
       # Store the actual data
-      IsLabDB.cosmic_put(primary_key, %{name: "Eve", role: "admin"})
-      IsLabDB.cosmic_put(profile_key, %{bio: "System administrator", avatar: "eve.jpg"})
-      IsLabDB.cosmic_put(settings_key, %{theme: "dark", notifications: true})
+      WarpEngine.cosmic_put(primary_key, %{name: "Eve", role: "admin"})
+      WarpEngine.cosmic_put(profile_key, %{bio: "System administrator", avatar: "eve.jpg"})
+      WarpEngine.cosmic_put(settings_key, %{theme: "dark", notifications: true})
 
       # Create entanglement
       QuantumIndex.create_entanglement(primary_key, [profile_key, settings_key], 1.0)
@@ -175,7 +175,7 @@ defmodule QuantumIndexTest do
       :timer.sleep(100)
 
       # Use quantum_get to observe with entanglement
-      {:ok, response} = IsLabDB.quantum_get(primary_key)
+      {:ok, response} = WarpEngine.quantum_get(primary_key)
 
       assert response.value == %{name: "Eve", role: "admin"}
       assert is_map(response.quantum_data)
@@ -211,9 +211,9 @@ defmodule QuantumIndexTest do
       ]
 
       # Store all the data
-      IsLabDB.cosmic_put(primary_key, %{total: 299.99, status: "confirmed"})
+      WarpEngine.cosmic_put(primary_key, %{total: 299.99, status: "confirmed"})
       Enum.each(entangled_keys, fn key ->
-        IsLabDB.cosmic_put(key, %{related_to: primary_key, data: "test_data_#{key}"})
+        WarpEngine.cosmic_put(key, %{related_to: primary_key, data: "test_data_#{key}"})
       end)
 
       # Create quantum entanglement
@@ -223,7 +223,7 @@ defmodule QuantumIndexTest do
 
       # Measure quantum observation performance
       {time, {:ok, response}} = :timer.tc(fn ->
-        IsLabDB.quantum_get(primary_key)
+        WarpEngine.quantum_get(primary_key)
       end)
 
       # Should complete within reasonable time (less than 100ms for parallel fetch)
@@ -273,14 +273,14 @@ defmodule QuantumIndexTest do
       assert metrics.average_entanglement_strength <= 1.0
     end
 
-    test "quantum entanglement enhances IsLabDB cosmic_metrics" do
+    test "quantum entanglement enhances WarpEngine cosmic_metrics" do
       # Create some entanglements
       QuantumIndex.create_entanglement("user:metrics_test", ["profile:metrics_test"], 0.7)
 
       :timer.sleep(100)
 
       # Get overall cosmic metrics
-      metrics = IsLabDB.cosmic_metrics()
+      metrics = WarpEngine.cosmic_metrics()
 
       # Should include quantum information
       assert Map.has_key?(metrics, :entanglement)
@@ -370,8 +370,8 @@ defmodule QuantumIndexTest do
   ## HELPER FUNCTIONS
 
   defp cleanup_test_quantum_system() do
-    # Stop any running IsLabDB process
-    case Process.whereis(IsLabDB) do
+    # Stop any running WarpEngine process
+    case Process.whereis(WarpEngine) do
       nil -> :ok
       pid ->
         if Process.alive?(pid) do
@@ -380,7 +380,7 @@ defmodule QuantumIndexTest do
     end
 
     # Clean up test data directory
-    test_data_dir = "/tmp/islab_db_test_quantum"
+    test_data_dir = "/tmp/warp_engine_test_quantum"
     if File.exists?(test_data_dir) do
       try do
         File.rm_rf!(test_data_dir)

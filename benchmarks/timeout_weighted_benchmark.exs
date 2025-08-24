@@ -92,12 +92,12 @@ defmodule TimeoutWeightedBenchmark do
   end
 
   defp setup_system() do
-    case Process.whereis(IsLabDB) do
+    case Process.whereis(WarpEngine) do
       nil ->
-        Logger.info("🌌 Starting IsLabDB...")
-        {:ok, _pid} = IsLabDB.start_link()
+        Logger.info("🌌 Starting WarpEngine...")
+        {:ok, _pid} = WarpEngine.start_link()
       _pid ->
-        Logger.info("✅ IsLabDB operational")
+        Logger.info("✅ WarpEngine operational")
     end
 
     Code.compile_file("examples/weighted_graph_database.ex")
@@ -317,7 +317,7 @@ defmodule TimeoutWeightedBenchmark do
     Logger.info("✅ Wormhole Networks: #{wormhole.wormholes_created} connections, #{wormhole.network_efficiency}% efficiency")
     Logger.info("✅ Quantum Correlation: #{quantum.recommendations_generated} recommendations")
     Logger.info("✅ Enhanced ADT Integration: Mathematical syntax → Performance")
-    Logger.info("✅ IsLabDB Integration: Multi-shard physics optimization")
+    Logger.info("✅ WarpEngine Integration: Multi-shard physics optimization")
 
     Logger.info("\n🎯 BENCHMARK TOTALS")
     Logger.info("=" |> String.duplicate(60))

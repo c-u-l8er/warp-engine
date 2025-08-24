@@ -2,7 +2,7 @@ import Config
 
 # Configure the data root directory to use the local data directory
 # instead of the system /data directory
-config :islab_db,
+config :warp_engine,
   data_root: Path.expand("../data", __DIR__)
 
 # Import environment specific config. This must remain at the bottom

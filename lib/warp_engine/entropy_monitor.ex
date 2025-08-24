@@ -1,4 +1,4 @@
-defmodule IsLabDB.EntropyMonitor do
+defmodule WarpEngine.EntropyMonitor do
   @moduledoc """
   Shannon Entropy Engine - Thermodynamic System Monitoring for Cosmic Database
 
@@ -38,7 +38,7 @@ defmodule IsLabDB.EntropyMonitor do
   use GenServer
   require Logger
 
-  alias IsLabDB.{CosmicConstants, CosmicPersistence}
+  alias WarpEngine.{CosmicConstants, CosmicPersistence}
 
   defstruct [
     :monitor_id,                    # Unique identifier for this entropy monitor
@@ -242,7 +242,7 @@ defmodule IsLabDB.EntropyMonitor do
   """
   def shutdown_monitor(monitor_id) do
     try do
-      case Registry.lookup(IsLabDB.EntropyRegistry, monitor_id) do
+      case Registry.lookup(WarpEngine.EntropyRegistry, monitor_id) do
         [] -> {:error, :not_found}
         [{pid, _}] ->
           if Process.alive?(pid) do
@@ -368,7 +368,7 @@ defmodule IsLabDB.EntropyMonitor do
   ## PRIVATE HELPER FUNCTIONS
 
   defp via_tuple(monitor_id) do
-    {:via, Registry, {IsLabDB.EntropyRegistry, monitor_id}}
+    {:via, Registry, {WarpEngine.EntropyRegistry, monitor_id}}
   end
 
   defp create_entropy_tables(monitor_id) do

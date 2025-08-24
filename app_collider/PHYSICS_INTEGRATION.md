@@ -1,16 +1,16 @@
-# ⚛️ Aurora Physics Integration: IsLabDB + Autogentic
+# ⚛️ Aurora Physics Integration: WarpEngine + Autogentic
 
 **How Physics-Enhanced AI Creates Revolutionary Spatial Intelligence**
 
 ## 🎯 Physics-Powered AI Architecture
 
-Aurora demonstrates the transformative power of combining **IsLabDB's physics engine** with **Autogentic's multi-agent intelligence**. This isn't just physics-inspired—it's physics-implemented AI that creates spatial intelligence capabilities impossible with traditional architectures.
+Aurora demonstrates the transformative power of combining **WarpEngine's physics engine** with **Autogentic's multi-agent intelligence**. This isn't just physics-inspired—it's physics-implemented AI that creates spatial intelligence capabilities impossible with traditional architectures.
 
-## 🌌 IsLabDB: The Physics Foundation
+## 🌌 WarpEngine: The Physics Foundation
 
 ### Gravitational Routing: AI-Optimized Data Placement
 
-Aurora's Autgentic agents work with IsLabDB's gravitational routing to create intelligent data placement that adapts in real-time based on AI analysis.
+Aurora's Autgentic agents work with WarpEngine's gravitational routing to create intelligent data placement that adapts in real-time based on AI analysis.
 
 ```elixir
 # Aurora: AI agents determine optimal physics properties
@@ -44,7 +44,7 @@ defmodule Aurora.Agents.DataPlacementOptimizer do
     ]
     
     # Store with AI-optimized physics
-    {:ok, :stored, shard_id, _time} = IsLabDB.cosmic_put(
+    {:ok, :stored, shard_id, _time} = WarpEngine.cosmic_put(
       "aurora_entity:#{entity_data.id}",
       entity_data,
       physics_properties
@@ -106,7 +106,7 @@ defmodule Aurora.Agents.QuantumCorrelationAnalyzer do
     entanglement_strength = correlation_analysis.correlation_strength
     
     # Create AI-optimized quantum entanglements
-    {:ok, entanglement_id} = IsLabDB.create_quantum_entanglement(
+    {:ok, entanglement_id} = WarpEngine.create_quantum_entanglement(
       "aurora_entity:#{primary_entity.id}",
       entanglement_candidates,
       entanglement_strength
@@ -144,7 +144,7 @@ Aurora.Agents.QuantumCorrelationAnalyzer.create_intelligent_entanglements(%{
 
 ### Wormhole Networks: AI-Optimized Ultra-Fast Routing
 
-Aurora's AI agents continuously analyze spatial query patterns and work with IsLabDB's WormholeRouter to create intelligent shortcuts through data space.
+Aurora's AI agents continuously analyze spatial query patterns and work with WarpEngine's WormholeRouter to create intelligent shortcuts through data space.
 
 ```elixir
 # Aurora: AI agents identify and optimize wormhole routing patterns
@@ -174,7 +174,7 @@ defmodule Aurora.Agents.WormholePathOptimizer do
     
     # Create AI-optimized wormhole networks
     wormhole_routes = Enum.map(wormhole_candidates, fn candidate ->
-      {:ok, route_id} = IsLabDB.WormholeRouter.establish_wormhole(
+      {:ok, route_id} = WarpEngine.WormholeRouter.establish_wormhole(
         candidate.source,
         candidate.destination,
         candidate.strength
@@ -462,7 +462,7 @@ Data Input
 - Determine quantum entanglement opportunities
 - Identify wormhole route candidates
     ↓
-[IsLabDB Physics Storage]
+[WarpEngine Physics Storage]
 - Store with gravitational routing
 - Create quantum entanglements
 - Establish wormhole routes
@@ -599,7 +599,7 @@ fold fleet_optimization_query do
     # - Event horizon caching keeps hot data instantly available
     
     # Result: All related data accessed in a single physics-optimized operation
-    optimized_result = IsLabDB.quantum_get_correlated([
+    optimized_result = WarpEngine.quantum_get_correlated([
       "vehicles:fleet_active",
       "customers:nearby", 
       "routes:optimized",

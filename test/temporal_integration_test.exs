@@ -1,4 +1,4 @@
-defmodule IsLabDB.TemporalIntegrationTest do
+defmodule WarpEngine.TemporalIntegrationTest do
   @moduledoc """
   Integration tests for Phase 7 Temporal Data Management
 
@@ -13,13 +13,13 @@ defmodule IsLabDB.TemporalIntegrationTest do
   use ExUnit.Case, async: false
   require Logger
 
-  alias IsLabDB.{TemporalShard, TemporalFilesystem, TemporalCheckpoint}
+  alias WarpEngine.{TemporalShard, TemporalFilesystem, TemporalCheckpoint}
 
   @moduletag :temporal_integration
 
   setup_all do
     # Ensure the full application is started with WAL and other components
-    Application.ensure_all_started(:islab_db)
+    Application.ensure_all_started(:warp_engine)
 
     # Initialize temporal filesystem
     {:ok, temporal_root} = TemporalFilesystem.initialize_temporal_filesystem()

@@ -1,10 +1,10 @@
 defmodule GravitationalRouterTest do
   use ExUnit.Case
-  doctest IsLabDB.GravitationalRouter
+  doctest WarpEngine.GravitationalRouter
 
   require Logger
 
-  alias IsLabDB.{GravitationalRouter, SpacetimeShard}
+  alias WarpEngine.{GravitationalRouter, SpacetimeShard}
 
   setup_all do
     cleanup_test_router_system()
@@ -15,9 +15,9 @@ defmodule GravitationalRouterTest do
   setup do
     cleanup_test_router_system()
 
-    test_data_dir = "/tmp/islab_db_test_router"
+    test_data_dir = "/tmp/warp_engine_test_router"
     File.mkdir_p!(test_data_dir)
-    Application.put_env(:islab_db, :data_root, test_data_dir)
+    Application.put_env(:warp_engine, :data_root, test_data_dir)
 
     # Create test shards for routing tests
     {:ok, hot_shard} = SpacetimeShard.create_shard(:hot_router_test, %{
@@ -386,7 +386,7 @@ defmodule GravitationalRouterTest do
     end)
 
     # Clean up test data directory
-    test_data_dir = "/tmp/islab_db_test_router"
+    test_data_dir = "/tmp/warp_engine_test_router"
     if File.exists?(test_data_dir) do
       try do
         File.rm_rf!(test_data_dir)

@@ -1,24 +1,24 @@
-# Dynamic Performance Comparison: IsLabDB vs Redis vs RabbitMQ
+# Dynamic Performance Comparison: WarpEngine vs Redis vs RabbitMQ
 # This benchmark performs real-time comparisons with actual system measurements
 
 IO.puts """
-🚀 Dynamic Performance Benchmark: IsLabDB vs Industry Standards
+🚀 Dynamic Performance Benchmark: WarpEngine vs Industry Standards
 ════════════════════════════════════════════════════════════════
 
 This benchmark performs REAL-TIME comparisons against:
 • Redis (if available)
 • RabbitMQ (if available)
 • Pure ETS (BEAM baseline)
-• IsLabDB (current optimized version)
+• WarpEngine (current optimized version)
 
 All results are measured dynamically - no hardcoded values!
 """
 
 # Load compiled application
-Code.prepend_path("_build/dev/lib/islab_db/ebin")
+Code.prepend_path("_build/dev/lib/warp_engine/ebin")
 
 # Start the system
-Application.ensure_all_started(:islab_db)
+Application.ensure_all_started(:warp_engine)
 Process.sleep(1000)
 
 # Ensure JSON encoding is available
@@ -40,7 +40,7 @@ defmodule DynamicBenchmark do
   """
   def benchmark_redis() do
     IO.puts "\n🔴 Testing Redis on localhost:6379..."
-    
+
     # Try to connect using telnet/nc first to check if Redis is running
     case System.cmd("timeout", ["2", "bash", "-c", "echo 'PING' | nc localhost 6379"], stderr_to_stdout: true) do
       {output, 0} ->
@@ -61,34 +61,34 @@ defmodule DynamicBenchmark do
         end
     end
   end
-  
+
   defp benchmark_redis_cli() do
     # Benchmark Redis SET operations via CLI
     {time_us, _} = :timer.tc(fn ->
       for i <- 1..1000 do
-        key = "islabdb:bench:#{i}"
+        key = "warp_enginedb:bench:#{i}"
         value = JSONHelper.encode!(%{id: i, data: "benchmark_#{i}"})
         System.cmd("redis-cli", ["-h", "localhost", "-p", "6379", "SET", key, value], stderr_to_stdout: true)
       end
     end)
-    
+
     put_throughput = 1000 * 1_000_000 / time_us
     put_latency = time_us / 1000.0
-    
+
     # Benchmark Redis GET operations
     {get_time_us, _} = :timer.tc(fn ->
       for i <- 1..1000 do
-        key = "islabdb:bench:#{i}"
+        key = "warp_enginedb:bench:#{i}"
         System.cmd("redis-cli", ["-h", "localhost", "-p", "6379", "GET", key], stderr_to_stdout: true)
       end
     end)
-    
+
     get_throughput = 1000 * 1_000_000 / get_time_us
     get_latency = get_time_us / 1000.0
-    
+
     # Cleanup - use FLUSHALL for efficiency
     System.cmd("redis-cli", ["-h", "localhost", "-p", "6379", "FLUSHALL"], stderr_to_stdout: true)
-    
+
     %{
       available: true,
       put_throughput: Float.round(put_throughput, 0),
@@ -98,26 +98,26 @@ defmodule DynamicBenchmark do
       notes: "Redis via CLI (localhost:6379)"
     }
   end
-  
+
   defp benchmark_redis_direct() do
     # Try to benchmark using direct TCP connection simulation
     # This would require implementing Redis protocol, so fall back to estimates
     IO.puts "   ⚠️ Direct Redis benchmarking not implemented, using realistic estimates..."
-    
+
     %{
       available: true,
       put_throughput: 80000,  # Typical Redis performance
       get_throughput: 100000,
       put_latency: 12.5,      # ~80k ops/sec = 12.5μs
-      get_latency: 10.0,      # ~100k ops/sec = 10μs  
+      get_latency: 10.0,      # ~100k ops/sec = 10μs
       notes: "Redis estimated (localhost:6379 responding)"
     }
   end
-  
+
   defp redis_not_available(reason) do
     IO.puts "   ⚠️ Redis not available on localhost:6379: #{reason}"
     IO.puts "   💡 To enable: Start Redis with 'redis-server' or 'sudo systemctl start redis'"
-    
+
     %{available: false, reason: reason}
   end
 
@@ -126,7 +126,7 @@ defmodule DynamicBenchmark do
   """
   def benchmark_rabbitmq() do
     IO.puts "\n🐰 Testing RabbitMQ on localhost:5672..."
-    
+
     # Test if RabbitMQ management API is accessible
     case System.cmd("curl", ["-s", "-u", "guest:guest", "http://localhost:15672/api/overview"], stderr_to_stdout: true) do
       {output, 0} ->
@@ -141,7 +141,7 @@ defmodule DynamicBenchmark do
         check_rabbitmq_port()
     end
   end
-  
+
   defp check_rabbitmq_port() do
     case System.cmd("timeout", ["2", "bash", "-c", "echo | nc localhost 5672"], stderr_to_stdout: true) do
       {_, 0} ->
@@ -158,22 +158,22 @@ defmodule DynamicBenchmark do
         rabbitmq_not_available("Port 5672 not accessible")
     end
   end
-  
+
   defp benchmark_rabbitmq_real() do
     IO.puts "   🚀 Running RabbitMQ message throughput benchmark..."
-    
+
     # Simple AMQP benchmark using curl to management API
-    queue_name = "islabdb_benchmark_#{:rand.uniform(10000)}"
-    
+    queue_name = "warp_enginedb_benchmark_#{:rand.uniform(10000)}"
+
     # Create queue
-    System.cmd("curl", ["-s", "-u", "guest:guest", "-X", "PUT", 
+    System.cmd("curl", ["-s", "-u", "guest:guest", "-X", "PUT",
                        "http://localhost:15672/api/queues/%2F/#{queue_name}"])
-    
+
     # Benchmark publishing (simplified)
     {pub_time_us, _} = :timer.tc(fn ->
       for i <- 1..100 do  # Fewer messages for HTTP API
         payload = JSONHelper.encode!(%{id: i, message: "benchmark_#{i}", timestamp: :os.system_time()})
-        
+
         System.cmd("curl", ["-s", "-u", "guest:guest", "-X", "POST",
                           "http://localhost:15672/api/exchanges/%2F/amq.default/publish",
                           "-H", "Content-Type: application/json",
@@ -185,15 +185,15 @@ defmodule DynamicBenchmark do
                           })], stderr_to_stdout: true)
       end
     end)
-    
+
     # Extrapolate to 1000 messages
     pub_throughput = 100 * 1_000_000 / pub_time_us * 10  # Scale up
     pub_latency = pub_time_us / 100.0
-    
+
     # Cleanup
     System.cmd("curl", ["-s", "-u", "guest:guest", "-X", "DELETE",
                "http://localhost:15672/api/queues/%2F/#{queue_name}"], stderr_to_stdout: true)
-    
+
     %{
       available: true,
       publish_throughput: Float.round(pub_throughput, 0),
@@ -203,11 +203,11 @@ defmodule DynamicBenchmark do
       notes: "RabbitMQ real (localhost:5672 + management API)"
     }
   end
-  
+
   defp rabbitmq_not_available(reason) do
     IO.puts "   ⚠️ RabbitMQ not available on localhost:5672: #{reason}"
     IO.puts "   💡 To enable: Start RabbitMQ with 'sudo systemctl start rabbitmq-server'"
-    
+
     simulate_rabbitmq_performance()
   end
 
@@ -275,17 +275,17 @@ defmodule DynamicBenchmark do
   end
 
   @doc """
-  Benchmark current IsLabDB performance
+  Benchmark current WarpEngine performance
   """
-  def benchmark_islab_db() do
-    IO.puts "\n🌌 Benchmarking IsLabDB (current optimized version)..."
+  def benchmark_warp_engine() do
+    IO.puts "\n🌌 Benchmarking WarpEngine (current optimized version)..."
 
     # PUT benchmark
     {put_time_us, _} = :timer.tc(fn ->
       for i <- 1..1000 do
-        key = "islab:bench:#{i}"
+        key = "warp_engine:bench:#{i}"
         value = %{id: i, name: "Test User #{i}", data: "benchmark_data_#{i}"}
-        IsLabDB.cosmic_put(key, value)
+        WarpEngine.cosmic_put(key, value)
       end
     end)
 
@@ -295,8 +295,8 @@ defmodule DynamicBenchmark do
     # GET benchmark
     {get_time_us, _} = :timer.tc(fn ->
       for i <- 1..1000 do
-        key = "islab:bench:#{i}"
-        IsLabDB.cosmic_get(key)
+        key = "warp_engine:bench:#{i}"
+        WarpEngine.cosmic_get(key)
       end
     end)
 
@@ -306,9 +306,9 @@ defmodule DynamicBenchmark do
     # Quantum GET benchmark
     {quantum_time_us, _} = :timer.tc(fn ->
       for i <- 1..100 do  # Fewer iterations for quantum operations
-        key = "islab:bench:#{i}"
+        key = "warp_engine:bench:#{i}"
         try do
-          IsLabDB.quantum_get(key)
+          WarpEngine.quantum_get(key)
         rescue
           _ -> :ok  # Handle any errors gracefully
         end
@@ -318,9 +318,9 @@ defmodule DynamicBenchmark do
     quantum_throughput = 100 * 1_000_000 / quantum_time_us
     quantum_latency = quantum_time_us / 100.0
 
-    IO.puts "   ✅ IsLabDB PUT: #{Float.round(put_throughput, 0)} ops/sec, #{Float.round(put_latency, 1)}μs latency"
-    IO.puts "   ✅ IsLabDB GET: #{Float.round(get_throughput, 0)} ops/sec, #{Float.round(get_latency, 1)}μs latency"
-    IO.puts "   ✅ IsLabDB Quantum GET: #{Float.round(quantum_throughput, 0)} ops/sec, #{Float.round(quantum_latency, 1)}μs latency"
+    IO.puts "   ✅ WarpEngine PUT: #{Float.round(put_throughput, 0)} ops/sec, #{Float.round(put_latency, 1)}μs latency"
+    IO.puts "   ✅ WarpEngine GET: #{Float.round(get_throughput, 0)} ops/sec, #{Float.round(get_latency, 1)}μs latency"
+    IO.puts "   ✅ WarpEngine Quantum GET: #{Float.round(quantum_throughput, 0)} ops/sec, #{Float.round(quantum_latency, 1)}μs latency"
 
     %{
       put_throughput: Float.round(put_throughput, 0),
@@ -348,10 +348,10 @@ defmodule DynamicBenchmark do
     ets = results.ets
     IO.puts format_table_row("ETS (BEAM Baseline)", ets.put_throughput, ets.get_throughput, ets.put_latency, "Pure memory")
 
-    # IsLabDB
-    islab = results.islab_db
-    IO.puts format_table_row("IsLabDB (Current)", islab.put_throughput, islab.get_throughput, islab.put_latency, "Physics + persistence")
-    IO.puts format_table_row("IsLabDB Quantum", islab.quantum_throughput, islab.quantum_throughput, islab.quantum_latency, "Entangled operations")
+    # WarpEngine
+    warp_engine = results.warp_engine
+    IO.puts format_table_row("WarpEngine (Current)", warp_engine.put_throughput, warp_engine.get_throughput, warp_engine.put_latency, "Physics + persistence")
+    IO.puts format_table_row("WarpEngine Quantum", warp_engine.quantum_throughput, warp_engine.quantum_throughput, warp_engine.quantum_latency, "Entangled operations")
 
     # Redis (if available)
     if results.redis.available do
@@ -365,7 +365,7 @@ defmodule DynamicBenchmark do
     if results.rabbitmq.available do
       rabbit = results.rabbitmq
       publish_throughput = Map.get(rabbit, :publish_throughput, "N/A")
-      consume_throughput = Map.get(rabbit, :consume_throughput, "N/A")  
+      consume_throughput = Map.get(rabbit, :consume_throughput, "N/A")
       publish_latency = Map.get(rabbit, :publish_latency, "N/A")
       IO.puts format_table_row("RabbitMQ (Live)", publish_throughput, consume_throughput, publish_latency, rabbit.notes)
     else
@@ -379,24 +379,24 @@ defmodule DynamicBenchmark do
     IO.puts "=" |> String.duplicate(30)
 
     ets_put = ets.put_throughput
-    islab_put = islab.put_throughput
-    islab_get = islab.get_throughput
+    warp_engine_put = warp_engine.put_throughput
+    warp_engine_get = warp_engine.get_throughput
 
-    improvement_vs_baseline = islab_put / ets_put
-    memory_efficiency = islab_get / islab_put
+    improvement_vs_baseline = warp_engine_put / ets_put
+    memory_efficiency = warp_engine_get / warp_engine_put
 
     IO.puts """
 
-    ✅ **IsLabDB Performance vs BEAM Baseline**:
+    ✅ **WarpEngine Performance vs BEAM Baseline**:
        • PUT Performance: #{Float.round(improvement_vs_baseline * 100, 1)}% of pure ETS
        • GET/PUT Ratio: #{Float.round(memory_efficiency, 1)}x (GET faster than PUT ✅)
-       • Physics Overhead: #{Float.round((ets_put / islab_put - 1) * 100, 1)}% (acceptable for features gained)
+       • Physics Overhead: #{Float.round((ets_put / warp_engine_put - 1) * 100, 1)}% (acceptable for features gained)
 
     🚀 **Competitive Analysis**:
     """
 
     if results.redis.available do
-      redis_comparison = islab_put / results.redis.put_throughput
+      redis_comparison = warp_engine_put / results.redis.put_throughput
       IO.puts "   • vs Redis: #{Float.round(redis_comparison * 100, 1)}% performance with 10x more intelligence"
     else
       IO.puts "   • vs Redis: Unable to test (Redis not available)"
@@ -404,18 +404,18 @@ defmodule DynamicBenchmark do
 
     if results.rabbitmq.available do
       rabbit_throughput = Map.get(results.rabbitmq, :publish_throughput, 25000)
-      rabbitmq_comparison = islab_put / rabbit_throughput  
+      rabbitmq_comparison = warp_engine_put / rabbit_throughput
       IO.puts "   • vs RabbitMQ: #{Float.round(rabbitmq_comparison * 100, 1)}% performance with persistent data + intelligence"
     else
-      estimated_throughput = Map.get(results.rabbitmq, :estimated_memory_throughput, 
+      estimated_throughput = Map.get(results.rabbitmq, :estimated_memory_throughput,
                                    Map.get(results.rabbitmq, :estimated_persistent_throughput, 25000))
-      estimated_comparison = islab_put / estimated_throughput
+      estimated_comparison = warp_engine_put / estimated_throughput
       IO.puts "   • vs RabbitMQ (est.): #{Float.round(estimated_comparison * 100, 1)}% performance (estimated)"
     end
 
     IO.puts """
 
-    🌟 **IsLabDB Unique Advantages**:
+    🌟 **WarpEngine Unique Advantages**:
        • Quantum entanglement for related data (3x query efficiency)
        • Entropy monitoring for automatic optimization
        • Gravitational routing for intelligent data placement
@@ -423,9 +423,9 @@ defmodule DynamicBenchmark do
        • Physics-inspired self-optimization
 
     💡 **Optimization Opportunities**:
-       • Current performance is #{Float.round(islab_put, 0)} PUT ops/sec
+       • Current performance is #{Float.round(warp_engine_put, 0)} PUT ops/sec
        • Target performance: 100,000+ ops/sec (achievable with WAL batching)
-       • Physics intelligence adds ~#{Float.round((ets_put / islab_put - 1) * 100, 0)}% overhead (excellent ROI)
+       • Physics intelligence adds ~#{Float.round((ets_put / warp_engine_put - 1) * 100, 0)}% overhead (excellent ROI)
     """
 
         # Memory and resource analysis
@@ -478,7 +478,7 @@ IO.puts "\n🚀 Starting dynamic performance benchmarks..."
 
 results = %{
   ets: DynamicBenchmark.benchmark_pure_ets(),
-  islab_db: DynamicBenchmark.benchmark_islab_db(),
+  warp_engine: DynamicBenchmark.benchmark_warp_engine(),
   redis: DynamicBenchmark.benchmark_redis(),
   rabbitmq: DynamicBenchmark.benchmark_rabbitmq()
 }

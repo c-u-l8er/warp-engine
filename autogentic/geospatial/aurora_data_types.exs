@@ -4,7 +4,7 @@ defmodule Aurora.DataTypes do
   Enhanced ADT data types for Aurora Geospatial Intelligence Platform.
 
   This module defines the core mathematical data structures used by Aurora's
-  spatial intelligence system, with automatic IsLabDB physics integration.
+  spatial intelligence system, with automatic WarpEngine physics integration.
 
   All data types automatically leverage:
   - Gravitational routing for optimal data placement
@@ -22,7 +22,7 @@ defmodule Aurora.DataTypes do
   @doc """
   Core geospatial entity with physics-enhanced optimization.
 
-  Automatically configures IsLabDB storage based on entity characteristics:
+  Automatically configures WarpEngine storage based on entity characteristics:
   - High importance -> gravitational mass -> hot shard placement
   - High velocity -> quantum entanglement -> smart pre-fetching
   - Regional clustering -> spacetime sharding -> co-located storage
@@ -146,7 +146,7 @@ defmodule Aurora.DataTypes do
   @doc """
   Spatial indexing tree for high-performance spatial queries.
 
-  Recursive tree structure automatically optimized by IsLabDB's
+  Recursive tree structure automatically optimized by WarpEngine's
   gravitational routing and wormhole network generation.
   """
   defsum SpatialTree do
@@ -295,10 +295,10 @@ defmodule Aurora.DataTypes do
   # =============================================================================
 
   @doc """
-  Extract physics parameters from any Aurora data type for IsLabDB optimization.
+  Extract physics parameters from any Aurora data type for WarpEngine optimization.
 
   Automatically analyzes data type physics annotations and generates
-  optimal IsLabDB cosmic_put options for maximum performance.
+  optimal WarpEngine cosmic_put options for maximum performance.
   """
   def extract_physics_parameters(%{__struct__: module} = data) do
     if function_exported?(module, :__adt_physics_config__, 0) do
@@ -315,12 +315,12 @@ defmodule Aurora.DataTypes do
   end
 
   @doc """
-  Convert physics parameters to IsLabDB cosmic_put options.
+  Convert physics parameters to WarpEngine cosmic_put options.
 
-  Translates Aurora physics context into IsLabDB-compatible
+  Translates Aurora physics context into WarpEngine-compatible
   storage optimization parameters.
   """
-  def to_islab_options(physics_params) do
+  def to_warp_engine_options(physics_params) do
     base_options = [
       access_pattern: Map.get(physics_params, :spatial_clustering, :warm),
       priority: determine_priority_from_mass(Map.get(physics_params, :gravitational_mass, 1.0))

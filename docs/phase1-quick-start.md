@@ -24,7 +24,7 @@
 
 ## 📋 Overview
 
-This guide documented the implementation of **Phase 1: Cosmic Foundation** of IsLab DB, establishing the fundamental architecture with elegant filesystem persistence to the `/data` folder.
+This guide documented the implementation of **Phase 1: Cosmic Foundation** of WarpEngine DB, establishing the fundamental architecture with elegant filesystem persistence to the `/data` folder.
 
 **✅ Phase 1 Goals Achieved:**
 - ✅ Basic GenServer universe controller
@@ -46,8 +46,8 @@ This guide documented the implementation of **Phase 1: Cosmic Foundation** of Is
 
 #### Create Mix Project
 ```bash
-mix new islab_db --sup
-cd islab_db
+mix new warp_engine --sup
+cd warp_engine
 ```
 
 #### Update `mix.exs` with cosmic dependencies
@@ -65,8 +65,8 @@ end
 
 #### Create cosmic directory structure
 ```elixir
-# lib/islab_db/cosmic_constants.ex
-defmodule IsLabDB.CosmicConstants do
+# lib/warp_engine/cosmic_constants.ex
+defmodule WarpEngine.CosmicConstants do
   @moduledoc """
   Fundamental physics constants for the computational universe.
   """
@@ -88,8 +88,8 @@ end
 
 #### Create the filesystem persistence module
 ```elixir
-# lib/islab_db/cosmic_persistence.ex
-defmodule IsLabDB.CosmicPersistence do
+# lib/warp_engine/cosmic_persistence.ex
+defmodule WarpEngine.CosmicPersistence do
   @moduledoc """
   Elegant filesystem persistence that mirrors the structure of the universe.
   """
@@ -142,11 +142,11 @@ defmodule IsLabDB.CosmicPersistence do
     manifest = %{
       universe_version: "1.0.0",
       created_at: DateTime.utc_now() |> DateTime.to_iso8601(),
-      physics_engine: "IsLabDB v1.0",
+      physics_engine: "WarpEngine v1.0",
       cosmic_constants: %{
-        planck_time_ns: IsLabDB.CosmicConstants.planck_time_ns(),
-        light_speed_ops: IsLabDB.CosmicConstants.light_speed_ops_per_sec(),
-        background_temp: IsLabDB.CosmicConstants.cosmic_background_temp()
+        planck_time_ns: WarpEngine.CosmicConstants.planck_time_ns(),
+        light_speed_ops: WarpEngine.CosmicConstants.light_speed_ops_per_sec(),
+        background_temp: WarpEngine.CosmicConstants.cosmic_background_temp()
       },
       spacetime_shards: ["hot_data", "warm_data", "cold_data"],
       persistence_strategy: "multi_format_elegant"
@@ -195,35 +195,35 @@ end
 
 ### 3. Core GenServer Universe
 
-#### Create the main IsLabDB GenServer
+#### Create the main WarpEngine GenServer
 ```elixir
-# lib/islab_db.ex
-defmodule IsLabDB do
+# lib/warp_engine.ex
+defmodule WarpEngine do
   @moduledoc """
-  IsLab Database - A physics-inspired database with elegant filesystem persistence.
+  WarpEngine Database - A physics-inspired database with elegant filesystem persistence.
   
   ## Overview
   
-  IsLabDB treats data storage as a computational universe, using physics principles
+  WarpEngine treats data storage as a computational universe, using physics principles
   like quantum entanglement for smart pre-fetching, spacetime sharding for optimal
   data placement, and black hole mechanics for intelligent caching.
   
   ## Example
   
       # Start the universe
-      {:ok, _pid} = IsLabDB.start_link()
+      {:ok, _pid} = WarpEngine.start_link()
       
       # Store data in the cosmic structure
-      {:ok, :stored} = IsLabDB.cosmic_put("user:alice", %{name: "Alice", age: 30})
+      {:ok, :stored} = WarpEngine.cosmic_put("user:alice", %{name: "Alice", age: 30})
       
       # Retrieve data (with potential entangled relationships)
-      {:ok, user_data} = IsLabDB.cosmic_get("user:alice")
+      {:ok, user_data} = WarpEngine.cosmic_get("user:alice")
   """
   
   use GenServer
   require Logger
   
-  alias IsLabDB.{CosmicPersistence, CosmicConstants}
+  alias WarpEngine.{CosmicPersistence, CosmicConstants}
   
   defstruct [
     :universe_state,
@@ -270,7 +270,7 @@ defmodule IsLabDB do
   ## GENSERVER CALLBACKS
   
   def init(opts) do
-    Logger.info("🚀 Initializing IsLabDB computational universe...")
+    Logger.info("🚀 Initializing WarpEngine computational universe...")
     
     # Initialize cosmic filesystem
     CosmicPersistence.initialize_universe()
@@ -283,7 +283,7 @@ defmodule IsLabDB do
     }
     
     # Initialize state
-    state = %IsLabDB{
+    state = %WarpEngine{
       universe_state: :stable,
       spacetime_tables: spacetime_tables,
       persistence_pid: start_persistence_process(),
@@ -294,7 +294,7 @@ defmodule IsLabDB do
     # Restore data from filesystem if it exists
     restore_universe_state(state)
     
-    Logger.info("✨ IsLabDB universe is stable and ready for cosmic operations")
+    Logger.info("✨ WarpEngine universe is stable and ready for cosmic operations")
     {:ok, state}
   end
   
@@ -538,8 +538,8 @@ end
 
 #### Update the application supervisor
 ```elixir
-# lib/islab_db/application.ex
-defmodule IsLabDB.Application do
+# lib/warp_engine/application.ex
+defmodule WarpEngine.Application do
   @moduledoc false
 
   use Application
@@ -547,10 +547,10 @@ defmodule IsLabDB.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {IsLabDB, []}
+      {WarpEngine, []}
     ]
 
-    opts = [strategy: :one_for_one, name: IsLabDB.Supervisor]
+    opts = [strategy: :one_for_one, name: WarpEngine.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end
@@ -560,24 +560,24 @@ end
 
 #### Create foundational tests
 ```elixir
-# test/islab_db_test.exs
-defmodule IsLabDBTest do
+# test/warp_engine_test.exs
+defmodule WarpEngineTest do
   use ExUnit.Case
-  doctest IsLabDB
+  doctest WarpEngine
 
   setup do
     # Clean up any existing universe state
     cleanup_test_universe()
     
     # Start fresh universe for each test
-    {:ok, _pid} = IsLabDB.start_link()
+    {:ok, _pid} = WarpEngine.start_link()
     
     on_exit(&cleanup_test_universe/0)
     :ok
   end
 
   test "cosmic_put stores data successfully" do
-    assert {:ok, :stored, shard, operation_time} = IsLabDB.cosmic_put("test:key1", %{data: "value1"})
+    assert {:ok, :stored, shard, operation_time} = WarpEngine.cosmic_put("test:key1", %{data: "value1"})
     assert is_atom(shard)
     assert is_integer(operation_time)
     assert operation_time > 0
@@ -585,25 +585,25 @@ defmodule IsLabDBTest do
 
   test "cosmic_get retrieves stored data" do
     # Store data first
-    {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put("test:key2", %{important: "data"})
+    {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put("test:key2", %{important: "data"})
     
     # Retrieve it
-    assert {:ok, %{important: "data"}, _shard, _time} = IsLabDB.cosmic_get("test:key2")
+    assert {:ok, %{important: "data"}, _shard, _time} = WarpEngine.cosmic_get("test:key2")
   end
 
   test "cosmic_delete removes data from universe" do
     # Store and verify data exists
-    {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put("test:key3", %{temp: "data"})
-    assert {:ok, %{temp: "data"}, _shard, _time} = IsLabDB.cosmic_get("test:key3")
+    {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put("test:key3", %{temp: "data"})
+    assert {:ok, %{temp: "data"}, _shard, _time} = WarpEngine.cosmic_get("test:key3")
     
     # Delete and verify it's gone
-    {:ok, deleted_from, _time} = IsLabDB.cosmic_delete("test:key3")
+    {:ok, deleted_from, _time} = WarpEngine.cosmic_delete("test:key3")
     assert is_list(deleted_from)
-    assert {:error, :not_found, _time} = IsLabDB.cosmic_get("test:key3")
+    assert {:error, :not_found, _time} = WarpEngine.cosmic_get("test:key3")
   end
 
   test "cosmic_metrics returns universe state" do
-    metrics = IsLabDB.cosmic_metrics()
+    metrics = WarpEngine.cosmic_metrics()
     
     assert %{
       universe_state: :stable,
@@ -619,7 +619,7 @@ defmodule IsLabDBTest do
 
   test "filesystem persistence creates cosmic structure" do
     # Store some data
-    IsLabDB.cosmic_put("user:alice", %{name: "Alice", role: "engineer"})
+    WarpEngine.cosmic_put("user:alice", %{name: "Alice", role: "engineer"})
     
     # Give async persistence time to complete
     :timer.sleep(100)
@@ -663,9 +663,9 @@ mix test
 iex -S mix
 
 # In IEx:
-IsLabDB.cosmic_put("user:alice", %{name: "Alice", age: 30, role: "engineer"})
-IsLabDB.cosmic_get("user:alice")
-IsLabDB.cosmic_metrics()
+WarpEngine.cosmic_put("user:alice", %{name: "Alice", age: 30, role: "engineer"})
+WarpEngine.cosmic_get("user:alice")
+WarpEngine.cosmic_metrics()
 ```
 
 ### Explore the Cosmic Filesystem

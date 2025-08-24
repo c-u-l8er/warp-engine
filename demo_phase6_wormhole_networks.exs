@@ -2,7 +2,7 @@
 """
 🌌 Phase 6: Wormhole Network Topology Demo
 
-This demo showcases the revolutionary Wormhole Network system for IsLabDB,
+This demo showcases the revolutionary Wormhole Network system for WarpEngine,
 demonstrating dynamic connection management, intelligent routing, and
 physics-based network optimization.
 
@@ -16,9 +16,9 @@ Features demonstrated:
 """
 
 # Set up test data directory for the demo
-demo_data_dir = "/tmp/islab_wormhole_demo_#{:rand.uniform(10000)}"
+demo_data_dir = "/tmp/warp_engine_wormhole_demo_#{:rand.uniform(10000)}"
 
-alias IsLabDB.WormholeRouter
+alias WarpEngine.WormholeRouter
 
 defmodule WormholeNetworkDemo do
   @moduledoc """
@@ -27,13 +27,13 @@ defmodule WormholeNetworkDemo do
 
     def run do
     # Store original data root and set demo directory
-    original_data_root = Application.get_env(:islab_db, :data_root)
-    demo_data_dir = "/tmp/islab_wormhole_demo_#{:rand.uniform(10000)}"
-    Application.put_env(:islab_db, :data_root, demo_data_dir)
+    original_data_root = Application.get_env(:warp_engine, :data_root)
+    demo_data_dir = "/tmp/warp_engine_wormhole_demo_#{:rand.uniform(10000)}"
+    Application.put_env(:warp_engine, :data_root, demo_data_dir)
 
     IO.puts """
     🌌====================================================================🌌
-    🚀 IsLabDB Phase 6: Wormhole Network Topology Demo
+    🚀 WarpEngine Phase 6: Wormhole Network Topology Demo
     🌌====================================================================🌌
 
     Welcome to the future of database networking! This demo showcases
@@ -83,7 +83,7 @@ defmodule WormholeNetworkDemo do
 
     # Cleanup and restore original data root
     File.rm_rf!(demo_data_dir)
-    Application.put_env(:islab_db, :data_root, original_data_root)
+    Application.put_env(:warp_engine, :data_root, original_data_root)
     :ok
   end
 

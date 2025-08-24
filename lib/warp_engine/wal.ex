@@ -1,8 +1,8 @@
-defmodule IsLabDB.WAL do
+defmodule WarpEngine.WAL do
   @moduledoc """
   Write-Ahead Log for ultra-high performance persistence
 
-  Implements Redis-style persistence while maintaining all IsLabDB
+  Implements Redis-style persistence while maintaining all WarpEngine
   physics intelligence features. This module provides:
 
   - Sequential WAL file structure for maximum I/O efficiency
@@ -36,7 +36,7 @@ defmodule IsLabDB.WAL do
   use GenServer
   require Logger
 
-  alias IsLabDB.CosmicPersistence
+  alias WarpEngine.CosmicPersistence
 
   defstruct [
     :wal_file_path,         # Current WAL file path
@@ -157,7 +157,7 @@ defmodule IsLabDB.WAL do
 
       # Initialize state
       Logger.info("🏗️ Building WAL state...")
-      state = %IsLabDB.WAL{
+      state = %WarpEngine.WAL{
         wal_file_path: wal_file_path,
         wal_file_handle: wal_file_handle,
         sequence_counter_ref: sequence_counter_ref,
@@ -330,7 +330,7 @@ defmodule IsLabDB.WAL do
 
   defp encode_operation_binary(operation) do
     # Encode single operation to binary format using our custom JSON encoder
-    json_data = IsLabDB.WAL.Entry.encode_json(operation)
+    json_data = WarpEngine.WAL.Entry.encode_json(operation)
     json_size = byte_size(json_data)
 
     <<json_size::32, json_data::binary>>
@@ -697,7 +697,7 @@ defmodule IsLabDB.WAL do
     case safe_decode_json(json_data) do
       {:ok, entry_data} ->
         # Convert to WAL.Entry struct
-        entry = struct(IsLabDB.WAL.Entry, atomize_keys(entry_data))
+        entry = struct(WarpEngine.WAL.Entry, atomize_keys(entry_data))
         parse_batch_operations(rest, operations_remaining - 1, entries ++ [entry])
 
       {:error, reason} ->

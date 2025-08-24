@@ -38,13 +38,13 @@ defmodule BigDataScalingTest do
   end
 
   defp setup_optimized_system() do
-    # Start IsLabDB
-    case Process.whereis(IsLabDB) do
+    # Start WarpEngine
+    case Process.whereis(WarpEngine) do
       nil ->
-        Logger.info("🌌 Starting IsLabDB for big data testing...")
-        {:ok, _pid} = IsLabDB.start_link()
+        Logger.info("🌌 Starting WarpEngine for big data testing...")
+        {:ok, _pid} = WarpEngine.start_link()
       _pid ->
-        Logger.info("✅ IsLabDB ready for scaling test")
+        Logger.info("✅ WarpEngine ready for scaling test")
     end
 
     # Load optimized WeightedGraphDatabase
@@ -187,8 +187,8 @@ defmodule BigDataScalingTest do
       access_pattern: if(node.importance_score >= 0.7, do: :hot, else: (if node.importance_score >= 0.4, do: :warm, else: :cold))
     ]
 
-    # Direct IsLabDB call
-    IsLabDB.cosmic_put(node_key, node, fast_physics)
+    # Direct WarpEngine call
+    WarpEngine.cosmic_put(node_key, node, fast_physics)
   end
 
   defp calculate_physics_benefits(storage_stats, node_count) do

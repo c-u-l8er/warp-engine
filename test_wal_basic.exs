@@ -43,10 +43,10 @@ defmodule BasicWALTest do
 
     try do
       # Load the WAL Entry module
-      Code.require_file("lib/islab_db/wal_entry.ex")
+      Code.require_file("lib/warp_engine/wal_entry.ex")
 
       # Create a test entry
-      test_entry = IsLabDB.WAL.Entry.new(
+      test_entry = WarpEngine.WAL.Entry.new(
         :put,                              # operation
         "test:key_1",                      # key
         %{data: "test_value", number: 42}, # value
@@ -63,26 +63,26 @@ defmodule BasicWALTest do
       IO.puts "     Compression: #{test_entry.compression_type}"
 
       # Test binary encoding
-      binary_data = IsLabDB.WAL.Entry.encode_binary(test_entry)
+      binary_data = WarpEngine.WAL.Entry.encode_binary(test_entry)
       IO.puts "  ✅ Binary encoding successful (#{byte_size(binary_data)} bytes)"
 
       # Test binary decoding
-      decoded_entry = IsLabDB.WAL.Entry.decode_binary(binary_data)
+      decoded_entry = WarpEngine.WAL.Entry.decode_binary(binary_data)
       IO.puts "  ✅ Binary decoding successful"
 
       # Verify integrity
-      if IsLabDB.WAL.Entry.validate_integrity(decoded_entry) do
+      if WarpEngine.WAL.Entry.validate_integrity(decoded_entry) do
         IO.puts "  ✅ Entry integrity validation passed"
       else
         IO.puts "  ❌ Entry integrity validation failed"
       end
 
       # Test JSON encoding
-      json_data = IsLabDB.WAL.Entry.encode_json(test_entry)
+      json_data = WarpEngine.WAL.Entry.encode_json(test_entry)
       IO.puts "  ✅ JSON encoding successful (#{byte_size(json_data)} bytes)"
 
       # Size analysis
-      entry_size = IsLabDB.WAL.Entry.entry_byte_size(test_entry)
+      entry_size = WarpEngine.WAL.Entry.entry_byte_size(test_entry)
       IO.puts "  📏 Entry size: #{entry_size} bytes"
 
     rescue
@@ -97,11 +97,11 @@ defmodule BasicWALTest do
     try do
       # This would test the WAL module if it's available
       # For now, just test module loading
-      Code.require_file("lib/islab_db/wal.ex")
+      Code.require_file("lib/warp_engine/wal.ex")
       IO.puts "  ✅ WAL module loaded successfully"
 
       # Test basic constants and structure
-      if Code.ensure_loaded?(IsLabDB.WAL) do
+      if Code.ensure_loaded?(WarpEngine.WAL) do
         IO.puts "  ✅ WAL module available for testing"
       else
         IO.puts "  ⚠️  WAL module not ready for runtime tests"
@@ -119,7 +119,7 @@ defmodule BasicWALTest do
     try do
       # Create test data
       test_entries = for i <- 1..1000 do
-        IsLabDB.WAL.Entry.new(
+        WarpEngine.WAL.Entry.new(
           :put,
           "bench:key_#{i}",
           %{data: "benchmark_data_#{i}", number: i, timestamp: :os.system_time(:microsecond)},
@@ -139,7 +139,7 @@ defmodule BasicWALTest do
       binary_start = :os.system_time(:microsecond)
 
       binary_results = Enum.map(test_entries, fn entry ->
-        IsLabDB.WAL.Entry.encode_binary(entry)
+        WarpEngine.WAL.Entry.encode_binary(entry)
       end)
 
       binary_time = :os.system_time(:microsecond) - binary_start
@@ -151,7 +151,7 @@ defmodule BasicWALTest do
       json_start = :os.system_time(:microsecond)
 
       json_results = Enum.map(test_entries, fn entry ->
-        IsLabDB.WAL.Entry.encode_json(entry)
+        WarpEngine.WAL.Entry.encode_json(entry)
       end)
 
       json_time = :os.system_time(:microsecond) - json_start

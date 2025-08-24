@@ -1,4 +1,4 @@
-defmodule IsLabDB.EventHorizonCache do
+defmodule WarpEngine.EventHorizonCache do
   @moduledoc """
   Event Horizon Cache System - Black Hole Mechanics for Ultimate Performance
 
@@ -44,7 +44,7 @@ defmodule IsLabDB.EventHorizonCache do
 
   require Logger
   # Import physics-inspired modules (will be used in future iterations)
-  # alias IsLabDB.{CosmicPersistence, CosmicConstants}
+  # alias WarpEngine.{CosmicPersistence, CosmicConstants}
 
   defstruct [
     :cache_id,                    # Unique identifier for this cache instance

@@ -1,14 +1,14 @@
 #!/usr/bin/env elixir
 
 # 🚀 Aurora Geospatial Intelligence Platform
-# Revolutionary AI-first spatial intelligence powered by Autogentic + IsLabDB
+# Revolutionary AI-first spatial intelligence powered by Autogentic + WarpEngine
 # Built for the autonomous economy - no backward compatibility constraints
 
 defmodule Aurora.SpatialIntelligence do
   @moduledoc """
   Aurora Geospatial Intelligence Platform - Revolutionary AI-first spatial intelligence.
 
-  Built on Autogentic's multi-agent architecture and IsLabDB's physics-enhanced database,
+  Built on Autogentic's multi-agent architecture and WarpEngine's physics-enhanced database,
   Aurora provides collaborative spatial reasoning, morphic boundaries, and autonomous
   intelligence generation for the next generation of spatial applications.
 
@@ -37,7 +37,7 @@ defmodule Aurora.SpatialIntelligence do
       {Aurora.IntelligenceOrchestrator, []},
 
       # System Adapters for External Integration
-      {Aurora.Adapters.IsLabDBAdapter, []},
+      {Aurora.Adapters.WarpEngineAdapter, []},
 
       # Multi-Agent Spatial Intelligence
       {Aurora.Agents.SpatialOracle, []},
@@ -94,8 +94,8 @@ defmodule Aurora.IntelligenceOrchestrator do
   end
 
   def init(_opts) do
-    # Initialize IsLabDB connection for Aurora
-    {:ok, _islab} = IsLabDB.start_link()
+    # Initialize WarpEngine connection for Aurora
+    {:ok, _warp_engine} = WarpEngine.start_link()
 
     state = %__MODULE__{
       agent_topology: initialize_agent_topology(),
@@ -262,7 +262,7 @@ defmodule Aurora.IntelligenceOrchestrator do
 end
 
 # =============================================================================
-# AURORA SPATIAL OPERATIONS - Direct IsLabDB Integration with Enhanced ADT
+# AURORA SPATIAL OPERATIONS - Direct WarpEngine Integration with Enhanced ADT
 # =============================================================================
 
 defmodule Aurora.SpatialOperations do
@@ -279,7 +279,7 @@ defmodule Aurora.SpatialOperations do
         ]
     end
 
-    IsLabDB.cosmic_put("aurora_entity:#{entity_id}", entity_data, physics_opts)
+    WarpEngine.cosmic_put("aurora_entity:#{entity_id}", entity_data, physics_opts)
   end
 
   @doc "Query spatial entities with Enhanced ADT analysis"
@@ -333,12 +333,12 @@ defmodule Aurora.SpatialOperations do
     # Spatial bounding box query using Enhanced ADT
     fold spatial_bounds_query do
       bounds ->
-        # Query IsLabDB for entities within spatial bounds
+        # Query WarpEngine for entities within spatial bounds
         spatial_keys = generate_spatial_region_keys(bounds)
 
         spatial_keys
         |> Enum.flat_map(fn key ->
-          case IsLabDB.cosmic_get(key) do
+          case WarpEngine.cosmic_get(key) do
             {:ok, entities, _shard, _time} when is_list(entities) -> entities
             {:ok, entity, _shard, _time} -> [entity]
             _ -> []
@@ -440,7 +440,7 @@ defmodule Aurora.SpatialOperations do
   end
 
   defp generate_spatial_region_keys(%{min_lat: min_lat, max_lat: max_lat, min_lng: min_lng, max_lng: max_lng}) do
-    # Generate spatial region keys for IsLabDB queries
+    # Generate spatial region keys for WarpEngine queries
     # Use grid-based spatial indexing
     lat_steps = trunc((max_lat - min_lat) / 0.01) + 1
     lng_steps = trunc((max_lng - min_lng) / 0.01) + 1
@@ -735,15 +735,15 @@ end
 # AURORA SYSTEM ADAPTERS - External System Integration
 # =============================================================================
 
-defmodule Aurora.Adapters.IsLabDBAdapter do
+defmodule Aurora.Adapters.WarpEngineAdapter do
   @moduledoc """
-  IsLabDB System Adapter - Intelligent adapter for physics-enhanced database integration.
+  WarpEngine System Adapter - Intelligent adapter for physics-enhanced database integration.
   Following Autogentic integration patterns for external system connectivity.
   """
 
-  use Autogentic.Agent, name: :islab_db_adapter
+  use Autogentic.Agent, name: :warp_engine_adapter
 
-  agent :islab_db_adapter do
+  agent :warp_engine_adapter do
     capability [:physics_database_operations, :spatial_queries, :quantum_optimizations]
     reasoning_style :analytical
     connects_to [:spatial_oracle, :predictive_mind, :boundary_shaper]
@@ -778,7 +778,7 @@ defmodule Aurora.Adapters.IsLabDBAdapter do
 
       # Parallel query analysis and optimization
       parallel do
-        # Direct Enhanced ADT analysis instead of made-up call_islab_db
+        # Direct Enhanced ADT analysis instead of made-up call_warp_engine
         query_analysis = fold query_physics_analysis do
           params ->
             %{
@@ -809,13 +809,13 @@ defmodule Aurora.Adapters.IsLabDBAdapter do
             # Apply gravitational routing for optimal data placement
             shard_routing = calculate_gravitational_routing(params.spatial_bounds)
 
-            # Direct IsLabDB calls for actual data retrieval
+            # Direct WarpEngine calls for actual data retrieval
             query_results = case params.query_type do
               :spatial_entities -> Aurora.SpatialOperations.query_spatial_entities(params)
-              :entity_get -> IsLabDB.cosmic_get(params.entity_key)
+              :entity_get -> WarpEngine.cosmic_get(params.entity_key)
               :bulk_query ->
                 params.entity_keys
-                |> Enum.map(&IsLabDB.cosmic_get/1)
+                |> Enum.map(&WarpEngine.cosmic_get/1)
                 |> Enum.reject(&match?({:error, _}, &1))
             end
 
@@ -869,7 +869,7 @@ defmodule Aurora.Adapters.IsLabDBAdapter do
 
       # Sequential storage with physics enhancement
       sequence do
-        # Use Aurora.SpatialOperations for proper IsLabDB integration
+        # Use Aurora.SpatialOperations for proper WarpEngine integration
         entity_key = get_data(:entity_key)
         storage_result = Aurora.SpatialOperations.store_spatial_entity(
           entity_key,
@@ -938,7 +938,7 @@ defmodule Aurora.Agents.SpatialOracle do
     field :reasoning_history, []
   end
 
-  # Initialize with IsLabDB integration
+  # Initialize with WarpEngine integration
   behavior :initialize_spatial_intelligence, triggers_on: [:agent_startup, :system_initialization] do
     sequence do
       log(:info, "Initializing SpatialOracle intelligence capabilities")
@@ -952,7 +952,7 @@ defmodule Aurora.Agents.SpatialOracle do
         # Initialize spatial intelligence directly (no fake DB connection needed)
         update_state(fn state ->
           %{state |
-            islab_connection: :connected,
+            warp_engine_connection: :connected,
             spatial_patterns: load_default_spatial_patterns(),
             query_optimizations: initialize_default_optimizations(),
             context_cache: %{}
@@ -971,7 +971,7 @@ defmodule Aurora.Agents.SpatialOracle do
       emit_event(:spatial_intelligence_initialized, %{
         capabilities: [:spatial_analysis, :query_optimization, :pattern_recognition],
         performance_target: "<100us query optimization",
-        islab_integration: :active
+        warp_engine_integration: :active
       })
     end
   end
@@ -1189,8 +1189,8 @@ defmodule Aurora.Agents.PredictiveMind do
 
       # Parallel context gathering and analysis
       parallel do
-        # Direct IsLabDB call for entity context
-        entity_context = IsLabDB.cosmic_get("entity:#{entity_id}")
+        # Direct WarpEngine call for entity context
+        entity_context = WarpEngine.cosmic_get("entity:#{entity_id}")
 
         # Store context in agent state
         update_state(fn state ->
@@ -1401,7 +1401,7 @@ defmodule Aurora.Agents.BoundaryShaper do
           adaptation_intelligence: get_data(:adaptation_config)
         })
 
-        # Direct IsLabDB cosmic_put for morphic boundary storage
+        # Direct WarpEngine cosmic_put for morphic boundary storage
         boundary_data = %{
           geometry: get_data(:final_geometry),
           adaptation_rules: get_data(:adaptation_intelligence),
@@ -1409,7 +1409,7 @@ defmodule Aurora.Agents.BoundaryShaper do
           performance_target: 0.995
         }
 
-        storage_result = IsLabDB.cosmic_put(
+        storage_result = WarpEngine.cosmic_put(
           "morphic_boundary:#{get_data(:boundary_id)}",
           boundary_data,
           [gravitational_mass: 0.8, quantum_entanglement_potential: 0.9, adaptive: true]
@@ -1456,8 +1456,8 @@ defmodule Aurora.Agents.BoundaryShaper do
 
       # Parallel performance analysis and optimization insights
       parallel do
-        # Direct IsLabDB cosmic_get for boundary performance data
-        boundary_performance_data = IsLabDB.cosmic_get("morphic_boundary:#{boundary_id}")
+        # Direct WarpEngine cosmic_get for boundary performance data
+        boundary_performance_data = WarpEngine.cosmic_get("morphic_boundary:#{boundary_id}")
 
         # Store in agent state for analysis
         update_state(fn state ->
@@ -1479,7 +1479,7 @@ defmodule Aurora.Agents.BoundaryShaper do
           physics_analysis: get_data(:physics_results)
         })
 
-        # Direct IsLabDB cosmic_put for boundary updates (IsLabDB doesn't have cosmic_update)
+        # Direct WarpEngine cosmic_put for boundary updates (WarpEngine doesn't have cosmic_update)
         optimization_changes = get_data(:optimization_changes)
         boundary_key = "morphic_boundary:#{boundary_id}"
 
@@ -1489,7 +1489,7 @@ defmodule Aurora.Agents.BoundaryShaper do
             updated_boundary_data = Map.merge(current_data, optimization_changes)
 
             # Store updated boundary data
-            update_result = IsLabDB.cosmic_put(
+            update_result = WarpEngine.cosmic_put(
               boundary_key,
               updated_boundary_data,
               [adaptive: true, quantum_entanglement_potential: 0.9]
@@ -1585,9 +1585,9 @@ defmodule Aurora.IntelligentEntityManager do
       }
     }
 
-    # Store in IsLabDB with physics optimization
+    # Store in WarpEngine with physics optimization
     physics_context = extract_entity_physics(enhanced_entity)
-    {:ok, :stored, shard_id, operation_time} = IsLabDB.cosmic_put(
+    {:ok, :stored, shard_id, operation_time} = WarpEngine.cosmic_put(
       "aurora_entity:#{entity_id}",
       enhanced_entity,
       physics_context
@@ -1696,8 +1696,8 @@ defmodule Aurora.MorphicBoundaryManager do
       performance_history: []
     }
 
-    # Store in IsLabDB with morphic properties
-    {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put(
+    # Store in WarpEngine with morphic properties
+    {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put(
       "morphic_boundary:#{boundary_id}",
       morphic_boundary,
       [morphic: true, adaptive: true, quantum_entanglement_potential: 0.9]
@@ -1789,7 +1789,7 @@ defmodule Aurora.QuantumPerformanceMonitor do
       accuracy_rate: measure_current_accuracy(),
       ai_enhancement_factor: calculate_ai_enhancement(),
       quantum_optimization_level: measure_quantum_optimization(),
-      islab_performance: IsLabDB.cosmic_metrics().performance
+      warp_engine_performance: WarpEngine.cosmic_metrics().performance
     }
 
     {:reply, current_metrics, %{state | current_metrics: current_metrics}}
@@ -1815,7 +1815,7 @@ defmodule Aurora.QuantumPerformanceMonitor do
     if current_performance.response_time_us > targets.max_response_time_us do
       optimizations = optimizations ++ [
         :optimize_agent_coordination,
-        :enhance_islab_physics,
+        :enhance_warp_engine_physics,
         :quantum_query_optimization
       ]
     end
@@ -1846,7 +1846,7 @@ defmodule Aurora do
   Aurora Geospatial Intelligence Platform - Main API Interface
 
   Revolutionary AI-first spatial intelligence for the autonomous economy.
-  Built on Autogentic multi-agent architecture and IsLabDB physics engine.
+  Built on Autogentic multi-agent architecture and WarpEngine physics engine.
   """
 
   # Entity Management API
@@ -1903,7 +1903,7 @@ defmodule Aurora.Demo do
 
   def run_aurora_demonstration do
     IO.puts("\n🚀 Aurora Geospatial Intelligence Platform Demo")
-    IO.puts("Revolutionary AI-first spatial intelligence powered by Autogentic + IsLabDB\n")
+    IO.puts("Revolutionary AI-first spatial intelligence powered by Autogentic + WarpEngine\n")
 
     # Start Aurora
     {:ok, _pid} = Aurora.SpatialIntelligence.start(:normal, [])

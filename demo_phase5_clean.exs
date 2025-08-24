@@ -5,8 +5,8 @@
 # A clean, simple demonstration of Phase 5 entropy monitoring features
 
 # Set up the application
-Application.put_env(:islab_db, :data_root, Path.expand("data", __DIR__))
-Application.ensure_all_started(:islab_db)
+Application.put_env(:warp_engine, :data_root, Path.expand("data", __DIR__))
+Application.ensure_all_started(:warp_engine)
 
 defmodule Phase5CleanDemo do
   @moduledoc """
@@ -14,7 +14,7 @@ defmodule Phase5CleanDemo do
   """
 
   require Logger
-  alias IsLabDB
+  alias WarpEngine
 
   def run_demo() do
     print_header()
@@ -33,7 +33,7 @@ defmodule Phase5CleanDemo do
     IO.puts("""
 
     🌡️  ═══════════════════════════════════════════════════════════════
-    🌌  IsLab Database - Phase 5: Entropy Monitoring Demo (Clean)
+    🌌  WarpEngine Database - Phase 5: Entropy Monitoring Demo (Clean)
     🌡️  ═══════════════════════════════════════════════════════════════
 
     Welcome to a clean demonstration of advanced entropy monitoring!
@@ -51,13 +51,13 @@ defmodule Phase5CleanDemo do
   end
 
   defp cleanup_existing_system() do
-    IO.puts("🧹 Cleaning up any existing IsLab Database instances...")
+    IO.puts("🧹 Cleaning up any existing WarpEngine Database instances...")
 
     # Try to stop main process
-    case GenServer.whereis(IsLabDB) do
+    case GenServer.whereis(WarpEngine) do
       pid when is_pid(pid) ->
         try do
-          GenServer.stop(IsLabDB, :normal, 2000)
+          GenServer.stop(WarpEngine, :normal, 2000)
         catch
           :exit, _ -> :ok
         end
@@ -65,10 +65,10 @@ defmodule Phase5CleanDemo do
     end
 
     # Try to stop entropy registry if it exists
-    case GenServer.whereis(IsLabDB.EntropyRegistry) do
+    case GenServer.whereis(WarpEngine.EntropyRegistry) do
       pid when is_pid(pid) ->
         try do
-          GenServer.stop(IsLabDB.EntropyRegistry, :normal, 1000)
+          GenServer.stop(WarpEngine.EntropyRegistry, :normal, 1000)
         catch
           :exit, _ -> :ok
         end
@@ -82,7 +82,7 @@ defmodule Phase5CleanDemo do
   defp demo_entropy_startup() do
     section_header("🌡️  Phase 5 Entropy System Status")
 
-    IO.puts("IsLab Database is running with Phase 5 entropy monitoring!")
+    IO.puts("WarpEngine Database is running with Phase 5 entropy monitoring!")
     IO.puts("🌡️  Phase 5: Entropy Monitoring - ACTIVE")
     IO.puts("")
 
@@ -90,7 +90,7 @@ defmodule Phase5CleanDemo do
     Process.sleep(2000)
 
     # Show initial metrics
-    metrics = IsLabDB.cosmic_metrics()
+    metrics = WarpEngine.cosmic_metrics()
     entropy_data = metrics.entropy_monitoring
 
     IO.puts("📊 Current System Status:")
@@ -123,7 +123,7 @@ defmodule Phase5CleanDemo do
         session_id: "session_#{i}",
         timestamp: :os.system_time(:millisecond)
       }
-      {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put(key, value, access_pattern: :hot)
+      {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put(key, value, access_pattern: :hot)
       key
     end)
 
@@ -135,7 +135,7 @@ defmodule Phase5CleanDemo do
         category: Enum.random(["electronics", "books", "clothing", "home"]),
         price: :rand.uniform(1000) + 10.99
       }
-      {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put(key, value, access_pattern: :warm)
+      {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put(key, value, access_pattern: :warm)
       key
     end)
 
@@ -147,7 +147,7 @@ defmodule Phase5CleanDemo do
         data: :crypto.strong_rand_bytes(50),
         created: :os.system_time(:millisecond) - (i * 86400 * 1000)
       }
-      {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put(key, value, access_pattern: :cold)
+      {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put(key, value, access_pattern: :cold)
       key
     end)
 
@@ -161,7 +161,7 @@ defmodule Phase5CleanDemo do
     Process.sleep(4000)
 
     # Get entropy results
-    entropy_metrics = IsLabDB.entropy_metrics()
+    entropy_metrics = WarpEngine.entropy_metrics()
 
     IO.puts("📊 Shannon Entropy Analysis:")
     IO.puts("   • Total System Entropy: #{Float.round(entropy_metrics.total_entropy, 4)} bits")
@@ -181,7 +181,7 @@ defmodule Phase5CleanDemo do
     IO.puts("")
 
     # Get current state
-    before_metrics = IsLabDB.entropy_metrics()
+    before_metrics = WarpEngine.entropy_metrics()
     IO.puts("📊 Current State:")
     IO.puts("   • Total Entropy: #{Float.round(before_metrics.total_entropy, 3)}")
     IO.puts("   • Rebalancing Recommended: #{before_metrics.rebalancing_recommended}")
@@ -199,7 +199,7 @@ defmodule Phase5CleanDemo do
         priority: :high,
         created_at: :os.system_time(:millisecond)
       }
-      {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put(key, value, access_pattern: :hot, priority: :critical)
+      {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put(key, value, access_pattern: :hot, priority: :critical)
       key
     end)
 
@@ -207,7 +207,7 @@ defmodule Phase5CleanDemo do
     Process.sleep(3000)
 
     # Check entropy increase
-    overload_metrics = IsLabDB.entropy_metrics()
+    overload_metrics = WarpEngine.entropy_metrics()
     IO.puts("")
     IO.puts("📊 After Creating Imbalance:")
     IO.puts("   • Total Entropy: #{Float.round(overload_metrics.total_entropy, 3)}")
@@ -218,7 +218,7 @@ defmodule Phase5CleanDemo do
     # Trigger rebalancing
     IO.puts("🌡️  Triggering thermodynamic rebalancing...")
 
-    {:ok, rebalance_report} = IsLabDB.trigger_entropy_rebalancing(
+    {:ok, rebalance_report} = WarpEngine.trigger_entropy_rebalancing(
       force_rebalancing: true,
       migration_strategy: :moderate
     )
@@ -245,7 +245,7 @@ defmodule Phase5CleanDemo do
     IO.puts("")
 
     # Show initial state
-    initial_metrics = IsLabDB.entropy_metrics()
+    initial_metrics = WarpEngine.entropy_metrics()
     IO.puts("📊 Initial Entropy State:")
     IO.puts("   • Total Entropy: #{Float.round(initial_metrics.total_entropy, 3)}")
     IO.puts("   • Disorder Index: #{Float.round(initial_metrics.disorder_index, 3)}")
@@ -256,9 +256,9 @@ defmodule Phase5CleanDemo do
 
     # Related data that should be co-located
     _user_data = ["alice", "bob", "charlie"] |> Enum.map(fn user ->
-      IsLabDB.cosmic_put("user:#{user}", %{name: user, type: :user})
-      IsLabDB.cosmic_put("profile:#{user}", %{user: user, details: "Profile"})
-      IsLabDB.cosmic_put("settings:#{user}", %{user: user, preferences: %{}})
+      WarpEngine.cosmic_put("user:#{user}", %{name: user, type: :user})
+      WarpEngine.cosmic_put("profile:#{user}", %{user: user, details: "Profile"})
+      WarpEngine.cosmic_put("settings:#{user}", %{user: user, preferences: %{}})
       user
     end)
 
@@ -274,7 +274,7 @@ defmodule Phase5CleanDemo do
         age_days: age_days,
         importance: if(age_days < 7, do: :high, else: :low)
       }
-      {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put(key, value)
+      {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put(key, value)
       key
     end)
 
@@ -292,7 +292,7 @@ defmodule Phase5CleanDemo do
     demon_results = Enum.map(strategies, fn strategy ->
       IO.puts("   Testing #{strategy} strategy...")
 
-      {:ok, result} = IsLabDB.trigger_entropy_rebalancing(
+      {:ok, result} = WarpEngine.trigger_entropy_rebalancing(
         force_rebalancing: true,
         migration_strategy: strategy
       )
@@ -321,10 +321,10 @@ defmodule Phase5CleanDemo do
     IO.puts("🧹 Demonstrating graceful system shutdown...")
 
     # Stop main process
-    case GenServer.whereis(IsLabDB) do
+    case GenServer.whereis(WarpEngine) do
       pid when is_pid(pid) ->
         try do
-          GenServer.stop(IsLabDB, :normal, 5000)
+          GenServer.stop(WarpEngine, :normal, 5000)
         catch
           :exit, _ -> :ok
         end
@@ -332,17 +332,17 @@ defmodule Phase5CleanDemo do
     end
 
     # Stop entropy registry if it exists
-    case GenServer.whereis(IsLabDB.EntropyRegistry) do
+    case GenServer.whereis(WarpEngine.EntropyRegistry) do
       pid when is_pid(pid) ->
         try do
-          GenServer.stop(IsLabDB.EntropyRegistry, :normal, 2000)
+          GenServer.stop(WarpEngine.EntropyRegistry, :normal, 2000)
         catch
           :exit, _ -> :ok
         end
       nil -> :ok
     end
 
-    IO.puts("   ✅ IsLab Database universe safely shut down")
+    IO.puts("   ✅ WarpEngine Database universe safely shut down")
     IO.puts("")
   end
 

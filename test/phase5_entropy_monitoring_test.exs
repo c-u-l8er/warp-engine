@@ -2,7 +2,7 @@ defmodule Phase5EntropyMonitoringTest do
   use ExUnit.Case, async: false
   require Logger
 
-  alias IsLabDB.{EntropyMonitor, CosmicConstants}
+  alias WarpEngine.{EntropyMonitor, CosmicConstants}
 
   @moduletag :phase5
 
@@ -11,7 +11,7 @@ defmodule Phase5EntropyMonitoringTest do
     cleanup_entropy_monitors()
 
     # Ensure entropy registry is available
-    case Registry.start_link(keys: :unique, name: IsLabDB.EntropyRegistry) do
+    case Registry.start_link(keys: :unique, name: WarpEngine.EntropyRegistry) do
       {:ok, _} -> :ok
       {:error, {:already_started, _}} -> :ok
     end
@@ -28,7 +28,7 @@ defmodule Phase5EntropyMonitoringTest do
 
     Enum.each(monitor_names, fn monitor_name ->
       try do
-        case Registry.lookup(IsLabDB.EntropyRegistry, monitor_name) do
+        case Registry.lookup(WarpEngine.EntropyRegistry, monitor_name) do
           [] -> :ok
           [{pid, _}] ->
             if Process.alive?(pid) do
@@ -60,7 +60,7 @@ defmodule Phase5EntropyMonitoringTest do
       assert {:ok, _pid} = EntropyMonitor.create_monitor(:test_entropy, [])
 
       # Verify monitor is registered
-      assert [{_pid, _}] = Registry.lookup(IsLabDB.EntropyRegistry, :test_entropy)
+      assert [{_pid, _}] = Registry.lookup(WarpEngine.EntropyRegistry, :test_entropy)
 
       # Clean up
       EntropyMonitor.shutdown_monitor(:test_entropy)
@@ -77,7 +77,7 @@ defmodule Phase5EntropyMonitoringTest do
       assert {:ok, _pid} = EntropyMonitor.create_monitor(:test_entropy_custom, config)
 
       # Verify monitor is registered
-      assert [{_pid, _}] = Registry.lookup(IsLabDB.EntropyRegistry, :test_entropy_custom)
+      assert [{_pid, _}] = Registry.lookup(WarpEngine.EntropyRegistry, :test_entropy_custom)
 
       # Clean up
       EntropyMonitor.shutdown_monitor(:test_entropy_custom)

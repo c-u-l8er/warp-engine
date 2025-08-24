@@ -16,8 +16,8 @@ defmodule OptimizedWeightedBenchmark do
 
     setup_system()
 
-    # Test 1: Raw IsLabDB performance (baseline)
-    raw_performance = benchmark_raw_islab_performance()
+    # Test 1: Raw WarpEngine performance (baseline)
+    raw_performance = benchmark_raw_warp_engine_performance()
 
     # Test 2: Enhanced ADT overhead analysis
     adt_overhead = benchmark_enhanced_adt_overhead()
@@ -30,28 +30,28 @@ defmodule OptimizedWeightedBenchmark do
   end
 
   defp setup_system() do
-    case Process.whereis(IsLabDB) do
+    case Process.whereis(WarpEngine) do
       nil ->
-        {:ok, _pid} = IsLabDB.start_link()
+        {:ok, _pid} = WarpEngine.start_link()
       _pid ->
-        Logger.info("✅ IsLabDB ready")
+        Logger.info("✅ WarpEngine ready")
     end
 
     Code.compile_file("examples/weighted_graph_database.ex")
   end
 
-  defp benchmark_raw_islab_performance() do
-    Logger.info("\n📊 TEST 1: Raw IsLabDB Performance (Baseline)")
+  defp benchmark_raw_warp_engine_performance() do
+    Logger.info("\n📊 TEST 1: Raw WarpEngine Performance (Baseline)")
     Logger.info("-" |> String.duplicate(50))
 
-    # Test raw IsLabDB.cosmic_put performance
+    # Test raw WarpEngine.cosmic_put performance
     test_data = Enum.map(1..1000, fn i ->
       {"raw_test_#{i}", %{id: i, data: "test_data"}, []}
     end)
 
     {time_us, successful} = :timer.tc(fn ->
       Enum.reduce(test_data, 0, fn {key, value, opts}, acc ->
-        case IsLabDB.cosmic_put(key, value, opts) do
+        case WarpEngine.cosmic_put(key, value, opts) do
           {:ok, :stored, _shard, _time} -> acc + 1
           _error -> acc
         end
@@ -60,7 +60,7 @@ defmodule OptimizedWeightedBenchmark do
 
     ops_per_sec = successful / (time_us / 1_000_000)
 
-    Logger.info("✅ Raw IsLabDB: #{successful} ops in #{Float.round(time_us/1000, 2)}ms")
+    Logger.info("✅ Raw WarpEngine: #{successful} ops in #{Float.round(time_us/1000, 2)}ms")
     Logger.info("⚡ Performance: #{round(ops_per_sec)} ops/sec")
     Logger.info("⏱️  Per operation: #{Float.round(time_us/successful, 1)}μs")
 
@@ -92,7 +92,7 @@ defmodule OptimizedWeightedBenchmark do
           access_pattern: :warm
         ]
 
-        case IsLabDB.cosmic_put("adt_#{node.id}", node, simple_physics) do
+        case WarpEngine.cosmic_put("adt_#{node.id}", node, simple_physics) do
           {:ok, :stored, _shard, _time} -> acc + 1
           _error -> acc
         end
@@ -119,7 +119,7 @@ defmodule OptimizedWeightedBenchmark do
       optimized_nodes
       |> Task.async_stream(fn node ->
         # Optimized storage without logging overhead
-        case IsLabDB.cosmic_put("opt_#{node.id}", node, get_optimized_physics(node)) do
+        case WarpEngine.cosmic_put("opt_#{node.id}", node, get_optimized_physics(node)) do
           {:ok, :stored, shard, _time} -> {:ok, shard}
           error -> {:error, error}
         end
@@ -182,7 +182,7 @@ defmodule OptimizedWeightedBenchmark do
 
     Logger.info("\n📊 PERFORMANCE COMPARISON")
     Logger.info("-" |> String.duplicate(50))
-    Logger.info("🔧 Raw IsLabDB: #{round(raw.ops_per_sec)} ops/sec")
+    Logger.info("🔧 Raw WarpEngine: #{round(raw.ops_per_sec)} ops/sec")
     Logger.info("🔧 Simple Enhanced ADT: #{round(adt.ops_per_sec)} ops/sec")
     Logger.info("🚀 Optimized Enhanced ADT: #{round(optimized.ops_per_sec)} ops/sec")
 
@@ -227,7 +227,7 @@ defmodule OptimizedWeightedBenchmark do
     Logger.info("2. 🧮 Pre-calculate physics parameters")
     Logger.info("3. 📦 Use simpler data structures")
     Logger.info("4. 🔄 Implement parallel batch operations")
-    Logger.info("5. ⚡ Use direct IsLabDB calls for pure performance")
+    Logger.info("5. ⚡ Use direct WarpEngine calls for pure performance")
 
     # Final assessment
     innovation_score = calculate_final_innovation_score(optimized.ops_per_sec, target_achievement)

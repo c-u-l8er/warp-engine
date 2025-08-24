@@ -3,7 +3,7 @@ defmodule EnhancedADT.QuantumAnalyzer do
   Quantum entanglement analysis and automatic creation for Enhanced ADT.
 
   This module analyzes ADT structures and data relationships to automatically
-  create optimal quantum entanglements in IsLabDB. It provides intelligent
+  create optimal quantum entanglements in WarpEngine. It provides intelligent
   correlation decisions based on mathematical structure analysis and usage patterns.
 
   ## Analysis Features
@@ -457,7 +457,7 @@ defmodule EnhancedADT.QuantumAnalyzer do
       # Calculate entanglement strength based on affinity level
       entanglement_strength = calculate_group_entanglement_strength(affinity_level, entanglements)
 
-      case IsLabDB.create_quantum_entanglement(primary_key, partner_keys, entanglement_strength) do
+      case WarpEngine.create_quantum_entanglement(primary_key, partner_keys, entanglement_strength) do
         {:ok, entanglement_id} ->
           Logger.debug("✅ Quantum entanglement created: #{primary_key} <-> #{inspect(partner_keys)} (strength: #{entanglement_strength})")
           %{

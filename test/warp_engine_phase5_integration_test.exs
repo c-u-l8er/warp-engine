@@ -1,16 +1,16 @@
-defmodule IsLabDBPhase5IntegrationTest do
+defmodule WarpEnginePhase5IntegrationTest do
   use ExUnit.Case, async: false
   require Logger
 
-  alias IsLabDB
+  alias WarpEngine
 
   @moduletag :phase5_integration
 
-    # Helper function to start IsLabDB if not already running
-  defp ensure_islab_db_started() do
+    # Helper function to start WarpEngine if not already running
+  defp ensure_warp_engine_started() do
     # Force stop the application to ensure clean restart
     try do
-      Application.stop(:islab_db)
+      Application.stop(:warp_engine)
     rescue
       _ -> :ok
     end
@@ -18,21 +18,21 @@ defmodule IsLabDBPhase5IntegrationTest do
     Process.sleep(200)
 
     # Start with current configuration
-    Application.ensure_all_started(:islab_db)
+    Application.ensure_all_started(:warp_engine)
     Process.sleep(500)
 
     :ok
   end
 
-            # Helper function to start IsLabDB with entropy monitoring enabled
-  defp ensure_islab_db_started_with_entropy() do
+            # Helper function to start WarpEngine with entropy monitoring enabled
+  defp ensure_warp_engine_started_with_entropy() do
     # Configure for Phase 5 testing (enable entropy monitoring and Phase 4 caches) BEFORE starting
-    Application.put_env(:islab_db, :enable_entropy_monitoring, true)
-    Application.put_env(:islab_db, :disable_phase4, false)  # Ensure caches are enabled
+    Application.put_env(:warp_engine, :enable_entropy_monitoring, true)
+    Application.put_env(:warp_engine, :disable_phase4, false)  # Ensure caches are enabled
 
     # Force stop the application to ensure clean restart
     try do
-      Application.stop(:islab_db)
+      Application.stop(:warp_engine)
     rescue
       _ -> :ok
     end
@@ -40,28 +40,28 @@ defmodule IsLabDBPhase5IntegrationTest do
     Process.sleep(200)
 
     # Start with fresh configuration
-    Application.ensure_all_started(:islab_db)
+    Application.ensure_all_started(:warp_engine)
     Process.sleep(800)  # Give time for entropy monitor to initialize
 
     :ok
   end
 
   setup do
-    # Work with the existing IsLabDB instance from application supervisor
+    # Work with the existing WarpEngine instance from application supervisor
     # No need to stop and restart - just ensure it's running
 
     # Ensure test data directory exists for entropy monitoring
-    File.mkdir_p!("/tmp/islab_db_test_data")
+    File.mkdir_p!("/tmp/warp_engine_test_data")
 
     # Clean up ETS tables
     cleanup_ets_tables()
 
     # Clean up entropy registry if it exists
-    case Process.whereis(IsLabDB.EntropyRegistry) do
+    case Process.whereis(WarpEngine.EntropyRegistry) do
       nil -> :ok
       pid when is_pid(pid) ->
         try do
-          GenServer.stop(IsLabDB.EntropyRegistry, :normal, 1000)
+          GenServer.stop(WarpEngine.EntropyRegistry, :normal, 1000)
         rescue
           _ -> :ok
         catch
@@ -93,16 +93,16 @@ defmodule IsLabDBPhase5IntegrationTest do
     end)
   end
 
-  describe "Phase 5 Integration: IsLabDB with Entropy Monitoring" do
-    test "IsLabDB starts successfully with Phase 5 entropy monitoring enabled" do
-      # Ensure IsLabDB is running with entropy monitoring enabled
-      ensure_islab_db_started_with_entropy()
+  describe "Phase 5 Integration: WarpEngine with Entropy Monitoring" do
+    test "WarpEngine starts successfully with Phase 5 entropy monitoring enabled" do
+      # Ensure WarpEngine is running with entropy monitoring enabled
+      ensure_warp_engine_started_with_entropy()
 
       # Give time for entropy monitor to initialize
       Process.sleep(1000)
 
       # Verify cosmic metrics include entropy information
-      metrics = IsLabDB.cosmic_metrics()
+      metrics = WarpEngine.cosmic_metrics()
 
       assert is_map(metrics)
       assert metrics.phase == "Phase 5: Entropy Monitoring & Thermodynamics"
@@ -113,11 +113,11 @@ defmodule IsLabDBPhase5IntegrationTest do
       assert is_number(metrics.entropy_monitoring.thermodynamic_entropy)
 
       # Clean up
-      case Process.whereis(IsLabDB) do
+      case Process.whereis(WarpEngine) do
         nil -> :ok
         pid when is_pid(pid) ->
           try do
-            GenServer.stop(IsLabDB, :normal, 1000)
+            GenServer.stop(WarpEngine, :normal, 1000)
           rescue
             _ -> :ok
           catch
@@ -128,24 +128,24 @@ defmodule IsLabDBPhase5IntegrationTest do
 
     test "entropy monitoring works with disabled option" do
       # Explicitly disable entropy monitoring for this test
-      Application.put_env(:islab_db, :enable_entropy_monitoring, false)
-      Application.put_env(:islab_db, :disable_phase4, false)  # Allow Phase 4 but disable Phase 5
+      Application.put_env(:warp_engine, :enable_entropy_monitoring, false)
+      Application.put_env(:warp_engine, :disable_phase4, false)  # Allow Phase 4 but disable Phase 5
 
-      # Start IsLabDB with entropy monitoring disabled
-      ensure_islab_db_started()
+      # Start WarpEngine with entropy monitoring disabled
+      ensure_warp_engine_started()
 
-      metrics = IsLabDB.cosmic_metrics()
+      metrics = WarpEngine.cosmic_metrics()
 
       # Should not be Phase 5 and entropy monitoring should be inactive
       assert metrics.phase != "Phase 5: Entropy Monitoring & Thermodynamics"
       assert metrics.entropy_monitoring.monitor_active == false
 
       # Clean up
-      case Process.whereis(IsLabDB) do
+      case Process.whereis(WarpEngine) do
         nil -> :ok
         pid when is_pid(pid) ->
           try do
-            GenServer.stop(IsLabDB, :normal, 1000)
+            GenServer.stop(WarpEngine, :normal, 1000)
           rescue
             _ -> :ok
           catch
@@ -155,13 +155,13 @@ defmodule IsLabDBPhase5IntegrationTest do
     end
 
     test "entropy metrics API works correctly" do
-      ensure_islab_db_started_with_entropy()
+      ensure_warp_engine_started_with_entropy()
 
       # Give time for entropy monitor to initialize
       Process.sleep(1000)
 
       # Test entropy metrics API
-      entropy_metrics = IsLabDB.entropy_metrics()
+      entropy_metrics = WarpEngine.entropy_metrics()
 
       assert is_map(entropy_metrics)
       assert is_number(entropy_metrics.total_entropy)
@@ -171,11 +171,11 @@ defmodule IsLabDBPhase5IntegrationTest do
       assert is_boolean(entropy_metrics.rebalancing_recommended)
 
       # Clean up
-      case Process.whereis(IsLabDB) do
+      case Process.whereis(WarpEngine) do
         nil -> :ok
         pid when is_pid(pid) ->
           try do
-            GenServer.stop(IsLabDB, :normal, 1000)
+            GenServer.stop(WarpEngine, :normal, 1000)
           rescue
             _ -> :ok
           catch
@@ -185,13 +185,13 @@ defmodule IsLabDBPhase5IntegrationTest do
     end
 
     test "entropy rebalancing API works correctly" do
-      ensure_islab_db_started_with_entropy()
+      ensure_warp_engine_started_with_entropy()
 
       # Give time for initialization
       Process.sleep(1000)
 
       # Test entropy rebalancing API
-      result = IsLabDB.trigger_entropy_rebalancing(force_rebalancing: true)
+      result = WarpEngine.trigger_entropy_rebalancing(force_rebalancing: true)
 
       assert {:ok, rebalancing_report} = result
       assert is_map(rebalancing_report)
@@ -201,11 +201,11 @@ defmodule IsLabDBPhase5IntegrationTest do
       assert is_number(rebalancing_report.final_entropy)
 
       # Clean up
-      case Process.whereis(IsLabDB) do
+      case Process.whereis(WarpEngine) do
         nil -> :ok
         pid when is_pid(pid) ->
           try do
-            GenServer.stop(IsLabDB, :normal, 1000)
+            GenServer.stop(WarpEngine, :normal, 1000)
           rescue
             _ -> :ok
           catch
@@ -216,22 +216,22 @@ defmodule IsLabDBPhase5IntegrationTest do
 
     test "entropy monitoring disabled returns appropriate errors" do
       # Explicitly disable entropy monitoring for this test
-      Application.put_env(:islab_db, :enable_entropy_monitoring, false)
-      ensure_islab_db_started()
+      Application.put_env(:warp_engine, :enable_entropy_monitoring, false)
+      ensure_warp_engine_started()
 
       # Should return error when entropy monitoring is disabled
-      entropy_result = IsLabDB.entropy_metrics()
+      entropy_result = WarpEngine.entropy_metrics()
       assert entropy_result.error == "entropy_monitoring_disabled"
 
-      rebalancing_result = IsLabDB.trigger_entropy_rebalancing()
+      rebalancing_result = WarpEngine.trigger_entropy_rebalancing()
       assert rebalancing_result == {:error, :entropy_monitoring_disabled}
 
       # Clean up
-      case Process.whereis(IsLabDB) do
+      case Process.whereis(WarpEngine) do
         nil -> :ok
         pid when is_pid(pid) ->
           try do
-            GenServer.stop(IsLabDB, :normal, 1000)
+            GenServer.stop(WarpEngine, :normal, 1000)
           rescue
             _ -> :ok
           catch
@@ -243,17 +243,17 @@ defmodule IsLabDBPhase5IntegrationTest do
 
   describe "Phase 5 Integration: Entropy Monitoring with Data Operations" do
     setup do
-      ensure_islab_db_started()
+      ensure_warp_engine_started()
 
       # Give time for initialization
       Process.sleep(1500)
 
       on_exit(fn ->
-        case Process.whereis(IsLabDB) do
+        case Process.whereis(WarpEngine) do
           nil -> :ok
           pid when is_pid(pid) ->
             try do
-              GenServer.stop(IsLabDB, :normal, 1000)
+              GenServer.stop(WarpEngine, :normal, 1000)
             rescue
               _ -> :ok
             catch
@@ -265,12 +265,12 @@ defmodule IsLabDBPhase5IntegrationTest do
     end
 
     test "entropy monitoring reacts to data operations" do
-      ensure_islab_db_started_with_entropy()
+      ensure_warp_engine_started_with_entropy()
 
       # Give time for entropy monitor to initialize
       Process.sleep(1000)
       # Get initial entropy
-      initial_entropy = IsLabDB.entropy_metrics()
+      initial_entropy = WarpEngine.entropy_metrics()
       assert is_map(initial_entropy)
       _initial_total = initial_entropy.total_entropy
 
@@ -285,19 +285,19 @@ defmodule IsLabDBPhase5IntegrationTest do
 
       # Store data
       Enum.each(data_operations, fn {key, value} ->
-        assert {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put(key, value)
+        assert {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put(key, value)
       end)
 
       # Retrieve data (affects access patterns)
       Enum.each(data_operations, fn {key, _value} ->
-        assert {:ok, _value, _shard, _time} = IsLabDB.cosmic_get(key)
+        assert {:ok, _value, _shard, _time} = WarpEngine.cosmic_get(key)
       end)
 
       # Give time for entropy monitoring to process changes
       Process.sleep(2000)
 
       # Check entropy after operations
-      final_entropy = IsLabDB.entropy_metrics()
+      final_entropy = WarpEngine.entropy_metrics()
       assert is_map(final_entropy)
 
       # Entropy might have changed due to data distribution changes
@@ -307,7 +307,7 @@ defmodule IsLabDBPhase5IntegrationTest do
     end
 
     test "entropy monitoring tracks system activity over time" do
-      ensure_islab_db_started_with_entropy()
+      ensure_warp_engine_started_with_entropy()
 
       # Give time for entropy monitor to initialize
       Process.sleep(1000)
@@ -318,11 +318,11 @@ defmodule IsLabDBPhase5IntegrationTest do
       |> Enum.each(fn i ->
         key = "burst:#{i}"
         value = %{id: i, timestamp: :os.system_time(), data: :crypto.strong_rand_bytes(100)}
-        IsLabDB.cosmic_put(key, value)
+        WarpEngine.cosmic_put(key, value)
 
         if rem(i, 5) == 0 do
           # Occasionally retrieve data
-          IsLabDB.cosmic_get("burst:#{i-2}")
+          WarpEngine.cosmic_get("burst:#{i-2}")
         end
       end)
 
@@ -330,7 +330,7 @@ defmodule IsLabDBPhase5IntegrationTest do
       Process.sleep(3000)
 
       # Get analytics to see if system tracked the activity
-      metrics = IsLabDB.cosmic_metrics()
+      metrics = WarpEngine.cosmic_metrics()
       entropy_data = metrics.entropy_monitoring
 
       assert entropy_data.monitor_active == true
@@ -341,7 +341,7 @@ defmodule IsLabDBPhase5IntegrationTest do
     end
 
     test "rebalancing affects system entropy" do
-      ensure_islab_db_started_with_entropy()
+      ensure_warp_engine_started_with_entropy()
 
       # Give time for entropy monitor to initialize
       Process.sleep(1000)
@@ -356,24 +356,24 @@ defmodule IsLabDBPhase5IntegrationTest do
 
         key = "rebalance_test:#{i}"
         value = %{shard_hint: shard, data: :crypto.strong_rand_bytes(50)}
-        IsLabDB.cosmic_put(key, value, access_pattern: shard)
+        WarpEngine.cosmic_put(key, value, access_pattern: shard)
       end)
 
       Process.sleep(2000)
 
       # Get entropy before rebalancing
-      before_rebalancing = IsLabDB.entropy_metrics()
+      before_rebalancing = WarpEngine.entropy_metrics()
       _before_entropy = before_rebalancing.total_entropy
 
       # Trigger rebalancing
-      {:ok, rebalance_report} = IsLabDB.trigger_entropy_rebalancing(force_rebalancing: true)
+      {:ok, rebalance_report} = WarpEngine.trigger_entropy_rebalancing(force_rebalancing: true)
       assert is_map(rebalance_report)
 
       # Give time for rebalancing effects
       Process.sleep(1000)
 
       # Check entropy after rebalancing
-      _after_rebalancing = IsLabDB.entropy_metrics()
+      _after_rebalancing = WarpEngine.entropy_metrics()
 
       # Verify rebalancing report shows entropy change
       assert is_number(rebalance_report.initial_entropy)
@@ -386,15 +386,15 @@ defmodule IsLabDBPhase5IntegrationTest do
 
   describe "Phase 5 Integration: Entropy Monitoring with Event Horizon Cache" do
     setup do
-      ensure_islab_db_started()
+      ensure_warp_engine_started()
 
       Process.sleep(1500)
       on_exit(fn ->
-        case Process.whereis(IsLabDB) do
+        case Process.whereis(WarpEngine) do
           nil -> :ok
           pid when is_pid(pid) ->
             try do
-              GenServer.stop(IsLabDB, :normal, 1000)
+              GenServer.stop(WarpEngine, :normal, 1000)
             rescue
               _ -> :ok
             catch
@@ -406,7 +406,7 @@ defmodule IsLabDBPhase5IntegrationTest do
     end
 
     test "entropy monitoring works with caching enabled" do
-      ensure_islab_db_started_with_entropy()
+      ensure_warp_engine_started_with_entropy()
 
       # Give time for entropy monitor to initialize
       Process.sleep(1000)
@@ -417,10 +417,10 @@ defmodule IsLabDBPhase5IntegrationTest do
         value = %{id: i, content: "Test data #{i}"}
 
         # Store data
-        {:ok, :stored, shard, _time} = IsLabDB.cosmic_put(key, value)
+        {:ok, :stored, shard, _time} = WarpEngine.cosmic_put(key, value)
 
         # Immediately retrieve (should populate cache)
-        {:ok, retrieved_value, retrieval_shard, _time} = IsLabDB.cosmic_get(key)
+        {:ok, retrieved_value, retrieval_shard, _time} = WarpEngine.cosmic_get(key)
 
         {key, value, shard, retrieval_shard, retrieved_value == value}
       end)
@@ -435,7 +435,7 @@ defmodule IsLabDBPhase5IntegrationTest do
       Process.sleep(2000)
 
       # Verify entropy monitoring is working with cache system
-      metrics = IsLabDB.cosmic_metrics()
+      metrics = WarpEngine.cosmic_metrics()
 
       assert metrics.phase == "Phase 5: Entropy Monitoring & Thermodynamics"
       assert metrics.entropy_monitoring.monitor_active == true
@@ -454,26 +454,26 @@ defmodule IsLabDBPhase5IntegrationTest do
   describe "Phase 5 Integration: Error Handling and Recovery" do
     test "system survives entropy monitor failures" do
       # Start system without entropy monitoring to simulate a failure scenario
-      Application.put_env(:islab_db, :enable_entropy_monitoring, false)
-      ensure_islab_db_started()
+      Application.put_env(:warp_engine, :enable_entropy_monitoring, false)
+      ensure_warp_engine_started()
 
       Process.sleep(500)
 
       # Verify normal operation still works without entropy monitoring
-      assert {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put("test:key", %{value: "test"})
-      assert {:ok, _value, _shard, _time} = IsLabDB.cosmic_get("test:key")
-      assert {:ok, :stored, _shard, _time} = IsLabDB.cosmic_put("test:key2", %{value: "test2"})
+      assert {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put("test:key", %{value: "test"})
+      assert {:ok, _value, _shard, _time} = WarpEngine.cosmic_get("test:key")
+      assert {:ok, :stored, _shard, _time} = WarpEngine.cosmic_put("test:key2", %{value: "test2"})
 
       # Entropy metrics should handle the unavailability gracefully
-      entropy_result = IsLabDB.entropy_metrics()
+      entropy_result = WarpEngine.entropy_metrics()
       assert entropy_result.error == "entropy_monitoring_disabled"
 
       # Clean up
-      case Process.whereis(IsLabDB) do
+      case Process.whereis(WarpEngine) do
         nil -> :ok
         pid when is_pid(pid) ->
           try do
-            GenServer.stop(IsLabDB, :normal, 1000)
+            GenServer.stop(WarpEngine, :normal, 1000)
           rescue
             _ -> :ok
           catch
@@ -484,21 +484,21 @@ defmodule IsLabDBPhase5IntegrationTest do
 
     test "cosmic metrics gracefully handle entropy monitor unavailability" do
       # Start without entropy monitoring
-      Application.put_env(:islab_db, :enable_entropy_monitoring, false)
-      ensure_islab_db_started()
+      Application.put_env(:warp_engine, :enable_entropy_monitoring, false)
+      ensure_warp_engine_started()
 
-      metrics = IsLabDB.cosmic_metrics()
+      metrics = WarpEngine.cosmic_metrics()
 
       # Should include entropy monitoring section but show as inactive
       assert is_map(metrics.entropy_monitoring)
       assert metrics.entropy_monitoring.monitor_active == false
 
       # Clean up
-      case Process.whereis(IsLabDB) do
+      case Process.whereis(WarpEngine) do
         nil -> :ok
         pid when is_pid(pid) ->
           try do
-            GenServer.stop(IsLabDB, :normal, 1000)
+            GenServer.stop(WarpEngine, :normal, 1000)
           rescue
             _ -> :ok
           catch
@@ -511,20 +511,20 @@ defmodule IsLabDBPhase5IntegrationTest do
   describe "Phase 5 Integration: Performance Impact" do
     test "entropy monitoring has minimal performance impact" do
       # Test without entropy monitoring
-      ensure_islab_db_started()
+      ensure_warp_engine_started()
 
       {time_without, _} = :timer.tc(fn ->
         1..100 |> Enum.each(fn i ->
-          IsLabDB.cosmic_put("perf_test:#{i}", %{value: i})
-          IsLabDB.cosmic_get("perf_test:#{i}")
+          WarpEngine.cosmic_put("perf_test:#{i}", %{value: i})
+          WarpEngine.cosmic_get("perf_test:#{i}")
         end)
       end)
 
-      case Process.whereis(IsLabDB) do
+      case Process.whereis(WarpEngine) do
         nil -> :ok
         pid when is_pid(pid) ->
           try do
-            GenServer.stop(IsLabDB, :normal, 1000)
+            GenServer.stop(WarpEngine, :normal, 1000)
           rescue
             _ -> :ok
           catch
@@ -534,14 +534,14 @@ defmodule IsLabDBPhase5IntegrationTest do
       Process.sleep(200)
 
       # Test with entropy monitoring
-      ensure_islab_db_started()
+      ensure_warp_engine_started()
 
       Process.sleep(500) # Let it initialize
 
       {time_with, _} = :timer.tc(fn ->
         1..100 |> Enum.each(fn i ->
-          IsLabDB.cosmic_put("perf_test:#{i}", %{value: i})
-          IsLabDB.cosmic_get("perf_test:#{i}")
+          WarpEngine.cosmic_put("perf_test:#{i}", %{value: i})
+          WarpEngine.cosmic_get("perf_test:#{i}")
         end)
       end)
 
@@ -551,11 +551,11 @@ defmodule IsLabDBPhase5IntegrationTest do
 
       Logger.info("Phase 5 performance impact: #{Float.round(performance_impact * 100, 2)}%")
 
-      case Process.whereis(IsLabDB) do
+      case Process.whereis(WarpEngine) do
         nil -> :ok
         pid when is_pid(pid) ->
           try do
-            GenServer.stop(IsLabDB, :normal, 1000)
+            GenServer.stop(WarpEngine, :normal, 1000)
           rescue
             _ -> :ok
           catch

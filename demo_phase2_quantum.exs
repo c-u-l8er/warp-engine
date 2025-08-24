@@ -1,25 +1,25 @@
 #!/usr/bin/env elixir
 
-# 🌌 IsLab Database Phase 2: Quantum Entanglement Demo
+# 🌌 WarpEngine Database Phase 2: Quantum Entanglement Demo
 # This script demonstrates the new quantum entanglement features
 
-# Mix.install([{:islab_db, path: "."}])
+# Mix.install([{:warp_engine, path: "."}])
 
 IO.puts """
 🌌 ═══════════════════════════════════════════════════════════════
-   IsLab Database - Phase 2: Quantum Entanglement Engine Demo
+   WarpEngine Database - Phase 2: Quantum Entanglement Engine Demo
 ═══════════════════════════════════════════════════════════════ 🌌
 
 Welcome to the physics-inspired database with quantum entanglement!
 """
 
 # Set up data directory first
-demo_data_dir = "/tmp/islab_demo_quantum"
-Application.put_env(:islab_db, :data_root, demo_data_dir)
+demo_data_dir = "/tmp/warp_engine_demo_quantum"
+Application.put_env(:warp_engine, :data_root, demo_data_dir)
 
-# Start the IsLab Database universe
+# Start the WarpEngine Database universe
 IO.puts "🚀 Initializing the computational universe..."
-case IsLabDB.start_link([data_root: demo_data_dir]) do
+case WarpEngine.start_link([data_root: demo_data_dir]) do
   {:ok, _pid} ->
     IO.puts "✨ Started new universe instance"
   {:error, {:already_started, _pid}} ->
@@ -43,17 +43,17 @@ IO.puts "─" |> String.duplicate(50)
 # Store some basic user data
 IO.puts "Storing user data across spacetime shards..."
 
-{:ok, :stored, shard1, time1} = IsLabDB.cosmic_put("user:alice",
+{:ok, :stored, shard1, time1} = WarpEngine.cosmic_put("user:alice",
   %{name: "Alice", role: "engineer", age: 30})
 
-{:ok, :stored, shard2, time2} = IsLabDB.cosmic_put("user:bob",
+{:ok, :stored, shard2, time2} = WarpEngine.cosmic_put("user:bob",
   %{name: "Bob", role: "designer", age: 28})
 
 IO.puts "✅ Alice stored in #{shard1} shard (#{time1}μs)"
 IO.puts "✅ Bob stored in #{shard2} shard (#{time2}μs)"
 
 # Basic retrieval
-{:ok, alice_data, alice_shard, get_time} = IsLabDB.cosmic_get("user:alice")
+{:ok, alice_data, alice_shard, get_time} = WarpEngine.cosmic_get("user:alice")
 IO.puts "📖 Retrieved Alice from #{alice_shard}: #{inspect(alice_data)} (#{get_time}μs)\n"
 
 # ═══════════════════════════════════════════════════════════════
@@ -67,26 +67,26 @@ IO.puts "─" |> String.duplicate(50)
 IO.puts "Creating quantum-entangled data relationships..."
 
 # Alice's extended profile
-IsLabDB.cosmic_put("profile:alice",
+WarpEngine.cosmic_put("profile:alice",
   %{bio: "Senior Software Engineer", avatar: "alice.jpg", skills: ["Elixir", "Physics", "Quantum Computing"]})
 
-IsLabDB.cosmic_put("settings:alice",
+WarpEngine.cosmic_put("settings:alice",
   %{theme: "cosmic-dark", notifications: true, language: "en"})
 
-IsLabDB.cosmic_put("sessions:alice",
+WarpEngine.cosmic_put("sessions:alice",
   %{active: true, last_login: "2025-01-15T14:30:00Z", devices: ["laptop", "phone"]})
 
 # Bob's extended profile
-IsLabDB.cosmic_put("profile:bob",
+WarpEngine.cosmic_put("profile:bob",
   %{bio: "UX Designer", avatar: "bob.jpg", skills: ["Design", "Psychology", "Art"]})
 
-IsLabDB.cosmic_put("settings:bob",
+WarpEngine.cosmic_put("settings:bob",
   %{theme: "light", notifications: false, language: "en"})
 
 # Manual quantum entanglement creation
 IO.puts "\n🔗 Creating manual quantum entanglement for Alice's data..."
 
-{:ok, entanglement_id} = IsLabDB.create_quantum_entanglement("user:alice",
+{:ok, entanglement_id} = WarpEngine.create_quantum_entanglement("user:alice",
   ["profile:alice", "settings:alice", "sessions:alice"],
   0.95)  # Very strong entanglement
 
@@ -97,10 +97,10 @@ IO.puts "\n🎯 Demonstrating automatic entanglement patterns..."
 IO.puts "   (User data automatically entangles with profile, settings, and sessions)"
 
 # Create a new user - should trigger automatic patterns
-IsLabDB.cosmic_put("user:charlie",
+WarpEngine.cosmic_put("user:charlie",
   %{name: "Charlie", role: "physicist", age: 32})
 
-IsLabDB.cosmic_put("profile:charlie",
+WarpEngine.cosmic_put("profile:charlie",
   %{bio: "Quantum Physicist", avatar: "charlie.jpg", skills: ["Quantum Mechanics", "Mathematics"]})
 
 :timer.sleep(200)  # Give pattern application time to complete
@@ -113,12 +113,12 @@ IO.puts "\n⚛️  QUANTUM OBSERVATION: Smart Data Retrieval"
 IO.puts "─" |> String.duplicate(50)
 
 IO.puts "🔬 Basic retrieval (Phase 1 style):"
-{:ok, basic_alice, basic_shard, basic_time} = IsLabDB.cosmic_get("user:alice")
+{:ok, basic_alice, basic_shard, basic_time} = WarpEngine.cosmic_get("user:alice")
 IO.puts "   Retrieved Alice: #{inspect(basic_alice)}"
 IO.puts "   From shard: #{basic_shard}, Time: #{basic_time}μs"
 
 IO.puts "\n🌟 Quantum retrieval (Phase 2 style):"
-{:ok, quantum_response} = IsLabDB.quantum_get("user:alice")
+{:ok, quantum_response} = WarpEngine.quantum_get("user:alice")
 
 IO.puts "   Primary Data: #{inspect(quantum_response.value)}"
 IO.puts "   From shard: #{quantum_response.shard}, Time: #{quantum_response.operation_time}μs"
@@ -146,7 +146,7 @@ IO.puts "\n📊 QUANTUM SYSTEM METRICS"
 IO.puts "─" |> String.duplicate(50)
 
 # Get comprehensive universe metrics
-metrics = IsLabDB.cosmic_metrics()
+metrics = WarpEngine.cosmic_metrics()
 
 IO.puts "🌌 Universe Status: #{metrics.universe_state}"
 IO.puts "⏱️  Uptime: #{metrics.uptime_ms}ms"
@@ -158,7 +158,7 @@ Enum.each(metrics.spacetime_regions, fn region ->
 end)
 
 # Quantum entanglement statistics
-quantum_stats = IsLabDB.quantum_entanglement_metrics()
+quantum_stats = WarpEngine.quantum_entanglement_metrics()
 IO.puts "\n⚛️  Quantum Entanglement Statistics:"
 IO.puts "   Total entanglements: #{quantum_stats.total_entanglements}"
 IO.puts "   Quantum relationships: #{quantum_stats.total_quantum_relationships}"
@@ -176,12 +176,12 @@ IO.puts "─" |> String.duplicate(50)
 
 # Benchmark basic vs quantum retrieval
 basic_times = for _i <- 1..10 do
-  {time, _result} = :timer.tc(fn -> IsLabDB.cosmic_get("user:alice") end)
+  {time, _result} = :timer.tc(fn -> WarpEngine.cosmic_get("user:alice") end)
   time
 end
 
 quantum_times = for _i <- 1..10 do
-  {time, _result} = :timer.tc(fn -> IsLabDB.quantum_get("user:alice") end)
+  {time, _result} = :timer.tc(fn -> WarpEngine.quantum_get("user:alice") end)
   time
 end
 
@@ -200,14 +200,14 @@ IO.puts "💡 BUT: Quantum retrieval gets #{quantum_response.quantum_data.entang
 IO.puts "\n📁 FILESYSTEM PERSISTENCE"
 IO.puts "─" |> String.duplicate(50)
 
-IO.puts "🗂️  Cosmic filesystem structure created at: /tmp/islab_demo_quantum"
+IO.puts "🗂️  Cosmic filesystem structure created at: /tmp/warp_engine_demo_quantum"
 IO.puts "📋 Key directories:"
 
 key_dirs = [
-  "/tmp/islab_demo_quantum/universe.manifest",
-  "/tmp/islab_demo_quantum/spacetime/hot_data/quantum_indices/",
-  "/tmp/islab_demo_quantum/spacetime/warm_data/particles/user/",
-  "/tmp/islab_demo_quantum/spacetime/cold_data/particles/"
+  "/tmp/warp_engine_demo_quantum/universe.manifest",
+  "/tmp/warp_engine_demo_quantum/spacetime/hot_data/quantum_indices/",
+  "/tmp/warp_engine_demo_quantum/spacetime/warm_data/particles/user/",
+  "/tmp/warp_engine_demo_quantum/spacetime/cold_data/particles/"
 ]
 
 Enum.each(key_dirs, fn dir ->
@@ -220,9 +220,9 @@ end)
 
 # Show some quantum indices if they exist
 quantum_files = [
-  "/tmp/islab_demo_quantum/spacetime/hot_data/quantum_indices/entanglements.json",
-  "/tmp/islab_demo_quantum/spacetime/warm_data/quantum_indices/entanglements.json",
-  "/tmp/islab_demo_quantum/spacetime/cold_data/quantum_indices/entanglements.json"
+  "/tmp/warp_engine_demo_quantum/spacetime/hot_data/quantum_indices/entanglements.json",
+  "/tmp/warp_engine_demo_quantum/spacetime/warm_data/quantum_indices/entanglements.json",
+  "/tmp/warp_engine_demo_quantum/spacetime/cold_data/quantum_indices/entanglements.json"
 ]
 
 quantum_file = Enum.find(quantum_files, &File.exists?/1)
@@ -270,7 +270,7 @@ IO.puts """
    🚀 Next: Phase 3 will add Spacetime Sharding with gravitational routing
    🌌 Making databases as elegant as the universe itself!
 
-Thanks for exploring the quantum-enhanced IsLab Database! 🌟
+Thanks for exploring the quantum-enhanced WarpEngine Database! 🌟
 """
 
-IO.puts "\n🧹 Demo cleanup: /tmp/islab_demo_quantum directory can be safely deleted.\n"
+IO.puts "\n🧹 Demo cleanup: /tmp/warp_engine_demo_quantum directory can be safely deleted.\n"

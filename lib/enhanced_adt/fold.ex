@@ -1,9 +1,9 @@
 defmodule EnhancedADT.Fold do
   @moduledoc """
-  Fold operations for Enhanced ADT with automatic IsLabDB integration.
+  Fold operations for Enhanced ADT with automatic WarpEngine integration.
 
   Fold operations provide pattern matching over ADT structures while automatically
-  translating to optimized IsLabDB operations. Mathematical fold expressions become
+  translating to optimized WarpEngine operations. Mathematical fold expressions become
   intelligent database commands with physics optimization.
 
   ## Automatic Translation Features
@@ -17,10 +17,10 @@ defmodule EnhancedADT.Fold do
   ## Example Usage
 
   ```elixir
-  # Simple fold with automatic IsLabDB storage
+  # Simple fold with automatic WarpEngine storage
   fold user do
     User(id, name, preferences, score) ->
-      # Automatically becomes: IsLabDB.cosmic_put("user:\#{id}", user, physics_context)
+      # Automatically becomes: WarpEngine.cosmic_put("user:\#{id}", user, physics_context)
       store_user_with_physics(id, name, preferences, score)
   end
 
@@ -35,7 +35,7 @@ defmodule EnhancedADT.Fold do
   """
 
   @doc """
-  Mathematical fold operation with automatic IsLabDB integration.
+  Mathematical fold operation with automatic WarpEngine integration.
 
   This macro transforms mathematical pattern matching into intelligent database
   operations while preserving the elegance of functional programming.
@@ -196,7 +196,7 @@ defmodule EnhancedADT.Fold do
     }
   end
 
-  # Enhanced clause generation with IsLabDB integration and elegant pattern transformation
+  # Enhanced clause generation with WarpEngine integration and elegant pattern transformation
   defp enhance_fold_clauses(clauses, clause_analysis, config) do
     case clauses do
       {:__block__, _, clause_list} ->
@@ -221,10 +221,10 @@ defmodule EnhancedADT.Fold do
     # Transform elegant ADT patterns to proper Elixir patterns
     transformed_patterns = Enum.map(pattern_list, &transform_adt_pattern/1)
 
-    # Generate enhanced clause with IsLabDB integration
+    # Generate enhanced clause with WarpEngine integration
     enhanced_body = if analysis.adt_operations.has_storage_operations or
                       analysis.adt_operations.has_retrieval_operations do
-      inject_islab_operations(body, analysis, config)
+      inject_warp_engine_operations(body, analysis, config)
     else
       body
     end
@@ -253,8 +253,8 @@ defmodule EnhancedADT.Fold do
     {:->, meta, [transformed_patterns, final_body]}
   end
 
-  defp inject_islab_operations(body, analysis, config) do
-    # Inject IsLabDB operations based on detected patterns
+  defp inject_warp_engine_operations(body, analysis, config) do
+    # Inject WarpEngine operations based on detected patterns
     quote do
       # Automatic physics context generation
       physics_context = generate_physics_context_from_analysis(
@@ -262,11 +262,11 @@ defmodule EnhancedADT.Fold do
         unquote(Macro.escape(config))
       )
 
-      # Enhanced body with IsLabDB integration
-      islab_enhanced_result = unquote(body)
+      # Enhanced body with WarpEngine integration
+      warp_engine_enhanced_result = unquote(body)
 
-      # Post-processing for IsLabDB optimization
-      optimize_islab_result(islab_enhanced_result, physics_context)
+      # Post-processing for WarpEngine optimization
+      optimize_warp_engine_result(warp_engine_enhanced_result, physics_context)
     end
   end
 
@@ -337,8 +337,8 @@ defmodule EnhancedADT.Fold do
     Map.merge(base_context, config.physics_override)
   end
 
-  def optimize_islab_result(result, _physics_context) do
-    # Post-process result for IsLabDB optimization
+  def optimize_warp_engine_result(result, _physics_context) do
+    # Post-process result for WarpEngine optimization
     # This is where we could add additional intelligence
     result
   end

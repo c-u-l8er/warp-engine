@@ -3,11 +3,11 @@
 # Phase 5 Verification Script - Quick Demo
 # Verifies that Phase 5: Entropy Monitoring & Thermodynamics is working correctly
 
-# Ensure IsLabDB application is started
+# Ensure WarpEngine application is started
 
 defmodule Phase5Verification do
   require Logger
-  alias IsLabDB
+  alias WarpEngine
 
   def run_verification() do
     IO.puts("""
@@ -19,16 +19,16 @@ defmodule Phase5Verification do
     Verifying Phase 5 implementation is working correctly...
     """)
 
-    # Step 1: Check if IsLabDB is running with Phase 5 enabled
-    IO.puts("🚀 Step 1: Checking IsLabDB with entropy monitoring...")
+    # Step 1: Check if WarpEngine is running with Phase 5 enabled
+    IO.puts("🚀 Step 1: Checking WarpEngine with entropy monitoring...")
 
-    # IsLabDB is already started by the application, so just verify it's running
-    case Process.whereis(IsLabDB) do
+    # WarpEngine is already started by the application, so just verify it's running
+    case Process.whereis(WarpEngine) do
       nil ->
-        IO.puts("   ❌ IsLabDB not running")
+        IO.puts("   ❌ WarpEngine not running")
         cleanup_and_exit()
       _pid ->
-        IO.puts("   ✅ IsLabDB is running with Phase 5 enabled")
+        IO.puts("   ✅ WarpEngine is running with Phase 5 enabled")
     end
 
     # Give time for entropy monitor to initialize
@@ -37,7 +37,7 @@ defmodule Phase5Verification do
     # Step 2: Verify entropy monitoring is active
     IO.puts("\n📊 Step 2: Verifying entropy monitoring system...")
 
-    metrics = IsLabDB.cosmic_metrics()
+    metrics = WarpEngine.cosmic_metrics()
 
     if metrics.phase == "Phase 5: Entropy Monitoring & Thermodynamics" do
       IO.puts("   ✅ Phase 5 confirmed active")
@@ -56,7 +56,7 @@ defmodule Phase5Verification do
     # Step 3: Test entropy metrics API
     IO.puts("\n🔬 Step 3: Testing entropy metrics API...")
 
-    entropy_metrics = IsLabDB.entropy_metrics()
+    entropy_metrics = WarpEngine.entropy_metrics()
 
     if is_map(entropy_metrics) and is_number(entropy_metrics.total_entropy) do
       IO.puts("   ✅ Entropy metrics API working")
@@ -83,7 +83,7 @@ defmodule Phase5Verification do
     ]
 
     Enum.each(test_operations, fn {key, value} ->
-      case IsLabDB.cosmic_put(key, value) do
+      case WarpEngine.cosmic_put(key, value) do
         {:ok, :stored, _shard, _time} -> :ok
         error ->
           IO.puts("   ❌ Failed to store #{key}: #{inspect(error)}")
@@ -93,7 +93,7 @@ defmodule Phase5Verification do
 
     # Retrieve the data
     retrieved_count = Enum.count(test_operations, fn {key, expected_value} ->
-      case IsLabDB.cosmic_get(key) do
+      case WarpEngine.cosmic_get(key) do
         {:ok, retrieved_value, _shard, _time} ->
           retrieved_value == expected_value
         _ ->
@@ -111,7 +111,7 @@ defmodule Phase5Verification do
     # Step 5: Test thermodynamic rebalancing
     IO.puts("\n⚖️  Step 5: Testing thermodynamic rebalancing...")
 
-    case IsLabDB.trigger_entropy_rebalancing(force_rebalancing: true, migration_strategy: :minimal) do
+    case WarpEngine.trigger_entropy_rebalancing(force_rebalancing: true, migration_strategy: :minimal) do
       {:ok, rebalance_report} ->
         IO.puts("   ✅ Thermodynamic rebalancing successful")
         IO.puts("   • Strategy: #{rebalance_report.strategy}")
@@ -128,7 +128,7 @@ defmodule Phase5Verification do
 
     # Measure entropy calculation time
     {entropy_time, _result} = :timer.tc(fn ->
-      IsLabDB.entropy_metrics()
+      WarpEngine.entropy_metrics()
     end)
 
     entropy_ms = entropy_time / 1000
@@ -142,7 +142,7 @@ defmodule Phase5Verification do
     # Step 7: Final verification
     IO.puts("\n🎯 Step 7: Final system verification...")
 
-    final_metrics = IsLabDB.cosmic_metrics()
+    final_metrics = WarpEngine.cosmic_metrics()
 
     verification_results = [
       {"Phase 5 Active", final_metrics.phase == "Phase 5: Entropy Monitoring & Thermodynamics"},
@@ -195,7 +195,7 @@ defmodule Phase5Verification do
   end
 
   defp cleanup_system() do
-    IO.puts("\n🧹 Verification complete - IsLabDB remains running")
+    IO.puts("\n🧹 Verification complete - WarpEngine remains running")
     IO.puts("   ✅ Phase 5 verification finished successfully")
   end
 end
