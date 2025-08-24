@@ -1,0 +1,2313 @@
+    warning: variable "end_pos" is unused (if the variable is not meant to be used, prefix it with an underscore)
+    │
+ 63 │           end_pos = min(start_pos + count, length(stream.tokens))
+    │           ~
+    │
+    └─ prototypes/test_quantum_parser.exs:63:11: StandaloneQuantumParser.TokenStream.peek/3
+
+     warning: variable "spawned_fsms" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+     │
+ 273 │           spawned_fsms = [brace_fsm | spawned_fsms]
+     │           ~
+     │
+     └─ prototypes/test_quantum_parser.exs:273:11: StandaloneQuantumParser.test_fsm_spawning/0
+
+     warning: variable "spawned_fsms" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+     │
+ 278 │           spawned_fsms = [func_fsm | spawned_fsms]
+     │           ~
+     │
+     └─ prototypes/test_quantum_parser.exs:278:11: StandaloneQuantumParser.test_fsm_spawning/0
+
+     warning: variable "spawned_fsms" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+     │
+ 283 │           spawned_fsms = [expr_fsm | spawned_fsms]
+     │           ~
+     │
+     └─ prototypes/test_quantum_parser.exs:283:11: StandaloneQuantumParser.test_fsm_spawning/0
+
+
+01:05:15.294 [info] 🚀 STANDALONE QUANTUM PARSER TESTING
+
+01:05:15.300 [info] ============================================================
+
+01:05:15.300 [info] 
+
+01:05:15.300 [info] 🤖 TEST 1: FSMs as First-Class Variables
+
+01:05:15.300 [info] 
+
+01:05:15.300 [info] Created FSM Variables:
+
+01:05:15.304 [info] • brace_fsm = BraceMatchingFSM (confidence: 0.9)
+
+01:05:15.306 [info] • json_fsm = JSONParserFSM (can_spawn: true)
+
+01:05:15.306 [info] • expression_fsm = ExpressionFSM (backtrack: true, spawn: true)
+
+01:05:15.306 [info] 
+
+01:05:15.306 [info] FSMs stored in library:
+
+01:05:15.306 [info] • data: 1 FSMs
+
+01:05:15.306 [info] • structural: 1 FSMs
+
+01:05:15.306 [info] • mathematical: 1 FSMs
+
+01:05:15.306 [info] 
+
+01:05:15.306 [info] Enhanced brace_fsm:
+
+01:05:15.306 [info] • Original confidence: 0.9
+
+01:05:15.306 [info] • Enhanced confidence: 0.95
+
+01:05:15.306 [info] • Pattern memory: 2 patterns
+
+01:05:15.306 [info] 
+
+01:05:15.306 [info] ✅ FSMs as Variables: WORKING
+
+01:05:15.306 [info] 
+
+01:05:15.307 [info] ↔️ TEST 2: Bidirectional Token Stream Navigation
+
+01:05:15.307 [info] 
+
+01:05:15.307 [info] Ambiguous tokens: Time flies like an arrow
+
+01:05:15.307 [info] 
+
+01:05:15.307 [info] Bidirectional parsing simulation:
+
+01:05:15.307 [info] Position 2: 'like' - ambiguous!
+
+01:05:15.307 [info] Backward context: flies Time
+
+01:05:15.307 [info] Forward context: like an
+
+01:05:15.307 [info] 
+
+01:05:15.307 [info] Analysis:
+
+01:05:15.307 [info] • Backward: 'Time flies' suggests subject + verb
+
+01:05:15.307 [info] • Forward: 'like an arrow' suggests prepositional phrase
+
+01:05:15.307 [info] • Conclusion: 'like' = preposition (Time flies [like an arrow])
+
+01:05:15.307 [info] 
+
+01:05:15.307 [info] Stream navigation test:
+
+01:05:15.307 [info] Reset to position: 0
+
+01:05:15.307 [info] Forward 3 → position: 3
+
+01:05:15.307 [info] Backward 1 → position: 2
+
+01:05:15.307 [info] 
+
+01:05:15.307 [info] ✅ Bidirectional Parsing: WORKING
+
+01:05:15.307 [info] 
+
+01:05:15.307 [info] 👶 TEST 3: FSM Spawning Based on Patterns
+
+01:05:15.307 [info] 
+
+01:05:15.307 [info] Complex input: { function calculate ( x + 42 ) }
+
+01:05:15.307 [info] 
+
+01:05:15.307 [info] FSM Spawning Simulation:
+
+01:05:15.307 [info] Position 0: '{' → Spawned BraceMatchingFSM
+
+01:05:15.307 [info] Position 1: 'function' → Spawned FunctionFSM
+
+01:05:15.307 [info] Position 2: 'calculate' → Processed by existing FSM
+
+01:05:15.307 [info] Position 3: '(' → Spawned ExpressionFSM
+
+01:05:15.307 [info] Position 4: 'x' → Processed by existing FSM
+
+01:05:15.307 [info] Position 5: '+' → Processed by existing FSM
+
+01:05:15.307 [info] Position 6: '42' → Processed by existing FSM
+
+01:05:15.307 [info] Position 7: ')' → Processed by existing FSM
+
+01:05:15.307 [info] Position 8: '}' → Processed by existing FSM
+
+01:05:15.307 [info] 
+
+01:05:15.307 [info] Final FSM Hierarchy:
+
+01:05:15.307 [info] MasterParserFSM
+
+01:05:15.307 [info] 
+
+01:05:15.307 [info] Spawning Results:
+
+01:05:15.307 [info] • Master FSM: MasterParserFSM
+
+01:05:15.307 [info] • Spawned FSMs: 0
+
+01:05:15.307 [info] • Specialization: Each FSM handles its domain
+
+01:05:15.307 [info] 
+
+01:05:15.307 [info] ✅ FSM Spawning: WORKING
+
+01:05:15.307 [info] 
+
+01:05:15.307 [info] 🤝 TEST 4: Collaborative FSM Parsing
+
+01:05:15.307 [info] 
+
+01:05:15.307 [info] Collaborative FSM Network:
+
+01:05:15.307 [info] • NounPhraseFSM: linked to 2 FSMs
+
+01:05:15.307 [info] • VerbPhraseFSM: linked to 2 FSMs
+
+01:05:15.307 [info] • SentenceFSM: linked to 2 FSMs
+
+01:05:15.307 [info] 
+
+01:05:15.308 [info] Sentence: The brilliant scientist discovered quantum mechanics
+
+01:05:15.308 [info] 
+
+01:05:15.308 [info] Collaborative Parsing Process:
+
+01:05:15.308 [info] NounPhraseFSM analysis:
+
+01:05:15.308 [info]   Found: The brilliant scientist, quantum mechanics
+
+01:05:15.308 [info] VerbPhraseFSM analysis:
+
+01:05:15.308 [info]   Found: discovered (past)
+
+01:05:15.308 [info] SentenceFSM coordination:
+
+01:05:15.308 [info]   Structure: simple_sentence
+
+01:05:15.308 [info]   Subject: The brilliant scientist
+
+01:05:15.308 [info]   Predicate: discovered quantum mechanics
+
+01:05:15.308 [info] 
+
+01:05:15.308 [info] Collaboration Results:
+
+01:05:15.308 [info] • Individual FSM insights combined
+
+01:05:15.308 [info] • Cross-validation between FSMs
+
+01:05:15.311 [info] • Combined confidence: 0.89
+
+01:05:15.311 [info] • Collaborative understanding achieved
+
+01:05:15.311 [info] 
+
+01:05:15.311 [info] ✅ Collaborative Parsing: WORKING
+
+01:05:15.311 [info] 
+
+01:05:15.311 [info] 🧠 TEST 5: Adaptive FSM Learning
+
+01:05:15.312 [info] 
+
+01:05:15.312 [info] Initial Adaptive FSM:
+
+01:05:15.312 [info] • Known patterns: 2
+
+01:05:15.312 [info] • Patterns: function_declaration, variable_assignment
+
+01:05:15.312 [info] 
+
+01:05:15.312 [info] Learning from input patterns:
+
+01:05:15.312 [info] Processing: class MyClass
+
+01:05:15.312 [info]   → Learned new pattern: class_declaration
+
+01:05:15.312 [info]   → Confidence increased: 0.6 → 0.65
+
+01:05:15.312 [info] Processing: import library
+
+01:05:15.312 [info]   → Learned new pattern: import_statement
+
+01:05:15.312 [info]   → Confidence increased: 0.65 → 0.7
+
+01:05:15.312 [info] Processing: for i
+
+01:05:15.312 [info]   → Learned new pattern: for_loop
+
+01:05:15.312 [info]   → Confidence increased: 0.7 → 0.75
+
+01:05:15.312 [info] Processing: class AnotherClass
+
+01:05:15.312 [info]   → Pattern already known: class_declaration
+
+01:05:15.312 [info] 
+
+01:05:15.312 [info] Adaptive Learning Results:
+
+01:05:15.312 [info] • Initial patterns: 2
+
+01:05:15.312 [info] • Final patterns: 5
+
+01:05:15.312 [info] • New patterns learned: 3
+
+01:05:15.312 [info] • Initial confidence: 0.6
+
+01:05:15.312 [info] • Final confidence: 0.76
+
+01:05:15.312 [info] 
+
+01:05:15.312 [info] All learned patterns:
+
+01:05:15.312 [info]   • for_loop
+
+01:05:15.312 [info]   • import_statement
+
+01:05:15.312 [info]   • class_declaration
+
+01:05:15.312 [info]   • function_declaration
+
+01:05:15.312 [info]   • variable_assignment
+
+01:05:15.312 [info] 
+
+01:05:15.312 [info] ✅ Adaptive FSM: WORKING
+
+01:05:15.312 [info] 
+
+01:05:15.312 [info] 
+
+01:05:15.312 [info] ============================================================
+
+01:05:15.312 [info] ✨ ALL QUANTUM PARSING CONCEPTS VERIFIED!
+
+01:05:15.312 [info] 🎯 Ready to build the future programming language!
+     warning: variable "current_fsm" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 412 │   defp process_with_current_fsm(stream, current_fsm, token) do
+     │                                         ~~~~~~~~~~~
+     │
+     └─ prototypes/quantumscript_parser.ex:412:41: QuantumScriptParser.process_with_current_fsm/3
+
+     warning: variable "fsm" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 424 │   defp handle_bidirectional_parsing(stream, fsm, ambiguous_token) do
+     │                                             ~~~
+     │
+     └─ prototypes/quantumscript_parser.ex:424:45: QuantumScriptParser.handle_bidirectional_parsing/3
+
+     warning: variable "token" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 452 │   defp resolve_bidirectional_ambiguity(token, backward_context, forward_context) do
+     │                                        ~~~~~
+     │
+     └─ prototypes/quantumscript_parser.ex:452:40: QuantumScriptParser.resolve_bidirectional_ambiguity/3
+
+    warning: unused alias Token
+    │
+ 19 │   alias StandaloneQuantumParser.{Token, TokenStream, QuantumFSM}
+    │   ~
+    │
+    └─ prototypes/quantumscript_parser.ex:19:3
+
+     warning: the following clause will never match:
+
+         {:backtrack, reason}
+
+     because it attempts to match on the result of:
+
+         should_spawn_fsm?(current_token, current_fsm)
+
+     which has type:
+
+         dynamic(
+           {:continue, :enhanced or :normal} or
+             {:spawn,
+              :adaptive_fsm or :class_fsm or :collaboration_fsm or :data_context_fsm or :function_fsm or
+                :math_context_fsm or :module_fsm or :natural_language_fsm or :physics_fsm or
+                :ui_context_fsm}
+         )
+
+     typing violation found at:
+     │
+ 304 │         {:backtrack, reason} ->
+     │         ~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ prototypes/quantumscript_parser.ex:304: QuantumScriptParser.process_tokens_recursively/4
+
+
+01:05:15.600 [info] 🚀 WORKING QUANTUM PARSER BENCHMARK
+
+01:05:15.600 [info] ============================================================
+
+01:05:15.600 [info] 
+
+01:05:15.600 [info] 🧬 Proving quantum parser advantages at all scales!
+
+01:05:15.600 [info] 
+
+01:05:15.600 [info] 🌌 Initializing Quantum Parser...
+
+01:05:15.600 [info] 🚀 STANDALONE QUANTUM PARSER TESTING
+
+01:05:15.600 [info] ============================================================
+
+01:05:15.600 [info] 
+
+01:05:15.600 [info] 🤖 TEST 1: FSMs as First-Class Variables
+
+01:05:15.600 [info] 
+
+01:05:15.600 [info] Created FSM Variables:
+
+01:05:15.600 [info] • brace_fsm = BraceMatchingFSM (confidence: 0.9)
+
+01:05:15.600 [info] • json_fsm = JSONParserFSM (can_spawn: true)
+
+01:05:15.600 [info] • expression_fsm = ExpressionFSM (backtrack: true, spawn: true)
+
+01:05:15.600 [info] 
+
+01:05:15.600 [info] FSMs stored in library:
+
+01:05:15.600 [info] • data: 1 FSMs
+
+01:05:15.600 [info] • structural: 1 FSMs
+
+01:05:15.600 [info] • mathematical: 1 FSMs
+
+01:05:15.600 [info] 
+
+01:05:15.600 [info] Enhanced brace_fsm:
+
+01:05:15.600 [info] • Original confidence: 0.9
+
+01:05:15.600 [info] • Enhanced confidence: 0.95
+
+01:05:15.600 [info] • Pattern memory: 2 patterns
+
+01:05:15.600 [info] 
+
+01:05:15.600 [info] ✅ FSMs as Variables: WORKING
+
+01:05:15.600 [info] 
+
+01:05:15.600 [info] ↔️ TEST 2: Bidirectional Token Stream Navigation
+
+01:05:15.600 [info] 
+
+01:05:15.601 [info] Ambiguous tokens: Time flies like an arrow
+
+01:05:15.601 [info] 
+
+01:05:15.601 [info] Bidirectional parsing simulation:
+
+01:05:15.601 [info] Position 2: 'like' - ambiguous!
+
+01:05:15.601 [info] Backward context: flies Time
+
+01:05:15.601 [info] Forward context: like an
+
+01:05:15.601 [info] 
+
+01:05:15.601 [info] Analysis:
+
+01:05:15.601 [info] • Backward: 'Time flies' suggests subject + verb
+
+01:05:15.601 [info] • Forward: 'like an arrow' suggests prepositional phrase
+
+01:05:15.601 [info] • Conclusion: 'like' = preposition (Time flies [like an arrow])
+
+01:05:15.601 [info] 
+
+01:05:15.601 [info] Stream navigation test:
+
+01:05:15.601 [info] Reset to position: 0
+
+01:05:15.601 [info] Forward 3 → position: 3
+
+01:05:15.601 [info] Backward 1 → position: 2
+
+01:05:15.601 [info] 
+
+01:05:15.601 [info] ✅ Bidirectional Parsing: WORKING
+
+01:05:15.601 [info] 
+
+01:05:15.601 [info] 👶 TEST 3: FSM Spawning Based on Patterns
+
+01:05:15.601 [info] 
+
+01:05:15.601 [info] Complex input: { function calculate ( x + 42 ) }
+
+01:05:15.601 [info] 
+
+01:05:15.601 [info] FSM Spawning Simulation:
+
+01:05:15.601 [info] Position 0: '{' → Spawned BraceMatchingFSM
+
+01:05:15.601 [info] Position 1: 'function' → Spawned FunctionFSM
+
+01:05:15.601 [info] Position 2: 'calculate' → Processed by existing FSM
+
+01:05:15.601 [info] Position 3: '(' → Spawned ExpressionFSM
+
+01:05:15.601 [info] Position 4: 'x' → Processed by existing FSM
+
+01:05:15.601 [info] Position 5: '+' → Processed by existing FSM
+
+01:05:15.603 [info] Position 6: '42' → Processed by existing FSM
+
+01:05:15.603 [info] Position 7: ')' → Processed by existing FSM
+
+01:05:15.603 [info] Position 8: '}' → Processed by existing FSM
+
+01:05:15.603 [info] 
+
+01:05:15.603 [info] Final FSM Hierarchy:
+
+01:05:15.603 [info] MasterParserFSM
+
+01:05:15.603 [info] 
+
+01:05:15.603 [info] Spawning Results:
+
+01:05:15.603 [info] • Master FSM: MasterParserFSM
+
+01:05:15.604 [info] • Spawned FSMs: 0
+
+01:05:15.604 [info] • Specialization: Each FSM handles its domain
+
+01:05:15.604 [info] 
+
+01:05:15.604 [info] ✅ FSM Spawning: WORKING
+
+01:05:15.604 [info] 
+
+01:05:15.604 [info] 🤝 TEST 4: Collaborative FSM Parsing
+
+01:05:15.604 [info] 
+
+01:05:15.604 [info] Collaborative FSM Network:
+
+01:05:15.604 [info] • NounPhraseFSM: linked to 2 FSMs
+
+01:05:15.604 [info] • VerbPhraseFSM: linked to 2 FSMs
+
+01:05:15.604 [info] • SentenceFSM: linked to 2 FSMs
+
+01:05:15.604 [info] 
+
+01:05:15.604 [info] Sentence: The brilliant scientist discovered quantum mechanics
+
+01:05:15.604 [info] 
+
+01:05:15.604 [info] Collaborative Parsing Process:
+
+01:05:15.604 [info] NounPhraseFSM analysis:
+
+01:05:15.604 [info]   Found: The brilliant scientist, quantum mechanics
+
+01:05:15.604 [info] VerbPhraseFSM analysis:
+
+01:05:15.604 [info]   Found: discovered (past)
+
+01:05:15.604 [info] SentenceFSM coordination:
+
+01:05:15.604 [info]   Structure: simple_sentence
+
+01:05:15.604 [info]   Subject: The brilliant scientist
+
+01:05:15.604 [info]   Predicate: discovered quantum mechanics
+
+01:05:15.604 [info] 
+
+01:05:15.604 [info] Collaboration Results:
+
+01:05:15.604 [info] • Individual FSM insights combined
+
+01:05:15.604 [info] • Cross-validation between FSMs
+
+01:05:15.604 [info] • Combined confidence: 0.89
+
+01:05:15.604 [info] • Collaborative understanding achieved
+
+01:05:15.604 [info] 
+
+01:05:15.604 [info] ✅ Collaborative Parsing: WORKING
+
+01:05:15.604 [info] 
+
+01:05:15.604 [info] 🧠 TEST 5: Adaptive FSM Learning
+
+01:05:15.604 [info] 
+
+01:05:15.605 [info] Initial Adaptive FSM:
+
+01:05:15.605 [info] • Known patterns: 2
+
+01:05:15.605 [info] • Patterns: function_declaration, variable_assignment
+
+01:05:15.605 [info] 
+
+01:05:15.605 [info] Learning from input patterns:
+
+01:05:15.605 [info] Processing: class MyClass
+
+01:05:15.605 [info]   → Learned new pattern: class_declaration
+
+01:05:15.605 [info]   → Confidence increased: 0.6 → 0.65
+
+01:05:15.605 [info] Processing: import library
+
+01:05:15.605 [info]   → Learned new pattern: import_statement
+
+01:05:15.605 [info]   → Confidence increased: 0.65 → 0.7
+
+01:05:15.605 [info] Processing: for i
+
+01:05:15.605 [info]   → Learned new pattern: for_loop
+
+01:05:15.605 [info]   → Confidence increased: 0.7 → 0.75
+
+01:05:15.605 [info] Processing: class AnotherClass
+
+01:05:15.605 [info]   → Pattern already known: class_declaration
+
+01:05:15.605 [info] 
+
+01:05:15.605 [info] Adaptive Learning Results:
+
+01:05:15.605 [info] • Initial patterns: 2
+
+01:05:15.605 [info] • Final patterns: 5
+
+01:05:15.605 [info] • New patterns learned: 3
+
+01:05:15.605 [info] • Initial confidence: 0.6
+
+01:05:15.605 [info] • Final confidence: 0.76
+
+01:05:15.605 [info] 
+
+01:05:15.605 [info] All learned patterns:
+
+01:05:15.605 [info]   • for_loop
+
+01:05:15.605 [info]   • import_statement
+
+01:05:15.605 [info]   • class_declaration
+
+01:05:15.605 [info]   • function_declaration
+
+01:05:15.605 [info]   • variable_assignment
+
+01:05:15.605 [info] 
+
+01:05:15.605 [info] ✅ Adaptive FSM: WORKING
+
+01:05:15.605 [info] 
+
+01:05:15.605 [info] 
+
+01:05:15.605 [info] ============================================================
+
+01:05:15.605 [info] ✨ ALL QUANTUM PARSING CONCEPTS VERIFIED!
+
+01:05:15.605 [info] 🎯 Ready to build the future programming language!
+
+01:05:15.605 [info] 
+
+01:05:15.605 [info] 🔬 SMALL SCALE TEST (10-50 tokens)
+
+01:05:15.605 [info] 🔬 Tokenizing QuantumScript source...
+
+01:05:15.609 [info] 📝 Tokenized 7 QuantumScript tokens
+
+01:05:15.609 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+01:05:15.610 [info] 🧠 Starting quantum FSM parsing...
+
+01:05:15.610 [debug] Processing token: function (function_def) at position 0
+
+01:05:15.610 [info] 👶 Spawned FunctionFSM for function
+
+01:05:15.610 [debug] 🎯 Processing with FunctionFSM
+
+01:05:15.610 [debug] Processing token: test() (unknown) at position 1
+
+01:05:15.610 [debug] Processing token: -> (forward_op) at position 2
+
+01:05:15.610 [debug] Processing token: { (brace_open) at position 3
+
+01:05:15.610 [debug] Processing token: return (identifier) at position 4
+
+01:05:15.610 [debug] Processing token: 42 (number) at position 5
+
+01:05:15.610 [debug] Processing token: } (brace_close) at position 6
+
+01:05:15.610 [info] ✨ QuantumScript parsing complete!
+
+01:05:15.610 [info] 📊 Parse result: 0.5 confidence
+
+01:05:15.610 [info] 🤖 FSMs spawned: 1
+
+01:05:15.610 [info] 🔬 Tokenizing QuantumScript source...
+
+01:05:15.610 [info] 📝 Tokenized 9 QuantumScript tokens
+
+01:05:15.610 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+01:05:15.610 [info] 🧠 Starting quantum FSM parsing...
+
+01:05:15.610 [debug] Processing token: quantum_module (quantum_module) at position 0
+
+01:05:15.610 [info] 👶 Spawned ModuleFSM for quantum_module
+
+01:05:15.610 [debug] 🎯 Processing with ModuleFSM
+
+01:05:15.610 [debug] Processing token: Test (identifier) at position 1
+
+01:05:15.610 [debug] Processing token: { (brace_open) at position 2
+
+01:05:15.610 [debug] Processing token: function (function_def) at position 3
+
+01:05:15.610 [info] 👶 Spawned FunctionFSM for function
+
+01:05:15.610 [debug] 🎯 Processing with FunctionFSM
+
+01:05:15.610 [debug] Processing token: hello() (unknown) at position 4
+
+01:05:15.610 [debug] Processing token: -> (forward_op) at position 5
+
+01:05:15.610 [debug] Processing token: { (brace_open) at position 6
+
+01:05:15.610 [debug] Processing token: } (brace_close) at position 7
+
+01:05:15.610 [debug] Processing token: } (brace_close) at position 8
+
+01:05:15.610 [info] ✨ QuantumScript parsing complete!
+
+01:05:15.610 [info] 📊 Parse result: 0.5 confidence
+
+01:05:15.610 [info] 🤖 FSMs spawned: 2
+
+01:05:15.610 [info] 🔬 Tokenizing QuantumScript source...
+
+01:05:15.610 [info] 📝 Tokenized 11 QuantumScript tokens
+
+01:05:15.610 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+01:05:15.610 [info] 🧠 Starting quantum FSM parsing...
+
+01:05:15.610 [debug] Processing token: collaborate (collaborate_block) at position 0
+
+01:05:15.610 [info] 👶 Spawned CollaborationFSM for collaborate
+
+01:05:15.611 [debug] 🎯 Processing with CollaborationFSM
+
+01:05:15.611 [debug] Processing token: { (brace_open) at position 1
+
+01:05:15.611 [debug] Processing token: task1: (unknown) at position 2
+
+01:05:15.611 [debug] Processing token: action1() (unknown) at position 3
+
+01:05:15.611 [debug] Processing token: -> (forward_op) at position 4
+
+01:05:15.611 [debug] Processing token: result1 (identifier) at position 5
+
+01:05:15.611 [debug] Processing token: task2: (unknown) at position 6
+
+01:05:15.611 [debug] Processing token: action2() (unknown) at position 7
+
+01:05:15.611 [debug] Processing token: -> (forward_op) at position 8
+
+01:05:15.611 [debug] Processing token: result2 (identifier) at position 9
+
+01:05:15.611 [debug] Processing token: } (brace_close) at position 10
+
+01:05:15.611 [info] ✨ QuantumScript parsing complete!
+
+01:05:15.611 [info] 📊 Parse result: 0.5318181818181817 confidence
+
+01:05:15.611 [info] 🤖 FSMs spawned: 1
+
+01:05:15.611 [info] 🔬 Tokenizing QuantumScript source...
+
+01:05:15.611 [info] 📝 Tokenized 11 QuantumScript tokens
+
+01:05:15.611 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+01:05:15.611 [info] 🧠 Starting quantum FSM parsing...
+
+01:05:15.611 [debug] Processing token: adaptive (adaptive_modifier) at position 0
+
+01:05:15.611 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+01:05:15.611 [debug] 🎯 Processing with AdaptiveFSM
+
+01:05:15.611 [debug] Processing token: function (function_def) at position 1
+
+01:05:15.611 [info] 👶 Spawned FunctionFSM for function
+
+01:05:15.611 [debug] 🎯 Processing with FunctionFSM
+
+01:05:15.611 [debug] Processing token: process(data) (unknown) at position 2
+
+01:05:15.611 [debug] Processing token: -> (forward_op) at position 3
+
+01:05:15.611 [debug] Processing token: { (brace_open) at position 4
+
+01:05:15.611 [debug] Processing token: when (conditional_when) at position 5
+
+01:05:15.611 [debug] Processing token: data.valid: (unknown) at position 6
+
+01:05:15.611 [debug] Processing token: normal_process(data) (unknown) at position 7
+
+01:05:15.611 [debug] Processing token: else: (unknown) at position 8
+
+01:05:15.611 [debug] Processing token: error_process(data) (unknown) at position 9
+
+01:05:15.611 [debug] Processing token: } (brace_close) at position 10
+
+01:05:15.611 [info] ✨ QuantumScript parsing complete!
+
+01:05:15.611 [info] 📊 Parse result: 0.5 confidence
+
+01:05:15.611 [info] 🤖 FSMs spawned: 2
+
+01:05:15.611 [info]    ✅ Average parse time: 0.31ms
+
+01:05:15.611 [info]    ✅ Average confidence: 0.51
+
+01:05:15.611 [info]    ✅ Total FSMs spawned: 6
+
+01:05:15.611 [info] 
+
+01:05:15.611 [info] 🏗️ MEDIUM SCALE TEST (100-500 tokens)
+
+01:05:15.611 [info] 🔬 Tokenizing QuantumScript source...
+
+01:05:15.611 [info] 📝 Tokenized 102 QuantumScript tokens
+
+01:05:15.611 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+01:05:15.612 [info] 🧠 Starting quantum FSM parsing...
+
+01:05:15.612 [debug] Processing token: quantum_module (quantum_module) at position 0
+
+01:05:15.612 [info] 👶 Spawned ModuleFSM for quantum_module
+
+01:05:15.612 [debug] 🎯 Processing with ModuleFSM
+
+01:05:15.612 [debug] Processing token: UserService (identifier) at position 1
+
+01:05:15.612 [debug] Processing token: { (brace_open) at position 2
+
+01:05:15.612 [debug] Processing token: entangled (entanglement_modifier) at position 3
+
+01:05:15.612 [debug] Processing token: user_state (identifier) at position 4
+
+01:05:15.612 [debug] Processing token: { (brace_open) at position 5
+
+01:05:15.612 [debug] Processing token: authentication.sessions (unknown) at position 6
+
+01:05:15.612 [debug] Processing token: <-> (bidirectional_op) at position 7
+
+01:05:15.612 [debug] Processing token: authorization.permissions (unknown) at position 8
+
+01:05:15.612 [debug] Processing token: profile.data (unknown) at position 9
+
+01:05:15.612 [debug] Processing token: <-> (bidirectional_op) at position 10
+
+01:05:15.612 [debug] Processing token: preferences.settings (unknown) at position 11
+
+01:05:15.612 [debug] Processing token: } (brace_close) at position 12
+
+01:05:15.612 [debug] Processing token: collaborate (collaborate_block) at position 13
+
+01:05:15.612 [info] 👶 Spawned CollaborationFSM for collaborate
+
+01:05:15.612 [debug] 🎯 Processing with CollaborationFSM
+
+01:05:15.612 [debug] Processing token: { (brace_open) at position 14
+
+01:05:15.612 [debug] Processing token: authentication: (unknown) at position 15
+
+01:05:15.612 [debug] Processing token: { (brace_open) at position 16
+
+01:05:15.612 [debug] Processing token: adaptive (adaptive_modifier) at position 17
+
+01:05:15.612 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+01:05:15.612 [debug] 🎯 Processing with AdaptiveFSM
+
+01:05:15.612 [debug] Processing token: function (function_def) at position 18
+
+01:05:15.612 [info] 👶 Spawned FunctionFSM for function
+
+01:05:15.612 [debug] 🎯 Processing with FunctionFSM
+
+01:05:15.612 [debug] Processing token: authenticate_user(credentials) (unknown) at position 19
+
+01:05:15.612 [debug] Processing token: <-> (bidirectional_op) at position 20
+
+01:05:15.612 [debug] Processing token: { (brace_open) at position 21
+
+01:05:15.612 [debug] Processing token: validate_credentials(credentials) (unknown) at position 22
+
+01:05:15.612 [debug] Processing token: -> (forward_op) at position 23
+
+01:05:15.612 [debug] Processing token: validation_result (identifier) at position 24
+
+01:05:15.612 [debug] Processing token: when (conditional_when) at position 25
+
+01:05:15.612 [debug] Processing token: validation_result.success: (unknown) at position 26
+
+01:05:15.612 [debug] Processing token: create_session(credentials.user_id) (unknown) at position 27
+
+01:05:15.612 [debug] Processing token: -> (forward_op) at position 28
+
+01:05:15.612 [debug] Processing token: session_token (identifier) at position 29
+
+01:05:15.613 [debug] Processing token: update_login_metrics(credentials.user_id) (unknown) at position 30
+
+01:05:15.613 [debug] Processing token: -> (forward_op) at position 31
+
+01:05:15.613 [debug] Processing token: metrics_updated (identifier) at position 32
+
+01:05:15.613 [debug] Processing token: else: (unknown) at position 33
+
+01:05:15.613 [debug] Processing token: handle_authentication_failure(credentials) (unknown) at position 34
+
+01:05:15.613 [debug] Processing token: -> (forward_op) at position 35
+
+01:05:15.613 [debug] Processing token: failure_response (identifier) at position 36
+
+01:05:15.613 [debug] Processing token: trace (identifier) at position 37
+
+01:05:15.613 [debug] Processing token: session_token (identifier) at position 38
+
+01:05:15.613 [debug] Processing token: <- (backward_op) at position 39
+
+01:05:15.613 [debug] Processing token: validation_result (identifier) at position 40
+
+01:05:15.613 [debug] Processing token: <- (backward_op) at position 41
+
+01:05:15.613 [debug] Processing token: credentials (identifier) at position 42
+
+01:05:15.613 [debug] Processing token: } (brace_close) at position 43
+
+01:05:15.613 [debug] Processing token: natural_language (natural_lang_block) at position 44
+
+01:05:15.613 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+01:05:15.613 [debug] 🎯 Processing with NaturalLanguageFSM
+
+01:05:15.613 [debug] Processing token: { (brace_open) at position 45
+
+01:05:15.613 [debug] Processing token: "Handle multi-factor authentication with adaptive security based on user risk profile" (string) at position 46
+
+01:05:15.613 [debug] Processing token: -> (forward_op) at position 47
+
+01:05:15.613 [debug] Processing token: function (function_def) at position 48
+
+01:05:15.613 [info] 👶 Spawned FunctionFSM for function
+
+01:05:15.613 [debug] 🎯 Processing with FunctionFSM
+
+01:05:15.613 [debug] Processing token: handle_mfa(user_id, (unknown) at position 49
+
+01:05:15.613 [debug] Processing token: risk_profile) (unknown) at position 50
+
+01:05:15.613 [debug] Processing token: -> (forward_op) at position 51
+
+01:05:15.613 [debug] Processing token: { (brace_open) at position 52
+
+01:05:15.613 [debug] Processing token: when (conditional_when) at position 53
+
+01:05:15.613 [debug] Processing token: risk_profile.level (unknown) at position 54
+
+01:05:15.613 [debug] Processing token: == (equals_op) at position 55
+
+01:05:15.613 [debug] Processing token: "high" (string) at position 56
+
+01:05:15.613 [debug] Processing token: : (unknown) at position 57
+
+01:05:15.613 [debug] Processing token: require_strong_mfa(user_id) (unknown) at position 58
+
+01:05:15.613 [debug] Processing token: -> (forward_op) at position 59
+
+01:05:15.613 [debug] Processing token: mfa_challenge (identifier) at position 60
+
+01:05:15.613 [debug] Processing token: when (conditional_when) at position 61
+
+01:05:15.613 [debug] Processing token: risk_profile.level (unknown) at position 62
+
+01:05:15.613 [debug] Processing token: == (equals_op) at position 63
+
+01:05:15.613 [debug] Processing token: "medium" (string) at position 64
+
+01:05:15.613 [debug] Processing token: : (unknown) at position 65
+
+01:05:15.613 [debug] Processing token: require_standard_mfa(user_id) (unknown) at position 66
+
+01:05:15.613 [debug] Processing token: -> (forward_op) at position 67
+
+01:05:15.613 [debug] Processing token: mfa_challenge (identifier) at position 68
+
+01:05:15.613 [debug] Processing token: else: (unknown) at position 69
+
+01:05:15.613 [debug] Processing token: skip_mfa_for_trusted_user(user_id) (unknown) at position 70
+
+01:05:15.613 [debug] Processing token: -> (forward_op) at position 71
+
+01:05:15.613 [debug] Processing token: trusted_session (identifier) at position 72
+
+01:05:15.613 [debug] Processing token: } (brace_close) at position 73
+
+01:05:15.613 [debug] Processing token: } (brace_close) at position 74
+
+01:05:15.613 [debug] Processing token: } (brace_close) at position 75
+
+01:05:15.613 [debug] Processing token: authorization: (unknown) at position 76
+
+01:05:15.613 [debug] Processing token: { (brace_open) at position 77
+
+01:05:15.613 [debug] Processing token: gravitate (gravitation_block) at position 78
+
+01:05:15.613 [info] 👶 Spawned PhysicsFSM for gravitate
+
+01:05:15.613 [debug] 🎯 Processing with PhysicsFSM
+
+01:05:15.613 [debug] Processing token: { (brace_open) at position 79
+
+01:05:15.613 [debug] Processing token: admin_user: (unknown) at position 80
+
+01:05:15.613 [debug] Processing token: user.role (unknown) at position 81
+
+01:05:15.613 [debug] Processing token: == (equals_op) at position 82
+
+01:05:15.613 [debug] Processing token: "admin" (string) at position 83
+
+01:05:15.613 [debug] Processing token: -> (forward_op) at position 84
+
+01:05:15.613 [debug] Processing token: full_access_permissions() (unknown) at position 85
+
+01:05:15.613 [debug] Processing token: standard_user: (unknown) at position 86
+
+01:05:15.613 [debug] Processing token: user.role (unknown) at position 87
+
+01:05:15.613 [debug] Processing token: == (equals_op) at position 88
+
+01:05:15.613 [debug] Processing token: "user" (string) at position 89
+
+01:05:15.613 [debug] Processing token: -> (forward_op) at position 90
+
+01:05:15.613 [debug] Processing token: standard_permissions() (unknown) at position 91
+
+01:05:15.613 [debug] Processing token: guest_user: (unknown) at position 92
+
+01:05:15.613 [debug] Processing token: user.role (unknown) at position 93
+
+01:05:15.613 [debug] Processing token: == (equals_op) at position 94
+
+01:05:15.613 [debug] Processing token: "guest" (string) at position 95
+
+01:05:15.613 [debug] Processing token: -> (forward_op) at position 96
+
+01:05:15.613 [debug] Processing token: limited_permissions() (unknown) at position 97
+
+01:05:15.613 [debug] Processing token: } (brace_close) at position 98
+
+01:05:15.613 [debug] Processing token: } (brace_close) at position 99
+
+01:05:15.613 [debug] Processing token: } (brace_close) at position 100
+
+01:05:15.613 [debug] Processing token: } (brace_close) at position 101
+
+01:05:15.613 [info] ✨ QuantumScript parsing complete!
+
+01:05:15.613 [info] 📊 Parse result: 0.5034313725490196 confidence
+
+01:05:15.613 [info] 🤖 FSMs spawned: 7
+
+01:05:15.614 [info]    ✅ Parse time: 2.02ms
+
+01:05:15.614 [info]    ✅ Confidence: 0.5
+
+01:05:15.614 [info]    ✅ FSMs spawned: 7
+
+01:05:15.614 [info]    ✅ Time per token: 23.36μs
+
+01:05:15.614 [info] 
+
+01:05:15.614 [info] 🏢 LARGE SCALE TEST (1000+ tokens)
+
+01:05:15.614 [info] 🔬 Tokenizing QuantumScript source...
+
+01:05:15.615 [info] 📝 Tokenized 518 QuantumScript tokens
+
+01:05:15.615 [info] 🧬 Parsing QuantumScript with Quantum FSMs...
+
+01:05:15.615 [info] 🧠 Starting quantum FSM parsing...
+
+01:05:15.615 [debug] Processing token: quantum_module (quantum_module) at position 0
+
+01:05:15.615 [info] 👶 Spawned ModuleFSM for quantum_module
+
+01:05:15.615 [debug] 🎯 Processing with ModuleFSM
+
+01:05:15.615 [debug] Processing token: ComprehensiveEnterpriseSystem (identifier) at position 1
+
+01:05:15.615 [debug] Processing token: { (brace_open) at position 2
+
+01:05:15.615 [debug] Processing token: entangled (entanglement_modifier) at position 3
+
+01:05:15.615 [debug] Processing token: enterprise_state (identifier) at position 4
+
+01:05:15.615 [debug] Processing token: { (brace_open) at position 5
+
+01:05:15.615 [debug] Processing token: user_service.sessions (unknown) at position 6
+
+01:05:15.615 [debug] Processing token: <-> (bidirectional_op) at position 7
+
+01:05:15.615 [debug] Processing token: auth_service.tokens (unknown) at position 8
+
+01:05:15.615 [debug] Processing token: order_service.transactions (unknown) at position 9
+
+01:05:15.615 [debug] Processing token: <-> (bidirectional_op) at position 10
+
+01:05:15.615 [debug] Processing token: payment_service.charges (unknown) at position 11
+
+01:05:15.615 [debug] Processing token: inventory_service.stock (unknown) at position 12
+
+01:05:15.615 [debug] Processing token: <-> (bidirectional_op) at position 13
+
+01:05:15.615 [debug] Processing token: fulfillment_service.allocations (unknown) at position 14
+
+01:05:15.615 [debug] Processing token: analytics_service.metrics (unknown) at position 15
+
+01:05:15.615 [debug] Processing token: <-> (bidirectional_op) at position 16
+
+01:05:15.615 [debug] Processing token: monitoring_service.alerts (unknown) at position 17
+
+01:05:15.615 [debug] Processing token: } (brace_close) at position 18
+
+01:05:15.615 [debug] Processing token: collaborate (collaborate_block) at position 19
+
+01:05:15.615 [info] 👶 Spawned CollaborationFSM for collaborate
+
+01:05:15.615 [debug] 🎯 Processing with CollaborationFSM
+
+01:05:15.615 [debug] Processing token: { (brace_open) at position 20
+
+01:05:15.615 [debug] Processing token: user_management: (unknown) at position 21
+
+01:05:15.615 [debug] Processing token: { (brace_open) at position 22
+
+01:05:15.615 [debug] Processing token: natural_language (natural_lang_block) at position 23
+
+01:05:15.615 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+01:05:15.615 [debug] 🎯 Processing with NaturalLanguageFSM
+
+01:05:15.615 [debug] Processing token: { (brace_open) at position 24
+
+01:05:15.615 [debug] Processing token: "Manage user authentication, authorization, and profile management with adaptive security" (string) at position 25
+
+01:05:15.615 [debug] Processing token: -> (forward_op) at position 26
+
+01:05:15.615 [debug] Processing token: adaptive (adaptive_modifier) at position 27
+
+01:05:15.615 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+01:05:15.615 [debug] 🎯 Processing with AdaptiveFSM
+
+01:05:15.615 [debug] Processing token: function (function_def) at position 28
+
+01:05:15.615 [info] 👶 Spawned FunctionFSM for function
+
+01:05:15.615 [debug] 🎯 Processing with FunctionFSM
+
+01:05:15.616 [debug] Processing token: comprehensive_user_management(user_request) (unknown) at position 29
+
+01:05:15.616 [debug] Processing token: <-> (bidirectional_op) at position 30
+
+01:05:15.616 [debug] Processing token: { (brace_open) at position 31
+
+01:05:15.616 [debug] Processing token: analyze_user_risk_profile(user_request) (unknown) at position 32
+
+01:05:15.616 [debug] Processing token: -> (forward_op) at position 33
+
+01:05:15.616 [debug] Processing token: risk_assessment (identifier) at position 34
+
+01:05:15.616 [debug] Processing token: gravitate (gravitation_block) at position 35
+
+01:05:15.616 [info] 👶 Spawned PhysicsFSM for gravitate
+
+01:05:15.616 [debug] 🎯 Processing with PhysicsFSM
+
+01:05:15.616 [debug] Processing token: { (brace_open) at position 36
+
+01:05:15.616 [debug] Processing token: high_risk: (unknown) at position 37
+
+01:05:15.616 [debug] Processing token: risk_assessment.level (unknown) at position 38
+
+01:05:15.616 [debug] Processing token: == (equals_op) at position 39
+
+01:05:15.616 [debug] Processing token: "high" (string) at position 40
+
+01:05:15.616 [debug] Processing token: -> (forward_op) at position 41
+
+01:05:15.616 [debug] Processing token: enhanced_security_flow(user_request) (unknown) at position 42
+
+01:05:15.616 [debug] Processing token: medium_risk: (unknown) at position 43
+
+01:05:15.616 [debug] Processing token: risk_assessment.level (unknown) at position 44
+
+01:05:15.616 [debug] Processing token: == (equals_op) at position 45
+
+01:05:15.616 [debug] Processing token: "medium" (string) at position 46
+
+01:05:15.616 [debug] Processing token: -> (forward_op) at position 47
+
+01:05:15.616 [debug] Processing token: standard_security_flow(user_request) (unknown) at position 48
+
+01:05:15.616 [debug] Processing token: low_risk: (unknown) at position 49
+
+01:05:15.616 [debug] Processing token: risk_assessment.level (unknown) at position 50
+
+01:05:15.616 [debug] Processing token: == (equals_op) at position 51
+
+01:05:15.616 [debug] Processing token: "low" (string) at position 52
+
+01:05:15.616 [debug] Processing token: -> (forward_op) at position 53
+
+01:05:15.616 [debug] Processing token: streamlined_flow(user_request) (unknown) at position 54
+
+01:05:15.616 [debug] Processing token: } (brace_close) at position 55
+
+01:05:15.616 [debug] Processing token: when (conditional_when) at position 56
+
+01:05:15.616 [debug] Processing token: user_request.requires_mfa: (unknown) at position 57
+
+01:05:15.616 [debug] Processing token: spawn (spawn_keyword) at position 58
+
+01:05:15.616 [debug] Processing token: mfa_processor (identifier) at position 59
+
+01:05:15.616 [debug] Processing token: -> (forward_op) at position 60
+
+01:05:15.616 [debug] Processing token: handle_multi_factor_auth(user_request, (unknown) at position 61
+
+01:05:15.616 [debug] Processing token: risk_assessment) (unknown) at position 62
+
+01:05:15.616 [debug] Processing token: when (conditional_when) at position 63
+
+01:05:15.616 [debug] Processing token: user_request.new_device: (unknown) at position 64
+
+01:05:15.616 [debug] Processing token: spawn (spawn_keyword) at position 65
+
+01:05:15.616 [debug] Processing token: device_verification (identifier) at position 66
+
+01:05:15.616 [debug] Processing token: -> (forward_op) at position 67
+
+01:05:15.616 [debug] Processing token: verify_new_device(user_request) (unknown) at position 68
+
+01:05:15.616 [debug] Processing token: else: (unknown) at position 69
+
+01:05:15.616 [debug] Processing token: spawn (spawn_keyword) at position 70
+
+01:05:15.616 [debug] Processing token: standard_auth (identifier) at position 71
+
+01:05:15.616 [debug] Processing token: -> (forward_op) at position 72
+
+01:05:15.616 [debug] Processing token: process_standard_authentication(user_request) (unknown) at position 73
+
+01:05:15.616 [debug] Processing token: trace (identifier) at position 74
+
+01:05:15.616 [debug] Processing token: final_auth_result (identifier) at position 75
+
+01:05:15.616 [debug] Processing token: <- (backward_op) at position 76
+
+01:05:15.616 [debug] Processing token: auth_processor (identifier) at position 77
+
+01:05:15.617 [debug] Processing token: <- (backward_op) at position 78
+
+01:05:15.617 [debug] Processing token: risk_assessment (identifier) at position 79
+
+01:05:15.617 [debug] Processing token: <- (backward_op) at position 80
+
+01:05:15.617 [debug] Processing token: user_request (identifier) at position 81
+
+01:05:15.617 [debug] Processing token: } (brace_close) at position 82
+
+01:05:15.617 [debug] Processing token: } (brace_close) at position 83
+
+01:05:15.617 [debug] Processing token: } (brace_close) at position 84
+
+01:05:15.617 [debug] Processing token: order_processing: (unknown) at position 85
+
+01:05:15.617 [debug] Processing token: { (brace_open) at position 86
+
+01:05:15.617 [debug] Processing token: collaborate (collaborate_block) at position 87
+
+01:05:15.617 [info] 👶 Spawned CollaborationFSM for collaborate
+
+01:05:15.617 [debug] 🎯 Processing with CollaborationFSM
+
+01:05:15.617 [debug] Processing token: { (brace_open) at position 88
+
+01:05:15.617 [debug] Processing token: order_validation: (unknown) at position 89
+
+01:05:15.617 [debug] Processing token: { (brace_open) at position 90
+
+01:05:15.617 [debug] Processing token: adaptive (adaptive_modifier) at position 91
+
+01:05:15.617 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+01:05:15.617 [debug] 🎯 Processing with AdaptiveFSM
+
+01:05:15.617 [debug] Processing token: function (function_def) at position 92
+
+01:05:15.617 [info] 👶 Spawned FunctionFSM for function
+
+01:05:15.617 [debug] 🎯 Processing with FunctionFSM
+
+01:05:15.617 [debug] Processing token: validate_comprehensive_order(order_data) (unknown) at position 93
+
+01:05:15.617 [debug] Processing token: <-> (bidirectional_op) at position 94
+
+01:05:15.617 [debug] Processing token: { (brace_open) at position 95
+
+01:05:15.617 [debug] Processing token: validate_customer_data(order_data.customer) (unknown) at position 96
+
+01:05:15.617 [debug] Processing token: -> (forward_op) at position 97
+
+01:05:15.617 [debug] Processing token: customer_validation (identifier) at position 98
+
+01:05:15.617 [debug] Processing token: validate_product_availability(order_data.items) (unknown) at position 99
+
+01:05:15.617 [debug] Processing token: -> (forward_op) at position 100
+
+01:05:15.617 [debug] Processing token: inventory_validation (identifier) at position 101
+
+01:05:15.617 [debug] Processing token: validate_payment_information(order_data.payment) (unknown) at position 102
+
+01:05:15.617 [debug] Processing token: -> (forward_op) at position 103
+
+01:05:15.617 [debug] Processing token: payment_validation (identifier) at position 104
+
+01:05:15.617 [debug] Processing token: validate_shipping_details(order_data.shipping) (unknown) at position 105
+
+01:05:15.617 [debug] Processing token: -> (forward_op) at position 106
+
+01:05:15.617 [debug] Processing token: shipping_validation (identifier) at position 107
+
+01:05:15.617 [debug] Processing token: when (conditional_when) at position 108
+
+01:05:15.617 [debug] Processing token: all_validations_pass(customer_validation, (unknown) at position 109
+
+01:05:15.617 [debug] Processing token: inventory_validation, (unknown) at position 110
+
+01:05:15.617 [debug] Processing token: payment_validation, (unknown) at position 111
+
+01:05:15.617 [debug] Processing token: shipping_validation): (unknown) at position 112
+
+01:05:15.617 [debug] Processing token: return (identifier) at position 113
+
+01:05:15.617 [debug] Processing token: comprehensive_order_validated(order_data) (unknown) at position 114
+
+01:05:15.617 [debug] Processing token: else: (unknown) at position 115
+
+01:05:15.617 [debug] Processing token: spawn (spawn_keyword) at position 116
+
+01:05:15.617 [debug] Processing token: error_handler (identifier) at position 117
+
+01:05:15.617 [debug] Processing token: -> (forward_op) at position 118
+
+01:05:15.617 [debug] Processing token: handle_validation_errors(order_data, (unknown) at position 119
+
+01:05:15.617 [debug] Processing token: [customer_validation, (unknown) at position 120
+
+01:05:15.618 [debug] Processing token: inventory_validation, (unknown) at position 121
+
+01:05:15.618 [debug] Processing token: payment_validation, (unknown) at position 122
+
+01:05:15.618 [debug] Processing token: shipping_validation]) (unknown) at position 123
+
+01:05:15.618 [debug] Processing token: } (brace_close) at position 124
+
+01:05:15.618 [debug] Processing token: } (brace_close) at position 125
+
+01:05:15.618 [debug] Processing token: payment_processing: (unknown) at position 126
+
+01:05:15.618 [debug] Processing token: { (brace_open) at position 127
+
+01:05:15.618 [debug] Processing token: natural_language (natural_lang_block) at position 128
+
+01:05:15.618 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+01:05:15.618 [debug] 🎯 Processing with NaturalLanguageFSM
+
+01:05:15.618 [debug] Processing token: { (brace_open) at position 129
+
+01:05:15.618 [debug] Processing token: "Process payments with fraud detection, multiple payment methods, and automatic retry logic" (string) at position 130
+
+01:05:15.618 [debug] Processing token: -> (forward_op) at position 131
+
+01:05:15.618 [debug] Processing token: adaptive (adaptive_modifier) at position 132
+
+01:05:15.618 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+01:05:15.618 [debug] 🎯 Processing with AdaptiveFSM
+
+01:05:15.618 [debug] Processing token: function (function_def) at position 133
+
+01:05:15.618 [info] 👶 Spawned FunctionFSM for function
+
+01:05:15.618 [debug] 🎯 Processing with FunctionFSM
+
+01:05:15.618 [debug] Processing token: process_enterprise_payment(payment_request) (unknown) at position 134
+
+01:05:15.618 [debug] Processing token: <-> (bidirectional_op) at position 135
+
+01:05:15.618 [debug] Processing token: { (brace_open) at position 136
+
+01:05:15.618 [debug] Processing token: detect_fraudulent_activity(payment_request) (unknown) at position 137
+
+01:05:15.618 [debug] Processing token: -> (forward_op) at position 138
+
+01:05:15.618 [debug] Processing token: fraud_analysis (identifier) at position 139
+
+01:05:15.618 [debug] Processing token: gravitate (gravitation_block) at position 140
+
+01:05:15.618 [info] 👶 Spawned PhysicsFSM for gravitate
+
+01:05:15.618 [debug] 🎯 Processing with PhysicsFSM
+
+01:05:15.618 [debug] Processing token: { (brace_open) at position 141
+
+01:05:15.618 [debug] Processing token: trusted_customer: (unknown) at position 142
+
+01:05:15.618 [debug] Processing token: fraud_analysis.risk_score (unknown) at position 143
+
+01:05:15.618 [debug] Processing token: < (less_op) at position 144
+
+01:05:15.618 [debug] Processing token: 0.1 (number) at position 145
+
+01:05:15.618 [debug] Processing token: -> (forward_op) at position 146
+
+01:05:15.618 [debug] Processing token: fast_payment_processing(payment_request) (unknown) at position 147
+
+01:05:15.618 [debug] Processing token: normal_customer: (unknown) at position 148
+
+01:05:15.618 [debug] Processing token: fraud_analysis.risk_score (unknown) at position 149
+
+01:05:15.618 [debug] Processing token: < (less_op) at position 150
+
+01:05:15.618 [debug] Processing token: 0.5 (number) at position 151
+
+01:05:15.618 [debug] Processing token: -> (forward_op) at position 152
+
+01:05:15.618 [debug] Processing token: standard_payment_processing(payment_request) (unknown) at position 153
+
+01:05:15.619 [debug] Processing token: suspicious_customer: (unknown) at position 154
+
+01:05:15.619 [debug] Processing token: fraud_analysis.risk_score (unknown) at position 155
+
+01:05:15.619 [debug] Processing token: >= (unknown) at position 156
+
+01:05:15.619 [debug] Processing token: 0.5 (number) at position 157
+
+01:05:15.619 [debug] Processing token: -> (forward_op) at position 158
+
+01:05:15.619 [debug] Processing token: enhanced_fraud_checking(payment_request) (unknown) at position 159
+
+01:05:15.619 [debug] Processing token: } (brace_close) at position 160
+
+01:05:15.619 [debug] Processing token: when (conditional_when) at position 161
+
+01:05:15.619 [debug] Processing token: payment_request.amount (unknown) at position 162
+
+01:05:15.619 [debug] Processing token: > (greater_op) at position 163
+
+01:05:15.619 [debug] Processing token: 10000: (unknown) at position 164
+
+01:05:15.619 [debug] Processing token: spawn (spawn_keyword) at position 165
+
+01:05:15.619 [debug] Processing token: high_value_processor (identifier) at position 166
+
+01:05:15.619 [debug] Processing token: -> (forward_op) at position 167
+
+01:05:15.619 [debug] Processing token: process_high_value_payment(payment_request, (unknown) at position 168
+
+01:05:15.619 [debug] Processing token: fraud_analysis) (unknown) at position 169
+
+01:05:15.619 [debug] Processing token: when (conditional_when) at position 170
+
+01:05:15.619 [debug] Processing token: payment_request.international: (unknown) at position 171
+
+01:05:15.619 [debug] Processing token: spawn (spawn_keyword) at position 172
+
+01:05:15.619 [debug] Processing token: international_processor (identifier) at position 173
+
+01:05:15.619 [debug] Processing token: -> (forward_op) at position 174
+
+01:05:15.619 [debug] Processing token: process_international_payment(payment_request) (unknown) at position 175
+
+01:05:15.619 [debug] Processing token: else: (unknown) at position 176
+
+01:05:15.619 [debug] Processing token: spawn (spawn_keyword) at position 177
+
+01:05:15.619 [debug] Processing token: standard_processor (identifier) at position 178
+
+01:05:15.619 [debug] Processing token: -> (forward_op) at position 179
+
+01:05:15.619 [debug] Processing token: process_standard_payment(payment_request) (unknown) at position 180
+
+01:05:15.619 [debug] Processing token: trace (identifier) at position 181
+
+01:05:15.619 [debug] Processing token: payment_result (identifier) at position 182
+
+01:05:15.619 [debug] Processing token: <- (backward_op) at position 183
+
+01:05:15.619 [debug] Processing token: processor (identifier) at position 184
+
+01:05:15.619 [debug] Processing token: <- (backward_op) at position 185
+
+01:05:15.619 [debug] Processing token: fraud_analysis (identifier) at position 186
+
+01:05:15.619 [debug] Processing token: <- (backward_op) at position 187
+
+01:05:15.619 [debug] Processing token: payment_request (identifier) at position 188
+
+01:05:15.619 [debug] Processing token: } (brace_close) at position 189
+
+01:05:15.619 [debug] Processing token: } (brace_close) at position 190
+
+01:05:15.619 [debug] Processing token: } (brace_close) at position 191
+
+01:05:15.619 [debug] Processing token: fulfillment_coordination: (unknown) at position 192
+
+01:05:15.619 [debug] Processing token: { (brace_open) at position 193
+
+01:05:15.619 [debug] Processing token: collaborate (collaborate_block) at position 194
+
+01:05:15.619 [info] 👶 Spawned CollaborationFSM for collaborate
+
+01:05:15.619 [debug] 🎯 Processing with CollaborationFSM
+
+01:05:15.619 [debug] Processing token: { (brace_open) at position 195
+
+01:05:15.619 [debug] Processing token: inventory_allocation: (unknown) at position 196
+
+01:05:15.620 [debug] Processing token: allocate_inventory_items(validated_order) (unknown) at position 197
+
+01:05:15.620 [debug] Processing token: -> (forward_op) at position 198
+
+01:05:15.620 [debug] Processing token: allocation_result (identifier) at position 199
+
+01:05:15.620 [debug] Processing token: shipping_calculation: (unknown) at position 200
+
+01:05:15.620 [debug] Processing token: calculate_optimal_shipping(validated_order, (unknown) at position 201
+
+01:05:15.620 [debug] Processing token: allocation_result) (unknown) at position 202
+
+01:05:15.620 [debug] Processing token: -> (forward_op) at position 203
+
+01:05:15.620 [debug] Processing token: shipping_plan (identifier) at position 204
+
+01:05:15.620 [debug] Processing token: warehouse_coordination: (unknown) at position 205
+
+01:05:15.620 [debug] Processing token: coordinate_warehouse_picking(allocation_result, (unknown) at position 206
+
+01:05:15.620 [debug] Processing token: shipping_plan) (unknown) at position 207
+
+01:05:15.620 [debug] Processing token: -> (forward_op) at position 208
+
+01:05:15.620 [debug] Processing token: fulfillment_instructions (identifier) at position 209
+
+01:05:15.620 [debug] Processing token: tracking_generation: (unknown) at position 210
+
+01:05:15.620 [debug] Processing token: generate_comprehensive_tracking(fulfillment_instructions) (unknown) at position 211
+
+01:05:15.620 [debug] Processing token: -> (forward_op) at position 212
+
+01:05:15.620 [debug] Processing token: tracking_information (identifier) at position 213
+
+01:05:15.620 [debug] Processing token: } (brace_close) at position 214
+
+01:05:15.620 [debug] Processing token: adaptive (adaptive_modifier) at position 215
+
+01:05:15.620 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+01:05:15.620 [debug] 🎯 Processing with AdaptiveFSM
+
+01:05:15.620 [debug] Processing token: function (function_def) at position 216
+
+01:05:15.620 [info] 👶 Spawned FunctionFSM for function
+
+01:05:15.620 [debug] 🎯 Processing with FunctionFSM
+
+01:05:15.620 [debug] Processing token: orchestrate_fulfillment(validated_order) (unknown) at position 217
+
+01:05:15.620 [debug] Processing token: <-> (bidirectional_op) at position 218
+
+01:05:15.620 [debug] Processing token: { (brace_open) at position 219
+
+01:05:15.620 [debug] Processing token: gravitate (gravitation_block) at position 220
+
+01:05:15.620 [info] 👶 Spawned PhysicsFSM for gravitate
+
+01:05:15.620 [debug] 🎯 Processing with PhysicsFSM
+
+01:05:15.620 [debug] Processing token: { (brace_open) at position 221
+
+01:05:15.620 [debug] Processing token: express_shipping: (unknown) at position 222
+
+01:05:15.620 [debug] Processing token: validated_order.shipping_speed (unknown) at position 223
+
+01:05:15.620 [debug] Processing token: == (equals_op) at position 224
+
+01:05:15.620 [debug] Processing token: "express" (string) at position 225
+
+01:05:15.620 [debug] Processing token: -> (forward_op) at position 226
+
+01:05:15.620 [debug] Processing token: express_fulfillment_pipeline(validated_order) (unknown) at position 227
+
+01:05:15.620 [debug] Processing token: standard_shipping: (unknown) at position 228
+
+01:05:15.620 [debug] Processing token: validated_order.shipping_speed (unknown) at position 229
+
+01:05:15.620 [debug] Processing token: == (equals_op) at position 230
+
+01:05:15.620 [debug] Processing token: "standard" (string) at position 231
+
+01:05:15.620 [debug] Processing token: -> (forward_op) at position 232
+
+01:05:15.620 [debug] Processing token: standard_fulfillment_pipeline(validated_order) (unknown) at position 233
+
+01:05:15.620 [debug] Processing token: economy_shipping: (unknown) at position 234
+
+01:05:15.620 [debug] Processing token: validated_order.shipping_speed (unknown) at position 235
+
+01:05:15.620 [debug] Processing token: == (equals_op) at position 236
+
+01:05:15.620 [debug] Processing token: "economy" (string) at position 237
+
+01:05:15.620 [debug] Processing token: -> (forward_op) at position 238
+
+01:05:15.620 [debug] Processing token: economy_fulfillment_pipeline(validated_order) (unknown) at position 239
+
+01:05:15.620 [debug] Processing token: } (brace_close) at position 240
+
+01:05:15.620 [debug] Processing token: natural_language (natural_lang_block) at position 241
+
+01:05:15.620 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+01:05:15.620 [debug] 🎯 Processing with NaturalLanguageFSM
+
+01:05:15.620 [debug] Processing token: { (brace_open) at position 242
+
+01:05:15.620 [debug] Processing token: "Ensure optimal fulfillment by coordinating inventory, warehouse operations, and shipping logistics" (string) at position 243
+
+01:05:15.620 [debug] Processing token: -> (forward_op) at position 244
+
+01:05:15.620 [debug] Processing token: coordinate_comprehensive_fulfillment(fulfillment_instructions, (unknown) at position 245
+
+01:05:15.620 [debug] Processing token: tracking_information) (unknown) at position 246
+
+01:05:15.620 [debug] Processing token: -> (forward_op) at position 247
+
+01:05:15.620 [debug] Processing token: fulfillment_confirmation (identifier) at position 248
+
+01:05:15.620 [debug] Processing token: } (brace_close) at position 249
+
+01:05:15.620 [debug] Processing token: } (brace_close) at position 250
+
+01:05:15.620 [debug] Processing token: } (brace_close) at position 251
+
+01:05:15.620 [debug] Processing token: } (brace_close) at position 252
+
+01:05:15.620 [debug] Processing token: } (brace_close) at position 253
+
+01:05:15.620 [debug] Processing token: analytics_intelligence: (unknown) at position 254
+
+01:05:15.620 [debug] Processing token: { (brace_open) at position 255
+
+01:05:15.620 [debug] Processing token: natural_language (natural_lang_block) at position 256
+
+01:05:15.620 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+01:05:15.621 [debug] 🎯 Processing with NaturalLanguageFSM
+
+01:05:15.621 [debug] Processing token: { (brace_open) at position 257
+
+01:05:15.621 [debug] Processing token: "Provide real-time analytics and business intelligence across all enterprise operations" (string) at position 258
+
+01:05:15.621 [debug] Processing token: -> (forward_op) at position 259
+
+01:05:15.621 [debug] Processing token: adaptive (adaptive_modifier) at position 260
+
+01:05:15.621 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+01:05:15.621 [debug] 🎯 Processing with AdaptiveFSM
+
+01:05:15.621 [debug] Processing token: function (function_def) at position 261
+
+01:05:15.621 [info] 👶 Spawned FunctionFSM for function
+
+01:05:15.621 [debug] 🎯 Processing with FunctionFSM
+
+01:05:15.621 [debug] Processing token: generate_enterprise_intelligence(analytics_request) (unknown) at position 262
+
+01:05:15.621 [debug] Processing token: <-> (bidirectional_op) at position 263
+
+01:05:15.621 [debug] Processing token: { (brace_open) at position 264
+
+01:05:15.621 [debug] Processing token: collaborate (collaborate_block) at position 265
+
+01:05:15.621 [info] 👶 Spawned CollaborationFSM for collaborate
+
+01:05:15.621 [debug] 🎯 Processing with CollaborationFSM
+
+01:05:15.621 [debug] Processing token: { (brace_open) at position 266
+
+01:05:15.621 [debug] Processing token: user_behavior_analysis: (unknown) at position 267
+
+01:05:15.621 [debug] Processing token: analyze_comprehensive_user_behavior() (unknown) at position 268
+
+01:05:15.621 [debug] Processing token: -> (forward_op) at position 269
+
+01:05:15.621 [debug] Processing token: behavior_insights (identifier) at position 270
+
+01:05:15.621 [debug] Processing token: sales_performance_analysis: (unknown) at position 271
+
+01:05:15.621 [debug] Processing token: analyze_sales_trends_and_patterns() (unknown) at position 272
+
+01:05:15.621 [debug] Processing token: -> (forward_op) at position 273
+
+01:05:15.621 [debug] Processing token: sales_insights (identifier) at position 274
+
+01:05:15.621 [debug] Processing token: inventory_optimization_analysis: (unknown) at position 275
+
+01:05:15.621 [debug] Processing token: analyze_inventory_efficiency() (unknown) at position 276
+
+01:05:15.621 [debug] Processing token: -> (forward_op) at position 277
+
+01:05:15.621 [debug] Processing token: inventory_insights (identifier) at position 278
+
+01:05:15.621 [debug] Processing token: financial_performance_analysis: (unknown) at position 279
+
+01:05:15.621 [debug] Processing token: analyze_financial_metrics() (unknown) at position 280
+
+01:05:15.621 [debug] Processing token: -> (forward_op) at position 281
+
+01:05:15.621 [debug] Processing token: financial_insights (identifier) at position 282
+
+01:05:15.621 [debug] Processing token: operational_efficiency_analysis: (unknown) at position 283
+
+01:05:15.621 [debug] Processing token: analyze_operational_performance() (unknown) at position 284
+
+01:05:15.621 [debug] Processing token: -> (forward_op) at position 285
+
+01:05:15.621 [debug] Processing token: operational_insights (identifier) at position 286
+
+01:05:15.621 [debug] Processing token: } (brace_close) at position 287
+
+01:05:15.621 [debug] Processing token: when (conditional_when) at position 288
+
+01:05:15.621 [debug] Processing token: analytics_request.real_time: (unknown) at position 289
+
+01:05:15.621 [debug] Processing token: spawn (spawn_keyword) at position 290
+
+01:05:15.621 [debug] Processing token: real_time_processor (identifier) at position 291
+
+01:05:15.621 [debug] Processing token: -> (forward_op) at position 292
+
+01:05:15.621 [debug] Processing token: process_real_time_analytics(behavior_insights, (unknown) at position 293
+
+01:05:15.621 [debug] Processing token: sales_insights, (unknown) at position 294
+
+01:05:15.621 [debug] Processing token: inventory_insights, (unknown) at position 295
+
+01:05:15.621 [debug] Processing token: financial_insights, (unknown) at position 296
+
+01:05:15.621 [debug] Processing token: operational_insights) (unknown) at position 297
+
+01:05:15.621 [debug] Processing token: when (conditional_when) at position 298
+
+01:05:15.621 [debug] Processing token: analytics_request.historical: (unknown) at position 299
+
+01:05:15.621 [debug] Processing token: spawn (spawn_keyword) at position 300
+
+01:05:15.621 [debug] Processing token: historical_processor (identifier) at position 301
+
+01:05:15.621 [debug] Processing token: -> (forward_op) at position 302
+
+01:05:15.622 [debug] Processing token: process_historical_analytics(analytics_request.time_range) (unknown) at position 303
+
+01:05:15.622 [debug] Processing token: when (conditional_when) at position 304
+
+01:05:15.622 [debug] Processing token: analytics_request.predictive: (unknown) at position 305
+
+01:05:15.622 [debug] Processing token: spawn (spawn_keyword) at position 306
+
+01:05:15.622 [debug] Processing token: predictive_processor (identifier) at position 307
+
+01:05:15.622 [debug] Processing token: -> (forward_op) at position 308
+
+01:05:15.622 [debug] Processing token: generate_predictive_analytics(behavior_insights, (unknown) at position 309
+
+01:05:15.622 [debug] Processing token: sales_insights, (unknown) at position 310
+
+01:05:15.622 [debug] Processing token: operational_insights) (unknown) at position 311
+
+01:05:15.622 [debug] Processing token: else: (unknown) at position 312
+
+01:05:15.622 [debug] Processing token: spawn (spawn_keyword) at position 313
+
+01:05:15.622 [debug] Processing token: comprehensive_processor (identifier) at position 314
+
+01:05:15.622 [debug] Processing token: -> (forward_op) at position 315
+
+01:05:15.622 [debug] Processing token: generate_comprehensive_analytics_report(behavior_insights, (unknown) at position 316
+
+01:05:15.622 [debug] Processing token: sales_insights, (unknown) at position 317
+
+01:05:15.622 [debug] Processing token: inventory_insights, (unknown) at position 318
+
+01:05:15.622 [debug] Processing token: financial_insights, (unknown) at position 319
+
+01:05:15.622 [debug] Processing token: operational_insights) (unknown) at position 320
+
+01:05:15.622 [debug] Processing token: gravitate (gravitation_block) at position 321
+
+01:05:15.622 [info] 👶 Spawned PhysicsFSM for gravitate
+
+01:05:15.622 [debug] 🎯 Processing with PhysicsFSM
+
+01:05:15.622 [debug] Processing token: { (brace_open) at position 322
+
+01:05:15.622 [debug] Processing token: executive_dashboard: (unknown) at position 323
+
+01:05:15.622 [debug] Processing token: analytics_request.audience (unknown) at position 324
+
+01:05:15.622 [debug] Processing token: == (equals_op) at position 325
+
+01:05:15.622 [debug] Processing token: "executives" (string) at position 326
+
+01:05:15.622 [debug] Processing token: -> (forward_op) at position 327
+
+01:05:15.622 [debug] Processing token: executive_level_insights() (unknown) at position 328
+
+01:05:15.622 [debug] Processing token: operational_dashboard: (unknown) at position 329
+
+01:05:15.623 [debug] Processing token: analytics_request.audience (unknown) at position 330
+
+01:05:15.623 [debug] Processing token: == (equals_op) at position 331
+
+01:05:15.623 [debug] Processing token: "operations" (string) at position 332
+
+01:05:15.623 [debug] Processing token: -> (forward_op) at position 333
+
+01:05:15.623 [debug] Processing token: operational_level_insights() (unknown) at position 334
+
+01:05:15.623 [debug] Processing token: analytical_dashboard: (unknown) at position 335
+
+01:05:15.623 [debug] Processing token: analytics_request.audience (unknown) at position 336
+
+01:05:15.623 [debug] Processing token: == (equals_op) at position 337
+
+01:05:15.623 [debug] Processing token: "analysts" (string) at position 338
+
+01:05:15.623 [debug] Processing token: -> (forward_op) at position 339
+
+01:05:15.623 [debug] Processing token: detailed_analytical_insights() (unknown) at position 340
+
+01:05:15.623 [debug] Processing token: } (brace_close) at position 341
+
+01:05:15.623 [debug] Processing token: trace (identifier) at position 342
+
+01:05:15.623 [debug] Processing token: final_analytics (identifier) at position 343
+
+01:05:15.623 [debug] Processing token: <- (backward_op) at position 344
+
+01:05:15.623 [debug] Processing token: processor (identifier) at position 345
+
+01:05:15.623 [debug] Processing token: <- (backward_op) at position 346
+
+01:05:15.623 [debug] Processing token: insights_compilation (identifier) at position 347
+
+01:05:15.623 [debug] Processing token: <- (backward_op) at position 348
+
+01:05:15.623 [debug] Processing token: analytics_request (identifier) at position 349
+
+01:05:15.623 [debug] Processing token: } (brace_close) at position 350
+
+01:05:15.623 [debug] Processing token: } (brace_close) at position 351
+
+01:05:15.623 [debug] Processing token: } (brace_close) at position 352
+
+01:05:15.623 [debug] Processing token: monitoring_system: (unknown) at position 353
+
+01:05:15.623 [debug] Processing token: { (brace_open) at position 354
+
+01:05:15.623 [debug] Processing token: collaborate (collaborate_block) at position 355
+
+01:05:15.623 [info] 👶 Spawned CollaborationFSM for collaborate
+
+01:05:15.623 [debug] 🎯 Processing with CollaborationFSM
+
+01:05:15.623 [debug] Processing token: { (brace_open) at position 356
+
+01:05:15.623 [debug] Processing token: performance_monitoring: (unknown) at position 357
+
+01:05:15.623 [debug] Processing token: monitor_comprehensive_system_performance() (unknown) at position 358
+
+01:05:15.623 [debug] Processing token: -> (forward_op) at position 359
+
+01:05:15.623 [debug] Processing token: performance_data (identifier) at position 360
+
+01:05:15.623 [debug] Processing token: error_tracking: (unknown) at position 361
+
+01:05:15.624 [debug] Processing token: track_and_categorize_all_errors() (unknown) at position 362
+
+01:05:15.624 [debug] Processing token: -> (forward_op) at position 363
+
+01:05:15.624 [debug] Processing token: error_analysis (identifier) at position 364
+
+01:05:15.624 [debug] Processing token: usage_analytics: (unknown) at position 365
+
+01:05:15.624 [debug] Processing token: analyze_comprehensive_usage_patterns() (unknown) at position 366
+
+01:05:15.624 [debug] Processing token: -> (forward_op) at position 367
+
+01:05:15.624 [debug] Processing token: usage_insights (identifier) at position 368
+
+01:05:15.624 [debug] Processing token: security_monitoring: (unknown) at position 369
+
+01:05:15.624 [debug] Processing token: monitor_security_events_and_threats() (unknown) at position 370
+
+01:05:15.624 [debug] Processing token: -> (forward_op) at position 371
+
+01:05:15.624 [debug] Processing token: security_status (identifier) at position 372
+
+01:05:15.624 [debug] Processing token: business_metrics_monitoring: (unknown) at position 373
+
+01:05:15.624 [debug] Processing token: monitor_key_business_indicators() (unknown) at position 374
+
+01:05:15.624 [debug] Processing token: -> (forward_op) at position 375
+
+01:05:15.624 [debug] Processing token: business_health (identifier) at position 376
+
+01:05:15.624 [debug] Processing token: } (brace_close) at position 377
+
+01:05:15.624 [debug] Processing token: adaptive (adaptive_modifier) at position 378
+
+01:05:15.624 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+01:05:15.624 [debug] 🎯 Processing with AdaptiveFSM
+
+01:05:15.624 [debug] Processing token: function (function_def) at position 379
+
+01:05:15.624 [info] 👶 Spawned FunctionFSM for function
+
+01:05:15.624 [debug] 🎯 Processing with FunctionFSM
+
+01:05:15.624 [debug] Processing token: intelligent_monitoring_system() (unknown) at position 380
+
+01:05:15.624 [debug] Processing token: <-> (bidirectional_op) at position 381
+
+01:05:15.624 [debug] Processing token: { (brace_open) at position 382
+
+01:05:15.624 [debug] Processing token: natural_language (natural_lang_block) at position 383
+
+01:05:15.624 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+01:05:15.624 [debug] 🎯 Processing with NaturalLanguageFSM
+
+01:05:15.624 [debug] Processing token: { (brace_open) at position 384
+
+01:05:15.624 [debug] Processing token: "Continuously monitor enterprise system health and automatically respond to issues" (string) at position 385
+
+01:05:15.624 [debug] Processing token: -> (forward_op) at position 386
+
+01:05:15.624 [debug] Processing token: function (function_def) at position 387
+
+01:05:15.624 [info] 👶 Spawned FunctionFSM for function
+
+01:05:15.624 [debug] 🎯 Processing with FunctionFSM
+
+01:05:15.624 [debug] Processing token: automated_monitoring_response(performance_data, (unknown) at position 388
+
+01:05:15.624 [debug] Processing token: error_analysis, (unknown) at position 389
+
+01:05:15.624 [debug] Processing token: usage_insights, (unknown) at position 390
+
+01:05:15.624 [debug] Processing token: security_status, (unknown) at position 391
+
+01:05:15.624 [debug] Processing token: business_health) (unknown) at position 392
+
+01:05:15.624 [debug] Processing token: -> (forward_op) at position 393
+
+01:05:15.624 [debug] Processing token: { (brace_open) at position 394
+
+01:05:15.624 [debug] Processing token: correlate_monitoring_data(performance_data, (unknown) at position 395
+
+01:05:15.624 [debug] Processing token: error_analysis, (unknown) at position 396
+
+01:05:15.624 [debug] Processing token: usage_insights) (unknown) at position 397
+
+01:05:15.624 [debug] Processing token: -> (forward_op) at position 398
+
+01:05:15.624 [debug] Processing token: correlation_analysis (identifier) at position 399
+
+01:05:15.624 [debug] Processing token: identify_critical_issues(correlation_analysis, (unknown) at position 400
+
+01:05:15.624 [debug] Processing token: security_status) (unknown) at position 401
+
+01:05:15.625 [debug] Processing token: -> (forward_op) at position 402
+
+01:05:15.625 [debug] Processing token: critical_issues (identifier) at position 403
+
+01:05:15.625 [debug] Processing token: generate_automated_responses(critical_issues, (unknown) at position 404
+
+01:05:15.625 [debug] Processing token: business_health) (unknown) at position 405
+
+01:05:15.625 [debug] Processing token: -> (forward_op) at position 406
+
+01:05:15.625 [debug] Processing token: response_actions (identifier) at position 407
+
+01:05:15.625 [debug] Processing token: execute_intelligent_remediation(response_actions) (unknown) at position 408
+
+01:05:15.625 [debug] Processing token: -> (forward_op) at position 409
+
+01:05:15.625 [debug] Processing token: remediation_results (identifier) at position 410
+
+01:05:15.625 [debug] Processing token: return (identifier) at position 411
+
+01:05:15.625 [debug] Processing token: comprehensive_monitoring_report(remediation_results) (unknown) at position 412
+
+01:05:15.625 [debug] Processing token: } (brace_close) at position 413
+
+01:05:15.625 [debug] Processing token: } (brace_close) at position 414
+
+01:05:15.625 [debug] Processing token: gravitate (gravitation_block) at position 415
+
+01:05:15.625 [info] 👶 Spawned PhysicsFSM for gravitate
+
+01:05:15.625 [debug] 🎯 Processing with PhysicsFSM
+
+01:05:15.625 [debug] Processing token: { (brace_open) at position 416
+
+01:05:15.625 [debug] Processing token: critical_issues: (unknown) at position 417
+
+01:05:15.625 [debug] Processing token: critical_issues.severity (unknown) at position 418
+
+01:05:15.625 [debug] Processing token: == (equals_op) at position 419
+
+01:05:15.625 [debug] Processing token: "critical" (string) at position 420
+
+01:05:15.625 [debug] Processing token: -> (forward_op) at position 421
+
+01:05:15.625 [debug] Processing token: immediate_response_protocol() (unknown) at position 422
+
+01:05:15.625 [debug] Processing token: warning_issues: (unknown) at position 423
+
+01:05:15.625 [debug] Processing token: critical_issues.severity (unknown) at position 424
+
+01:05:15.625 [debug] Processing token: == (equals_op) at position 425
+
+01:05:15.625 [debug] Processing token: "warning" (string) at position 426
+
+01:05:15.625 [debug] Processing token: -> (forward_op) at position 427
+
+01:05:15.625 [debug] Processing token: scheduled_maintenance_protocol() (unknown) at position 428
+
+01:05:15.625 [debug] Processing token: normal_operations: (unknown) at position 429
+
+01:05:15.625 [debug] Processing token: critical_issues.severity (unknown) at position 430
+
+01:05:15.625 [debug] Processing token: == (equals_op) at position 431
+
+01:05:15.625 [debug] Processing token: "normal" (string) at position 432
+
+01:05:15.625 [debug] Processing token: -> (forward_op) at position 433
+
+01:05:15.625 [debug] Processing token: routine_monitoring_protocol() (unknown) at position 434
+
+01:05:15.625 [debug] Processing token: } (brace_close) at position 435
+
+01:05:15.625 [debug] Processing token: when (conditional_when) at position 436
+
+01:05:15.625 [debug] Processing token: security_status.threats_detected: (unknown) at position 437
+
+01:05:15.625 [debug] Processing token: spawn (spawn_keyword) at position 438
+
+01:05:15.625 [debug] Processing token: security_response (identifier) at position 439
+
+01:05:15.625 [debug] Processing token: -> (forward_op) at position 440
+
+01:05:15.625 [debug] Processing token: handle_security_threats(security_status) (unknown) at position 441
+
+01:05:15.625 [debug] Processing token: when (conditional_when) at position 442
+
+01:05:15.625 [debug] Processing token: performance_data.degradation_detected: (unknown) at position 443
+
+01:05:15.625 [debug] Processing token: spawn (spawn_keyword) at position 444
+
+01:05:15.625 [debug] Processing token: performance_optimizer (identifier) at position 445
+
+01:05:15.625 [debug] Processing token: -> (forward_op) at position 446
+
+01:05:15.625 [debug] Processing token: optimize_system_performance(performance_data) (unknown) at position 447
+
+01:05:15.626 [debug] Processing token: when (conditional_when) at position 448
+
+01:05:15.626 [debug] Processing token: business_health.metrics_declining: (unknown) at position 449
+
+01:05:15.626 [debug] Processing token: spawn (spawn_keyword) at position 450
+
+01:05:15.626 [debug] Processing token: business_response (identifier) at position 451
+
+01:05:15.626 [debug] Processing token: -> (forward_op) at position 452
+
+01:05:15.626 [debug] Processing token: address_business_concerns(business_health) (unknown) at position 453
+
+01:05:15.626 [debug] Processing token: else: (unknown) at position 454
+
+01:05:15.626 [debug] Processing token: spawn (spawn_keyword) at position 455
+
+01:05:15.626 [debug] Processing token: routine_maintenance (identifier) at position 456
+
+01:05:15.626 [debug] Processing token: -> (forward_op) at position 457
+
+01:05:15.626 [debug] Processing token: perform_routine_system_maintenance() (unknown) at position 458
+
+01:05:15.626 [debug] Processing token: } (brace_close) at position 459
+
+01:05:15.626 [debug] Processing token: } (brace_close) at position 460
+
+01:05:15.626 [debug] Processing token: } (brace_close) at position 461
+
+01:05:15.626 [debug] Processing token: quantum_sync(user_management, (unknown) at position 462
+
+01:05:15.626 [debug] Processing token: order_processing, (unknown) at position 463
+
+01:05:15.626 [debug] Processing token: analytics_intelligence, (unknown) at position 464
+
+01:05:15.626 [debug] Processing token: monitoring_system) (unknown) at position 465
+
+01:05:15.626 [debug] Processing token: -> (forward_op) at position 466
+
+01:05:15.626 [debug] Processing token: enterprise_system (identifier) at position 467
+
+01:05:15.626 [debug] Processing token: natural_language (natural_lang_block) at position 468
+
+01:05:15.626 [info] 👶 Spawned NaturalLanguageFSM for natural_language
+
+01:05:15.626 [debug] 🎯 Processing with NaturalLanguageFSM
+
+01:05:15.626 [debug] Processing token: { (brace_open) at position 469
+
+01:05:15.626 [debug] Processing token: "Orchestrate the entire enterprise system with intelligent coordination and optimization" (string) at position 470
+
+01:05:15.626 [debug] Processing token: -> (forward_op) at position 471
+
+01:05:15.626 [debug] Processing token: adaptive (adaptive_modifier) at position 472
+
+01:05:15.626 [info] 👶 Spawned AdaptiveFSM for adaptive
+
+01:05:15.626 [debug] 🎯 Processing with AdaptiveFSM
+
+01:05:15.627 [debug] Processing token: function (function_def) at position 473
+
+01:05:15.627 [info] 👶 Spawned FunctionFSM for function
+
+01:05:15.627 [debug] 🎯 Processing with FunctionFSM
+
+01:05:15.627 [debug] Processing token: orchestrate_enterprise_intelligence() (unknown) at position 474
+
+01:05:15.627 [debug] Processing token: <-> (bidirectional_op) at position 475
+
+01:05:15.627 [debug] Processing token: { (brace_open) at position 476
+
+01:05:15.627 [debug] Processing token: gather_comprehensive_system_intelligence() (unknown) at position 477
+
+01:05:15.627 [debug] Processing token: -> (forward_op) at position 478
+
+01:05:15.627 [debug] Processing token: system_intelligence (identifier) at position 479
+
+01:05:15.627 [debug] Processing token: identify_cross_system_optimization_opportunities(system_intelligence) (unknown) at position 480
+
+01:05:15.627 [debug] Processing token: -> (forward_op) at position 481
+
+01:05:15.627 [debug] Processing token: optimization_opportunities (identifier) at position 482
+
+01:05:15.627 [debug] Processing token: coordinate_enterprise_wide_improvements(optimization_opportunities) (unknown) at position 483
+
+01:05:15.627 [debug] Processing token: -> (forward_op) at position 484
+
+01:05:15.627 [debug] Processing token: system_improvements (identifier) at position 485
+
+01:05:15.627 [debug] Processing token: gravitate (gravitation_block) at position 486
+
+01:05:15.627 [info] 👶 Spawned PhysicsFSM for gravitate
+
+01:05:15.627 [debug] 🎯 Processing with PhysicsFSM
+
+01:05:15.627 [debug] Processing token: { (brace_open) at position 487
+
+01:05:15.627 [debug] Processing token: major_optimizations: (unknown) at position 488
+
+01:05:15.627 [debug] Processing token: system_improvements.impact (unknown) at position 489
+
+01:05:15.627 [debug] Processing token: > (greater_op) at position 490
+
+01:05:15.627 [debug] Processing token: 0.8 (number) at position 491
+
+01:05:15.627 [debug] Processing token: -> (forward_op) at position 492
+
+01:05:15.627 [debug] Processing token: implement_major_enterprise_changes(system_improvements) (unknown) at position 493
+
+01:05:15.627 [debug] Processing token: minor_optimizations: (unknown) at position 494
+
+01:05:15.627 [debug] Processing token: system_improvements.impact (unknown) at position 495
+
+01:05:15.627 [debug] Processing token: > (greater_op) at position 496
+
+01:05:15.627 [debug] Processing token: 0.3 (number) at position 497
+
+01:05:15.627 [debug] Processing token: -> (forward_op) at position 498
+
+01:05:15.627 [debug] Processing token: implement_incremental_improvements(system_improvements) (unknown) at position 499
+
+01:05:15.627 [debug] Processing token: monitoring_only: (unknown) at position 500
+
+01:05:15.627 [debug] Processing token: system_improvements.impact (unknown) at position 501
+
+01:05:15.627 [debug] Processing token: <= (unknown) at position 502
+
+01:05:15.627 [debug] Processing token: 0.3 (number) at position 503
+
+01:05:15.627 [debug] Processing token: -> (forward_op) at position 504
+
+01:05:15.627 [debug] Processing token: continue_intelligent_monitoring(system_improvements) (unknown) at position 505
+
+01:05:15.627 [debug] Processing token: } (brace_close) at position 506
+
+01:05:15.627 [debug] Processing token: trace (identifier) at position 507
+
+01:05:15.627 [debug] Processing token: enterprise_optimization (identifier) at position 508
+
+01:05:15.627 [debug] Processing token: <- (backward_op) at position 509
+
+01:05:15.627 [debug] Processing token: system_improvements (identifier) at position 510
+
+01:05:15.627 [debug] Processing token: <- (backward_op) at position 511
+
+01:05:15.627 [debug] Processing token: optimization_opportunities (identifier) at position 512
+
+01:05:15.627 [debug] Processing token: <- (backward_op) at position 513
+
+01:05:15.627 [debug] Processing token: system_intelligence (identifier) at position 514
+
+01:05:15.627 [debug] Processing token: } (brace_close) at position 515
+
+01:05:15.627 [debug] Processing token: } (brace_close) at position 516
+
+01:05:15.627 [debug] Processing token: } (brace_close) at position 517
+
+01:05:15.627 [info] ✨ QuantumScript parsing complete!
+
+01:05:15.627 [info] 📊 Parse result: 0.5033783783783784 confidence
+
+01:05:15.627 [info] 🤖 FSMs spawned: 33
+
+01:05:15.627 [info]    ✅ Parse time: 12.85ms
+
+01:05:15.627 [info]    ✅ Confidence: 0.5
+
+01:05:15.627 [info]    ✅ FSMs spawned: 33
+
+01:05:15.627 [info]    ✅ Time per token: 26.86μs
+
+01:05:15.627 [info]    ✅ Tokens processed: 518
+
+01:05:15.628 [info] 
+
+01:05:15.628 [info] 📊 QUANTUM PARSER SCALING ANALYSIS
+
+01:05:15.628 [info] ============================================================
+
+01:05:15.628 [info] 
+
+01:05:15.628 [info] ⚡ PERFORMANCE SCALING:
+
+01:05:15.628 [info]    Small scale (avg): 7.76μs/token
+
+01:05:15.628 [info]    Medium scale: 10.11μs/token
+
+01:05:15.628 [info]    Large scale: 10.71μs/token
+
+01:05:15.628 [info] 
+
+01:05:15.628 [info] 🧠 QUANTUM ADVANTAGES:
+
+01:05:15.628 [info]    Scaling efficiency: 0.73x improvement
+
+01:05:15.628 [info]    Quantum advantage proven: false
+
+01:05:15.628 [info] 
+
+01:05:15.628 [info] 🤖 FSM SPAWNING ANALYSIS:
+
+01:05:15.628 [info]    Small scale FSMs: 6
+
+01:05:15.628 [info]    Medium scale FSMs: 7
+
+01:05:15.628 [info]    Large scale FSMs: 33
+
+01:05:15.628 [info]    FSM spawning scales properly: true
+
+01:05:15.628 [info] 
+
+01:05:15.628 [info] 🎯 CONFIDENCE ANALYSIS:
+
+01:05:15.628 [info]    Small scale confidence: 0.51
+
+01:05:15.628 [info]    Medium scale confidence: 0.5
+
+01:05:15.628 [info]    Large scale confidence: 0.5
+
+01:05:15.628 [info]    Confidence maintained at scale: true
+
+01:05:15.628 [info] 
+
+01:05:15.628 [info] 🏆 FINAL ASSESSMENT:
+
+01:05:15.628 [info]    Performance Score: 7.5/10
+
+01:05:15.628 [info]    ⚠️  Mixed results - some quantum advantages demonstrated
+
+01:05:15.628 [info]    🔧 Additional optimization may be needed
+
+01:05:15.628 [info] 
+
+01:05:15.628 [info] ============================================================
+
+01:05:15.628 [info] ✨ Quantum Parser Benchmark Complete!

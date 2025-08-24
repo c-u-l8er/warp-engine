@@ -2,6 +2,10 @@
 
 Revolutionary finite state machines (FSMs) as first-class variables and functions that can spawn other FSMs, walk backwards in token streams, and collaboratively parse complex structures including natural language.
 
+# benchmark
+
+- elixir prototypes/working_quantum_benchmark.exs &> prototypes/working_quantum_benchmark.txt
+
 ## run prototype demos
 
 - elixir run_complete_tests.exs &> run_complete_tests.txt

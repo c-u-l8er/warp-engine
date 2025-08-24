@@ -20,3 +20,6 @@ mix run benchmarks/simple_weighted_graph_benchmark.exs &> benchmarks/simple_weig
 ### big data
 mix run benchmarks/big_data_scaling_test.exs &> benchmarks/big_data_scaling_test.txt
 mix run benchmarks/extreme_scale_benchmark.exs &> benchmarks/extreme_scale_benchmark.txt
+
+
+### parser
