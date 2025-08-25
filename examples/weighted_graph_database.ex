@@ -754,14 +754,22 @@ defmodule WeightedGraphDatabase do
     # Create wormhole route for high-weight edges
     wormhole_strength = (weight + strength) / 2
 
-    case WarpEngine.WormholeRouter.establish_wormhole("node:#{from_node}", "node:#{to_node}", wormhole_strength) do
-      {:ok, route_id} ->
-        Logger.debug("🌀 Wormhole route created: #{from_node} → #{to_node} (strength: #{wormhole_strength})")
-        {:ok, route_id}
+    # Check if WormholeRouter is available before attempting to use it
+    case Process.whereis(WarpEngine.WormholeRouter) do
+      nil ->
+        Logger.debug("⚠️ WormholeRouter not available, skipping wormhole route creation for #{from_node} → #{to_node}")
+        {:ok, :wormhole_router_unavailable}
 
-      {:error, reason} ->
-        Logger.debug("❌ Wormhole route creation failed: #{from_node} → #{to_node} (#{reason})")
-        {:error, reason}
+      router_pid when is_pid(router_pid) ->
+        case WarpEngine.WormholeRouter.establish_wormhole(router_pid, "node:#{from_node}", "node:#{to_node}", [strength: wormhole_strength]) do
+          {:ok, route_id} ->
+            Logger.debug("🌀 Wormhole route created: #{from_node} → #{to_node} (strength: #{wormhole_strength})")
+            {:ok, route_id}
+
+          {:error, reason} ->
+            Logger.debug("❌ Wormhole route creation failed: #{from_node} → #{to_node} (#{reason})")
+            {:error, reason}
+        end
     end
   end
 
@@ -769,14 +777,20 @@ defmodule WeightedGraphDatabase do
     # Create quantum entanglement for frequent relationships
     entanglement_strength = min(1.0, frequency * 1.2)
 
-    case WarpEngine.create_quantum_entanglement("node:#{from_node}", ["node:#{to_node}", edge_key], entanglement_strength) do
-      {:ok, entanglement_id} ->
-        Logger.debug("⚛️ Quantum entanglement created: #{from_node} <-> #{to_node} (strength: #{entanglement_strength})")
-        {:ok, entanglement_id}
+    # Check if quantum entanglement is available
+    if function_exported?(WarpEngine, :create_quantum_entanglement, 3) do
+      case WarpEngine.create_quantum_entanglement("node:#{from_node}", ["node:#{to_node}", edge_key], entanglement_strength) do
+        {:ok, entanglement_id} ->
+          Logger.debug("⚛️ Quantum entanglement created: #{from_node} <-> #{to_node} (strength: #{entanglement_strength})")
+          {:ok, entanglement_id}
 
-      {:error, reason} ->
-        Logger.debug("❌ Quantum entanglement failed: #{from_node} <-> #{to_node} (#{reason})")
-        {:error, reason}
+        {:error, reason} ->
+          Logger.debug("❌ Quantum entanglement failed: #{from_node} <-> #{to_node} (#{reason})")
+          {:error, reason}
+      end
+    else
+      Logger.debug("⚠️ Quantum entanglement not available, skipping for #{from_node} <-> #{to_node}")
+      {:ok, :quantum_entanglement_unavailable}
     end
   end
 
@@ -799,19 +813,25 @@ defmodule WeightedGraphDatabase do
 
   defp attempt_wormhole_traversal(node_id) do
     # Try to use existing wormhole routes for graph traversal
-    case WarpEngine.WormholeRouter.find_route("node:#{node_id}", "node:*", %{max_cost: 1.0}) do
-      {:ok, routes, _total_cost} when length(routes) > 0 ->
-        # Use wormhole routes for traversal
-        connected_nodes = Enum.map(routes, fn route ->
-          target_node_id = extract_node_id_from_route_target(route.target)
-          edge_data = %{weight: route.strength, type: :wormhole_route}
-          {target_node_id, edge_data}
-        end)
-
-        {:ok, connected_nodes}
-
-      _ ->
+    case Process.whereis(WarpEngine.WormholeRouter) do
+      nil ->
         {:error, :no_wormholes}
+
+      router_pid when is_pid(router_pid) ->
+        case WarpEngine.WormholeRouter.find_route(router_pid, "node:#{node_id}", "node:*", %{max_cost: 1.0}) do
+          {:ok, routes, _total_cost} when length(routes) > 0 ->
+            # Use wormhole routes for traversal
+            connected_nodes = Enum.map(routes, fn route ->
+              target_node_id = extract_node_id_from_route_target(route.target)
+              edge_data = %{weight: route.strength, type: :wormhole_route}
+              {target_node_id, edge_data}
+            end)
+
+            {:ok, connected_nodes}
+
+          _ ->
+            {:error, :no_wormholes}
+        end
     end
   rescue
     _error -> {:error, :no_wormholes}

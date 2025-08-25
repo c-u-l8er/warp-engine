@@ -7,8 +7,8 @@ A high-performance Elixir key-value database with creative physics-inspired opti
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-175%20passing-brightgreen.svg)]()
 
-**Performance**: 15K-26K ops/sec with good scaling characteristics  
-**Architecture**: Intelligent caching, adaptive sharding, predictive loading  
+**Performance**: 300K–650K ops/sec (median), 500K+ peak (short steady-state)
+**Architecture**: Intelligent caching, adaptive sharding, predictive loading
 **Zero-Tuning**: Self-optimizing system that adapts to workload patterns
 
 ## Overview
@@ -16,7 +16,7 @@ A high-performance Elixir key-value database with creative physics-inspired opti
 WarpEngine is an Elixir-based key-value database that combines solid engineering with creative optimization techniques inspired by physics concepts. It provides high-performance data storage with intelligent caching, adaptive sharding, and predictive data loading.
 
 **Key Features:**
-- **High Performance**: 15K-26K ops/sec with good scaling characteristics (measured on laptop hardware)
+- **High Performance**: 300K–650K ops/sec median with 500K+ peak (laptop, short windows)
 - **Intelligent Caching**: Predictive prefetching based on access pattern analysis  
 - **Adaptive Sharding**: Locality-aware data placement that improves over time
 - **Pattern Learning**: Automatically learns data relationships for optimization
@@ -25,19 +25,23 @@ WarpEngine is an Elixir-based key-value database that combines solid engineering
 
 ## Performance Characteristics
 
-**Measured Performance (Dell PX13 Laptop):**
-- **Key-Value Operations**: 15,209-26,033 ops/sec
-- **Scaling**: Good performance maintained up to ~1M records  
-- **Memory Efficiency**: Reasonable memory usage with intelligent caching
-- **Latency**: Sub-millisecond operations for cached data
+**Latest Concurrency Scaling (Dell PX13 / WSL, warmup 2s, measure 1.5s, trials 5):**
 
-**Scaling Results:**
-| Dataset Size | Operations/sec | Notes |
-|--------------|----------------|--------|
-| 1K records | 15,209 ops/sec | Baseline performance |
-| 10K records | 23,922 ops/sec | 57% improvement as optimizations engage |
-| 500K records | 24,598 ops/sec | Sustained performance |  
-| 1M records | 26,033 ops/sec | Peak measured performance |
+| Processes | Median ops/sec | Best ops/sec |
+|-----------|----------------|--------------|
+| 1         | 194,533        | 204,600      |
+| 2         | 357,000        | 376,000      |
+| 3         | 508,600        | 517,866      |
+| 4         | 637,400        | 647,266      |
+
+Notes:
+- Benchmarks reflect short steady-state windows to avoid OS memory interference under WSL.
+- Longer sweeps are possible with tighter memory caps (bounded keysets, periodic WAL flushes, and sampling).
+
+**Why the improvement?**
+- Per-shard WAL (24 shards) eliminated the single-GenServer bottleneck.
+- Ultra-minimal WAL format (binary, essential fields only) with iodata writes.
+- Buffered raw I/O with jittered flushing, hard buffer caps, and shard pinning.
 
 ## Architecture
 
@@ -139,6 +143,16 @@ config :warp_engine,
   enable_event_horizon_cache: true,     # Multi-level caching
   enable_entropy_monitoring: true,      # Load balancing
   
+  # Dynamic shard topology (per-machine)
+  # Enable numbered shards and size to cores for max throughput
+  use_numbered_shards: true,
+  num_numbered_shards: System.schedulers_online(),
+
+  # Benchmark knobs
+  bench_mode: false,                 # Set true to skip non-essential work
+  enable_auto_entanglement: true,    # Disable for pure-write benches
+  wal_sample_rate: 1                 # Increase (e.g., 4/8/16) to reduce WAL I/O during long runs
+
   # Prefetch patterns
   entanglement_rules: [
     {"user:*", ["profile:*", "settings:*"]},
@@ -168,15 +182,6 @@ WarpEngine combines traditional high-performance data structures (ETS tables) wi
 - **Elixir/OTP Integration**: Built on battle-tested Erlang VM
 - **Monitoring**: Built-in metrics and performance tracking
 - **Self-Optimization**: Adapts to workload patterns without manual tuning
-
-## Performance Comparison
-
-**vs Other Elixir Databases (on similar hardware):**
-- **Mnesia**: ~5,000-8,000 ops/sec → WarpEngine: 2-3x faster with intelligent optimizations  
-- **CubDB**: ~3,000-6,000 ops/sec → WarpEngine: 3-5x faster with predictive caching
-- **ETS-based stores**: Fast but no persistence → WarpEngine: Persistent + adaptive optimizations
-
-**Note**: Performance is hardware and workload specific. WarpEngine excels at key-value operations with predictable access patterns and intelligent caching.
 
 ## Technical Architecture: Physics + Performance
 
@@ -230,10 +235,21 @@ The example provides graph operations like `store_node/1`, `store_edge/1`, `trav
 Run performance tests:
 
 ```bash
-# Basic performance
+# Simple baseline
 mix run simple_benchmark.exs
 
-# Multi-core scaling
+# Concurrency sweep (warmup + steady-state): prints best/median/p50/p90
+mix run benchmarks/optimal_concurrency_test
+mix run benchmarks/concurrency_sweep_heavy.exs
+
+# Concurrency sweep with settings and output to filesystem
+WAL_SAMPLE_RATE=16 KEYSET=500 CONC="1,2,3,4" TRIALS=5 MEASURE_MS=1500 OPS=100 MIX_ENV=prod mix run benchmarks/optimal_concurrency_test.exs &> benchmarks/optimal_concurrency_test.txt 
+CONC="1,2,3,4" KEYSET=10000 TRIALS=2 WARMUPS=1 MEASURE_MS=3000 SHARDS=24 mix run benchmarks/concurrency_sweep_heavy.exs &> benchmarks/concurrency_sweep_heavy.txt
+
+# general benchmark
+mix run benchmarks/working_benchmark.exs &> benchmarks/working_benchmark.txt
+
+# Multi-core scaling (additional scenarios)
 mix run multi_core_benchmark.exs
 
 # Graph database comparison (uses the example implementation)

@@ -71,13 +71,24 @@ defmodule WarpEngine.Application do
     # Log startup configuration
     log_startup_config(config)
 
-    # Define supervised processes
+    # Define supervised processes (Phase 9.3: High-Concurrency Optimized Architecture)
+    bench_mode = Keyword.get(config, :bench_mode, false)
+    disable_batcher = bench_mode or Application.get_env(:warp_engine, :disable_operation_batcher, false)
+    disable_ilb = bench_mode or Application.get_env(:warp_engine, :disable_intelligent_load_balancer, false)
+
     children = [
-      # WAL System - Must start before main database
-      {WarpEngine.WAL, config},
+      # Phase 9.3: Operation Batcher - reduces per-operation overhead at high concurrency
+      (if disable_batcher, do: nil, else: {WarpEngine.OperationBatcher, []}),
+      # Phase 9.2: Intelligent Load Balancer - optimizes performance at all concurrency levels
+      (if disable_ilb, do: nil, else: {WarpEngine.IntelligentLoadBalancer, []}),
+      # Phase 9.1: WAL Coordinator with per-shard processes - eliminates concurrency bottleneck
+      (if bench_mode, do: nil, else: {WarpEngine.WALCoordinator, config}),
+      # Legacy WAL (single process) for compatibility with TemporalShard and tests expecting :warp_engine.WAL
+      (if bench_mode, do: nil, else: {WarpEngine.WAL, config}),
       # Main WarpEngine Database GenServer
       {WarpEngine, config}
     ]
+    |> Enum.reject(&is_nil/1)
 
     Logger.info("🔧 Starting supervisor with #{length(children)} children")
 

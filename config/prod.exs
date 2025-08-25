@@ -11,6 +11,13 @@ import Config
 config :warp_engine,
   data_root: Path.expand("../data", __DIR__)
 
+# Dynamic shard topology sized to the machine
+config :warp_engine,
+  use_numbered_shards: true,
+  num_numbered_shards: System.schedulers_online(),
+  enable_auto_entanglement: true,
+  bench_mode: false
+
 # Configure logging for production
 config :logger,
   level: :warning

@@ -160,17 +160,17 @@ defmodule WarpEngine.WAL.Entry do
   Encode entry to JSON format for human-readable debugging.
   """
   def encode_json(entry) do
-    # Manual JSON encoding for compatibility
+    # Manual JSON encoding for compatibility - handle both full and minimal entries
     json_map = %{
-      sequence: entry.sequence,
-      timestamp: entry.timestamp,
-      operation: entry.operation,
-      shard_id: entry.shard_id,
-      key: entry.key,
-      value_preview: entry.value_preview,
-      physics_metadata: entry.physics_metadata,
-      compression_type: entry.compression_type,
-      version: entry.version
+      sequence: Map.get(entry, :sequence),
+      timestamp: Map.get(entry, :timestamp),
+      operation: Map.get(entry, :operation),
+      shard_id: Map.get(entry, :shard_id),
+      key: Map.get(entry, :key),
+      value_preview: Map.get(entry, :value_preview),
+      physics_metadata: Map.get(entry, :physics_metadata, %{}),
+      compression_type: Map.get(entry, :compression_type, :none),
+      version: Map.get(entry, :version, "6.6.0")
     }
 
     # Simple JSON encoding (will be replaced with proper Jason when available)

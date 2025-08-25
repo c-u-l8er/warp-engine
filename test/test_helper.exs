@@ -4,6 +4,9 @@
 # Test environment configuration
 Application.put_env(:warp_engine, :test_mode, true)
 Application.put_env(:warp_engine, :data_root, "/tmp/warp_engine_test_data")
+# Ensure tests run in normal mode (not bench mode)
+Application.put_env(:warp_engine, :bench_mode, false)
+Application.put_env(:warp_engine, :force_ultra_fast_path, false)
 
 # Ensure clean test environment before starting
 test_data_dir = "/tmp/warp_engine_test_data"

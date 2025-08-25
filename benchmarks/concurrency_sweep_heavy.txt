@@ -1,0 +1,1234 @@
+     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 272 │     Enum.each(operations, fn {_op_type, key, _value, opts} ->
+     │                                                      ~
+     │
+     └─ lib/warp_engine/operation_batcher.ex:272:54: WarpEngine.OperationBatcher.execute_operation_batch/3
+
+     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 279 │     Enum.each(operations, fn {_op_type, key, _value, opts} ->
+     │                                                      ~
+     │
+     └─ lib/warp_engine/operation_batcher.ex:279:54: WarpEngine.OperationBatcher.execute_operation_batch/3
+
+     warning: the underscored variable "_meta" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore
+     │
+ 548 │       {module_name, _meta, args}
+     │                     ~
+     │
+     └─ lib/enhanced_adt/bend.ex:548:21: EnhancedADT.Bend.transform_bend_adt_pattern/1
+
+     warning: function update_bend_context/2 is unused
+     │
+ 427 │   defp update_bend_context(context, updates) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:427:8: EnhancedADT.Bend (module)
+
+     warning: function transform_elegant_bend_clause/1 is unused
+     │
+ 526 │   defp transform_elegant_bend_clause({:->, meta, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:526:8: EnhancedADT.Bend (module)
+
+     warning: function transform_elegant_adt_clauses_for_bend/1 is unused
+     │
+ 517 │   defp transform_elegant_adt_clauses_for_bend(clauses) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:517:8: EnhancedADT.Bend (module)
+
+     warning: function transform_bend_adt_pattern/1 is unused
+     │
+ 532 │   defp transform_bend_adt_pattern({module_name, _meta, args}) when is_atom(module_name) and is_list(args) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:532:8: EnhancedADT.Bend (module)
+
+     warning: function record_network_connections/3 is unused
+     │
+ 431 │   defp record_network_connections(context, _node_id, _result) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:431:8: EnhancedADT.Bend (module)
+
+     warning: function inject_network_generation/2 is unused
+     │
+ 245 │   defp inject_network_generation(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:245:8: EnhancedADT.Bend (module)
+
+     warning: function inject_fork_tracking/1 is unused
+     │
+ 283 │   defp inject_fork_tracking(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:283:8: EnhancedADT.Bend (module)
+
+     warning: function get_bend_module_field_names/1 is unused
+     │
+ 558 │   defp get_bend_module_field_names(variant_name) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:558:8: EnhancedADT.Bend (module)
+
+     warning: function generate_unique_node_id/0 is unused
+     │
+ 423 │   defp generate_unique_node_id() do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:423:8: EnhancedADT.Bend (module)
+
+     warning: function find_recursive_calls_in_ast/1 is unused
+     │
+ 405 │   defp find_recursive_calls_in_ast(_body), do: []  # Simplified
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:405:8: EnhancedADT.Bend (module)
+
+     warning: function find_fork_calls_in_ast/1 is unused
+     │
+ 408 │   defp find_fork_calls_in_ast(_body), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:408:8: EnhancedADT.Bend (module)
+
+     warning: function find_connection_points/2 is unused
+     │
+ 410 │   defp find_connection_points(_patterns, _body), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:410:8: EnhancedADT.Bend (module)
+
+     warning: function extract_topology_hints/2 is unused
+     │
+ 412 │   defp extract_topology_hints(_patterns, _body), do: %{}
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:412:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_recursion_depth/1 is unused
+     │
+ 407 │   defp estimate_recursion_depth(_calls), do: 1
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:407:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_node_count/2 is unused
+     │
+ 416 │   defp estimate_node_count(fork_count, depth), do: fork_count * depth
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:416:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_max_recursion_depth/1 is unused
+     │
+ 415 │   defp estimate_max_recursion_depth(_body), do: 1
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:415:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_connection_count/1 is unused
+     │
+ 417 │   defp estimate_connection_count(fork_count), do: fork_count * 2
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:417:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_body_with_network_tracking/2 is unused
+     │
+ 274 │   defp enhance_body_with_network_tracking(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:274:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_bend_clauses/2 is unused
+     │
+ 225 │   defp enhance_bend_clauses(clauses, bend_analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:225:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_bend_clause/2 is unused
+     │
+ 238 │   defp enhance_bend_clause({:->, meta, [pattern_list, body]}, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:238:8: EnhancedADT.Bend (module)
+
+     warning: function determine_optimization_priority/2 is unused
+     │
+ 418 │   defp determine_optimization_priority(fork_count, depth), do: if(fork_count * depth > 10, do: :high, else: :normal)
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:418:8: EnhancedADT.Bend (module)
+
+     warning: function detect_recursive_calls/1 is unused
+     │
+ 181 │   defp detect_recursive_calls(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:181:8: EnhancedADT.Bend (module)
+
+     warning: function detect_fork_operations/1 is unused
+     │
+ 191 │   defp detect_fork_operations(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:191:8: EnhancedADT.Bend (module)
+
+     warning: function count_fork_operations/1 is unused
+     │
+ 414 │   defp count_fork_operations(_body), do: 0
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:414:8: EnhancedADT.Bend (module)
+
+     warning: function contains_depth_check?/1 is unused
+     │
+ 419 │   defp contains_depth_check?(_guard), do: false
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:419:8: EnhancedADT.Bend (module)
+
+     warning: function classify_recursive_calls/1 is unused
+     │
+ 406 │   defp classify_recursive_calls(_calls), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:406:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_optimization_potential/2 is unused
+     │
+ 413 │   defp calculate_optimization_potential(_patterns, _body), do: 0.5
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:413:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_network_complexity/1 is unused
+     │
+ 211 │   defp calculate_network_complexity(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:211:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_fork_connection_strength/3 is unused
+     │
+ 435 │   defp calculate_fork_connection_strength(_source, _target, _value) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:435:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_wormhole_opportunities/2 is unused
+     │
+ 201 │   defp analyze_wormhole_opportunities(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:201:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_strength_indicators/1 is unused
+     │
+ 411 │   defp analyze_strength_indicators(_body), do: %{}
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:411:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_fork_patterns/1 is unused
+     │
+ 409 │   defp analyze_fork_patterns(_calls), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:409:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_pattern/1 is unused
+     │
+ 131 │   defp analyze_bend_pattern(pattern) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:131:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_clauses/1 is unused
+     │
+ 108 │   defp analyze_bend_clauses(clauses) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:108:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_clause/1 is unused
+     │
+ 115 │   defp analyze_bend_clause({:->, _, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:115:8: EnhancedADT.Bend (module)
+
+      warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+      │
+ 1107 │         missing_tables = [table_name | missing_tables]
+      │         ~
+      │
+      └─ lib/warp_engine.ex:1107:9: WarpEngine.verify_tables_created/1
+
+      warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+      │
+ 1115 │         missing_tables = [table_name | missing_tables]
+      │         ~
+      │
+      └─ lib/warp_engine.ex:1115:9: WarpEngine.verify_tables_created/1
+
+      warning: function update_quantum_metrics/3 is unused
+      │
+ 1268 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1268:8: WarpEngine (module)
+
+      warning: function store_in_event_horizon_cache/5 is unused
+      │
+ 1350 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1350:8: WarpEngine (module)
+
+      warning: function refresh_cached_state/0 is unused
+      │
+ 1771 │   defp refresh_cached_state() do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1771:8: WarpEngine (module)
+
+      warning: function get_current_state/0 is unused
+      │
+ 1795 │   defp get_current_state() do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1795:8: WarpEngine (module)
+
+warning: struct :already_exists is undefined (module :already_exists is not available or is yet to be defined)
+└─ lib/warp_engine.ex: WarpEngine.create_all_ets_tables_eagerly/0
+
+     warning: function atomize_keys/1 is unused
+     │
+ 288 │   defp atomize_keys(map) when is_map(map) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_entry.ex:288:8: WarpEngine.WAL.Entry (module)
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 467 │   defp start_shard_sync_process(shard_id, wal_file_handle) do
+     │                                 ~~~~~~~~
+     │
+     └─ lib/warp_engine/wal_shard.ex:467:33: WarpEngine.WALShard.start_shard_sync_process/2
+
+     warning: variable "wal_file_handle" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 467 │   defp start_shard_sync_process(shard_id, wal_file_handle) do
+     │                                           ~~~~~~~~~~~~~~~
+     │
+     └─ lib/warp_engine/wal_shard.ex:467:43: WarpEngine.WALShard.start_shard_sync_process/2
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 472 │   defp shard_sync_loop(shard_id, wal_file_handle) do
+     │                        ~~~~~~~~
+     │
+     └─ lib/warp_engine/wal_shard.ex:472:24: WarpEngine.WALShard.shard_sync_loop/2
+
+     warning: variable "wal_file_handle" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 472 │   defp shard_sync_loop(shard_id, wal_file_handle) do
+     │                                  ~~~~~~~~~~~~~~~
+     │
+     └─ lib/warp_engine/wal_shard.ex:472:34: WarpEngine.WALShard.shard_sync_loop/2
+
+     warning: function start_shard_sync_process/2 is unused
+     │
+ 467 │   defp start_shard_sync_process(shard_id, wal_file_handle) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_shard.ex:467:8: WarpEngine.WALShard (module)
+
+     warning: function shard_sync_loop/2 is unused
+     │
+ 472 │   defp shard_sync_loop(shard_id, wal_file_handle) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_shard.ex:472:8: WarpEngine.WALShard (module)
+
+     warning: the following clause will never match:
+
+         {:ok, checkpoint_info}
+
+     because it attempts to match on the result of:
+
+         checkpoint_result
+
+     which has type:
+
+         dynamic({:error, :no_checkpoint})
+
+     typing violation found at:
+     │
+ 541 │         {:ok, checkpoint_info} ->
+     │         ~~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/warp_engine/wal_shard.ex:541: WarpEngine.WALShard.perform_shard_wal_recovery/1
+
+     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 178 │   def ultra_fast_get(key, opts \\ []) do
+     │                           ~~~~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:178:27: WarpEngine.UltraFastOperations.ultra_fast_get/2
+
+     warning: WarpEngine.WormholeRouter.find_route/2 is undefined or private. Did you mean:
+
+           * find_route/3
+           * find_route/4
+
+     │
+ 390 │     case WarpEngine.WormholeRouter.find_route(key, "*") do
+     │                                    ~
+     │
+     └─ lib/enhanced_adt/islab_integration.ex:390:36: EnhancedADT.WarpEngineIntegration.Translators.attempt_wormhole_retrieval/1
+
+     warning: WarpEngine.WormholeRouter.traverse_route_for_data/1 is undefined or private
+     │
+ 393 │         case WarpEngine.WormholeRouter.traverse_route_for_data(route) do
+     │                                        ~
+     │
+     └─ lib/enhanced_adt/islab_integration.ex:393:40: EnhancedADT.WarpEngineIntegration.Translators.attempt_wormhole_retrieval/1
+
+     warning: clauses with the same name and arity (number of arguments) should be grouped together, "def handle_call/3" was previously defined (lib/warp_engine/wal_coordinator.ex:225)
+     │
+ 252 │   def handle_call(:create_coordinated_checkpoint, _from, state) do
+     │       ~
+     │
+     └─ lib/warp_engine/wal_coordinator.ex:252:7
+
+    warning: module attribute @spacetime_shards was set but never used
+    │
+ 54 │   @spacetime_shards [
+    │   ~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_coordinator.ex:54: WarpEngine.WALCoordinator (module)
+
+     warning: the following clause will never match:
+
+         :high_frequency
+
+     because it attempts to match on the result of:
+
+         analyze_route_pattern(route_candidate)
+
+     which has type:
+
+         dynamic(:medium_frequency)
+
+     typing violation found at:
+     │
+ 149 │       :high_frequency -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:149: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
+
+     warning: the following clause will never match:
+
+         :low_frequency
+
+     because it attempts to match on the result of:
+
+         analyze_route_pattern(route_candidate)
+
+     which has type:
+
+         dynamic(:medium_frequency)
+
+     typing violation found at:
+     │
+ 151 │       :low_frequency -> 0.3
+     │       ~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:151: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
+
+     warning: the following clause will never match:
+
+         :unknown
+
+     because it attempts to match on the result of:
+
+         analyze_route_pattern(route_candidate)
+
+     which has type:
+
+         dynamic(:medium_frequency)
+
+     typing violation found at:
+     │
+ 152 │       :unknown -> 0.4
+     │       ~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:152: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
+
+     warning: the following clause will never match:
+
+         :simple
+
+     because it attempts to match on the result of:
+
+         estimate_route_complexity(route_candidate)
+
+     which has type:
+
+         dynamic(:moderate)
+
+     typing violation found at:
+     │
+ 165 │       :simple -> 0.05
+     │       ~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:165: EnhancedADT.WormholeAnalyzer.estimate_maintenance_cost/1
+
+     warning: the following clause will never match:
+
+         :complex
+
+     because it attempts to match on the result of:
+
+         estimate_route_complexity(route_candidate)
+
+     which has type:
+
+         dynamic(:moderate)
+
+     typing violation found at:
+     │
+ 167 │       :complex -> 0.2
+     │       ~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:167: EnhancedADT.WormholeAnalyzer.estimate_maintenance_cost/1
+
+     warning: variable "meta1" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 162 │   defp transform_single_physics_field({:"::", meta1, [field_name, {:"::", meta2, [type_spec, [physics: physics_annotation]]}]}) do
+     │                                               ~~~~~
+     │
+     └─ lib/enhanced_adt.ex:162:47: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: variable "meta2" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 162 │   defp transform_single_physics_field({:"::", meta1, [field_name, {:"::", meta2, [type_spec, [physics: physics_annotation]]}]}) do
+     │                                                                           ~~~~~
+     │
+     └─ lib/enhanced_adt.ex:162:75: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: variable "meta" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 168 │   defp transform_single_physics_field({{:"::", meta, [field_name, type_spec]}, [physics: physics_annotation]}) do
+     │                                                ~~~~
+     │
+     └─ lib/enhanced_adt.ex:168:48: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: function extract_variant_name/1 is unused
+     │
+ 242 │   defp extract_variant_name({:__aliases__, _, [variant_name]}) when is_atom(variant_name), do: variant_name
+     │        ~
+     │
+     └─ lib/enhanced_adt.ex:242:8: EnhancedADT.ProductType (module)
+
+     warning: function parse_elegant_variant_fields/1 is unused
+     │
+ 450 │   defp parse_elegant_variant_fields(args) do
+     │        ~
+     │
+     └─ lib/enhanced_adt.ex:450:8: EnhancedADT.SumType (module)
+
+    warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+    │
+ 60 │     defmacro fold(value, opts \\ [], do: clauses) do
+    │                          ~~~~
+    │
+    └─ lib/enhanced_adt/fold.ex:60:26: EnhancedADT.Fold.fold/3
+
+     warning: the underscored variable "_meta" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore
+     │
+ 433 │       {module_name, _meta, args}
+     │                     ~
+     │
+     └─ lib/enhanced_adt/fold.ex:433:21: EnhancedADT.Fold.transform_adt_pattern/1
+
+     warning: defp transform_adt_pattern/1 is private, @doc attribute is always discarded for private functions/macros/types
+     │
+ 411 │     @doc """
+     │     ~~~~~~~~
+     │
+     └─ lib/enhanced_adt/fold.ex:411: EnhancedADT.Fold.transform_adt_pattern/1
+
+     warning: function wrap_with_state_management/2 is unused
+     │
+ 303 │   defp wrap_with_state_management(body, mode) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:303:8: EnhancedADT.Fold (module)
+
+     warning: function inject_wormhole_analysis/2 is unused
+     │
+ 273 │   defp inject_wormhole_analysis(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:273:8: EnhancedADT.Fold (module)
+
+     warning: function inject_warp_engine_operations/3 is unused
+     │
+ 256 │   defp inject_warp_engine_operations(body, analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:256:8: EnhancedADT.Fold (module)
+
+     warning: function inject_quantum_correlation/2 is unused
+     │
+ 288 │   defp inject_quantum_correlation(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:288:8: EnhancedADT.Fold (module)
+
+     warning: function extract_types_from_pattern/1 is unused
+     │
+ 380 │   defp extract_types_from_pattern({module_name, _, _args}) when is_atom(module_name) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:380:8: EnhancedADT.Fold (module)
+
+     warning: function extract_physics_hints/2 is unused
+     │
+ 189 │   defp extract_physics_hints(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:189:8: EnhancedADT.Fold (module)
+
+     warning: function extract_pattern_types/1 is unused
+     │
+ 376 │   defp extract_pattern_types(patterns) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:376:8: EnhancedADT.Fold (module)
+
+     warning: function extract_body_references/1 is unused
+     │
+ 385 │   defp extract_body_references(_body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:385:8: EnhancedADT.Fold (module)
+
+     warning: function enhance_single_clause/3 is unused
+     │
+ 220 │   defp enhance_single_clause({:->, meta, [pattern_list, body]}, analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:220:8: EnhancedADT.Fold (module)
+
+     warning: function enhance_fold_clauses/3 is unused
+     │
+ 200 │   defp enhance_fold_clauses(clauses, clause_analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:200:8: EnhancedADT.Fold (module)
+
+     warning: function determine_access_pattern/2 is unused
+     │
+ 391 │   defp determine_access_pattern(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:391:8: EnhancedADT.Fold (module)
+
+     warning: function detect_cross_references/2 is unused
+     │
+ 172 │   defp detect_cross_references(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:172:8: EnhancedADT.Fold (module)
+
+     warning: function detect_adt_operations/1 is unused
+     │
+ 161 │   defp detect_adt_operations(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:161:8: EnhancedADT.Fold (module)
+
+     warning: function contains_storage_calls?/1 is unused
+     │
+ 347 │   defp contains_storage_calls?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:347:8: EnhancedADT.Fold (module)
+
+     warning: function contains_retrieval_calls?/1 is unused
+     │
+ 355 │   defp contains_retrieval_calls?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:355:8: EnhancedADT.Fold (module)
+
+     warning: function contains_cross_reference_patterns?/1 is unused
+     │
+ 362 │   defp contains_cross_reference_patterns?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:362:8: EnhancedADT.Fold (module)
+
+     warning: function calculate_operation_complexity/1 is unused
+     │
+ 370 │   defp calculate_operation_complexity(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:370:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_temporal_characteristics/1 is unused
+     │
+ 401 │   defp analyze_temporal_characteristics(_body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:401:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_single_clause/1 is unused
+     │
+ 104 │   defp analyze_single_clause({:->, _, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:104:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_pattern/1 is unused
+     │
+ 119 │   defp analyze_pattern(pattern) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:119:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_gravitational_hints/2 is unused
+     │
+ 406 │   defp analyze_gravitational_hints(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:406:8: EnhancedADT.Fold (module)
+
+    warning: function analyze_fold_clauses/1 is unused
+    │
+ 96 │   defp analyze_fold_clauses(clauses) do
+    │        ~
+    │
+    └─ lib/enhanced_adt/fold.ex:96:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_data_locality/2 is unused
+     │
+ 396 │   defp analyze_data_locality(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:396:8: EnhancedADT.Fold (module)
+
+     warning: the following clause will never match:
+
+         :strongly_related
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 170 │       :strongly_related -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:170: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :weakly_related
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 172 │       :weakly_related -> 0.4
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:172: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :unrelated
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 173 │       :unrelated -> 0.1
+     │       ~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:173: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :always_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 180 │       :always_together -> 0.95
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:180: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :frequently_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 181 │       :frequently_together -> 0.8
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:181: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :rarely_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 183 │       :rarely_together -> 0.2
+     │       ~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:183: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :never_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 184 │       :never_together -> 0.0
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:184: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :very_stable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 191 │       :very_stable -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:191: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: the following clause will never match:
+
+         :moderately_stable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 193 │       :moderately_stable -> 0.5
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:193: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: the following clause will never match:
+
+         :unstable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 194 │       :unstable -> 0.3
+     │       ~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:194: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: function update_wormhole_usage_patterns/3 is unused
+     │
+ 578 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:578:8: WarpEngine.WALOperations (module)
+
+     warning: function update_shard_statistics/4 is unused
+     │
+ 588 │   defp update_shard_statistics(shard, operation, _key, _value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:588:8: WarpEngine.WALOperations (module)
+
+     warning: function update_physics_intelligence_async/4 is unused
+     │
+ 357 │   defp update_physics_intelligence_async(key, _value, _cosmic_metadata, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:357:8: WarpEngine.WALOperations (module)
+
+     warning: function update_get_physics_intelligence_async/5 is unused
+     │
+ 388 │   defp update_get_physics_intelligence_async(key, _value, _shard_id, _cosmic_metadata, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:388:8: WarpEngine.WALOperations (module)
+
+     warning: function update_access_patterns_async/3 is unused
+     │
+ 516 │   defp update_access_patterns_async(key, access_type, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:516:8: WarpEngine.WALOperations (module)
+
+     warning: function ultra_fast_route_data/3 is unused
+     │
+ 259 │   defp ultra_fast_route_data(key, _value, opts) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:259:8: WarpEngine.WALOperations (module)
+
+     warning: function populate_event_horizon_cache_async/4 is unused
+     │
+ 485 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:485:8: WarpEngine.WALOperations (module)
+
+     warning: function get_wormhole_metadata/2 is unused
+     │
+ 560 │   defp get_wormhole_metadata(_key, shard_id) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:560:8: WarpEngine.WALOperations (module)
+
+     warning: function estimate_value_size/1 is unused
+     │
+ 304 │   defp estimate_value_size(value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:304:8: WarpEngine.WALOperations (module)
+
+     warning: function estimate_current_concurrency/0 is unused
+     │
+ 286 │   defp estimate_current_concurrency() do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:286:8: WarpEngine.WALOperations (module)
+
+     warning: function determine_quantum_state/2 is unused
+     │
+ 521 │   defp determine_quantum_state(key, value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:521:8: WarpEngine.WALOperations (module)
+
+     warning: function determine_optimal_cache_level/1 is unused
+     │
+ 569 │   defp determine_optimal_cache_level(cosmic_metadata) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:569:8: WarpEngine.WALOperations (module)
+
+     warning: function create_cosmic_metadata/5 is unused
+     │
+ 341 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:341:8: WarpEngine.WALOperations (module)
+
+     warning: function check_event_horizon_cache_v2/2 is unused
+     │
+ 402 │   defp check_event_horizon_cache_v2(state, key) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:402:8: WarpEngine.WALOperations (module)
+
+     warning: function calculate_entropy_impact/3 is unused
+     │
+ 532 │   defp calculate_entropy_impact(key, value, shard_id) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:532:8: WarpEngine.WALOperations (module)
+
+     warning: function calculate_cosmic_coordinates/2 is unused
+     │
+ 546 │   defp calculate_cosmic_coordinates(key, value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:546:8: WarpEngine.WALOperations (module)
+
+     warning: function cache_retrieved_value_async/5 is unused
+     │
+ 498 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:498:8: WarpEngine.WALOperations (module)
+
+    warning: module attribute @wal_sequence_ref_key_prefix was set but never used
+    │
+ 31 │   @wal_sequence_ref_key_prefix :wal_shard_sequence_counter_cache
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_operations.ex:31: WarpEngine.WALOperations (module)
+
+    warning: unused alias IntelligentLoadBalancer
+    │
+ 27 │   alias WarpEngine.{WALCoordinator, QuantumIndex, IntelligentLoadBalancer}
+    │   ~
+    │
+    └─ lib/warp_engine/wal_operations.ex:27:3
+
+    warning: unused alias WALEntry
+    │
+ 28 │   alias WarpEngine.WAL.Entry, as: WALEntry
+    │   ~
+    │
+    └─ lib/warp_engine/wal_operations.ex:28:3
+
+     warning: the following clause will never match:
+
+         {:error, _reason}
+
+     because it attempts to match on the result of:
+
+         WarpEngine.EventHorizonCache.get(cache, key)
+
+     which has type:
+
+         dynamic(
+           {:miss, %{..., performance_metrics: term()}} or
+             {:ok, term(), %{..., performance_metrics: term()},
+              %{
+                cache_level: term(),
+                data_decompressed: boolean(),
+                dilated_operation_time: integer(),
+                promoted: boolean(),
+                time_dilation_factor: term(),
+                wall_clock_time: float() or integer()
+              }}
+         )
+
+     typing violation found at:
+     │
+ 414 │             {:error, _reason} -> nil
+     │             ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/warp_engine/wal_operations.ex:414: WarpEngine.WALOperations.check_event_horizon_cache_v2/2
+
+
+16:07:17.598 [info] 🚀 Starting WarpEngine Database Application...
+
+16:07:17.601 [info] ⚙️  Application Configuration:
+
+16:07:17.610 [info]   data_root: "/home/travis/Projects/warp-engine/data"
+
+16:07:17.610 [info]   Entanglement rules: using defaults
+
+16:07:17.610 [info] 🔧 Starting supervisor with 1 children
+     warning: variable "build_graph_seq" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 115 │ build_graph_seq = fn ->
+     │ ~~~~~~~~~~~~~~~
+     │
+     └─ benchmarks/concurrency_sweep_heavy.exs:115:1
+
+     warning: variable "edge_reduce_seq" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 102 │ edge_reduce_seq = fn ->
+     │ ~~~~~~~~~~~~~~~
+     │
+     └─ benchmarks/concurrency_sweep_heavy.exs:102:1
+
+    warning: variable "node_reduce_seq" is unused (if the variable is not meant to be used, prefix it with an underscore)
+    │
+ 86 │ node_reduce_seq = fn ->
+    │ ~~~~~~~~~~~~~~~
+    │
+    └─ benchmarks/concurrency_sweep_heavy.exs:86:1
+
+⚙️  Concurrency Sweep Config: nodes=10000 edges=20000 repeat=5 warmups=1 trials=2
+   Levels: 1,2,3,4
+
+16:07:17.978 [info] 📚 Compiling simplified Enhanced ADT module...
+    warning: duplicate key :"::" found in struct
+    │
+ 44 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/simple_weighted_graph.ex:44: :ConnectedGraph (module)
+
+    warning: duplicate key :"::" found in struct
+    │
+ 44 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/simple_weighted_graph.ex:44: :ConnectedGraph (module)
+
+    warning: duplicate key :"::" found in struct
+    │
+ 44 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/simple_weighted_graph.ex:44: :ClusteredGraph (module)
+
+    warning: duplicate key :"::" found in struct
+    │
+ 44 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/simple_weighted_graph.ex:44: :ClusteredGraph (module)
+
+    warning: duplicate key :"::" found in struct
+    │
+ 44 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/simple_weighted_graph.ex:44: :HierarchicalGraph (module)
+
+    warning: duplicate key :"::" found in struct
+    │
+ 44 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/simple_weighted_graph.ex:44: :HierarchicalGraph (module)
+
+    warning: redefining @doc attribute previously set at line 17
+    │
+ 74 │   @doc """
+    │   ~~~~~~~~
+    │
+    └─ examples/simple_weighted_graph.ex:74: SimpleWeightedGraph (module)
+
+    warning: SimpleWeightedGraph.WeightedGraph."ClusteredGraph"/0 is undefined or private. Did you mean:
+
+          * "ClusteredGraph"/3
+
+    │
+ 44 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/simple_weighted_graph.ex:44: SimpleWeightedGraph.WeightedGraph."ClusteredGraph"/3
+
+    warning: SimpleWeightedGraph.WeightedGraph."ConnectedGraph"/0 is undefined or private. Did you mean:
+
+          * "ConnectedGraph"/3
+
+    │
+ 44 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/simple_weighted_graph.ex:44: SimpleWeightedGraph.WeightedGraph."ConnectedGraph"/3
+
+    warning: SimpleWeightedGraph.WeightedGraph."HierarchicalGraph"/0 is undefined or private. Did you mean:
+
+          * "HierarchicalGraph"/3
+
+    │
+ 44 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/simple_weighted_graph.ex:44: SimpleWeightedGraph.WeightedGraph."HierarchicalGraph"/3
+
+    warning: SimpleWeightedGraph.WeightedGraph."SingleNode"/0 is undefined or private. Did you mean:
+
+          * "SingleNode"/1
+
+    │
+ 44 │   defsum WeightedGraph do
+    │   ~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ examples/simple_weighted_graph.ex:44: SimpleWeightedGraph.WeightedGraph."SingleNode"/1
+
+
+16:07:18.251 [info] ✅ Simplified ADT ready
+
+16:07:18.251 [info] 📦 Generating dataset...
+
+🎯 Concurrency Sweep (4 levels)
+
+16:07:18.798 [info] 📦 Data ready: gen_nodes=13.7ms, gen_edges=522.3ms
+
+== Concurrency level: 1 ==
+   • best 158.2ms (948414 ops/sec), median 948414 (p50 948414, p90 948414)
+
+== Concurrency level: 2 ==
+   • best 131.8ms (1138303 ops/sec), median 1138303 (p50 1138303, p90 1138303)
+
+== Concurrency level: 3 ==
+   • best 113.4ms (1322987 ops/sec), median 1322987 (p50 1322987, p90 1322987)
+
+== Concurrency level: 4 ==
+   • best 138.1ms (1085801 ops/sec), median 1085801 (p50 1085801, p90 1085801)

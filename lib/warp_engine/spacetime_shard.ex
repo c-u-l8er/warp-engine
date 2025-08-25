@@ -324,7 +324,28 @@ defmodule WarpEngine.SpacetimeShard do
       base_options
     end
 
-    :ets.new(:"spacetime_shard_#{shard_id}", table_options)
+    # PHASE 9.6: Fix ETS naming for proper shard isolation
+    table_name = case shard_id do
+      :shard_0 -> :spacetime_shard_0
+      :shard_1 -> :spacetime_shard_1
+      :shard_2 -> :spacetime_shard_2
+      :shard_3 -> :spacetime_shard_3
+      :shard_4 -> :spacetime_shard_4
+      :shard_5 -> :spacetime_shard_5
+      :shard_6 -> :spacetime_shard_6
+      :shard_7 -> :spacetime_shard_7
+      :shard_8 -> :spacetime_shard_8
+      :shard_9 -> :spacetime_shard_9
+      :shard_10 -> :spacetime_shard_10
+      :shard_11 -> :spacetime_shard_11
+      # Legacy 3-shard support
+      :hot_data -> :spacetime_shard_hot_data
+      :warm_data -> :spacetime_shard_warm_data
+      :cold_data -> :spacetime_shard_cold_data
+      _ -> :"spacetime_shard_#{shard_id}"  # Fallback
+    end
+
+    :ets.new(table_name, table_options)
   end
 
   defp complete_physics_laws(partial_laws) do
