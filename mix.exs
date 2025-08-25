@@ -35,12 +35,10 @@ defmodule WarpEngine.MixProject do
     [
       name: "warp_engine",
       description: "Revolutionary physics-inspired graph database with 23,742 ops/sec performance",
-      maintainers: ["WarpEngine Team"],
+      maintainers: ["Travis Burandt"],
       licenses: ["Apache-2.0"],
       links: %{
-        "GitHub" => "https://github.com/company/warp_engine_database",
-        "Documentation" => "https://hexdocs.pm/warp_engine",
-        "Benchmarks" => "https://github.com/company/warp_engine_database/tree/main/benchmarks"
+        "GitHub" => "https://github.com/c-u-l8er/warp-engine"
       },
       files: [
         "lib",
@@ -59,8 +57,8 @@ defmodule WarpEngine.MixProject do
   defp docs do
     [
       main: "WarpEngine",
-      source_url: "https://github.com/company/warp_engine_database",
-      homepage_url: "https://github.com/company/warp_engine_database",
+      source_url: "https://github.com/c-u-l8er/warp-engine",
+      homepage_url: "https://github.com/c-u-l8er/warp-engine",
       extras: [
         "README.md",
         "CHANGELOG.md",
