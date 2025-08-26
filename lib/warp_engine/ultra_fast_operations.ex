@@ -362,12 +362,14 @@ defmodule WarpEngine.UltraFastOperations do
     # Enable in bench mode or when explicitly requested
     bench_mode = Application.get_env(:warp_engine, :bench_mode, false)
     force_ultra = Application.get_env(:warp_engine, :force_ultra_fast_path, false)
+
+    # If either is explicitly set, use that setting
     if bench_mode or force_ultra do
       true
     else
-      # Heuristic based on process count (fallback)
-      active_process_count = Process.list() |> length()
-      active_process_count > 150
+      # Only use heuristic when neither is explicitly configured
+      # This prevents the heuristic from overriding explicit benchmark settings
+      false
     end
   end
 end

@@ -1,8 +1,8 @@
 # Polished benchmark runner: warmup + steady-state, median p50/p90
 
-# Enable bench mode for maximum performance
-Application.put_env(:warp_engine, :bench_mode, true)
-Application.put_env(:warp_engine, :force_ultra_fast_path, true)
+# Disable bench mode to enable numbered shards and per-shard WAL (Phase 9)
+Application.put_env(:warp_engine, :bench_mode, false)
+Application.put_env(:warp_engine, :force_ultra_fast_path, false)
 
 # Ensure we have enough numbered shards for the benchmark
 Application.put_env(:warp_engine, :use_numbered_shards, true)
@@ -60,12 +60,10 @@ wait_for_ets_tables = fn shard_count ->
   wait_recursive.(wait_recursive)
 end
 
-# Wait for ETS tables to be created in bench mode
-if Application.get_env(:warp_engine, :bench_mode, false) do
-  IO.puts("⏳ Waiting for ETS tables to be created...")
-  shard_count = Application.get_env(:warp_engine, :num_numbered_shards, 24)
-  wait_for_ets_tables.(shard_count)
-end
+# Wait for ETS tables to be created (numbered shards require WALCoordinator)
+IO.puts("⏳ Waiting for ETS tables to be created...")
+shard_count = Application.get_env(:warp_engine, :num_numbered_shards, 24)
+wait_for_ets_tables.(shard_count)
 
 # Prime cached state once to avoid initial GenServer contention
 _ = (try do GenServer.call(WarpEngine, :get_current_state, 5000) rescue _ -> :ok end)

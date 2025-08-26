@@ -918,7 +918,7 @@ defmodule WarpEngine do
 
     # Create entropy monitor configuration
     monitor_config = [
-      monitoring_interval: Keyword.get(opts, :entropy_monitoring_interval, 5000),
+      monitoring_interval: Keyword.get(opts, :entropy_monitoring_interval, 30000),  # Reduced from 5000ms to 30000ms
       entropy_threshold: Keyword.get(opts, :entropy_threshold, CosmicConstants.entropy_rebalance_threshold()),
       enable_maxwell_demon: Keyword.get(opts, :enable_maxwell_demon, true),
       vacuum_stability_checks: Keyword.get(opts, :vacuum_stability_checks, true),
@@ -1023,14 +1023,25 @@ defmodule WarpEngine do
 
   defp find_in_gravitational_shards(key, spacetime_shards) do
     # Search all shards in order of likelihood (hot -> warm -> cold)
-    search_order = [:hot_data, :warm_data, :cold_data]
+    # Use actual shard IDs that exist in the system
+    search_order = if map_size(spacetime_shards) > 3 do
+      # Numbered shard system - search in order of priority
+      [:shard_0, :shard_1, :shard_2, :shard_3, :shard_4, :shard_5, :shard_6, :shard_7, :shard_8, :shard_9, :shard_10, :shard_11]
+    else
+      # Legacy 3-shard system
+      [:hot_data, :warm_data, :cold_data]
+    end
 
     Enum.find_value(search_order, {:error, :not_found}, fn shard_id ->
       shard = Map.get(spacetime_shards, shard_id)
-      case SpacetimeShard.gravitational_get(shard, key) do
-        {:ok, value, updated_shard, _metadata} -> {:ok, value, shard_id, updated_shard}
-        {:error, :not_found, _time} -> nil
-        {:error, reason, _time} -> {:error, reason}
+      if shard do
+        case SpacetimeShard.gravitational_get(shard, key) do
+          {:ok, value, updated_shard, _metadata} -> {:ok, value, shard_id, updated_shard}
+          {:error, :not_found, _time} -> nil
+          {:error, reason, _time} -> {:error, reason}
+        end
+      else
+        nil  # Skip if shard doesn't exist
       end
     end)
   end
@@ -1438,11 +1449,19 @@ defmodule WarpEngine do
   end
 
   defp collect_wormhole_metrics(wormhole_network) do
-    %{
-      total_wormholes: :ets.info(wormhole_network, :size),
-      memory_usage: :ets.info(wormhole_network, :memory) * :erlang.system_info(:wordsize),
-      active_routes: 0  # Placeholder
-    }
+    # Safely collect wormhole metrics with error handling
+    try do
+      %{
+        total_wormholes: :ets.info(wormhole_network, :size) || 0,
+        memory_usage: case :ets.info(wormhole_network, :memory) do
+          memory when is_integer(memory) -> memory * :erlang.system_info(:wordsize)
+          _ -> 0
+        end,
+        active_routes: 0  # Placeholder
+      }
+    rescue
+      _ -> %{total_wormholes: 0, memory_usage: 0, active_routes: 0}
+    end
   end
 
   defp collect_entropy_monitoring_metrics(entropy_monitor) do
@@ -1562,8 +1581,12 @@ defmodule WarpEngine do
               create_entanglement_links(key, entangled_with, shard_updated_state)
             end
 
-            # Apply automatic entanglement patterns
-            QuantumIndex.apply_entanglement_patterns(key, value)
+            # Apply automatic entanglement patterns (only if quantum system is ready)
+            if :ets.whereis(:quantum_pattern_cache) != :undefined do
+              QuantumIndex.apply_entanglement_patterns(key, value)
+            else
+              Logger.debug("⚠️  Quantum system not ready, skipping entanglement patterns for #{key}")
+            end
 
             end_time = :os.system_time(:microsecond)
             total_operation_time = end_time - start_time
@@ -1641,29 +1664,68 @@ defmodule WarpEngine do
     # Legacy quantum_get implementation
     start_time = :os.system_time(:microsecond)
 
-    # Use quantum observation to get primary data and entangled partners
-    result = QuantumIndex.observe_quantum_data(key, state.spacetime_tables)
+    # Check if quantum index is available and spacetime_tables exist
+    if state.spacetime_tables && map_size(state.spacetime_tables) > 0 do
+      # Use quantum observation to get primary data and entangled partners
+      result = QuantumIndex.observe_quantum_data(key, state.spacetime_tables)
 
-    end_time = :os.system_time(:microsecond)
-    operation_time = end_time - start_time
+      end_time = :os.system_time(:microsecond)
+      operation_time = end_time - start_time
 
-    case result do
-      {:ok, value, entangled_data, quantum_metadata} ->
-        # Return enhanced response with quantum data
-        response = %{
-          value: value,
-          shard: quantum_metadata.primary_shard,
-          operation_time: operation_time,
-          quantum_data: %{
-            entangled_items: entangled_data,
-            entangled_count: quantum_metadata.entangled_count,
-            quantum_efficiency: quantum_metadata.entanglement_efficiency
+      case result do
+        {:ok, value, entangled_data, quantum_metadata} ->
+          # Return enhanced response with quantum data
+          response = %{
+            value: value,
+            shard: quantum_metadata.primary_shard,
+            operation_time: operation_time,
+            quantum_data: %{
+              entangled_items: entangled_data,
+              entangled_count: quantum_metadata.entangled_count,
+              quantum_efficiency: quantum_metadata.entanglement_efficiency
+            }
           }
-        }
-        {:reply, {:ok, response}, state}
+          {:reply, {:ok, response}, state}
 
-      {:error, :not_found} ->
-        {:reply, {:error, :not_found, operation_time}, state}
+        {:error, :not_found} ->
+          {:reply, {:error, :not_found, operation_time}, state}
+      end
+    else
+      # Fallback to basic cosmic_get if quantum index is not available
+      Logger.warning("⚠️  Quantum index not available, falling back to cosmic_get for #{key}")
+
+      # Try to find the key in any available shards
+      result = find_in_any_shard(key, state)
+
+      end_time = :os.system_time(:microsecond)
+      operation_time = end_time - start_time
+
+      case result do
+        {:ok, value, shard_id} ->
+          {:reply, {:ok, value}, state}
+        {:error, :not_found} ->
+          {:reply, {:error, :not_found, operation_time}, state}
+      end
+    end
+  end
+
+  # Helper function to find a key in any available shard
+  defp find_in_any_shard(key, state) do
+    # Try to find the key in spacetime shards first
+    if state.spacetime_shards && map_size(state.spacetime_shards) > 0 do
+      Enum.find_value(Map.values(state.spacetime_shards), {:error, :not_found}, fn shard ->
+        if shard.ets_table && :ets.whereis(shard.ets_table) != :undefined do
+          case :ets.lookup(shard.ets_table, key) do
+            [{^key, value, _metadata}] -> {:ok, value, shard.shard_id}
+            [{^key, value}] -> {:ok, value, shard.shard_id}  # Handle both metadata and non-metadata formats
+            [] -> nil
+          end
+        else
+          nil
+        end
+      end)
+    else
+      {:error, :not_found}
     end
   end
 

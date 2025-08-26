@@ -287,7 +287,18 @@ defmodule WarpEngine.QuantumIndex do
     # Load existing quantum indices from all shards
     data_root = CosmicPersistence.data_root()
 
-    ["hot_data", "warm_data", "cold_data"]
+    # Support both numbered shards (new) and legacy shards (old)
+    shard_names = case Application.get_env(:warp_engine, :use_numbered_shards, false) do
+      true ->
+        # New numbered shard system
+        shard_count = Application.get_env(:warp_engine, :num_numbered_shards, 24)
+        Enum.map(0..(shard_count - 1), &"shard_#{&1}")
+      false ->
+        # Legacy 3-shard system
+        ["hot_data", "warm_data", "cold_data"]
+    end
+
+    shard_names
     |> Enum.each(fn shard ->
       indices_path = Path.join([data_root, "spacetime", shard, "quantum_indices"])
 
@@ -356,13 +367,26 @@ defmodule WarpEngine.QuantumIndex do
   end
 
   defp find_in_spacetime_shards(key, spacetime_tables) do
-    search_order = [:hot_data, :warm_data, :cold_data]
+    # Support both numbered shards (new) and legacy shards (old)
+    search_order = case spacetime_tables do
+      %{} when map_size(spacetime_tables) > 3 ->
+        # New numbered shard system (shard_0, shard_1, etc.)
+        Map.keys(spacetime_tables)
+      _ ->
+        # Legacy 3-shard system (hot_data, warm_data, cold_data)
+        [:hot_data, :warm_data, :cold_data]
+    end
 
     Enum.find_value(search_order, {:error, :not_found}, fn shard ->
       table = Map.get(spacetime_tables, shard)
-      case :ets.lookup(table, key) do
-        [{^key, value}] -> {:ok, value, shard}
-        [] -> nil
+      if table && :ets.whereis(table) != :undefined do
+        case :ets.lookup(table, key) do
+          [{^key, value, metadata}] when is_map(metadata) -> {:ok, value, shard}  # 3-tuple with metadata
+          [{^key, value}] -> {:ok, value, shard}  # 2-tuple without metadata
+          [] -> nil
+        end
+      else
+        nil
       end
     end)
   end

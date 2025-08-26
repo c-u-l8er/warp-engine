@@ -90,6 +90,13 @@ defmodule WarpEngine.WALShard do
   end
 
   @doc """
+  Get the atomic counter reference for this shard (for coordinator use).
+  """
+  def get_sequence_counter_ref(shard_id) do
+    GenServer.call(via_tuple(shard_id), :get_sequence_counter_ref)
+  end
+
+  @doc """
   Force flush this shard's write buffer to disk.
   """
   def force_flush(shard_id) do
@@ -132,14 +139,20 @@ defmodule WarpEngine.WALShard do
       Logger.info("📁 Shard #{shard_id} WAL file: #{wal_file_path}")
 
       # Create WAL directory structure
+      Logger.info("📁 Creating directories for shard #{shard_id}...")
       File.mkdir_p!(wal_directory)
       File.mkdir_p!(Path.join(wal_directory, "checkpoints"))
       File.mkdir_p!(Path.join([wal_directory, "checkpoints", "#{shard_id}"]))
 
+      Logger.info("📁 Directories created for shard #{shard_id}")
+
       # Initialize shard-specific WAL file
+      Logger.info("📄 Opening WAL file for shard #{shard_id}...")
       {:ok, wal_file_handle} = File.open(wal_file_path, [:raw, :binary, :append, {:delayed_write, 131_072, 2}])
+      Logger.info("📄 WAL file opened for shard #{shard_id}")
 
       # Initialize shard-specific atomic counter
+      Logger.info("⚡ Initializing sequence counter for shard #{shard_id}...")
       sequence_counter_ref = :atomics.new(1, [])
       last_sequence = load_shard_last_sequence(wal_directory, shard_id)
       :atomics.put(sequence_counter_ref, 1, last_sequence)
@@ -155,6 +168,7 @@ defmodule WarpEngine.WALShard do
       end
 
       # Initialize shard state
+      Logger.info("🏗️ Building state for shard #{shard_id}...")
       state = %WarpEngine.WALShard{
         shard_id: shard_id,
         wal_file_path: wal_file_path,
@@ -180,6 +194,7 @@ defmodule WarpEngine.WALShard do
     rescue
       error ->
         Logger.error("❌ WAL Shard #{shard_id} initialization failed: #{inspect(error)}")
+        Logger.error("❌ Stacktrace: #{Exception.format_stacktrace(__STACKTRACE__)}")
         {:stop, {:wal_shard_init_failed, shard_id, error}}
     end
   end
@@ -210,7 +225,13 @@ defmodule WarpEngine.WALShard do
   end
 
   def handle_call(:get_sequence_counter, _from, state) do
-    # Direct access to shard-specific atomic counter
+    # Get current sequence number from shard-specific atomic counter
+    current_sequence = :atomics.get(state.sequence_counter_ref, 1)
+    {:reply, current_sequence, state}
+  end
+
+  def handle_call(:get_sequence_counter_ref, _from, state) do
+    # Get the atomic counter reference itself (for coordinator use)
     {:reply, state.sequence_counter_ref, state}
   end
 
@@ -324,66 +345,52 @@ defmodule WarpEngine.WALShard do
     # Flush the shard's write buffer to the WAL file in the GenServer (controlling process)
     start_time = :os.system_time(:millisecond)
 
-    case state.write_buffer do
-      [] ->
-        %{state | last_flush_time: start_time}
-      buffer ->
-        binary_data = encode_shard_operations_batch(buffer, state.shard_id)
+    if length(state.write_buffer) == 0 do
+      state
+    else
+      try do
+        # Convert buffer to binary data for efficient writing
+        operations = Enum.reverse(state.write_buffer)
+        binary_data = encode_shard_operations_batch(operations)
+
+        # Write to shard-specific WAL file
         IO.binwrite(state.wal_file_handle, binary_data)
-        # Ensure data is pushed by delayed_write; optional periodic sync can be added here if needed
-        # :file.sync(state.wal_file_handle)
 
-        end_time = :os.system_time(:millisecond)
-        flush_time = end_time - start_time
-        new_stats = update_shard_flush_stats(state.stats, flush_time, length(buffer))
+        # Update statistics
+        updated_stats = update_shard_flush_stats(state.stats, :os.system_time(:millisecond) - start_time, length(operations))
 
-        %{state | write_buffer: [], last_flush_time: end_time, stats: new_stats}
+        # Clear buffer and update timestamp
+        %{state |
+          write_buffer: [],
+          last_flush_time: :os.system_time(:millisecond),
+          stats: updated_stats
+        }
+      rescue
+        error ->
+          Logger.error("❌ Failed to flush shard #{state.shard_id} buffer: #{inspect(error)}")
+          # Return state unchanged on error
+          state
+      end
     end
   end
 
-  defp encode_shard_operations_batch(operations, shard_id) do
-    # Shard-specific batch header
-    shard_binary = :erlang.term_to_binary(shard_id)
-    batch_header = <<
-      length(operations)::32,
-      :os.system_time(:microsecond)::64,
-      byte_size(shard_binary)::16,
-      shard_binary::binary
-    >>
+  defp encode_shard_operations_batch(operations) do
+    # Encode batch of operations to binary format for maximum I/O efficiency
+    batch_header = <<length(operations)::32, :os.system_time(:millisecond)::64>>
 
     operations_binary = operations
     |> Enum.map(&encode_shard_operation_binary/1)
+    |> Enum.join()
 
-    # iodata: list of binaries, more GC friendly
-    [batch_header | operations_binary]
+    batch_header <> operations_binary
   end
 
   defp encode_shard_operation_binary(operation) do
-    # PHASE 9.9: Ultra-fast encoding for minimal WAL entries
-    case operation do
-      %{timestamp: timestamp, operation: op, key: key, sequence: seq, shard_id: shard} ->
-        # ULTRA-MINIMAL binary format: 30x faster than JSON
-        op_byte = case op do
-          :put -> 1
-          :delete -> 2
-          _ -> 0
-        end
+    # Encode single operation to binary format
+    json_data = Jason.encode!(operation)
+    json_size = byte_size(json_data)
 
-        key_binary = :erlang.term_to_binary(key)
-        key_size = byte_size(key_binary)
-        shard_binary = :erlang.term_to_binary(shard)
-        shard_size = byte_size(shard_binary)
-
-        # Fixed-size header + variable key + variable shard
-        <<timestamp::64, op_byte::8, seq::64, key_size::16, key_binary::binary,
-          shard_size::8, shard_binary::binary>>
-
-      _ ->
-        # Fallback for legacy complex entries (should be rare now)
-        json_data = WALEntry.encode_json(operation)
-        json_size = byte_size(json_data)
-        <<255::8, json_size::32, json_data::binary>>  # 255 = legacy format marker
-    end
+    <<json_size::32, json_data::binary>>
   end
 
   defp load_shard_last_sequence(wal_directory, shard_id) do
@@ -397,6 +404,259 @@ defmodule WarpEngine.WALShard do
           _ -> 0
         end
       {:error, _} -> 0
+    end
+  end
+
+  # Safe JSON decoding without Jason dependency
+  defp safe_decode_json(content) do
+    try do
+      case Jason.decode(content) do
+        {:ok, data} -> {:ok, data}
+        {:error, reason} -> {:error, reason}
+      end
+    rescue
+      UndefinedFunctionError ->
+        # Fallback: try to evaluate as Elixir term
+        try do
+          {data, _} = Code.eval_string(content)
+          {:ok, data}
+        rescue
+          _ -> {:error, "Unable to decode JSON"}
+        end
+    end
+  end
+
+  defp initialize_shard_stats(shard_id) do
+    %{
+      shard_id: shard_id,
+      total_operations: 0,
+      total_flushes: 0,
+      avg_flush_time_ms: 0.0,
+      total_flush_time_ms: 0,
+      created_at: :os.system_time(:millisecond)
+    }
+  end
+
+  defp update_shard_flush_stats(stats, flush_time_ms, operations_count) do
+    new_total_flushes = stats.total_flushes + 1
+    new_total_operations = stats.total_operations + operations_count
+    new_total_flush_time = stats.total_flush_time_ms + flush_time_ms
+    new_avg_flush_time = new_total_flush_time / new_total_flushes
+
+    %{stats |
+      total_operations: new_total_operations,
+      total_flushes: new_total_flushes,
+      avg_flush_time_ms: new_avg_flush_time,
+      total_flush_time_ms: new_total_flush_time
+    }
+  end
+
+  defp schedule_flush_check() do
+    Process.send_after(self(), :flush_check, @flush_interval_ms)
+  end
+
+  def via_tuple(shard_id) do
+    {:via, Registry, {WarpEngine.WALRegistry, shard_id}}
+  end
+
+  defp get_file_size(file_path) do
+    case File.stat(file_path) do
+      {:ok, %{size: size}} -> size
+      {:error, _} -> 0
+    end
+  end
+
+  defp save_shard_ets_table_to_checkpoint(checkpoint_dir, table_name) do
+    try do
+      # Check if table exists and has data
+      case :ets.whereis(table_name) do
+        :undefined ->
+          %{
+            table_name: table_name,
+            status: :not_found,
+            error: "Table does not exist"
+          }
+        _reference ->
+          table_size = :ets.info(table_name, :size) || 0
+          table_file = Path.join(checkpoint_dir, "#{table_name}.ets")
+
+          case :ets.tab2file(table_name, String.to_charlist(table_file)) do
+            :ok ->
+              %{
+                table_name: table_name,
+                file_path: table_file,
+                size: table_size,
+                status: :saved
+              }
+            {:error, reason} ->
+              %{
+                table_name: table_name,
+                file_path: table_file,
+                error: reason,
+                status: :failed
+              }
+          end
+      end
+    rescue
+      error ->
+        %{
+          table_name: table_name,
+          error: error,
+          status: :exception
+        }
+    end
+  end
+
+  defp cleanup_old_shard_checkpoints(shard_checkpoint_dir) do
+    try do
+      case File.ls(shard_checkpoint_dir) do
+        {:ok, entries} ->
+          # Get checkpoint directories sorted by creation time (newest first)
+          checkpoint_dirs = entries
+          |> Enum.filter(fn entry ->
+            full_path = Path.join(shard_checkpoint_dir, entry)
+            File.dir?(full_path) and String.starts_with?(entry, "checkpoint_")
+          end)
+          |> Enum.map(fn entry ->
+            full_path = Path.join(shard_checkpoint_dir, entry)
+            stat = File.stat!(full_path)
+            {entry, full_path, stat.mtime}
+          end)
+          |> Enum.sort_by(fn {_entry, _path, mtime} -> mtime end, :desc)
+
+          # Keep the 3 most recent, delete the rest
+          {keep, delete} = Enum.split(checkpoint_dirs, 3)
+
+          if length(delete) > 0 do
+            Logger.info("🗑️  Deleting #{length(delete)} old checkpoints (keeping #{length(keep)} recent)")
+
+            deleted_count = delete
+            |> Enum.map(fn {entry, full_path, _mtime} ->
+              try do
+                File.rm_rf!(full_path)
+                Logger.debug("🗑️  Deleted old checkpoint: #{entry}")
+                1
+              rescue
+                error ->
+                  Logger.warning("⚠️  Failed to delete checkpoint #{entry}: #{inspect(error)}")
+                  0
+              end
+            end)
+            |> Enum.sum()
+
+            Logger.info("🧹 Cleanup complete: #{deleted_count}/#{length(delete)} old checkpoints deleted")
+          end
+
+        {:error, reason} ->
+          Logger.warning("⚠️  Failed to list checkpoints directory: #{inspect(reason)}")
+      end
+    rescue
+      error ->
+        Logger.error("💥 Checkpoint cleanup failed: #{inspect(error)}")
+    end
+  end
+
+  defp perform_shard_wal_recovery(state) do
+    Logger.info("🔄 Beginning WAL recovery for shard #{state.shard_id}...")
+    start_time = :os.system_time(:millisecond)
+
+    try do
+      # Look for shard-specific checkpoint first
+      wal_directory = Path.dirname(state.wal_file_path)
+      shard_checkpoint_dir = Path.join([wal_directory, "checkpoints", "#{state.shard_id}"])
+
+      checkpoint_result = attempt_shard_checkpoint_recovery(shard_checkpoint_dir, state.shard_id)
+
+      case checkpoint_result do
+        {:ok, checkpoint_info} ->
+          Logger.info("📂 Shard #{state.shard_id} checkpoint recovery successful")
+          :atomics.put(state.sequence_counter_ref, 1, checkpoint_info.last_sequence + 1)
+          replay_shard_wal_after_checkpoint(state, checkpoint_info.last_sequence, start_time)
+
+        {:error, :no_checkpoint} ->
+          Logger.info("ℹ️  No checkpoint found for shard #{state.shard_id}, performing full WAL recovery")
+          perform_full_shard_wal_recovery(state, start_time)
+
+        {:error, reason} ->
+          Logger.warning("⚠️  Checkpoint recovery failed for shard #{state.shard_id} (#{inspect(reason)}), falling back to full WAL recovery")
+          perform_full_shard_wal_recovery(state, start_time)
+      end
+
+    rescue
+      error ->
+        recovery_time = :os.system_time(:millisecond) - start_time
+        Logger.error("💥 WAL recovery failed for shard #{state.shard_id} after #{recovery_time}ms: #{inspect(error)}")
+        {:error, {:recovery_failed, error}}
+    end
+  end
+
+  defp perform_full_shard_wal_recovery(state, start_time) do
+    try do
+      # Check if WAL file exists
+      case File.exists?(state.wal_file_path) do
+        false ->
+          Logger.info("ℹ️  No WAL file found for shard #{state.shard_id}, starting with clean state")
+          {:ok, %{entries_replayed: 0, recovery_time_ms: 0}}
+
+        true ->
+          # Load and replay WAL entries
+          case load_shard_wal_entries_from_file(state.wal_file_path) do
+            {:ok, entries} ->
+              Logger.info("📂 Found #{length(entries)} WAL entries to replay for shard #{state.shard_id}")
+
+              # Replay each entry to restore system state
+              total_entries = length(entries)
+
+              {replayed_count, _} =
+                entries
+                |> Stream.with_index()
+                |> Stream.map(fn {entry, index} ->
+                  # Show progress for large recoveries
+                  if total_entries > 1000 and rem(index, 1000) == 0 do
+                    progress = Float.round(index / total_entries * 100, 1)
+                    Logger.info("🔄 Recovery progress for shard #{state.shard_id}: #{progress}%")
+                  end
+
+                  # Replay the WAL entry
+                  case replay_shard_wal_entry(entry) do
+                    :ok -> {1, entry}
+                    {:error, reason} ->
+                      Logger.warning("⚠️  Failed to replay entry #{entry.sequence} for shard #{state.shard_id}: #{inspect(reason)}")
+                      {0, entry}
+                  end
+                end)
+                |> Enum.reduce({0, nil}, fn {count, entry}, {total_count, _last} ->
+                  {total_count + count, entry}
+                end)
+
+              recovery_time = :os.system_time(:millisecond) - start_time
+              Logger.info("✅ WAL recovery completed for shard #{state.shard_id}: #{replayed_count}/#{total_entries} entries in #{recovery_time}ms")
+
+              # Update sequence counter to continue from last replayed sequence
+              if total_entries > 0 do
+                last_entry = List.last(entries)
+                :atomics.put(state.sequence_counter_ref, 1, last_entry.sequence + 1)
+                Logger.info("🔢 Sequence counter updated for shard #{state.shard_id} to #{last_entry.sequence + 1}")
+              end
+
+              {:ok, %{
+                entries_replayed: replayed_count,
+                total_entries: total_entries,
+                recovery_time_ms: recovery_time,
+                last_sequence: if(total_entries > 0, do: List.last(entries).sequence, else: 0)
+              }}
+
+            {:error, reason} ->
+              Logger.error("❌ Failed to load WAL entries for shard #{state.shard_id}: #{inspect(reason)}")
+              {:error, reason}
+          end
+      end
+
+    rescue
+      error ->
+        recovery_time = :os.system_time(:millisecond) - start_time
+        Logger.error("💥 Full WAL recovery failed for shard #{state.shard_id} after #{recovery_time}ms: #{inspect(error)}")
+        {:error, {:full_recovery_failed, error}}
     end
   end
 
@@ -526,156 +786,216 @@ defmodule WarpEngine.WALShard do
     end
   end
 
-  defp perform_shard_wal_recovery(state) do
-    Logger.info("🔄 Beginning WAL recovery for shard #{state.shard_id}...")
-    start_time = :os.system_time(:millisecond)
+  defp attempt_shard_checkpoint_recovery(shard_checkpoint_dir, shard_id) do
+    Logger.info("🔍 Looking for checkpoint for shard #{shard_id} to accelerate recovery...")
 
+    case File.exists?(shard_checkpoint_dir) do
+      false ->
+        Logger.info("📁 No checkpoints directory found for shard #{shard_id}")
+        {:error, :no_checkpoint}
+
+      true ->
+        case find_latest_shard_checkpoint(shard_checkpoint_dir) do
+          {:ok, checkpoint_path} ->
+            load_shard_checkpoint(checkpoint_path, shard_id)
+
+          {:error, reason} ->
+            Logger.info("📄 No valid checkpoint found for shard #{shard_id}: #{inspect(reason)}")
+            {:error, reason}
+        end
+    end
+  end
+
+  defp find_latest_shard_checkpoint(shard_checkpoint_dir) do
     try do
-      # Look for shard-specific checkpoint first
-      wal_directory = Path.dirname(state.wal_file_path)
-      shard_checkpoint_dir = Path.join([wal_directory, "checkpoints", "#{state.shard_id}"])
+      case File.ls(shard_checkpoint_dir) do
+        {:ok, entries} ->
+          # Find valid checkpoint directories (filter out files)
+          checkpoint_dirs = entries
+          |> Enum.filter(fn entry ->
+            full_path = Path.join(shard_checkpoint_dir, entry)
+            File.dir?(full_path) and String.starts_with?(entry, "checkpoint_")
+          end)
+          |> Enum.sort(:desc) # Most recent first
 
-      checkpoint_result = attempt_shard_checkpoint_recovery(shard_checkpoint_dir, state.shard_id)
+          case checkpoint_dirs do
+            [] ->
+              {:error, :no_checkpoints}
 
-      case checkpoint_result do
-        {:ok, checkpoint_info} ->
-          Logger.info("📂 Shard #{state.shard_id} checkpoint recovery successful")
-          :atomics.put(state.sequence_counter_ref, 1, checkpoint_info.last_sequence + 1)
-          replay_shard_wal_after_checkpoint(state, checkpoint_info.last_sequence, start_time)
-
-        {:error, :no_checkpoint} ->
-          Logger.info("ℹ️  No checkpoint found for shard #{state.shard_id}, performing full recovery")
-          perform_full_shard_wal_recovery(state, start_time)
+            [latest | _rest] ->
+              latest_path = Path.join(shard_checkpoint_dir, latest)
+              Logger.info("📂 Found latest checkpoint: #{latest}")
+              {:ok, latest_path}
+          end
 
         {:error, reason} ->
-          Logger.warning("⚠️  Shard #{state.shard_id} checkpoint recovery failed: #{inspect(reason)}")
-          perform_full_shard_wal_recovery(state, start_time)
+          {:error, {:ls_failed, reason}}
       end
 
     rescue
       error ->
-        recovery_time = :os.system_time(:millisecond) - start_time
-        Logger.error("💥 Shard #{state.shard_id} WAL recovery failed after #{recovery_time}ms: #{inspect(error)}")
-        {:error, {:recovery_failed, error}}
+        {:error, {:find_checkpoint_failed, error}}
+    end
+  end
+
+  defp load_shard_checkpoint(checkpoint_path, shard_id) do
+    Logger.info("📥 Loading checkpoint from #{checkpoint_path} for shard #{shard_id}")
+
+    try do
+      # Load checkpoint metadata
+      metadata_file = Path.join(checkpoint_path, "metadata.json")
+
+      case File.read(metadata_file) do
+        {:ok, content} ->
+          case :erlang.binary_to_term(content) do
+            %{sequence_number: sequence_number} = metadata ->
+              Logger.info("📋 Checkpoint metadata for shard #{shard_id}: sequence #{sequence_number}")
+
+              {:ok, %{
+                checkpoint_id: metadata.checkpoint_id,
+                last_sequence: sequence_number,
+                shard_id: shard_id,
+                created_at: metadata.created_at
+              }}
+
+            _ ->
+              Logger.error("❌ Invalid checkpoint metadata format for shard #{shard_id}")
+              {:error, :invalid_metadata_format}
+          end
+
+        {:error, reason} ->
+          Logger.error("❌ Failed to read checkpoint metadata for shard #{shard_id}: #{inspect(reason)}")
+          {:error, {:metadata_read_failed, reason}}
+      end
+
+    rescue
+      error ->
+        Logger.error("💥 Checkpoint loading failed for shard #{shard_id}: #{inspect(error)}")
+        {:error, {:checkpoint_load_failed, error}}
+    end
+  end
+
+  defp replay_shard_wal_after_checkpoint(state, checkpoint_sequence, start_time) do
+    Logger.info("🔄 Replaying WAL entries after checkpoint sequence #{checkpoint_sequence} for shard #{state.shard_id}")
+
+    case load_shard_wal_entries_from_file(state.wal_file_path) do
+      {:ok, all_entries} ->
+        # Filter entries that come after the checkpoint
+        entries_after_checkpoint = all_entries
+        |> Enum.filter(fn entry -> entry.sequence > checkpoint_sequence end)
+
+        Logger.info("📂 Found #{length(entries_after_checkpoint)} WAL entries to replay after checkpoint for shard #{state.shard_id}")
+
+        if length(entries_after_checkpoint) > 0 do
+          # Replay entries after checkpoint
+          {replayed_count, _} =
+            entries_after_checkpoint
+            |> Stream.with_index()
+            |> Stream.map(fn {entry, _index} ->
+              case replay_shard_wal_entry(entry) do
+                :ok -> {1, entry}
+                {:error, reason} ->
+                  Logger.warning("⚠️  Failed to replay entry #{entry.sequence} for shard #{state.shard_id}: #{inspect(reason)}")
+                  {0, entry}
+              end
+            end)
+            |> Enum.reduce({0, nil}, fn {count, entry}, {total_count, _last} ->
+              {total_count + count, entry}
+            end)
+
+          # Update sequence counter
+          last_entry = List.last(entries_after_checkpoint)
+          :atomics.put(state.sequence_counter_ref, 1, last_entry.sequence + 1)
+
+          recovery_time = :os.system_time(:millisecond) - start_time
+          Logger.info("✅ Checkpoint + WAL recovery completed for shard #{state.shard_id}: #{replayed_count} entries replayed in #{recovery_time}ms")
+
+          {:ok, %{
+            checkpoint_used: true,
+            entries_replayed: replayed_count,
+            recovery_time_ms: recovery_time,
+            last_sequence: last_entry.sequence
+          }}
+        else
+          recovery_time = :os.system_time(:millisecond) - start_time
+          Logger.info("✅ Checkpoint recovery completed for shard #{state.shard_id} (no WAL entries to replay) in #{recovery_time}ms")
+
+          {:ok, %{
+            checkpoint_used: true,
+            entries_replayed: 0,
+            recovery_time_ms: recovery_time,
+            last_sequence: checkpoint_sequence
+          }}
+        end
+
+      {:error, reason} ->
+        Logger.error("❌ Failed to load WAL entries for shard #{state.shard_id} after checkpoint: #{inspect(reason)}")
+        {:error, reason}
     end
   end
 
   # Additional helper functions
   # PHASE 9.6: Use direct process names for maximum performance (no registry overhead)
-  def via_tuple(shard_id) do
-    # Convert shard_id to simple name format for direct process naming
-    case shard_id do
-      :shard_0 -> :wal_shard_0
-      :shard_1 -> :wal_shard_1
-      :shard_2 -> :wal_shard_2
-      :shard_3 -> :wal_shard_3
-      :shard_4 -> :wal_shard_4
-      :shard_5 -> :wal_shard_5
-      :shard_6 -> :wal_shard_6
-      :shard_7 -> :wal_shard_7
-      :shard_8 -> :wal_shard_8
-      :shard_9 -> :wal_shard_9
-      :shard_10 -> :wal_shard_10
-      :shard_11 -> :wal_shard_11
-      :shard_12 -> :wal_shard_12
-      :shard_13 -> :wal_shard_13
-      :shard_14 -> :wal_shard_14
-      :shard_15 -> :wal_shard_15
-      :shard_16 -> :wal_shard_16
-      :shard_17 -> :wal_shard_17
-      :shard_18 -> :wal_shard_18
-      :shard_19 -> :wal_shard_19
-      :shard_20 -> :wal_shard_20
-      :shard_21 -> :wal_shard_21
-      :shard_22 -> :wal_shard_22
-      :shard_23 -> :wal_shard_23
-      # Legacy support
-      :hot_data -> :wal_shard_hot_data
-      :warm_data -> :wal_shard_warm_data
-      :cold_data -> :wal_shard_cold_data
-      _ -> :"wal_shard_#{shard_id}"
-    end
-  end
-
-  defp initialize_shard_stats(shard_id) do
-    %{
-      shard_id: shard_id,
-      total_operations: 0,
-      total_flushes: 0,
-      avg_flush_time_ms: 0.0,
-      total_flush_time_ms: 0
-    }
-  end
-
-  defp update_shard_flush_stats(stats, flush_time_ms, operations_count) do
-    new_total_flushes = stats.total_flushes + 1
-    new_total_operations = stats.total_operations + operations_count
-    new_total_flush_time = stats.total_flush_time_ms + flush_time_ms
-    new_avg_flush_time = new_total_flush_time / new_total_flushes
-
-    %{stats |
-      total_operations: new_total_operations,
-      total_flushes: new_total_flushes,
-      avg_flush_time_ms: new_avg_flush_time,
-      total_flush_time_ms: new_total_flush_time
-    }
-  end
-
-  defp get_file_size(file_path) do
-    case File.stat(file_path) do
-      {:ok, %{size: size}} -> size
-      {:error, _} -> 0
-    end
-  end
-
-  defp schedule_flush_check() do
-    # Add small random jitter to avoid flush storms
-    jitter = :rand.uniform(1)
-    Process.send_after(self(), :flush_check, @flush_interval_ms + jitter)
-  end
-
   defp generate_shard_checkpoint_id(shard_id) do
     timestamp = DateTime.utc_now() |> DateTime.to_unix()
     sequence = :rand.uniform(9999)
     "#{shard_id}_checkpoint_#{timestamp}_#{sequence}"
   end
 
-  # Safe JSON decoding helper
-  defp safe_decode_json(content) do
-    try do
-      case :erlang.binary_to_term(content) do
-        data when is_map(data) -> {:ok, data}
-        _ -> {:error, "Invalid term format"}
-      end
-    rescue
-      _ ->
-        # Fallback to string parsing if available
-        {:error, "Term decode failed"}
-    end
-  end
-
   # Placeholder functions for checkpoint and recovery operations
-  defp save_shard_ets_table_to_checkpoint(_checkpoint_dir, _table_name) do
-    %{status: :not_implemented}
-  end
-
-  defp cleanup_old_shard_checkpoints(_shard_checkpoint_dir) do
+  defp replay_shard_wal_entry(entry) do
+    # This function needs to be implemented based on how the WAL entry should be replayed.
+    # For example, if it's a :put operation, it might need to update an ETS table.
+    # If it's a :delete operation, it might need to delete a key from an ETS table.
+    # The actual logic depends on the application's data model and how entries are encoded.
+    # For now, we'll just log the replay attempt.
+    Logger.debug("🔄 Replaying WAL entry: #{inspect(entry)}")
+    # Example: If entry is a :put operation, you might update an ETS table
+    # case entry.operation do
+    #   :put ->
+    #     table_name = :"spacetime_#{entry.shard_id}"
+    #     :ets.insert(table_name, {entry.key, entry.value})
+    #     :ok
+    #   :delete ->
+    #     table_name = :"spacetime_#{entry.shard_id}"
+    #     :ets.delete(table_name, entry.key)
+    #     :ok
+    #   _ ->
+    #     :ok # No action for other operations
+    # end
     :ok
   end
 
-  defp attempt_shard_checkpoint_recovery(_shard_checkpoint_dir, _shard_id) do
-    {:error, :no_checkpoint}
-  end
+  defp load_shard_wal_entries_from_file(file_path) do
+    try do
+      # Open the WAL file for reading
+      {:ok, file_handle} = File.open(file_path, [:raw, :binary])
 
-  defp replay_shard_wal_after_checkpoint(state, _checkpoint_sequence, start_time) do
-    recovery_time = :os.system_time(:millisecond) - start_time
-    Logger.info("✅ Shard #{state.shard_id} checkpoint recovery completed in #{recovery_time}ms")
-    {:ok, %{checkpoint_used: true, recovery_time_ms: recovery_time}}
-  end
+      # Read the header to get the number of operations
+      case IO.binread(file_handle, 12) do
+        <<batch_size::32, _timestamp::64, _shard_size::16, _shard_binary::binary>> = header ->
+          # Read the rest of the batch
+          batch_data = IO.binread(file_handle, batch_size)
+          :ok = :file.position(file_handle, :cur, batch_size) # Move position forward
 
-  defp perform_full_shard_wal_recovery(state, start_time) do
-    recovery_time = :os.system_time(:millisecond) - start_time
-    Logger.info("✅ Shard #{state.shard_id} full recovery completed in #{recovery_time}ms")
-    {:ok, %{entries_replayed: 0, recovery_time_ms: recovery_time}}
+          # Decode the batch
+          case :erlang.binary_to_term(batch_data) do
+            {:wal_batch, operations} ->
+              # Decode each operation
+              decoded_operations = operations
+              |> Enum.map(&WALEntry.decode_binary/1)
+              |> Enum.map(&WALEntry.decode_json/1) # Assuming JSON is the default format
+
+              {:ok, decoded_operations}
+            _ ->
+              {:error, "Unexpected batch format"}
+          end
+        _ ->
+          {:error, "Invalid WAL file header"}
+      end
+    rescue
+      error ->
+        {:error, "Failed to load WAL entries from file #{file_path}: #{inspect(error)}"}
+    end
   end
 end

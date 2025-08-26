@@ -562,7 +562,7 @@ defmodule WarpEngine.SpacetimeShard do
     current_entropy = calculate_shard_entropy(shard)
 
     if current_entropy > shard.physics_laws.entropy_limit do
-      Logger.info("🌀 High entropy detected in #{shard.shard_id}: #{Float.round(current_entropy, 2)}")
+      Logger.debug("🌀 High entropy detected in #{shard.shard_id}: #{Float.round(current_entropy, 2)}")
       trigger_entropy_rebalancing(shard)
     else
       shard

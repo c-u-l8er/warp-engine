@@ -1,4 +1,3 @@
-Compiling 3 files (.ex)
      warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  272 │     Enum.each(operations, fn {_op_type, key, _value, opts} ->
@@ -12,259 +11,6 @@ Compiling 3 files (.ex)
      │                                                      ~
      │
      └─ lib/warp_engine/operation_batcher.ex:279:54: WarpEngine.OperationBatcher.execute_operation_batch/3
-
-      warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
-      │
- 1107 │         missing_tables = [table_name | missing_tables]
-      │         ~
-      │
-      └─ lib/warp_engine.ex:1107:9: WarpEngine.verify_tables_created/1
-
-      warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
-      │
- 1115 │         missing_tables = [table_name | missing_tables]
-      │         ~
-      │
-      └─ lib/warp_engine.ex:1115:9: WarpEngine.verify_tables_created/1
-
-      warning: function update_quantum_metrics/3 is unused
-      │
- 1268 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
-      │        ~
-      │
-      └─ lib/warp_engine.ex:1268:8: WarpEngine (module)
-
-      warning: function store_in_event_horizon_cache/5 is unused
-      │
- 1350 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
-      │        ~
-      │
-      └─ lib/warp_engine.ex:1350:8: WarpEngine (module)
-
-      warning: function refresh_cached_state/0 is unused
-      │
- 1771 │   defp refresh_cached_state() do
-      │        ~
-      │
-      └─ lib/warp_engine.ex:1771:8: WarpEngine (module)
-
-      warning: function get_current_state/0 is unused
-      │
- 1795 │   defp get_current_state() do
-      │        ~
-      │
-      └─ lib/warp_engine.ex:1795:8: WarpEngine (module)
-
-     warning: the following clause will never match:
-
-         :strongly_related
-
-     because it attempts to match on the result of:
-
-         analyze_data_relationship(candidate)
-
-     which has type:
-
-         dynamic(:moderately_related)
-
-     typing violation found at:
-     │
- 170 │       :strongly_related -> 0.9
-     │       ~~~~~~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:170: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
-
-     warning: the following clause will never match:
-
-         :weakly_related
-
-     because it attempts to match on the result of:
-
-         analyze_data_relationship(candidate)
-
-     which has type:
-
-         dynamic(:moderately_related)
-
-     typing violation found at:
-     │
- 172 │       :weakly_related -> 0.4
-     │       ~~~~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:172: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
-
-     warning: the following clause will never match:
-
-         :unrelated
-
-     because it attempts to match on the result of:
-
-         analyze_data_relationship(candidate)
-
-     which has type:
-
-         dynamic(:moderately_related)
-
-     typing violation found at:
-     │
- 173 │       :unrelated -> 0.1
-     │       ~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:173: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
-
-     warning: the following clause will never match:
-
-         :always_together
-
-     because it attempts to match on the result of:
-
-         analyze_access_patterns(candidate)
-
-     which has type:
-
-         dynamic(:sometimes_together)
-
-     typing violation found at:
-     │
- 180 │       :always_together -> 0.95
-     │       ~~~~~~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:180: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
-
-     warning: the following clause will never match:
-
-         :frequently_together
-
-     because it attempts to match on the result of:
-
-         analyze_access_patterns(candidate)
-
-     which has type:
-
-         dynamic(:sometimes_together)
-
-     typing violation found at:
-     │
- 181 │       :frequently_together -> 0.8
-     │       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:181: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
-
-     warning: the following clause will never match:
-
-         :rarely_together
-
-     because it attempts to match on the result of:
-
-         analyze_access_patterns(candidate)
-
-     which has type:
-
-         dynamic(:sometimes_together)
-
-     typing violation found at:
-     │
- 183 │       :rarely_together -> 0.2
-     │       ~~~~~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:183: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
-
-     warning: WarpEngine.WormholeRouter.find_route/2 is undefined or private. Did you mean:
-
-           * find_route/3
-           * find_route/4
-
-     │
- 390 │     case WarpEngine.WormholeRouter.find_route(key, "*") do
-     │                                    ~
-     │
-     └─ lib/enhanced_adt/islab_integration.ex:390:36: EnhancedADT.WarpEngineIntegration.Translators.attempt_wormhole_retrieval/1
-
-     warning: the following clause will never match:
-
-         :never_together
-
-     because it attempts to match on the result of:
-
-         analyze_access_patterns(candidate)
-
-     which has type:
-
-         dynamic(:sometimes_together)
-
-     typing violation found at:
-     │
- 184 │       :never_together -> 0.0
-     │       ~~~~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:184: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
-
-     warning: the following clause will never match:
-
-         :very_stable
-
-     because it attempts to match on the result of:
-
-         analyze_coherence_factors(candidate)
-
-     which has type:
-
-         dynamic(:stable)
-
-     typing violation found at:
-     │
- 191 │       :very_stable -> 0.9
-     │       ~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:191: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
-
-     warning: WarpEngine.WormholeRouter.traverse_route_for_data/1 is undefined or private
-     │
- 393 │         case WarpEngine.WormholeRouter.traverse_route_for_data(route) do
-     │                                        ~
-     │
-     └─ lib/enhanced_adt/islab_integration.ex:393:40: EnhancedADT.WarpEngineIntegration.Translators.attempt_wormhole_retrieval/1
-
-     warning: the following clause will never match:
-
-         :moderately_stable
-
-     because it attempts to match on the result of:
-
-         analyze_coherence_factors(candidate)
-
-     which has type:
-
-         dynamic(:stable)
-
-     typing violation found at:
-     │
- 193 │       :moderately_stable -> 0.5
-     │       ~~~~~~~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:193: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
-
-     warning: the following clause will never match:
-
-         :unstable
-
-     because it attempts to match on the result of:
-
-         analyze_coherence_factors(candidate)
-
-     which has type:
-
-         dynamic(:stable)
-
-     typing violation found at:
-     │
- 194 │       :unstable -> 0.3
-     │       ~~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:194: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
-
-warning: struct :already_exists is undefined (module :already_exists is not available or is yet to be defined)
-└─ lib/warp_engine.ex: WarpEngine.create_all_ets_tables_eagerly/0
 
      warning: the underscored variable "_meta" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore
      │
@@ -518,6 +264,58 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │
      └─ lib/enhanced_adt/bend.ex:115:8: EnhancedADT.Bend (module)
 
+      warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+      │
+ 1118 │         missing_tables = [table_name | missing_tables]
+      │         ~
+      │
+      └─ lib/warp_engine.ex:1118:9: WarpEngine.verify_tables_created/1
+
+      warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+      │
+ 1126 │         missing_tables = [table_name | missing_tables]
+      │         ~
+      │
+      └─ lib/warp_engine.ex:1126:9: WarpEngine.verify_tables_created/1
+
+      warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1704 │         {:ok, value, shard_id} ->
+      │                      ~
+      │
+      └─ lib/warp_engine.ex:1704:22: WarpEngine.handle_call_legacy_quantum_get/2
+
+      warning: function update_quantum_metrics/3 is unused
+      │
+ 1279 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1279:8: WarpEngine (module)
+
+      warning: function store_in_event_horizon_cache/5 is unused
+      │
+ 1361 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1361:8: WarpEngine (module)
+
+      warning: function refresh_cached_state/0 is unused
+      │
+ 1833 │   defp refresh_cached_state() do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1833:8: WarpEngine (module)
+
+      warning: function get_current_state/0 is unused
+      │
+ 1857 │   defp get_current_state() do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1857:8: WarpEngine (module)
+
+warning: struct :already_exists is undefined (module :already_exists is not available or is yet to be defined)
+└─ lib/warp_engine.ex: WarpEngine.create_all_ets_tables_eagerly/0
+
      warning: function atomize_keys/1 is unused
      │
  288 │   defp atomize_keys(map) when is_map(map) do
@@ -592,6 +390,24 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │                           ~~~~
      │
      └─ lib/warp_engine/ultra_fast_operations.ex:178:27: WarpEngine.UltraFastOperations.ultra_fast_get/2
+
+     warning: WarpEngine.WormholeRouter.find_route/2 is undefined or private. Did you mean:
+
+           * find_route/3
+           * find_route/4
+
+     │
+ 390 │     case WarpEngine.WormholeRouter.find_route(key, "*") do
+     │                                    ~
+     │
+     └─ lib/enhanced_adt/islab_integration.ex:390:36: EnhancedADT.WarpEngineIntegration.Translators.attempt_wormhole_retrieval/1
+
+     warning: WarpEngine.WormholeRouter.traverse_route_for_data/1 is undefined or private
+     │
+ 393 │         case WarpEngine.WormholeRouter.traverse_route_for_data(route) do
+     │                                        ~
+     │
+     └─ lib/enhanced_adt/islab_integration.ex:393:40: EnhancedADT.WarpEngineIntegration.Translators.attempt_wormhole_retrieval/1
 
      warning: clauses with the same name and arity (number of arguments) should be grouped together, "def handle_call/3" was previously defined (lib/warp_engine/wal_coordinator.ex:225)
      │
@@ -919,124 +735,314 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │
      └─ lib/enhanced_adt/fold.ex:396:8: EnhancedADT.Fold (module)
 
+     warning: the following clause will never match:
+
+         :strongly_related
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 170 │       :strongly_related -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:170: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :weakly_related
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 172 │       :weakly_related -> 0.4
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:172: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :unrelated
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 173 │       :unrelated -> 0.1
+     │       ~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:173: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :always_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 180 │       :always_together -> 0.95
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:180: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :frequently_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 181 │       :frequently_together -> 0.8
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:181: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :rarely_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 183 │       :rarely_together -> 0.2
+     │       ~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:183: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :never_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 184 │       :never_together -> 0.0
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:184: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :very_stable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 191 │       :very_stable -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:191: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: the following clause will never match:
+
+         :moderately_stable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 193 │       :moderately_stable -> 0.5
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:193: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: the following clause will never match:
+
+         :unstable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 194 │       :unstable -> 0.3
+     │       ~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:194: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
      warning: function update_wormhole_usage_patterns/3 is unused
      │
- 578 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
+ 571 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:578:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:571:8: WarpEngine.WALOperations (module)
 
      warning: function update_shard_statistics/4 is unused
      │
- 588 │   defp update_shard_statistics(shard, operation, _key, _value) do
+ 581 │   defp update_shard_statistics(shard, operation, _key, _value) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:588:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:581:8: WarpEngine.WALOperations (module)
 
      warning: function update_physics_intelligence_async/4 is unused
      │
- 357 │   defp update_physics_intelligence_async(key, _value, _cosmic_metadata, _state) do
+ 350 │   defp update_physics_intelligence_async(key, _value, _cosmic_metadata, _state) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:357:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:350:8: WarpEngine.WALOperations (module)
 
      warning: function update_get_physics_intelligence_async/5 is unused
      │
- 388 │   defp update_get_physics_intelligence_async(key, _value, _shard_id, _cosmic_metadata, _state) do
+ 381 │   defp update_get_physics_intelligence_async(key, _value, _shard_id, _cosmic_metadata, _state) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:388:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:381:8: WarpEngine.WALOperations (module)
 
      warning: function update_access_patterns_async/3 is unused
      │
- 516 │   defp update_access_patterns_async(key, access_type, _state) do
+ 509 │   defp update_access_patterns_async(key, access_type, _state) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:516:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:509:8: WarpEngine.WALOperations (module)
 
      warning: function ultra_fast_route_data/3 is unused
      │
- 259 │   defp ultra_fast_route_data(key, _value, opts) do
+ 252 │   defp ultra_fast_route_data(key, _value, opts) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:259:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:252:8: WarpEngine.WALOperations (module)
 
      warning: function populate_event_horizon_cache_async/4 is unused
      │
- 485 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
+ 478 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:485:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:478:8: WarpEngine.WALOperations (module)
 
      warning: function get_wormhole_metadata/2 is unused
      │
- 560 │   defp get_wormhole_metadata(_key, shard_id) do
+ 553 │   defp get_wormhole_metadata(_key, shard_id) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:560:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:553:8: WarpEngine.WALOperations (module)
 
      warning: function estimate_value_size/1 is unused
      │
- 304 │   defp estimate_value_size(value) do
+ 297 │   defp estimate_value_size(value) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:304:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:297:8: WarpEngine.WALOperations (module)
 
      warning: function estimate_current_concurrency/0 is unused
      │
- 286 │   defp estimate_current_concurrency() do
+ 279 │   defp estimate_current_concurrency() do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:286:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:279:8: WarpEngine.WALOperations (module)
 
      warning: function determine_quantum_state/2 is unused
      │
- 521 │   defp determine_quantum_state(key, value) do
+ 514 │   defp determine_quantum_state(key, value) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:521:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:514:8: WarpEngine.WALOperations (module)
 
      warning: function determine_optimal_cache_level/1 is unused
      │
- 569 │   defp determine_optimal_cache_level(cosmic_metadata) do
+ 562 │   defp determine_optimal_cache_level(cosmic_metadata) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:569:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:562:8: WarpEngine.WALOperations (module)
 
      warning: function create_cosmic_metadata/5 is unused
      │
- 341 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
+ 334 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:341:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:334:8: WarpEngine.WALOperations (module)
 
      warning: function check_event_horizon_cache_v2/2 is unused
      │
- 402 │   defp check_event_horizon_cache_v2(state, key) do
+ 395 │   defp check_event_horizon_cache_v2(state, key) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:402:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:395:8: WarpEngine.WALOperations (module)
 
      warning: function calculate_entropy_impact/3 is unused
      │
- 532 │   defp calculate_entropy_impact(key, value, shard_id) do
+ 525 │   defp calculate_entropy_impact(key, value, shard_id) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:532:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:525:8: WarpEngine.WALOperations (module)
 
      warning: function calculate_cosmic_coordinates/2 is unused
      │
- 546 │   defp calculate_cosmic_coordinates(key, value) do
+ 539 │   defp calculate_cosmic_coordinates(key, value) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:546:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:539:8: WarpEngine.WALOperations (module)
 
      warning: function cache_retrieved_value_async/5 is unused
      │
- 498 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
+ 491 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:498:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:491:8: WarpEngine.WALOperations (module)
 
     warning: module attribute @wal_sequence_ref_key_prefix was set but never used
     │
@@ -1044,13 +1050,6 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
     │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     │
     └─ lib/warp_engine/wal_operations.ex:31: WarpEngine.WALOperations (module)
-
-    warning: unused alias IntelligentLoadBalancer
-    │
- 27 │   alias WarpEngine.{WALCoordinator, QuantumIndex, IntelligentLoadBalancer}
-    │   ~
-    │
-    └─ lib/warp_engine/wal_operations.ex:27:3
 
     warning: unused alias WALEntry
     │
@@ -1084,25 +1083,27 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
 
      typing violation found at:
      │
- 414 │             {:error, _reason} -> nil
+ 407 │             {:error, _reason} -> nil
      │             ~~~~~~~~~~~~~~~~~~~~~~~~
      │
-     └─ lib/warp_engine/wal_operations.ex:414: WarpEngine.WALOperations.check_event_horizon_cache_v2/2
+     └─ lib/warp_engine/wal_operations.ex:407: WarpEngine.WALOperations.check_event_horizon_cache_v2/2
 
-Generated warp_engine app
+     warning: variable "metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 105 │   def route_operation(key, operation_type, metadata) do
+     │                                            ~~~~~~~~
+     │
+     └─ lib/warp_engine/intelligent_load_balancer.ex:105:44: WarpEngine.IntelligentLoadBalancer.route_operation/3
 
-16:03:00.054 [warning] ⚠️  Invalid quantum entanglement data in hot_data
-
-16:03:00.058 [warning] ⚠️  Invalid quantum entanglement data in cold_data
 🔧 Benchmark configuration:
-   bench_mode: true
+   bench_mode: false
    use_numbered_shards: true
    num_numbered_shards: 24
 
 🎯 WarpEngine Benchmark (warmup 2000ms, measure 1500ms, trials 5)
 ⏳ Waiting for ETS tables to be created...
-❌ Timeout waiting for ETS tables after 5051ms
-   • 1 processes: best 1500ms (386266 ops/sec), median 371133 (p50 371133, p90 386266)
-   • 2 processes: best 1500ms (739066 ops/sec), median 720066 (p50 720066, p90 739066)
-   • 3 processes: best 1500ms (1022533 ops/sec), median 1013933 (p50 1013933, p90 1022533)
-   • 4 processes: best 1500ms (1397200 ops/sec), median 1359387 (p50 1359387, p90 1397200)
+❌ Timeout waiting for ETS tables after 5050ms
+   • 1 processes: best 1501ms (29513 ops/sec), median 28066 (p50 28066, p90 29513)
+   • 2 processes: best 1501ms (51698 ops/sec), median 50200 (p50 50200, p90 51698)
+   • 3 processes: best 1504ms (74268 ops/sec), median 73750 (p50 73750, p90 74268)
+   • 4 processes: best 1503ms (99068 ops/sec), median 92686 (p50 92686, p90 99068)

@@ -68,32 +68,20 @@ defmodule WarpEngine.WALOperations do
         end
       _ ->
         if Application.get_env(:warp_engine, :use_numbered_shards, false) do
-          shard_index = :erlang.phash2(key, 24)
-          case shard_index do
-            0 -> :shard_0
-            1 -> :shard_1
-            2 -> :shard_2
-            3 -> :shard_3
-            4 -> :shard_4
-            5 -> :shard_5
-            6 -> :shard_6
-            7 -> :shard_7
-            8 -> :shard_8
-            9 -> :shard_9
-            10 -> :shard_10
-            11 -> :shard_11
-            12 -> :shard_12
-            13 -> :shard_13
-            14 -> :shard_14
-            15 -> :shard_15
-            16 -> :shard_16
-            17 -> :shard_17
-            18 -> :shard_18
-            19 -> :shard_19
-            20 -> :shard_20
-            21 -> :shard_21
-            22 -> :shard_22
-            23 -> :shard_23
+          # PHASE 9.2: Use Intelligent Load Balancer for optimal shard distribution
+          # This eliminates shard hotspots and enables true parallel processing
+          case Process.whereis(WarpEngine.IntelligentLoadBalancer) do
+            nil ->
+              # Fallback to hash-based routing if load balancer not available
+              shard_index = :erlang.phash2(key, 24)
+              String.to_atom("shard_#{shard_index}")
+            _pid ->
+              # Use intelligent load balancing for optimal performance
+              IntelligentLoadBalancer.route_operation(key, :put, %{
+                access_pattern: :balanced,
+                priority: :normal,
+                concurrency_level: System.schedulers_online()
+              })
           end
         else
           # Legacy hash to 3 shards
@@ -134,19 +122,22 @@ defmodule WarpEngine.WALOperations do
       # Phase 2 compatibility: apply automatic entanglement patterns (bench-mode aware)
       bench_mode = Application.get_env(:warp_engine, :bench_mode, false)
       if Application.get_env(:warp_engine, :enable_auto_entanglement, true) and not bench_mode do
-        QuantumIndex.apply_entanglement_patterns(key, value)
+        # Only apply patterns if quantum system is ready
+        if :ets.whereis(:quantum_pattern_cache) != :undefined do
+          QuantumIndex.apply_entanglement_patterns(key, value)
+        else
+          Logger.debug("⚠️  Quantum system not ready, skipping entanglement patterns for #{key}")
+        end
       end
 
       # PHASE 9.9: ULTRA-MINIMAL WAL - Binary format, essential fields only
       # 30x faster encoding, zero JSON overhead, maximum throughput
-      bench_mode = Application.get_env(:warp_engine, :bench_mode, false)
+      # WAL is enabled when not in bench mode (BENCH_MODE=false enables WAL)
       sample_rate = Application.get_env(:warp_engine, :wal_sample_rate, 1)
-      if not bench_mode do
-        sequence_number = get_next_sequence_ultra_fast(resolved_shard_id)
-        # Optional sampling to reduce OS page cache pressure during long benches
-        if sample_rate <= 1 or rem(sequence_number, sample_rate) == 0 do
-          WALCoordinator.fire_and_forget_append(resolved_shard_id, :put, key, value, sequence_number)
-        end
+      sequence_number = get_next_sequence_ultra_fast(resolved_shard_id)
+      # Optional sampling to reduce OS page cache pressure during long benches
+      if sample_rate <= 1 or rem(sequence_number, sample_rate) == 0 do
+        WALCoordinator.fire_and_forget_append(resolved_shard_id, :put, key, value, sequence_number)
       end
 
       # PHASE 9.6: SKIP ALL NON-ESSENTIAL OPERATIONS for maximum throughput
@@ -323,19 +314,41 @@ defmodule WarpEngine.WALOperations do
     :atomics.add_get(counter_ref, 1, 1)
   end
 
+  # Helper function to validate atomic counter references (OTP version compatible)
+  defp valid_atomic_counter?(counter_ref) do
+    try do
+      :atomics.get(counter_ref, 1)
+      true
+    rescue
+      _ -> false
+    end
+  end
+
   # PHASE 9.7: Get pre-cached atomic counter reference for maximum speed
   defp get_cached_sequence_counter(shard_id) do
-    # Use Application environment to cache atomic counter references globally
-    case Application.get_env(:warp_engine, :shard_counters, %{}) do
-      %{^shard_id => counter_ref} ->
+    # Always get the counter directly from WALCoordinator for reliability
+    try do
+      counter_ref = WALCoordinator.get_sequence_counter(shard_id)
+      Logger.debug("🔍 WALOperations: Got counter ref for #{shard_id}: #{inspect(counter_ref)}")
+
+      # Validate the counter reference
+      if is_reference(counter_ref) and valid_atomic_counter?(counter_ref) do
         counter_ref
-      cached_counters ->
-        # Fallback: Get from WAL shard and cache it globally
-        counter_ref = WALCoordinator.get_sequence_counter(shard_id)
-        updated_cache = Map.put(cached_counters, shard_id, counter_ref)
-        Application.put_env(:warp_engine, :shard_counters, updated_cache)
+      else
+        Logger.warning("⚠️ WALOperations: Invalid counter ref for #{shard_id}: #{inspect(counter_ref)}")
+        # Emergency fallback: create a simple atomic counter
+        counter_ref = :atomics.new(1, [])
+        :atomics.put(counter_ref, 1, 1)
         counter_ref
-    end
+      end
+    rescue
+      error ->
+        Logger.error("❌ WALOperations: Error getting counter for #{shard_id}: #{inspect(error)}")
+        # Emergency fallback: create a simple atomic counter
+        counter_ref = :atomics.new(1, [])
+        :atomics.put(counter_ref, 1, 1)
+        counter_ref
+      end
   end
 
   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do

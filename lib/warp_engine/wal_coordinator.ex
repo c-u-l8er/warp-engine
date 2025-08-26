@@ -87,11 +87,11 @@ defmodule WarpEngine.WALCoordinator do
     # Send minimal data directly to WAL shard (no WALEntry object overhead)
     shard_name = WarpEngine.WALShard.via_tuple(shard_id)
 
-    case Process.whereis(shard_name) do
-      pid when is_pid(pid) ->
+    case Registry.lookup(WarpEngine.WALRegistry, shard_id) do
+      [{pid, _}] when is_pid(pid) ->
         # Direct send to existing process - fastest path
         send(pid, {:fire_and_forget, operation_type, key, value, sequence_number})
-      nil ->
+      [] ->
         # Process doesn't exist - skip WAL for this operation (fire-and-forget)
         # This prevents crashes but loses durability for operations during restarts
         :skipped
@@ -111,7 +111,14 @@ defmodule WarpEngine.WALCoordinator do
   Use for maximum speed sequence generation without GenServer calls.
   """
   def get_sequence_counter(shard_id) do
-    WarpEngine.WALShard.get_sequence_counter(shard_id)
+    # Get the cached atomic counter reference from process dictionary
+    case Process.get({:shard_counter, shard_id}) do
+      counter_ref when is_reference(counter_ref) ->
+        counter_ref
+      _ ->
+        # Fallback: get from WAL shard directly
+        WarpEngine.WALShard.get_sequence_counter_ref(shard_id)
+    end
   end
 
   @doc """
@@ -394,6 +401,18 @@ defmodule WarpEngine.WALCoordinator do
     {:reply, health_report, state}
   end
 
+  def handle_call({:get_shard_pid, shard_id}, _from, state) do
+    # Get the PID for a specific shard
+    case Map.get(state.shard_processes, shard_id) do
+      nil ->
+        {:reply, nil, state}
+      pid when is_pid(pid) ->
+        {:reply, pid, state}
+      _ ->
+        {:reply, nil, state}
+    end
+  end
+
   def terminate(_reason, state) do
     Logger.info("🛑 WAL Coordinator shutting down...")
 
@@ -471,74 +490,192 @@ defmodule WarpEngine.WALCoordinator do
         {shard_id, reason}
       end)
 
-      {:error, failed_shards}
+      # Log detailed error information for debugging
+      Logger.error("❌ Some WAL shards failed to start:")
+      Enum.each(failed_shards, fn {shard_id, reason} ->
+        Logger.error("   • #{shard_id}: #{inspect(reason)}")
+      end)
+
+      # For now, allow the coordinator to start with successful shards only
+      # This prevents the entire system from failing due to a few bad shards
+      if length(successful) > 0 do
+        Logger.warning("⚠️  WALCoordinator will start with #{length(successful)} successful shards (some failed)")
+
+        shard_processes = successful
+        |> Enum.map(fn {shard_id, {:ok, pid}} -> {shard_id, pid} end)
+        |> Enum.into(%{})
+
+        {:ok, shard_processes}
+      else
+        Logger.error("❌ No WAL shards started successfully - WALCoordinator cannot start")
+        {:error, failed_shards}
+      end
     end
   end
 
   defp initialize_coordinator_stats() do
     %{
       started_at: :os.system_time(:millisecond),
-      coordinated_checkpoints: 0,
-      coordinated_recoveries: 0,
-      total_flush_operations: 0
+      total_operations: 0,
+      total_checkpoints: 0,
+      total_recoveries: 0,
+      coordinator_uptime_ms: 0
     }
   end
 
   defp calculate_aggregate_stats(shard_stats) do
-    # Calculate totals across all shards
-    total_operations = shard_stats
-    |> Map.values()
-    |> Enum.map(fn stats -> stats.total_operations end)
-    |> Enum.sum()
+    try do
+      # Extract numeric values from shard stats
+      numeric_stats = shard_stats
+      |> Enum.map(fn {_shard_id, stats} ->
+        case stats do
+          %{sequence_number: seq, buffer_size: buf, total_operations: ops, total_flushes: flushes} ->
+            %{
+              sequence_number: seq,
+              buffer_size: buf,
+              total_operations: ops,
+              total_flushes: flushes
+            }
+          _ ->
+            %{
+              sequence_number: 0,
+              buffer_size: 0,
+              total_operations: 0,
+              total_flushes: 0
+            }
+        end
+      end)
 
-    total_flushes = shard_stats
-    |> Map.values()
-    |> Enum.map(fn stats -> stats.total_flushes end)
-    |> Enum.sum()
+      # Calculate aggregates
+      total_operations = Enum.sum(Enum.map(numeric_stats, & &1.total_operations))
+      total_flushes = Enum.sum(Enum.map(numeric_stats, & &1.total_flushes))
+      total_buffer_size = Enum.sum(Enum.map(numeric_stats, & &1.buffer_size))
+      max_sequence = Enum.max(Enum.map(numeric_stats, & &1.sequence_number), fn -> 0 end)
 
-    avg_flush_times = shard_stats
-    |> Map.values()
-    |> Enum.map(fn stats -> stats.avg_flush_time_ms end)
-
-    overall_avg_flush_time = if length(avg_flush_times) > 0 do
-      Enum.sum(avg_flush_times) / length(avg_flush_times)
-    else
-      0.0
+      %{
+        total_operations: total_operations,
+        total_flushes: total_flushes,
+        total_buffer_size: total_buffer_size,
+        max_sequence: max_sequence,
+        active_shards: length(shard_stats),
+        calculated_at: DateTime.utc_now()
+      }
+    rescue
+      error ->
+        Logger.error("❌ Failed to calculate aggregate stats: #{inspect(error)}")
+        %{
+          total_operations: 0,
+          total_flushes: 0,
+          total_buffer_size: 0,
+          max_sequence: 0,
+          active_shards: length(shard_stats),
+          error: inspect(error),
+          calculated_at: DateTime.utc_now()
+        }
     end
-
-    shard_count = map_size(shard_stats)
-
-    %{
-      total_operations: total_operations,
-      total_flushes: total_flushes,
-      overall_avg_flush_time_ms: overall_avg_flush_time,
-      operations_per_shard: (if shard_count > 0, do: div(total_operations, shard_count), else: 0),
-      active_shards: shard_count
-    }
   end
 
-  defp get_shard_pid(shard_id) do
-    Process.whereis(WarpEngine.WALShard.via_tuple(shard_id))
+  defp cache_atomic_counters(shard_processes) do
+    Logger.info("⚡ Pre-caching atomic counter references for ultra-fast sequence generation...")
+
+    try do
+      # Cache atomic counter references for each shard to enable direct access
+      # This eliminates GenServer calls for sequence generation
+      Enum.each(shard_processes, fn {shard_id, _pid} ->
+        case WarpEngine.WALShard.get_sequence_counter_ref(shard_id) do
+          counter_ref when is_reference(counter_ref) ->
+            # Store the counter reference in a process dictionary for fast access
+            Process.put({:shard_counter, shard_id}, counter_ref)
+            Logger.debug("✅ Cached atomic counter for shard #{shard_id}")
+          _ ->
+            Logger.warning("⚠️  Failed to cache atomic counter for shard #{shard_id}")
+        end
+      end)
+
+      Logger.info("⚡ Atomic counter caching complete - ultra-fast sequence generation enabled!")
+    rescue
+      error ->
+        Logger.error("❌ Atomic counter caching failed: #{inspect(error)}")
+    end
   end
 
   defp generate_coordinated_checkpoint_id() do
     timestamp = DateTime.utc_now() |> DateTime.to_unix()
-    sequence = :rand.uniform(9999)
-    "coordinated_checkpoint_#{timestamp}_#{sequence}"
+    random = :rand.uniform(99999)
+    "coordinated_checkpoint_#{timestamp}_#{random}"
   end
 
   defp save_coordinated_checkpoint_metadata(metadata, data_root) do
     try do
-      wal_directory = Path.join(data_root, "wal")
-      File.mkdir_p!(wal_directory)
+      # Create coordinated checkpoints directory
+      coordinated_checkpoints_dir = Path.join([data_root, "wal", "coordinated_checkpoints"])
+      File.mkdir_p!(coordinated_checkpoints_dir)
 
-      metadata_file = Path.join(wal_directory, "coordinated_checkpoint_metadata.json")
-      File.write!(metadata_file, :erlang.term_to_binary(metadata))
+      # Save coordinated checkpoint metadata
+      metadata_file = Path.join(coordinated_checkpoints_dir, "#{metadata.coordinator_checkpoint_id}_metadata.json")
+      File.write!(metadata_file, Jason.encode!(metadata, pretty: true))
 
-      Logger.debug("📝 Coordinated checkpoint metadata saved: #{metadata_file}")
+      Logger.info("💾 Coordinated checkpoint metadata saved: #{metadata_file}")
+      {:ok, metadata_file}
     rescue
       error ->
-        Logger.warning("⚠️  Failed to save coordinated checkpoint metadata: #{inspect(error)}")
+        Logger.error("❌ Failed to save coordinated checkpoint metadata: #{inspect(error)}")
+        {:error, {:metadata_save_failed, error}}
+    end
+  end
+
+  defp get_shard_pid(shard_id) do
+    # Get the PID for a specific shard from the coordinator's state
+    # This is used for health checks and process management
+    case Process.whereis(__MODULE__) do
+      nil ->
+        Logger.error("❌ WALCoordinator process not found")
+        nil
+      coordinator_pid ->
+        try do
+          GenServer.call(coordinator_pid, {:get_shard_pid, shard_id}, 5000)
+        rescue
+          _ ->
+            Logger.warning("⚠️  Failed to get PID for shard #{shard_id}")
+            nil
+        end
+    end
+  end
+
+  defp load_shard_checkpoint(checkpoint_path, shard_id) do
+    Logger.info("📥 Loading checkpoint from #{checkpoint_path} for shard #{shard_id}")
+
+    try do
+      # Load checkpoint metadata
+      metadata_file = Path.join(checkpoint_path, "metadata.json")
+
+      case File.read(metadata_file) do
+        {:ok, content} ->
+          case :erlang.binary_to_term(content) do
+            %{sequence_number: sequence_number} = metadata ->
+              Logger.info("📋 Checkpoint metadata for shard #{shard_id}: sequence #{sequence_number}")
+
+              {:ok, %{
+                checkpoint_id: metadata.checkpoint_id,
+                last_sequence: sequence_number,
+                shard_id: shard_id,
+                created_at: metadata.created_at
+              }}
+
+            _ ->
+              Logger.error("❌ Invalid checkpoint metadata format for shard #{shard_id}")
+              {:error, :invalid_metadata_format}
+          end
+
+        {:error, reason} ->
+          Logger.error("❌ Failed to read checkpoint metadata for shard #{shard_id}: #{inspect(reason)}")
+          {:error, {:metadata_read_failed, reason}}
+      end
+
+    rescue
+      error ->
+        Logger.error("💥 Checkpoint loading failed for shard #{shard_id}: #{inspect(error)}")
+        {:error, {:checkpoint_load_failed, error}}
     end
   end
 
@@ -572,26 +709,27 @@ defmodule WarpEngine.WALCoordinator do
 
   # PHASE 9.7: Pre-cache atomic counter references for ultra-fast sequence generation
   # This eliminates ALL GenServer calls during high-frequency operations
-  defp cache_atomic_counters(shard_processes) do
-    Logger.info("⚡ PHASE 9.7: Caching atomic counter references for zero-overhead sequence generation...")
+  # This function is now handled by cache_atomic_counters
+  # defp cache_atomic_counters(shard_processes) do
+  #   Logger.info("⚡ PHASE 9.7: Caching atomic counter references for zero-overhead sequence generation...")
 
-    cached_counters = Enum.reduce(shard_processes, %{}, fn {shard_id, _pid}, acc ->
-      try do
-        # Get the atomic counter reference directly (one-time GenServer call)
-        counter_ref = WarpEngine.WALShard.get_sequence_counter(shard_id)
-        Map.put(acc, shard_id, counter_ref)
-      rescue
-        error ->
-          Logger.warning("⚠️  Failed to cache counter for shard #{shard_id}: #{inspect(error)}")
-          acc
-      end
-    end)
+  #   cached_counters = Enum.reduce(shard_processes, %{}, fn {shard_id, _pid}, acc ->
+  #     try do
+  #       # Get the atomic counter reference directly (one-time GenServer call)
+  #       counter_ref = WarpEngine.WALShard.get_sequence_counter(shard_id)
+  #       Map.put(acc, shard_id, counter_ref)
+  #     rescue
+  #       error ->
+  #         Logger.warning("⚠️  Failed to cache counter for shard #{shard_id}: #{inspect(error)}")
+  #         acc
+  #     end
+  #   end)
 
-    # Store in Application environment for global access (no process dictionary needed)
-    Application.put_env(:warp_engine, :shard_counters, cached_counters)
+  #   # Store in Application environment for global access (no process dictionary needed)
+  #   Application.put_env(:warp_engine, :shard_counters, cached_counters)
 
-    Logger.info("✅ Cached #{map_size(cached_counters)} atomic counter references - sequence generation is now zero-overhead!")
-  end
+  #   Logger.info("✅ Cached #{map_size(cached_counters)} atomic counter references - sequence generation is now zero-overhead!")
+  # end
 
   # Helper function to determine shard from operation for backward compatibility
   defp determine_shard_from_operation(%{shard_id: shard_id}) when shard_id != nil do

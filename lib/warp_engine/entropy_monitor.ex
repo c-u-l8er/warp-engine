@@ -357,7 +357,13 @@ defmodule WarpEngine.EntropyMonitor do
   end
 
   def handle_info({:entropy_alert, alert_type, details}, state) do
-    Logger.info("🚨 Entropy Alert: #{alert_type} - #{inspect(details)}")
+    # Reduce logging verbosity for high entropy alerts during benchmarks
+    case alert_type do
+      :high_entropy ->
+        Logger.debug("🌀 High entropy detected: #{inspect(details)}")
+      _ ->
+        Logger.info("🚨 Entropy Alert: #{alert_type} - #{inspect(details)}")
+    end
 
     # Process entropy alert and potentially trigger rebalancing
     updated_state = process_entropy_alert(state, alert_type, details)
@@ -762,7 +768,7 @@ defmodule WarpEngine.EntropyMonitor do
     final_state = if entropy_metrics.rebalancing_recommended and state.maxwell_demon do
       case should_trigger_automatic_rebalancing(updated_state) do
         true ->
-          Logger.info("🌡️  High entropy detected (#{Float.round(entropy_metrics.total_entropy, 2)}), activating Maxwell's demon")
+          Logger.debug("🌡️  High entropy detected (#{Float.round(entropy_metrics.total_entropy, 2)}), activating Maxwell's demon")
           trigger_maxwell_demon_optimization(updated_state)
         false ->
           updated_state

@@ -1,3 +1,177 @@
+Compiling 2 files (.ex)
+     warning: variable "metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 105 │   def route_operation(key, operation_type, metadata) do
+     │                                            ~~~~~~~~
+     │
+     └─ lib/warp_engine/intelligent_load_balancer.ex:105:44: WarpEngine.IntelligentLoadBalancer.route_operation/3
+
+     warning: function update_wormhole_usage_patterns/3 is unused
+     │
+ 571 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:571:8: WarpEngine.WALOperations (module)
+
+     warning: function update_shard_statistics/4 is unused
+     │
+ 581 │   defp update_shard_statistics(shard, operation, _key, _value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:581:8: WarpEngine.WALOperations (module)
+
+     warning: function update_physics_intelligence_async/4 is unused
+     │
+ 350 │   defp update_physics_intelligence_async(key, _value, _cosmic_metadata, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:350:8: WarpEngine.WALOperations (module)
+
+     warning: function update_get_physics_intelligence_async/5 is unused
+     │
+ 381 │   defp update_get_physics_intelligence_async(key, _value, _shard_id, _cosmic_metadata, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:381:8: WarpEngine.WALOperations (module)
+
+     warning: function update_access_patterns_async/3 is unused
+     │
+ 509 │   defp update_access_patterns_async(key, access_type, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:509:8: WarpEngine.WALOperations (module)
+
+     warning: function ultra_fast_route_data/3 is unused
+     │
+ 252 │   defp ultra_fast_route_data(key, _value, opts) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:252:8: WarpEngine.WALOperations (module)
+
+     warning: function populate_event_horizon_cache_async/4 is unused
+     │
+ 478 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:478:8: WarpEngine.WALOperations (module)
+
+     warning: function get_wormhole_metadata/2 is unused
+     │
+ 553 │   defp get_wormhole_metadata(_key, shard_id) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:553:8: WarpEngine.WALOperations (module)
+
+     warning: function estimate_value_size/1 is unused
+     │
+ 297 │   defp estimate_value_size(value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:297:8: WarpEngine.WALOperations (module)
+
+     warning: function estimate_current_concurrency/0 is unused
+     │
+ 279 │   defp estimate_current_concurrency() do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:279:8: WarpEngine.WALOperations (module)
+
+     warning: function determine_quantum_state/2 is unused
+     │
+ 514 │   defp determine_quantum_state(key, value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:514:8: WarpEngine.WALOperations (module)
+
+     warning: function determine_optimal_cache_level/1 is unused
+     │
+ 562 │   defp determine_optimal_cache_level(cosmic_metadata) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:562:8: WarpEngine.WALOperations (module)
+
+     warning: function create_cosmic_metadata/5 is unused
+     │
+ 334 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:334:8: WarpEngine.WALOperations (module)
+
+     warning: function check_event_horizon_cache_v2/2 is unused
+     │
+ 395 │   defp check_event_horizon_cache_v2(state, key) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:395:8: WarpEngine.WALOperations (module)
+
+     warning: function calculate_entropy_impact/3 is unused
+     │
+ 525 │   defp calculate_entropy_impact(key, value, shard_id) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:525:8: WarpEngine.WALOperations (module)
+
+     warning: function calculate_cosmic_coordinates/2 is unused
+     │
+ 539 │   defp calculate_cosmic_coordinates(key, value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:539:8: WarpEngine.WALOperations (module)
+
+     warning: function cache_retrieved_value_async/5 is unused
+     │
+ 491 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:491:8: WarpEngine.WALOperations (module)
+
+    warning: module attribute @wal_sequence_ref_key_prefix was set but never used
+    │
+ 31 │   @wal_sequence_ref_key_prefix :wal_shard_sequence_counter_cache
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_operations.ex:31: WarpEngine.WALOperations (module)
+
+    warning: unused alias WALEntry
+    │
+ 28 │   alias WarpEngine.WAL.Entry, as: WALEntry
+    │   ~
+    │
+    └─ lib/warp_engine/wal_operations.ex:28:3
+
+     warning: the following clause will never match:
+
+         {:error, _reason}
+
+     because it attempts to match on the result of:
+
+         WarpEngine.EventHorizonCache.get(cache, key)
+
+     which has type:
+
+         dynamic(
+           {:miss, %{..., performance_metrics: term()}} or
+             {:ok, term(), %{..., performance_metrics: term()},
+              %{
+                cache_level: term(),
+                data_decompressed: boolean(),
+                dilated_operation_time: integer(),
+                promoted: boolean(),
+                time_dilation_factor: term(),
+                wall_clock_time: float() or integer()
+              }}
+         )
+
+     typing violation found at:
+     │
+ 407 │             {:error, _reason} -> nil
+     │             ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/warp_engine/wal_operations.ex:407: WarpEngine.WALOperations.check_event_horizon_cache_v2/2
+
+warning: struct :already_exists is undefined (module :already_exists is not available or is yet to be defined)
+└─ lib/warp_engine.ex: WarpEngine.create_all_ets_tables_eagerly/0
+
      warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  272 │     Enum.each(operations, fn {_op_type, key, _value, opts} ->
@@ -266,48 +440,52 @@
 
       warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
       │
- 1107 │         missing_tables = [table_name | missing_tables]
+ 1118 │         missing_tables = [table_name | missing_tables]
       │         ~
       │
-      └─ lib/warp_engine.ex:1107:9: WarpEngine.verify_tables_created/1
+      └─ lib/warp_engine.ex:1118:9: WarpEngine.verify_tables_created/1
 
       warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
       │
- 1115 │         missing_tables = [table_name | missing_tables]
+ 1126 │         missing_tables = [table_name | missing_tables]
       │         ~
       │
-      └─ lib/warp_engine.ex:1115:9: WarpEngine.verify_tables_created/1
+      └─ lib/warp_engine.ex:1126:9: WarpEngine.verify_tables_created/1
+
+      warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1704 │         {:ok, value, shard_id} ->
+      │                      ~
+      │
+      └─ lib/warp_engine.ex:1704:22: WarpEngine.handle_call_legacy_quantum_get/2
 
       warning: function update_quantum_metrics/3 is unused
       │
- 1268 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
+ 1279 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
       │        ~
       │
-      └─ lib/warp_engine.ex:1268:8: WarpEngine (module)
+      └─ lib/warp_engine.ex:1279:8: WarpEngine (module)
 
       warning: function store_in_event_horizon_cache/5 is unused
       │
- 1350 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
+ 1361 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
       │        ~
       │
-      └─ lib/warp_engine.ex:1350:8: WarpEngine (module)
+      └─ lib/warp_engine.ex:1361:8: WarpEngine (module)
 
       warning: function refresh_cached_state/0 is unused
       │
- 1771 │   defp refresh_cached_state() do
+ 1833 │   defp refresh_cached_state() do
       │        ~
       │
-      └─ lib/warp_engine.ex:1771:8: WarpEngine (module)
+      └─ lib/warp_engine.ex:1833:8: WarpEngine (module)
 
       warning: function get_current_state/0 is unused
       │
- 1795 │   defp get_current_state() do
+ 1857 │   defp get_current_state() do
       │        ~
       │
-      └─ lib/warp_engine.ex:1795:8: WarpEngine (module)
-
-warning: struct :already_exists is undefined (module :already_exists is not available or is yet to be defined)
-└─ lib/warp_engine.ex: WarpEngine.create_all_ets_tables_eagerly/0
+      └─ lib/warp_engine.ex:1857:8: WarpEngine (module)
 
      warning: function atomize_keys/1 is unused
      │
@@ -918,186 +1096,17 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │
      └─ lib/enhanced_adt/quantum_analyzer.ex:194: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
 
-     warning: function update_wormhole_usage_patterns/3 is unused
-     │
- 578 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:578:8: WarpEngine.WALOperations (module)
+Generated warp_engine app
 
-     warning: function update_shard_statistics/4 is unused
-     │
- 588 │   defp update_shard_statistics(shard, operation, _key, _value) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:588:8: WarpEngine.WALOperations (module)
+18:34:22.031 [info] 🚀 Starting WarpEngine Database Application...
 
-     warning: function update_physics_intelligence_async/4 is unused
-     │
- 357 │   defp update_physics_intelligence_async(key, _value, _cosmic_metadata, _state) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:357:8: WarpEngine.WALOperations (module)
+18:34:22.034 [info] ⚙️  Application Configuration:
 
-     warning: function update_get_physics_intelligence_async/5 is unused
-     │
- 388 │   defp update_get_physics_intelligence_async(key, _value, _shard_id, _cosmic_metadata, _state) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:388:8: WarpEngine.WALOperations (module)
+18:34:22.041 [info]   data_root: "/home/travis/Projects/warp-engine/data"
 
-     warning: function update_access_patterns_async/3 is unused
-     │
- 516 │   defp update_access_patterns_async(key, access_type, _state) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:516:8: WarpEngine.WALOperations (module)
+18:34:22.042 [info]   Entanglement rules: using defaults
 
-     warning: function ultra_fast_route_data/3 is unused
-     │
- 259 │   defp ultra_fast_route_data(key, _value, opts) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:259:8: WarpEngine.WALOperations (module)
-
-     warning: function populate_event_horizon_cache_async/4 is unused
-     │
- 485 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:485:8: WarpEngine.WALOperations (module)
-
-     warning: function get_wormhole_metadata/2 is unused
-     │
- 560 │   defp get_wormhole_metadata(_key, shard_id) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:560:8: WarpEngine.WALOperations (module)
-
-     warning: function estimate_value_size/1 is unused
-     │
- 304 │   defp estimate_value_size(value) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:304:8: WarpEngine.WALOperations (module)
-
-     warning: function estimate_current_concurrency/0 is unused
-     │
- 286 │   defp estimate_current_concurrency() do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:286:8: WarpEngine.WALOperations (module)
-
-     warning: function determine_quantum_state/2 is unused
-     │
- 521 │   defp determine_quantum_state(key, value) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:521:8: WarpEngine.WALOperations (module)
-
-     warning: function determine_optimal_cache_level/1 is unused
-     │
- 569 │   defp determine_optimal_cache_level(cosmic_metadata) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:569:8: WarpEngine.WALOperations (module)
-
-     warning: function create_cosmic_metadata/5 is unused
-     │
- 341 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:341:8: WarpEngine.WALOperations (module)
-
-     warning: function check_event_horizon_cache_v2/2 is unused
-     │
- 402 │   defp check_event_horizon_cache_v2(state, key) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:402:8: WarpEngine.WALOperations (module)
-
-     warning: function calculate_entropy_impact/3 is unused
-     │
- 532 │   defp calculate_entropy_impact(key, value, shard_id) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:532:8: WarpEngine.WALOperations (module)
-
-     warning: function calculate_cosmic_coordinates/2 is unused
-     │
- 546 │   defp calculate_cosmic_coordinates(key, value) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:546:8: WarpEngine.WALOperations (module)
-
-     warning: function cache_retrieved_value_async/5 is unused
-     │
- 498 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:498:8: WarpEngine.WALOperations (module)
-
-    warning: module attribute @wal_sequence_ref_key_prefix was set but never used
-    │
- 31 │   @wal_sequence_ref_key_prefix :wal_shard_sequence_counter_cache
-    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ lib/warp_engine/wal_operations.ex:31: WarpEngine.WALOperations (module)
-
-    warning: unused alias IntelligentLoadBalancer
-    │
- 27 │   alias WarpEngine.{WALCoordinator, QuantumIndex, IntelligentLoadBalancer}
-    │   ~
-    │
-    └─ lib/warp_engine/wal_operations.ex:27:3
-
-    warning: unused alias WALEntry
-    │
- 28 │   alias WarpEngine.WAL.Entry, as: WALEntry
-    │   ~
-    │
-    └─ lib/warp_engine/wal_operations.ex:28:3
-
-     warning: the following clause will never match:
-
-         {:error, _reason}
-
-     because it attempts to match on the result of:
-
-         WarpEngine.EventHorizonCache.get(cache, key)
-
-     which has type:
-
-         dynamic(
-           {:miss, %{..., performance_metrics: term()}} or
-             {:ok, term(), %{..., performance_metrics: term()},
-              %{
-                cache_level: term(),
-                data_decompressed: boolean(),
-                dilated_operation_time: integer(),
-                promoted: boolean(),
-                time_dilation_factor: term(),
-                wall_clock_time: float() or integer()
-              }}
-         )
-
-     typing violation found at:
-     │
- 414 │             {:error, _reason} -> nil
-     │             ~~~~~~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/warp_engine/wal_operations.ex:414: WarpEngine.WALOperations.check_event_horizon_cache_v2/2
-
-
-16:07:17.598 [info] 🚀 Starting WarpEngine Database Application...
-
-16:07:17.601 [info] ⚙️  Application Configuration:
-
-16:07:17.610 [info]   data_root: "/home/travis/Projects/warp-engine/data"
-
-16:07:17.610 [info]   Entanglement rules: using defaults
-
-16:07:17.610 [info] 🔧 Starting supervisor with 1 children
+18:34:22.042 [info] 🔧 Starting supervisor with 1 children
      warning: variable "build_graph_seq" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  115 │ build_graph_seq = fn ->
@@ -1122,7 +1131,7 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
 ⚙️  Concurrency Sweep Config: nodes=10000 edges=20000 repeat=5 warmups=1 trials=2
    Levels: 1,2,3,4
 
-16:07:17.978 [info] 📚 Compiling simplified Enhanced ADT module...
+18:34:22.421 [info] 📚 Compiling simplified Enhanced ADT module...
     warning: duplicate key :"::" found in struct
     │
  44 │   defsum WeightedGraph do
@@ -1213,22 +1222,22 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
     └─ examples/simple_weighted_graph.ex:44: SimpleWeightedGraph.WeightedGraph."SingleNode"/1
 
 
-16:07:18.251 [info] ✅ Simplified ADT ready
+18:34:22.718 [info] ✅ Simplified ADT ready
 
-16:07:18.251 [info] 📦 Generating dataset...
+18:34:22.718 [info] 📦 Generating dataset...
 
 🎯 Concurrency Sweep (4 levels)
 
-16:07:18.798 [info] 📦 Data ready: gen_nodes=13.7ms, gen_edges=522.3ms
+18:34:23.275 [info] 📦 Data ready: gen_nodes=12.1ms, gen_edges=538.4ms
 
 == Concurrency level: 1 ==
-   • best 158.2ms (948414 ops/sec), median 948414 (p50 948414, p90 948414)
+   • best 138.2ms (1085411 ops/sec), median 1085411 (p50 1085411, p90 1085411)
 
 == Concurrency level: 2 ==
-   • best 131.8ms (1138303 ops/sec), median 1138303 (p50 1138303, p90 1138303)
+   • best 127.4ms (1177759 ops/sec), median 1177759 (p50 1177759, p90 1177759)
 
 == Concurrency level: 3 ==
-   • best 113.4ms (1322987 ops/sec), median 1322987 (p50 1322987, p90 1322987)
+   • best 129.3ms (1160243 ops/sec), median 1160243 (p50 1160243, p90 1160243)
 
 == Concurrency level: 4 ==
-   • best 138.1ms (1085801 ops/sec), median 1085801 (p50 1085801, p90 1085801)
+   • best 146.4ms (1024316 ops/sec), median 1024316 (p50 1024316, p90 1024316)

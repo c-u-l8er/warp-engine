@@ -35,7 +35,8 @@ defmodule WarpEngine.IntelligentLoadBalancer do
     :optimization_state              # Current optimization configuration
   ]
 
-  @shard_ids [:hot_data, :warm_data, :cold_data]
+  # PHASE 9.2: Support both legacy 3-shard and modern 24-shard systems
+  @legacy_shard_ids [:hot_data, :warm_data, :cold_data]
 
   # Performance targets for different concurrency levels
   @performance_targets %{
@@ -84,6 +85,74 @@ defmodule WarpEngine.IntelligentLoadBalancer do
   """
   def get_balancing_stats() do
     GenServer.call(__MODULE__, :get_balancing_stats)
+  end
+
+  @doc """
+  Get current shard IDs based on configuration.
+  """
+  def get_shard_ids() do
+    if Application.get_env(:warp_engine, :use_numbered_shards, false) do
+      num_shards = Application.get_env(:warp_engine, :num_numbered_shards, 24)
+      Enum.map(0..(num_shards - 1), &String.to_atom("shard_#{&1}"))
+    else
+      @legacy_shard_ids
+    end
+  end
+
+  @doc """
+  Route operation to optimal shard (direct call for performance).
+  """
+  def route_operation(key, operation_type, metadata) do
+    # PHASE 9.2: TRUE LOAD-BALANCED ROUTING for linear concurrency scaling
+    # This eliminates shard hotspots and enables true parallel processing across all 24 shards
+
+    shard_ids = get_shard_ids()
+
+    # Get current shard loads (real-time load balancing)
+    current_loads = get_current_shard_loads()
+
+    # Find the least loaded shard for optimal distribution
+    {least_loaded_shard, _min_load} = Enum.min_by(current_loads, fn {_shard, load} -> load end)
+
+    # Update load tracking for this shard
+    update_shard_load_tracking(least_loaded_shard)
+
+    least_loaded_shard
+  end
+
+  # Track shard loads for load balancing
+  @shard_loads_key :intelligent_load_balancer_shard_loads
+
+  defp get_current_shard_loads() do
+    case Process.get(@shard_loads_key) do
+      nil ->
+        # Initialize with zero loads
+        shard_ids = get_shard_ids()
+        loads = Enum.map(shard_ids, fn shard_id -> {shard_id, 0} end) |> Enum.into(%{})
+        Process.put(@shard_loads_key, loads)
+        loads
+      loads -> loads
+    end
+  end
+
+  defp update_shard_load_tracking(shard_id) do
+    current_loads = get_current_shard_loads()
+    current_load = Map.get(current_loads, shard_id, 0)
+
+    # Increment load for this shard
+    updated_loads = Map.put(current_loads, shard_id, current_load + 1)
+    Process.put(@shard_loads_key, updated_loads)
+
+    # Periodically reset loads to prevent overflow
+    if rem(current_load + 1, 1000) == 0 do
+      reset_shard_loads()
+    end
+  end
+
+  defp reset_shard_loads() do
+    shard_ids = get_shard_ids()
+    loads = Enum.map(shard_ids, fn shard_id -> {shard_id, 0} end) |> Enum.into(%{})
+    Process.put(@shard_loads_key, loads)
   end
 
   @doc """
@@ -289,18 +358,20 @@ defmodule WarpEngine.IntelligentLoadBalancer do
 
   defp hash_based_routing(key) do
     # Traditional routing - maintains data locality
-    shard_index = :erlang.phash2(key, 3)
-    Enum.at(@shard_ids, shard_index)
+    shard_ids = get_shard_ids()
+    shard_index = :erlang.phash2(key, length(shard_ids))
+    Enum.at(shard_ids, shard_index)
   end
 
   defp round_robin_routing(shard_loads) do
     # Simple round-robin - ensures even distribution
+    shard_ids = get_shard_ids()
     least_used_count = shard_loads |> Map.values() |> Enum.min()
 
     # Find first shard with minimum load
-    Enum.find(@shard_ids, fn shard_id ->
+    Enum.find(shard_ids, fn shard_id ->
       Map.get(shard_loads, shard_id, 0) == least_used_count
-    end) || :hot_data
+    end) || List.first(shard_ids)
   end
 
   defp least_loaded_routing(shard_loads) do
@@ -340,7 +411,7 @@ defmodule WarpEngine.IntelligentLoadBalancer do
 
   defp initialize_shard_loads() do
     # Initialize load tracking for all shards
-    @shard_ids
+    get_shard_ids()
     |> Enum.map(fn shard_id -> {shard_id, 0.0} end)
     |> Map.new()
   end

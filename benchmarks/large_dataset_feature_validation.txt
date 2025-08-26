@@ -1167,237 +1167,1201 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      └─ lib/warp_engine/intelligent_load_balancer.ex:109:5: WarpEngine.IntelligentLoadBalancer.route_operation/3
 
 
-13:44:52.797 [info] 🚀 Starting WarpEngine Database Application...
+13:46:06.014 [info] 🚀 Starting WarpEngine Database Application...
+
+13:46:06.016 [info] ⚙️  Application Configuration:
+
+13:46:06.023 [info]   data_root: "/home/travis/Projects/warp-engine/data"
+
+13:46:06.023 [info]   Entanglement rules: using defaults
+
+13:46:06.023 [info] 🔧 Starting supervisor with 1 children
+     warning: variable "item_num" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 286 │       items: Enum.map(1..:rand.uniform(5), fn item_num ->
+     │                                               ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:286:47
 
-13:44:52.801 [info] ⚙️  Application Configuration:
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 363 │ test_intelligent_caching = fn worker_id, keys ->
+     │                               ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:363:31
 
-13:44:52.810 [info]   data_root: "/home/travis/Projects/warp-engine/data"
-
-13:44:52.810 [info]   Entanglement rules: using defaults
+     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 383 │ test_gravitational_routing = fn worker_id, keys ->
+     │                                            ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:383:44
 
-13:44:52.810 [info] 🔧 Starting supervisor with 1 children
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 383 │ test_gravitational_routing = fn worker_id, keys ->
+     │                                 ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:383:33
 
-13:44:53.336 [info] 🚀 Enhanced ADT Weighted Graph Database - WORKING BENCHMARK
+     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 402 │ test_quantum_entanglement = fn worker_id, keys ->
+     │                                           ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:402:43
 
-13:44:53.336 [info] ================================================================================
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 402 │ test_quantum_entanglement = fn worker_id, keys ->
+     │                                ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:402:32
 
-13:44:53.336 [info] 🌌 Testing Enhanced ADT compilation and basic functionality...
+     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 419 │ test_entropy_monitoring = fn worker_id, keys ->
+     │                                         ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:419:41
 
-13:44:53.336 [info] 📚 Compiling simplified Enhanced ADT example...
-    warning: duplicate key :"::" found in struct
-    │
- 44 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:44: :ConnectedGraph (module)
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 419 │ test_entropy_monitoring = fn worker_id, keys ->
+     │                              ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:419:30
 
-    warning: duplicate key :"::" found in struct
-    │
- 44 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:44: :ConnectedGraph (module)
+     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 438 │ test_per_shard_wal = fn worker_id, keys ->
+     │                                    ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:438:36
 
-    warning: duplicate key :"::" found in struct
-    │
- 44 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:44: :ClusteredGraph (module)
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 438 │ test_per_shard_wal = fn worker_id, keys ->
+     │                         ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:438:25
 
-    warning: duplicate key :"::" found in struct
-    │
- 44 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:44: :ClusteredGraph (module)
+🚀 Large Dataset Feature Validation Benchmark
 
-    warning: duplicate key :"::" found in struct
-    │
- 44 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:44: :HierarchicalGraph (module)
+13:46:06.762 [info] ✨ All WarpEngine features enabled (using Phase 6.6 WAL system)
+================================================================================
+📊 Target Dataset: 0.1GB (10000 keys)
+🔧 Shards: 24
+⚡ Concurrency Levels: 1,2,4,6,12,24
+⏱️  Warmup: 5000ms, Measure: 10000ms, Trials: 1
 
-    warning: duplicate key :"::" found in struct
-    │
- 44 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:44: :HierarchicalGraph (module)
+13:46:06.767 [error] ❌ WALCoordinator not running - Phase 9 per-shard WAL disabled!
 
-    warning: redefining @doc attribute previously set at line 17
-    │
- 74 │   @doc """
-    │   ~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:74: SimpleWeightedGraph (module)
+13:46:06.767 [error]    This will cause negative concurrency scaling
 
-    warning: SimpleWeightedGraph.WeightedGraph."ClusteredGraph"/0 is undefined or private. Did you mean:
+13:46:06.767 [error]    Check if bench_mode is properly set to false
 
-          * "ClusteredGraph"/3
+13:46:06.768 [error]    Current bench_mode: false
 
-    │
- 44 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:44: SimpleWeightedGraph.WeightedGraph."ClusteredGraph"/3
+13:46:06.768 [error]    Current use_numbered_shards: true
 
-    warning: SimpleWeightedGraph.WeightedGraph."ConnectedGraph"/0 is undefined or private. Did you mean:
+13:46:06.768 [info] 🔄 Attempting to start WALCoordinator manually...
 
-          * "ConnectedGraph"/3
+13:46:06.768 [info] 🚀 Starting WAL Coordinator for per-shard architecture...
 
-    │
- 44 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:44: SimpleWeightedGraph.WeightedGraph."ConnectedGraph"/3
+13:46:06.777 [info] 📡 Starting WAL shard processes (24) ...
 
-    warning: SimpleWeightedGraph.WeightedGraph."HierarchicalGraph"/0 is undefined or private. Did you mean:
+13:46:06.777 [info] 🚀 Starting WAL shard: shard_0
 
-          * "HierarchicalGraph"/3
+13:46:06.782 [info] 🚀 Initializing WAL Shard shard_0...
 
-    │
- 44 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:44: SimpleWeightedGraph.WeightedGraph."HierarchicalGraph"/3
+13:46:06.782 [info] 📁 Shard shard_0 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_0.wal
 
-    warning: SimpleWeightedGraph.WeightedGraph."SingleNode"/0 is undefined or private. Did you mean:
+13:46:06.782 [info] 📁 Creating directories for shard shard_0...
 
-          * "SingleNode"/1
+13:46:06.783 [info] 📁 Directories created for shard shard_0
 
-    │
- 44 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:44: SimpleWeightedGraph.WeightedGraph."SingleNode"/1
+13:46:06.783 [info] 📄 Opening WAL file for shard shard_0...
 
+13:46:06.786 [info] 📄 WAL file opened for shard shard_0
 
-13:44:53.729 [info] ✅ Simplified Enhanced ADT compilation successful
+13:46:06.786 [info] ⚡ Initializing sequence counter for shard shard_0...
 
-13:44:53.729 [info] 🧪 Testing basic ADT functionality...
+13:46:06.786 [info] ⚡ Shard shard_0 sequence counter initialized: 0
 
-13:44:53.737 [info] 📊 Created 20 test nodes using Enhanced ADT
+13:46:06.786 [info] 📌 Shard shard_0 pinned to CPU core 0
 
-13:44:53.737 [info] 🔍 Testing basic ADT operations...
+13:46:06.786 [info] 🏗️ Building state for shard shard_0...
 
-13:44:53.737 [info] 🔍 Testing node creation and validation...
+13:46:06.786 [info] ✅ WAL Shard shard_0 ready for linear concurrency scaling!
 
-13:44:53.741 [info] ✅ Node creation and validation successful in 0.005ms
+13:46:06.789 [info] ✅ WAL shard shard_0 started: #PID<0.438.0>
 
-13:44:53.741 [info] 🔍 Testing edge creation...
+13:46:06.789 [info] 🚀 Starting WAL shard: shard_1
 
-13:44:53.741 [info] ✅ Edge creation and validation successful in 0.004ms
+13:46:06.789 [info] 🚀 Initializing WAL Shard shard_1...
 
-13:44:53.741 [info] 🌐 Testing graph structure creation...
+13:46:06.789 [info] 📁 Shard shard_1 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_1.wal
 
-13:44:53.741 [info] ✅ Graph structure creation successful in 0.002ms
+13:46:06.789 [info] 📁 Creating directories for shard shard_1...
 
-13:44:53.741 [info] 
-🎯 ENHANCED ADT PERFORMANCE RESULTS
+13:46:06.789 [info] 📁 Directories created for shard shard_1
 
-13:44:53.741 [info] ================================================================================
+13:46:06.789 [info] 📄 Opening WAL file for shard shard_1...
 
-13:44:53.741 [info] 
-⚡ MEASURED ADT OPERATIONS PERFORMANCE
+13:46:06.789 [info] 📄 WAL file opened for shard shard_1
 
-13:44:53.741 [info] --------------------------------------------------
+13:46:06.789 [info] ⚡ Initializing sequence counter for shard shard_1...
 
-13:44:53.741 [info] 📊 Total Operations: 31
+13:46:06.789 [info] ⚡ Shard shard_1 sequence counter initialized: 0
 
-13:44:53.741 [info] 📊 Nodes Created: 20
+13:46:06.789 [info] 📌 Shard shard_1 pinned to CPU core 1
 
-13:44:53.741 [info] 🔗 Edges Created: 10
+13:46:06.789 [info] 🏗️ Building state for shard shard_1...
 
-13:44:53.741 [info] 🌐 Graphs Created: 1
+13:46:06.789 [info] ✅ WAL Shard shard_1 ready for linear concurrency scaling!
 
-13:44:53.741 [info] ⏱️  Total Time: 0.01ms
+13:46:06.789 [info] ✅ WAL shard shard_1 started: #PID<0.440.0>
 
-13:44:53.741 [info] 🚀 Operations per Second: 2818182
+13:46:06.789 [info] 🚀 Starting WAL shard: shard_2
 
-🎯 WORKING BENCHMARK SUMMARY (stdout)
+13:46:06.790 [info] 🚀 Initializing WAL Shard shard_2...
 
-13:44:53.741 [info] ⚡ Time per Operation: 0.4μs
-==================================================
+13:46:06.790 [info] 📁 Shard shard_2 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_2.wal
 
-13:44:53.741 [info] 
-🌌 ENHANCED ADT FEATURES VALIDATED
-📊 Total Operations: 31
+13:46:06.790 [info] 📁 Creating directories for shard shard_2...
 
-13:44:53.741 [info] --------------------------------------------------
-⏱  Total Time (ms): 0.01
+13:46:06.790 [info] 📁 Directories created for shard shard_2
 
-13:44:53.741 [info] ✅ Product Types (GraphNode, GraphEdge)
-🚀 Ops/sec: 2818182
+13:46:06.790 [info] 📄 Opening WAL file for shard shard_2...
 
-13:44:53.741 [info] ✅ Sum Types (WeightedGraph variants)
-⚡ Time/op (µs): 0.4
+13:46:06.790 [info] 📄 WAL file opened for shard shard_2
 
-13:44:53.741 [info] ✅ Physics Annotations
-🌀 Potential Wormholes: 6
+13:46:06.790 [info] ⚡ Initializing sequence counter for shard shard_2...
 
-13:44:53.741 [info] ✅ Pattern Matching
-⭐ High-Importance Nodes: 3
+13:46:06.790 [info] ⚡ Shard shard_2 sequence counter initialized: 0
 
-13:44:53.741 [info] ✅ Type Safety
-🏅 Rating: 🌟 REVOLUTIONARY BREAKTHROUGH
+13:46:06.790 [info] 📌 Shard shard_2 pinned to CPU core 2
 
-13:44:53.741 [info] 
-🌀 GRAPH DATABASE STRUCTURES TESTED
+13:46:06.790 [info] 🏗️ Building state for shard shard_2...
 
-13:44:53.741 [info] --------------------------------------------------
+13:46:06.790 [info] ✅ WAL Shard shard_2 ready for linear concurrency scaling!
 
-13:44:53.741 [info] 🔥 Graph Nodes: 20 with physics annotations
+13:46:06.790 [info] ✅ WAL shard shard_2 started: #PID<0.442.0>
 
-13:44:53.741 [info] 🔗 Graph Edges: 10 with relationship weights
+13:46:06.790 [info] 🚀 Starting WAL shard: shard_3
 
-13:44:53.741 [info] 🌐 Graph Topology: Connected graph with 5 nodes, 5 edges
+13:46:06.791 [info] 🚀 Initializing WAL Shard shard_3...
 
-13:44:53.742 [info] 📊 Data Integrity: All structures validated successfully
+13:46:06.791 [info] 📁 Shard shard_3 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_3.wal
 
-13:44:53.742 [info] 
-⚛️ QUANTUM CORRELATION ANALYSIS
+13:46:06.791 [info] 📁 Creating directories for shard shard_3...
 
-13:44:53.742 [info] --------------------------------------------------
+13:46:06.791 [info] 📁 Directories created for shard shard_3
 
-13:44:53.742 [info] 🌀 Potential Wormhole Routes: 6
+13:46:06.791 [info] 📄 Opening WAL file for shard shard_3...
 
-13:44:53.742 [info] ⭐ High-Importance Nodes: 3
+13:46:06.791 [info] 📄 WAL file opened for shard shard_3
 
-13:44:53.742 [info] 📈 Wormhole Creation Rate: 30.0%
+13:46:06.791 [info] ⚡ Initializing sequence counter for shard shard_3...
 
-13:44:53.742 [info] 
-🏆 OVERALL ENHANCED ADT PERFORMANCE
+13:46:06.791 [info] ⚡ Shard shard_3 sequence counter initialized: 0
 
-13:44:53.742 [info] ============================================================
+13:46:06.791 [info] 📌 Shard shard_3 pinned to CPU core 3
 
-13:44:53.742 [info] ⚡ Enhanced ADT Performance: 2818182 ops/sec
+13:46:06.791 [info] 🏗️ Building state for shard shard_3...
 
-13:44:53.742 [info] 📈 vs Manual Struct Creation: ~10,000 ops/sec (estimated)
+13:46:06.791 [info] ✅ WAL Shard shard_3 ready for linear concurrency scaling!
 
-13:44:53.742 [info] 🚀 Performance Improvement: +28081.8%
+13:46:06.791 [info] ✅ WAL shard shard_3 started: #PID<0.444.0>
 
-13:44:53.742 [info] 🔬 Physics Features Active: 5/5
+13:46:06.791 [info] 🚀 Starting WAL shard: shard_4
 
-13:44:53.742 [info] 🌟 Innovation Score: 2825.2/10
+13:46:06.791 [info] 🚀 Initializing WAL Shard shard_4...
 
-13:44:53.742 [info] 🎉 Rating: 🌟 REVOLUTIONARY BREAKTHROUGH
+13:46:06.791 [info] 📁 Shard shard_4 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_4.wal
 
-13:44:53.742 [info] 
-✅ ENHANCED ADT WEIGHTED GRAPH DATABASE VALIDATED!
+13:46:06.791 [info] 📁 Creating directories for shard shard_4...
 
-13:44:53.742 [info] 🌌 Physics-inspired architecture delivering 28081.8% performance gains!
+13:46:06.791 [info] 📁 Directories created for shard shard_4
 
-13:44:53.742 [info] 🚀 Revolutionary database engineering proven with real metrics!
+13:46:06.791 [info] 📄 Opening WAL file for shard shard_4...
 
-13:44:53.742 [info] ================================================================================
+13:46:06.791 [info] 📄 WAL file opened for shard shard_4
 
-13:44:53.742 [info] 
-🎉 ENHANCED ADT BENCHMARK COMPLETE!
+13:46:06.791 [info] ⚡ Initializing sequence counter for shard shard_4...
 
-13:44:53.742 [info] 🌌 Enhanced ADT successfully compiled and tested!
+13:46:06.792 [info] ⚡ Shard shard_4 sequence counter initialized: 0
 
-13:44:53.742 [info] 🚀 All graph database structures validated!
+13:46:06.792 [info] 📌 Shard shard_4 pinned to CPU core 4
 
-13:44:53.742 [info] ================================================================================
+13:46:06.792 [info] 🏗️ Building state for shard shard_4...
+
+13:46:06.792 [info] ✅ WAL Shard shard_4 ready for linear concurrency scaling!
+
+13:46:06.792 [info] ✅ WAL shard shard_4 started: #PID<0.446.0>
+
+13:46:06.792 [info] 🚀 Starting WAL shard: shard_5
+
+13:46:06.792 [info] 🚀 Initializing WAL Shard shard_5...
+
+13:46:06.792 [info] 📁 Shard shard_5 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_5.wal
+
+13:46:06.792 [info] 📁 Creating directories for shard shard_5...
+
+13:46:06.792 [info] 📁 Directories created for shard shard_5
+
+13:46:06.792 [info] 📄 Opening WAL file for shard shard_5...
+
+13:46:06.792 [info] 📄 WAL file opened for shard shard_5
+
+13:46:06.792 [info] ⚡ Initializing sequence counter for shard shard_5...
+
+13:46:06.792 [info] ⚡ Shard shard_5 sequence counter initialized: 0
+
+13:46:06.792 [info] 📌 Shard shard_5 pinned to CPU core 5
+
+13:46:06.793 [info] 🏗️ Building state for shard shard_5...
+
+13:46:06.793 [info] ✅ WAL Shard shard_5 ready for linear concurrency scaling!
+
+13:46:06.793 [info] ✅ WAL shard shard_5 started: #PID<0.448.0>
+
+13:46:06.793 [info] 🚀 Starting WAL shard: shard_6
+
+13:46:06.793 [info] 🚀 Initializing WAL Shard shard_6...
+
+13:46:06.793 [info] 📁 Shard shard_6 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_6.wal
+
+13:46:06.793 [info] 📁 Creating directories for shard shard_6...
+
+13:46:06.793 [info] 📁 Directories created for shard shard_6
+
+13:46:06.793 [info] 📄 Opening WAL file for shard shard_6...
+
+13:46:06.793 [info] 📄 WAL file opened for shard shard_6
+
+13:46:06.793 [info] ⚡ Initializing sequence counter for shard shard_6...
+
+13:46:06.793 [info] ⚡ Shard shard_6 sequence counter initialized: 0
+
+13:46:06.793 [info] 📌 Shard shard_6 pinned to CPU core 6
+
+13:46:06.793 [info] 🏗️ Building state for shard shard_6...
+
+13:46:06.793 [info] ✅ WAL Shard shard_6 ready for linear concurrency scaling!
+
+13:46:06.794 [info] ✅ WAL shard shard_6 started: #PID<0.450.0>
+
+13:46:06.794 [info] 🚀 Starting WAL shard: shard_7
+
+13:46:06.794 [info] 🚀 Initializing WAL Shard shard_7...
+
+13:46:06.794 [info] 📁 Shard shard_7 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_7.wal
+
+13:46:06.794 [info] 📁 Creating directories for shard shard_7...
+
+13:46:06.794 [info] 📁 Directories created for shard shard_7
+
+13:46:06.794 [info] 📄 Opening WAL file for shard shard_7...
+
+13:46:06.794 [info] 📄 WAL file opened for shard shard_7
+
+13:46:06.794 [info] ⚡ Initializing sequence counter for shard shard_7...
+
+13:46:06.794 [info] ⚡ Shard shard_7 sequence counter initialized: 0
+
+13:46:06.794 [info] 📌 Shard shard_7 pinned to CPU core 7
+
+13:46:06.794 [info] 🏗️ Building state for shard shard_7...
+
+13:46:06.794 [info] ✅ WAL Shard shard_7 ready for linear concurrency scaling!
+
+13:46:06.794 [info] ✅ WAL shard shard_7 started: #PID<0.452.0>
+
+13:46:06.794 [info] 🚀 Starting WAL shard: shard_8
+
+13:46:06.794 [info] 🚀 Initializing WAL Shard shard_8...
+
+13:46:06.794 [info] 📁 Shard shard_8 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_8.wal
+
+13:46:06.794 [info] 📁 Creating directories for shard shard_8...
+
+13:46:06.794 [info] 📁 Directories created for shard shard_8
+
+13:46:06.794 [info] 📄 Opening WAL file for shard shard_8...
+
+13:46:06.795 [info] 📄 WAL file opened for shard shard_8
+
+13:46:06.795 [info] ⚡ Initializing sequence counter for shard shard_8...
+
+13:46:06.795 [info] ⚡ Shard shard_8 sequence counter initialized: 0
+
+13:46:06.795 [info] 📌 Shard shard_8 pinned to CPU core 8
+
+13:46:06.795 [info] 🏗️ Building state for shard shard_8...
+
+13:46:06.795 [info] ✅ WAL Shard shard_8 ready for linear concurrency scaling!
+
+13:46:06.795 [info] ✅ WAL shard shard_8 started: #PID<0.454.0>
+
+13:46:06.795 [info] 🚀 Starting WAL shard: shard_9
+
+13:46:06.795 [info] 🚀 Initializing WAL Shard shard_9...
+
+13:46:06.795 [info] 📁 Shard shard_9 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_9.wal
+
+13:46:06.795 [info] 📁 Creating directories for shard shard_9...
+
+13:46:06.795 [info] 📁 Directories created for shard shard_9
+
+13:46:06.795 [info] 📄 Opening WAL file for shard shard_9...
+
+13:46:06.795 [info] 📄 WAL file opened for shard shard_9
+
+13:46:06.795 [info] ⚡ Initializing sequence counter for shard shard_9...
+
+13:46:06.795 [info] ⚡ Shard shard_9 sequence counter initialized: 0
+
+13:46:06.795 [info] 📌 Shard shard_9 pinned to CPU core 9
+
+13:46:06.795 [info] 🏗️ Building state for shard shard_9...
+
+13:46:06.795 [info] ✅ WAL Shard shard_9 ready for linear concurrency scaling!
+
+13:46:06.796 [info] ✅ WAL shard shard_9 started: #PID<0.456.0>
+
+13:46:06.796 [info] 🚀 Starting WAL shard: shard_10
+
+13:46:06.796 [info] 🚀 Initializing WAL Shard shard_10...
+
+13:46:06.796 [info] 📁 Shard shard_10 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_10.wal
+
+13:46:06.796 [info] 📁 Creating directories for shard shard_10...
+
+13:46:06.796 [info] 📁 Directories created for shard shard_10
+
+13:46:06.796 [info] 📄 Opening WAL file for shard shard_10...
+
+13:46:06.796 [info] 📄 WAL file opened for shard shard_10
+
+13:46:06.796 [info] ⚡ Initializing sequence counter for shard shard_10...
+
+13:46:06.796 [info] ⚡ Shard shard_10 sequence counter initialized: 0
+
+13:46:06.796 [info] 📌 Shard shard_10 pinned to CPU core 10
+
+13:46:06.796 [info] 🏗️ Building state for shard shard_10...
+
+13:46:06.796 [info] ✅ WAL Shard shard_10 ready for linear concurrency scaling!
+
+13:46:06.796 [info] ✅ WAL shard shard_10 started: #PID<0.458.0>
+
+13:46:06.796 [info] 🚀 Starting WAL shard: shard_11
+
+13:46:06.796 [info] 🚀 Initializing WAL Shard shard_11...
+
+13:46:06.796 [info] 📁 Shard shard_11 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_11.wal
+
+13:46:06.796 [info] 📁 Creating directories for shard shard_11...
+
+13:46:06.796 [info] 📁 Directories created for shard shard_11
+
+13:46:06.797 [info] 📄 Opening WAL file for shard shard_11...
+
+13:46:06.797 [info] 📄 WAL file opened for shard shard_11
+
+13:46:06.797 [info] ⚡ Initializing sequence counter for shard shard_11...
+
+13:46:06.797 [info] ⚡ Shard shard_11 sequence counter initialized: 0
+
+13:46:06.797 [info] 📌 Shard shard_11 pinned to CPU core 11
+
+13:46:06.797 [info] 🏗️ Building state for shard shard_11...
+
+13:46:06.797 [info] ✅ WAL Shard shard_11 ready for linear concurrency scaling!
+
+13:46:06.797 [info] ✅ WAL shard shard_11 started: #PID<0.460.0>
+
+13:46:06.797 [info] 🚀 Starting WAL shard: shard_12
+
+13:46:06.797 [info] 🚀 Initializing WAL Shard shard_12...
+
+13:46:06.797 [info] 📁 Shard shard_12 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_12.wal
+
+13:46:06.797 [info] 📁 Creating directories for shard shard_12...
+
+13:46:06.797 [info] 📁 Directories created for shard shard_12
+
+13:46:06.797 [info] 📄 Opening WAL file for shard shard_12...
+
+13:46:06.797 [info] 📄 WAL file opened for shard shard_12
+
+13:46:06.797 [info] ⚡ Initializing sequence counter for shard shard_12...
+
+13:46:06.797 [info] ⚡ Shard shard_12 sequence counter initialized: 0
+
+13:46:06.797 [info] 📌 Shard shard_12 pinned to CPU core 12
+
+13:46:06.797 [info] 🏗️ Building state for shard shard_12...
+
+13:46:06.797 [info] ✅ WAL Shard shard_12 ready for linear concurrency scaling!
+
+13:46:06.798 [info] ✅ WAL shard shard_12 started: #PID<0.462.0>
+
+13:46:06.798 [info] 🚀 Starting WAL shard: shard_13
+
+13:46:06.798 [info] 🚀 Initializing WAL Shard shard_13...
+
+13:46:06.798 [info] 📁 Shard shard_13 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_13.wal
+
+13:46:06.798 [info] 📁 Creating directories for shard shard_13...
+
+13:46:06.798 [info] 📁 Directories created for shard shard_13
+
+13:46:06.798 [info] 📄 Opening WAL file for shard shard_13...
+
+13:46:06.798 [info] 📄 WAL file opened for shard shard_13
+
+13:46:06.798 [info] ⚡ Initializing sequence counter for shard shard_13...
+
+13:46:06.798 [info] ⚡ Shard shard_13 sequence counter initialized: 0
+
+13:46:06.798 [info] 📌 Shard shard_13 pinned to CPU core 13
+
+13:46:06.798 [info] 🏗️ Building state for shard shard_13...
+
+13:46:06.798 [info] ✅ WAL Shard shard_13 ready for linear concurrency scaling!
+
+13:46:06.798 [info] ✅ WAL shard shard_13 started: #PID<0.464.0>
+
+13:46:06.798 [info] 🚀 Starting WAL shard: shard_14
+
+13:46:06.798 [info] 🚀 Initializing WAL Shard shard_14...
+
+13:46:06.798 [info] 📁 Shard shard_14 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_14.wal
+
+13:46:06.798 [info] 📁 Creating directories for shard shard_14...
+
+13:46:06.798 [info] 📁 Directories created for shard shard_14
+
+13:46:06.798 [info] 📄 Opening WAL file for shard shard_14...
+
+13:46:06.798 [info] 📄 WAL file opened for shard shard_14
+
+13:46:06.798 [info] ⚡ Initializing sequence counter for shard shard_14...
+
+13:46:06.799 [info] ⚡ Shard shard_14 sequence counter initialized: 0
+
+13:46:06.799 [info] 📌 Shard shard_14 pinned to CPU core 14
+
+13:46:06.799 [info] 🏗️ Building state for shard shard_14...
+
+13:46:06.799 [info] ✅ WAL Shard shard_14 ready for linear concurrency scaling!
+
+13:46:06.799 [info] ✅ WAL shard shard_14 started: #PID<0.466.0>
+
+13:46:06.799 [info] 🚀 Starting WAL shard: shard_15
+
+13:46:06.799 [info] 🚀 Initializing WAL Shard shard_15...
+
+13:46:06.799 [info] 📁 Shard shard_15 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_15.wal
+
+13:46:06.799 [info] 📁 Creating directories for shard shard_15...
+
+13:46:06.799 [info] 📁 Directories created for shard shard_15
+
+13:46:06.799 [info] 📄 Opening WAL file for shard shard_15...
+
+13:46:06.799 [info] 📄 WAL file opened for shard shard_15
+
+13:46:06.799 [info] ⚡ Initializing sequence counter for shard shard_15...
+
+13:46:06.799 [info] ⚡ Shard shard_15 sequence counter initialized: 0
+
+13:46:06.799 [info] 📌 Shard shard_15 pinned to CPU core 15
+
+13:46:06.799 [info] 🏗️ Building state for shard shard_15...
+
+13:46:06.799 [info] ✅ WAL Shard shard_15 ready for linear concurrency scaling!
+
+13:46:06.799 [info] ✅ WAL shard shard_15 started: #PID<0.468.0>
+
+13:46:06.799 [info] 🚀 Starting WAL shard: shard_16
+
+13:46:06.799 [info] 🚀 Initializing WAL Shard shard_16...
+
+13:46:06.799 [info] 📁 Shard shard_16 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_16.wal
+
+13:46:06.799 [info] 📁 Creating directories for shard shard_16...
+
+13:46:06.799 [info] 📁 Directories created for shard shard_16
+
+13:46:06.800 [info] 📄 Opening WAL file for shard shard_16...
+
+13:46:06.800 [info] 📄 WAL file opened for shard shard_16
+
+13:46:06.800 [info] ⚡ Initializing sequence counter for shard shard_16...
+
+13:46:06.800 [info] ⚡ Shard shard_16 sequence counter initialized: 0
+
+13:46:06.800 [info] 📌 Shard shard_16 pinned to CPU core 16
+
+13:46:06.800 [info] 🏗️ Building state for shard shard_16...
+
+13:46:06.800 [info] ✅ WAL Shard shard_16 ready for linear concurrency scaling!
+
+13:46:06.800 [info] ✅ WAL shard shard_16 started: #PID<0.470.0>
+
+13:46:06.800 [info] 🚀 Starting WAL shard: shard_17
+
+13:46:06.800 [info] 🚀 Initializing WAL Shard shard_17...
+
+13:46:06.800 [info] 📁 Shard shard_17 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_17.wal
+
+13:46:06.800 [info] 📁 Creating directories for shard shard_17...
+
+13:46:06.800 [info] 📁 Directories created for shard shard_17
+
+13:46:06.800 [info] 📄 Opening WAL file for shard shard_17...
+
+13:46:06.800 [info] 📄 WAL file opened for shard shard_17
+
+13:46:06.800 [info] ⚡ Initializing sequence counter for shard shard_17...
+
+13:46:06.800 [info] ⚡ Shard shard_17 sequence counter initialized: 0
+
+13:46:06.800 [info] 📌 Shard shard_17 pinned to CPU core 17
+
+13:46:06.800 [info] 🏗️ Building state for shard shard_17...
+
+13:46:06.800 [info] ✅ WAL Shard shard_17 ready for linear concurrency scaling!
+
+13:46:06.800 [info] ✅ WAL shard shard_17 started: #PID<0.472.0>
+
+13:46:06.800 [info] 🚀 Starting WAL shard: shard_18
+
+13:46:06.800 [info] 🚀 Initializing WAL Shard shard_18...
+
+13:46:06.801 [info] 📁 Shard shard_18 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_18.wal
+
+13:46:06.801 [info] 📁 Creating directories for shard shard_18...
+
+13:46:06.801 [info] 📁 Directories created for shard shard_18
+
+13:46:06.801 [info] 📄 Opening WAL file for shard shard_18...
+
+13:46:06.801 [info] 📄 WAL file opened for shard shard_18
+
+13:46:06.801 [info] ⚡ Initializing sequence counter for shard shard_18...
+
+13:46:06.801 [info] ⚡ Shard shard_18 sequence counter initialized: 0
+
+13:46:06.801 [info] 📌 Shard shard_18 pinned to CPU core 18
+
+13:46:06.801 [info] 🏗️ Building state for shard shard_18...
+
+13:46:06.801 [info] ✅ WAL Shard shard_18 ready for linear concurrency scaling!
+
+13:46:06.801 [info] ✅ WAL shard shard_18 started: #PID<0.474.0>
+
+13:46:06.801 [info] 🚀 Starting WAL shard: shard_19
+
+13:46:06.801 [info] 🚀 Initializing WAL Shard shard_19...
+
+13:46:06.801 [info] 📁 Shard shard_19 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_19.wal
+
+13:46:06.801 [info] 📁 Creating directories for shard shard_19...
+
+13:46:06.801 [info] 📁 Directories created for shard shard_19
+
+13:46:06.801 [info] 📄 Opening WAL file for shard shard_19...
+
+13:46:06.801 [info] 📄 WAL file opened for shard shard_19
+
+13:46:06.801 [info] ⚡ Initializing sequence counter for shard shard_19...
+
+13:46:06.801 [info] ⚡ Shard shard_19 sequence counter initialized: 0
+
+13:46:06.801 [info] 📌 Shard shard_19 pinned to CPU core 19
+
+13:46:06.801 [info] 🏗️ Building state for shard shard_19...
+
+13:46:06.801 [info] ✅ WAL Shard shard_19 ready for linear concurrency scaling!
+
+13:46:06.801 [info] ✅ WAL shard shard_19 started: #PID<0.476.0>
+
+13:46:06.801 [info] 🚀 Starting WAL shard: shard_20
+
+13:46:06.801 [info] 🚀 Initializing WAL Shard shard_20...
+
+13:46:06.801 [info] 📁 Shard shard_20 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_20.wal
+
+13:46:06.801 [info] 📁 Creating directories for shard shard_20...
+
+13:46:06.802 [info] 📁 Directories created for shard shard_20
+
+13:46:06.802 [info] 📄 Opening WAL file for shard shard_20...
+
+13:46:06.802 [info] 📄 WAL file opened for shard shard_20
+
+13:46:06.802 [info] ⚡ Initializing sequence counter for shard shard_20...
+
+13:46:06.802 [info] ⚡ Shard shard_20 sequence counter initialized: 0
+
+13:46:06.802 [info] 📌 Shard shard_20 pinned to CPU core 20
+
+13:46:06.802 [info] 🏗️ Building state for shard shard_20...
+
+13:46:06.802 [info] ✅ WAL Shard shard_20 ready for linear concurrency scaling!
+
+13:46:06.802 [info] ✅ WAL shard shard_20 started: #PID<0.478.0>
+
+13:46:06.802 [info] 🚀 Starting WAL shard: shard_21
+
+13:46:06.802 [info] 🚀 Initializing WAL Shard shard_21...
+
+13:46:06.802 [info] 📁 Shard shard_21 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_21.wal
+
+13:46:06.802 [info] 📁 Creating directories for shard shard_21...
+
+13:46:06.802 [info] 📁 Directories created for shard shard_21
+
+13:46:06.802 [info] 📄 Opening WAL file for shard shard_21...
+
+13:46:06.802 [info] 📄 WAL file opened for shard shard_21
+
+13:46:06.802 [info] ⚡ Initializing sequence counter for shard shard_21...
+
+13:46:06.802 [info] ⚡ Shard shard_21 sequence counter initialized: 0
+
+13:46:06.803 [info] 📌 Shard shard_21 pinned to CPU core 21
+
+13:46:06.803 [info] 🏗️ Building state for shard shard_21...
+
+13:46:06.803 [info] ✅ WAL Shard shard_21 ready for linear concurrency scaling!
+
+13:46:06.803 [info] ✅ WAL shard shard_21 started: #PID<0.480.0>
+
+13:46:06.803 [info] 🚀 Starting WAL shard: shard_22
+
+13:46:06.803 [info] 🚀 Initializing WAL Shard shard_22...
+
+13:46:06.803 [info] 📁 Shard shard_22 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_22.wal
+
+13:46:06.803 [info] 📁 Creating directories for shard shard_22...
+
+13:46:06.803 [info] 📁 Directories created for shard shard_22
+
+13:46:06.803 [info] 📄 Opening WAL file for shard shard_22...
+
+13:46:06.803 [info] 📄 WAL file opened for shard shard_22
+
+13:46:06.803 [info] ⚡ Initializing sequence counter for shard shard_22...
+
+13:46:06.803 [info] ⚡ Shard shard_22 sequence counter initialized: 0
+
+13:46:06.803 [info] 📌 Shard shard_22 pinned to CPU core 22
+
+13:46:06.803 [info] 🏗️ Building state for shard shard_22...
+
+13:46:06.803 [info] ✅ WAL Shard shard_22 ready for linear concurrency scaling!
+
+13:46:06.803 [info] ✅ WAL shard shard_22 started: #PID<0.482.0>
+
+13:46:06.803 [info] 🚀 Starting WAL shard: shard_23
+
+13:46:06.803 [info] 🚀 Initializing WAL Shard shard_23...
+
+13:46:06.803 [info] 📁 Shard shard_23 WAL file: /tmp/warp_engine_data/wal/cosmic_shard_23.wal
+
+13:46:06.803 [info] 📁 Creating directories for shard shard_23...
+
+13:46:06.803 [info] 📁 Directories created for shard shard_23
+
+13:46:06.803 [info] 📄 Opening WAL file for shard shard_23...
+
+13:46:06.804 [info] 📄 WAL file opened for shard shard_23
+
+13:46:06.804 [info] ⚡ Initializing sequence counter for shard shard_23...
+
+13:46:06.804 [info] ⚡ Shard shard_23 sequence counter initialized: 0
+
+13:46:06.804 [info] 📌 Shard shard_23 pinned to CPU core 23
+
+13:46:06.804 [info] 🏗️ Building state for shard shard_23...
+
+13:46:06.804 [info] ✅ WAL Shard shard_23 ready for linear concurrency scaling!
+
+13:46:06.804 [info] ✅ WAL shard shard_23 started: #PID<0.484.0>
+
+13:46:06.804 [info] ⚡ Pre-caching atomic counter references for ultra-fast sequence generation...
+
+13:46:06.804 [info] ⚡ Atomic counter caching complete - ultra-fast sequence generation enabled!
+
+13:46:06.804 [info] ✅ WAL Coordinator started successfully!
+⏳ Waiting for ETS tables...
+
+13:46:06.804 [info] ⚡ Per-shard WAL architecture ready for linear concurrency scaling!
+
+13:46:06.804 [info] 📊 Active shards: 24 | Shards: shard_0, shard_1, shard_2, shard_3, shard_4, shard_5, shard_6, shard_7, shard_8, shard_9, shard_10, shard_11, shard_12, shard_13, shard_14, shard_15, shard_16, shard_17, shard_18, shard_19, shard_20, shard_21, shard_22, shard_23
+
+13:46:06.804 [info] ✅ WALCoordinator started manually: #PID<0.435.0>
+✅ All 24 ETS tables ready in 0ms
+
+13:46:06.804 [info] 📦 Generating 0.1GB dataset (10000 keys)...
+
+13:46:07.527 [info] 📦 Dataset generated in 723.0ms
+
+13:46:07.528 [info] 📊 Total keys: 30000
+
+13:46:07.528 [info] 💾 Estimated size: 0.01MB
+
+13:46:07.528 [info] 🚀 Loading 30000 keys into WarpEngine...
+
+13:46:07.532 [info] 💾 Memory before loading: 112.74MB
+
+13:46:07.546 [info] 📦 Loaded chunk 1/6 - Memory: 112.85MB
+
+13:46:46.525 [info] ✅ Dataset loaded in 40523ms
+
+13:46:46.525 [info] 💾 Memory after loading: 176.41MB
+
+13:46:46.525 [info] 💾 Memory increase: 63.67MB
+
+13:46:46.526 [info] 🎯 Starting feature validation benchmarks...
+
+13:46:46.546 [info] 🧹 Memory before benchmarks: 158.24MB
+
+13:46:46.546 [info] ⚛️  Quantum entanglement tests enabled
+
+13:46:46.546 [info] 🔗 Testing intelligent prefetching and entanglement collapse
+
+13:46:46.546 [info] 🔧 Initializing quantum index system...
+
+13:46:46.546 [info] ⚛️  Initializing quantum entanglement system...
+
+13:46:46.547 [info] ✨ Quantum entanglement system ready for superposition
+
+13:46:46.547 [info] ✅ Quantum index system ready
+
+13:46:46.547 [info] 🌊 Initializing entropy monitoring system...
+
+13:46:46.547 [info] ✅ Entropy registry started
+
+13:46:46.547 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
+
+13:46:46.547 [info] 💾 Entropy persistence initialized: /home/travis/Projects/warp-engine/data/entropy/cosmic_entropy
+
+13:46:46.548 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 30000ms
+
+13:46:46.548 [info] ✅ Entropy monitoring system ready
+
+13:46:46.548 [info] 
+== Testing with 1 processes ==
+
+13:46:46.548 [info]   Trial 1/1...
+
+13:47:03.428 [info]     Trial 1 Results:
+
+13:47:03.428 [info]       Duration: 10079ms
+
+13:47:03.428 [info]       Total Operations: 12000
+
+13:47:03.428 [info]       Operations/sec: 1190
+
+13:47:03.428 [info]       Detailed Breakdown:
+
+13:47:03.428 [info]         Cache ops: 3000
+
+13:47:03.428 [info]         Routing ops: 3000
+
+13:47:03.428 [info]         Entanglement ops: 1500
+
+13:47:03.428 [info]         Entropy ops: 3000
+
+13:47:03.428 [info]         WAL ops: 1500
+
+13:47:03.428 [info]         Total counted: 12000
+
+13:47:03.428 [info]    • 1 processes: best 10079ms (1190 ops/sec)
+
+13:47:03.428 [info]      median 1190 (p50 1190, p90 1190)
+
+13:47:03.428 [info]      Best trial detailed breakdown:
+
+13:47:03.428 [info]        Cache: 3000 ops
+
+13:47:03.428 [info]        Routing: 3000 ops
+
+13:47:03.428 [info]        Entanglement: 1500 ops
+
+13:47:03.428 [info]        Entropy: 3000 ops
+
+13:47:03.429 [info]        WAL: 1500 ops
+
+13:47:03.429 [info]        Total counted: 12000
+
+13:47:03.429 [info]        vs Total reported: 12000
+
+13:47:03.429 [info]        Discrepancy: 0
+
+13:47:04.429 [info] 
+== Testing with 2 processes ==
+
+13:47:04.429 [info]   Trial 1/1...
+
+13:47:19.419 [info]     Trial 1 Results:
+
+13:47:19.419 [info]       Duration: 11080ms
+
+13:47:19.419 [info]       Total Operations: 11200
+
+13:47:19.419 [info]       Operations/sec: 1010
+
+13:47:19.419 [info]       Detailed Breakdown:
+
+13:47:19.419 [info]         Cache ops: 2800
+
+13:47:19.419 [info]         Routing ops: 2800
+
+13:47:19.419 [info]         Entanglement ops: 1400
+
+13:47:19.419 [info]         Entropy ops: 2800
+
+13:47:19.419 [info]         WAL ops: 1400
+
+13:47:19.419 [info]         Total counted: 11200
+
+13:47:19.419 [info]    • 2 processes: best 11080ms (1010 ops/sec)
+
+13:47:19.419 [info]      median 1010 (p50 1010, p90 1010)
+
+13:47:19.419 [info]      Best trial detailed breakdown:
+
+13:47:19.419 [info]        Cache: 2800 ops
+
+13:47:19.419 [info]        Routing: 2800 ops
+
+13:47:19.419 [info]        Entanglement: 1400 ops
+
+13:47:19.419 [info]        Entropy: 2800 ops
+
+13:47:19.419 [info]        WAL: 1400 ops
+
+13:47:19.419 [info]        Total counted: 11200
+
+13:47:19.419 [info]        vs Total reported: 11200
+
+13:47:19.419 [info]        Discrepancy: 0
+
+13:47:20.420 [info] 
+== Testing with 4 processes ==
+
+13:47:20.420 [info]   Trial 1/1...
+
+13:47:37.730 [info]     Trial 1 Results:
+
+13:47:37.730 [info]       Duration: 13016ms
+
+13:47:37.730 [info]       Total Operations: 9600
+
+13:47:37.730 [info]       Operations/sec: 737
+
+13:47:37.730 [info]       Detailed Breakdown:
+
+13:47:37.730 [info]         Cache ops: 2400
+
+13:47:37.730 [info]         Routing ops: 2400
+
+13:47:37.730 [info]         Entanglement ops: 1200
+
+13:47:37.730 [info]         Entropy ops: 2400
+
+13:47:37.730 [info]         WAL ops: 1200
+
+13:47:37.730 [info]         Total counted: 9600
+
+13:47:37.730 [info]    • 4 processes: best 13016ms (737 ops/sec)
+
+13:47:37.730 [info]      median 737 (p50 737, p90 737)
+
+13:47:37.730 [info]      Best trial detailed breakdown:
+
+13:47:37.730 [info]        Cache: 2400 ops
+
+13:47:37.730 [info]        Routing: 2400 ops
+
+13:47:37.730 [info]        Entanglement: 1200 ops
+
+13:47:37.730 [info]        Entropy: 2400 ops
+
+13:47:37.730 [info]        WAL: 1200 ops
+
+13:47:37.730 [info]        Total counted: 9600
+
+13:47:37.730 [info]        vs Total reported: 9600
+
+13:47:37.730 [info]        Discrepancy: 0
+
+13:47:37.730 [info]    🔍 Testing feature effectiveness...
+
+13:47:38.287 [info]      📊 Cache hit rate: N/A
+
+13:47:38.288 [info]      🌊 Entropy score: 1.2253410860198548
+
+13:47:38.311 [info]      🌌 Active entanglements: 2375
+
+13:47:39.312 [info] 
+== Testing with 6 processes ==
+
+13:47:39.312 [info]   Trial 1/1...
+
+13:48:08.575 [info]     Trial 1 Results:
+
+13:48:08.576 [info]       Duration: 16049ms
+
+13:48:08.576 [info]       Total Operations: 9600
+
+13:48:08.576 [info]       Operations/sec: 598
+
+13:48:08.576 [info]       Detailed Breakdown:
+
+13:48:08.576 [info]         Cache ops: 2400
+
+13:48:08.576 [info]         Routing ops: 2400
+
+13:48:08.576 [info]         Entanglement ops: 1200
+
+13:48:08.576 [info]         Entropy ops: 2400
+
+13:48:08.576 [info]         WAL ops: 1200
+
+13:48:08.576 [info]         Total counted: 9600
+
+13:48:08.576 [info]    • 6 processes: best 16049ms (598 ops/sec)
+
+13:48:08.576 [info]      median 598 (p50 598, p90 598)
+
+13:48:08.576 [info]      Best trial detailed breakdown:
+
+13:48:08.576 [info]        Cache: 2400 ops
+
+13:48:08.576 [info]        Routing: 2400 ops
+
+13:48:08.576 [info]        Entanglement: 1200 ops
+
+13:48:08.576 [info]        Entropy: 2400 ops
+
+13:48:08.576 [info]        WAL: 1200 ops
+
+13:48:08.576 [info]        Total counted: 9600
+
+13:48:08.576 [info]        vs Total reported: 9600
+
+13:48:08.576 [info]        Discrepancy: 0
+
+13:48:08.576 [info]    🔍 Testing feature effectiveness...
+
+13:48:08.963 [info]      📊 Cache hit rate: N/A
+
+13:48:08.963 [info]      🌊 Entropy score: 1.2353934122259231
+
+13:48:08.969 [info]      🌌 Active entanglements: 2438
+
+13:48:09.971 [info] 
+== Testing with 12 processes ==
+
+13:48:09.971 [info]   Trial 1/1...
+
+13:48:58.576 [info]     Trial 1 Results:
+
+13:48:58.576 [info]       Duration: 22137ms
+
+13:48:58.576 [info]       Total Operations: 9600
+
+13:48:58.576 [info]       Operations/sec: 433
+
+13:48:58.577 [info]       Detailed Breakdown:
+
+13:48:58.577 [info]         Cache ops: 2400
+
+13:48:58.577 [info]         Routing ops: 2400
+
+13:48:58.577 [info]         Entanglement ops: 1200
+
+13:48:58.577 [info]         Entropy ops: 2400
+
+13:48:58.577 [info]         WAL ops: 1200
+
+13:48:58.577 [info]         Total counted: 9600
+
+13:48:58.577 [info]    • 12 processes: best 22137ms (433 ops/sec)
+
+13:48:58.577 [info]      median 433 (p50 433, p90 433)
+
+13:48:58.577 [info]      Best trial detailed breakdown:
+
+13:48:58.577 [info]        Cache: 2400 ops
+
+13:48:58.577 [info]        Routing: 2400 ops
+
+13:48:58.577 [info]        Entanglement: 1200 ops
+
+13:48:58.577 [info]        Entropy: 2400 ops
+
+13:48:58.577 [info]        WAL: 1200 ops
+
+13:48:58.577 [info]        Total counted: 9600
+
+13:48:58.577 [info]        vs Total reported: 9600
+
+13:48:58.577 [info]        Discrepancy: 0
+
+13:48:58.577 [info]    🔍 Testing feature effectiveness...
+
+13:48:59.009 [info]      📊 Cache hit rate: N/A
+
+13:48:59.009 [info]      🌊 Entropy score: 0.42794769764038687
+
+13:48:59.021 [info]      🌌 Active entanglements: 2477
+
+13:49:00.022 [info] 
+== Testing with 24 processes ==
+
+13:49:00.022 [info]   Trial 1/1...
+
+13:50:43.868 [info]     Trial 1 Results:
+
+13:50:43.868 [info]       Duration: 77739ms
+
+13:50:43.868 [info]       Total Operations: 19200
+
+13:50:43.868 [info]       Operations/sec: 246
+
+13:50:43.868 [info]       Detailed Breakdown:
+
+13:50:43.868 [info]         Cache ops: 4800
+
+13:50:43.868 [info]         Routing ops: 4800
+
+13:50:43.868 [info]         Entanglement ops: 2400
+
+13:50:43.868 [info]         Entropy ops: 4800
+
+13:50:43.868 [info]         WAL ops: 2400
+
+13:50:43.868 [info]         Total counted: 19200
+
+13:50:43.868 [info]    • 24 processes: best 77739ms (246 ops/sec)
+
+13:50:43.868 [info]      median 246 (p50 246, p90 246)
+
+13:50:43.868 [info]      Best trial detailed breakdown:
+
+13:50:43.868 [info]        Cache: 4800 ops
+
+13:50:43.868 [info]        Routing: 4800 ops
+
+13:50:43.868 [info]        Entanglement: 2400 ops
+
+13:50:43.869 [info]        Entropy: 4800 ops
+
+13:50:43.869 [info]        WAL: 2400 ops
+
+13:50:43.869 [info]        Total counted: 19200
+
+13:50:43.869 [info]        vs Total reported: 19200
+
+13:50:43.869 [info]        Discrepancy: 0
+
+13:50:43.869 [info]    🔍 Testing feature effectiveness...
+
+13:50:44.248 [info]      📊 Cache hit rate: N/A
+
+13:50:44.248 [info]      🌊 Entropy score: 0.9013878835643745
+
+13:50:44.259 [info]      🌌 Active entanglements: 2495
+
+13:50:45.260 [info] 
+🎯 Feature Validation Summary
+
+13:50:45.260 [info] ============================================================
+
+13:50:45.260 [info] 🧪 Testing individual features...
+
+13:50:45.261 [info] 📊 Testing Event Horizon Cache...
+
+13:50:50.557 [info]    ✅ Cache test: 1000 operations in 5297ms
+
+13:50:50.557 [info] 🌍 Testing Gravitational Routing...
+
+13:51:01.034 [info]    ✅ Routing test: 2000 operations in 10476ms
+
+13:51:01.034 [info] 🌌 Testing Quantum Entanglement...
+
+13:51:01.062 [info]    ✅ Entanglement test: 100 operations in 28ms
+
+13:51:01.062 [info] 🌊 Testing Entropy Monitoring...
+
+13:51:01.081 [info]    ✅ Entropy metrics: %{total_entropy: 1.0137117208040851, shannon_entropy: 1.6895195346734753, thermodynamic_entropy: 2.0101226171265217e-22, entropy_trend: :increasing, system_temperature: 4.86, last_calculated: 1756234261062, disorder_index: 0.40548468832163403, stability_metric: 0.7465720697989788, rebalancing_recommended: false, vacuum_stability: 0.99995}
+
+13:51:01.081 [info] 📝 Testing Per-Shard WAL...
+
+13:51:06.962 [info]    ✅ WAL test: 1000 operations in 5880ms
+
+13:51:06.962 [info] 
+🎉 Large Dataset Feature Validation Complete!
+
+13:51:06.963 [info] 📊 Dataset: 0.1GB (10000 keys)
+
+13:51:06.963 [info] 🔧 Features tested: Intelligent Caching, Gravitational Routing, Quantum Entanglement, Entropy Monitoring, Per-Shard WAL
+
+13:51:06.964 [info] 🚀 Ready for Phase 9.2 optimization!
+
+13:51:06.964 [info] 
+📊 COMPREHENSIVE PERFORMANCE ANALYSIS
+
+13:51:06.964 [info] ================================================================================
+
+13:51:06.964 [info] 🔍 OPERATION COUNTING ANALYSIS:
+
+13:51:06.964 [info]    Expected operations per worker per iteration:
+
+13:51:06.964 [info]      • Intelligent Caching: 4 operations (4 cosmic_get)
+
+13:51:06.964 [info]      • Gravitational Routing: 4 operations (4 cosmic_get)
+
+13:51:06.964 [info]      • Quantum Entanglement: 2 operations (1 quantum_get + 2 cosmic_get)
+
+13:51:06.964 [info]      • Entropy Monitoring: 4 operations (4 cosmic_get)
+
+13:51:06.965 [info]      • Per-Shard WAL: 2 operations (2 cosmic_put)
+
+13:51:06.965 [info]      • TOTAL PER ITERATION: 16 operations
+
+13:51:06.965 [info]    Expected operations per worker (50 iterations): 16 × 50 = 800 operations
+
+13:51:06.965 [info]    Expected operations for 24 workers: 800 × 24 = 19200 operations
+
+13:51:06.965 [info] 
+🎯 PERFORMANCE TARGETS:
+
+13:51:06.965 [info]    • Target: 25,000+ ops/sec per process
+
+13:51:06.965 [info]    • Phase 9 Architecture: ✅ Enabled
+
+13:51:06.965 [info]    • WALCoordinator: ✅ Running
+
+13:51:06.965 [info]    • Numbered Shards: ✅ 24 shards active
+
+13:51:06.965 [info] 
+💡 TROUBLESHOOTING NOTES:
+
+13:51:06.965 [info]    • If discrepancy > 0: Some operations not being counted
+
+13:51:06.965 [info]    • If discrepancy < 0: Operations being double-counted
+
+13:51:06.965 [info]    • If performance < 25k ops/sec: Check workload complexity or system bottlenecks
+
+13:51:06.965 [info]    • Phase 9 should provide linear scaling up to 24 processes
