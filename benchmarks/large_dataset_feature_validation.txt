@@ -1181,15 +1181,15 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      └─ lib/warp_engine/intelligent_load_balancer.ex:109:5: WarpEngine.IntelligentLoadBalancer.route_operation/3
 
 
-16:55:20.177 [info] 🚀 Starting WarpEngine Database Application...
+17:17:11.724 [info] 🚀 Starting WarpEngine Database Application...
 
-16:55:20.180 [info] ⚙️  Application Configuration:
+17:17:11.727 [info] ⚙️  Application Configuration:
 
-16:55:20.188 [info]   data_root: "/home/travis/Projects/warp-engine/data"
+17:17:11.737 [info]   data_root: "/home/travis/Projects/warp-engine/data"
 
-16:55:20.188 [info]   Entanglement rules: using defaults
+17:17:11.737 [info]   Entanglement rules: using defaults
 
-16:55:20.188 [info] 🔧 Starting supervisor with 1 children
+17:17:11.737 [info] 🔧 Starting supervisor with 1 children
      warning: variable "item_num" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  286 │       items: Enum.map(1..:rand.uniform(5), fn item_num ->
@@ -1262,309 +1262,498 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
 
 🚀 Large Dataset Feature Validation Benchmark
 
-16:55:20.973 [info] ✨ All WarpEngine features enabled (using Phase 6.6 WAL system)
+17:17:12.584 [info] ✨ All WarpEngine features enabled (using Phase 6.6 WAL system)
 ================================================================================
-📊 Target Dataset: 0.1GB (10000 keys)
+📊 Target Dataset: 0.001GB (100 keys)
 🔧 Shards: 24
 ⚡ Concurrency Levels: 1,2,4,6,12,24
 ⏱️  Warmup: 5000ms, Measure: 10000ms, Trials: 1
 
-16:55:20.977 [error] ❌ WALCoordinator not running - Phase 9 per-shard WAL disabled!
+17:17:12.593 [error] ❌ WALCoordinator not running - Phase 9 per-shard WAL disabled!
 
-16:55:20.977 [error]    This will cause negative concurrency scaling
+17:17:12.593 [error]    This will cause negative concurrency scaling
 
-16:55:20.977 [error]    Check if bench_mode is properly set to false
+17:17:12.593 [error]    Check if bench_mode is properly set to false
 
-16:55:20.977 [error]    Current bench_mode: false
+17:17:12.593 [error]    Current bench_mode: false
 
-16:55:20.977 [error]    Current use_numbered_shards: true
+17:17:12.593 [error]    Current use_numbered_shards: true
 
-16:55:20.977 [info] 🔄 Attempting to start WAL system manually...
+17:17:12.593 [info] 🔄 Attempting to start WAL system manually...
 
-16:55:20.977 [info] 🚀 Initializing WAL Persistence Revolution...
+17:17:12.593 [info] 🚀 Initializing WAL Persistence Revolution...
 
-16:55:20.977 [info] 📁 WAL data_root: /home/travis/Projects/warp-engine/data
+17:17:12.593 [info] 📁 WAL data_root: /home/travis/Projects/warp-engine/data
 
-16:55:20.977 [info] 📁 Creating WAL directory: /home/travis/Projects/warp-engine/data/wal
+17:17:12.593 [info] 📁 Creating WAL directory: /home/travis/Projects/warp-engine/data/wal
 
-16:55:20.977 [info] 📄 Opening WAL file: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
+17:17:12.593 [info] 📄 Opening WAL file: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
 
-16:55:20.977 [info] ⚡ Setting up atomic counter...
+17:17:12.593 [info] ⚡ Setting up atomic counter...
 
-16:55:20.978 [info] 🏗️ Building WAL state...
+17:17:12.593 [info] 🏗️ Building WAL state...
 
-16:55:20.978 [info] ✅ WAL system initialized: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
+17:17:12.593 [info] ✅ WAL system initialized: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
 
-16:55:20.978 [info] ⚡ Ready for 250,000+ ops/second performance!
+17:17:12.593 [info] ⚡ Ready for 250,000+ ops/second performance!
 ⏳ Waiting for ETS tables...
 
-16:55:20.985 [info] ✅ WAL system started manually: #PID<0.437.0>
+17:17:12.602 [info] ✅ WAL system started manually: #PID<0.437.0>
 ✅ All 24 ETS tables ready in 0ms
 
-16:55:20.986 [info] 📦 Generating 0.1GB dataset (10000 keys)...
+17:17:12.602 [info] 📦 Generating 0.001GB dataset (100 keys)...
 
-16:55:21.757 [info] 📦 Dataset generated in 771.0ms
+17:17:12.613 [info] 📦 Dataset generated in 10.0ms
 
-16:55:21.757 [info] 📊 Total keys: 30000
+17:17:12.613 [info] 📊 Total keys: 300
 
-16:55:21.757 [info] 💾 Estimated size: 0.01MB
+17:17:12.613 [info] 💾 Estimated size: 0.0MB
 
-16:55:21.757 [info] 🚀 Loading 30000 keys into WarpEngine...
+17:17:12.613 [info] 🚀 Loading 300 keys into WarpEngine...
 
-16:55:21.760 [info] 💾 Memory before loading: 110.82MB
+17:17:12.616 [info] 💾 Memory before loading: 62.66MB
 
-16:55:21.820 [info] 📦 Loaded chunk 1/6 - Memory: 111.0MB
+17:17:12.627 [info] 📦 Loaded chunk 1/1 - Memory: 62.83MB
 
-16:56:00.959 [info] ✅ Dataset loaded in 40756ms
+17:17:12.895 [info] ✅ Dataset loaded in 281ms
 
-16:56:00.959 [info] 💾 Memory after loading: 174.69MB
+17:17:12.895 [info] 💾 Memory after loading: 65.02MB
 
-16:56:00.959 [info] 💾 Memory increase: 63.87MB
+17:17:12.896 [info] 💾 Memory increase: 2.36MB
 
-16:56:00.959 [info] 🎯 Starting feature validation benchmarks...
+17:17:12.896 [info] 🎯 Starting feature validation benchmarks...
 
-16:56:00.980 [info] 🧹 Memory before benchmarks: 156.45MB
+17:17:12.897 [info] 🧹 Memory before benchmarks: 63.04MB
 
-16:56:00.980 [info] ⚛️  Quantum entanglement tests enabled
+17:17:12.897 [info] ⚛️  Quantum entanglement tests enabled
 
-16:56:00.980 [info] 🔗 Testing intelligent prefetching and entanglement collapse
+17:17:12.897 [info] 🔗 Testing intelligent prefetching and entanglement collapse
 
-16:56:00.980 [info] 🔧 Initializing quantum index system...
+17:17:12.897 [info] 🔧 Initializing quantum index system...
 
-16:56:00.980 [info] ⚛️  Initializing quantum entanglement system...
+17:17:12.898 [info] ⚛️  Initializing quantum entanglement system...
 
-16:56:00.981 [info] ✨ Quantum entanglement system ready for superposition
+17:17:12.898 [info] ✨ Quantum entanglement system ready for superposition
 
-16:56:00.981 [info] ✅ Quantum index system ready
+17:17:12.898 [info] ✅ Quantum index system ready
 
-16:56:00.981 [info] 🌊 Initializing entropy monitoring system...
+17:17:12.898 [info] 🌊 Initializing entropy monitoring system...
 
-16:56:00.986 [info] ✅ Entropy registry started
+17:17:12.907 [info] ✅ Entropy registry started
 
-16:56:00.986 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
+17:17:12.907 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
 
-16:56:00.987 [info] 💾 Entropy persistence initialized: /home/travis/Projects/warp-engine/data/entropy/cosmic_entropy
+17:17:12.911 [info] 💾 Entropy persistence initialized: /home/travis/Projects/warp-engine/data/entropy/cosmic_entropy
 
-16:56:00.987 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 30000ms
+17:17:12.911 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 30000ms
 
-16:56:00.987 [info] ✅ Entropy monitoring system ready
+17:17:12.911 [info] ✅ Entropy monitoring system ready
 
-16:56:00.987 [info] 
+17:17:12.911 [info] 
 == Testing with 1 processes ==
 
-16:56:00.987 [info]   Trial 1/1...
+17:17:12.911 [info]   Trial 1/1...
 
-16:56:19.328 [info]     Trial 1 Results:
+17:17:28.080 [info]     Trial 1 Results:
 
-16:56:19.328 [info]       Duration: 13090ms
+17:17:28.080 [info]       Duration: 10084ms
 
-16:56:19.328 [info]       Total Operations: 13600
+17:17:28.080 [info]       Total Operations: 35200
 
-16:56:19.329 [info]       Operations/sec: 1038
+17:17:28.080 [info]       Operations/sec: 3490
 
-16:56:19.329 [info]       Detailed Breakdown:
+17:17:28.080 [info]       Detailed Breakdown:
 
-16:56:19.329 [info]         Cache ops: 3400
+17:17:28.080 [info]         Cache ops: 8800
 
-16:56:19.329 [info]         Routing ops: 3400
+17:17:28.080 [info]         Routing ops: 8800
 
-16:56:19.329 [info]         Entanglement ops: 1700
+17:17:28.080 [info]         Entanglement ops: 4400
 
-16:56:19.329 [info]         Entropy ops: 3400
+17:17:28.080 [info]         Entropy ops: 8800
 
-16:56:19.329 [info]         WAL ops: 1700
+17:17:28.080 [info]         WAL ops: 4400
 
-16:56:19.329 [info]         Total counted: 13600
+17:17:28.080 [info]         Total counted: 35200
 
-16:56:19.329 [info]    • 1 processes: best 13090ms (1038 ops/sec)
+17:17:28.080 [info]    • 1 processes: best 10084ms (3490 ops/sec)
 
-16:56:19.329 [info]      median 1038 (p50 1038, p90 1038)
+17:17:28.080 [info]      median 3490 (p50 3490, p90 3490)
 
-16:56:19.329 [info]      Best trial detailed breakdown:
+17:17:28.080 [info]      Best trial detailed breakdown:
 
-16:56:19.329 [info]        Cache: 3400 ops
+17:17:28.080 [info]        Cache: 8800 ops
 
-16:56:19.329 [info]        Routing: 3400 ops
+17:17:28.080 [info]        Routing: 8800 ops
 
-16:56:19.329 [info]        Entanglement: 1700 ops
+17:17:28.080 [info]        Entanglement: 4400 ops
 
-16:56:19.329 [info]        Entropy: 3400 ops
+17:17:28.080 [info]        Entropy: 8800 ops
 
-16:56:19.329 [info]        WAL: 1700 ops
+17:17:28.080 [info]        WAL: 4400 ops
 
-16:56:19.329 [info]        Total counted: 13600
+17:17:28.080 [info]        Total counted: 35200
 
-16:56:19.329 [info]        vs Total reported: 13600
+17:17:28.080 [info]        vs Total reported: 35200
 
-16:56:19.329 [info]        Discrepancy: 0
+17:17:28.080 [info]        Discrepancy: 0
 
-16:56:20.331 [info] 
+17:17:29.083 [info] 
 == Testing with 2 processes ==
 
-16:56:20.331 [info]   Trial 1/1...
+17:17:29.083 [info]   Trial 1/1...
 
-16:56:39.651 [info]     Trial 1 Results:
+17:17:42.840 [info]     Trial 1 Results:
 
-16:56:39.651 [info]       Duration: 12179ms
+17:17:42.840 [info]       Duration: 10263ms
 
-16:56:39.651 [info]       Total Operations: 12800
+17:17:42.840 [info]       Total Operations: 38400
 
-16:56:39.651 [info]       Operations/sec: 1050
+17:17:42.840 [info]       Operations/sec: 3741
 
-16:56:39.651 [info]       Detailed Breakdown:
+17:17:42.840 [info]       Detailed Breakdown:
 
-16:56:39.651 [info]         Cache ops: 3200
+17:17:42.840 [info]         Cache ops: 9600
 
-16:56:39.651 [info]         Routing ops: 3200
+17:17:42.840 [info]         Routing ops: 9600
 
-16:56:39.652 [info]         Entanglement ops: 1600
+17:17:42.840 [info]         Entanglement ops: 4800
 
-16:56:39.652 [info]         Entropy ops: 3200
+17:17:42.840 [info]         Entropy ops: 9600
 
-16:56:39.652 [info]         WAL ops: 1600
+17:17:42.840 [info]         WAL ops: 4800
 
-16:56:39.652 [info]         Total counted: 12800
+17:17:42.840 [info]         Total counted: 38400
 
-16:56:39.652 [info]    • 2 processes: best 12179ms (1050 ops/sec)
+17:17:42.840 [info]    • 2 processes: best 10263ms (3741 ops/sec)
 
-16:56:39.652 [info]      median 1050 (p50 1050, p90 1050)
+17:17:42.840 [info]      median 3741 (p50 3741, p90 3741)
 
-16:56:39.652 [info]      Best trial detailed breakdown:
+17:17:42.840 [info]      Best trial detailed breakdown:
 
-16:56:39.652 [info]        Cache: 3200 ops
+17:17:42.840 [info]        Cache: 9600 ops
 
-16:56:39.652 [info]        Routing: 3200 ops
+17:17:42.840 [info]        Routing: 9600 ops
 
-16:56:39.652 [info]        Entanglement: 1600 ops
+17:17:42.840 [info]        Entanglement: 4800 ops
 
-16:56:39.652 [info]        Entropy: 3200 ops
+17:17:42.840 [info]        Entropy: 9600 ops
 
-16:56:39.652 [info]        WAL: 1600 ops
+17:17:42.840 [info]        WAL: 4800 ops
 
-16:56:39.652 [info]        Total counted: 12800
+17:17:42.840 [info]        Total counted: 38400
 
-16:56:39.652 [info]        vs Total reported: 12800
+17:17:42.840 [info]        vs Total reported: 38400
 
-16:56:39.652 [info]        Discrepancy: 0
+17:17:42.840 [info]        Discrepancy: 0
 
-16:56:39.122 [info] 
+17:17:43.841 [info] 
 == Testing with 4 processes ==
 
-16:56:39.122 [info]   Trial 1/1...
+17:17:43.841 [info]   Trial 1/1...
 
-16:57:10.243 [info]     Trial 1 Results:
+17:17:59.793 [info]     Trial 1 Results:
 
-16:57:10.243 [info]       Duration: 20312ms
+17:17:59.793 [info]       Duration: 10926ms
 
-16:57:10.243 [info]       Total Operations: 12800
+17:17:59.793 [info]       Total Operations: 41600
 
-16:57:10.243 [info]       Operations/sec: 630
+17:17:59.793 [info]       Operations/sec: 3807
 
-16:57:10.243 [info]       Detailed Breakdown:
+17:17:59.793 [info]       Detailed Breakdown:
 
-16:57:10.243 [info]         Cache ops: 3200
+17:17:59.793 [info]         Cache ops: 10400
 
-16:57:10.244 [info]         Routing ops: 3200
+17:17:59.793 [info]         Routing ops: 10400
 
-16:57:10.244 [info]         Entanglement ops: 1600
+17:17:59.793 [info]         Entanglement ops: 5200
 
-16:57:10.244 [info]         Entropy ops: 3200
+17:17:59.793 [info]         Entropy ops: 10400
 
-16:57:10.244 [info]         WAL ops: 1600
+17:17:59.793 [info]         WAL ops: 5200
 
-16:57:10.244 [info]         Total counted: 12800
+17:17:59.793 [info]         Total counted: 41600
 
-16:57:10.244 [info]    • 4 processes: best 20312ms (630 ops/sec)
+17:17:59.793 [info]    • 4 processes: best 10926ms (3807 ops/sec)
 
-16:57:10.244 [info]      median 630 (p50 630, p90 630)
+17:17:59.793 [info]      median 3807 (p50 3807, p90 3807)
 
-16:57:10.244 [info]      Best trial detailed breakdown:
+17:17:59.793 [info]      Best trial detailed breakdown:
 
-16:57:10.244 [info]        Cache: 3200 ops
+17:17:59.793 [info]        Cache: 10400 ops
 
-16:57:10.244 [info]        Routing: 3200 ops
+17:17:59.794 [info]        Routing: 10400 ops
 
-16:57:10.244 [info]        Entanglement: 1600 ops
+17:17:59.794 [info]        Entanglement: 5200 ops
 
-16:57:10.244 [info]        Entropy: 3200 ops
+17:17:59.794 [info]        Entropy: 10400 ops
 
-16:57:10.244 [info]        WAL: 1600 ops
+17:17:59.794 [info]        WAL: 5200 ops
 
-16:57:10.244 [info]        Total counted: 12800
+17:17:59.794 [info]        Total counted: 41600
 
-16:57:10.244 [info]        vs Total reported: 12800
+17:17:59.795 [info]        vs Total reported: 41600
 
-16:57:10.244 [info]        Discrepancy: 0
+17:17:59.795 [info]        Discrepancy: 0
 
-16:57:10.244 [info]    🔍 Testing feature effectiveness...
+17:17:59.795 [info]    🔍 Testing feature effectiveness...
 
-16:57:10.649 [info]      📊 Cache hit rate: N/A
+17:18:00.219 [info]      📊 Cache hit rate: N/A
 
-16:57:10.649 [info]      🌊 Entropy score: 0.47107127996185294
+17:18:00.219 [info]      🌊 Entropy score: 0.28385124474573153
 
-16:57:10.683 [info]      🌌 Active entanglements: 2419
+17:18:00.219 [info]      🌌 Active entanglements: 25
 
-16:57:11.685 [info] 
+17:18:01.223 [info] 
 == Testing with 6 processes ==
 
-16:57:11.685 [info]   Trial 1/1...
+17:18:01.223 [info]   Trial 1/1...
 
-16:57:35.022 [info]     Trial 1 Results:
+17:18:15.788 [info]     Trial 1 Results:
 
-16:57:35.022 [info]       Duration: 17441ms
+17:18:15.788 [info]       Duration: 11125ms
 
-16:57:35.022 [info]       Total Operations: 9600
+17:18:15.788 [info]       Total Operations: 41600
 
-16:57:35.022 [info]       Operations/sec: 550
+17:18:15.788 [info]       Operations/sec: 3739
 
-16:57:35.022 [info]       Detailed Breakdown:
+17:18:15.789 [info]       Detailed Breakdown:
 
-16:57:35.022 [info]         Cache ops: 2400
+17:18:15.789 [info]         Cache ops: 10400
 
-16:57:35.022 [info]         Routing ops: 2400
+17:18:15.789 [info]         Routing ops: 10400
 
-16:57:35.022 [info]         Entanglement ops: 1200
+17:18:15.789 [info]         Entanglement ops: 5200
 
-16:57:35.022 [info]         Entropy ops: 2400
+17:18:15.789 [info]         Entropy ops: 10400
 
-16:57:35.022 [info]         WAL ops: 1200
+17:18:15.789 [info]         WAL ops: 5200
 
-16:57:35.022 [info]         Total counted: 9600
+17:18:15.789 [info]         Total counted: 41600
 
-16:57:35.022 [info]    • 6 processes: best 17441ms (550 ops/sec)
+17:18:15.789 [info]    • 6 processes: best 11125ms (3739 ops/sec)
 
-16:57:35.022 [info]      median 550 (p50 550, p90 550)
+17:18:15.789 [info]      median 3739 (p50 3739, p90 3739)
 
-16:57:35.022 [info]      Best trial detailed breakdown:
+17:18:15.789 [info]      Best trial detailed breakdown:
 
-16:57:35.022 [info]        Cache: 2400 ops
+17:18:15.789 [info]        Cache: 10400 ops
 
-16:57:35.022 [info]        Routing: 2400 ops
+17:18:15.789 [info]        Routing: 10400 ops
 
-16:57:35.022 [info]        Entanglement: 1200 ops
+17:18:15.789 [info]        Entanglement: 5200 ops
 
-16:57:35.022 [info]        Entropy: 2400 ops
+17:18:15.789 [info]        Entropy: 10400 ops
 
-16:57:35.022 [info]        WAL: 1200 ops
+17:18:15.789 [info]        WAL: 5200 ops
 
-16:57:35.022 [info]        Total counted: 9600
+17:18:15.789 [info]        Total counted: 41600
 
-16:57:35.022 [info]        vs Total reported: 9600
+17:18:15.789 [info]        vs Total reported: 41600
 
-16:57:35.022 [info]        Discrepancy: 0
+17:18:15.789 [info]        Discrepancy: 0
 
-16:57:35.022 [info]    🔍 Testing feature effectiveness...
+17:18:15.789 [info]    🔍 Testing feature effectiveness...
 
-16:57:35.439 [info]      📊 Cache hit rate: N/A
+17:18:16.171 [info]      📊 Cache hit rate: N/A
 
-16:57:35.439 [info]      🌊 Entropy score: 1.3182629541267394
+17:18:16.172 [info]      🌊 Entropy score: 1.2023266428364725
 
-16:57:35.446 [info]      🌌 Active entanglements: 2471
+17:18:16.172 [info]      🌌 Active entanglements: 25
 
-16:57:36.449 [info] 
+17:18:17.174 [info] 
 == Testing with 12 processes ==
 
-16:57:36.450 [info]   Trial 1/1...
+17:18:17.175 [info]   Trial 1/1...
 
-BREAK: (a)bort (A)bort with dump (c)ontinue (p)roc info (i)nfo
-       (l)oaded (v)ersion (k)ill (D)b-tables (d)istribution
+17:18:34.278 [info]     Trial 1 Results:
+
+17:18:34.278 [info]       Duration: 11448ms
+
+17:18:34.278 [info]       Total Operations: 41600
+
+17:18:34.279 [info]       Operations/sec: 3633
+
+17:18:34.279 [info]       Detailed Breakdown:
+
+17:18:34.279 [info]         Cache ops: 10400
+
+17:18:34.279 [info]         Routing ops: 10400
+
+17:18:34.279 [info]         Entanglement ops: 5200
+
+17:18:34.279 [info]         Entropy ops: 10400
+
+17:18:34.279 [info]         WAL ops: 5200
+
+17:18:34.279 [info]         Total counted: 41600
+
+17:18:34.279 [info]    • 12 processes: best 11448ms (3633 ops/sec)
+
+17:18:34.279 [info]      median 3633 (p50 3633, p90 3633)
+
+17:18:34.279 [info]      Best trial detailed breakdown:
+
+17:18:34.279 [info]        Cache: 10400 ops
+
+17:18:34.279 [info]        Routing: 10400 ops
+
+17:18:34.279 [info]        Entanglement: 5200 ops
+
+17:18:34.279 [info]        Entropy: 10400 ops
+
+17:18:34.279 [info]        WAL: 5200 ops
+
+17:18:34.279 [info]        Total counted: 41600
+
+17:18:34.279 [info]        vs Total reported: 41600
+
+17:18:34.279 [info]        Discrepancy: 0
+
+17:18:34.279 [info]    🔍 Testing feature effectiveness...
+
+17:18:34.659 [info]      📊 Cache hit rate: N/A
+
+17:18:34.659 [info]      🌊 Entropy score: 1.0172302435585105
+
+17:18:34.660 [info]      🌌 Active entanglements: 25
+
+17:18:35.664 [info] 
+== Testing with 24 processes ==
+
+17:18:35.664 [info]   Trial 1/1...
+
+17:18:54.195 [info]     Trial 1 Results:
+
+17:18:54.195 [info]       Duration: 13317ms
+
+17:18:54.195 [info]       Total Operations: 44800
+
+17:18:54.195 [info]       Operations/sec: 3364
+
+17:18:54.195 [info]       Detailed Breakdown:
+
+17:18:54.195 [info]         Cache ops: 11200
+
+17:18:54.195 [info]         Routing ops: 11200
+
+17:18:54.195 [info]         Entanglement ops: 5600
+
+17:18:54.195 [info]         Entropy ops: 11200
+
+17:18:54.195 [info]         WAL ops: 5600
+
+17:18:54.195 [info]         Total counted: 44800
+
+17:18:54.195 [info]    • 24 processes: best 13317ms (3364 ops/sec)
+
+17:18:54.195 [info]      median 3364 (p50 3364, p90 3364)
+
+17:18:54.195 [info]      Best trial detailed breakdown:
+
+17:18:54.195 [info]        Cache: 11200 ops
+
+17:18:54.195 [info]        Routing: 11200 ops
+
+17:18:54.195 [info]        Entanglement: 5600 ops
+
+17:18:54.195 [info]        Entropy: 11200 ops
+
+17:18:54.195 [info]        WAL: 5600 ops
+
+17:18:54.195 [info]        Total counted: 44800
+
+17:18:54.195 [info]        vs Total reported: 44800
+
+17:18:54.195 [info]        Discrepancy: 0
+
+17:18:54.195 [info]    🔍 Testing feature effectiveness...
+
+17:18:54.579 [info]      📊 Cache hit rate: N/A
+
+17:18:54.579 [info]      🌊 Entropy score: 0.33169163035311
+
+17:18:54.579 [info]      🌌 Active entanglements: 25
+
+17:18:55.585 [info] 
+🎯 Feature Validation Summary
+
+17:18:55.585 [info] ============================================================
+
+17:18:55.585 [info] 🧪 Testing individual features...
+
+17:18:55.585 [info] 📊 Testing Event Horizon Cache...
+
+17:18:55.639 [info]    ✅ Cache test: 1000 operations in 53ms
+
+17:18:55.639 [info] 🌍 Testing Gravitational Routing...
+
+17:18:55.738 [info]    ✅ Routing test: 2000 operations in 100ms
+
+17:18:55.739 [info] 🌌 Testing Quantum Entanglement...
+
+17:18:55.749 [info]    ✅ Entanglement test: 100 operations in 11ms
+
+17:18:55.749 [info] 🌊 Testing Entropy Monitoring...
+
+17:18:55.765 [info]    ✅ Entropy metrics: %{total_entropy: 0.3982258258530987, shannon_entropy: 0.6637097097551645, thermodynamic_entropy: 1.3123422475376496e-22, entropy_trend: :decreasing, system_temperature: 3.5100000000000002, last_calculated: 1756246735749, disorder_index: 0.15929033034123946, stability_metric: 0.9004435435367253, rebalancing_recommended: false, vacuum_stability: 0.99995}
+
+17:18:55.765 [info] 📝 Testing Per-Shard WAL...
+
+17:18:56.608 [info]    ✅ WAL test: 1000 operations in 843ms
+
+17:18:56.608 [info] 
+🎉 Large Dataset Feature Validation Complete!
+
+17:18:56.608 [info] 📊 Dataset: 0.001GB (100 keys)
+
+17:18:56.608 [info] 🔧 Features tested: Intelligent Caching, Gravitational Routing, Quantum Entanglement, Entropy Monitoring, Per-Shard WAL
+
+17:18:56.608 [info] 🚀 Ready for Phase 9.2 optimization!
+
+17:18:56.608 [info] 
+📊 COMPREHENSIVE PERFORMANCE ANALYSIS
+
+17:18:56.609 [info] ================================================================================
+
+17:18:56.609 [info] 🔍 OPERATION COUNTING ANALYSIS:
+
+17:18:56.609 [info]    Expected operations per worker per iteration:
+
+17:18:56.609 [info]      • Intelligent Caching: 4 operations (4 cosmic_get)
+
+17:18:56.609 [info]      • Gravitational Routing: 4 operations (4 cosmic_get)
+
+17:18:56.609 [info]      • Quantum Entanglement: 2 operations (1 quantum_get + 2 cosmic_get)
+
+17:18:56.609 [info]      • Entropy Monitoring: 4 operations (4 cosmic_get)
+
+17:18:56.609 [info]      • Per-Shard WAL: 2 operations (2 cosmic_put)
+
+17:18:56.609 [info]      • TOTAL PER ITERATION: 16 operations
+
+17:18:56.609 [info]    Expected operations per worker (50 iterations): 16 × 50 = 800 operations
+
+17:18:56.609 [info]    Expected operations for 24 workers: 800 × 24 = 19200 operations
+
+17:18:56.609 [info] 
+🎯 PERFORMANCE TARGETS:
+
+17:18:56.609 [info]    • Target: 25,000+ ops/sec per process
+
+17:18:56.609 [info]    • Phase 9 Architecture: ✅ Enabled
+
+17:18:56.609 [info]    • WALCoordinator: ✅ Running
+
+17:18:56.609 [info]    • Numbered Shards: ✅ 24 shards active
+
+17:18:56.609 [info] 
+💡 TROUBLESHOOTING NOTES:
+
+17:18:56.609 [info]    • If discrepancy > 0: Some operations not being counted
+
+17:18:56.609 [info]    • If discrepancy < 0: Operations being double-counted
+
+17:18:56.609 [info]    • If performance < 25k ops/sec: Check workload complexity or system bottlenecks
+
+17:18:56.609 [info]    • Phase 9 should provide linear scaling up to 24 processes
