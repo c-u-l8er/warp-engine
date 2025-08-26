@@ -12,6 +12,20 @@
      │
      └─ lib/warp_engine/operation_batcher.ex:279:54: WarpEngine.OperationBatcher.execute_operation_batch/3
 
+    warning: module attribute @default_fsync_strategy was set but never used
+    │
+ 30 │   @default_fsync_strategy :adaptive  # :immediate, :batch, :adaptive
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/modern_wal.ex:30: WarpEngine.ModernWAL (module)
+
+    warning: module attribute @max_shards was set but never used
+    │
+ 29 │   @max_shards 48  # Support up to 48 shards for maximum concurrency
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/modern_wal.ex:29: WarpEngine.ModernWAL (module)
+
      warning: the underscored variable "_meta" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore
      │
  548 │       {module_name, _meta, args}
@@ -266,52 +280,52 @@
 
       warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
       │
- 1118 │         missing_tables = [table_name | missing_tables]
+ 1117 │         missing_tables = [table_name | missing_tables]
       │         ~
       │
-      └─ lib/warp_engine.ex:1118:9: WarpEngine.verify_tables_created/1
+      └─ lib/warp_engine.ex:1117:9: WarpEngine.verify_tables_created/1
 
       warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
       │
- 1126 │         missing_tables = [table_name | missing_tables]
+ 1125 │         missing_tables = [table_name | missing_tables]
       │         ~
       │
-      └─ lib/warp_engine.ex:1126:9: WarpEngine.verify_tables_created/1
+      └─ lib/warp_engine.ex:1125:9: WarpEngine.verify_tables_created/1
 
       warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
       │
- 1704 │         {:ok, value, shard_id} ->
+ 1703 │         {:ok, value, shard_id} ->
       │                      ~
       │
-      └─ lib/warp_engine.ex:1704:22: WarpEngine.handle_call_legacy_quantum_get/2
+      └─ lib/warp_engine.ex:1703:22: WarpEngine.handle_call_legacy_quantum_get/2
 
       warning: function update_quantum_metrics/3 is unused
       │
- 1279 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
+ 1278 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
       │        ~
       │
-      └─ lib/warp_engine.ex:1279:8: WarpEngine (module)
+      └─ lib/warp_engine.ex:1278:8: WarpEngine (module)
 
       warning: function store_in_event_horizon_cache/5 is unused
       │
- 1361 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
+ 1360 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
       │        ~
       │
-      └─ lib/warp_engine.ex:1361:8: WarpEngine (module)
+      └─ lib/warp_engine.ex:1360:8: WarpEngine (module)
 
       warning: function refresh_cached_state/0 is unused
       │
- 1833 │   defp refresh_cached_state() do
+ 1832 │   defp refresh_cached_state() do
       │        ~
       │
-      └─ lib/warp_engine.ex:1833:8: WarpEngine (module)
+      └─ lib/warp_engine.ex:1832:8: WarpEngine (module)
 
       warning: function get_current_state/0 is unused
       │
- 1857 │   defp get_current_state() do
+ 1856 │   defp get_current_state() do
       │        ~
       │
-      └─ lib/warp_engine.ex:1857:8: WarpEngine (module)
+      └─ lib/warp_engine.ex:1856:8: WarpEngine (module)
 
 warning: struct :already_exists is undefined (module :already_exists is not available or is yet to be defined)
 └─ lib/warp_engine.ex: WarpEngine.create_all_ets_tables_eagerly/0
@@ -323,54 +337,33 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │
      └─ lib/warp_engine/wal_entry.ex:288:8: WarpEngine.WAL.Entry (module)
 
-     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 727 │   defp start_shard_sync_process(shard_id, wal_file_handle) do
-     │                                 ~~~~~~~~
-     │
-     └─ lib/warp_engine/wal_shard.ex:727:33: WarpEngine.WALShard.start_shard_sync_process/2
+      warning: variable "header" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1082 │         <<batch_size::32, _timestamp::64, _shard_size::16, _shard_binary::binary>> = header ->
+      │                                                                                      ~
+      │
+      └─ lib/warp_engine/wal_shard.ex:1082:86: WarpEngine.WALShard.load_shard_wal_entries_from_file/1
 
-     warning: variable "wal_file_handle" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 727 │   defp start_shard_sync_process(shard_id, wal_file_handle) do
-     │                                           ~~~~~~~~~~~~~~~
-     │
-     └─ lib/warp_engine/wal_shard.ex:727:43: WarpEngine.WALShard.start_shard_sync_process/2
+    warning: module attribute @max_buffer_ops was set but never used
+    │
+ 57 │   @max_buffer_ops 25000       # Maximum buffer size (increased from 8192)
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_shard.ex:57: WarpEngine.WALShard (module)
 
-     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 732 │   defp shard_sync_loop(shard_id, wal_file_handle) do
-     │                        ~~~~~~~~
-     │
-     └─ lib/warp_engine/wal_shard.ex:732:24: WarpEngine.WALShard.shard_sync_loop/2
+    warning: module attribute @flush_batch_size was set but never used
+    │
+ 56 │   @flush_batch_size 1024
+    │   ~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_shard.ex:56: WarpEngine.WALShard (module)
 
-     warning: variable "wal_file_handle" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 732 │   defp shard_sync_loop(shard_id, wal_file_handle) do
-     │                                  ~~~~~~~~~~~~~~~
-     │
-     └─ lib/warp_engine/wal_shard.ex:732:34: WarpEngine.WALShard.shard_sync_loop/2
-
-     warning: variable "header" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 976 │         <<batch_size::32, _timestamp::64, _shard_size::16, _shard_binary::binary>> = header ->
-     │                                                                                      ~
-     │
-     └─ lib/warp_engine/wal_shard.ex:976:86: WarpEngine.WALShard.load_shard_wal_entries_from_file/1
-
-     warning: function start_shard_sync_process/2 is unused
-     │
- 727 │   defp start_shard_sync_process(shard_id, wal_file_handle) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_shard.ex:727:8: WarpEngine.WALShard (module)
-
-     warning: function shard_sync_loop/2 is unused
-     │
- 732 │   defp shard_sync_loop(shard_id, wal_file_handle) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_shard.ex:732:8: WarpEngine.WALShard (module)
+    warning: module attribute @write_batch_size was set but never used
+    │
+ 54 │   @write_batch_size 5000     # Operations per batch write (increased from 1000)
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_shard.ex:54: WarpEngine.WALShard (module)
 
      warning: the following clause will never match:
 
@@ -386,39 +379,39 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
 
      typing violation found at:
      │
- 623 │                     {:error, reason} ->
+ 790 │                     {:error, reason} ->
      │                     ~~~~~~~~~~~~~~~~~~~
      │
-     └─ lib/warp_engine/wal_shard.ex:623: WarpEngine.WALShard.perform_full_shard_wal_recovery/2
+     └─ lib/warp_engine/wal_shard.ex:790: WarpEngine.WALShard.perform_full_shard_wal_recovery/2
 
-     warning: the following clause will never match:
+      warning: the following clause will never match:
 
-         {:error, reason}
+          {:error, reason}
 
-     because it attempts to match on the result of:
+      because it attempts to match on the result of:
 
-         replay_shard_wal_entry(entry)
+          replay_shard_wal_entry(entry)
 
-     which has type:
+      which has type:
 
-         dynamic(:ok)
+          dynamic(:ok)
 
-     typing violation found at:
-     │
- 897 │                 {:error, reason} ->
-     │                 ~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/warp_engine/wal_shard.ex:897: WarpEngine.WALShard.replay_shard_wal_after_checkpoint/3
+      typing violation found at:
+      │
+ 1003 │                 {:error, reason} ->
+      │                 ~~~~~~~~~~~~~~~~~~~
+      │
+      └─ lib/warp_engine/wal_shard.ex:1003: WarpEngine.WALShard.replay_shard_wal_after_checkpoint/3
 
-     warning: :file.position/3 is undefined or private. Did you mean:
+      warning: :file.position/3 is undefined or private. Did you mean:
 
-           * position/2
+            * position/2
 
-     │
- 979 │           :ok = :file.position(file_handle, :cur, batch_size) # Move position forward
-     │                       ~
-     │
-     └─ lib/warp_engine/wal_shard.ex:979:23: WarpEngine.WALShard.load_shard_wal_entries_from_file/1
+      │
+ 1085 │           :ok = :file.position(file_handle, :cur, batch_size) # Move position forward
+      │                       ~
+      │
+      └─ lib/warp_engine/wal_shard.ex:1085:23: WarpEngine.WALShard.load_shard_wal_entries_from_file/1
 
      warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
@@ -426,6 +419,41 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │                           ~~~~
      │
      └─ lib/warp_engine/ultra_fast_operations.ex:178:27: WarpEngine.UltraFastOperations.ultra_fast_get/2
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 262 │   defp get_ultra_fast_sequence(shard_id) do
+     │                                ~~~~~~~~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:262:32: WarpEngine.UltraFastOperations.get_ultra_fast_sequence/1
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 276 │   defp ultra_fast_wal_append(shard_id, wal_entry) do
+     │                              ~~~~~~~~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:276:30: WarpEngine.UltraFastOperations.ultra_fast_wal_append/2
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 336 │   defp send_wal_entry_direct(shard_id, wal_entry) do
+     │                              ~~~~~~~~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:336:30: WarpEngine.UltraFastOperations.send_wal_entry_direct/2
+
+     warning: function send_wal_entry_direct/2 is unused
+     │
+ 336 │   defp send_wal_entry_direct(shard_id, wal_entry) do
+     │        ~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:336:8: WarpEngine.UltraFastOperations (module)
+
+     warning: function get_shard_counter_ref/1 is unused
+     │
+ 303 │   defp get_shard_counter_ref(shard_id) do
+     │        ~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:303:8: WarpEngine.UltraFastOperations (module)
 
      warning: WarpEngine.WormholeRouter.find_route/2 is undefined or private. Did you mean:
 
@@ -444,34 +472,6 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │                                        ~
      │
      └─ lib/enhanced_adt/islab_integration.ex:393:40: EnhancedADT.WarpEngineIntegration.Translators.attempt_wormhole_retrieval/1
-
-    warning: variable "shard_name" is unused (if the variable is not meant to be used, prefix it with an underscore)
-    │
- 88 │     shard_name = WarpEngine.WALShard.via_tuple(shard_id)
-    │     ~~~~~~~~~~
-    │
-    └─ lib/warp_engine/wal_coordinator.ex:88:5: WarpEngine.WALCoordinator.fire_and_forget_append/5
-
-     warning: clauses with the same name and arity (number of arguments) should be grouped together, "def handle_call/3" was previously defined (lib/warp_engine/wal_coordinator.ex:232)
-     │
- 259 │   def handle_call(:create_coordinated_checkpoint, _from, state) do
-     │       ~
-     │
-     └─ lib/warp_engine/wal_coordinator.ex:259:7
-
-     warning: function load_shard_checkpoint/2 is unused
-     │
- 645 │   defp load_shard_checkpoint(checkpoint_path, shard_id) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_coordinator.ex:645:8: WarpEngine.WALCoordinator (module)
-
-    warning: module attribute @spacetime_shards was set but never used
-    │
- 54 │   @spacetime_shards [
-    │   ~~~~~~~~~~~~~~~~~~~
-    │
-    └─ lib/warp_engine/wal_coordinator.ex:54: WarpEngine.WALCoordinator (module)
 
      warning: the following clause will never match:
 
@@ -602,6 +602,13 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │        ~
      │
      └─ lib/enhanced_adt.ex:450:8: EnhancedADT.SumType (module)
+
+    warning: module attribute @max_buffer_size was set but never used
+    │
+ 30 │   @max_buffer_size 50000       # Large buffer for maximum batching
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/modern_wal_shard.ex:30: WarpEngine.ModernWALShard (module)
 
     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
     │
@@ -975,124 +982,131 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │
      └─ lib/enhanced_adt/quantum_analyzer.ex:194: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
 
+     warning: Logger.warn/1 is deprecated. Use Logger.warning/2 instead
+     │
+ 715 │       Logger.warn("Process WAL table #{wal_table} is getting too large. Flushing...")
+     │              ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:715:14: WarpEngine.WALOperations.flush_process_wal_table/1
+
      warning: function update_wormhole_usage_patterns/3 is unused
      │
- 591 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
+ 669 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:591:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:669:8: WarpEngine.WALOperations (module)
 
      warning: function update_shard_statistics/4 is unused
      │
- 601 │   defp update_shard_statistics(shard, operation, _key, _value) do
+ 679 │   defp update_shard_statistics(shard, operation, _key, _value) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:601:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:679:8: WarpEngine.WALOperations (module)
 
      warning: function update_physics_intelligence_async/4 is unused
      │
- 370 │   defp update_physics_intelligence_async(key, _value, _cosmic_metadata, _state) do
+ 448 │   defp update_physics_intelligence_async(key, _value, _cosmic_metadata, _state) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:370:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:448:8: WarpEngine.WALOperations (module)
 
      warning: function update_get_physics_intelligence_async/5 is unused
      │
- 401 │   defp update_get_physics_intelligence_async(key, _value, _shard_id, _cosmic_metadata, _state) do
+ 479 │   defp update_get_physics_intelligence_async(key, _value, _shard_id, _cosmic_metadata, _state) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:401:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:479:8: WarpEngine.WALOperations (module)
 
      warning: function update_access_patterns_async/3 is unused
      │
- 529 │   defp update_access_patterns_async(key, access_type, _state) do
+ 607 │   defp update_access_patterns_async(key, access_type, _state) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:529:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:607:8: WarpEngine.WALOperations (module)
 
      warning: function ultra_fast_route_data/3 is unused
      │
- 250 │   defp ultra_fast_route_data(key, _value, opts) do
+ 305 │   defp ultra_fast_route_data(key, _value, opts) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:250:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:305:8: WarpEngine.WALOperations (module)
 
      warning: function populate_event_horizon_cache_async/4 is unused
      │
- 498 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
+ 576 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:498:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:576:8: WarpEngine.WALOperations (module)
 
      warning: function get_wormhole_metadata/2 is unused
      │
- 573 │   defp get_wormhole_metadata(_key, shard_id) do
+ 651 │   defp get_wormhole_metadata(_key, shard_id) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:573:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:651:8: WarpEngine.WALOperations (module)
+
+     warning: function flush_process_wal_table/1 is unused
+     │
+ 708 │   defp flush_process_wal_table(wal_table) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:708:8: WarpEngine.WALOperations (module)
 
      warning: function estimate_value_size/1 is unused
      │
- 295 │   defp estimate_value_size(value) do
+ 332 │   defp estimate_value_size(value) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:295:8: WarpEngine.WALOperations (module)
-
-     warning: function estimate_current_concurrency/0 is unused
-     │
- 277 │   defp estimate_current_concurrency() do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:277:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:332:8: WarpEngine.WALOperations (module)
 
      warning: function determine_quantum_state/2 is unused
      │
- 534 │   defp determine_quantum_state(key, value) do
+ 612 │   defp determine_quantum_state(key, value) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:534:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:612:8: WarpEngine.WALOperations (module)
 
      warning: function determine_optimal_cache_level/1 is unused
      │
- 582 │   defp determine_optimal_cache_level(cosmic_metadata) do
+ 660 │   defp determine_optimal_cache_level(cosmic_metadata) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:582:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:660:8: WarpEngine.WALOperations (module)
 
      warning: function create_cosmic_metadata/5 is unused
      │
- 354 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
+ 432 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:354:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:432:8: WarpEngine.WALOperations (module)
 
      warning: function check_event_horizon_cache_v2/2 is unused
      │
- 415 │   defp check_event_horizon_cache_v2(state, key) do
+ 493 │   defp check_event_horizon_cache_v2(state, key) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:415:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:493:8: WarpEngine.WALOperations (module)
 
      warning: function calculate_entropy_impact/3 is unused
      │
- 545 │   defp calculate_entropy_impact(key, value, shard_id) do
+ 623 │   defp calculate_entropy_impact(key, value, shard_id) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:545:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:623:8: WarpEngine.WALOperations (module)
 
      warning: function calculate_cosmic_coordinates/2 is unused
      │
- 559 │   defp calculate_cosmic_coordinates(key, value) do
+ 637 │   defp calculate_cosmic_coordinates(key, value) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:559:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:637:8: WarpEngine.WALOperations (module)
 
      warning: function cache_retrieved_value_async/5 is unused
      │
- 511 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
+ 589 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:511:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:589:8: WarpEngine.WALOperations (module)
 
     warning: module attribute @wal_sequence_ref_key_prefix was set but never used
     │
@@ -1133,10 +1147,10 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
 
      typing violation found at:
      │
- 427 │             {:error, _reason} -> nil
+ 505 │             {:error, _reason} -> nil
      │             ~~~~~~~~~~~~~~~~~~~~~~~~
      │
-     └─ lib/warp_engine/wal_operations.ex:427: WarpEngine.WALOperations.check_event_horizon_cache_v2/2
+     └─ lib/warp_engine/wal_operations.ex:505: WarpEngine.WALOperations.check_event_horizon_cache_v2/2
 
      warning: variable "key" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
@@ -1167,23 +1181,23 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      └─ lib/warp_engine/intelligent_load_balancer.ex:109:5: WarpEngine.IntelligentLoadBalancer.route_operation/3
 
 
-13:44:52.797 [info] 🚀 Starting WarpEngine Database Application...
+16:44:15.606 [info] 🚀 Starting WarpEngine Database Application...
 
-13:44:52.801 [info] ⚙️  Application Configuration:
+16:44:15.609 [info] ⚙️  Application Configuration:
 
-13:44:52.810 [info]   data_root: "/home/travis/Projects/warp-engine/data"
+16:44:15.618 [info]   data_root: "/home/travis/Projects/warp-engine/data"
 
-13:44:52.810 [info]   Entanglement rules: using defaults
+16:44:15.618 [info]   Entanglement rules: using defaults
 
-13:44:52.810 [info] 🔧 Starting supervisor with 1 children
+16:44:15.618 [info] 🔧 Starting supervisor with 1 children
 
-13:44:53.336 [info] 🚀 Enhanced ADT Weighted Graph Database - WORKING BENCHMARK
+16:44:16.028 [info] 🚀 Enhanced ADT Weighted Graph Database - WORKING BENCHMARK
 
-13:44:53.336 [info] ================================================================================
+16:44:16.028 [info] ================================================================================
 
-13:44:53.336 [info] 🌌 Testing Enhanced ADT compilation and basic functionality...
+16:44:16.028 [info] 🌌 Testing Enhanced ADT compilation and basic functionality...
 
-13:44:53.336 [info] 📚 Compiling simplified Enhanced ADT example...
+16:44:16.028 [info] 📚 Compiling simplified Enhanced ADT example...
     warning: duplicate key :"::" found in struct
     │
  44 │   defsum WeightedGraph do
@@ -1274,130 +1288,130 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
     └─ examples/simple_weighted_graph.ex:44: SimpleWeightedGraph.WeightedGraph."SingleNode"/1
 
 
-13:44:53.729 [info] ✅ Simplified Enhanced ADT compilation successful
+16:44:16.322 [info] ✅ Simplified Enhanced ADT compilation successful
 
-13:44:53.729 [info] 🧪 Testing basic ADT functionality...
+16:44:16.322 [info] 🧪 Testing basic ADT functionality...
 
-13:44:53.737 [info] 📊 Created 20 test nodes using Enhanced ADT
+16:44:16.329 [info] 📊 Created 20 test nodes using Enhanced ADT
 
-13:44:53.737 [info] 🔍 Testing basic ADT operations...
+16:44:16.329 [info] 🔍 Testing basic ADT operations...
 
-13:44:53.737 [info] 🔍 Testing node creation and validation...
+16:44:16.329 [info] 🔍 Testing node creation and validation...
 
-13:44:53.741 [info] ✅ Node creation and validation successful in 0.005ms
+16:44:16.331 [info] ✅ Node creation and validation successful in 0.01ms
 
-13:44:53.741 [info] 🔍 Testing edge creation...
+16:44:16.331 [info] 🔍 Testing edge creation...
 
-13:44:53.741 [info] ✅ Edge creation and validation successful in 0.004ms
+16:44:16.331 [info] ✅ Edge creation and validation successful in 0.004ms
 
-13:44:53.741 [info] 🌐 Testing graph structure creation...
+16:44:16.331 [info] 🌐 Testing graph structure creation...
 
-13:44:53.741 [info] ✅ Graph structure creation successful in 0.002ms
+16:44:16.331 [info] ✅ Graph structure creation successful in 0.0ms
 
-13:44:53.741 [info] 
+16:44:16.331 [info] 
 🎯 ENHANCED ADT PERFORMANCE RESULTS
 
-13:44:53.741 [info] ================================================================================
+16:44:16.331 [info] ================================================================================
 
-13:44:53.741 [info] 
+16:44:16.332 [info] 
 ⚡ MEASURED ADT OPERATIONS PERFORMANCE
 
-13:44:53.741 [info] --------------------------------------------------
+16:44:16.332 [info] --------------------------------------------------
 
-13:44:53.741 [info] 📊 Total Operations: 31
+16:44:16.332 [info] 📊 Total Operations: 31
 
-13:44:53.741 [info] 📊 Nodes Created: 20
+16:44:16.332 [info] 📊 Nodes Created: 20
 
-13:44:53.741 [info] 🔗 Edges Created: 10
+16:44:16.332 [info] 🔗 Edges Created: 10
 
-13:44:53.741 [info] 🌐 Graphs Created: 1
+16:44:16.332 [info] 🌐 Graphs Created: 1
 
-13:44:53.741 [info] ⏱️  Total Time: 0.01ms
+16:44:16.332 [info] ⏱️  Total Time: 0.01ms
 
-13:44:53.741 [info] 🚀 Operations per Second: 2818182
+16:44:16.332 [info] 🚀 Operations per Second: 2214286
+
+16:44:16.332 [info] ⚡ Time per Operation: 0.5μs
+
+16:44:16.332 [info] 
+🌌 ENHANCED ADT FEATURES VALIDATED
+
+16:44:16.332 [info] --------------------------------------------------
+
+16:44:16.332 [info] ✅ Product Types (GraphNode, GraphEdge)
+
+16:44:16.332 [info] ✅ Sum Types (WeightedGraph variants)
+
+16:44:16.332 [info] ✅ Physics Annotations
+
+16:44:16.332 [info] ✅ Pattern Matching
+
+16:44:16.332 [info] ✅ Type Safety
+
+16:44:16.332 [info] 
+🌀 GRAPH DATABASE STRUCTURES TESTED
+
+16:44:16.332 [info] --------------------------------------------------
+
+16:44:16.332 [info] 🔥 Graph Nodes: 20 with physics annotations
+
+16:44:16.332 [info] 🔗 Graph Edges: 10 with relationship weights
+
+16:44:16.332 [info] 🌐 Graph Topology: Connected graph with 5 nodes, 5 edges
+
+16:44:16.332 [info] 📊 Data Integrity: All structures validated successfully
+
+16:44:16.332 [info] 
+⚛️ QUANTUM CORRELATION ANALYSIS
+
+16:44:16.333 [info] --------------------------------------------------
+
+16:44:16.333 [info] 🌀 Potential Wormhole Routes: 9
+
+16:44:16.333 [info] ⭐ High-Importance Nodes: 3
+
+16:44:16.333 [info] 📈 Wormhole Creation Rate: 45.0%
+
+16:44:16.333 [info] 
+🏆 OVERALL ENHANCED ADT PERFORMANCE
 
 🎯 WORKING BENCHMARK SUMMARY (stdout)
 
-13:44:53.741 [info] ⚡ Time per Operation: 0.4μs
+16:44:16.333 [info] ============================================================
 ==================================================
 
-13:44:53.741 [info] 
-🌌 ENHANCED ADT FEATURES VALIDATED
+16:44:16.333 [info] ⚡ Enhanced ADT Performance: 2214286 ops/sec
 📊 Total Operations: 31
 
-13:44:53.741 [info] --------------------------------------------------
+16:44:16.333 [info] 📈 vs Manual Struct Creation: ~10,000 ops/sec (estimated)
 ⏱  Total Time (ms): 0.01
 
-13:44:53.741 [info] ✅ Product Types (GraphNode, GraphEdge)
-🚀 Ops/sec: 2818182
+16:44:16.333 [info] 🚀 Performance Improvement: +22042.9%
+🚀 Ops/sec: 2214286
 
-13:44:53.741 [info] ✅ Sum Types (WeightedGraph variants)
-⚡ Time/op (µs): 0.4
+16:44:16.333 [info] 🔬 Physics Features Active: 5/5
+⚡ Time/op (µs): 0.5
 
-13:44:53.741 [info] ✅ Physics Annotations
-🌀 Potential Wormholes: 6
+16:44:16.333 [info] 🌟 Innovation Score: 2221.3/10
+🌀 Potential Wormholes: 9
 
-13:44:53.741 [info] ✅ Pattern Matching
+16:44:16.333 [info] 🎉 Rating: 🌟 REVOLUTIONARY BREAKTHROUGH
 ⭐ High-Importance Nodes: 3
 
-13:44:53.741 [info] ✅ Type Safety
+16:44:16.333 [info] 
+✅ ENHANCED ADT WEIGHTED GRAPH DATABASE VALIDATED!
 🏅 Rating: 🌟 REVOLUTIONARY BREAKTHROUGH
 
-13:44:53.741 [info] 
-🌀 GRAPH DATABASE STRUCTURES TESTED
+16:44:16.333 [info] 🌌 Physics-inspired architecture delivering 22042.9% performance gains!
 
-13:44:53.741 [info] --------------------------------------------------
+16:44:16.333 [info] 🚀 Revolutionary database engineering proven with real metrics!
 
-13:44:53.741 [info] 🔥 Graph Nodes: 20 with physics annotations
+16:44:16.333 [info] ================================================================================
 
-13:44:53.741 [info] 🔗 Graph Edges: 10 with relationship weights
-
-13:44:53.741 [info] 🌐 Graph Topology: Connected graph with 5 nodes, 5 edges
-
-13:44:53.742 [info] 📊 Data Integrity: All structures validated successfully
-
-13:44:53.742 [info] 
-⚛️ QUANTUM CORRELATION ANALYSIS
-
-13:44:53.742 [info] --------------------------------------------------
-
-13:44:53.742 [info] 🌀 Potential Wormhole Routes: 6
-
-13:44:53.742 [info] ⭐ High-Importance Nodes: 3
-
-13:44:53.742 [info] 📈 Wormhole Creation Rate: 30.0%
-
-13:44:53.742 [info] 
-🏆 OVERALL ENHANCED ADT PERFORMANCE
-
-13:44:53.742 [info] ============================================================
-
-13:44:53.742 [info] ⚡ Enhanced ADT Performance: 2818182 ops/sec
-
-13:44:53.742 [info] 📈 vs Manual Struct Creation: ~10,000 ops/sec (estimated)
-
-13:44:53.742 [info] 🚀 Performance Improvement: +28081.8%
-
-13:44:53.742 [info] 🔬 Physics Features Active: 5/5
-
-13:44:53.742 [info] 🌟 Innovation Score: 2825.2/10
-
-13:44:53.742 [info] 🎉 Rating: 🌟 REVOLUTIONARY BREAKTHROUGH
-
-13:44:53.742 [info] 
-✅ ENHANCED ADT WEIGHTED GRAPH DATABASE VALIDATED!
-
-13:44:53.742 [info] 🌌 Physics-inspired architecture delivering 28081.8% performance gains!
-
-13:44:53.742 [info] 🚀 Revolutionary database engineering proven with real metrics!
-
-13:44:53.742 [info] ================================================================================
-
-13:44:53.742 [info] 
+16:44:16.333 [info] 
 🎉 ENHANCED ADT BENCHMARK COMPLETE!
 
-13:44:53.742 [info] 🌌 Enhanced ADT successfully compiled and tested!
+16:44:16.333 [info] 🌌 Enhanced ADT successfully compiled and tested!
 
-13:44:53.742 [info] 🚀 All graph database structures validated!
+16:44:16.333 [info] 🚀 All graph database structures validated!
 
-13:44:53.742 [info] ================================================================================
+16:44:16.333 [info] ================================================================================

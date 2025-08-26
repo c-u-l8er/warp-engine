@@ -482,18 +482,17 @@ defmodule WarpEngine do
     # Initialize wormhole network for fast routing
     wormhole_network = if bench_mode, do: nil, else: create_wormhole_network()
 
-    # Phase 9.1: Connect to WALCoordinator system (per-shard WAL architecture)
+    # Phase 9.1: Connect to new lock-free WAL system (no more WALCoordinator)
     wal_enabled = Keyword.get(opts, :enable_wal, true) and not bench_mode
     wal_system = if wal_enabled do
-      # WALCoordinator is already started by the application supervisor
-      # Just verify it's running and get its PID
-      case Process.whereis(WarpEngine.WALCoordinator) do
+      # Use the new lock-free WAL system instead of WALCoordinator
+      case Process.whereis(WarpEngine.WAL) do
         nil ->
-          Logger.error("❌ WALCoordinator system not found - ensure it's in supervisor tree")
+          Logger.error("❌ WAL system not found - ensure it's in supervisor tree")
           nil
-        wal_coordinator_pid when is_pid(wal_coordinator_pid) ->
-          Logger.info("✅ Connected to WALCoordinator system (per-shard WAL architecture)")
-          wal_coordinator_pid
+        wal_pid when is_pid(wal_pid) ->
+          Logger.info("✅ Connected to lock-free WAL system")
+          wal_pid
       end
     else
       if bench_mode do

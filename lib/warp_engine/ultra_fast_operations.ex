@@ -163,7 +163,7 @@ defmodule WarpEngine.UltraFastOperations do
       }
 
       # Direct async WAL write (bypass WALCoordinator)
-      send_wal_entry_direct(shard_id, wal_entry)
+      ultra_fast_wal_append(shard_id, wal_entry)
     else
       # In bench mode, skip WAL writes for maximum performance
       Logger.debug("🏁 Bench mode: skipping WAL write for key: #{key}")
@@ -258,15 +258,27 @@ defmodule WarpEngine.UltraFastOperations do
 
   ## Private Implementation
 
+  # Get sequence number directly from atomic counter (bypass GenServer)
   defp get_ultra_fast_sequence(shard_id) do
-    # Use the existing per-shard atomic counter system
-    counter_ref = get_shard_counter_ref(shard_id)
-    :atomics.add_get(counter_ref, 1, 1)
+    # Check if WAL system exists before calling
+    case Process.whereis(WarpEngine.WAL) do
+      nil ->
+        # WAL not available, use simple counter
+        :erlang.phash2({:erlang.monotonic_time(), self()}, 1000000)
+      _ ->
+        # Use the new lock-free WAL system
+        ref = WarpEngine.WAL.get_sequence_counter()
+        :atomics.add_get(ref, 1, 1)
+    end
   end
 
+  # Direct async WAL write (bypass WALCoordinator)
+  defp ultra_fast_wal_append(shard_id, wal_entry) do
+    # Use the new lock-free WAL system
+    WarpEngine.WAL.async_append(wal_entry)
+  end
 
-
-    defp get_cached_shard_count() do
+  defp get_cached_shard_count() do
     # Cache shard count configuration to avoid repeated Application.get_env calls
     case Process.get(:cached_shard_count) do
       nil ->
@@ -302,17 +314,16 @@ defmodule WarpEngine.UltraFastOperations do
           Process.put(cache_key, counter_ref)
           counter_ref
         else
-          # Get the reference from the WAL shard process
-          # Check if WALCoordinator exists before calling
-          case Process.whereis(WarpEngine.WALCoordinator) do
+          # Get the reference from the new WAL system
+          case Process.whereis(WarpEngine.WAL) do
             nil ->
-              # WALCoordinator not available, use simple counter
+              # WAL not available, use simple counter
               counter_ref = :atomics.new(1, [])
               :atomics.put(counter_ref, 1, 1)
               Process.put(cache_key, counter_ref)
               counter_ref
             _pid ->
-              ref = WarpEngine.WALCoordinator.get_sequence_counter(shard_id)
+              ref = WarpEngine.WAL.get_sequence_counter()
               Process.put(cache_key, ref)
               ref
           end
@@ -323,35 +334,14 @@ defmodule WarpEngine.UltraFastOperations do
   end
 
   defp send_wal_entry_direct(shard_id, wal_entry) do
-    # Send WAL entry directly to shard process (bypass coordinator)
-    process_name = case shard_id do
-      # Legacy 3-shard system
-      :hot_data -> :wal_shard_hot_data
-      :warm_data -> :wal_shard_warm_data
-      :cold_data -> :wal_shard_cold_data
-      # Numbered shard system
-      :shard_0 -> :wal_shard_0
-      :shard_1 -> :wal_shard_1
-      :shard_2 -> :wal_shard_2
-      :shard_3 -> :wal_shard_3
-      :shard_4 -> :wal_shard_4
-      :shard_5 -> :wal_shard_5
-      :shard_6 -> :wal_shard_6
-      :shard_7 -> :wal_shard_7
-      :shard_8 -> :wal_shard_8
-      :shard_9 -> :wal_shard_9
-      :shard_10 -> :wal_shard_10
-      :shard_11 -> :wal_shard_11
-      _ -> :"wal_shard_#{shard_id}"
-    end
-
-    case Process.whereis(process_name) do
+    # Send WAL entry directly to the new WAL system (bypass coordinator)
+    case Process.whereis(WarpEngine.WAL) do
       nil ->
-        # Fallback: use coordinator if direct process not found
-        WarpEngine.WALCoordinator.async_append(shard_id, wal_entry)
-      pid ->
-        # Direct send to WAL shard process - use the correct message format
-        send(pid, {:append, wal_entry})
+        # WAL not available, skip WAL write
+        :ok
+      _pid ->
+        # Use the new lock-free WAL system
+        WarpEngine.WAL.async_append(wal_entry)
     end
   end
 

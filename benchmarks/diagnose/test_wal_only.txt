@@ -1,0 +1,3295 @@
+     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 272 │     Enum.each(operations, fn {_op_type, key, _value, opts} ->
+     │                                                      ~
+     │
+     └─ lib/warp_engine/operation_batcher.ex:272:54: WarpEngine.OperationBatcher.execute_operation_batch/3
+
+     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 279 │     Enum.each(operations, fn {_op_type, key, _value, opts} ->
+     │                                                      ~
+     │
+     └─ lib/warp_engine/operation_batcher.ex:279:54: WarpEngine.OperationBatcher.execute_operation_batch/3
+
+    warning: module attribute @default_fsync_strategy was set but never used
+    │
+ 30 │   @default_fsync_strategy :adaptive  # :immediate, :batch, :adaptive
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/modern_wal.ex:30: WarpEngine.ModernWAL (module)
+
+    warning: module attribute @max_shards was set but never used
+    │
+ 29 │   @max_shards 48  # Support up to 48 shards for maximum concurrency
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/modern_wal.ex:29: WarpEngine.ModernWAL (module)
+
+     warning: the underscored variable "_meta" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore
+     │
+ 548 │       {module_name, _meta, args}
+     │                     ~
+     │
+     └─ lib/enhanced_adt/bend.ex:548:21: EnhancedADT.Bend.transform_bend_adt_pattern/1
+
+     warning: function update_bend_context/2 is unused
+     │
+ 427 │   defp update_bend_context(context, updates) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:427:8: EnhancedADT.Bend (module)
+
+     warning: function transform_elegant_bend_clause/1 is unused
+     │
+ 526 │   defp transform_elegant_bend_clause({:->, meta, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:526:8: EnhancedADT.Bend (module)
+
+     warning: function transform_elegant_adt_clauses_for_bend/1 is unused
+     │
+ 517 │   defp transform_elegant_adt_clauses_for_bend(clauses) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:517:8: EnhancedADT.Bend (module)
+
+     warning: function transform_bend_adt_pattern/1 is unused
+     │
+ 532 │   defp transform_bend_adt_pattern({module_name, _meta, args}) when is_atom(module_name) and is_list(args) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:532:8: EnhancedADT.Bend (module)
+
+     warning: function record_network_connections/3 is unused
+     │
+ 431 │   defp record_network_connections(context, _node_id, _result) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:431:8: EnhancedADT.Bend (module)
+
+     warning: function inject_network_generation/2 is unused
+     │
+ 245 │   defp inject_network_generation(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:245:8: EnhancedADT.Bend (module)
+
+     warning: function inject_fork_tracking/1 is unused
+     │
+ 283 │   defp inject_fork_tracking(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:283:8: EnhancedADT.Bend (module)
+
+     warning: function get_bend_module_field_names/1 is unused
+     │
+ 558 │   defp get_bend_module_field_names(variant_name) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:558:8: EnhancedADT.Bend (module)
+
+     warning: function generate_unique_node_id/0 is unused
+     │
+ 423 │   defp generate_unique_node_id() do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:423:8: EnhancedADT.Bend (module)
+
+     warning: function find_recursive_calls_in_ast/1 is unused
+     │
+ 405 │   defp find_recursive_calls_in_ast(_body), do: []  # Simplified
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:405:8: EnhancedADT.Bend (module)
+
+     warning: function find_fork_calls_in_ast/1 is unused
+     │
+ 408 │   defp find_fork_calls_in_ast(_body), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:408:8: EnhancedADT.Bend (module)
+
+     warning: function find_connection_points/2 is unused
+     │
+ 410 │   defp find_connection_points(_patterns, _body), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:410:8: EnhancedADT.Bend (module)
+
+     warning: function extract_topology_hints/2 is unused
+     │
+ 412 │   defp extract_topology_hints(_patterns, _body), do: %{}
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:412:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_recursion_depth/1 is unused
+     │
+ 407 │   defp estimate_recursion_depth(_calls), do: 1
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:407:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_node_count/2 is unused
+     │
+ 416 │   defp estimate_node_count(fork_count, depth), do: fork_count * depth
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:416:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_max_recursion_depth/1 is unused
+     │
+ 415 │   defp estimate_max_recursion_depth(_body), do: 1
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:415:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_connection_count/1 is unused
+     │
+ 417 │   defp estimate_connection_count(fork_count), do: fork_count * 2
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:417:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_body_with_network_tracking/2 is unused
+     │
+ 274 │   defp enhance_body_with_network_tracking(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:274:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_bend_clauses/2 is unused
+     │
+ 225 │   defp enhance_bend_clauses(clauses, bend_analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:225:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_bend_clause/2 is unused
+     │
+ 238 │   defp enhance_bend_clause({:->, meta, [pattern_list, body]}, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:238:8: EnhancedADT.Bend (module)
+
+     warning: function determine_optimization_priority/2 is unused
+     │
+ 418 │   defp determine_optimization_priority(fork_count, depth), do: if(fork_count * depth > 10, do: :high, else: :normal)
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:418:8: EnhancedADT.Bend (module)
+
+     warning: function detect_recursive_calls/1 is unused
+     │
+ 181 │   defp detect_recursive_calls(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:181:8: EnhancedADT.Bend (module)
+
+     warning: function detect_fork_operations/1 is unused
+     │
+ 191 │   defp detect_fork_operations(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:191:8: EnhancedADT.Bend (module)
+
+     warning: function count_fork_operations/1 is unused
+     │
+ 414 │   defp count_fork_operations(_body), do: 0
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:414:8: EnhancedADT.Bend (module)
+
+     warning: function contains_depth_check?/1 is unused
+     │
+ 419 │   defp contains_depth_check?(_guard), do: false
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:419:8: EnhancedADT.Bend (module)
+
+     warning: function classify_recursive_calls/1 is unused
+     │
+ 406 │   defp classify_recursive_calls(_calls), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:406:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_optimization_potential/2 is unused
+     │
+ 413 │   defp calculate_optimization_potential(_patterns, _body), do: 0.5
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:413:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_network_complexity/1 is unused
+     │
+ 211 │   defp calculate_network_complexity(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:211:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_fork_connection_strength/3 is unused
+     │
+ 435 │   defp calculate_fork_connection_strength(_source, _target, _value) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:435:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_wormhole_opportunities/2 is unused
+     │
+ 201 │   defp analyze_wormhole_opportunities(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:201:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_strength_indicators/1 is unused
+     │
+ 411 │   defp analyze_strength_indicators(_body), do: %{}
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:411:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_fork_patterns/1 is unused
+     │
+ 409 │   defp analyze_fork_patterns(_calls), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:409:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_pattern/1 is unused
+     │
+ 131 │   defp analyze_bend_pattern(pattern) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:131:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_clauses/1 is unused
+     │
+ 108 │   defp analyze_bend_clauses(clauses) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:108:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_clause/1 is unused
+     │
+ 115 │   defp analyze_bend_clause({:->, _, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:115:8: EnhancedADT.Bend (module)
+
+      warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+      │
+ 1118 │         missing_tables = [table_name | missing_tables]
+      │         ~
+      │
+      └─ lib/warp_engine.ex:1118:9: WarpEngine.verify_tables_created/1
+
+      warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+      │
+ 1126 │         missing_tables = [table_name | missing_tables]
+      │         ~
+      │
+      └─ lib/warp_engine.ex:1126:9: WarpEngine.verify_tables_created/1
+
+      warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1704 │         {:ok, value, shard_id} ->
+      │                      ~
+      │
+      └─ lib/warp_engine.ex:1704:22: WarpEngine.handle_call_legacy_quantum_get/2
+
+      warning: function update_quantum_metrics/3 is unused
+      │
+ 1279 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1279:8: WarpEngine (module)
+
+      warning: function store_in_event_horizon_cache/5 is unused
+      │
+ 1361 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1361:8: WarpEngine (module)
+
+      warning: function refresh_cached_state/0 is unused
+      │
+ 1833 │   defp refresh_cached_state() do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1833:8: WarpEngine (module)
+
+      warning: function get_current_state/0 is unused
+      │
+ 1857 │   defp get_current_state() do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1857:8: WarpEngine (module)
+
+warning: struct :already_exists is undefined (module :already_exists is not available or is yet to be defined)
+└─ lib/warp_engine.ex: WarpEngine.create_all_ets_tables_eagerly/0
+
+     warning: function atomize_keys/1 is unused
+     │
+ 288 │   defp atomize_keys(map) when is_map(map) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_entry.ex:288:8: WarpEngine.WAL.Entry (module)
+
+      warning: variable "header" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1082 │         <<batch_size::32, _timestamp::64, _shard_size::16, _shard_binary::binary>> = header ->
+      │                                                                                      ~
+      │
+      └─ lib/warp_engine/wal_shard.ex:1082:86: WarpEngine.WALShard.load_shard_wal_entries_from_file/1
+
+    warning: module attribute @max_buffer_ops was set but never used
+    │
+ 57 │   @max_buffer_ops 25000       # Maximum buffer size (increased from 8192)
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_shard.ex:57: WarpEngine.WALShard (module)
+
+    warning: module attribute @flush_batch_size was set but never used
+    │
+ 56 │   @flush_batch_size 1024
+    │   ~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_shard.ex:56: WarpEngine.WALShard (module)
+
+    warning: module attribute @write_batch_size was set but never used
+    │
+ 54 │   @write_batch_size 5000     # Operations per batch write (increased from 1000)
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_shard.ex:54: WarpEngine.WALShard (module)
+
+     warning: the following clause will never match:
+
+         {:error, reason}
+
+     because it attempts to match on the result of:
+
+         replay_shard_wal_entry(entry)
+
+     which has type:
+
+         dynamic(:ok)
+
+     typing violation found at:
+     │
+ 790 │                     {:error, reason} ->
+     │                     ~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/warp_engine/wal_shard.ex:790: WarpEngine.WALShard.perform_full_shard_wal_recovery/2
+
+      warning: the following clause will never match:
+
+          {:error, reason}
+
+      because it attempts to match on the result of:
+
+          replay_shard_wal_entry(entry)
+
+      which has type:
+
+          dynamic(:ok)
+
+      typing violation found at:
+      │
+ 1003 │                 {:error, reason} ->
+      │                 ~~~~~~~~~~~~~~~~~~~
+      │
+      └─ lib/warp_engine/wal_shard.ex:1003: WarpEngine.WALShard.replay_shard_wal_after_checkpoint/3
+
+      warning: :file.position/3 is undefined or private. Did you mean:
+
+            * position/2
+
+      │
+ 1085 │           :ok = :file.position(file_handle, :cur, batch_size) # Move position forward
+      │                       ~
+      │
+      └─ lib/warp_engine/wal_shard.ex:1085:23: WarpEngine.WALShard.load_shard_wal_entries_from_file/1
+
+     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 178 │   def ultra_fast_get(key, opts \\ []) do
+     │                           ~~~~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:178:27: WarpEngine.UltraFastOperations.ultra_fast_get/2
+
+     warning: WarpEngine.WormholeRouter.find_route/2 is undefined or private. Did you mean:
+
+           * find_route/3
+           * find_route/4
+
+     │
+ 390 │     case WarpEngine.WormholeRouter.find_route(key, "*") do
+     │                                    ~
+     │
+     └─ lib/enhanced_adt/islab_integration.ex:390:36: EnhancedADT.WarpEngineIntegration.Translators.attempt_wormhole_retrieval/1
+
+     warning: WarpEngine.WormholeRouter.traverse_route_for_data/1 is undefined or private
+     │
+ 393 │         case WarpEngine.WormholeRouter.traverse_route_for_data(route) do
+     │                                        ~
+     │
+     └─ lib/enhanced_adt/islab_integration.ex:393:40: EnhancedADT.WarpEngineIntegration.Translators.attempt_wormhole_retrieval/1
+
+     warning: the following clause will never match:
+
+         :high_frequency
+
+     because it attempts to match on the result of:
+
+         analyze_route_pattern(route_candidate)
+
+     which has type:
+
+         dynamic(:medium_frequency)
+
+     typing violation found at:
+     │
+ 149 │       :high_frequency -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:149: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
+
+     warning: the following clause will never match:
+
+         :low_frequency
+
+     because it attempts to match on the result of:
+
+         analyze_route_pattern(route_candidate)
+
+     which has type:
+
+         dynamic(:medium_frequency)
+
+     typing violation found at:
+     │
+ 151 │       :low_frequency -> 0.3
+     │       ~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:151: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
+
+     warning: the following clause will never match:
+
+         :unknown
+
+     because it attempts to match on the result of:
+
+         analyze_route_pattern(route_candidate)
+
+     which has type:
+
+         dynamic(:medium_frequency)
+
+     typing violation found at:
+     │
+ 152 │       :unknown -> 0.4
+     │       ~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:152: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
+
+     warning: the following clause will never match:
+
+         :simple
+
+     because it attempts to match on the result of:
+
+         estimate_route_complexity(route_candidate)
+
+     which has type:
+
+         dynamic(:moderate)
+
+     typing violation found at:
+     │
+ 165 │       :simple -> 0.05
+     │       ~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:165: EnhancedADT.WormholeAnalyzer.estimate_maintenance_cost/1
+
+     warning: the following clause will never match:
+
+         :complex
+
+     because it attempts to match on the result of:
+
+         estimate_route_complexity(route_candidate)
+
+     which has type:
+
+         dynamic(:moderate)
+
+     typing violation found at:
+     │
+ 167 │       :complex -> 0.2
+     │       ~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/wormhole_analyzer.ex:167: EnhancedADT.WormholeAnalyzer.estimate_maintenance_cost/1
+
+     warning: variable "meta1" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 162 │   defp transform_single_physics_field({:"::", meta1, [field_name, {:"::", meta2, [type_spec, [physics: physics_annotation]]}]}) do
+     │                                               ~~~~~
+     │
+     └─ lib/enhanced_adt.ex:162:47: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: variable "meta2" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 162 │   defp transform_single_physics_field({:"::", meta1, [field_name, {:"::", meta2, [type_spec, [physics: physics_annotation]]}]}) do
+     │                                                                           ~~~~~
+     │
+     └─ lib/enhanced_adt.ex:162:75: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: variable "meta" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 168 │   defp transform_single_physics_field({{:"::", meta, [field_name, type_spec]}, [physics: physics_annotation]}) do
+     │                                                ~~~~
+     │
+     └─ lib/enhanced_adt.ex:168:48: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: function extract_variant_name/1 is unused
+     │
+ 242 │   defp extract_variant_name({:__aliases__, _, [variant_name]}) when is_atom(variant_name), do: variant_name
+     │        ~
+     │
+     └─ lib/enhanced_adt.ex:242:8: EnhancedADT.ProductType (module)
+
+     warning: function parse_elegant_variant_fields/1 is unused
+     │
+ 450 │   defp parse_elegant_variant_fields(args) do
+     │        ~
+     │
+     └─ lib/enhanced_adt.ex:450:8: EnhancedADT.SumType (module)
+
+    warning: module attribute @max_buffer_size was set but never used
+    │
+ 30 │   @max_buffer_size 50000       # Large buffer for maximum batching
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/modern_wal_shard.ex:30: WarpEngine.ModernWALShard (module)
+
+    warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+    │
+ 60 │     defmacro fold(value, opts \\ [], do: clauses) do
+    │                          ~~~~
+    │
+    └─ lib/enhanced_adt/fold.ex:60:26: EnhancedADT.Fold.fold/3
+
+     warning: the underscored variable "_meta" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore
+     │
+ 433 │       {module_name, _meta, args}
+     │                     ~
+     │
+     └─ lib/enhanced_adt/fold.ex:433:21: EnhancedADT.Fold.transform_adt_pattern/1
+
+     warning: defp transform_adt_pattern/1 is private, @doc attribute is always discarded for private functions/macros/types
+     │
+ 411 │     @doc """
+     │     ~~~~~~~~
+     │
+     └─ lib/enhanced_adt/fold.ex:411: EnhancedADT.Fold.transform_adt_pattern/1
+
+     warning: function wrap_with_state_management/2 is unused
+     │
+ 303 │   defp wrap_with_state_management(body, mode) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:303:8: EnhancedADT.Fold (module)
+
+     warning: function inject_wormhole_analysis/2 is unused
+     │
+ 273 │   defp inject_wormhole_analysis(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:273:8: EnhancedADT.Fold (module)
+
+     warning: function inject_warp_engine_operations/3 is unused
+     │
+ 256 │   defp inject_warp_engine_operations(body, analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:256:8: EnhancedADT.Fold (module)
+
+     warning: function inject_quantum_correlation/2 is unused
+     │
+ 288 │   defp inject_quantum_correlation(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:288:8: EnhancedADT.Fold (module)
+
+     warning: function extract_types_from_pattern/1 is unused
+     │
+ 380 │   defp extract_types_from_pattern({module_name, _, _args}) when is_atom(module_name) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:380:8: EnhancedADT.Fold (module)
+
+     warning: function extract_physics_hints/2 is unused
+     │
+ 189 │   defp extract_physics_hints(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:189:8: EnhancedADT.Fold (module)
+
+     warning: function extract_pattern_types/1 is unused
+     │
+ 376 │   defp extract_pattern_types(patterns) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:376:8: EnhancedADT.Fold (module)
+
+     warning: function extract_body_references/1 is unused
+     │
+ 385 │   defp extract_body_references(_body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:385:8: EnhancedADT.Fold (module)
+
+     warning: function enhance_single_clause/3 is unused
+     │
+ 220 │   defp enhance_single_clause({:->, meta, [pattern_list, body]}, analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:220:8: EnhancedADT.Fold (module)
+
+     warning: function enhance_fold_clauses/3 is unused
+     │
+ 200 │   defp enhance_fold_clauses(clauses, clause_analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:200:8: EnhancedADT.Fold (module)
+
+     warning: function determine_access_pattern/2 is unused
+     │
+ 391 │   defp determine_access_pattern(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:391:8: EnhancedADT.Fold (module)
+
+     warning: function detect_cross_references/2 is unused
+     │
+ 172 │   defp detect_cross_references(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:172:8: EnhancedADT.Fold (module)
+
+     warning: function detect_adt_operations/1 is unused
+     │
+ 161 │   defp detect_adt_operations(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:161:8: EnhancedADT.Fold (module)
+
+     warning: function contains_storage_calls?/1 is unused
+     │
+ 347 │   defp contains_storage_calls?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:347:8: EnhancedADT.Fold (module)
+
+     warning: function contains_retrieval_calls?/1 is unused
+     │
+ 355 │   defp contains_retrieval_calls?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:355:8: EnhancedADT.Fold (module)
+
+     warning: function contains_cross_reference_patterns?/1 is unused
+     │
+ 362 │   defp contains_cross_reference_patterns?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:362:8: EnhancedADT.Fold (module)
+
+     warning: function calculate_operation_complexity/1 is unused
+     │
+ 370 │   defp calculate_operation_complexity(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:370:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_temporal_characteristics/1 is unused
+     │
+ 401 │   defp analyze_temporal_characteristics(_body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:401:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_single_clause/1 is unused
+     │
+ 104 │   defp analyze_single_clause({:->, _, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:104:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_pattern/1 is unused
+     │
+ 119 │   defp analyze_pattern(pattern) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:119:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_gravitational_hints/2 is unused
+     │
+ 406 │   defp analyze_gravitational_hints(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:406:8: EnhancedADT.Fold (module)
+
+    warning: function analyze_fold_clauses/1 is unused
+    │
+ 96 │   defp analyze_fold_clauses(clauses) do
+    │        ~
+    │
+    └─ lib/enhanced_adt/fold.ex:96:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_data_locality/2 is unused
+     │
+ 396 │   defp analyze_data_locality(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:396:8: EnhancedADT.Fold (module)
+
+     warning: the following clause will never match:
+
+         :strongly_related
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 170 │       :strongly_related -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:170: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :weakly_related
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 172 │       :weakly_related -> 0.4
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:172: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :unrelated
+
+     because it attempts to match on the result of:
+
+         analyze_data_relationship(candidate)
+
+     which has type:
+
+         dynamic(:moderately_related)
+
+     typing violation found at:
+     │
+ 173 │       :unrelated -> 0.1
+     │       ~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:173: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+
+     warning: the following clause will never match:
+
+         :always_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 180 │       :always_together -> 0.95
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:180: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :frequently_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 181 │       :frequently_together -> 0.8
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:181: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :rarely_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 183 │       :rarely_together -> 0.2
+     │       ~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:183: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :never_together
+
+     because it attempts to match on the result of:
+
+         analyze_access_patterns(candidate)
+
+     which has type:
+
+         dynamic(:sometimes_together)
+
+     typing violation found at:
+     │
+ 184 │       :never_together -> 0.0
+     │       ~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:184: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+
+     warning: the following clause will never match:
+
+         :very_stable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 191 │       :very_stable -> 0.9
+     │       ~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:191: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: the following clause will never match:
+
+         :moderately_stable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 193 │       :moderately_stable -> 0.5
+     │       ~~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:193: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: the following clause will never match:
+
+         :unstable
+
+     because it attempts to match on the result of:
+
+         analyze_coherence_factors(candidate)
+
+     which has type:
+
+         dynamic(:stable)
+
+     typing violation found at:
+     │
+ 194 │       :unstable -> 0.3
+     │       ~~~~~~~~~~~~~~~~
+     │
+     └─ lib/enhanced_adt/quantum_analyzer.ex:194: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+
+     warning: Logger.warn/1 is deprecated. Use Logger.warning/2 instead
+     │
+ 693 │       Logger.warn("Process WAL table #{wal_table} is getting too large. Flushing...")
+     │              ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:693:14: WarpEngine.WALOperations.flush_process_wal_table/1
+
+     warning: function update_wormhole_usage_patterns/3 is unused
+     │
+ 647 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:647:8: WarpEngine.WALOperations (module)
+
+     warning: function update_shard_statistics/4 is unused
+     │
+ 657 │   defp update_shard_statistics(shard, operation, _key, _value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:657:8: WarpEngine.WALOperations (module)
+
+     warning: function update_physics_intelligence_async/4 is unused
+     │
+ 426 │   defp update_physics_intelligence_async(key, _value, _cosmic_metadata, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:426:8: WarpEngine.WALOperations (module)
+
+     warning: function update_get_physics_intelligence_async/5 is unused
+     │
+ 457 │   defp update_get_physics_intelligence_async(key, _value, _shard_id, _cosmic_metadata, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:457:8: WarpEngine.WALOperations (module)
+
+     warning: function update_access_patterns_async/3 is unused
+     │
+ 585 │   defp update_access_patterns_async(key, access_type, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:585:8: WarpEngine.WALOperations (module)
+
+     warning: function ultra_fast_route_data/3 is unused
+     │
+ 283 │   defp ultra_fast_route_data(key, _value, opts) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:283:8: WarpEngine.WALOperations (module)
+
+     warning: function populate_event_horizon_cache_async/4 is unused
+     │
+ 554 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:554:8: WarpEngine.WALOperations (module)
+
+     warning: function get_wormhole_metadata/2 is unused
+     │
+ 629 │   defp get_wormhole_metadata(_key, shard_id) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:629:8: WarpEngine.WALOperations (module)
+
+     warning: function flush_process_wal_table/1 is unused
+     │
+ 686 │   defp flush_process_wal_table(wal_table) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:686:8: WarpEngine.WALOperations (module)
+
+     warning: function estimate_value_size/1 is unused
+     │
+ 310 │   defp estimate_value_size(value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:310:8: WarpEngine.WALOperations (module)
+
+     warning: function determine_quantum_state/2 is unused
+     │
+ 590 │   defp determine_quantum_state(key, value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:590:8: WarpEngine.WALOperations (module)
+
+     warning: function determine_optimal_cache_level/1 is unused
+     │
+ 638 │   defp determine_optimal_cache_level(cosmic_metadata) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:638:8: WarpEngine.WALOperations (module)
+
+     warning: function create_cosmic_metadata/5 is unused
+     │
+ 410 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:410:8: WarpEngine.WALOperations (module)
+
+     warning: function check_event_horizon_cache_v2/2 is unused
+     │
+ 471 │   defp check_event_horizon_cache_v2(state, key) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:471:8: WarpEngine.WALOperations (module)
+
+     warning: function calculate_entropy_impact/3 is unused
+     │
+ 601 │   defp calculate_entropy_impact(key, value, shard_id) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:601:8: WarpEngine.WALOperations (module)
+
+     warning: function calculate_cosmic_coordinates/2 is unused
+     │
+ 615 │   defp calculate_cosmic_coordinates(key, value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:615:8: WarpEngine.WALOperations (module)
+
+     warning: function cache_retrieved_value_async/5 is unused
+     │
+ 567 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:567:8: WarpEngine.WALOperations (module)
+
+    warning: module attribute @wal_sequence_ref_key_prefix was set but never used
+    │
+ 31 │   @wal_sequence_ref_key_prefix :wal_shard_sequence_counter_cache
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_operations.ex:31: WarpEngine.WALOperations (module)
+
+    warning: unused alias WALEntry
+    │
+ 28 │   alias WarpEngine.WAL.Entry, as: WALEntry
+    │   ~
+    │
+    └─ lib/warp_engine/wal_operations.ex:28:3
+
+     warning: WarpEngine.WALCoordinator.fire_and_forget_append/5 is undefined (module WarpEngine.WALCoordinator is not available or is yet to be defined)
+     │
+ 232 │           WALCoordinator.fire_and_forget_append(shard_id, :delete, key, nil, sequence_number)
+     │                          ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:232:26: WarpEngine.WALOperations.cosmic_delete_v2/2
+
+     warning: WarpEngine.WALCoordinator.get_sequence_counter/1 is undefined (module WarpEngine.WALCoordinator is not available or is yet to be defined)
+     │
+ 367 │       counter_ref = WALCoordinator.get_sequence_counter(shard_id)
+     │                                    ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:367:36: WarpEngine.WALOperations.get_fresh_counter/1
+
+     warning: the following clause will never match:
+
+         {:error, _reason}
+
+     because it attempts to match on the result of:
+
+         WarpEngine.EventHorizonCache.get(cache, key)
+
+     which has type:
+
+         dynamic(
+           {:miss, %{..., performance_metrics: term()}} or
+             {:ok, term(), %{..., performance_metrics: term()},
+              %{
+                cache_level: term(),
+                data_decompressed: boolean(),
+                dilated_operation_time: integer(),
+                promoted: boolean(),
+                time_dilation_factor: term(),
+                wall_clock_time: float() or integer()
+              }}
+         )
+
+     typing violation found at:
+     │
+ 483 │             {:error, _reason} -> nil
+     │             ~~~~~~~~~~~~~~~~~~~~~~~~
+     │
+     └─ lib/warp_engine/wal_operations.ex:483: WarpEngine.WALOperations.check_event_horizon_cache_v2/2
+
+     warning: variable "key" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 105 │   def route_operation(key, operation_type, metadata) do
+     │                       ~~~
+     │
+     └─ lib/warp_engine/intelligent_load_balancer.ex:105:23: WarpEngine.IntelligentLoadBalancer.route_operation/3
+
+     warning: variable "metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 105 │   def route_operation(key, operation_type, metadata) do
+     │                                            ~~~~~~~~
+     │
+     └─ lib/warp_engine/intelligent_load_balancer.ex:105:44: WarpEngine.IntelligentLoadBalancer.route_operation/3
+
+     warning: variable "operation_type" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 105 │   def route_operation(key, operation_type, metadata) do
+     │                            ~~~~~~~~~~~~~~
+     │
+     └─ lib/warp_engine/intelligent_load_balancer.ex:105:28: WarpEngine.IntelligentLoadBalancer.route_operation/3
+
+     warning: variable "shard_ids" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 109 │     shard_ids = get_shard_ids()
+     │     ~~~~~~~~~
+     │
+     └─ lib/warp_engine/intelligent_load_balancer.ex:109:5: WarpEngine.IntelligentLoadBalancer.route_operation/3
+
+
+16:22:38.790 [info] 🚀 Starting WarpEngine Database Application...
+
+16:22:38.793 [info] ⚙️  Application Configuration:
+
+16:22:38.801 [info]   data_root: "/home/travis/Projects/warp-engine/data"
+
+16:22:38.801 [info]   Entanglement rules: using defaults
+
+16:22:38.801 [info] 🔧 Starting supervisor with 1 children
+    warning: variable "keyset" is unused (if the variable is not meant to be used, prefix it with an underscore)
+    │
+ 23 │ keyset = 10000
+    │ ~~~~~~
+    │
+    └─ benchmarks/diagnose/test_wal_only.exs:23:1
+
+
+16:22:39.227 [info] 🛑 Stopping WarpEngine Database Application...
+
+16:22:39.227 [info] 🌌 WarpEngine Database universe has been gracefully shut down
+
+16:22:39.228 [notice] Application warp_engine exited: :stopped
+🔧 WAL-Only Benchmark Configuration:
+   bench_mode: false
+   use_numbered_shards: true
+   num_numbered_shards: 24
+   Concurrency levels: 1,2,4,6,12,24
+
+16:22:39.335 [info] 🚀 Starting WarpEngine Database Application...
+
+16:22:39.335 [info] ⚙️  Application Configuration:
+
+16:22:39.335 [info]   data_root: "/home/travis/Projects/warp-engine/data"
+
+16:22:39.335 [info]   Entanglement rules: using defaults
+
+16:22:39.335 [info] 🔧 Starting supervisor with 2 children
+
+16:22:39.335 [info] 🚀 Initializing WAL Persistence Revolution...
+
+16:22:39.335 [info] 📁 WAL data_root: /home/travis/Projects/warp-engine/data
+
+16:22:39.335 [info] 📁 Creating WAL directory: /home/travis/Projects/warp-engine/data/wal
+
+16:22:39.335 [info] 📄 Opening WAL file: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
+
+16:22:39.336 [info] ⚡ Setting up atomic counter...
+
+16:22:39.336 [info] 🏗️ Building WAL state...
+
+16:22:39.336 [info] ✅ WAL system initialized: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
+
+16:22:39.336 [info] ⚡ Ready for 250,000+ ops/second performance!
+
+16:22:39.336 [info] 🚀 Initializing WarpEngine computational universe...
+
+16:22:39.340 [info] 🌌 Initializing cosmic filesystem structure...
+
+16:22:39.353 [info] ✨ Cosmic structure ready at /home/travis/Projects/warp-engine/data
+
+16:22:39.358 [info] ⚛️  Initializing quantum entanglement system...
+
+16:22:39.358 [info] ✨ Quantum entanglement system ready for superposition
+
+16:22:39.358 [info] 🌌 Initializing Phase 3: Spacetime Sharding System...
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_0 with strong consistency
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_1 with strong consistency
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_2 with strong consistency
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_3 with strong consistency
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_4 with eventual consistency
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_5 with eventual consistency
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_6 with eventual consistency
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_7 with eventual consistency
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_8 with weak consistency
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_9 with weak consistency
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_10 with weak consistency
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_11 with weak consistency
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_12 with weak consistency
+
+16:22:39.359 [info] 🌌 Created spacetime shard: shard_13 with weak consistency
+
+16:22:39.360 [info] 🌌 Created spacetime shard: shard_14 with weak consistency
+
+16:22:39.360 [info] 🌌 Created spacetime shard: shard_15 with weak consistency
+
+16:22:39.360 [info] 🌌 Created spacetime shard: shard_16 with weak consistency
+
+16:22:39.360 [info] 🌌 Created spacetime shard: shard_17 with weak consistency
+
+16:22:39.360 [info] 🌌 Created spacetime shard: shard_18 with weak consistency
+
+16:22:39.360 [info] 🌌 Created spacetime shard: shard_19 with weak consistency
+
+16:22:39.360 [info] 🌌 Created spacetime shard: shard_20 with weak consistency
+
+16:22:39.360 [info] 🌌 Created spacetime shard: shard_21 with weak consistency
+
+16:22:39.360 [info] 🌌 Created spacetime shard: shard_22 with weak consistency
+
+16:22:39.360 [info] 🌌 Created spacetime shard: shard_23 with weak consistency
+
+16:22:39.361 [info] 🌌 Initializing gravitational routing system with 24 shards
+
+16:22:39.361 [info] ✨ Gravitational router initialized with gravitational algorithm
+
+16:22:39.361 [info] ✨ Phase 3 spacetime sharding system ready
+
+16:22:39.361 [info] 🕳️  Initializing Phase 4: Event Horizon Cache System...
+
+16:22:39.366 [info] 🕳️  Creating Event Horizon Cache: hot_data_cache
+
+16:22:39.367 [info] ✨ Event Horizon Cache hot_data_cache ready - Schwarzschild radius: 10000
+
+16:22:39.367 [info] 🕳️  Creating Event Horizon Cache: warm_data_cache
+
+16:22:39.367 [info] ✨ Event Horizon Cache warm_data_cache ready - Schwarzschild radius: 5000
+
+16:22:39.367 [info] 🕳️  Creating Event Horizon Cache: cold_data_cache
+
+16:22:39.367 [info] ✨ Event Horizon Cache cold_data_cache ready - Schwarzschild radius: 2000
+
+16:22:39.367 [info] 🕳️  Creating Event Horizon Cache: universal_cache
+
+16:22:39.368 [info] ✨ Event Horizon Cache universal_cache ready - Schwarzschild radius: 20000
+
+16:22:39.368 [info] ✨ Phase 4 Event Horizon Cache System ready - 4 caches active
+
+16:22:39.368 [info] 🌡️  Initializing Phase 5: Entropy Monitoring & Thermodynamics...
+
+16:22:39.383 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
+
+16:22:39.383 [info] 💾 Entropy persistence initialized: /home/travis/Projects/warp-engine/data/entropy/cosmic_entropy
+
+16:22:39.383 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 30000ms
+
+16:22:39.383 [info] ✨ Phase 5 Entropy Monitoring System ready - cosmic entropy monitor active
+
+16:22:39.384 [error] ❌ WALCoordinator system not found - ensure it's in supervisor tree
+
+16:22:39.384 [info] ✨ WarpEngine universe is stable and ready for cosmic operations
+
+16:22:39.384 [info] 🌌 Data root: /home/travis/Projects/warp-engine/data
+
+16:22:39.384 [info] 🪐 Advanced spacetime shards: shard_0, shard_1, shard_10, shard_11, shard_12, shard_13, shard_14, shard_15, shard_16, shard_17, shard_18, shard_19, shard_2, shard_20, shard_21, shard_22, shard_23, shard_3, shard_8, shard_9, shard_4, shard_5, shard_6, shard_7
+
+16:22:39.384 [info] 🎯 Gravitational routing: gravitational algorithm
+
+16:22:39.384 [info] 🕳️  Event horizon caches: warm_data_cache, hot_data_cache, cold_data_cache, universal_cache
+
+16:22:39.384 [info] 🔗 Entanglement rules: 4 patterns configured
+
+16:22:39.384 [info] 🚀 Phase 4: Event Horizon Cache System - ACTIVE
+
+16:22:39.384 [info] 🌡️  Phase 5: Entropy Monitoring & Thermodynamics - ACTIVE
+
+16:22:39.384 [info] ✨ WarpEngine Database Application started successfully
+
+16:22:39.387 [info] 🌌 Universe supervisor PID: #PID<0.427.0>
+⏳ Waiting for ETS tables...
+
+16:22:39.496 [info] 👥 Supervisor children: [{WarpEngine, #PID<0.433.0>, :worker, [WarpEngine]}, {WarpEngine.WAL, #PID<0.428.0>, :worker, [WarpEngine.WAL]}]
+❌ Timeout waiting for ETS tables after 10089ms
+🔧 Creating ETS tables for lock-free WAL...
+✅ Created 24 ETS tables for lock-free WAL
+
+🎯 WAL-Only Performance Test
+============================================================
+
+== Testing with 1 processes ==
+  Trial 1/1...
+     📊 Table wal_process_5 size: 10000
+     📊 Table wal_process_5 size: 20000
+     📊 Table wal_process_5 size: 30000
+     📊 Table wal_process_5 size: 40000
+     📊 Table wal_process_5 size: 50000
+     📊 Table wal_process_5 size: 60000
+     📊 Table wal_process_5 size: 70000
+     📊 Table wal_process_5 size: 80000
+     📊 Table wal_process_5 size: 90000
+     📊 Table wal_process_5 size: 100000
+     📊 Table wal_process_5 size: 110000
+     📊 Table wal_process_5 size: 120000
+     📊 Table wal_process_5 size: 130000
+     📊 Table wal_process_5 size: 140000
+     📊 Table wal_process_5 size: 150000
+     📊 Table wal_process_5 size: 160000
+     📊 Table wal_process_5 size: 170000
+     📊 Table wal_process_5 size: 180000
+     📊 Table wal_process_5 size: 190000
+     📊 Table wal_process_5 size: 200000
+     📊 Table wal_process_5 size: 210000
+     📊 Table wal_process_5 size: 220000
+     📊 Table wal_process_5 size: 230000
+     📊 Table wal_process_5 size: 240000
+     📊 Table wal_process_5 size: 250000
+     📊 Table wal_process_5 size: 260000
+     📊 Table wal_process_5 size: 270000
+     📊 Table wal_process_5 size: 280000
+     📊 Table wal_process_5 size: 290000
+     📊 Table wal_process_5 size: 300000
+     📊 Table wal_process_5 size: 310000
+     📊 Table wal_process_5 size: 320000
+     📊 Table wal_process_5 size: 330000
+     📊 Table wal_process_5 size: 340000
+     📊 Table wal_process_5 size: 350000
+     📊 Table wal_process_5 size: 360000
+     📊 Table wal_process_5 size: 370000
+     📊 Table wal_process_5 size: 380000
+     📊 Table wal_process_5 size: 390000
+     📊 Table wal_process_5 size: 400000
+     📊 Table wal_process_5 size: 410000
+     📊 Table wal_process_5 size: 420000
+     📊 Table wal_process_5 size: 430000
+     📊 Table wal_process_5 size: 440000
+     📊 Table wal_process_5 size: 450000
+     📊 Table wal_process_5 size: 460000
+     📊 Table wal_process_5 size: 470000
+     📊 Table wal_process_5 size: 480000
+     📊 Table wal_process_5 size: 490000
+     📊 Table wal_process_5 size: 500000
+     📊 Table wal_process_5 size: 510000
+     📊 Table wal_process_5 size: 520000
+     📊 Table wal_process_5 size: 530000
+     📊 Table wal_process_5 size: 540000
+     📊 Table wal_process_5 size: 550000
+     📊 Table wal_process_5 size: 560000
+     📊 Table wal_process_5 size: 570000
+     📊 Table wal_process_5 size: 580000
+     📊 Table wal_process_5 size: 590000
+     📊 Table wal_process_5 size: 600000
+     📊 Table wal_process_5 size: 610000
+     📊 Table wal_process_5 size: 620000
+     📊 Table wal_process_21 size: 4855
+     📊 Table wal_process_21 size: 14855
+     📊 Table wal_process_21 size: 24855
+     📊 Table wal_process_21 size: 34855
+     📊 Table wal_process_21 size: 44855
+     📊 Table wal_process_21 size: 54855
+     📊 Table wal_process_21 size: 64855
+     📊 Table wal_process_21 size: 74855
+     📊 Table wal_process_21 size: 84855
+     📊 Table wal_process_21 size: 94855
+     📊 Table wal_process_21 size: 104855
+     📊 Table wal_process_21 size: 114855
+     📊 Table wal_process_21 size: 124855
+     📊 Table wal_process_21 size: 134855
+     📊 Table wal_process_21 size: 144855
+     📊 Table wal_process_21 size: 154855
+     📊 Table wal_process_21 size: 164855
+     📊 Table wal_process_21 size: 174855
+     📊 Table wal_process_21 size: 184855
+     📊 Table wal_process_21 size: 194855
+     📊 Table wal_process_21 size: 204855
+     📊 Table wal_process_21 size: 214855
+     📊 Table wal_process_21 size: 224855
+     📊 Table wal_process_21 size: 234855
+     📊 Table wal_process_21 size: 244855
+     📊 Table wal_process_21 size: 254855
+     📊 Table wal_process_21 size: 264855
+     📊 Table wal_process_21 size: 274855
+     📊 Table wal_process_21 size: 284855
+     📊 Table wal_process_21 size: 294855
+     📊 Table wal_process_21 size: 304855
+     📊 Table wal_process_21 size: 314855
+     📊 Table wal_process_21 size: 324855
+     📊 Table wal_process_21 size: 334855
+     📊 Table wal_process_21 size: 344855
+     📊 Table wal_process_21 size: 354855
+     📊 Table wal_process_21 size: 364855
+     📊 Table wal_process_21 size: 374855
+     📊 Table wal_process_21 size: 384855
+     📊 Table wal_process_21 size: 394855
+     📊 Table wal_process_21 size: 404855
+     📊 Table wal_process_21 size: 414855
+     📊 Table wal_process_21 size: 424855
+     📊 Table wal_process_21 size: 434855
+     📊 Table wal_process_21 size: 444855
+     📊 Table wal_process_21 size: 454855
+     📊 Table wal_process_21 size: 464855
+     📊 Table wal_process_21 size: 474855
+     📊 Table wal_process_21 size: 484855
+     📊 Table wal_process_21 size: 494855
+     📊 Table wal_process_21 size: 504855
+     📊 Table wal_process_21 size: 514855
+     📊 Table wal_process_21 size: 524855
+     📊 Table wal_process_21 size: 534855
+     📊 Table wal_process_21 size: 544855
+     📊 Table wal_process_21 size: 554855
+     📊 Table wal_process_21 size: 564855
+     📊 Table wal_process_21 size: 574855
+     📊 Table wal_process_21 size: 584855
+     📊 Table wal_process_21 size: 594855
+     📊 Table wal_process_21 size: 604855
+     📊 Table wal_process_21 size: 614855
+     📊 Table wal_process_21 size: 624855
+     📊 Table wal_process_21 size: 634855
+     📊 Table wal_process_21 size: 644855
+     📊 Table wal_process_21 size: 654855
+     📊 Table wal_process_21 size: 664855
+     📊 Table wal_process_21 size: 674855
+     📊 Table wal_process_21 size: 684855
+     📊 Table wal_process_21 size: 694855
+     📊 Table wal_process_21 size: 704855
+     📊 Table wal_process_21 size: 714855
+     📊 Table wal_process_21 size: 724855
+     📊 Table wal_process_21 size: 734855
+     📊 Table wal_process_21 size: 744855
+     📊 Table wal_process_21 size: 754855
+     📊 Table wal_process_21 size: 764855
+     📊 Table wal_process_21 size: 774855
+     📊 Table wal_process_21 size: 784855
+     📊 Table wal_process_21 size: 794855
+     📊 Table wal_process_21 size: 804855
+     📊 Table wal_process_21 size: 814855
+     📊 Table wal_process_21 size: 824855
+     📊 Table wal_process_21 size: 834855
+     📊 Table wal_process_21 size: 844855
+     📊 Table wal_process_21 size: 854855
+     📊 Table wal_process_21 size: 864855
+     📊 Table wal_process_21 size: 874855
+     📊 Table wal_process_21 size: 884855
+     📊 Table wal_process_21 size: 894855
+     📊 Table wal_process_21 size: 904855
+     📊 Table wal_process_21 size: 914855
+     📊 Table wal_process_21 size: 924855
+     📊 Table wal_process_21 size: 934855
+     📊 Table wal_process_21 size: 944855
+     📊 Table wal_process_21 size: 954855
+     📊 Table wal_process_21 size: 964855
+     📊 Table wal_process_21 size: 974855
+     📊 Table wal_process_21 size: 984855
+     📊 Table wal_process_21 size: 994855
+     📊 Table wal_process_21 size: 1004855
+     📊 Table wal_process_21 size: 1014855
+     📊 Table wal_process_21 size: 1024855
+     📊 Table wal_process_21 size: 1034855
+     📊 Table wal_process_21 size: 1044855
+     📊 Table wal_process_21 size: 1054855
+     📊 Table wal_process_21 size: 1064855
+     📊 Table wal_process_21 size: 1074855
+     📊 Table wal_process_21 size: 1084855
+     📊 Table wal_process_21 size: 1094855
+     📊 Table wal_process_21 size: 1104855
+     📊 Table wal_process_21 size: 1114855
+     📊 Table wal_process_21 size: 1124855
+     📊 Table wal_process_21 size: 1134855
+     📊 Table wal_process_21 size: 1144855
+     📊 Table wal_process_21 size: 1154855
+     📊 Table wal_process_21 size: 1164855
+     📊 Table wal_process_21 size: 1174855
+     📊 Table wal_process_21 size: 1184855
+     📊 Table wal_process_21 size: 1194855
+     📊 Table wal_process_21 size: 1204855
+     📊 Table wal_process_21 size: 1214855
+     📊 Table wal_process_21 size: 1224855
+     📊 Table wal_process_21 size: 1234855
+     📊 Table wal_process_21 size: 1244855
+     📊 Table wal_process_21 size: 1254855
+     📊 Table wal_process_21 size: 1264855
+     📊 Table wal_process_21 size: 1274855
+     📊 Table wal_process_21 size: 1284855
+     📊 Table wal_process_21 size: 1294855
+     📊 Table wal_process_21 size: 1304855
+     📊 Table wal_process_21 size: 1314855
+     📊 Table wal_process_21 size: 1324855
+     📊 Table wal_process_21 size: 1334855
+     📊 Table wal_process_21 size: 1344855
+     📊 Table wal_process_21 size: 1354855
+     📊 Table wal_process_21 size: 1364855
+     📊 Table wal_process_21 size: 1374855
+     📊 Table wal_process_21 size: 1384855
+     📊 Table wal_process_21 size: 1394855
+     📊 Table wal_process_21 size: 1404855
+     📊 Table wal_process_21 size: 1414855
+     📊 Table wal_process_21 size: 1424855
+     📊 Table wal_process_21 size: 1434855
+     📊 Table wal_process_21 size: 1444855
+     📊 Table wal_process_21 size: 1454855
+     📊 Table wal_process_21 size: 1464855
+     📊 Table wal_process_21 size: 1474855
+     📊 Table wal_process_21 size: 1484855
+   • 1 processes: best 5000ms (298691 ops/sec)
+     median 298691 (p50 298691, p90 298691)
+     🔍 Debug - Before force flush:
+       📊 wal_process_5: 625145 entries
+       📊 wal_process_21: 1493458 entries
+
+== Testing with 2 processes ==
+  Trial 1/1...
+     📊 Table wal_process_23 size: 719
+     📊 Table wal_process_9 size: 5650
+     📊 Table wal_process_23 size: 10804
+     📊 Table wal_process_9 size: 15424
+     📊 Table wal_process_9 size: 20509
+     📊 Table wal_process_23 size: 26090
+     📊 Table wal_process_9 size: 30002
+     📊 Table wal_process_9 size: 34847
+     📊 Table wal_process_9 size: 39851
+     📊 Table wal_process_23 size: 46583
+     📊 Table wal_process_9 size: 49876
+     📊 Table wal_process_9 size: 54878
+     📊 Table wal_process_9 size: 59926
+     📊 Table wal_process_23 size: 66309
+     📊 Table wal_process_9 size: 70069
+     📊 Table wal_process_9 size: 74989
+     📊 Table wal_process_9 size: 79948
+     📊 Table wal_process_9 size: 84885
+     📊 Table wal_process_9 size: 89887
+     📊 Table wal_process_23 size: 96583
+     📊 Table wal_process_9 size: 99907
+     📊 Table wal_process_9 size: 104884
+     📊 Table wal_process_9 size: 110039
+     📊 Table wal_process_23 size: 116406
+     📊 Table wal_process_23 size: 121374
+     📊 Table wal_process_23 size: 125934
+     📊 Table wal_process_23 size: 130936
+     📊 Table wal_process_23 size: 136177
+     📊 Table wal_process_9 size: 140808
+     📊 Table wal_process_9 size: 145696
+     📊 Table wal_process_23 size: 151004
+     📊 Table wal_process_23 size: 155880
+     📊 Table wal_process_9 size: 160607
+     📊 Table wal_process_23 size: 165971
+     📊 Table wal_process_23 size: 170966
+     📊 Table wal_process_9 size: 175543
+     📊 Table wal_process_9 size: 180689
+     📊 Table wal_process_23 size: 185776
+     📊 Table wal_process_23 size: 190198
+     📊 Table wal_process_23 size: 195385
+     📊 Table wal_process_9 size: 201028
+     📊 Table wal_process_23 size: 205459
+     📊 Table wal_process_9 size: 211137
+     📊 Table wal_process_9 size: 216053
+     📊 Table wal_process_23 size: 220081
+     📊 Table wal_process_9 size: 226131
+     📊 Table wal_process_23 size: 230282
+     📊 Table wal_process_9 size: 235705
+     📊 Table wal_process_23 size: 240646
+     📊 Table wal_process_9 size: 245472
+     📊 Table wal_process_9 size: 250501
+     📊 Table wal_process_23 size: 255891
+     📊 Table wal_process_23 size: 260593
+     📊 Table wal_process_23 size: 265385
+     📊 Table wal_process_23 size: 270560
+     📊 Table wal_process_9 size: 276025
+     📊 Table wal_process_23 size: 280493
+     📊 Table wal_process_9 size: 285844
+     📊 Table wal_process_23 size: 290799
+     📊 Table wal_process_9 size: 295600
+     📊 Table wal_process_23 size: 300729
+     📊 Table wal_process_23 size: 305939
+     📊 Table wal_process_23 size: 310854
+     📊 Table wal_process_23 size: 315828
+     📊 Table wal_process_9 size: 320619
+     📊 Table wal_process_23 size: 326069
+     📊 Table wal_process_23 size: 331410
+     📊 Table wal_process_9 size: 334962
+     📊 Table wal_process_23 size: 341251
+     📊 Table wal_process_23 size: 345738
+     📊 Table wal_process_23 size: 350839
+     📊 Table wal_process_23 size: 356097
+     📊 Table wal_process_9 size: 360535
+     📊 Table wal_process_23 size: 365681
+     📊 Table wal_process_23 size: 370486
+     📊 Table wal_process_9 size: 376017
+     📊 Table wal_process_9 size: 380960
+     📊 Table wal_process_23 size: 385462
+     📊 Table wal_process_9 size: 390797
+     📊 Table wal_process_23 size: 396041
+     📊 Table wal_process_9 size: 400138
+     📊 Table wal_process_23 size: 406360
+     📊 Table wal_process_8 size: 3720
+     📊 Table wal_process_23 size: 415839
+     📊 Table wal_process_23 size: 420900
+     📊 Table wal_process_8 size: 18966
+     📊 Table wal_process_8 size: 24029
+     📊 Table wal_process_8 size: 29188
+     📊 Table wal_process_8 size: 34722
+     📊 Table wal_process_8 size: 40297
+     📊 Table wal_process_23 size: 449404
+     📊 Table wal_process_23 size: 454093
+     📊 Table wal_process_8 size: 56128
+     📊 Table wal_process_8 size: 61253
+     📊 Table wal_process_23 size: 468628
+     📊 Table wal_process_23 size: 473377
+     📊 Table wal_process_8 size: 76885
+     📊 Table wal_process_8 size: 82040
+     📊 Table wal_process_8 size: 87119
+     📊 Table wal_process_8 size: 92292
+     📊 Table wal_process_23 size: 497541
+     📊 Table wal_process_8 size: 102712
+     📊 Table wal_process_23 size: 507123
+     📊 Table wal_process_8 size: 112949
+     📊 Table wal_process_8 size: 118059
+     📊 Table wal_process_23 size: 521756
+     📊 Table wal_process_8 size: 128211
+     📊 Table wal_process_8 size: 133247
+     📊 Table wal_process_23 size: 536708
+     📊 Table wal_process_8 size: 143449
+     📊 Table wal_process_23 size: 546472
+     📊 Table wal_process_23 size: 551276
+     📊 Table wal_process_23 size: 556171
+     📊 Table wal_process_23 size: 561017
+     📊 Table wal_process_23 size: 565938
+     📊 Table wal_process_8 size: 174097
+     📊 Table wal_process_23 size: 575170
+     📊 Table wal_process_8 size: 184886
+     📊 Table wal_process_23 size: 584948
+     📊 Table wal_process_23 size: 589942
+     📊 Table wal_process_8 size: 199826
+     📊 Table wal_process_23 size: 600502
+     📊 Table wal_process_23 size: 605729
+     📊 Table wal_process_8 size: 214561
+     📊 Table wal_process_23 size: 615282
+     📊 Table wal_process_23 size: 620280
+     📊 Table wal_process_8 size: 229740
+     📊 Table wal_process_23 size: 630408
+     📊 Table wal_process_23 size: 635365
+     📊 Table wal_process_8 size: 243844
+     📊 Table wal_process_23 size: 646563
+     📊 Table wal_process_23 size: 651081
+     📊 Table wal_process_23 size: 656022
+     📊 Table wal_process_23 size: 660915
+     📊 Table wal_process_8 size: 269804
+     📊 Table wal_process_8 size: 274830
+     📊 Table wal_process_8 size: 279896
+     📊 Table wal_process_23 size: 679929
+     📊 Table wal_process_8 size: 290205
+     📊 Table wal_process_23 size: 689688
+     📊 Table wal_process_8 size: 300371
+     📊 Table wal_process_8 size: 305392
+     📊 Table wal_process_8 size: 310459
+     📊 Table wal_process_8 size: 315513
+     📊 Table wal_process_8 size: 320570
+     📊 Table wal_process_23 size: 719437
+     📊 Table wal_process_8 size: 330663
+     📊 Table wal_process_8 size: 335750
+     📊 Table wal_process_23 size: 734132
+     📊 Table wal_process_23 size: 739001
+     📊 Table wal_process_8 size: 351116
+     📊 Table wal_process_8 size: 356166
+     📊 Table wal_process_23 size: 753735
+     📊 Table wal_process_8 size: 366417
+     📊 Table wal_process_23 size: 763814
+     📊 Table wal_process_23 size: 768666
+     📊 Table wal_process_8 size: 381621
+     📊 Table wal_process_8 size: 387052
+     📊 Table wal_process_23 size: 782858
+     📊 Table wal_process_23 size: 788240
+     📊 Table wal_process_8 size: 401899
+     📊 Table wal_process_23 size: 798027
+     📊 Table wal_process_23 size: 802891
+     📊 Table wal_process_23 size: 807754
+     📊 Table wal_process_8 size: 422134
+     📊 Table wal_process_23 size: 817819
+     📊 Table wal_process_23 size: 823025
+     📊 Table wal_process_8 size: 437175
+     📊 Table wal_process_23 size: 832779
+     📊 Table wal_process_8 size: 447230
+     📊 Table wal_process_8 size: 452304
+     📊 Table wal_process_8 size: 457373
+     📊 Table wal_process_23 size: 852808
+     📊 Table wal_process_23 size: 857716
+     📊 Table wal_process_8 size: 471938
+     📊 Table wal_process_23 size: 867508
+     📊 Table wal_process_23 size: 872237
+     📊 Table wal_process_23 size: 877155
+     📊 Table wal_process_23 size: 882150
+     📊 Table wal_process_23 size: 887014
+     📊 Table wal_process_8 size: 502718
+     📊 Table wal_process_23 size: 897583
+     📊 Table wal_process_8 size: 512185
+     📊 Table wal_process_23 size: 908107
+     📊 Table wal_process_23 size: 913056
+     📊 Table wal_process_23 size: 917909
+     📊 Table wal_process_23 size: 922882
+     📊 Table wal_process_8 size: 537263
+     📊 Table wal_process_8 size: 542385
+     📊 Table wal_process_23 size: 937805
+     📊 Table wal_process_8 size: 552369
+     📊 Table wal_process_23 size: 947776
+     📊 Table wal_process_8 size: 562239
+     📊 Table wal_process_23 size: 957946
+     📊 Table wal_process_8 size: 572248
+     📊 Table wal_process_8 size: 577554
+     📊 Table wal_process_8 size: 582710
+     📊 Table wal_process_23 size: 977111
+     📊 Table wal_process_23 size: 982068
+     📊 Table wal_process_8 size: 597521
+     📊 Table wal_process_23 size: 992663
+     📊 Table wal_process_23 size: 997304
+     📊 Table wal_process_23 size: 1002275
+     📊 Table wal_process_8 size: 617849
+     📊 Table wal_process_23 size: 1011764
+     📊 Table wal_process_8 size: 628570
+     📊 Table wal_process_23 size: 1021342
+     📊 Table wal_process_23 size: 1026447
+     📊 Table wal_process_8 size: 643440
+     📊 Table wal_process_23 size: 1036410
+     📊 Table wal_process_23 size: 1041317
+     📊 Table wal_process_8 size: 658872
+     📊 Table wal_process_23 size: 1051066
+     📊 Table wal_process_8 size: 668934
+     📊 Table wal_process_8 size: 673964
+     📊 Table wal_process_23 size: 1065978
+     📊 Table wal_process_23 size: 1071109
+     📊 Table wal_process_8 size: 688915
+     📊 Table wal_process_23 size: 1081140
+     📊 Table wal_process_23 size: 1086045
+     📊 Table wal_process_8 size: 704032
+     📊 Table wal_process_23 size: 1095983
+     📊 Table wal_process_8 size: 713895
+     📊 Table wal_process_8 size: 718868
+     📊 Table wal_process_23 size: 1111199
+     📊 Table wal_process_23 size: 1116198
+     📊 Table wal_process_23 size: 1121146
+     📊 Table wal_process_8 size: 738877
+     📊 Table wal_process_8 size: 743853
+     📊 Table wal_process_23 size: 1136236
+     📊 Table wal_process_8 size: 753772
+     📊 Table wal_process_23 size: 1146055
+     📊 Table wal_process_8 size: 763823
+     📊 Table wal_process_23 size: 1156176
+     📊 Table wal_process_23 size: 1161136
+     📊 Table wal_process_8 size: 778932
+     📊 Table wal_process_8 size: 783841
+     📊 Table wal_process_8 size: 788511
+     📊 Table wal_process_8 size: 793499
+     📊 Table wal_process_23 size: 1186159
+     📊 Table wal_process_23 size: 1191524
+     📊 Table wal_process_8 size: 808441
+     📊 Table wal_process_23 size: 1202272
+     📊 Table wal_process_8 size: 817742
+     📊 Table wal_process_23 size: 1212282
+     📊 Table wal_process_23 size: 1217316
+     📊 Table wal_process_8 size: 832651
+     📊 Table wal_process_23 size: 1227507
+     📊 Table wal_process_23 size: 1232498
+     📊 Table wal_process_8 size: 847404
+     📊 Table wal_process_23 size: 1242591
+     📊 Table wal_process_23 size: 1247636
+     📊 Table wal_process_23 size: 1252641
+     📊 Table wal_process_23 size: 1257693
+     📊 Table wal_process_8 size: 872333
+     📊 Table wal_process_23 size: 1267783
+     📊 Table wal_process_8 size: 882203
+     📊 Table wal_process_23 size: 1277825
+     📊 Table wal_process_8 size: 892228
+     📊 Table wal_process_8 size: 897176
+     📊 Table wal_process_8 size: 902251
+     📊 Table wal_process_23 size: 1297745
+     📊 Table wal_process_8 size: 912285
+   • 2 processes: best 5000ms (362206 ops/sec)
+     median 362206 (p50 362206, p90 362206)
+     🔍 Debug - Before force flush:
+       📊 wal_process_8: 913972 entries
+       📊 wal_process_9: 406422 entries
+       📊 wal_process_23: 1304633 entries
+
+== Testing with 4 processes ==
+  Trial 1/1...
+     📊 Table wal_process_12 size: 1529
+     📊 Table wal_process_13 size: 3961
+     📊 Table wal_process_13 size: 6459
+     📊 Table wal_process_12 size: 9032
+     📊 Table wal_process_23 size: 11470
+     📊 Table wal_process_18 size: 14121
+     📊 Table wal_process_23 size: 16629
+     📊 Table wal_process_12 size: 19085
+     📊 Table wal_process_18 size: 21642
+     📊 Table wal_process_13 size: 23999
+     📊 Table wal_process_13 size: 26391
+     📊 Table wal_process_18 size: 29061
+     📊 Table wal_process_12 size: 31897
+     📊 Table wal_process_12 size: 34276
+     📊 Table wal_process_23 size: 36604
+     📊 Table wal_process_18 size: 39006
+     📊 Table wal_process_18 size: 41521
+     📊 Table wal_process_18 size: 43999
+     📊 Table wal_process_23 size: 46697
+     📊 Table wal_process_13 size: 49026
+     📊 Table wal_process_23 size: 51776
+     📊 Table wal_process_12 size: 54414
+     📊 Table wal_process_23 size: 56703
+     📊 Table wal_process_18 size: 59069
+     📊 Table wal_process_12 size: 61661
+     📊 Table wal_process_12 size: 64070
+     📊 Table wal_process_23 size: 67103
+     📊 Table wal_process_23 size: 69694
+     📊 Table wal_process_18 size: 71760
+     📊 Table wal_process_12 size: 74078
+     📊 Table wal_process_12 size: 76460
+     📊 Table wal_process_23 size: 79881
+     📊 Table wal_process_18 size: 82359
+     📊 Table wal_process_18 size: 84798
+     📊 Table wal_process_12 size: 86279
+     📊 Table wal_process_13 size: 88117
+     📊 Table wal_process_13 size: 90599
+     📊 Table wal_process_23 size: 94895
+     📊 Table wal_process_18 size: 97046
+     📊 Table wal_process_13 size: 98074
+     📊 Table wal_process_23 size: 102336
+     📊 Table wal_process_13 size: 103045
+     📊 Table wal_process_18 size: 107087
+     📊 Table wal_process_12 size: 108818
+     📊 Table wal_process_12 size: 111229
+     📊 Table wal_process_12 size: 113734
+     📊 Table wal_process_13 size: 115637
+     📊 Table wal_process_18 size: 119357
+     📊 Table wal_process_18 size: 121841
+     📊 Table wal_process_13 size: 123346
+     📊 Table wal_process_23 size: 127423
+     📊 Table wal_process_18 size: 129246
+     📊 Table wal_process_13 size: 130917
+     📊 Table wal_process_18 size: 134267
+     📊 Table wal_process_23 size: 137382
+     📊 Table wal_process_18 size: 139276
+     📊 Table wal_process_13 size: 140880
+     📊 Table wal_process_12 size: 143870
+     📊 Table wal_process_23 size: 147392
+     📊 Table wal_process_23 size: 149861
+     📊 Table wal_process_18 size: 151787
+     📊 Table wal_process_12 size: 153934
+     📊 Table wal_process_12 size: 156397
+     📊 Table wal_process_18 size: 159146
+     📊 Table wal_process_23 size: 162353
+     📊 Table wal_process_18 size: 164130
+     📊 Table wal_process_13 size: 166050
+     📊 Table wal_process_23 size: 169867
+     📊 Table wal_process_18 size: 171610
+     📊 Table wal_process_12 size: 174001
+     📊 Table wal_process_23 size: 177400
+     📊 Table wal_process_13 size: 178342
+     📊 Table wal_process_23 size: 182555
+     📊 Table wal_process_18 size: 184067
+     📊 Table wal_process_12 size: 186523
+     📊 Table wal_process_13 size: 188378
+     📊 Table wal_process_13 size: 190857
+     📊 Table wal_process_12 size: 193963
+     📊 Table wal_process_13 size: 195826
+     📊 Table wal_process_12 size: 198967
+     📊 Table wal_process_23 size: 202616
+     📊 Table wal_process_13 size: 203326
+     📊 Table wal_process_23 size: 207588
+     📊 Table wal_process_18 size: 209152
+     📊 Table wal_process_13 size: 210751
+     📊 Table wal_process_23 size: 214951
+     📊 Table wal_process_12 size: 216479
+     📊 Table wal_process_12 size: 219026
+     📊 Table wal_process_13 size: 220612
+     📊 Table wal_process_12 size: 224106
+     📊 Table wal_process_18 size: 226796
+     📊 Table wal_process_18 size: 229255
+     📊 Table wal_process_12 size: 231559
+     📊 Table wal_process_18 size: 234310
+     📊 Table wal_process_13 size: 235623
+     📊 Table wal_process_18 size: 239216
+     📊 Table wal_process_13 size: 240606
+     📊 Table wal_process_12 size: 243945
+     📊 Table wal_process_23 size: 247514
+     📊 Table wal_process_13 size: 248340
+     📊 Table wal_process_18 size: 251583
+     📊 Table wal_process_18 size: 254100
+     📊 Table wal_process_23 size: 257507
+     📊 Table wal_process_21 size: 4999
+     📊 Table wal_process_6 size: 7464
+     📊 Table wal_process_0 size: 10423
+     📊 Table wal_process_6 size: 12227
+     📊 Table wal_process_6 size: 14828
+     📊 Table wal_process_6 size: 17112
+     📊 Table wal_process_6 size: 19449
+     📊 Table wal_process_6 size: 21947
+     📊 Table wal_process_23 size: 279271
+     📊 Table wal_process_23 size: 281678
+     📊 Table wal_process_6 size: 29122
+     📊 Table wal_process_23 size: 286623
+     📊 Table wal_process_23 size: 288839
+     📊 Table wal_process_23 size: 291308
+     📊 Table wal_process_23 size: 293652
+     📊 Table wal_process_0 size: 44106
+     📊 Table wal_process_0 size: 46593
+     📊 Table wal_process_6 size: 46691
+     📊 Table wal_process_23 size: 303288
+     📊 Table wal_process_21 size: 53182
+     📊 Table wal_process_0 size: 56444
+     📊 Table wal_process_6 size: 56476
+     📊 Table wal_process_0 size: 61765
+     📊 Table wal_process_23 size: 315651
+     📊 Table wal_process_21 size: 65454
+     📊 Table wal_process_0 size: 69690
+     📊 Table wal_process_6 size: 69030
+     📊 Table wal_process_21 size: 73394
+     📊 Table wal_process_21 size: 75846
+     📊 Table wal_process_21 size: 78330
+     📊 Table wal_process_23 size: 332826
+     📊 Table wal_process_21 size: 83442
+     📊 Table wal_process_21 size: 85974
+     📊 Table wal_process_23 size: 340246
+     📊 Table wal_process_23 size: 342464
+     📊 Table wal_process_6 size: 91512
+     📊 Table wal_process_21 size: 96237
+     📊 Table wal_process_23 size: 349717
+     📊 Table wal_process_23 size: 352274
+     📊 Table wal_process_23 size: 354875
+     📊 Table wal_process_0 size: 106651
+     📊 Table wal_process_23 size: 359824
+     📊 Table wal_process_0 size: 111618
+     📊 Table wal_process_21 size: 113959
+     📊 Table wal_process_6 size: 114279
+     📊 Table wal_process_21 size: 118972
+     📊 Table wal_process_0 size: 121650
+     📊 Table wal_process_0 size: 124115
+     📊 Table wal_process_21 size: 126235
+     📊 Table wal_process_21 size: 128725
+     📊 Table wal_process_0 size: 131655
+     📊 Table wal_process_21 size: 133717
+     📊 Table wal_process_21 size: 136160
+     📊 Table wal_process_21 size: 138482
+     📊 Table wal_process_21 size: 141044
+     📊 Table wal_process_21 size: 143662
+     📊 Table wal_process_0 size: 146617
+     📊 Table wal_process_21 size: 148763
+     📊 Table wal_process_21 size: 151207
+     📊 Table wal_process_6 size: 152570
+     📊 Table wal_process_21 size: 156171
+     📊 Table wal_process_0 size: 159209
+     📊 Table wal_process_21 size: 161326
+     📊 Table wal_process_21 size: 163846
+     📊 Table wal_process_21 size: 166363
+     📊 Table wal_process_23 size: 418914
+     📊 Table wal_process_6 size: 170148
+     📊 Table wal_process_21 size: 173764
+     📊 Table wal_process_21 size: 176254
+     📊 Table wal_process_6 size: 177628
+     📊 Table wal_process_0 size: 182037
+     📊 Table wal_process_0 size: 184506
+     📊 Table wal_process_6 size: 185203
+     📊 Table wal_process_0 size: 189405
+     📊 Table wal_process_21 size: 191455
+     📊 Table wal_process_21 size: 193930
+     📊 Table wal_process_23 size: 446072
+     📊 Table wal_process_21 size: 199006
+     📊 Table wal_process_6 size: 200250
+     📊 Table wal_process_23 size: 453396
+     📊 Table wal_process_6 size: 205173
+     📊 Table wal_process_23 size: 458306
+     📊 Table wal_process_21 size: 211678
+     📊 Table wal_process_0 size: 214511
+     📊 Table wal_process_6 size: 215259
+     📊 Table wal_process_0 size: 219503
+     📊 Table wal_process_6 size: 220175
+     📊 Table wal_process_21 size: 224283
+     📊 Table wal_process_6 size: 225154
+     📊 Table wal_process_23 size: 478105
+     📊 Table wal_process_23 size: 480520
+     📊 Table wal_process_23 size: 482986
+     📊 Table wal_process_6 size: 235005
+     📊 Table wal_process_23 size: 487794
+     📊 Table wal_process_6 size: 240257
+     📊 Table wal_process_0 size: 244933
+     📊 Table wal_process_0 size: 247393
+     📊 Table wal_process_6 size: 247787
+     📊 Table wal_process_0 size: 252276
+     📊 Table wal_process_23 size: 502465
+     📊 Table wal_process_0 size: 257442
+     📊 Table wal_process_21 size: 259265
+     📊 Table wal_process_6 size: 260423
+     📊 Table wal_process_21 size: 264246
+     📊 Table wal_process_21 size: 266885
+     📊 Table wal_process_23 size: 516926
+     📊 Table wal_process_0 size: 272764
+     📊 Table wal_process_21 size: 274685
+     📊 Table wal_process_6 size: 275372
+     📊 Table wal_process_23 size: 526679
+     📊 Table wal_process_6 size: 280258
+     📊 Table wal_process_6 size: 282695
+     📊 Table wal_process_23 size: 534200
+     📊 Table wal_process_21 size: 289696
+     📊 Table wal_process_6 size: 289921
+     📊 Table wal_process_6 size: 292398
+     📊 Table wal_process_21 size: 297439
+     📊 Table wal_process_21 size: 299893
+     📊 Table wal_process_6 size: 299800
+     📊 Table wal_process_23 size: 551703
+     📊 Table wal_process_6 size: 304547
+     📊 Table wal_process_0 size: 310601
+     📊 Table wal_process_0 size: 313208
+     📊 Table wal_process_0 size: 315667
+     📊 Table wal_process_6 size: 314723
+     📊 Table wal_process_21 size: 320234
+     📊 Table wal_process_21 size: 322744
+     📊 Table wal_process_0 size: 325699
+     📊 Table wal_process_0 size: 328185
+     📊 Table wal_process_21 size: 330071
+     📊 Table wal_process_0 size: 333252
+     📊 Table wal_process_21 size: 335108
+     📊 Table wal_process_0 size: 338293
+     📊 Table wal_process_23 size: 586400
+     📊 Table wal_process_23 size: 588885
+     📊 Table wal_process_0 size: 345816
+     📊 Table wal_process_6 size: 345320
+     📊 Table wal_process_0 size: 350630
+     📊 Table wal_process_21 size: 352545
+     📊 Table wal_process_21 size: 355022
+     📊 Table wal_process_6 size: 355348
+     📊 Table wal_process_21 size: 359977
+     📊 Table wal_process_21 size: 362420
+     📊 Table wal_process_6 size: 362589
+     📊 Table wal_process_23 size: 613755
+     📊 Table wal_process_0 size: 370943
+     📊 Table wal_process_0 size: 373529
+     📊 Table wal_process_0 size: 376162
+     📊 Table wal_process_21 size: 377306
+     📊 Table wal_process_6 size: 377322
+     📊 Table wal_process_6 size: 379786
+     📊 Table wal_process_0 size: 386272
+     📊 Table wal_process_21 size: 387492
+     📊 Table wal_process_21 size: 390307
+     📊 Table wal_process_0 size: 393862
+     📊 Table wal_process_21 size: 395399
+     📊 Table wal_process_6 size: 393989
+     📊 Table wal_process_6 size: 396663
+     📊 Table wal_process_21 size: 403188
+     📊 Table wal_process_23 size: 650998
+     📊 Table wal_process_23 size: 653519
+     📊 Table wal_process_23 size: 655970
+     📊 Table wal_process_0 size: 413778
+     📊 Table wal_process_0 size: 416196
+     📊 Table wal_process_23 size: 663872
+     📊 Table wal_process_0 size: 421258
+     📊 Table wal_process_0 size: 423793
+     📊 Table wal_process_21 size: 425381
+     📊 Table wal_process_0 size: 428597
+     📊 Table wal_process_0 size: 431190
+     📊 Table wal_process_0 size: 433751
+     📊 Table wal_process_0 size: 436436
+     📊 Table wal_process_21 size: 437669
+     📊 Table wal_process_6 size: 436953
+     📊 Table wal_process_6 size: 439339
+     📊 Table wal_process_23 size: 691411
+     📊 Table wal_process_6 size: 444115
+     📊 Table wal_process_6 size: 446521
+     📊 Table wal_process_21 size: 453086
+     📊 Table wal_process_0 size: 456226
+     📊 Table wal_process_6 size: 454132
+     📊 Table wal_process_23 size: 705895
+     📊 Table wal_process_0 size: 463680
+     📊 Table wal_process_6 size: 461642
+     📊 Table wal_process_0 size: 468637
+     📊 Table wal_process_23 size: 715950
+     📊 Table wal_process_0 size: 473316
+     📊 Table wal_process_0 size: 475852
+     📊 Table wal_process_23 size: 723170
+     📊 Table wal_process_23 size: 725615
+     📊 Table wal_process_0 size: 483316
+     📊 Table wal_process_6 size: 481925
+     📊 Table wal_process_21 size: 488774
+     📊 Table wal_process_0 size: 490804
+     📊 Table wal_process_23 size: 738121
+     📊 Table wal_process_23 size: 740526
+     📊 Table wal_process_23 size: 742801
+     📊 Table wal_process_23 size: 745243
+     📊 Table wal_process_0 size: 503534
+     📊 Table wal_process_23 size: 750011
+     📊 Table wal_process_23 size: 752603
+     📊 Table wal_process_0 size: 510949
+     📊 Table wal_process_23 size: 757615
+     📊 Table wal_process_0 size: 515984
+     📊 Table wal_process_21 size: 518598
+     📊 Table wal_process_23 size: 765167
+     📊 Table wal_process_6 size: 519567
+     📊 Table wal_process_0 size: 525561
+     📊 Table wal_process_21 size: 528822
+     📊 Table wal_process_6 size: 527542
+     📊 Table wal_process_23 size: 778023
+     📊 Table wal_process_0 size: 535752
+     📊 Table wal_process_23 size: 783295
+     📊 Table wal_process_6 size: 537303
+     📊 Table wal_process_0 size: 543444
+     📊 Table wal_process_6 size: 542039
+     📊 Table wal_process_21 size: 548843
+     📊 Table wal_process_21 size: 551038
+     📊 Table wal_process_21 size: 553242
+     📊 Table wal_process_0 size: 557026
+     📊 Table wal_process_23 size: 802555
+     📊 Table wal_process_6 size: 556565
+     📊 Table wal_process_21 size: 563592
+     📊 Table wal_process_21 size: 566238
+     📊 Table wal_process_0 size: 569339
+     📊 Table wal_process_0 size: 571592
+     📊 Table wal_process_23 size: 817614
+     📊 Table wal_process_0 size: 576530
+     📊 Table wal_process_6 size: 574092
+     📊 Table wal_process_21 size: 581384
+     📊 Table wal_process_6 size: 579055
+     📊 Table wal_process_6 size: 581632
+     📊 Table wal_process_21 size: 589019
+     📊 Table wal_process_0 size: 591406
+     📊 Table wal_process_6 size: 589475
+     📊 Table wal_process_0 size: 596356
+     📊 Table wal_process_0 size: 598773
+     📊 Table wal_process_21 size: 601411
+   • 4 processes: best 5000ms (479624 ops/sec)
+     median 479624 (p50 479624, p90 479624)
+   🔍 WAL Metrics:
+     🔍 Debug - First 5 tables: [wal_process_0: 603511, wal_process_1: 0, wal_process_2: 0, wal_process_3: 0, wal_process_4: 0]
+     🔍 Debug - Tables with data: [wal_process_0: 603511, wal_process_6: 599076, wal_process_12: 253829, wal_process_13: 253820, wal_process_18: 254162, wal_process_21: 604083, wal_process_23: 846819]
+     📁 WAL tables: 7, Total entries: 3415300
+     🔢 Shard 0 sequence: 8158930
+     🔍 Debug - Before force flush:
+       📊 wal_process_0: 603511 entries
+       📊 wal_process_6: 599076 entries
+       📊 wal_process_12: 253829 entries
+       📊 wal_process_13: 253820 entries
+       📊 wal_process_18: 254162 entries
+       📊 wal_process_21: 604083 entries
+       📊 wal_process_23: 846819 entries
+
+== Testing with 6 processes ==
+  Trial 1/1...
+     📊 Table wal_process_11 size: 170
+     📊 Table wal_process_8 size: 1850
+     📊 Table wal_process_7 size: 3532
+     📊 Table wal_process_11 size: 5070
+     📊 Table wal_process_11 size: 6863
+     📊 Table wal_process_18 size: 8540
+     📊 Table wal_process_18 size: 10072
+     📊 Table wal_process_18 size: 11706
+     📊 Table wal_process_7 size: 13313
+     📊 Table wal_process_11 size: 15309
+     📊 Table wal_process_7 size: 16583
+     📊 Table wal_process_8 size: 18585
+     📊 Table wal_process_8 size: 20223
+     📊 Table wal_process_9 size: 21997
+     📊 Table wal_process_9 size: 23715
+     📊 Table wal_process_21 size: 25565
+     📊 Table wal_process_9 size: 26856
+     📊 Table wal_process_8 size: 28512
+     📊 Table wal_process_21 size: 30600
+     📊 Table wal_process_21 size: 32321
+     📊 Table wal_process_8 size: 33443
+     📊 Table wal_process_8 size: 35034
+     📊 Table wal_process_11 size: 37211
+     📊 Table wal_process_18 size: 38629
+     📊 Table wal_process_8 size: 39929
+     📊 Table wal_process_9 size: 41944
+     📊 Table wal_process_11 size: 43898
+     📊 Table wal_process_11 size: 45506
+     📊 Table wal_process_18 size: 46607
+     📊 Table wal_process_21 size: 48905
+     📊 Table wal_process_9 size: 50086
+     📊 Table wal_process_11 size: 52209
+     📊 Table wal_process_7 size: 53371
+     📊 Table wal_process_9 size: 55141
+     📊 Table wal_process_9 size: 56840
+     📊 Table wal_process_21 size: 59276
+     📊 Table wal_process_18 size: 59814
+     📊 Table wal_process_11 size: 61852
+     📊 Table wal_process_11 size: 63527
+     📊 Table wal_process_11 size: 65248
+     📊 Table wal_process_8 size: 66573
+     📊 Table wal_process_7 size: 68392
+     📊 Table wal_process_18 size: 69696
+     📊 Table wal_process_9 size: 71900
+     📊 Table wal_process_8 size: 73251
+     📊 Table wal_process_11 size: 75241
+     📊 Table wal_process_7 size: 76760
+     📊 Table wal_process_7 size: 78392
+     📊 Table wal_process_21 size: 81098
+     📊 Table wal_process_11 size: 81745
+     📊 Table wal_process_7 size: 83172
+     📊 Table wal_process_11 size: 85073
+     📊 Table wal_process_11 size: 86786
+     📊 Table wal_process_11 size: 88472
+     📊 Table wal_process_9 size: 90503
+     📊 Table wal_process_21 size: 92815
+     📊 Table wal_process_9 size: 93907
+     📊 Table wal_process_18 size: 94418
+     📊 Table wal_process_11 size: 96933
+     📊 Table wal_process_7 size: 98078
+     📊 Table wal_process_9 size: 100394
+     📊 Table wal_process_9 size: 101992
+     📊 Table wal_process_18 size: 103012
+     📊 Table wal_process_11 size: 105285
+     📊 Table wal_process_7 size: 106148
+     📊 Table wal_process_11 size: 108417
+     📊 Table wal_process_11 size: 110121
+     📊 Table wal_process_9 size: 111843
+     📊 Table wal_process_18 size: 113101
+     📊 Table wal_process_18 size: 114752
+     📊 Table wal_process_9 size: 116750
+     📊 Table wal_process_8 size: 118906
+     📊 Table wal_process_7 size: 119450
+     📊 Table wal_process_7 size: 121093
+     📊 Table wal_process_8 size: 123720
+     📊 Table wal_process_11 size: 125127
+     📊 Table wal_process_11 size: 126755
+     📊 Table wal_process_18 size: 128315
+     📊 Table wal_process_8 size: 130534
+     📊 Table wal_process_9 size: 131386
+     📊 Table wal_process_8 size: 133754
+     📊 Table wal_process_8 size: 135383
+     📊 Table wal_process_21 size: 138288
+     📊 Table wal_process_7 size: 137569
+     📊 Table wal_process_8 size: 140414
+     📊 Table wal_process_7 size: 140832
+     📊 Table wal_process_11 size: 143224
+     📊 Table wal_process_9 size: 144946
+     📊 Table wal_process_9 size: 146660
+     📊 Table wal_process_8 size: 148946
+     📊 Table wal_process_9 size: 149793
+     📊 Table wal_process_11 size: 151603
+     📊 Table wal_process_21 size: 154920
+     📊 Table wal_process_7 size: 154035
+     📊 Table wal_process_7 size: 155651
+     📊 Table wal_process_18 size: 158252
+     📊 Table wal_process_8 size: 160475
+     📊 Table wal_process_11 size: 161825
+     📊 Table wal_process_18 size: 163115
+     📊 Table wal_process_21 size: 166550
+     📊 Table wal_process_8 size: 167120
+     📊 Table wal_process_11 size: 168595
+     📊 Table wal_process_8 size: 170446
+     📊 Table wal_process_8 size: 172075
+     📊 Table wal_process_9 size: 173506
+     📊 Table wal_process_9 size: 175117
+     📊 Table wal_process_11 size: 176985
+     📊 Table wal_process_8 size: 178723
+     📊 Table wal_process_18 size: 179663
+     📊 Table wal_process_21 size: 183123
+     📊 Table wal_process_22 size: 855
+     📊 Table wal_process_22 size: 2629
+     📊 Table wal_process_16 size: 4350
+     📊 Table wal_process_5 size: 6097
+     📊 Table wal_process_16 size: 7729
+     📊 Table wal_process_8 size: 200832
+     📊 Table wal_process_5 size: 11331
+     📊 Table wal_process_18 size: 194422
+     📊 Table wal_process_22 size: 14653
+     📊 Table wal_process_16 size: 16315
+     📊 Table wal_process_16 size: 18020
+     📊 Table wal_process_16 size: 19758
+     📊 Table wal_process_5 size: 21559
+     📊 Table wal_process_18 size: 204141
+     📊 Table wal_process_22 size: 25379
+     📊 Table wal_process_22 size: 27057
+     📊 Table wal_process_8 size: 236201
+     📊 Table wal_process_8 size: 239264
+     📊 Table wal_process_8 size: 242189
+     📊 Table wal_process_16 size: 33291
+     📊 Table wal_process_16 size: 34813
+     📊 Table wal_process_8 size: 251759
+     📊 Table wal_process_16 size: 37910
+     📊 Table wal_process_8 size: 258437
+     📊 Table wal_process_22 size: 43038
+     📊 Table wal_process_22 size: 44640
+     📊 Table wal_process_5 size: 45072
+     📊 Table wal_process_8 size: 271471
+     📊 Table wal_process_8 size: 274489
+     📊 Table wal_process_16 size: 50217
+     📊 Table wal_process_8 size: 281311
+     📊 Table wal_process_22 size: 54247
+     📊 Table wal_process_8 size: 287939
+     📊 Table wal_process_16 size: 56905
+     📊 Table wal_process_22 size: 59339
+     📊 Table wal_process_8 size: 298081
+     📊 Table wal_process_22 size: 62618
+     📊 Table wal_process_5 size: 63624
+     📊 Table wal_process_18 size: 245735
+     📊 Table wal_process_16 size: 66777
+     📊 Table wal_process_5 size: 68884
+     📊 Table wal_process_18 size: 250771
+     📊 Table wal_process_5 size: 72381
+     📊 Table wal_process_8 size: 323742
+     📊 Table wal_process_8 size: 327052
+     📊 Table wal_process_22 size: 78506
+     📊 Table wal_process_5 size: 78981
+     📊 Table wal_process_22 size: 81876
+     📊 Table wal_process_22 size: 83566
+     📊 Table wal_process_8 size: 343622
+     📊 Table wal_process_8 size: 346660
+     📊 Table wal_process_8 size: 349923
+     📊 Table wal_process_5 size: 88856
+     📊 Table wal_process_18 size: 270522
+     📊 Table wal_process_22 size: 93314
+     📊 Table wal_process_16 size: 94686
+     📊 Table wal_process_8 size: 365879
+     📊 Table wal_process_5 size: 97329
+     📊 Table wal_process_18 size: 279297
+     📊 Table wal_process_8 size: 375971
+     📊 Table wal_process_18 size: 282632
+     📊 Table wal_process_16 size: 105042
+     📊 Table wal_process_8 size: 385879
+     📊 Table wal_process_8 size: 389238
+     📊 Table wal_process_22 size: 109474
+     📊 Table wal_process_16 size: 111992
+     📊 Table wal_process_22 size: 112676
+     📊 Table wal_process_18 size: 294615
+     📊 Table wal_process_8 size: 405497
+     📊 Table wal_process_18 size: 297749
+     📊 Table wal_process_18 size: 299469
+     📊 Table wal_process_5 size: 120702
+     📊 Table wal_process_16 size: 123562
+     📊 Table wal_process_16 size: 125202
+     📊 Table wal_process_22 size: 126024
+     📊 Table wal_process_8 size: 428538
+     📊 Table wal_process_8 size: 431943
+     📊 Table wal_process_22 size: 131061
+     📊 Table wal_process_22 size: 132830
+     📊 Table wal_process_5 size: 134168
+     📊 Table wal_process_8 size: 444918
+     📊 Table wal_process_18 size: 318005
+     📊 Table wal_process_16 size: 140304
+     📊 Table wal_process_8 size: 454704
+     📊 Table wal_process_16 size: 143770
+     📊 Table wal_process_8 size: 461162
+     📊 Table wal_process_8 size: 464388
+     📊 Table wal_process_18 size: 328163
+     📊 Table wal_process_5 size: 149138
+     📊 Table wal_process_8 size: 474072
+     📊 Table wal_process_18 size: 333149
+     📊 Table wal_process_18 size: 334747
+     📊 Table wal_process_16 size: 157577
+     📊 Table wal_process_16 size: 159167
+     📊 Table wal_process_5 size: 159238
+     📊 Table wal_process_5 size: 160909
+     📊 Table wal_process_16 size: 164240
+     📊 Table wal_process_22 size: 165894
+     📊 Table wal_process_18 size: 346171
+     📊 Table wal_process_22 size: 169249
+     📊 Table wal_process_22 size: 170875
+     📊 Table wal_process_5 size: 170749
+     📊 Table wal_process_8 size: 516292
+     📊 Table wal_process_16 size: 176497
+     📊 Table wal_process_16 size: 178046
+     📊 Table wal_process_16 size: 179677
+     📊 Table wal_process_8 size: 529306
+     📊 Table wal_process_22 size: 183485
+     📊 Table wal_process_5 size: 182853
+     📊 Table wal_process_16 size: 186095
+     📊 Table wal_process_22 size: 188380
+     📊 Table wal_process_8 size: 545732
+     📊 Table wal_process_8 size: 549138
+     📊 Table wal_process_18 size: 370595
+     📊 Table wal_process_22 size: 195030
+     📊 Table wal_process_5 size: 194459
+     📊 Table wal_process_18 size: 375374
+     📊 Table wal_process_8 size: 566027
+     📊 Table wal_process_8 size: 569344
+     📊 Table wal_process_18 size: 380362
+     📊 Table wal_process_5 size: 202446
+     📊 Table wal_process_5 size: 204170
+     📊 Table wal_process_5 size: 205831
+     📊 Table wal_process_5 size: 207667
+     📊 Table wal_process_8 size: 589332
+     📊 Table wal_process_8 size: 592633
+     📊 Table wal_process_18 size: 391720
+     📊 Table wal_process_8 size: 599484
+     📊 Table wal_process_18 size: 394899
+     📊 Table wal_process_8 size: 605938
+     📊 Table wal_process_16 size: 221650
+     📊 Table wal_process_5 size: 220971
+     📊 Table wal_process_18 size: 401779
+     📊 Table wal_process_8 size: 619026
+     📊 Table wal_process_18 size: 405206
+     📊 Table wal_process_5 size: 227734
+     📊 Table wal_process_8 size: 628869
+     📊 Table wal_process_16 size: 233136
+     📊 Table wal_process_22 size: 235503
+     📊 Table wal_process_16 size: 236581
+     📊 Table wal_process_22 size: 238655
+     📊 Table wal_process_8 size: 645636
+     📊 Table wal_process_5 size: 239257
+     📊 Table wal_process_18 size: 420233
+     📊 Table wal_process_22 size: 245587
+     📊 Table wal_process_16 size: 246297
+     📊 Table wal_process_5 size: 246058
+     📊 Table wal_process_5 size: 247643
+     📊 Table wal_process_22 size: 252007
+     📊 Table wal_process_8 size: 672334
+     📊 Table wal_process_16 size: 254538
+     📊 Table wal_process_22 size: 257077
+     📊 Table wal_process_22 size: 258712
+     📊 Table wal_process_18 size: 436845
+     📊 Table wal_process_5 size: 259199
+     📊 Table wal_process_18 size: 440169
+     📊 Table wal_process_22 size: 265485
+     📊 Table wal_process_22 size: 267095
+     📊 Table wal_process_8 size: 702543
+     📊 Table wal_process_8 size: 705649
+     📊 Table wal_process_16 size: 271959
+     📊 Table wal_process_22 size: 273632
+     📊 Table wal_process_16 size: 275189
+     📊 Table wal_process_5 size: 274175
+     📊 Table wal_process_5 size: 275852
+     📊 Table wal_process_16 size: 280226
+     📊 Table wal_process_8 size: 728327
+     📊 Table wal_process_18 size: 459956
+     📊 Table wal_process_18 size: 461717
+     📊 Table wal_process_5 size: 284212
+     📊 Table wal_process_5 size: 285687
+     📊 Table wal_process_18 size: 466714
+     📊 Table wal_process_22 size: 292811
+     📊 Table wal_process_8 size: 751390
+     📊 Table wal_process_8 size: 754592
+     📊 Table wal_process_16 size: 297221
+     📊 Table wal_process_16 size: 298849
+     📊 Table wal_process_8 size: 764563
+     📊 Table wal_process_8 size: 767755
+     📊 Table wal_process_16 size: 304037
+     📊 Table wal_process_16 size: 305700
+     📊 Table wal_process_8 size: 777684
+     📊 Table wal_process_8 size: 781004
+     📊 Table wal_process_16 size: 310665
+     📊 Table wal_process_16 size: 312482
+     📊 Table wal_process_22 size: 314487
+     📊 Table wal_process_16 size: 315882
+     📊 Table wal_process_16 size: 317489
+     📊 Table wal_process_16 size: 319199
+     📊 Table wal_process_8 size: 803758
+     📊 Table wal_process_22 size: 322980
+     📊 Table wal_process_5 size: 321050
+     📊 Table wal_process_5 size: 322838
+     📊 Table wal_process_18 size: 503381
+     📊 Table wal_process_5 size: 326404
+     📊 Table wal_process_8 size: 823587
+     📊 Table wal_process_18 size: 508273
+     📊 Table wal_process_22 size: 334690
+     📊 Table wal_process_8 size: 833325
+     📊 Table wal_process_16 size: 337565
+     📊 Table wal_process_5 size: 336514
+     📊 Table wal_process_16 size: 341216
+     📊 Table wal_process_22 size: 343230
+     📊 Table wal_process_18 size: 519919
+     📊 Table wal_process_8 size: 852333
+     📊 Table wal_process_5 size: 344941
+     📊 Table wal_process_5 size: 346574
+     📊 Table wal_process_5 size: 348456
+     📊 Table wal_process_16 size: 353186
+     📊 Table wal_process_8 size: 868751
+     📊 Table wal_process_5 size: 353295
+     📊 Table wal_process_8 size: 875570
+     📊 Table wal_process_22 size: 360124
+     📊 Table wal_process_8 size: 882152
+     📊 Table wal_process_8 size: 885451
+     📊 Table wal_process_8 size: 888712
+     📊 Table wal_process_8 size: 891929
+     📊 Table wal_process_8 size: 895319
+     📊 Table wal_process_8 size: 898512
+     📊 Table wal_process_5 size: 368380
+     📊 Table wal_process_8 size: 904599
+     📊 Table wal_process_18 size: 550355
+     📊 Table wal_process_5 size: 373542
+     📊 Table wal_process_8 size: 914207
+     📊 Table wal_process_16 size: 380173
+     📊 Table wal_process_5 size: 378705
+     📊 Table wal_process_8 size: 924011
+     📊 Table wal_process_5 size: 382007
+     📊 Table wal_process_22 size: 387299
+     📊 Table wal_process_8 size: 933919
+     📊 Table wal_process_18 size: 565235
+     📊 Table wal_process_8 size: 940393
+     📊 Table wal_process_8 size: 943572
+     📊 Table wal_process_16 size: 396056
+     📊 Table wal_process_5 size: 393474
+     📊 Table wal_process_8 size: 953376
+     📊 Table wal_process_5 size: 396734
+     📊 Table wal_process_22 size: 402317
+     📊 Table wal_process_18 size: 578662
+     📊 Table wal_process_16 size: 406095
+     📊 Table wal_process_18 size: 582055
+     📊 Table wal_process_8 size: 972751
+   • 6 processes: best 5000ms (483724 ops/sec)
+     median 483724 (p50 483724, p90 483724)
+   🔍 WAL Metrics:
+     🔍 Debug - First 5 tables: [wal_process_0: 0, wal_process_1: 0, wal_process_2: 0, wal_process_3: 0, wal_process_4: 0]
+     🔍 Debug - Tables with data: [wal_process_5: 405866, wal_process_7: 181003, wal_process_8: 973894, wal_process_9: 182823, wal_process_11: 182981, wal_process_16: 410210, wal_process_18: 584457, wal_process_21: 183919, wal_process_22: 409392]
+     📁 WAL tables: 9, Total entries: 3514545
+     🔢 Shard 0 sequence: 11673475
+     🔍 Debug - Before force flush:
+       📊 wal_process_5: 405866 entries
+       📊 wal_process_7: 181003 entries
+       📊 wal_process_8: 973894 entries
+       📊 wal_process_9: 182823 entries
+       📊 wal_process_11: 182981 entries
+       📊 wal_process_16: 410210 entries
+       📊 wal_process_18: 584457 entries
+       📊 wal_process_21: 183919 entries
+       📊 wal_process_22: 409392 entries
+
+== Testing with 12 processes ==
+  Trial 1/1...
+     📊 Table wal_process_16 size: 1088
+     📊 Table wal_process_16 size: 2732
+     📊 Table wal_process_13 size: 2188
+     📊 Table wal_process_15 size: 3022
+     📊 Table wal_process_16 size: 7678
+     📊 Table wal_process_13 size: 4688
+     📊 Table wal_process_10 size: 5467
+     📊 Table wal_process_7 size: 12747
+     📊 Table wal_process_10 size: 7127
+     📊 Table wal_process_20 size: 16336
+     📊 Table wal_process_10 size: 8841
+     📊 Table wal_process_13 size: 9659
+     📊 Table wal_process_17 size: 10507
+     📊 Table wal_process_3 size: 11368
+     📊 Table wal_process_17 size: 12146
+     📊 Table wal_process_20 size: 26339
+     📊 Table wal_process_20 size: 27938
+     📊 Table wal_process_17 size: 14640
+     📊 Table wal_process_10 size: 15495
+     📊 Table wal_process_17 size: 16269
+     📊 Table wal_process_7 size: 34469
+     📊 Table wal_process_7 size: 36065
+     📊 Table wal_process_16 size: 37390
+     📊 Table wal_process_15 size: 19767
+     📊 Table wal_process_7 size: 41043
+     📊 Table wal_process_3 size: 21474
+     📊 Table wal_process_3 size: 22289
+     📊 Table wal_process_13 size: 23073
+     📊 Table wal_process_20 size: 48104
+     📊 Table wal_process_16 size: 49054
+     📊 Table wal_process_13 size: 25586
+     📊 Table wal_process_21 size: 26349
+     📊 Table wal_process_13 size: 27162
+     📊 Table wal_process_13 size: 27970
+     📊 Table wal_process_16 size: 57417
+     📊 Table wal_process_21 size: 29711
+     📊 Table wal_process_10 size: 30739
+     📊 Table wal_process_20 size: 63049
+     📊 Table wal_process_16 size: 64029
+     📊 Table wal_process_13 size: 32904
+     📊 Table wal_process_20 size: 68059
+     📊 Table wal_process_10 size: 34855
+     📊 Table wal_process_20 size: 71429
+     📊 Table wal_process_20 size: 73083
+     📊 Table wal_process_13 size: 37077
+     📊 Table wal_process_13 size: 37901
+     📊 Table wal_process_7 size: 77592
+     📊 Table wal_process_13 size: 39549
+     📊 Table wal_process_16 size: 80661
+     📊 Table wal_process_16 size: 82401
+     📊 Table wal_process_10 size: 42321
+     📊 Table wal_process_7 size: 85786
+     📊 Table wal_process_21 size: 44048
+     📊 Table wal_process_21 size: 44884
+     📊 Table wal_process_7 size: 90801
+     📊 Table wal_process_10 size: 46482
+     📊 Table wal_process_7 size: 94104
+     📊 Table wal_process_20 size: 96383
+     📊 Table wal_process_20 size: 98051
+     📊 Table wal_process_3 size: 49771
+     📊 Table wal_process_7 size: 100694
+     📊 Table wal_process_3 size: 51520
+     📊 Table wal_process_21 size: 52424
+     📊 Table wal_process_7 size: 105613
+     📊 Table wal_process_20 size: 107994
+     📊 Table wal_process_20 size: 109645
+     📊 Table wal_process_10 size: 55703
+     📊 Table wal_process_7 size: 112299
+     📊 Table wal_process_13 size: 56995
+     📊 Table wal_process_17 size: 58358
+     📊 Table wal_process_15 size: 59012
+     📊 Table wal_process_20 size: 119734
+     📊 Table wal_process_7 size: 120524
+     📊 Table wal_process_17 size: 61586
+     📊 Table wal_process_13 size: 62036
+     📊 Table wal_process_15 size: 63238
+     📊 Table wal_process_17 size: 63973
+     📊 Table wal_process_21 size: 64996
+     📊 Table wal_process_13 size: 65302
+     📊 Table wal_process_16 size: 132118
+     📊 Table wal_process_7 size: 133898
+     📊 Table wal_process_7 size: 135542
+     📊 Table wal_process_3 size: 69391
+     📊 Table wal_process_21 size: 70118
+     📊 Table wal_process_7 size: 140549
+     📊 Table wal_process_7 size: 142211
+     📊 Table wal_process_16 size: 143670
+     📊 Table wal_process_20 size: 146360
+     📊 Table wal_process_3 size: 74367
+     📊 Table wal_process_16 size: 148578
+     📊 Table wal_process_3 size: 75981
+     📊 Table wal_process_10 size: 76423
+     📊 Table wal_process_10 size: 77229
+     📊 Table wal_process_21 size: 78616
+     📊 Table wal_process_7 size: 157030
+     📊 Table wal_process_17 size: 79766
+     📊 Table wal_process_13 size: 80398
+     📊 Table wal_process_16 size: 162051
+     📊 Table wal_process_16 size: 163718
+     📊 Table wal_process_7 size: 165367
+     📊 Table wal_process_7 size: 167049
+     📊 Table wal_process_3 size: 85241
+     📊 Table wal_process_20 size: 171319
+     📊 Table wal_process_13 size: 86141
+     📊 Table wal_process_7 size: 173652
+     📊 Table wal_process_10 size: 88112
+     📊 Table wal_process_20 size: 177930
+     📊 Table wal_process_7 size: 178643
+     📊 Table wal_process_7 size: 180279
+     📊 Table wal_process_15 size: 91687
+     📊 Table wal_process_15 size: 92538
+     📊 Table wal_process_20 size: 186153
+     📊 Table wal_process_16 size: 186888
+     📊 Table wal_process_16 size: 188527
+     📊 Table wal_process_17 size: 95470
+     📊 Table wal_process_15 size: 96639
+     📊 Table wal_process_14 size: 529
+     📊 Table wal_process_17 size: 98005
+     📊 Table wal_process_18 size: 2164
+     📊 Table wal_process_18 size: 3094
+     📊 Table wal_process_17 size: 100415
+     📊 Table wal_process_4 size: 14102
+     📊 Table wal_process_17 size: 102037
+     📊 Table wal_process_5 size: 6335
+     📊 Table wal_process_13 size: 103654
+     📊 Table wal_process_7 size: 200727
+     📊 Table wal_process_13 size: 105390
+     📊 Table wal_process_14 size: 9799
+     📊 Table wal_process_14 size: 10629
+     📊 Table wal_process_4 size: 33880
+     📊 Table wal_process_5 size: 12269
+     📊 Table wal_process_4 size: 38950
+     📊 Table wal_process_5 size: 13882
+     📊 Table wal_process_4 size: 43861
+     📊 Table wal_process_4 size: 46271
+     📊 Table wal_process_14 size: 16653
+     📊 Table wal_process_4 size: 51294
+     📊 Table wal_process_4 size: 53881
+     📊 Table wal_process_13 size: 115373
+     📊 Table wal_process_7 size: 212202
+     📊 Table wal_process_2 size: 20230
+     📊 Table wal_process_13 size: 117857
+     📊 Table wal_process_5 size: 22242
+     📊 Table wal_process_4 size: 68623
+     📊 Table wal_process_3 size: 121458
+     📊 Table wal_process_3 size: 122227
+     📊 Table wal_process_3 size: 123025
+     📊 Table wal_process_2 size: 26220
+     📊 Table wal_process_13 size: 124001
+     📊 Table wal_process_3 size: 125481
+     📊 Table wal_process_2 size: 28850
+     📊 Table wal_process_14 size: 30363
+     📊 Table wal_process_17 size: 127199
+     📊 Table wal_process_2 size: 31365
+     📊 Table wal_process_4 size: 94867
+     📊 Table wal_process_4 size: 97298
+     📊 Table wal_process_2 size: 34086
+     📊 Table wal_process_13 size: 131471
+     📊 Table wal_process_4 size: 105006
+     📊 Table wal_process_14 size: 37123
+     📊 Table wal_process_2 size: 37205
+     📊 Table wal_process_2 size: 38022
+     📊 Table wal_process_2 size: 38929
+     📊 Table wal_process_17 size: 136319
+     📊 Table wal_process_0 size: 41118
+     📊 Table wal_process_4 size: 122331
+     📊 Table wal_process_3 size: 139355
+     📊 Table wal_process_0 size: 43545
+     📊 Table wal_process_14 size: 45222
+     📊 Table wal_process_14 size: 46065
+     📊 Table wal_process_17 size: 142095
+     📊 Table wal_process_3 size: 143608
+     📊 Table wal_process_4 size: 139371
+     📊 Table wal_process_14 size: 49494
+     📊 Table wal_process_0 size: 49452
+     📊 Table wal_process_14 size: 51157
+     📊 Table wal_process_17 size: 147076
+     📊 Table wal_process_7 size: 243721
+     📊 Table wal_process_2 size: 52357
+     📊 Table wal_process_7 size: 245356
+     📊 Table wal_process_7 size: 246159
+     📊 Table wal_process_7 size: 246989
+     📊 Table wal_process_13 size: 152301
+     📊 Table wal_process_17 size: 153000
+     📊 Table wal_process_18 size: 57564
+     📊 Table wal_process_4 size: 171827
+     📊 Table wal_process_0 size: 59403
+     📊 Table wal_process_4 size: 176572
+     📊 Table wal_process_2 size: 60850
+     📊 Table wal_process_18 size: 61720
+     📊 Table wal_process_17 size: 158816
+     📊 Table wal_process_7 size: 255393
+     📊 Table wal_process_0 size: 64374
+     📊 Table wal_process_18 size: 65083
+     📊 Table wal_process_13 size: 162415
+     📊 Table wal_process_2 size: 66752
+     📊 Table wal_process_7 size: 259505
+     📊 Table wal_process_2 size: 68275
+     📊 Table wal_process_4 size: 203263
+     📊 Table wal_process_2 size: 69939
+     📊 Table wal_process_14 size: 72092
+     📊 Table wal_process_5 size: 71292
+     📊 Table wal_process_2 size: 72343
+     📊 Table wal_process_0 size: 73706
+     📊 Table wal_process_2 size: 73996
+     📊 Table wal_process_4 size: 220218
+     📊 Table wal_process_18 size: 76287
+     📊 Table wal_process_4 size: 224997
+     📊 Table wal_process_0 size: 77972
+     📊 Table wal_process_13 size: 175275
+     📊 Table wal_process_13 size: 176091
+     📊 Table wal_process_5 size: 79659
+     📊 Table wal_process_4 size: 237484
+     📊 Table wal_process_4 size: 239993
+     📊 Table wal_process_2 size: 82289
+     📊 Table wal_process_3 size: 180822
+     📊 Table wal_process_4 size: 247286
+     📊 Table wal_process_17 size: 181466
+     📊 Table wal_process_0 size: 86416
+     📊 Table wal_process_17 size: 183210
+     📊 Table wal_process_4 size: 257026
+     📊 Table wal_process_14 size: 89832
+     📊 Table wal_process_5 size: 88828
+     📊 Table wal_process_0 size: 90632
+     📊 Table wal_process_7 size: 283029
+     📊 Table wal_process_7 size: 283877
+     📊 Table wal_process_18 size: 93088
+     📊 Table wal_process_14 size: 94844
+     📊 Table wal_process_2 size: 94150
+     📊 Table wal_process_4 size: 279407
+     📊 Table wal_process_7 size: 288030
+     📊 Table wal_process_2 size: 96642
+     📊 Table wal_process_0 size: 97985
+     📊 Table wal_process_18 size: 98969
+     📊 Table wal_process_4 size: 291949
+     📊 Table wal_process_13 size: 196746
+     📊 Table wal_process_14 size: 102404
+     📊 Table wal_process_5 size: 101432
+     📊 Table wal_process_3 size: 199958
+     📊 Table wal_process_4 size: 304394
+     📊 Table wal_process_13 size: 200810
+     📊 Table wal_process_4 size: 309346
+     📊 Table wal_process_14 size: 107360
+     📊 Table wal_process_0 size: 107200
+     📊 Table wal_process_4 size: 316875
+     📊 Table wal_process_17 size: 205179
+     📊 Table wal_process_4 size: 321924
+     📊 Table wal_process_7 size: 302116
+     📊 Table wal_process_5 size: 110674
+     📊 Table wal_process_4 size: 329435
+     📊 Table wal_process_4 size: 331912
+     📊 Table wal_process_5 size: 113198
+     📊 Table wal_process_17 size: 211084
+     📊 Table wal_process_17 size: 211830
+     📊 Table wal_process_0 size: 116415
+     📊 Table wal_process_13 size: 212897
+     📊 Table wal_process_3 size: 214936
+     📊 Table wal_process_18 size: 118785
+     📊 Table wal_process_18 size: 119602
+     📊 Table wal_process_4 size: 354430
+     📊 Table wal_process_13 size: 217113
+     📊 Table wal_process_13 size: 217951
+     📊 Table wal_process_4 size: 361929
+     📊 Table wal_process_4 size: 364192
+     📊 Table wal_process_3 size: 221740
+     📊 Table wal_process_18 size: 125464
+     📊 Table wal_process_7 size: 318340
+     📊 Table wal_process_17 size: 223500
+     📊 Table wal_process_4 size: 376663
+     📊 Table wal_process_18 size: 128725
+     📊 Table wal_process_18 size: 129569
+     📊 Table wal_process_4 size: 384158
+     📊 Table wal_process_4 size: 386673
+     📊 Table wal_process_14 size: 133191
+     📊 Table wal_process_5 size: 132310
+     📊 Table wal_process_4 size: 394086
+     📊 Table wal_process_18 size: 134472
+     📊 Table wal_process_18 size: 135292
+     📊 Table wal_process_4 size: 401608
+     📊 Table wal_process_0 size: 137325
+     📊 Table wal_process_4 size: 406587
+     📊 Table wal_process_4 size: 409095
+     📊 Table wal_process_4 size: 411576
+     📊 Table wal_process_2 size: 140140
+     📊 Table wal_process_14 size: 142532
+     📊 Table wal_process_18 size: 142030
+     📊 Table wal_process_17 size: 239270
+     📊 Table wal_process_0 size: 144012
+     📊 Table wal_process_7 size: 336552
+     📊 Table wal_process_5 size: 144837
+     📊 Table wal_process_4 size: 431472
+     📊 Table wal_process_17 size: 243499
+     📊 Table wal_process_4 size: 436386
+     📊 Table wal_process_4 size: 438857
+     📊 Table wal_process_18 size: 149592
+     📊 Table wal_process_18 size: 150441
+     📊 Table wal_process_4 size: 446201
+     📊 Table wal_process_5 size: 151566
+     📊 Table wal_process_18 size: 153046
+     📊 Table wal_process_5 size: 153191
+     📊 Table wal_process_7 size: 346510
+     📊 Table wal_process_7 size: 347315
+     📊 Table wal_process_0 size: 156631
+     📊 Table wal_process_4 size: 463550
+     📊 Table wal_process_4 size: 466002
+     📊 Table wal_process_4 size: 468472
+     📊 Table wal_process_14 size: 160995
+     📊 Table wal_process_18 size: 160534
+     📊 Table wal_process_3 size: 258532
+     📊 Table wal_process_5 size: 161547
+     📊 Table wal_process_5 size: 162348
+     📊 Table wal_process_7 size: 355641
+     📊 Table wal_process_14 size: 166118
+     📊 Table wal_process_4 size: 488380
+     📊 Table wal_process_0 size: 166676
+     📊 Table wal_process_18 size: 167216
+     📊 Table wal_process_14 size: 169575
+     📊 Table wal_process_5 size: 168166
+     📊 Table wal_process_4 size: 500770
+     📊 Table wal_process_3 size: 267699
+     📊 Table wal_process_0 size: 171667
+     📊 Table wal_process_18 size: 172211
+     📊 Table wal_process_4 size: 510569
+     📊 Table wal_process_4 size: 513021
+     📊 Table wal_process_4 size: 515565
+     📊 Table wal_process_7 size: 367219
+     📊 Table wal_process_7 size: 368043
+     📊 Table wal_process_13 size: 272876
+     📊 Table wal_process_4 size: 525539
+     📊 Table wal_process_13 size: 274548
+     📊 Table wal_process_17 size: 275922
+     📊 Table wal_process_13 size: 276145
+     📊 Table wal_process_4 size: 535495
+     📊 Table wal_process_2 size: 182068
+     📊 Table wal_process_5 size: 182543
+     📊 Table wal_process_14 size: 185365
+     📊 Table wal_process_4 size: 545540
+     📊 Table wal_process_17 size: 281906
+     📊 Table wal_process_4 size: 550187
+     📊 Table wal_process_4 size: 552665
+     📊 Table wal_process_5 size: 187709
+     📊 Table wal_process_13 size: 284403
+     📊 Table wal_process_13 size: 285222
+     📊 Table wal_process_14 size: 192120
+     📊 Table wal_process_4 size: 565136
+     📊 Table wal_process_7 size: 383677
+     📊 Table wal_process_4 size: 569968
+     📊 Table wal_process_4 size: 572391
+     📊 Table wal_process_5 size: 194436
+     📊 Table wal_process_17 size: 291831
+     📊 Table wal_process_4 size: 579939
+     📊 Table wal_process_5 size: 196947
+     📊 Table wal_process_18 size: 197530
+     📊 Table wal_process_13 size: 294172
+     📊 Table wal_process_18 size: 199187
+     📊 Table wal_process_4 size: 592174
+     📊 Table wal_process_4 size: 594600
+     📊 Table wal_process_4 size: 597060
+     📊 Table wal_process_4 size: 599407
+     📊 Table wal_process_0 size: 204445
+     📊 Table wal_process_0 size: 205270
+     📊 Table wal_process_14 size: 207200
+     📊 Table wal_process_7 size: 397928
+     📊 Table wal_process_3 size: 305004
+     📊 Table wal_process_4 size: 614282
+     📊 Table wal_process_17 size: 305428
+     📊 Table wal_process_4 size: 619311
+     📊 Table wal_process_14 size: 212018
+     📊 Table wal_process_17 size: 307862
+     📊 Table wal_process_3 size: 310142
+     📊 Table wal_process_3 size: 310906
+     📊 Table wal_process_4 size: 631749
+     📊 Table wal_process_0 size: 215300
+     📊 Table wal_process_2 size: 215799
+     📊 Table wal_process_18 size: 216022
+     📊 Table wal_process_4 size: 641777
+     📊 Table wal_process_4 size: 644282
+     📊 Table wal_process_5 size: 218644
+     📊 Table wal_process_4 size: 649247
+     📊 Table wal_process_5 size: 220321
+     📊 Table wal_process_0 size: 222061
+     📊 Table wal_process_7 size: 413614
+     📊 Table wal_process_17 size: 319370
+     📊 Table wal_process_14 size: 225401
+     📊 Table wal_process_17 size: 321046
+     📊 Table wal_process_17 size: 321883
+     📊 Table wal_process_18 size: 226122
+     📊 Table wal_process_4 size: 671597
+     📊 Table wal_process_3 size: 326065
+     📊 Table wal_process_4 size: 676636
+     📊 Table wal_process_4 size: 679181
+     📊 Table wal_process_0 size: 231309
+     📊 Table wal_process_4 size: 683927
+     📊 Table wal_process_7 size: 423738
+     📊 Table wal_process_0 size: 233818
+     📊 Table wal_process_0 size: 234546
+     📊 Table wal_process_17 size: 330919
+     📊 Table wal_process_4 size: 695851
+     📊 Table wal_process_4 size: 698273
+     📊 Table wal_process_7 size: 428586
+     📊 Table wal_process_14 size: 239470
+     📊 Table wal_process_7 size: 430221
+     📊 Table wal_process_5 size: 239360
+     📊 Table wal_process_0 size: 241187
+     📊 Table wal_process_13 size: 337092
+     📊 Table wal_process_18 size: 241933
+     📊 Table wal_process_7 size: 434434
+     📊 Table wal_process_3 size: 342340
+     📊 Table wal_process_7 size: 436127
+     📊 Table wal_process_13 size: 341336
+     📊 Table wal_process_7 size: 437787
+     📊 Table wal_process_2 size: 248358
+     📊 Table wal_process_7 size: 439410
+     📊 Table wal_process_7 size: 440231
+     📊 Table wal_process_17 size: 345712
+     📊 Table wal_process_4 size: 740158
+     📊 Table wal_process_17 size: 347382
+     📊 Table wal_process_14 size: 253633
+     📊 Table wal_process_17 size: 349045
+     📊 Table wal_process_4 size: 750165
+     📊 Table wal_process_2 size: 255934
+     📊 Table wal_process_7 size: 447053
+   • 12 processes: best 5000ms (611561 ops/sec)
+     median 611561 (p50 611561, p90 611561)
+   🔍 WAL Metrics:
+     🔍 Debug - First 5 tables: [wal_process_0: 256297, wal_process_1: 0, wal_process_2: 256941, wal_process_3: 354157, wal_process_4: 755550]
+     🔍 Debug - Tables with data: [wal_process_0: 256297, wal_process_2: 256941, wal_process_3: 354157, wal_process_4: 755550, wal_process_5: 255323, wal_process_7: 447177, wal_process_10: 96735, wal_process_13: 351615, wal_process_14: 257024, wal_process_15: 96931, wal_process_16: 192523, wal_process_17: 351657, wal_process_18: 255401, wal_process_20: 193373, wal_process_21: 97336]
+     📁 WAL tables: 15, Total entries: 4218040
+     🔢 Shard 0 sequence: 15891515
+     🔍 Debug - Before force flush:
+       📊 wal_process_0: 256297 entries
+       📊 wal_process_2: 256941 entries
+       📊 wal_process_3: 354157 entries
+       📊 wal_process_4: 755550 entries
+       📊 wal_process_5: 255323 entries
+       📊 wal_process_7: 447177 entries
+       📊 wal_process_10: 96735 entries
+       📊 wal_process_13: 351615 entries
+       📊 wal_process_14: 257024 entries
+       📊 wal_process_15: 96931 entries
+       📊 wal_process_16: 192523 entries
+       📊 wal_process_17: 351657 entries
+       📊 wal_process_18: 255401 entries
+       📊 wal_process_20: 193373 entries
+       📊 wal_process_21: 97336 entries
+
+== Testing with 24 processes ==
+  Trial 1/1...
+     📊 Table wal_process_16 size: 699
+     📊 Table wal_process_8 size: 803
+     📊 Table wal_process_12 size: 1128
+     📊 Table wal_process_2 size: 1597
+     📊 Table wal_process_23 size: 4022
+     📊 Table wal_process_5 size: 4935
+     📊 Table wal_process_19 size: 2691
+     📊 Table wal_process_8 size: 3321
+     📊 Table wal_process_10 size: 3725
+     📊 Table wal_process_9 size: 8151
+     📊 Table wal_process_11 size: 4483
+     📊 Table wal_process_14 size: 9872
+     📊 Table wal_process_2 size: 5343
+     📊 Table wal_process_4 size: 5868
+     📊 Table wal_process_10 size: 6206
+     📊 Table wal_process_23 size: 13177
+     📊 Table wal_process_14 size: 14047
+     📊 Table wal_process_16 size: 14882
+     📊 Table wal_process_20 size: 15608
+     📊 Table wal_process_18 size: 8201
+     📊 Table wal_process_16 size: 17392
+     📊 Table wal_process_4 size: 9199
+     📊 Table wal_process_16 size: 19073
+     📊 Table wal_process_6 size: 10017
+     📊 Table wal_process_9 size: 20658
+     📊 Table wal_process_18 size: 10700
+     📊 Table wal_process_8 size: 11324
+     📊 Table wal_process_17 size: 11663
+     📊 Table wal_process_14 size: 24063
+     📊 Table wal_process_2 size: 12316
+     📊 Table wal_process_17 size: 12924
+     📊 Table wal_process_4 size: 13365
+     📊 Table wal_process_20 size: 27172
+     📊 Table wal_process_9 size: 28142
+     📊 Table wal_process_18 size: 14427
+     📊 Table wal_process_0 size: 15004
+     📊 Table wal_process_23 size: 30693
+     📊 Table wal_process_14 size: 31533
+     📊 Table wal_process_23 size: 32359
+     📊 Table wal_process_9 size: 33103
+     📊 Table wal_process_12 size: 16953
+     📊 Table wal_process_16 size: 34957
+     📊 Table wal_process_14 size: 35633
+     📊 Table wal_process_4 size: 18389
+     📊 Table wal_process_15 size: 18868
+     📊 Table wal_process_8 size: 19261
+     📊 Table wal_process_21 size: 733
+     📊 Table wal_process_10 size: 21191
+     📊 Table wal_process_9 size: 40662
+     📊 Table wal_process_21 size: 1989
+     📊 Table wal_process_3 size: 7184
+     📊 Table wal_process_1 size: 5630
+     📊 Table wal_process_1 size: 6469
+     📊 Table wal_process_9 size: 44792
+     📊 Table wal_process_11 size: 26843
+     📊 Table wal_process_3 size: 13487
+     📊 Table wal_process_8 size: 23811
+     📊 Table wal_process_11 size: 29319
+     📊 Table wal_process_1 size: 11492
+     📊 Table wal_process_9 size: 49735
+     📊 Table wal_process_5 size: 44305
+     📊 Table wal_process_7 size: 6953
+     📊 Table wal_process_4 size: 33544
+     📊 Table wal_process_11 size: 34313
+     📊 Table wal_process_3 size: 24701
+     📊 Table wal_process_3 size: 25971
+     📊 Table wal_process_8 size: 27995
+     📊 Table wal_process_12 size: 28238
+     📊 Table wal_process_9 size: 57184
+     📊 Table wal_process_6 size: 29126
+     📊 Table wal_process_11 size: 40118
+     📊 Table wal_process_3 size: 33411
+     📊 Table wal_process_19 size: 41728
+     📊 Table wal_process_23 size: 49593
+     📊 Table wal_process_11 size: 43465
+     📊 Table wal_process_12 size: 31580
+     📊 Table wal_process_8 size: 32182
+     📊 Table wal_process_11 size: 45937
+     📊 Table wal_process_3 size: 42206
+     📊 Table wal_process_11 size: 47613
+     📊 Table wal_process_7 size: 14861
+     📊 Table wal_process_10 size: 49463
+     📊 Table wal_process_1 size: 31592
+     📊 Table wal_process_4 size: 51092
+     📊 Table wal_process_12 size: 35318
+     📊 Table wal_process_1 size: 34052
+     📊 Table wal_process_19 size: 53426
+     📊 Table wal_process_3 size: 53435
+     📊 Table wal_process_17 size: 37194
+     📊 Table wal_process_11 size: 55967
+     📊 Table wal_process_4 size: 56935
+     📊 Table wal_process_4 size: 57749
+     📊 Table wal_process_6 size: 38717
+     📊 Table wal_process_11 size: 59260
+     📊 Table wal_process_11 size: 60097
+     📊 Table wal_process_10 size: 61097
+     📊 Table wal_process_5 size: 59259
+     📊 Table wal_process_3 size: 65976
+     📊 Table wal_process_9 size: 82188
+     📊 Table wal_process_6 size: 41609
+     📊 Table wal_process_17 size: 42175
+     📊 Table wal_process_10 size: 66110
+     📊 Table wal_process_13 size: 24128
+     📊 Table wal_process_8 size: 43567
+     📊 Table wal_process_3 size: 74675
+     📊 Table wal_process_9 size: 88009
+     📊 Table wal_process_4 size: 70446
+     📊 Table wal_process_6 size: 44925
+     📊 Table wal_process_19 size: 71666
+     📊 Table wal_process_4 size: 72941
+     📊 Table wal_process_3 size: 82245
+     📊 Table wal_process_8 size: 46875
+     📊 Table wal_process_4 size: 75443
+     📊 Table wal_process_11 size: 75897
+     📊 Table wal_process_3 size: 87208
+     📊 Table wal_process_10 size: 77798
+     📊 Table wal_process_21 size: 29883
+     📊 Table wal_process_9 size: 97984
+     📊 Table wal_process_10 size: 80292
+     📊 Table wal_process_3 size: 93470
+     📊 Table wal_process_3 size: 94685
+     📊 Table wal_process_12 size: 50713
+     📊 Table wal_process_13 size: 32516
+     📊 Table wal_process_11 size: 84235
+     📊 Table wal_process_1 size: 66567
+     📊 Table wal_process_3 size: 100924
+     📊 Table wal_process_1 size: 68259
+     📊 Table wal_process_23 size: 71994
+     📊 Table wal_process_11 size: 88447
+     📊 Table wal_process_19 size: 89060
+     📊 Table wal_process_4 size: 90455
+     📊 Table wal_process_12 size: 54913
+     📊 Table wal_process_9 size: 110337
+     📊 Table wal_process_9 size: 111149
+     📊 Table wal_process_9 size: 111976
+     📊 Table wal_process_9 size: 112792
+     📊 Table wal_process_9 size: 113612
+     📊 Table wal_process_10 size: 96174
+     📊 Table wal_process_11 size: 96825
+     📊 Table wal_process_11 size: 97633
+     📊 Table wal_process_8 size: 58965
+     📊 Table wal_process_19 size: 99002
+     📊 Table wal_process_19 size: 99826
+     📊 Table wal_process_4 size: 101310
+     📊 Table wal_process_9 size: 120320
+     📊 Table wal_process_9 size: 121124
+     📊 Table wal_process_21 size: 42400
+     📊 Table wal_process_1 size: 85754
+     📊 Table wal_process_13 size: 43350
+     📊 Table wal_process_11 size: 105865
+     📊 Table wal_process_23 size: 81624
+     📊 Table wal_process_21 size: 44409
+     📊 Table wal_process_9 size: 127017
+     📊 Table wal_process_4 size: 109433
+     📊 Table wal_process_17 size: 64672
+     📊 Table wal_process_7 size: 46224
+     📊 Table wal_process_3 size: 139706
+     📊 Table wal_process_11 size: 112609
+     📊 Table wal_process_10 size: 113770
+     📊 Table wal_process_10 size: 114618
+     📊 Table wal_process_13 size: 48331
+     📊 Table wal_process_19 size: 115516
+     📊 Table wal_process_4 size: 116880
+     📊 Table wal_process_7 size: 49564
+     📊 Table wal_process_17 size: 68823
+     📊 Table wal_process_11 size: 119299
+     📊 Table wal_process_10 size: 120439
+     📊 Table wal_process_13 size: 51223
+     📊 Table wal_process_11 size: 121864
+     📊 Table wal_process_19 size: 122107
+     📊 Table wal_process_4 size: 123476
+     📊 Table wal_process_13 size: 52830
+     📊 Table wal_process_4 size: 125175
+     📊 Table wal_process_4 size: 125985
+     📊 Table wal_process_1 size: 107912
+     📊 Table wal_process_5 size: 92393
+     📊 Table wal_process_12 size: 73824
+     📊 Table wal_process_9 size: 147969
+     📊 Table wal_process_12 size: 74657
+     📊 Table wal_process_10 size: 131311
+     📊 Table wal_process_7 size: 56728
+     📊 Table wal_process_9 size: 151293
+     📊 Table wal_process_17 size: 76310
+     📊 Table wal_process_9 size: 153004
+     📊 Table wal_process_9 size: 153837
+     📊 Table wal_process_4 size: 136020
+     📊 Table wal_process_6 size: 77917
+     📊 Table wal_process_4 size: 137675
+     📊 Table wal_process_8 size: 78981
+     📊 Table wal_process_17 size: 79286
+     📊 Table wal_process_6 size: 79556
+     📊 Table wal_process_3 size: 183422
+     📊 Table wal_process_1 size: 123009
+     📊 Table wal_process_19 size: 141915
+     📊 Table wal_process_3 size: 187149
+     📊 Table wal_process_10 size: 144628
+     📊 Table wal_process_21 size: 63241
+     📊 Table wal_process_17 size: 82650
+     📊 Table wal_process_3 size: 192164
+     📊 Table wal_process_11 size: 147705
+     📊 Table wal_process_5 size: 102841
+     📊 Table wal_process_1 size: 130545
+     📊 Table wal_process_9 size: 168943
+     📊 Table wal_process_21 size: 66083
+     📊 Table wal_process_1 size: 133038
+     📊 Table wal_process_23 size: 104611
+     📊 Table wal_process_3 size: 202083
+     📊 Table wal_process_19 size: 153617
+     📊 Table wal_process_1 size: 136375
+     📊 Table wal_process_1 size: 137202
+     📊 Table wal_process_12 size: 88010
+     📊 Table wal_process_1 size: 138855
+     📊 Table wal_process_8 size: 89020
+     📊 Table wal_process_9 size: 178190
+     📊 Table wal_process_4 size: 160104
+     📊 Table wal_process_13 size: 71125
+     📊 Table wal_process_13 size: 71538
+     📊 Table wal_process_1 size: 143871
+     📊 Table wal_process_5 size: 110436
+     📊 Table wal_process_23 size: 110485
+     📊 Table wal_process_19 size: 164183
+     📊 Table wal_process_10 size: 166523
+     📊 Table wal_process_3 size: 221611
+     📊 Table wal_process_21 size: 74504
+     📊 Table wal_process_17 size: 93948
+     📊 Table wal_process_11 size: 169479
+     📊 Table wal_process_10 size: 170588
+     📊 Table wal_process_19 size: 170047
+     📊 Table wal_process_6 size: 95444
+     📊 Table wal_process_17 size: 96042
+     📊 Table wal_process_19 size: 172579
+     📊 Table wal_process_3 size: 232975
+     📊 Table wal_process_10 size: 175596
+     📊 Table wal_process_19 size: 175045
+     📊 Table wal_process_3 size: 236697
+     📊 Table wal_process_9 size: 196430
+     📊 Table wal_process_9 size: 197252
+     📊 Table wal_process_11 size: 179335
+     📊 Table wal_process_10 size: 180603
+     📊 Table wal_process_3 size: 242940
+     📊 Table wal_process_3 size: 244148
+     📊 Table wal_process_1 size: 163761
+     📊 Table wal_process_1 size: 164586
+   • 24 processes: best 5001ms (397219 ops/sec)
+     median 397219 (p50 397219, p90 397219)
+   🔍 WAL Metrics:
+     🔍 Debug - First 5 tables: [wal_process_0: 18890, wal_process_1: 165311, wal_process_2: 18690, wal_process_3: 247760, wal_process_4: 184239]
+     🔍 Debug - Tables with data: [wal_process_0: 18890, wal_process_1: 165311, wal_process_2: 18690, wal_process_3: 247760, wal_process_4: 184239, wal_process_5: 120752, wal_process_6: 101624, wal_process_7: 82991, wal_process_8: 102006, wal_process_9: 202965, wal_process_10: 184721, wal_process_11: 184177, wal_process_12: 101855, wal_process_13: 82816, wal_process_14: 37512, wal_process_15: 18947, wal_process_16: 37671, wal_process_17: 101824, wal_process_18: 18707, wal_process_19: 183348, wal_process_20: 37394, wal_process_21: 82781, wal_process_23: 120451]
+     📁 WAL tables: 23, Total entries: 2437432
+     🔢 Shard 0 sequence: 18328947
+     🔍 Debug - Before force flush:
+       📊 wal_process_0: 18890 entries
+       📊 wal_process_1: 165311 entries
+       📊 wal_process_2: 18690 entries
+       📊 wal_process_3: 247760 entries
+       📊 wal_process_4: 184239 entries
+       📊 wal_process_5: 120752 entries
+       📊 wal_process_6: 101624 entries
+       📊 wal_process_7: 82991 entries
+       📊 wal_process_8: 102006 entries
+       📊 wal_process_9: 202965 entries
+       📊 wal_process_10: 184721 entries
+       📊 wal_process_11: 184177 entries
+       📊 wal_process_12: 101855 entries
+       📊 wal_process_13: 82816 entries
+       📊 wal_process_14: 37512 entries
+       📊 wal_process_15: 18947 entries
+       📊 wal_process_16: 37671 entries
+       📊 wal_process_17: 101824 entries
+       📊 wal_process_18: 18707 entries
+       📊 wal_process_19: 183348 entries
+       📊 wal_process_20: 37394 entries
+       📊 wal_process_21: 82781 entries
+       📊 wal_process_23: 120451 entries
+
+🎉 WAL-Only Benchmark Complete!
+💡 If WAL performance scales poorly, check:
+   • WAL file I/O bottlenecks
+   • Shard locking contention
+   • Disk I/O saturation

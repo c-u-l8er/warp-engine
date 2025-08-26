@@ -41,13 +41,9 @@ rescue
   error -> IO.puts("Error getting sequence: #{inspect(error)}")
 end
 
-# Try to force flush all shards
-IO.puts("\n=== Testing Force Flush ===")
-try do
-  result = WarpEngine.WALCoordinator.force_flush_all()
-  IO.puts("Force flush result: #{inspect(result)}")
-rescue
-  error -> IO.puts("Error force flushing: #{inspect(error)}")
-end
+# Test force flush
+IO.puts("=== Testing Force Flush ===")
+result = WarpEngine.WAL.force_flush()
+IO.puts("Force flush result: #{inspect(result)}")
 
 IO.puts("\n=== Test Complete ===")

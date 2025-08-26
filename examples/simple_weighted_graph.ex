@@ -1,9 +1,20 @@
 defmodule SimpleWeightedGraph do
   @moduledoc """
-  Simple Weighted Property Graph using Enhanced ADT WITHOUT WarpEngine Integration
+  Simple Weighted Property Graph using Enhanced ADT WITH Physics Annotations
 
-  This is a minimal version to test if the basic Enhanced ADT functionality works
-  after the WAL and shard updates.
+  This module demonstrates how to define graph data structures with physics annotations
+  that enable database performance optimizations including:
+
+  - **Gravitational Mass**: Affects shard placement and routing for optimal data access
+  - **Quantum Entanglement Potential**: Enables smart correlations and relationship discovery
+  - **Temporal Weight**: Optimizes data lifecycle management and archival
+  - **Quantum Entanglement Groups**: Enables wormhole routing for related data
+
+  These physics annotations allow WarpEngine to automatically optimize:
+  - Data placement across spacetime shards
+  - Wormhole network creation for fast cross-references
+  - Quantum correlation detection for smart pre-fetching
+  - Temporal data lifecycle management
   """
 
   use EnhancedADT
@@ -16,28 +27,40 @@ defmodule SimpleWeightedGraph do
 
   @doc """
   Graph Node - Represents entities in the weighted property graph.
+
+  Physics annotations enable database performance optimizations:
+  - importance_score → gravitational_mass (affects shard placement and routing)
+  - activity_level → quantum_entanglement_potential (enables smart correlations)
+  - created_at → temporal_weight (optimizes data lifecycle management)
+  - properties → quantum_entanglement_group (groups related data for wormhole routing)
   """
   defproduct GraphNode do
     field id :: String.t()
     field label :: String.t()
-    field properties :: map()
-    field importance_score :: float()
-    field activity_level :: float()
-    field created_at :: DateTime.t()
+    field properties :: map(), physics: :quantum_entanglement_group
+    field importance_score :: float(), physics: :gravitational_mass
+    field activity_level :: float(), physics: :quantum_entanglement_potential
+    field created_at :: DateTime.t(), physics: :temporal_weight
     field node_type :: atom()
   end
 
   # Graph Edge - Represents weighted relationships between nodes
+  # Physics annotations enable database performance optimizations:
+  # - weight → gravitational_mass (affects shard placement and routing)
+  # - frequency → quantum_entanglement_potential (enables smart correlations)
+  # - created_at → temporal_weight (optimizes data lifecycle management)
+  # - properties → quantum_entanglement_group (groups related data for wormhole routing)
+  # - relationship_strength → quantum_entanglement_potential (correlation strength)
   defproduct GraphEdge do
     field id :: String.t()
     field from_node :: String.t()
     field to_node :: String.t()
-    field weight :: float()
-    field frequency :: float()
+    field weight :: float(), physics: :gravitational_mass
+    field frequency :: float(), physics: :quantum_entanglement_potential
     field relationship_type :: atom()
-    field properties :: map()
-    field created_at :: DateTime.t()
-    field relationship_strength :: float()
+    field properties :: map(), physics: :quantum_entanglement_group
+    field created_at :: DateTime.t(), physics: :temporal_weight
+    field relationship_strength :: float(), physics: :quantum_entanglement_potential
   end
 
   # Weighted Graph Structure - Sum type representing different graph topologies
@@ -59,12 +82,14 @@ defmodule SimpleWeightedGraph do
   end
 
   # Graph Cluster - Represents clustered subgraphs
+  # Physics annotations enable database performance optimizations:
+  # - cohesion_score → quantum_entanglement_potential (enables smart correlations and wormhole routing)
   defproduct GraphCluster do
     field id :: String.t()
     field nodes :: [GraphNode.t()]
     field internal_edges :: [GraphEdge.t()]
     field cluster_type :: atom()
-    field cohesion_score :: float()
+    field cohesion_score :: float(), physics: :quantum_entanglement_potential
   end
 
   # =============================================================================

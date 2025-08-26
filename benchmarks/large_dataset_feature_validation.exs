@@ -80,13 +80,13 @@ case Process.whereis(WarpEngine.WALCoordinator) do
     Logger.error("   Current bench_mode: #{Application.get_env(:warp_engine, :bench_mode)}")
     Logger.error("   Current use_numbered_shards: #{Application.get_env(:warp_engine, :use_numbered_shards)}")
 
-    # Try to start WALCoordinator manually if it's not running
-    Logger.info("🔄 Attempting to start WALCoordinator manually...")
-    case WarpEngine.WALCoordinator.start_link([]) do
+    # Try to start WAL system manually if it's not running
+    Logger.info("🔄 Attempting to start WAL system manually...")
+    case WarpEngine.WAL.start_link([]) do
       {:ok, pid} ->
-        Logger.info("✅ WALCoordinator started manually: #{inspect(pid)}")
+        Logger.info("✅ WAL system started manually: #{inspect(pid)}")
       {:error, reason} ->
-        Logger.error("❌ Failed to start WALCoordinator manually: #{inspect(reason)}")
+        Logger.error("❌ Failed to start WAL system manually: #{inspect(reason)}")
     end
   pid when is_pid(pid) ->
     Logger.info("✅ WALCoordinator running: #{inspect(pid)}")

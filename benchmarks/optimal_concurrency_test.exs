@@ -141,7 +141,7 @@ Enum.each(concurrency_levels, fn procs ->
   stats = format_stats.(results)
   best = Enum.max_by(results, & &1.ops_sec)
   IO.puts("   • #{procs} processes: best #{best.ms}ms (#{best.ops_sec} ops/sec), median #{stats.median} (p50 #{stats.p50}, p90 #{stats.p90})")
-  # Cooldown + flush between levels
-  _ = WarpEngine.WALCoordinator.force_flush_all()
+  # Force flush all WAL data to ensure clean state
+  _ = WarpEngine.WAL.force_flush()
   Process.sleep(500)
 end)

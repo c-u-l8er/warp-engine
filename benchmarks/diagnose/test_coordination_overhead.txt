@@ -1181,390 +1181,96 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      └─ lib/warp_engine/intelligent_load_balancer.ex:109:5: WarpEngine.IntelligentLoadBalancer.route_operation/3
 
 
-16:55:20.177 [info] 🚀 Starting WarpEngine Database Application...
+16:38:03.253 [info] 🚀 Starting WarpEngine Database Application...
 
-16:55:20.180 [info] ⚙️  Application Configuration:
+16:38:03.257 [info] ⚙️  Application Configuration:
 
-16:55:20.188 [info]   data_root: "/home/travis/Projects/warp-engine/data"
+16:38:03.267 [info]   data_root: "/home/travis/Projects/warp-engine/data"
 
-16:55:20.188 [info]   Entanglement rules: using defaults
+16:38:03.267 [info]   Entanglement rules: using defaults
 
-16:55:20.188 [info] 🔧 Starting supervisor with 1 children
-     warning: variable "item_num" is unused (if the variable is not meant to be used, prefix it with an underscore)
+16:38:03.267 [info] 🔧 Starting supervisor with 1 children
+     warning: found quoted atom "spacetime_shard_0" but the quotes are not required. Atoms made exclusively of ASCII letters, numbers, underscores, beginning with a letter or underscore, and optionally ending with ! or ? do not require quotes
      │
- 286 │       items: Enum.map(1..:rand.uniform(5), fn item_num ->
-     │                                               ~
+ 280 │       shard_0_pid = Process.whereis(:"spacetime_shard_0")
+     │                                     ~
      │
-     └─ benchmarks/large_dataset_feature_validation.exs:286:47
+     └─ benchmarks/diagnose/test_coordination_overhead.exs:280:37
 
-     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 363 │ test_intelligent_caching = fn worker_id, keys ->
-     │                               ~
-     │
-     └─ benchmarks/large_dataset_feature_validation.exs:363:31
-
-     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 383 │ test_gravitational_routing = fn worker_id, keys ->
-     │                                            ~
-     │
-     └─ benchmarks/large_dataset_feature_validation.exs:383:44
-
-     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 383 │ test_gravitational_routing = fn worker_id, keys ->
-     │                                 ~
-     │
-     └─ benchmarks/large_dataset_feature_validation.exs:383:33
-
-     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 402 │ test_quantum_entanglement = fn worker_id, keys ->
-     │                                           ~
-     │
-     └─ benchmarks/large_dataset_feature_validation.exs:402:43
-
-     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 402 │ test_quantum_entanglement = fn worker_id, keys ->
-     │                                ~
-     │
-     └─ benchmarks/large_dataset_feature_validation.exs:402:32
-
-     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 419 │ test_entropy_monitoring = fn worker_id, keys ->
-     │                                         ~
-     │
-     └─ benchmarks/large_dataset_feature_validation.exs:419:41
-
-     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 419 │ test_entropy_monitoring = fn worker_id, keys ->
-     │                              ~
-     │
-     └─ benchmarks/large_dataset_feature_validation.exs:419:30
-
-     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 438 │ test_per_shard_wal = fn worker_id, keys ->
-     │                                    ~
-     │
-     └─ benchmarks/large_dataset_feature_validation.exs:438:36
-
-     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 438 │ test_per_shard_wal = fn worker_id, keys ->
-     │                         ~
-     │
-     └─ benchmarks/large_dataset_feature_validation.exs:438:25
-
-🚀 Large Dataset Feature Validation Benchmark
-
-16:55:20.973 [info] ✨ All WarpEngine features enabled (using Phase 6.6 WAL system)
-================================================================================
-📊 Target Dataset: 0.1GB (10000 keys)
-🔧 Shards: 24
-⚡ Concurrency Levels: 1,2,4,6,12,24
-⏱️  Warmup: 5000ms, Measure: 10000ms, Trials: 1
-
-16:55:20.977 [error] ❌ WALCoordinator not running - Phase 9 per-shard WAL disabled!
-
-16:55:20.977 [error]    This will cause negative concurrency scaling
-
-16:55:20.977 [error]    Check if bench_mode is properly set to false
-
-16:55:20.977 [error]    Current bench_mode: false
-
-16:55:20.977 [error]    Current use_numbered_shards: true
-
-16:55:20.977 [info] 🔄 Attempting to start WAL system manually...
-
-16:55:20.977 [info] 🚀 Initializing WAL Persistence Revolution...
-
-16:55:20.977 [info] 📁 WAL data_root: /home/travis/Projects/warp-engine/data
-
-16:55:20.977 [info] 📁 Creating WAL directory: /home/travis/Projects/warp-engine/data/wal
-
-16:55:20.977 [info] 📄 Opening WAL file: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
-
-16:55:20.977 [info] ⚡ Setting up atomic counter...
-
-16:55:20.978 [info] 🏗️ Building WAL state...
-
-16:55:20.978 [info] ✅ WAL system initialized: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
-
-16:55:20.978 [info] ⚡ Ready for 250,000+ ops/second performance!
+🔧 Coordination Overhead Test Configuration:
+   bench_mode: false
+   use_numbered_shards: true
+   num_numbered_shards: 24
+   Concurrency levels: 1,2,4,6,12,24
 ⏳ Waiting for ETS tables...
-
-16:55:20.985 [info] ✅ WAL system started manually: #PID<0.437.0>
 ✅ All 24 ETS tables ready in 0ms
 
-16:55:20.986 [info] 📦 Generating 0.1GB dataset (10000 keys)...
+🎯 Process Coordination Overhead Test
+============================================================
 
-16:55:21.757 [info] 📦 Dataset generated in 771.0ms
-
-16:55:21.757 [info] 📊 Total keys: 30000
-
-16:55:21.757 [info] 💾 Estimated size: 0.01MB
-
-16:55:21.757 [info] 🚀 Loading 30000 keys into WarpEngine...
-
-16:55:21.760 [info] 💾 Memory before loading: 110.82MB
-
-16:55:21.820 [info] 📦 Loaded chunk 1/6 - Memory: 111.0MB
-
-16:56:00.959 [info] ✅ Dataset loaded in 40756ms
-
-16:56:00.959 [info] 💾 Memory after loading: 174.69MB
-
-16:56:00.959 [info] 💾 Memory increase: 63.87MB
-
-16:56:00.959 [info] 🎯 Starting feature validation benchmarks...
-
-16:56:00.980 [info] 🧹 Memory before benchmarks: 156.45MB
-
-16:56:00.980 [info] ⚛️  Quantum entanglement tests enabled
-
-16:56:00.980 [info] 🔗 Testing intelligent prefetching and entanglement collapse
-
-16:56:00.980 [info] 🔧 Initializing quantum index system...
-
-16:56:00.980 [info] ⚛️  Initializing quantum entanglement system...
-
-16:56:00.981 [info] ✨ Quantum entanglement system ready for superposition
-
-16:56:00.981 [info] ✅ Quantum index system ready
-
-16:56:00.981 [info] 🌊 Initializing entropy monitoring system...
-
-16:56:00.986 [info] ✅ Entropy registry started
-
-16:56:00.986 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
-
-16:56:00.987 [info] 💾 Entropy persistence initialized: /home/travis/Projects/warp-engine/data/entropy/cosmic_entropy
-
-16:56:00.987 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 30000ms
-
-16:56:00.987 [info] ✅ Entropy monitoring system ready
-
-16:56:00.987 [info] 
 == Testing with 1 processes ==
+  Trial 1/3...
+  Trial 2/3...
+  Trial 3/3...
+   • 1 processes: best 5000ms (67030 ops/sec)
+     median 66090 (p50 66090, p90 67030)
+   🔗 Coordination Metrics:
 
-16:56:00.987 [info]   Trial 1/1...
-
-16:56:19.328 [info]     Trial 1 Results:
-
-16:56:19.328 [info]       Duration: 13090ms
-
-16:56:19.328 [info]       Total Operations: 13600
-
-16:56:19.329 [info]       Operations/sec: 1038
-
-16:56:19.329 [info]       Detailed Breakdown:
-
-16:56:19.329 [info]         Cache ops: 3400
-
-16:56:19.329 [info]         Routing ops: 3400
-
-16:56:19.329 [info]         Entanglement ops: 1700
-
-16:56:19.329 [info]         Entropy ops: 3400
-
-16:56:19.329 [info]         WAL ops: 1700
-
-16:56:19.329 [info]         Total counted: 13600
-
-16:56:19.329 [info]    • 1 processes: best 13090ms (1038 ops/sec)
-
-16:56:19.329 [info]      median 1038 (p50 1038, p90 1038)
-
-16:56:19.329 [info]      Best trial detailed breakdown:
-
-16:56:19.329 [info]        Cache: 3400 ops
-
-16:56:19.329 [info]        Routing: 3400 ops
-
-16:56:19.329 [info]        Entanglement: 1700 ops
-
-16:56:19.329 [info]        Entropy: 3400 ops
-
-16:56:19.329 [info]        WAL: 1700 ops
-
-16:56:19.329 [info]        Total counted: 13600
-
-16:56:19.329 [info]        vs Total reported: 13600
-
-16:56:19.329 [info]        Discrepancy: 0
-
-16:56:20.331 [info] 
 == Testing with 2 processes ==
+  Trial 1/3...
+  Trial 2/3...
+  Trial 3/3...
+   • 2 processes: best 5000ms (132110 ops/sec)
+     median 123980 (p50 123980, p90 132110)
+   🔗 Coordination Metrics:
 
-16:56:20.331 [info]   Trial 1/1...
-
-16:56:39.651 [info]     Trial 1 Results:
-
-16:56:39.651 [info]       Duration: 12179ms
-
-16:56:39.651 [info]       Total Operations: 12800
-
-16:56:39.651 [info]       Operations/sec: 1050
-
-16:56:39.651 [info]       Detailed Breakdown:
-
-16:56:39.651 [info]         Cache ops: 3200
-
-16:56:39.651 [info]         Routing ops: 3200
-
-16:56:39.652 [info]         Entanglement ops: 1600
-
-16:56:39.652 [info]         Entropy ops: 3200
-
-16:56:39.652 [info]         WAL ops: 1600
-
-16:56:39.652 [info]         Total counted: 12800
-
-16:56:39.652 [info]    • 2 processes: best 12179ms (1050 ops/sec)
-
-16:56:39.652 [info]      median 1050 (p50 1050, p90 1050)
-
-16:56:39.652 [info]      Best trial detailed breakdown:
-
-16:56:39.652 [info]        Cache: 3200 ops
-
-16:56:39.652 [info]        Routing: 3200 ops
-
-16:56:39.652 [info]        Entanglement: 1600 ops
-
-16:56:39.652 [info]        Entropy: 3200 ops
-
-16:56:39.652 [info]        WAL: 1600 ops
-
-16:56:39.652 [info]        Total counted: 12800
-
-16:56:39.652 [info]        vs Total reported: 12800
-
-16:56:39.652 [info]        Discrepancy: 0
-
-16:56:39.122 [info] 
 == Testing with 4 processes ==
+  Trial 1/3...
+  Trial 2/3...
+  Trial 3/3...
+   • 4 processes: best 5000ms (264540 ops/sec)
+     median 227440 (p50 227440, p90 264540)
+   🔗 Coordination Metrics:
+   🔍 Coordination Analysis:
+     ❌ WALCoordinator not running
+     🔄 Total processes: 136
 
-16:56:39.122 [info]   Trial 1/1...
-
-16:57:10.243 [info]     Trial 1 Results:
-
-16:57:10.243 [info]       Duration: 20312ms
-
-16:57:10.243 [info]       Total Operations: 12800
-
-16:57:10.243 [info]       Operations/sec: 630
-
-16:57:10.243 [info]       Detailed Breakdown:
-
-16:57:10.243 [info]         Cache ops: 3200
-
-16:57:10.244 [info]         Routing ops: 3200
-
-16:57:10.244 [info]         Entanglement ops: 1600
-
-16:57:10.244 [info]         Entropy ops: 3200
-
-16:57:10.244 [info]         WAL ops: 1600
-
-16:57:10.244 [info]         Total counted: 12800
-
-16:57:10.244 [info]    • 4 processes: best 20312ms (630 ops/sec)
-
-16:57:10.244 [info]      median 630 (p50 630, p90 630)
-
-16:57:10.244 [info]      Best trial detailed breakdown:
-
-16:57:10.244 [info]        Cache: 3200 ops
-
-16:57:10.244 [info]        Routing: 3200 ops
-
-16:57:10.244 [info]        Entanglement: 1600 ops
-
-16:57:10.244 [info]        Entropy: 3200 ops
-
-16:57:10.244 [info]        WAL: 1600 ops
-
-16:57:10.244 [info]        Total counted: 12800
-
-16:57:10.244 [info]        vs Total reported: 12800
-
-16:57:10.244 [info]        Discrepancy: 0
-
-16:57:10.244 [info]    🔍 Testing feature effectiveness...
-
-16:57:10.649 [info]      📊 Cache hit rate: N/A
-
-16:57:10.649 [info]      🌊 Entropy score: 0.47107127996185294
-
-16:57:10.683 [info]      🌌 Active entanglements: 2419
-
-16:57:11.685 [info] 
 == Testing with 6 processes ==
+  Trial 1/3...
+  Trial 2/3...
+  Trial 3/3...
+   • 6 processes: best 5000ms (389090 ops/sec)
+     median 357008 (p50 357008, p90 389090)
+   🔗 Coordination Metrics:
+   🔍 Coordination Analysis:
+     ❌ WALCoordinator not running
+     🔄 Total processes: 136
 
-16:57:11.685 [info]   Trial 1/1...
-
-16:57:35.022 [info]     Trial 1 Results:
-
-16:57:35.022 [info]       Duration: 17441ms
-
-16:57:35.022 [info]       Total Operations: 9600
-
-16:57:35.022 [info]       Operations/sec: 550
-
-16:57:35.022 [info]       Detailed Breakdown:
-
-16:57:35.022 [info]         Cache ops: 2400
-
-16:57:35.022 [info]         Routing ops: 2400
-
-16:57:35.022 [info]         Entanglement ops: 1200
-
-16:57:35.022 [info]         Entropy ops: 2400
-
-16:57:35.022 [info]         WAL ops: 1200
-
-16:57:35.022 [info]         Total counted: 9600
-
-16:57:35.022 [info]    • 6 processes: best 17441ms (550 ops/sec)
-
-16:57:35.022 [info]      median 550 (p50 550, p90 550)
-
-16:57:35.022 [info]      Best trial detailed breakdown:
-
-16:57:35.022 [info]        Cache: 2400 ops
-
-16:57:35.022 [info]        Routing: 2400 ops
-
-16:57:35.022 [info]        Entanglement: 1200 ops
-
-16:57:35.022 [info]        Entropy: 2400 ops
-
-16:57:35.022 [info]        WAL: 1200 ops
-
-16:57:35.022 [info]        Total counted: 9600
-
-16:57:35.022 [info]        vs Total reported: 9600
-
-16:57:35.022 [info]        Discrepancy: 0
-
-16:57:35.022 [info]    🔍 Testing feature effectiveness...
-
-16:57:35.439 [info]      📊 Cache hit rate: N/A
-
-16:57:35.439 [info]      🌊 Entropy score: 1.3182629541267394
-
-16:57:35.446 [info]      🌌 Active entanglements: 2471
-
-16:57:36.449 [info] 
 == Testing with 12 processes ==
+  Trial 1/3...
+  Trial 2/3...
+  Trial 3/3...
+   • 12 processes: best 5000ms (757460 ops/sec)
+     median 744290 (p50 744290, p90 757460)
+   🔗 Coordination Metrics:
+   🔍 Coordination Analysis:
+     ❌ WALCoordinator not running
+     🔄 Total processes: 136
 
-16:57:36.450 [info]   Trial 1/1...
+== Testing with 24 processes ==
+  Trial 1/3...
+  Trial 2/3...
+  Trial 3/3...
+   • 24 processes: best 5001ms (1363997 ops/sec)
+     median 1346600 (p50 1346600, p90 1363997)
+   🔗 Coordination Metrics:
+   🔍 Coordination Analysis:
+     ❌ WALCoordinator not running
+     🔄 Total processes: 136
 
-BREAK: (a)bort (A)bort with dump (c)ontinue (p)roc info (i)nfo
-       (l)oaded (v)ersion (k)ill (D)b-tables (d)istribution
+🎉 Coordination Overhead Test Complete!
+💡 If coordination overhead causes poor scaling, check:
+   • WALCoordinator message queue buildup
+   • Coordinator response times
+   • Process communication overhead
+   • Shard process bottlenecks

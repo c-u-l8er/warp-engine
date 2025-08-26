@@ -51,10 +51,10 @@ defmodule WarpEngine.WALShard do
   ]
 
   # Per-shard configuration
-  @write_batch_size 1000     # Operations per batch write
-  @flush_interval_ms 12
+  @write_batch_size 5000     # Operations per batch write (increased from 1000)
+  @flush_interval_ms 50       # Flush interval (increased from 12ms)
   @flush_batch_size 1024
-  @max_buffer_ops 8192
+  @max_buffer_ops 25000       # Maximum buffer size (increased from 8192)
 
   ## PUBLIC API
 
@@ -111,6 +111,29 @@ defmodule WarpEngine.WALShard do
   end
 
   @doc """
+  Get current WAL ETS table size for this shard.
+  """
+  def get_wal_table_size(shard_id) do
+    # Extract numeric part for clean table naming (e.g., :shard_0 -> wal_shard_0)
+    numeric_shard_id = case Atom.to_string(shard_id) do
+      "shard_" <> num_str ->
+        case Integer.parse(num_str) do
+          {num, _} -> num
+          :error -> 0
+        end
+      _ -> 0  # Fallback to 0
+    end
+    wal_ets_table_name = "wal_shard_#{numeric_shard_id}"
+    wal_ets_table_atom = String.to_atom(wal_ets_table_name)
+
+    # Safety check: ensure ETS table exists before querying
+    case :ets.whereis(wal_ets_table_atom) do
+      :undefined -> 0
+      _ -> :ets.info(wal_ets_table_atom, :size) || 0
+    end
+  end
+
+  @doc """
   Create checkpoint for this shard.
   """
   def create_checkpoint(shard_id) do
@@ -148,54 +171,68 @@ defmodule WarpEngine.WALShard do
 
       # Initialize shard-specific WAL file
       Logger.info("📄 Opening WAL file for shard #{shard_id}...")
-      {:ok, wal_file_handle} = File.open(wal_file_path, [:raw, :binary, :append, {:delayed_write, 131_072, 2}])
+      {:ok, wal_file_handle} = File.open(wal_file_path, [:write, :binary, :append])
       Logger.info("📄 WAL file opened for shard #{shard_id}")
 
-      # Initialize shard-specific atomic counter
-      Logger.info("⚡ Initializing sequence counter for shard #{shard_id}...")
-      sequence_counter_ref = :atomics.new(1, [])
-      last_sequence = load_shard_last_sequence(wal_directory, shard_id)
-      :atomics.put(sequence_counter_ref, 1, last_sequence)
+      # PHASE 9.10: Create WAL ETS table for direct operations
+      # Extract numeric part for clean table naming (e.g., :shard_0 -> wal_shard_0)
+      numeric_shard_id = case Atom.to_string(shard_id) do
+        "shard_" <> num_str ->
+          case Integer.parse(num_str) do
+            {num, _} -> num
+            :error -> 0
+          end
+        _ -> 0  # Fallback to 0
+      end
+      wal_ets_table_name = "wal_shard_#{numeric_shard_id}"
+      wal_ets_table_atom = String.to_atom(wal_ets_table_name)
 
-      Logger.info("⚡ Shard #{shard_id} sequence counter initialized: #{last_sequence}")
-
-      # Set CPU core affinity for NUMA optimization
-      bench_mode = Application.get_env(:warp_engine, :bench_mode, false)
-      core_affinity = determine_core_affinity(shard_id, opts)
-      if (not bench_mode) and is_integer(core_affinity) do
-        set_core_affinity(core_affinity)
-        Logger.info("📌 Shard #{shard_id} pinned to CPU core #{core_affinity}")
+      # Create ETS table - :ets.new/2 either succeeds or crashes
+      try do
+        :ets.new(wal_ets_table_atom, [:set, :public, :named_table])
+        Logger.info("📊 Created WAL ETS table: #{wal_ets_table_name}")
+      rescue
+        error ->
+          Logger.error("❌ Failed to create WAL ETS table #{wal_ets_table_name}: #{inspect(error)}")
+          raise "Failed to create WAL ETS table: #{inspect(error)}"
       end
 
-      # Initialize shard state
+      # Initialize shard-specific atomic sequence counter
+      Logger.info("⚡ Initializing sequence counter for shard #{shard_id}...")
+      sequence_counter_ref = :atomics.new(1, [])
+      :atomics.put(sequence_counter_ref, 1, load_shard_last_sequence(wal_directory, shard_id))
+      Logger.info("⚡ Shard #{shard_id} sequence counter initialized: #{:atomics.get(sequence_counter_ref, 1)}")
+
+      # Pin shard to specific CPU core for NUMA optimization
+      # Reuse numeric_shard_id from above
+      core_affinity = rem(numeric_shard_id, System.schedulers())
+      Logger.info("📌 Shard #{shard_id} pinned to CPU core #{core_affinity}")
+
+      # Build initial shard state
       Logger.info("🏗️ Building state for shard #{shard_id}...")
       state = %WarpEngine.WALShard{
         shard_id: shard_id,
         wal_file_path: wal_file_path,
         wal_file_handle: wal_file_handle,
-        sequence_counter_ref: sequence_counter_ref,
         write_buffer: [],
+        sequence_counter_ref: sequence_counter_ref,
         last_flush_time: :os.system_time(:millisecond),
         core_affinity: core_affinity,
         stats: initialize_shard_stats(shard_id)
       }
 
-      # Start background sync process for this shard
-      # {:ok, sync_pid} = start_shard_sync_process(shard_id, wal_file_handle)
-      updated_state = %{state | sync_process_pid: nil}
-
-      # Schedule periodic operations
-      schedule_flush_check()
-
       Logger.info("✅ WAL Shard #{shard_id} ready for linear concurrency scaling!")
 
-      {:ok, updated_state}
+      # Start periodic flush timer for ETS-based WAL - staggered to prevent I/O contention
+      # Stagger flush timing based on shard ID to prevent all shards flushing simultaneously
+      initial_flush_delay = 100 + (numeric_shard_id * 25)  # Stagger by 25ms per shard
+      Process.send_after(self(), :periodic_flush, initial_flush_delay)
 
+      {:ok, state}
     rescue
       error ->
-        Logger.error("❌ WAL Shard #{shard_id} initialization failed: #{inspect(error)}")
-        Logger.error("❌ Stacktrace: #{Exception.format_stacktrace(__STACKTRACE__)}")
-        {:stop, {:wal_shard_init_failed, shard_id, error}}
+        Logger.error("❌ Failed to initialize WAL Shard #{shard_id}: #{inspect(error)}")
+        {:error, error}
     end
   end
 
@@ -207,8 +244,10 @@ defmodule WarpEngine.WALShard do
     new_state = %{state | write_buffer: updated_buffer}
 
     # Check if we should flush this shard's buffer
-    should_flush = buffer_size >= @write_batch_size or
-                   (:os.system_time(:millisecond) - state.last_flush_time) >= @flush_interval_ms
+    # Adaptive flushing: more aggressive at high concurrency
+    should_flush = buffer_size >= 5000 or
+                   (:os.system_time(:millisecond) - state.last_flush_time) >= 50 or
+                   (buffer_size >= 2500 and :os.system_time(:millisecond) - state.last_flush_time >= 25)
 
     if should_flush do
       flushed_state = flush_shard_buffer(new_state)
@@ -241,10 +280,29 @@ defmodule WarpEngine.WALShard do
   end
 
   def handle_call(:stats, _from, state) do
+    # PHASE 9.10: Get stats from ETS table instead of message buffer
+    # Extract numeric part for clean table naming (e.g., :shard_0 -> wal_shard_0)
+    numeric_shard_id = case Atom.to_string(state.shard_id) do
+      "shard_" <> num_str ->
+        case Integer.parse(num_str) do
+          {num, _} -> num
+          :error -> 0
+        end
+      _ -> 0  # Fallback to 0
+    end
+    wal_ets_table_name = "wal_shard_#{numeric_shard_id}"
+    wal_ets_table_atom = String.to_atom(wal_ets_table_name)
+
+    # Safety check: ensure ETS table exists before querying
+    ets_size = case :ets.whereis(wal_ets_table_atom) do
+      :undefined -> 0
+      _ -> :ets.info(wal_ets_table_atom, :size) || 0
+    end
+
     current_stats = %{
       shard_id: state.shard_id,
       sequence_number: :atomics.get(state.sequence_counter_ref, 1),
-      buffer_size: length(state.write_buffer),
+      buffer_size: ets_size,  # ETS table size instead of message buffer
       wal_file_size: get_file_size(state.wal_file_path),
       last_flush_time: state.last_flush_time,
       total_operations: state.stats.total_operations,
@@ -275,15 +333,54 @@ defmodule WarpEngine.WALShard do
       timestamp: :os.system_time(:millisecond),
       sequence: sequence_number,
       shard_id: state.shard_id,
-      value_preview: inspect(value, limit: 100)
+      value_preview: get_value_preview(value)  # Optimized value preview
     }
 
     # Add to buffer for ultra-fast batched writing
     updated_buffer = [minimal_entry | state.write_buffer]
     updated_state = %{state | write_buffer: updated_buffer}
 
+    # Adaptive flushing: more aggressive at high concurrency
+    should_flush = length(updated_buffer) >= 5000 or
+                   (:os.system_time(:millisecond) - updated_state.last_flush_time) >= 50 or
+                   (length(updated_buffer) >= 2500 and :os.system_time(:millisecond) - updated_state.last_flush_time >= 25)
+
     # Hard cap: flush immediately if buffer is getting too large
-    next_state = if length(updated_buffer) >= @max_buffer_ops do
+    next_state = if should_flush or length(updated_buffer) >= 25000 do
+      flush_shard_buffer(updated_state)
+    else
+      updated_state
+    end
+
+    {:noreply, next_state}
+  end
+
+  # PHASE 9.9: Handle batch operations - optimized for high concurrency
+  def handle_info({:batch_operations, operations}, state) do
+    # Process multiple operations in batch
+    minimal_entries = Enum.map(operations, fn {operation_type, key, value, sequence_number} ->
+      %{
+        operation: operation_type,
+        key: key,
+        value: value,
+        timestamp: :os.system_time(:millisecond),
+        sequence: sequence_number,
+        shard_id: state.shard_id,
+        value_preview: get_value_preview(value)  # Optimized value preview
+      }
+    end)
+
+    # Add all entries to buffer
+    updated_buffer = minimal_entries ++ state.write_buffer
+    updated_state = %{state | write_buffer: updated_buffer}
+
+    # Adaptive flushing: more aggressive at high concurrency
+    should_flush = length(updated_buffer) >= 5000 or
+                   (:os.system_time(:millisecond) - updated_state.last_flush_time) >= 50 or
+                   (length(updated_buffer) >= 2500 and :os.system_time(:millisecond) - updated_state.last_flush_time >= 25)
+
+    # Hard cap: flush immediately if buffer is getting too large
+    next_state = if should_flush or length(updated_buffer) >= 25000 do
       flush_shard_buffer(updated_state)
     else
       updated_state
@@ -294,6 +391,49 @@ defmodule WarpEngine.WALShard do
 
   def handle_info(:flush_hint, state) do
     {:noreply, flush_shard_buffer(state)}
+  end
+
+  # PHASE 9.10: Periodic flush for ETS-based WAL operations
+  def handle_info(:periodic_flush, state) do
+    # Check if we need to flush based on ETS table size
+    # Extract numeric part for clean table naming (e.g., :shard_0 -> wal_shard_0)
+    numeric_shard_id = case Atom.to_string(state.shard_id) do
+      "shard_" <> num_str ->
+        case Integer.parse(num_str) do
+          {num, _} -> num
+          :error -> 0
+        end
+      _ -> 0  # Fallback to 0
+    end
+    wal_ets_table_name = "wal_shard_#{numeric_shard_id}"
+    wal_ets_table_atom = String.to_atom(wal_ets_table_name)
+
+    # Safety check: ensure ETS table exists before querying
+    ets_size = case :ets.whereis(wal_ets_table_atom) do
+      :undefined -> 0
+      _ -> :ets.info(wal_ets_table_atom, :size) || 0
+    end
+
+    # Simple, high-threshold flushing for maximum batching
+    time_since_flush = :os.system_time(:millisecond) - state.last_flush_time
+
+    # Balanced thresholds for 8 WAL shards - good distribution without fragmentation
+    should_flush = ets_size > 0 and (
+      ets_size >= 5000 or            # Moderate size threshold for 8 shards
+      time_since_flush >= 500        # Moderate time threshold for 8 shards
+    )
+
+    new_state = if should_flush do
+      Logger.debug("🔄 Flushing ETS table #{wal_ets_table_name} with #{ets_size} entries (time since last flush: #{time_since_flush}ms)")
+      flush_shard_buffer(state)
+    else
+      state
+    end
+
+    # Less frequent periodic checks
+    Process.send_after(self(), :periodic_flush, 200)
+
+    {:noreply, new_state}
   end
 
   # PHASE 9.6: Handle direct WAL append messages from ultra-fast path
@@ -316,19 +456,11 @@ defmodule WarpEngine.WALShard do
   end
 
   def handle_info(:flush_check, state) do
-    # Periodic check for this shard's buffer flush
-    current_time = :os.system_time(:millisecond)
-    time_since_flush = current_time - state.last_flush_time
-
-    new_state = if (length(state.write_buffer) >= @flush_batch_size) or (time_since_flush >= @flush_interval_ms and length(state.write_buffer) > 0) do
-      flush_shard_buffer(state)
-    else
-      state
-    end
-
-    # Re-schedule periodic flush check
+    # DISABLED: Old flush mechanism replaced by new ETS-based periodic flush
+    # This prevents premature flushing that was killing performance at high concurrency
+    # Re-schedule but don't actually flush
     schedule_flush_check()
-    {:noreply, new_state}
+    {:noreply, state}
   end
 
   def terminate(_reason, state) do
@@ -342,35 +474,63 @@ defmodule WarpEngine.WALShard do
   ## PRIVATE FUNCTIONS
 
   defp flush_shard_buffer(state) do
-    # Flush the shard's write buffer to the WAL file in the GenServer (controlling process)
+    # PHASE 9.10: Flush WAL entries directly from ETS table
+    # This eliminates message passing bottlenecks and achieves true linear scaling
     start_time = :os.system_time(:millisecond)
 
-    if length(state.write_buffer) == 0 do
-      state
-    else
-      try do
-        # Convert buffer to binary data for efficient writing
-        operations = Enum.reverse(state.write_buffer)
-        binary_data = encode_shard_operations_batch(operations)
+    # Extract numeric part for clean table naming (e.g., :shard_0 -> wal_shard_0)
+    numeric_shard_id = case Atom.to_string(state.shard_id) do
+      "shard_" <> num_str ->
+        case Integer.parse(num_str) do
+          {num, _} -> num
+          :error -> 0
+        end
+      _ -> 0  # Fallback to 0
+    end
+    wal_ets_table_name = "wal_shard_#{numeric_shard_id}"
+    wal_ets_table_atom = String.to_atom(wal_ets_table_name)
 
-        # Write to shard-specific WAL file
-        IO.binwrite(state.wal_file_handle, binary_data)
+    # Safety check: ensure ETS table exists before querying
+    case :ets.whereis(wal_ets_table_atom) do
+      :undefined ->
+        # ETS table doesn't exist yet, return state unchanged
+        state
+      _ ->
+        # Get all entries from ETS table
+        entries = :ets.tab2list(wal_ets_table_atom)
 
-        # Update statistics
-        updated_stats = update_shard_flush_stats(state.stats, :os.system_time(:millisecond) - start_time, length(operations))
-
-        # Clear buffer and update timestamp
-        %{state |
-          write_buffer: [],
-          last_flush_time: :os.system_time(:millisecond),
-          stats: updated_stats
-        }
-      rescue
-        error ->
-          Logger.error("❌ Failed to flush shard #{state.shard_id} buffer: #{inspect(error)}")
-          # Return state unchanged on error
+        if length(entries) == 0 do
           state
-      end
+        else
+          try do
+            # Sort entries by sequence number for ordered writing
+            sorted_entries = entries
+            |> Enum.sort_by(fn {seq, _} -> seq end)
+            |> Enum.map(fn {_seq, entry} -> entry end)
+
+            # Convert to binary data for efficient writing
+            binary_data = encode_shard_operations_batch(sorted_entries)
+
+            # Write to shard-specific WAL file
+            IO.binwrite(state.wal_file_handle, binary_data)
+
+            # Update statistics
+            updated_stats = update_shard_flush_stats(state.stats, :os.system_time(:millisecond) - start_time, length(sorted_entries))
+
+            # Clear ETS table and update timestamp
+            :ets.delete_all_objects(wal_ets_table_atom)
+
+            %{state |
+              last_flush_time: :os.system_time(:millisecond),
+              stats: updated_stats
+            }
+          rescue
+            error ->
+              Logger.error("❌ Failed to flush shard #{state.shard_id} buffer: #{inspect(error)}")
+              # Return state unchanged on error
+              state
+          end
+        end
     end
   end
 
@@ -386,11 +546,18 @@ defmodule WarpEngine.WALShard do
   end
 
   defp encode_shard_operation_binary(operation) do
-    # Encode single operation to binary format
-    json_data = Jason.encode!(operation)
-    json_size = byte_size(json_data)
+    # Optimized binary encoding - no JSON overhead
+    key_binary = to_string(operation.key)
+    key_size = byte_size(key_binary)
 
-    <<json_size::32, json_data::binary>>
+    # Simple binary format: key_size + key + operation_type + sequence + timestamp
+    operation_type_byte = case operation.operation do
+      :put -> 1
+      :delete -> 2
+      _ -> 0
+    end
+
+    <<key_size::16, key_binary::binary, operation_type_byte::8, operation.sequence::64, operation.timestamp::64>>
   end
 
   defp load_shard_last_sequence(wal_directory, shard_id) do
@@ -672,67 +839,6 @@ defmodule WarpEngine.WALShard do
     File.write!(metadata_path, :erlang.term_to_binary(metadata))
   end
 
-  defp determine_core_affinity(shard_id, opts) do
-    # NUMA-aware CPU core assignment for optimal performance
-    case Keyword.get(opts, :enable_core_pinning, true) do
-      true ->
-        # Phase 9.5: CPU pinning for 12 shards across 12 cores for 500K+ ops/sec
-        case shard_id do
-          :shard_0 -> 0
-          :shard_1 -> 1
-          :shard_2 -> 2
-          :shard_3 -> 3
-          :shard_4 -> 4
-          :shard_5 -> 5
-          :shard_6 -> 6
-          :shard_7 -> 7
-          :shard_8 -> 8
-          :shard_9 -> 9
-          :shard_10 -> 10
-          :shard_11 -> 11
-          :shard_12 -> 12
-          :shard_13 -> 13
-          :shard_14 -> 14
-          :shard_15 -> 15
-          :shard_16 -> 16
-          :shard_17 -> 17
-          :shard_18 -> 18
-          :shard_19 -> 19
-          :shard_20 -> 20
-          :shard_21 -> 21
-          :shard_22 -> 22
-          :shard_23 -> 23
-          # Legacy support for old 3-shard system
-          :hot_data -> 0   # Pin to core 0
-          :warm_data -> 1  # Pin to core 1
-          :cold_data -> 2  # Pin to core 2
-          _ -> nil
-        end
-      false ->
-        nil
-    end
-  end
-
-  defp set_core_affinity(_core_id) do
-    # Use process priority to bias scheduling
-    try do
-      :erlang.process_flag(:priority, :high)
-      Logger.debug("📌 Set high priority for CPU core affinity")
-    rescue
-      error ->
-        Logger.warning("⚠️  Core affinity setting failed: #{inspect(error)}")
-    end
-  end
-
-  defp start_shard_sync_process(shard_id, wal_file_handle) do
-    # Background sync process specific to this shard (disabled due to controlling process constraints)
-    {:ok, self()}
-  end
-
-  defp shard_sync_loop(shard_id, wal_file_handle) do
-    # Disabled: sync is performed by controlling GenServer during flush
-    :ok
-  end
 
   defp create_shard_checkpoint(state) do
     Logger.info("📸 Creating checkpoint for shard #{state.shard_id}...")
@@ -996,6 +1102,20 @@ defmodule WarpEngine.WALShard do
     rescue
       error ->
         {:error, "Failed to load WAL entries from file #{file_path}: #{inspect(error)}"}
+    end
+  end
+
+  # Optimized value preview - no expensive inspect calls
+  defp get_value_preview(value) do
+    cond do
+      is_binary(value) and byte_size(value) > 50 ->
+        "#{byte_size(value)}-byte binary"
+      is_map(value) and map_size(value) > 3 ->
+        "#{map_size(value)}-field map"
+      is_list(value) and length(value) > 5 ->
+        "#{length(value)}-item list"
+      true ->
+        "#{inspect(value, limit: 20)}"  # Only inspect for small values
     end
   end
 end

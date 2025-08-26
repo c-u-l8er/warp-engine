@@ -81,8 +81,8 @@ defmodule WarpEngine.Application do
       (if disable_batcher, do: nil, else: {WarpEngine.OperationBatcher, []}),
       # Phase 9.2: Intelligent Load Balancer - optimizes performance at all concurrency levels
       (if disable_ilb, do: nil, else: {WarpEngine.IntelligentLoadBalancer, []}),
-      # Phase 9.1: WAL Coordinator with per-shard processes - eliminates concurrency bottleneck
-      (if bench_mode, do: nil, else: {WarpEngine.WALCoordinator, config}),
+      # WALCoordinator DISABLED - using only main WAL system for zero coordination overhead
+      # (if bench_mode, do: nil, else: {WarpEngine.WALCoordinator, config}),
       # Legacy WAL (single process) for compatibility with TemporalShard and tests expecting :warp_engine.WAL
       (if bench_mode, do: nil, else: {WarpEngine.WAL, config}),
       # Main WarpEngine Database GenServer

@@ -254,27 +254,6 @@ Enum.each(concurrency_levels, fn procs ->
   if procs >= 4 do
     IO.puts("   🔍 Coordination Analysis:")
 
-    # Check WALCoordinator process info
-    coordinator_pid = Process.whereis(WarpEngine.WALCoordinator)
-    if coordinator_pid do
-      try do
-        # Check if coordinator is responsive
-        start_check = System.monotonic_time(:millisecond)
-        _ = GenServer.call(WarpEngine.WALCoordinator, :get_current_state, 1000)
-        response_time = System.monotonic_time(:millisecond) - start_check
-
-        IO.puts("     ⚡ Coordinator response time: #{response_time}ms")
-
-        if response_time > 100 do
-          IO.puts("     ⚠️  Slow coordinator response detected")
-        end
-      rescue
-        _ -> IO.puts("     ❌ Coordinator not responsive")
-      end
-    else
-      IO.puts("     ❌ WALCoordinator not running")
-    end
-
     # Check shard process states
     try do
       shard_0_pid = Process.whereis(:"spacetime_shard_0")
@@ -296,7 +275,6 @@ end)
 
 IO.puts("\n🎉 Coordination Overhead Test Complete!")
 IO.puts("💡 If coordination overhead causes poor scaling, check:")
-IO.puts("   • WALCoordinator message queue buildup")
 IO.puts("   • Coordinator response times")
 IO.puts("   • Process communication overhead")
 IO.puts("   • Shard process bottlenecks")
