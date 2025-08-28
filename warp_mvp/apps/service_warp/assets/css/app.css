@@ -1,0 +1,24 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Custom ServiceWarp styles */
+.service-warp-container {
+  @apply min-h-screen bg-gray-50;
+}
+
+.service-warp-header {
+  @apply bg-white shadow-sm border-b border-gray-200;
+}
+
+.service-warp-card {
+  @apply bg-white shadow rounded-lg;
+}
+
+.service-warp-button {
+  @apply bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium;
+}
+
+.service-warp-button-secondary {
+  @apply bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md text-sm font-medium;
+}
