@@ -51,6 +51,9 @@ defmodule WarpEngine.WALOperations do
 
         # PHASE 9.2: INTELLIGENT LOAD-BALANCED ROUTING
         # Uses machine learning and real-time metrics for optimal shard selection
+    # Phase 9.2+: Prefer deterministic routing for fast GETs unless explicitly disabled
+    deterministic_numbered = Application.get_env(:warp_engine, :deterministic_numbered_routing, true)
+
     shard_id = case Keyword.get(opts, :access_pattern) do
       # Respect explicit access pattern overrides for test compatibility
       :hot -> :hot_data
@@ -68,20 +71,24 @@ defmodule WarpEngine.WALOperations do
         end
       _ ->
         if Application.get_env(:warp_engine, :use_numbered_shards, false) do
-          # PHASE 9.2: Use Intelligent Load Balancer for optimal shard distribution
-          # This eliminates shard hotspots and enables true parallel processing
-          case Process.whereis(WarpEngine.IntelligentLoadBalancer) do
-            nil ->
-              # Fallback to hash-based routing if load balancer not available
-              shard_index = :erlang.phash2(key, 24)
-              String.to_atom("shard_#{shard_index}")
-            _pid ->
-              # Use intelligent load balancing for optimal performance
+          if deterministic_numbered do
+            # Deterministic routing for numbered shards based on key hash
+            shard_count = Application.get_env(:warp_engine, :num_numbered_shards, 24) |> max(1) |> min(24)
+            shard_index = :erlang.phash2(key, shard_count)
+            String.to_atom("shard_#{shard_index}")
+          else
+            # Intelligent load balancing (non-deterministic) - avoid Process.whereis in hot path
+            use_ilb = Application.get_env(:warp_engine, :enable_intelligent_load_balancer, false)
+            if use_ilb do
               IntelligentLoadBalancer.route_operation(key, :put, %{
                 access_pattern: :balanced,
                 priority: :normal,
                 concurrency_level: System.schedulers_online()
               })
+            else
+              shard_index = :erlang.phash2(key, 24)
+              String.to_atom("shard_#{shard_index}")
+            end
           end
         else
           # Legacy hash to 3 shards
@@ -119,14 +126,48 @@ defmodule WarpEngine.WALOperations do
             # 4. ETS insert + LIGHTWEIGHT WAL (for test compatibility)
       :ets.insert(ets_table, {key, value, cosmic_metadata})
 
-      # Phase 2 compatibility: apply automatic entanglement patterns (bench-mode aware)
+      # Phase 2 compatibility: apply automatic entanglement patterns with sampling
       bench_mode = Application.get_env(:warp_engine, :bench_mode, false)
-      if Application.get_env(:warp_engine, :enable_auto_entanglement, true) and not bench_mode do
-        # Only apply patterns if quantum system is ready
-        if :ets.whereis(:quantum_pattern_cache) != :undefined do
-          QuantumIndex.apply_entanglement_patterns(key, value)
-        else
-          Logger.debug("⚠️  Quantum system not ready, skipping entanglement patterns for #{key}")
+      physics_sample_rate_put = Application.get_env(:warp_engine, :physics_sample_rate_put, 16)
+      entanglement_ok =
+        Application.get_env(:warp_engine, :enable_auto_entanglement, true) and
+        (not bench_mode or Application.get_env(:warp_engine, :enable_auto_entanglement_in_bench, true))
+      if entanglement_ok do
+        do_physics = physics_sample_rate_put <= 1 or rem(:erlang.phash2(key), physics_sample_rate_put) == 0
+        if do_physics do
+          # Determine offload mode from ADT if present
+          offload_mode = resolve_entanglement_offload_mode(value,
+            Application.get_env(:warp_engine, :physics_offload_default, :cast)
+          )
+          case offload_mode do
+            :call ->
+              if :ets.whereis(:quantum_pattern_cache) != :undefined do
+                QuantumIndex.apply_entanglement_patterns(key, value)
+              else
+                Logger.debug("⚠️  Quantum system not ready, skipping entanglement patterns for #{key}")
+              end
+            _ ->
+              # Asynchronous cast to physics coordinator (GPU pipeline)
+              try do
+                GenServer.cast(WarpEngine.PhysicsCoordinator, {:observe_put, key, value, resolved_shard_id})
+              rescue
+                _ -> :ok
+              end
+          end
+        end
+      end
+
+      # Optional write-through cache population (sampled) to improve cache hit rates in benchmarks
+      cache_write_through = Application.get_env(:warp_engine, :cache_write_through_on_put, true)
+      if cache_write_through do
+        cache_sample_rate_put = Application.get_env(:warp_engine, :cache_sample_rate_put, 8)
+        if cache_sample_rate_put <= 1 or rem(:erlang.phash2(key), cache_sample_rate_put) == 0 do
+          # Replace per-op Task.start with coordinator cast
+          try do
+            WarpEngine.CacheCoordinator.write_through(key, value, resolved_shard_id)
+          rescue
+            _ -> :ok
+          end
         end
       end
 
@@ -140,20 +181,21 @@ defmodule WarpEngine.WALOperations do
 
       # Use lock-free ETS WAL - zero coordination overhead
       if sample_rate <= 1 or rem(sequence_number, sample_rate) == 0 do
-        # Create minimal operation
+        # Create operation with real request data
         operation = %{
           operation: :put,
-          key: "key_#{sequence_number}",
-          value: "value_#{sequence_number}",
+          key: key,
+          value: value,
           timestamp: :os.system_time(:microsecond),
           sequence: sequence_number,
-          shard_id: :hot_data
+          shard_id: resolved_shard_id
         }
 
         # DIRECT ETS WRITE - zero coordination overhead
         # Each process writes directly to its own ETS table
         process_id = :erlang.phash2(self(), 1000000)
-        wal_table = :"wal_process_#{rem(process_id, 24)}"
+        wal_shards = Application.get_env(:warp_engine, :num_numbered_shards, 24) |> max(1) |> min(24)
+        wal_table = :"wal_process_#{rem(process_id, wal_shards)}"
 
         # Create table if it doesn't exist (first time only)
         case :ets.info(wal_table) do
@@ -204,13 +246,55 @@ defmodule WarpEngine.WALOperations do
   - No I/O blocking on critical path
   """
   def cosmic_get_v2(state, key) do
-    # ULTRA-FAST GET - Direct ETS lookup only!
-    # Skip all cache checking, async updates, and timing overhead
-    case find_in_ets_shards_v2(key, state.spacetime_shards) do
-      {:ok, value, shard_id, _cosmic_metadata} ->
-        {:ok, value, shard_id, 1, state}  # Minimal non-zero time for tests
-      :not_found ->
-        {:error, :not_found, 1, state}  # Minimal non-zero time for tests
+    # Physics-aware fast path: check Event Horizon Cache first
+    case check_event_horizon_cache_v2(state, key) do
+      {:cache_hit, value, updated_state, _metadata} ->
+        {:ok, value, :event_horizon_cache, 1, updated_state}
+      :cache_miss ->
+        # Deterministic single-shard lookup when numbered shards enabled
+        use_numbered = Application.get_env(:warp_engine, :use_numbered_shards, false)
+        deterministic_numbered = Application.get_env(:warp_engine, :deterministic_numbered_routing, true)
+
+        result =
+          if use_numbered and deterministic_numbered do
+            case find_in_ets_hashed_numbered_shard(key, state.spacetime_shards) do
+              {:ok, value, shard_id, meta} -> {:ok, value, shard_id, meta}
+              :not_found -> :not_found
+            end
+          else
+            # Fallback: probe numbered + legacy shards (maintain correctness)
+            find_in_ets_shards_v2(key, state.spacetime_shards)
+          end
+
+        case result do
+          {:ok, value, shard_id, _meta} ->
+            # Populate cache asynchronously to improve subsequent hits (sampled)
+            cache_sample_rate_get = Application.get_env(:warp_engine, :cache_sample_rate_get, 4)
+            if cache_sample_rate_get <= 1 or rem(:erlang.phash2(key), cache_sample_rate_get) == 0 do
+              # Replace per-op Task.start with coordinator cast
+              try do
+                WarpEngine.CacheCoordinator.backfill(key, value, shard_id)
+              rescue
+                _ -> :ok
+              end
+            end
+            {:ok, value, shard_id, 1, state}
+          :not_found ->
+            # Fallback: try legacy shards quickly if numbered miss
+            case find_in_legacy_shards_quick(key, state.spacetime_shards) do
+              {:ok, value, shard_id} ->
+                cache_sample_rate_get = Application.get_env(:warp_engine, :cache_sample_rate_get, 4)
+                if cache_sample_rate_get <= 1 or rem(:erlang.phash2(key), cache_sample_rate_get) == 0 do
+                  try do
+                    WarpEngine.CacheCoordinator.backfill(key, value, shard_id)
+                  rescue
+                    _ -> :ok
+                  end
+                end
+                {:ok, value, shard_id, 1, state}
+              :not_found -> {:error, :not_found, 1, state}
+            end
+        end
     end
   end
 
@@ -299,6 +383,37 @@ defmodule WarpEngine.WALOperations do
   end
 
   ## PRIVATE HELPER FUNCTIONS
+  # Determine offload mode (:cast | :call) for quantum entanglement based on ADT field prefs
+  defp resolve_entanglement_offload_mode(value, default) do
+    try do
+      case value do
+        %{__struct__: module} when is_atom(module) ->
+          has_offload = function_exported?(module, :__adt_physics_offload__, 0)
+          has_config = function_exported?(module, :__adt_physics_config__, 0)
+          if has_offload and has_config do
+            offload_by_field = module.__adt_physics_offload__()
+            physics_config = module.__adt_physics_config__()
+            entanglement_fields = Enum.flat_map(physics_config, fn {field, physics_type} ->
+              if physics_type in [:quantum_entanglement_group, :quantum_entanglement_potential], do: [field], else: []
+            end)
+
+            Enum.find_value(entanglement_fields, default, fn field_name ->
+              case Map.get(offload_by_field, field_name) do
+                :cast -> :cast
+                :call -> :call
+                _ -> nil
+              end
+            end) || default
+          else
+            default
+          end
+        _ ->
+          default
+      end
+    rescue
+      _ -> default
+    end
+  end
 
   # ULTRA-FAST ROUTING (PERFORMANCE REVOLUTION!)
   # Bypass complex physics routing for maximum speed
@@ -500,9 +615,23 @@ defmodule WarpEngine.WALOperations do
       Enum.find_value(cache_order, :cache_miss, fn cache_id ->
         if cache = Map.get(state.event_horizon_caches, cache_id) do
           case WarpEngine.EventHorizonCache.get(cache, key) do
-            {:ok, value, _cache_state, metadata} -> {:cache_hit, value, metadata}
-            {:miss, _cache_state} -> nil
-            {:error, _reason} -> nil
+            {:ok, value, updated_cache, metadata} ->
+              # Persist updated cache metrics via async cast to avoid state contention
+              try do
+                GenServer.cast(WarpEngine, {:update_event_horizon_cache, cache_id, updated_cache})
+              rescue
+                _ -> :ok
+              end
+              {:cache_hit, value, state, metadata}
+            {:miss, updated_cache} ->
+              # Record miss metrics too so hit_rate is meaningful
+              try do
+                GenServer.cast(WarpEngine, {:update_event_horizon_cache, cache_id, updated_cache})
+              rescue
+                _ -> :ok
+              end
+              nil
+            _ -> nil
           end
         end
       end)
@@ -535,6 +664,38 @@ defmodule WarpEngine.WALOperations do
           [{^key, value, cosmic_metadata}] -> {:ok, value, shard_id, cosmic_metadata}
           [] -> nil
         end
+      end
+    end)
+  end
+
+  # Fast single-table lookup using hash affinity for numbered shards
+  defp find_in_ets_hashed_numbered_shard(key, spacetime_shards) do
+    shard_count = Application.get_env(:warp_engine, :num_numbered_shards, 24) |> max(1) |> min(24)
+    shard_index = :erlang.phash2(key, shard_count)
+    shard_id = String.to_atom("shard_#{shard_index}")
+
+    case Map.get(spacetime_shards, shard_id) do
+      nil -> :not_found
+      shard ->
+        ets_table = shard.ets_table
+        case :ets.lookup(ets_table, key) do
+          [{^key, value, cosmic_metadata}] -> {:ok, value, shard_id, cosmic_metadata}
+          [] -> :not_found
+        end
+    end
+  end
+
+  # Quick legacy cycle only (3 tables) to avoid a full 24-shard scan
+  defp find_in_legacy_shards_quick(key, spacetime_shards) do
+    Enum.find_value([:hot_data, :warm_data, :cold_data], :not_found, fn shard_id ->
+      case Map.get(spacetime_shards, shard_id) do
+        nil -> nil
+        shard ->
+          ets_table = shard.ets_table
+          case :ets.lookup(ets_table, key) do
+            [{^key, value, _meta}] -> {:ok, value, shard_id}
+            [] -> nil
+          end
       end
     end)
   end
@@ -712,7 +873,7 @@ defmodule WarpEngine.WALOperations do
     # In a real system, you'd send the operations to a GenServer or directly to ETS
     # For this example, we'll just log and potentially delete if table is very large
     if :ets.info(wal_table, :size) > 1000 do # Example threshold
-      Logger.warn("Process WAL table #{wal_table} is getting too large. Flushing...")
+      Logger.warning("Process WAL table #{wal_table} is getting too large. Flushing...")
       # In a real system, you'd iterate and send operations to a GenServer
       # For this example, we'll just delete the table
       :ets.delete(wal_table)

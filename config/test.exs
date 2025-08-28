@@ -11,7 +11,12 @@ config :warp_engine,
   num_numbered_shards: 3,
   # Ensure deterministic entanglement for tests that expect it
   enable_auto_entanglement: true,
-  bench_mode: false
+  bench_mode: false,
+  enable_gpu: true
+
+# Ensure Nx uses Candlex CUDA in tests when available
+config :nx,
+  default_backend: {Candlex.Backend, device: :cuda}
 
 # Configure logging for testing
 config :logger,

@@ -18,6 +18,10 @@ config :warp_engine,
   enable_auto_entanglement: true,
   bench_mode: false
 
+# Nx configuration - enable GPU acceleration using Candlex for production
+config :nx,
+  default_backend: {Candlex.Backend, device: :cuda}
+
 # Configure logging for production
 config :logger,
   level: :warning

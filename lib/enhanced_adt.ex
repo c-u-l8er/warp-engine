@@ -210,6 +210,11 @@ defmodule EnhancedADT.ProductType do
     %{name: field_name, type: field_type, physics: physics_annotation}
   end
 
+  defp parse_field_spec({field_name, field_type, physics_annotation, physics_offload}) when is_atom(field_name) do
+    # Extended field macro: {field_name, field_type, physics_annotation, physics_offload}
+    %{name: field_name, type: field_type, physics: physics_annotation, physics_offload: physics_offload}
+  end
+
   defp parse_field_spec({:"::", _meta, [field_name_ast, type_spec]}) do
     # Simple field: name :: Type.t()
     field_name = extract_field_name(field_name_ast)
@@ -288,6 +293,16 @@ defmodule EnhancedADT.ProductType do
 
       @doc "Get field specifications for WarpEngine optimization"
       def __adt_field_specs__, do: unquote(Macro.escape(field_specs))
+
+      @doc "Get per-field physics offload preferences (:cast | :call)"
+      def __adt_physics_offload__ do
+        field_specs = unquote(Macro.escape(field_specs))
+        field_specs
+        |> Enum.reduce(%{}, fn field, acc ->
+          offload = Map.get(field, :physics_offload)
+          if offload in [:cast, :call], do: Map.put(acc, field.name, offload), else: acc
+        end)
+      end
 
       @doc "Extract physics parameters for WarpEngine cosmic_put operation"
       def extract_physics_context(data) do
@@ -633,6 +648,16 @@ defmodule EnhancedADT.FieldSyntax do
     field_name_atom = extract_field_name_from_ast(field_name)
     quote do
       {unquote(field_name_atom), unquote(type_spec), unquote(physics_annotation)}
+    end
+  end
+
+  defmacro field({:"::", _, [field_name, type_spec]}, opts) when is_list(opts) do
+    # Extended field with options: physics_offload: :cast | :call
+    field_name_atom = extract_field_name_from_ast(field_name)
+    physics_annotation = Keyword.get(opts, :physics)
+    physics_offload = Keyword.get(opts, :physics_offload) || Keyword.get(opts, :offload)
+    quote do
+      {unquote(field_name_atom), unquote(type_spec), unquote(physics_annotation), unquote(physics_offload)}
     end
   end
 

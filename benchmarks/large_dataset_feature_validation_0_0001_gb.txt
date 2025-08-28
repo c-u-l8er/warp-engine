@@ -1,42 +1,3 @@
-Compiling 4 files (.ex)
-    warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
-    │
- 69 │   def get(key, opts \\ []) do
-    │                ~~~~
-    │
-    └─ lib/warp_engine/fast_path.ex:69:16: WarpEngine.FastPath.get/2
-
-     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
-     │
- 119 │   def delete(key, opts \\ []) do
-     │                   ~~~~
-     │
-     └─ lib/warp_engine/fast_path.ex:119:19: WarpEngine.FastPath.delete/2
-
-    warning: this clause cannot match because a previous clause at line 48 always matches
-    │
- 51 │       :error, _ -> {:error, :wal_unavailable}
-    │       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ lib/warp_engine/fast_path.ex:51
-
-     warning: this clause cannot match because a previous clause at line 97 always matches
-     │
- 100 │       :error, _ -> {:error, :wal_unavailable}
-     │       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/warp_engine/fast_path.ex:100
-
-     warning: this clause cannot match because a previous clause at line 146 always matches
-     │
- 149 │       :error, _ -> {:error, :wal_unavailable}
-     │       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/warp_engine/fast_path.ex:149
-
-warning: struct :already_exists is undefined (module :already_exists is not available or is yet to be defined)
-└─ lib/warp_engine.ex: WarpEngine.create_all_ets_tables_eagerly/0
-
      warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
  272 │     Enum.each(operations, fn {_op_type, key, _value, opts} ->
@@ -372,6 +333,9 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
       │        ~
       │
       └─ lib/warp_engine.ex:1394:8: WarpEngine (module)
+
+warning: struct :already_exists is undefined (module :already_exists is not available or is yet to be defined)
+└─ lib/warp_engine.ex: WarpEngine.create_all_ets_tables_eagerly/0
 
      warning: function calculate_entropy_cpu_fallback/1 is unused
      │
@@ -744,6 +708,20 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │
      └─ lib/enhanced_adt/fold.ex:303:8: EnhancedADT.Fold (module)
 
+    warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+    │
+ 69 │   def get(key, opts \\ []) do
+    │                ~~~~
+    │
+    └─ lib/warp_engine/fast_path.ex:69:16: WarpEngine.FastPath.get/2
+
+     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 119 │   def delete(key, opts \\ []) do
+     │                   ~~~~
+     │
+     └─ lib/warp_engine/fast_path.ex:119:19: WarpEngine.FastPath.delete/2
+
      warning: Logger.warn/1 is deprecated. Use Logger.warning/2 instead
      │
  715 │       Logger.warn("Process WAL table #{wal_table} is getting too large. Flushing...")
@@ -912,148 +890,523 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │
      └─ lib/warp_engine/intelligent_load_balancer.ex:109:5: WarpEngine.IntelligentLoadBalancer.route_operation/3
 
-Generated warp_engine app
 
-09:09:47.470 [info] 🚀 Starting WarpEngine Database Application...
+09:25:51.852 [info] 🚀 Starting WarpEngine Database Application...
 
-09:09:47.473 [info] ⚙️  Application Configuration:
+09:25:51.854 [info] ⚙️  Application Configuration:
 
-09:09:47.478 [info]   data_root: "/home/travis/Projects/warp-engine/data"
+09:25:51.860 [info]   data_root: "/home/travis/Projects/warp-engine/data"
 
-09:09:47.478 [info]   Entanglement rules: using defaults
+09:25:51.860 [info]   Entanglement rules: using defaults
 
-09:09:47.478 [info] 🔧 Starting supervisor with 1 children
-     warning: variable "build_graph_seq" is unused (if the variable is not meant to be used, prefix it with an underscore)
+09:25:51.860 [info] 🔧 Starting supervisor with 1 children
+     warning: variable "item_num" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
- 115 │ build_graph_seq = fn ->
-     │ ~~~~~~~~~~~~~~~
+ 295 │       items: Enum.map(1..:rand.uniform(5), fn item_num ->
+     │                                               ~
      │
-     └─ benchmarks/concurrency_sweep_heavy.exs:115:1
+     └─ benchmarks/large_dataset_feature_validation.exs:295:47
 
-     warning: variable "edge_reduce_seq" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
- 102 │ edge_reduce_seq = fn ->
-     │ ~~~~~~~~~~~~~~~
+ 372 │ test_intelligent_caching = fn worker_id, keys ->
+     │                               ~
      │
-     └─ benchmarks/concurrency_sweep_heavy.exs:102:1
+     └─ benchmarks/large_dataset_feature_validation.exs:372:31
 
-    warning: variable "node_reduce_seq" is unused (if the variable is not meant to be used, prefix it with an underscore)
-    │
- 86 │ node_reduce_seq = fn ->
-    │ ~~~~~~~~~~~~~~~
-    │
-    └─ benchmarks/concurrency_sweep_heavy.exs:86:1
+     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 392 │ test_gravitational_routing = fn worker_id, keys ->
+     │                                            ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:392:44
 
-⚙️  Concurrency Sweep Config: nodes=10000 edges=20000 repeat=5 warmups=0 trials=1
-   Levels: 1,2,4,8
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 392 │ test_gravitational_routing = fn worker_id, keys ->
+     │                                 ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:392:33
 
-09:09:47.912 [info] 📚 Compiling simplified Enhanced ADT module...
-    warning: duplicate key :"::" found in struct
-    │
- 67 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:67: :ConnectedGraph (module)
+     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 411 │ test_quantum_entanglement = fn worker_id, keys ->
+     │                                           ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:411:43
 
-    warning: duplicate key :"::" found in struct
-    │
- 67 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:67: :ConnectedGraph (module)
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 411 │ test_quantum_entanglement = fn worker_id, keys ->
+     │                                ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:411:32
 
-    warning: duplicate key :"::" found in struct
-    │
- 67 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:67: :ClusteredGraph (module)
+     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 428 │ test_entropy_monitoring = fn worker_id, keys ->
+     │                                         ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:428:41
 
-    warning: duplicate key :"::" found in struct
-    │
- 67 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:67: :ClusteredGraph (module)
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 428 │ test_entropy_monitoring = fn worker_id, keys ->
+     │                              ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:428:30
 
-    warning: duplicate key :"::" found in struct
-    │
- 67 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:67: :HierarchicalGraph (module)
+     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 447 │ test_per_shard_wal = fn worker_id, keys ->
+     │                                    ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:447:36
 
-    warning: duplicate key :"::" found in struct
-    │
- 67 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:67: :HierarchicalGraph (module)
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 447 │ test_per_shard_wal = fn worker_id, keys ->
+     │                         ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:447:25
 
-    warning: redefining @doc attribute previously set at line 28
-    │
- 99 │   @doc """
-    │   ~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:99: SimpleWeightedGraph (module)
+🚀 Large Dataset Feature Validation Benchmark
 
-    warning: SimpleWeightedGraph.WeightedGraph."ClusteredGraph"/0 is undefined or private. Did you mean:
+09:25:52.697 [info] ✨ All WarpEngine features enabled (using Phase 6.6 WAL system)
+================================================================================
+📊 Target Dataset: 0.0001GB (10 keys)
+🔧 Shards: 24
+⚡ Concurrency Levels: 1,2,4,8,12
+⏱️  Warmup: 5000ms, Measure: 10000ms, Trials: 1
 
-          * "ClusteredGraph"/3
+09:25:52.702 [error] ❌ WALCoordinator not running - Phase 9 per-shard WAL disabled!
 
-    │
- 67 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:67: SimpleWeightedGraph.WeightedGraph."ClusteredGraph"/3
+09:25:52.702 [error]    This will cause negative concurrency scaling
 
-    warning: SimpleWeightedGraph.WeightedGraph."ConnectedGraph"/0 is undefined or private. Did you mean:
+09:25:52.702 [error]    Check if bench_mode is properly set to false
 
-          * "ConnectedGraph"/3
+09:25:52.702 [error]    Current bench_mode: false
 
-    │
- 67 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:67: SimpleWeightedGraph.WeightedGraph."ConnectedGraph"/3
+09:25:52.702 [error]    Current use_numbered_shards: true
 
-    warning: SimpleWeightedGraph.WeightedGraph."HierarchicalGraph"/0 is undefined or private. Did you mean:
+09:25:52.702 [info] 🔄 Attempting to start WAL system manually...
 
-          * "HierarchicalGraph"/3
+09:25:52.702 [info] 🚀 Initializing WAL Persistence Revolution...
 
-    │
- 67 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:67: SimpleWeightedGraph.WeightedGraph."HierarchicalGraph"/3
+09:25:52.702 [info] 📁 WAL data_root: /home/travis/Projects/warp-engine/data
 
-    warning: SimpleWeightedGraph.WeightedGraph."SingleNode"/0 is undefined or private. Did you mean:
+09:25:52.703 [info] 📁 Creating WAL directory: /home/travis/Projects/warp-engine/data/wal
 
-          * "SingleNode"/1
+09:25:52.703 [info] 📄 Opening WAL file: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
 
-    │
- 67 │   defsum WeightedGraph do
-    │   ~~~~~~~~~~~~~~~~~~~~~~~
-    │
-    └─ examples/simple_weighted_graph.ex:67: SimpleWeightedGraph.WeightedGraph."SingleNode"/1
+09:25:52.703 [info] ⚡ Setting up atomic counter...
 
+09:25:52.703 [info] 🏗️ Building WAL state...
+⏳ Waiting for ETS tables...
 
-09:09:48.154 [info] ✅ Simplified ADT ready
+09:25:52.703 [info] ✅ WAL system initialized: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
+✅ All 24 ETS tables ready in 0ms
 
-09:09:48.154 [info] 📦 Generating dataset...
+09:25:52.703 [info] ⚡ Ready for 250,000+ ops/second performance!
 
-🎯 Concurrency Sweep (4 levels)
+09:25:52.713 [info] ✅ WAL system started manually: #PID<0.432.0>
 
-09:09:48.672 [info] 📦 Data ready: gen_nodes=12.4ms, gen_edges=496.9ms
+09:25:52.713 [info] 📦 Generating 0.0001GB dataset (10 keys)...
 
-== Concurrency level: 1 ==
-   • best 150.5ms (996687 ops/sec), median 996687 (p50 996687, p90 996687)
+09:25:52.719 [info] 📦 Dataset generated in 6.0ms
 
-== Concurrency level: 2 ==
-   • best 107.8ms (1392012 ops/sec), median 1392012 (p50 1392012, p90 1392012)
+09:25:52.719 [info] 📊 Total keys: 24
 
-== Concurrency level: 4 ==
-   • best 100.4ms (1494700 ops/sec), median 1494700 (p50 1494700, p90 1494700)
+09:25:52.719 [info] 💾 Estimated size: 0.0MB
 
-== Concurrency level: 8 ==
-   • best 95.7ms (1568050 ops/sec), median 1568050 (p50 1568050, p90 1568050)
+09:25:52.719 [info] 🚀 Loading 24 keys into WarpEngine...
+
+09:25:52.721 [info] 💾 Memory before loading: 64.37MB
+
+09:25:52.729 [info] 📦 Loaded chunk 1/1 - Memory: 64.51MB
+
+09:25:52.742 [info] ✅ Dataset loaded in 22ms
+
+09:25:52.742 [info] 💾 Memory after loading: 64.59MB
+
+09:25:52.742 [info] 💾 Memory increase: 0.23MB
+
+09:25:52.742 [info] 🎯 Starting feature validation benchmarks...
+
+09:25:52.743 [info] 🧹 Memory before benchmarks: 63.45MB
+
+09:25:52.743 [info] ⚛️  Quantum entanglement tests enabled
+
+09:25:52.743 [info] 🔗 Testing intelligent prefetching and entanglement collapse
+
+09:25:52.743 [info] 🔧 Initializing quantum index system...
+
+09:25:52.743 [info] ⚛️  Initializing quantum entanglement system...
+
+09:25:52.744 [info] ✨ Quantum entanglement system ready for superposition
+
+09:25:52.744 [info] ✅ Quantum index system ready
+
+09:25:52.744 [info] 🌊 Initializing entropy monitoring system...
+
+09:25:52.749 [info] ✅ Entropy registry started
+
+09:25:52.749 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
+
+09:25:52.750 [info] 💾 Entropy persistence initialized: /home/travis/Projects/warp-engine/data/entropy/cosmic_entropy
+
+09:25:52.750 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 30000ms
+
+09:25:52.750 [info] ✅ Entropy monitoring system ready
+
+09:25:52.750 [info] 
+== Testing with 1 processes ==
+
+09:25:52.750 [info]   Trial 1/1...
+
+09:26:07.783 [info]     Trial 1 Results:
+
+09:26:07.783 [info]       Duration: 10016ms
+
+09:26:07.783 [info]       Total Operations: 484800
+
+09:26:07.783 [info]       Operations/sec: 48402
+
+09:26:07.783 [info]       Detailed Breakdown:
+
+09:26:07.783 [info]         Cache ops: 121200
+
+09:26:07.783 [info]         Routing ops: 121200
+
+09:26:07.783 [info]         Entanglement ops: 60600
+
+09:26:07.783 [info]         Entropy ops: 121200
+
+09:26:07.783 [info]         WAL ops: 60600
+
+09:26:07.783 [info]         Total counted: 484800
+
+09:26:07.783 [info]    • 1 processes: best 10016ms (48402 ops/sec)
+
+09:26:07.783 [info]      median 48402 (p50 48402, p90 48402)
+
+09:26:07.783 [info]      Best trial detailed breakdown:
+
+09:26:07.783 [info]        Cache: 121200 ops
+
+09:26:07.783 [info]        Routing: 121200 ops
+
+09:26:07.783 [info]        Entanglement: 60600 ops
+
+09:26:07.783 [info]        Entropy: 121200 ops
+
+09:26:07.783 [info]        WAL: 60600 ops
+
+09:26:07.783 [info]        Total counted: 484800
+
+09:26:07.783 [info]        vs Total reported: 484800
+
+09:26:07.783 [info]        Discrepancy: 0
+
+09:26:08.784 [info] 
+== Testing with 2 processes ==
+
+09:26:08.784 [info]   Trial 1/1...
+
+09:26:23.844 [info]     Trial 1 Results:
+
+09:26:23.844 [info]       Duration: 10030ms
+
+09:26:23.844 [info]       Total Operations: 604000
+
+09:26:23.844 [info]       Operations/sec: 60219
+
+09:26:23.844 [info]       Detailed Breakdown:
+
+09:26:23.844 [info]         Cache ops: 151000
+
+09:26:23.844 [info]         Routing ops: 151000
+
+09:26:23.844 [info]         Entanglement ops: 75500
+
+09:26:23.844 [info]         Entropy ops: 151000
+
+09:26:23.844 [info]         WAL ops: 75500
+
+09:26:23.844 [info]         Total counted: 604000
+
+09:26:23.844 [info]    • 2 processes: best 10030ms (60219 ops/sec)
+
+09:26:23.844 [info]      median 60219 (p50 60219, p90 60219)
+
+09:26:23.844 [info]      Best trial detailed breakdown:
+
+09:26:23.845 [info]        Cache: 151000 ops
+
+09:26:23.845 [info]        Routing: 151000 ops
+
+09:26:23.845 [info]        Entanglement: 75500 ops
+
+09:26:23.845 [info]        Entropy: 151000 ops
+
+09:26:23.845 [info]        WAL: 75500 ops
+
+09:26:23.845 [info]        Total counted: 604000
+
+09:26:23.845 [info]        vs Total reported: 604000
+
+09:26:23.845 [info]        Discrepancy: 0
+
+09:26:24.846 [info] 
+== Testing with 4 processes ==
+
+09:26:24.846 [info]   Trial 1/1...
+
+09:26:39.923 [info]     Trial 1 Results:
+
+09:26:39.923 [info]       Duration: 10035ms
+
+09:26:39.924 [info]       Total Operations: 630400
+
+09:26:39.924 [info]       Operations/sec: 62820
+
+09:26:39.924 [info]       Detailed Breakdown:
+
+09:26:39.924 [info]         Cache ops: 157600
+
+09:26:39.924 [info]         Routing ops: 157600
+
+09:26:39.924 [info]         Entanglement ops: 78800
+
+09:26:39.924 [info]         Entropy ops: 157600
+
+09:26:39.925 [info]         WAL ops: 78800
+
+09:26:39.925 [info]         Total counted: 630400
+
+09:26:39.925 [info]    • 4 processes: best 10035ms (62820 ops/sec)
+
+09:26:39.925 [info]      median 62820 (p50 62820, p90 62820)
+
+09:26:39.925 [info]      Best trial detailed breakdown:
+
+09:26:39.925 [info]        Cache: 157600 ops
+
+09:26:39.925 [info]        Routing: 157600 ops
+
+09:26:39.925 [info]        Entanglement: 78800 ops
+
+09:26:39.925 [info]        Entropy: 157600 ops
+
+09:26:39.925 [info]        WAL: 78800 ops
+
+09:26:39.925 [info]        Total counted: 630400
+
+09:26:39.925 [info]        vs Total reported: 630400
+
+09:26:39.925 [info]        Discrepancy: 0
+
+09:26:39.925 [info]    🔍 Testing feature effectiveness...
+
+09:26:40.305 [info]      📊 Cache hit rate: N/A
+
+09:26:40.305 [info]      🌊 Entropy score: 1.1399485693948634
+
+09:26:40.305 [info]      🌌 Active entanglements: 0
+
+09:26:41.306 [info] 
+== Testing with 8 processes ==
+
+09:26:41.306 [info]   Trial 1/1...
+
+09:26:56.490 [info]     Trial 1 Results:
+
+09:26:56.490 [info]       Duration: 10108ms
+
+09:26:56.490 [info]       Total Operations: 601600
+
+09:26:56.490 [info]       Operations/sec: 59517
+
+09:26:56.490 [info]       Detailed Breakdown:
+
+09:26:56.490 [info]         Cache ops: 150400
+
+09:26:56.490 [info]         Routing ops: 150400
+
+09:26:56.490 [info]         Entanglement ops: 75200
+
+09:26:56.490 [info]         Entropy ops: 150400
+
+09:26:56.490 [info]         WAL ops: 75200
+
+09:26:56.490 [info]         Total counted: 601600
+
+09:26:56.490 [info]    • 8 processes: best 10108ms (59517 ops/sec)
+
+09:26:56.490 [info]      median 59517 (p50 59517, p90 59517)
+
+09:26:56.490 [info]      Best trial detailed breakdown:
+
+09:26:56.490 [info]        Cache: 150400 ops
+
+09:26:56.490 [info]        Routing: 150400 ops
+
+09:26:56.490 [info]        Entanglement: 75200 ops
+
+09:26:56.490 [info]        Entropy: 150400 ops
+
+09:26:56.490 [info]        WAL: 75200 ops
+
+09:26:56.490 [info]        Total counted: 601600
+
+09:26:56.490 [info]        vs Total reported: 601600
+
+09:26:56.490 [info]        Discrepancy: 0
+
+09:26:56.490 [info]    🔍 Testing feature effectiveness...
+
+09:26:56.871 [info]      📊 Cache hit rate: N/A
+
+09:26:56.871 [info]      🌊 Entropy score: 1.1469149681485182
+
+09:26:56.871 [info]      🌌 Active entanglements: 0
+
+09:26:57.872 [info] 
+== Testing with 12 processes ==
+
+09:26:57.872 [info]   Trial 1/1...
+
+09:27:13.142 [info]     Trial 1 Results:
+
+09:27:13.142 [info]       Duration: 10175ms
+
+09:27:13.142 [info]       Total Operations: 547200
+
+09:27:13.142 [info]       Operations/sec: 53778
+
+09:27:13.142 [info]       Detailed Breakdown:
+
+09:27:13.142 [info]         Cache ops: 136800
+
+09:27:13.142 [info]         Routing ops: 136800
+
+09:27:13.142 [info]         Entanglement ops: 68400
+
+09:27:13.142 [info]         Entropy ops: 136800
+
+09:27:13.142 [info]         WAL ops: 68400
+
+09:27:13.142 [info]         Total counted: 547200
+
+09:27:13.142 [info]    • 12 processes: best 10175ms (53778 ops/sec)
+
+09:27:13.142 [info]      median 53778 (p50 53778, p90 53778)
+
+09:27:13.142 [info]      Best trial detailed breakdown:
+
+09:27:13.142 [info]        Cache: 136800 ops
+
+09:27:13.142 [info]        Routing: 136800 ops
+
+09:27:13.142 [info]        Entanglement: 68400 ops
+
+09:27:13.142 [info]        Entropy: 136800 ops
+
+09:27:13.142 [info]        WAL: 68400 ops
+
+09:27:13.142 [info]        Total counted: 547200
+
+09:27:13.142 [info]        vs Total reported: 547200
+
+09:27:13.142 [info]        Discrepancy: 0
+
+09:27:13.142 [info]    🔍 Testing feature effectiveness...
+
+09:27:13.558 [info]      📊 Cache hit rate: N/A
+
+09:27:13.558 [info]      🌊 Entropy score: 0.6757520405768109
+
+09:27:13.558 [info]      🌌 Active entanglements: 0
+
+09:27:14.559 [info] 
+🎯 Feature Validation Summary
+
+09:27:14.559 [info] ============================================================
+
+09:27:14.559 [info] 🧪 Testing individual features...
+
+09:27:14.559 [info] 📊 Testing Event Horizon Cache...
+
+09:27:14.567 [info]    ✅ Cache test: 1000 operations in 8ms
+
+09:27:14.567 [info] 🌍 Testing Gravitational Routing...
+
+09:27:14.584 [info]    ✅ Routing test: 2000 operations in 17ms
+
+09:27:14.584 [info] 🌌 Testing Quantum Entanglement...
+
+09:27:14.585 [info]    ✅ Entanglement test: 100 operations in 1ms
+
+09:27:14.585 [info] 🌊 Testing Entropy Monitoring...
+
+09:27:14.601 [info]    ✅ Entropy metrics: %{total_entropy: 0.9635458905440497, shannon_entropy: 1.6059098175734163, thermodynamic_entropy: 1.1805302436366167e-22, entropy_trend: :stable, system_temperature: 3.24, last_calculated: 1756391234585, disorder_index: 0.3854183562176199, stability_metric: 0.7591135273639875, rebalancing_recommended: false, vacuum_stability: 0.99995}
+
+09:27:14.601 [info] 📝 Testing Per-Shard WAL...
+
+09:27:14.633 [info]    ✅ WAL test: 1000 operations in 32ms
+
+09:27:14.633 [info] 
+🎉 Large Dataset Feature Validation Complete!
+
+09:27:14.633 [info] 📊 Dataset: 0.0001GB (10 keys)
+
+09:27:14.633 [info] 🔧 Features tested: Intelligent Caching, Gravitational Routing, Quantum Entanglement, Entropy Monitoring, Per-Shard WAL
+
+09:27:14.633 [info] 🚀 Ready for Phase 9.2 optimization!
+
+09:27:14.633 [info] 
+📊 COMPREHENSIVE PERFORMANCE ANALYSIS
+
+09:27:14.633 [info] ================================================================================
+
+09:27:14.633 [info] 🔍 OPERATION COUNTING ANALYSIS:
+
+09:27:14.633 [info]    Expected operations per worker per iteration:
+
+09:27:14.633 [info]      • Intelligent Caching: 4 operations (4 cosmic_get)
+
+09:27:14.633 [info]      • Gravitational Routing: 4 operations (4 cosmic_get)
+
+09:27:14.633 [info]      • Quantum Entanglement: 2 operations (1 quantum_get + 2 cosmic_get)
+
+09:27:14.633 [info]      • Entropy Monitoring: 4 operations (4 cosmic_get)
+
+09:27:14.633 [info]      • Per-Shard WAL: 2 operations (2 cosmic_put)
+
+09:27:14.633 [info]      • TOTAL PER ITERATION: 16 operations
+
+09:27:14.633 [info]    Expected operations per worker (50 iterations): 16 × 50 = 800 operations
+
+09:27:14.633 [info]    Expected operations for 12 workers: 800 × 12 = 9600 operations
+
+09:27:14.633 [info] 
+🎯 PERFORMANCE TARGETS:
+
+09:27:14.633 [info]    • Target: 25,000+ ops/sec per process
+
+09:27:14.633 [info]    • Phase 9 Architecture: ✅ Enabled
+
+09:27:14.633 [info]    • WALCoordinator: ✅ Running
+
+09:27:14.633 [info]    • Numbered Shards: ✅ 24 shards active
+
+09:27:14.633 [info] 
+💡 TROUBLESHOOTING NOTES:
+
+09:27:14.633 [info]    • If discrepancy > 0: Some operations not being counted
+
+09:27:14.633 [info]    • If discrepancy < 0: Operations being double-counted
+
+09:27:14.633 [info]    • If performance < 25k ops/sec: Check workload complexity or system bottlenecks
+
+09:27:14.633 [info]    • Phase 9 should provide linear scaling up to 24 processes

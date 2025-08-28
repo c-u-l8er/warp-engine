@@ -33,236 +33,12 @@
      │
      └─ lib/enhanced_adt/bend.ex:548:21: EnhancedADT.Bend.transform_bend_adt_pattern/1
 
-     warning: function update_bend_context/2 is unused
+     warning: function analyze_bend_clause/1 is unused
      │
- 427 │   defp update_bend_context(context, updates) do
+ 115 │   defp analyze_bend_clause({:->, _, [pattern_list, body]}) do
      │        ~
      │
-     └─ lib/enhanced_adt/bend.ex:427:8: EnhancedADT.Bend (module)
-
-     warning: function transform_elegant_bend_clause/1 is unused
-     │
- 526 │   defp transform_elegant_bend_clause({:->, meta, [pattern_list, body]}) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:526:8: EnhancedADT.Bend (module)
-
-     warning: function transform_elegant_adt_clauses_for_bend/1 is unused
-     │
- 517 │   defp transform_elegant_adt_clauses_for_bend(clauses) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:517:8: EnhancedADT.Bend (module)
-
-     warning: function transform_bend_adt_pattern/1 is unused
-     │
- 532 │   defp transform_bend_adt_pattern({module_name, _meta, args}) when is_atom(module_name) and is_list(args) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:532:8: EnhancedADT.Bend (module)
-
-     warning: function record_network_connections/3 is unused
-     │
- 431 │   defp record_network_connections(context, _node_id, _result) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:431:8: EnhancedADT.Bend (module)
-
-     warning: function inject_network_generation/2 is unused
-     │
- 245 │   defp inject_network_generation(body, analysis) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:245:8: EnhancedADT.Bend (module)
-
-     warning: function inject_fork_tracking/1 is unused
-     │
- 283 │   defp inject_fork_tracking(body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:283:8: EnhancedADT.Bend (module)
-
-     warning: function get_bend_module_field_names/1 is unused
-     │
- 558 │   defp get_bend_module_field_names(variant_name) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:558:8: EnhancedADT.Bend (module)
-
-     warning: function generate_unique_node_id/0 is unused
-     │
- 423 │   defp generate_unique_node_id() do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:423:8: EnhancedADT.Bend (module)
-
-     warning: function find_recursive_calls_in_ast/1 is unused
-     │
- 405 │   defp find_recursive_calls_in_ast(_body), do: []  # Simplified
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:405:8: EnhancedADT.Bend (module)
-
-     warning: function find_fork_calls_in_ast/1 is unused
-     │
- 408 │   defp find_fork_calls_in_ast(_body), do: []
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:408:8: EnhancedADT.Bend (module)
-
-     warning: function find_connection_points/2 is unused
-     │
- 410 │   defp find_connection_points(_patterns, _body), do: []
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:410:8: EnhancedADT.Bend (module)
-
-     warning: function extract_topology_hints/2 is unused
-     │
- 412 │   defp extract_topology_hints(_patterns, _body), do: %{}
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:412:8: EnhancedADT.Bend (module)
-
-     warning: function estimate_recursion_depth/1 is unused
-     │
- 407 │   defp estimate_recursion_depth(_calls), do: 1
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:407:8: EnhancedADT.Bend (module)
-
-     warning: function estimate_node_count/2 is unused
-     │
- 416 │   defp estimate_node_count(fork_count, depth), do: fork_count * depth
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:416:8: EnhancedADT.Bend (module)
-
-     warning: function estimate_max_recursion_depth/1 is unused
-     │
- 415 │   defp estimate_max_recursion_depth(_body), do: 1
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:415:8: EnhancedADT.Bend (module)
-
-     warning: function estimate_connection_count/1 is unused
-     │
- 417 │   defp estimate_connection_count(fork_count), do: fork_count * 2
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:417:8: EnhancedADT.Bend (module)
-
-     warning: function enhance_body_with_network_tracking/2 is unused
-     │
- 274 │   defp enhance_body_with_network_tracking(body, analysis) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:274:8: EnhancedADT.Bend (module)
-
-     warning: function enhance_bend_clauses/2 is unused
-     │
- 225 │   defp enhance_bend_clauses(clauses, bend_analysis) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:225:8: EnhancedADT.Bend (module)
-
-     warning: function enhance_bend_clause/2 is unused
-     │
- 238 │   defp enhance_bend_clause({:->, meta, [pattern_list, body]}, analysis) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:238:8: EnhancedADT.Bend (module)
-
-     warning: function determine_optimization_priority/2 is unused
-     │
- 418 │   defp determine_optimization_priority(fork_count, depth), do: if(fork_count * depth > 10, do: :high, else: :normal)
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:418:8: EnhancedADT.Bend (module)
-
-     warning: function detect_recursive_calls/1 is unused
-     │
- 181 │   defp detect_recursive_calls(body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:181:8: EnhancedADT.Bend (module)
-
-     warning: function detect_fork_operations/1 is unused
-     │
- 191 │   defp detect_fork_operations(body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:191:8: EnhancedADT.Bend (module)
-
-     warning: function count_fork_operations/1 is unused
-     │
- 414 │   defp count_fork_operations(_body), do: 0
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:414:8: EnhancedADT.Bend (module)
-
-     warning: function contains_depth_check?/1 is unused
-     │
- 419 │   defp contains_depth_check?(_guard), do: false
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:419:8: EnhancedADT.Bend (module)
-
-     warning: function classify_recursive_calls/1 is unused
-     │
- 406 │   defp classify_recursive_calls(_calls), do: []
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:406:8: EnhancedADT.Bend (module)
-
-     warning: function calculate_optimization_potential/2 is unused
-     │
- 413 │   defp calculate_optimization_potential(_patterns, _body), do: 0.5
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:413:8: EnhancedADT.Bend (module)
-
-     warning: function calculate_network_complexity/1 is unused
-     │
- 211 │   defp calculate_network_complexity(body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:211:8: EnhancedADT.Bend (module)
-
-     warning: function calculate_fork_connection_strength/3 is unused
-     │
- 435 │   defp calculate_fork_connection_strength(_source, _target, _value) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:435:8: EnhancedADT.Bend (module)
-
-     warning: function analyze_wormhole_opportunities/2 is unused
-     │
- 201 │   defp analyze_wormhole_opportunities(patterns, body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:201:8: EnhancedADT.Bend (module)
-
-     warning: function analyze_strength_indicators/1 is unused
-     │
- 411 │   defp analyze_strength_indicators(_body), do: %{}
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:411:8: EnhancedADT.Bend (module)
-
-     warning: function analyze_fork_patterns/1 is unused
-     │
- 409 │   defp analyze_fork_patterns(_calls), do: []
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:409:8: EnhancedADT.Bend (module)
-
-     warning: function analyze_bend_pattern/1 is unused
-     │
- 131 │   defp analyze_bend_pattern(pattern) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/bend.ex:131:8: EnhancedADT.Bend (module)
+     └─ lib/enhanced_adt/bend.ex:115:8: EnhancedADT.Bend (module)
 
      warning: function analyze_bend_clauses/1 is unused
      │
@@ -271,64 +47,337 @@
      │
      └─ lib/enhanced_adt/bend.ex:108:8: EnhancedADT.Bend (module)
 
-     warning: function analyze_bend_clause/1 is unused
+     warning: function analyze_bend_pattern/1 is unused
      │
- 115 │   defp analyze_bend_clause({:->, _, [pattern_list, body]}) do
+ 131 │   defp analyze_bend_pattern(pattern) do
      │        ~
      │
-     └─ lib/enhanced_adt/bend.ex:115:8: EnhancedADT.Bend (module)
+     └─ lib/enhanced_adt/bend.ex:131:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_fork_patterns/1 is unused
+     │
+ 409 │   defp analyze_fork_patterns(_calls), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:409:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_strength_indicators/1 is unused
+     │
+ 411 │   defp analyze_strength_indicators(_body), do: %{}
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:411:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_wormhole_opportunities/2 is unused
+     │
+ 201 │   defp analyze_wormhole_opportunities(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:201:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_fork_connection_strength/3 is unused
+     │
+ 435 │   defp calculate_fork_connection_strength(_source, _target, _value) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:435:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_network_complexity/1 is unused
+     │
+ 211 │   defp calculate_network_complexity(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:211:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_optimization_potential/2 is unused
+     │
+ 413 │   defp calculate_optimization_potential(_patterns, _body), do: 0.5
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:413:8: EnhancedADT.Bend (module)
+
+     warning: function classify_recursive_calls/1 is unused
+     │
+ 406 │   defp classify_recursive_calls(_calls), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:406:8: EnhancedADT.Bend (module)
+
+     warning: function contains_depth_check?/1 is unused
+     │
+ 419 │   defp contains_depth_check?(_guard), do: false
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:419:8: EnhancedADT.Bend (module)
+
+     warning: function count_fork_operations/1 is unused
+     │
+ 414 │   defp count_fork_operations(_body), do: 0
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:414:8: EnhancedADT.Bend (module)
+
+     warning: function detect_fork_operations/1 is unused
+     │
+ 191 │   defp detect_fork_operations(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:191:8: EnhancedADT.Bend (module)
+
+     warning: function detect_recursive_calls/1 is unused
+     │
+ 181 │   defp detect_recursive_calls(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:181:8: EnhancedADT.Bend (module)
+
+     warning: function determine_optimization_priority/2 is unused
+     │
+ 418 │   defp determine_optimization_priority(fork_count, depth), do: if(fork_count * depth > 10, do: :high, else: :normal)
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:418:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_bend_clause/2 is unused
+     │
+ 238 │   defp enhance_bend_clause({:->, meta, [pattern_list, body]}, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:238:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_bend_clauses/2 is unused
+     │
+ 225 │   defp enhance_bend_clauses(clauses, bend_analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:225:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_body_with_network_tracking/2 is unused
+     │
+ 274 │   defp enhance_body_with_network_tracking(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:274:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_connection_count/1 is unused
+     │
+ 417 │   defp estimate_connection_count(fork_count), do: fork_count * 2
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:417:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_max_recursion_depth/1 is unused
+     │
+ 415 │   defp estimate_max_recursion_depth(_body), do: 1
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:415:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_node_count/2 is unused
+     │
+ 416 │   defp estimate_node_count(fork_count, depth), do: fork_count * depth
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:416:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_recursion_depth/1 is unused
+     │
+ 407 │   defp estimate_recursion_depth(_calls), do: 1
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:407:8: EnhancedADT.Bend (module)
+
+     warning: function extract_topology_hints/2 is unused
+     │
+ 412 │   defp extract_topology_hints(_patterns, _body), do: %{}
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:412:8: EnhancedADT.Bend (module)
+
+     warning: function find_connection_points/2 is unused
+     │
+ 410 │   defp find_connection_points(_patterns, _body), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:410:8: EnhancedADT.Bend (module)
+
+     warning: function find_fork_calls_in_ast/1 is unused
+     │
+ 408 │   defp find_fork_calls_in_ast(_body), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:408:8: EnhancedADT.Bend (module)
+
+     warning: function find_recursive_calls_in_ast/1 is unused
+     │
+ 405 │   defp find_recursive_calls_in_ast(_body), do: []  # Simplified
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:405:8: EnhancedADT.Bend (module)
+
+     warning: function generate_unique_node_id/0 is unused
+     │
+ 423 │   defp generate_unique_node_id() do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:423:8: EnhancedADT.Bend (module)
+
+     warning: function get_bend_module_field_names/1 is unused
+     │
+ 558 │   defp get_bend_module_field_names(variant_name) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:558:8: EnhancedADT.Bend (module)
+
+     warning: function inject_fork_tracking/1 is unused
+     │
+ 283 │   defp inject_fork_tracking(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:283:8: EnhancedADT.Bend (module)
+
+     warning: function inject_network_generation/2 is unused
+     │
+ 245 │   defp inject_network_generation(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:245:8: EnhancedADT.Bend (module)
+
+     warning: function record_network_connections/3 is unused
+     │
+ 431 │   defp record_network_connections(context, _node_id, _result) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:431:8: EnhancedADT.Bend (module)
+
+     warning: function transform_bend_adt_pattern/1 is unused
+     │
+ 532 │   defp transform_bend_adt_pattern({module_name, _meta, args}) when is_atom(module_name) and is_list(args) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:532:8: EnhancedADT.Bend (module)
+
+     warning: function transform_elegant_adt_clauses_for_bend/1 is unused
+     │
+ 517 │   defp transform_elegant_adt_clauses_for_bend(clauses) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:517:8: EnhancedADT.Bend (module)
+
+     warning: function transform_elegant_bend_clause/1 is unused
+     │
+ 526 │   defp transform_elegant_bend_clause({:->, meta, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:526:8: EnhancedADT.Bend (module)
+
+     warning: function update_bend_context/2 is unused
+     │
+ 427 │   defp update_bend_context(context, updates) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:427:8: EnhancedADT.Bend (module)
 
       warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
       │
- 1117 │         missing_tables = [table_name | missing_tables]
+ 1233 │         missing_tables = [table_name | missing_tables]
       │         ~
       │
-      └─ lib/warp_engine.ex:1117:9: WarpEngine.verify_tables_created/1
+      └─ lib/warp_engine.ex:1233:9: WarpEngine.verify_tables_created/1
 
       warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
       │
- 1125 │         missing_tables = [table_name | missing_tables]
+ 1241 │         missing_tables = [table_name | missing_tables]
       │         ~
       │
-      └─ lib/warp_engine.ex:1125:9: WarpEngine.verify_tables_created/1
+      └─ lib/warp_engine.ex:1241:9: WarpEngine.verify_tables_created/1
 
       warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
       │
- 1703 │         {:ok, value, shard_id} ->
+ 1819 │         {:ok, value, shard_id} ->
       │                      ~
       │
-      └─ lib/warp_engine.ex:1703:22: WarpEngine.handle_call_legacy_quantum_get/2
+      └─ lib/warp_engine.ex:1819:22: WarpEngine.handle_call_legacy_quantum_get/2
 
-      warning: function update_quantum_metrics/3 is unused
+      warning: defp initialize_phase10_gpu_system/0 is private, @doc attribute is always discarded for private functions/macros/types
       │
- 1278 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
-      │        ~
+ 1978 │   @doc """
+      │   ~~~~~~~~
       │
-      └─ lib/warp_engine.ex:1278:8: WarpEngine (module)
-
-      warning: function store_in_event_horizon_cache/5 is unused
-      │
- 1360 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
-      │        ~
-      │
-      └─ lib/warp_engine.ex:1360:8: WarpEngine (module)
-
-      warning: function refresh_cached_state/0 is unused
-      │
- 1832 │   defp refresh_cached_state() do
-      │        ~
-      │
-      └─ lib/warp_engine.ex:1832:8: WarpEngine (module)
+      └─ lib/warp_engine.ex:1978: WarpEngine.initialize_phase10_gpu_system/0
 
       warning: function get_current_state/0 is unused
       │
- 1856 │   defp get_current_state() do
+ 1972 │   defp get_current_state() do
       │        ~
       │
-      └─ lib/warp_engine.ex:1856:8: WarpEngine (module)
+      └─ lib/warp_engine.ex:1972:8: WarpEngine (module)
+
+      warning: function refresh_cached_state/0 is unused
+      │
+ 1948 │   defp refresh_cached_state() do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1948:8: WarpEngine (module)
+
+      warning: function store_in_event_horizon_cache/5 is unused
+      │
+ 1476 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1476:8: WarpEngine (module)
+
+      warning: function update_quantum_metrics/3 is unused
+      │
+ 1394 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1394:8: WarpEngine (module)
 
 warning: struct :already_exists is undefined (module :already_exists is not available or is yet to be defined)
 └─ lib/warp_engine.ex: WarpEngine.create_all_ets_tables_eagerly/0
+
+     warning: function calculate_entropy_cpu_fallback/1 is unused
+     │
+ 311 │   defp calculate_entropy_cpu_fallback(operations) do
+     │        ~
+     │
+     └─ lib/warp_engine/gpu/physics_engine.ex:311:8: WarpEngine.GPU.PhysicsEngine (module)
+
+     warning: function calculate_gravitational_cpu_fallback/1 is unused
+     │
+ 276 │   defp calculate_gravitational_cpu_fallback(operations) do
+     │        ~
+     │
+     └─ lib/warp_engine/gpu/physics_engine.ex:276:8: WarpEngine.GPU.PhysicsEngine (module)
+
+     warning: function calculate_quantum_cpu_fallback/1 is unused
+     │
+ 299 │   defp calculate_quantum_cpu_fallback(operations) do
+     │        ~
+     │
+     └─ lib/warp_engine/gpu/physics_engine.ex:299:8: WarpEngine.GPU.PhysicsEngine (module)
+
+     warning: function prepare_entropy_data_optimized/2 is unused
+     │
+ 253 │   defp prepare_entropy_data_optimized(operations, optimized_batch_size) do
+     │        ~
+     │
+     └─ lib/warp_engine/gpu/physics_engine.ex:253:8: WarpEngine.GPU.PhysicsEngine (module)
+
+     warning: function prepare_gravitational_data_optimized/2 is unused
+     │
+ 159 │   defp prepare_gravitational_data_optimized(operations, optimized_batch_size) do
+     │        ~
+     │
+     └─ lib/warp_engine/gpu/physics_engine.ex:159:8: WarpEngine.GPU.PhysicsEngine (module)
+
+     warning: function prepare_quantum_data_optimized/2 is unused
+     │
+ 220 │   defp prepare_quantum_data_optimized(operations, optimized_batch_size) do
+     │        ~
+     │
+     └─ lib/warp_engine/gpu/physics_engine.ex:220:8: WarpEngine.GPU.PhysicsEngine (module)
 
      warning: function atomize_keys/1 is unused
      │
@@ -364,44 +413,6 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
     │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     │
     └─ lib/warp_engine/wal_shard.ex:54: WarpEngine.WALShard (module)
-
-     warning: the following clause will never match:
-
-         {:error, reason}
-
-     because it attempts to match on the result of:
-
-         replay_shard_wal_entry(entry)
-
-     which has type:
-
-         dynamic(:ok)
-
-     typing violation found at:
-     │
- 790 │                     {:error, reason} ->
-     │                     ~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/warp_engine/wal_shard.ex:790: WarpEngine.WALShard.perform_full_shard_wal_recovery/2
-
-      warning: the following clause will never match:
-
-          {:error, reason}
-
-      because it attempts to match on the result of:
-
-          replay_shard_wal_entry(entry)
-
-      which has type:
-
-          dynamic(:ok)
-
-      typing violation found at:
-      │
- 1003 │                 {:error, reason} ->
-      │                 ~~~~~~~~~~~~~~~~~~~
-      │
-      └─ lib/warp_engine/wal_shard.ex:1003: WarpEngine.WALShard.replay_shard_wal_after_checkpoint/3
 
       warning: :file.position/3 is undefined or private. Did you mean:
 
@@ -441,19 +452,19 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │
      └─ lib/warp_engine/ultra_fast_operations.ex:336:30: WarpEngine.UltraFastOperations.send_wal_entry_direct/2
 
-     warning: function send_wal_entry_direct/2 is unused
-     │
- 336 │   defp send_wal_entry_direct(shard_id, wal_entry) do
-     │        ~
-     │
-     └─ lib/warp_engine/ultra_fast_operations.ex:336:8: WarpEngine.UltraFastOperations (module)
-
      warning: function get_shard_counter_ref/1 is unused
      │
  303 │   defp get_shard_counter_ref(shard_id) do
      │        ~
      │
      └─ lib/warp_engine/ultra_fast_operations.ex:303:8: WarpEngine.UltraFastOperations (module)
+
+     warning: function send_wal_entry_direct/2 is unused
+     │
+ 336 │   defp send_wal_entry_direct(shard_id, wal_entry) do
+     │        ~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:336:8: WarpEngine.UltraFastOperations (module)
 
      warning: WarpEngine.WormholeRouter.find_route/2 is undefined or private. Did you mean:
 
@@ -472,101 +483,6 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │                                        ~
      │
      └─ lib/enhanced_adt/islab_integration.ex:393:40: EnhancedADT.WarpEngineIntegration.Translators.attempt_wormhole_retrieval/1
-
-     warning: the following clause will never match:
-
-         :high_frequency
-
-     because it attempts to match on the result of:
-
-         analyze_route_pattern(route_candidate)
-
-     which has type:
-
-         dynamic(:medium_frequency)
-
-     typing violation found at:
-     │
- 149 │       :high_frequency -> 0.9
-     │       ~~~~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/wormhole_analyzer.ex:149: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
-
-     warning: the following clause will never match:
-
-         :low_frequency
-
-     because it attempts to match on the result of:
-
-         analyze_route_pattern(route_candidate)
-
-     which has type:
-
-         dynamic(:medium_frequency)
-
-     typing violation found at:
-     │
- 151 │       :low_frequency -> 0.3
-     │       ~~~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/wormhole_analyzer.ex:151: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
-
-     warning: the following clause will never match:
-
-         :unknown
-
-     because it attempts to match on the result of:
-
-         analyze_route_pattern(route_candidate)
-
-     which has type:
-
-         dynamic(:medium_frequency)
-
-     typing violation found at:
-     │
- 152 │       :unknown -> 0.4
-     │       ~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/wormhole_analyzer.ex:152: EnhancedADT.WormholeAnalyzer.estimate_frequency_score/1
-
-     warning: the following clause will never match:
-
-         :simple
-
-     because it attempts to match on the result of:
-
-         estimate_route_complexity(route_candidate)
-
-     which has type:
-
-         dynamic(:moderate)
-
-     typing violation found at:
-     │
- 165 │       :simple -> 0.05
-     │       ~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/wormhole_analyzer.ex:165: EnhancedADT.WormholeAnalyzer.estimate_maintenance_cost/1
-
-     warning: the following clause will never match:
-
-         :complex
-
-     because it attempts to match on the result of:
-
-         estimate_route_complexity(route_candidate)
-
-     which has type:
-
-         dynamic(:moderate)
-
-     typing violation found at:
-     │
- 167 │       :complex -> 0.2
-     │       ~~~~~~~~~~~~~~~
-     │
-     └─ lib/enhanced_adt/wormhole_analyzer.ex:167: EnhancedADT.WormholeAnalyzer.estimate_maintenance_cost/1
 
      warning: variable "meta1" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
@@ -631,152 +547,12 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │
      └─ lib/enhanced_adt/fold.ex:411: EnhancedADT.Fold.transform_adt_pattern/1
 
-     warning: function wrap_with_state_management/2 is unused
+     warning: function analyze_data_locality/2 is unused
      │
- 303 │   defp wrap_with_state_management(body, mode) do
+ 396 │   defp analyze_data_locality(_patterns, _body) do
      │        ~
      │
-     └─ lib/enhanced_adt/fold.ex:303:8: EnhancedADT.Fold (module)
-
-     warning: function inject_wormhole_analysis/2 is unused
-     │
- 273 │   defp inject_wormhole_analysis(body, analysis) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:273:8: EnhancedADT.Fold (module)
-
-     warning: function inject_warp_engine_operations/3 is unused
-     │
- 256 │   defp inject_warp_engine_operations(body, analysis, config) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:256:8: EnhancedADT.Fold (module)
-
-     warning: function inject_quantum_correlation/2 is unused
-     │
- 288 │   defp inject_quantum_correlation(body, analysis) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:288:8: EnhancedADT.Fold (module)
-
-     warning: function extract_types_from_pattern/1 is unused
-     │
- 380 │   defp extract_types_from_pattern({module_name, _, _args}) when is_atom(module_name) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:380:8: EnhancedADT.Fold (module)
-
-     warning: function extract_physics_hints/2 is unused
-     │
- 189 │   defp extract_physics_hints(patterns, body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:189:8: EnhancedADT.Fold (module)
-
-     warning: function extract_pattern_types/1 is unused
-     │
- 376 │   defp extract_pattern_types(patterns) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:376:8: EnhancedADT.Fold (module)
-
-     warning: function extract_body_references/1 is unused
-     │
- 385 │   defp extract_body_references(_body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:385:8: EnhancedADT.Fold (module)
-
-     warning: function enhance_single_clause/3 is unused
-     │
- 220 │   defp enhance_single_clause({:->, meta, [pattern_list, body]}, analysis, config) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:220:8: EnhancedADT.Fold (module)
-
-     warning: function enhance_fold_clauses/3 is unused
-     │
- 200 │   defp enhance_fold_clauses(clauses, clause_analysis, config) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:200:8: EnhancedADT.Fold (module)
-
-     warning: function determine_access_pattern/2 is unused
-     │
- 391 │   defp determine_access_pattern(_patterns, _body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:391:8: EnhancedADT.Fold (module)
-
-     warning: function detect_cross_references/2 is unused
-     │
- 172 │   defp detect_cross_references(patterns, body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:172:8: EnhancedADT.Fold (module)
-
-     warning: function detect_adt_operations/1 is unused
-     │
- 161 │   defp detect_adt_operations(body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:161:8: EnhancedADT.Fold (module)
-
-     warning: function contains_storage_calls?/1 is unused
-     │
- 347 │   defp contains_storage_calls?(body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:347:8: EnhancedADT.Fold (module)
-
-     warning: function contains_retrieval_calls?/1 is unused
-     │
- 355 │   defp contains_retrieval_calls?(body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:355:8: EnhancedADT.Fold (module)
-
-     warning: function contains_cross_reference_patterns?/1 is unused
-     │
- 362 │   defp contains_cross_reference_patterns?(body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:362:8: EnhancedADT.Fold (module)
-
-     warning: function calculate_operation_complexity/1 is unused
-     │
- 370 │   defp calculate_operation_complexity(body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:370:8: EnhancedADT.Fold (module)
-
-     warning: function analyze_temporal_characteristics/1 is unused
-     │
- 401 │   defp analyze_temporal_characteristics(_body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:401:8: EnhancedADT.Fold (module)
-
-     warning: function analyze_single_clause/1 is unused
-     │
- 104 │   defp analyze_single_clause({:->, _, [pattern_list, body]}) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:104:8: EnhancedADT.Fold (module)
-
-     warning: function analyze_pattern/1 is unused
-     │
- 119 │   defp analyze_pattern(pattern) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:119:8: EnhancedADT.Fold (module)
-
-     warning: function analyze_gravitational_hints/2 is unused
-     │
- 406 │   defp analyze_gravitational_hints(_patterns, _body) do
-     │        ~
-     │
-     └─ lib/enhanced_adt/fold.ex:406:8: EnhancedADT.Fold (module)
+     └─ lib/enhanced_adt/fold.ex:396:8: EnhancedADT.Fold (module)
 
     warning: function analyze_fold_clauses/1 is unused
     │
@@ -785,202 +561,166 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
     │
     └─ lib/enhanced_adt/fold.ex:96:8: EnhancedADT.Fold (module)
 
-     warning: function analyze_data_locality/2 is unused
+     warning: function analyze_gravitational_hints/2 is unused
      │
- 396 │   defp analyze_data_locality(_patterns, _body) do
+ 406 │   defp analyze_gravitational_hints(_patterns, _body) do
      │        ~
      │
-     └─ lib/enhanced_adt/fold.ex:396:8: EnhancedADT.Fold (module)
+     └─ lib/enhanced_adt/fold.ex:406:8: EnhancedADT.Fold (module)
 
-     warning: the following clause will never match:
-
-         :strongly_related
-
-     because it attempts to match on the result of:
-
-         analyze_data_relationship(candidate)
-
-     which has type:
-
-         dynamic(:moderately_related)
-
-     typing violation found at:
+     warning: function analyze_pattern/1 is unused
      │
- 170 │       :strongly_related -> 0.9
-     │       ~~~~~~~~~~~~~~~~~~~~~~~~
+ 119 │   defp analyze_pattern(pattern) do
+     │        ~
      │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:170: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+     └─ lib/enhanced_adt/fold.ex:119:8: EnhancedADT.Fold (module)
 
-     warning: the following clause will never match:
-
-         :weakly_related
-
-     because it attempts to match on the result of:
-
-         analyze_data_relationship(candidate)
-
-     which has type:
-
-         dynamic(:moderately_related)
-
-     typing violation found at:
+     warning: function analyze_single_clause/1 is unused
      │
- 172 │       :weakly_related -> 0.4
-     │       ~~~~~~~~~~~~~~~~~~~~~~
+ 104 │   defp analyze_single_clause({:->, _, [pattern_list, body]}) do
+     │        ~
      │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:172: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+     └─ lib/enhanced_adt/fold.ex:104:8: EnhancedADT.Fold (module)
 
-     warning: the following clause will never match:
-
-         :unrelated
-
-     because it attempts to match on the result of:
-
-         analyze_data_relationship(candidate)
-
-     which has type:
-
-         dynamic(:moderately_related)
-
-     typing violation found at:
+     warning: function analyze_temporal_characteristics/1 is unused
      │
- 173 │       :unrelated -> 0.1
-     │       ~~~~~~~~~~~~~~~~~
+ 401 │   defp analyze_temporal_characteristics(_body) do
+     │        ~
      │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:173: EnhancedADT.QuantumAnalyzer.calculate_data_affinity/1
+     └─ lib/enhanced_adt/fold.ex:401:8: EnhancedADT.Fold (module)
 
-     warning: the following clause will never match:
-
-         :always_together
-
-     because it attempts to match on the result of:
-
-         analyze_access_patterns(candidate)
-
-     which has type:
-
-         dynamic(:sometimes_together)
-
-     typing violation found at:
+     warning: function calculate_operation_complexity/1 is unused
      │
- 180 │       :always_together -> 0.95
-     │       ~~~~~~~~~~~~~~~~~~~~~~~~
+ 370 │   defp calculate_operation_complexity(body) do
+     │        ~
      │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:180: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+     └─ lib/enhanced_adt/fold.ex:370:8: EnhancedADT.Fold (module)
 
-     warning: the following clause will never match:
-
-         :frequently_together
-
-     because it attempts to match on the result of:
-
-         analyze_access_patterns(candidate)
-
-     which has type:
-
-         dynamic(:sometimes_together)
-
-     typing violation found at:
+     warning: function contains_cross_reference_patterns?/1 is unused
      │
- 181 │       :frequently_together -> 0.8
-     │       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 362 │   defp contains_cross_reference_patterns?(body) do
+     │        ~
      │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:181: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+     └─ lib/enhanced_adt/fold.ex:362:8: EnhancedADT.Fold (module)
 
-     warning: the following clause will never match:
-
-         :rarely_together
-
-     because it attempts to match on the result of:
-
-         analyze_access_patterns(candidate)
-
-     which has type:
-
-         dynamic(:sometimes_together)
-
-     typing violation found at:
+     warning: function contains_retrieval_calls?/1 is unused
      │
- 183 │       :rarely_together -> 0.2
-     │       ~~~~~~~~~~~~~~~~~~~~~~~
+ 355 │   defp contains_retrieval_calls?(body) do
+     │        ~
      │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:183: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+     └─ lib/enhanced_adt/fold.ex:355:8: EnhancedADT.Fold (module)
 
-     warning: the following clause will never match:
-
-         :never_together
-
-     because it attempts to match on the result of:
-
-         analyze_access_patterns(candidate)
-
-     which has type:
-
-         dynamic(:sometimes_together)
-
-     typing violation found at:
+     warning: function contains_storage_calls?/1 is unused
      │
- 184 │       :never_together -> 0.0
-     │       ~~~~~~~~~~~~~~~~~~~~~~
+ 347 │   defp contains_storage_calls?(body) do
+     │        ~
      │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:184: EnhancedADT.QuantumAnalyzer.estimate_access_correlation/1
+     └─ lib/enhanced_adt/fold.ex:347:8: EnhancedADT.Fold (module)
 
-     warning: the following clause will never match:
-
-         :very_stable
-
-     because it attempts to match on the result of:
-
-         analyze_coherence_factors(candidate)
-
-     which has type:
-
-         dynamic(:stable)
-
-     typing violation found at:
+     warning: function detect_adt_operations/1 is unused
      │
- 191 │       :very_stable -> 0.9
-     │       ~~~~~~~~~~~~~~~~~~~
+ 161 │   defp detect_adt_operations(body) do
+     │        ~
      │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:191: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+     └─ lib/enhanced_adt/fold.ex:161:8: EnhancedADT.Fold (module)
 
-     warning: the following clause will never match:
-
-         :moderately_stable
-
-     because it attempts to match on the result of:
-
-         analyze_coherence_factors(candidate)
-
-     which has type:
-
-         dynamic(:stable)
-
-     typing violation found at:
+     warning: function detect_cross_references/2 is unused
      │
- 193 │       :moderately_stable -> 0.5
-     │       ~~~~~~~~~~~~~~~~~~~~~~~~~
+ 172 │   defp detect_cross_references(patterns, body) do
+     │        ~
      │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:193: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+     └─ lib/enhanced_adt/fold.ex:172:8: EnhancedADT.Fold (module)
 
-     warning: the following clause will never match:
-
-         :unstable
-
-     because it attempts to match on the result of:
-
-         analyze_coherence_factors(candidate)
-
-     which has type:
-
-         dynamic(:stable)
-
-     typing violation found at:
+     warning: function determine_access_pattern/2 is unused
      │
- 194 │       :unstable -> 0.3
-     │       ~~~~~~~~~~~~~~~~
+ 391 │   defp determine_access_pattern(_patterns, _body) do
+     │        ~
      │
-     └─ lib/enhanced_adt/quantum_analyzer.ex:194: EnhancedADT.QuantumAnalyzer.estimate_coherence_stability/1
+     └─ lib/enhanced_adt/fold.ex:391:8: EnhancedADT.Fold (module)
+
+     warning: function enhance_fold_clauses/3 is unused
+     │
+ 200 │   defp enhance_fold_clauses(clauses, clause_analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:200:8: EnhancedADT.Fold (module)
+
+     warning: function enhance_single_clause/3 is unused
+     │
+ 220 │   defp enhance_single_clause({:->, meta, [pattern_list, body]}, analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:220:8: EnhancedADT.Fold (module)
+
+     warning: function extract_body_references/1 is unused
+     │
+ 385 │   defp extract_body_references(_body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:385:8: EnhancedADT.Fold (module)
+
+     warning: function extract_pattern_types/1 is unused
+     │
+ 376 │   defp extract_pattern_types(patterns) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:376:8: EnhancedADT.Fold (module)
+
+     warning: function extract_physics_hints/2 is unused
+     │
+ 189 │   defp extract_physics_hints(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:189:8: EnhancedADT.Fold (module)
+
+     warning: function extract_types_from_pattern/1 is unused
+     │
+ 380 │   defp extract_types_from_pattern({module_name, _, _args}) when is_atom(module_name) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:380:8: EnhancedADT.Fold (module)
+
+     warning: function inject_quantum_correlation/2 is unused
+     │
+ 288 │   defp inject_quantum_correlation(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:288:8: EnhancedADT.Fold (module)
+
+     warning: function inject_warp_engine_operations/3 is unused
+     │
+ 256 │   defp inject_warp_engine_operations(body, analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:256:8: EnhancedADT.Fold (module)
+
+     warning: function inject_wormhole_analysis/2 is unused
+     │
+ 273 │   defp inject_wormhole_analysis(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:273:8: EnhancedADT.Fold (module)
+
+     warning: function wrap_with_state_management/2 is unused
+     │
+ 303 │   defp wrap_with_state_management(body, mode) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:303:8: EnhancedADT.Fold (module)
+
+    warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+    │
+ 69 │   def get(key, opts \\ []) do
+    │                ~~~~
+    │
+    └─ lib/warp_engine/fast_path.ex:69:16: WarpEngine.FastPath.get/2
+
+     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 119 │   def delete(key, opts \\ []) do
+     │                   ~~~~
+     │
+     └─ lib/warp_engine/fast_path.ex:119:19: WarpEngine.FastPath.delete/2
 
      warning: Logger.warn/1 is deprecated. Use Logger.warning/2 instead
      │
@@ -989,110 +729,12 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │
      └─ lib/warp_engine/wal_operations.ex:715:14: WarpEngine.WALOperations.flush_process_wal_table/1
 
-     warning: function update_wormhole_usage_patterns/3 is unused
+     warning: function cache_retrieved_value_async/5 is unused
      │
- 669 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
+ 589 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:669:8: WarpEngine.WALOperations (module)
-
-     warning: function update_shard_statistics/4 is unused
-     │
- 679 │   defp update_shard_statistics(shard, operation, _key, _value) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:679:8: WarpEngine.WALOperations (module)
-
-     warning: function update_physics_intelligence_async/4 is unused
-     │
- 448 │   defp update_physics_intelligence_async(key, _value, _cosmic_metadata, _state) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:448:8: WarpEngine.WALOperations (module)
-
-     warning: function update_get_physics_intelligence_async/5 is unused
-     │
- 479 │   defp update_get_physics_intelligence_async(key, _value, _shard_id, _cosmic_metadata, _state) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:479:8: WarpEngine.WALOperations (module)
-
-     warning: function update_access_patterns_async/3 is unused
-     │
- 607 │   defp update_access_patterns_async(key, access_type, _state) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:607:8: WarpEngine.WALOperations (module)
-
-     warning: function ultra_fast_route_data/3 is unused
-     │
- 305 │   defp ultra_fast_route_data(key, _value, opts) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:305:8: WarpEngine.WALOperations (module)
-
-     warning: function populate_event_horizon_cache_async/4 is unused
-     │
- 576 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:576:8: WarpEngine.WALOperations (module)
-
-     warning: function get_wormhole_metadata/2 is unused
-     │
- 651 │   defp get_wormhole_metadata(_key, shard_id) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:651:8: WarpEngine.WALOperations (module)
-
-     warning: function flush_process_wal_table/1 is unused
-     │
- 708 │   defp flush_process_wal_table(wal_table) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:708:8: WarpEngine.WALOperations (module)
-
-     warning: function estimate_value_size/1 is unused
-     │
- 332 │   defp estimate_value_size(value) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:332:8: WarpEngine.WALOperations (module)
-
-     warning: function determine_quantum_state/2 is unused
-     │
- 612 │   defp determine_quantum_state(key, value) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:612:8: WarpEngine.WALOperations (module)
-
-     warning: function determine_optimal_cache_level/1 is unused
-     │
- 660 │   defp determine_optimal_cache_level(cosmic_metadata) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:660:8: WarpEngine.WALOperations (module)
-
-     warning: function create_cosmic_metadata/5 is unused
-     │
- 432 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:432:8: WarpEngine.WALOperations (module)
-
-     warning: function check_event_horizon_cache_v2/2 is unused
-     │
- 493 │   defp check_event_horizon_cache_v2(state, key) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:493:8: WarpEngine.WALOperations (module)
-
-     warning: function calculate_entropy_impact/3 is unused
-     │
- 623 │   defp calculate_entropy_impact(key, value, shard_id) do
-     │        ~
-     │
-     └─ lib/warp_engine/wal_operations.ex:623:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:589:8: WarpEngine.WALOperations (module)
 
      warning: function calculate_cosmic_coordinates/2 is unused
      │
@@ -1101,12 +743,110 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      │
      └─ lib/warp_engine/wal_operations.ex:637:8: WarpEngine.WALOperations (module)
 
-     warning: function cache_retrieved_value_async/5 is unused
+     warning: function calculate_entropy_impact/3 is unused
      │
- 589 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
+ 623 │   defp calculate_entropy_impact(key, value, shard_id) do
      │        ~
      │
-     └─ lib/warp_engine/wal_operations.ex:589:8: WarpEngine.WALOperations (module)
+     └─ lib/warp_engine/wal_operations.ex:623:8: WarpEngine.WALOperations (module)
+
+     warning: function check_event_horizon_cache_v2/2 is unused
+     │
+ 493 │   defp check_event_horizon_cache_v2(state, key) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:493:8: WarpEngine.WALOperations (module)
+
+     warning: function create_cosmic_metadata/5 is unused
+     │
+ 432 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:432:8: WarpEngine.WALOperations (module)
+
+     warning: function determine_optimal_cache_level/1 is unused
+     │
+ 660 │   defp determine_optimal_cache_level(cosmic_metadata) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:660:8: WarpEngine.WALOperations (module)
+
+     warning: function determine_quantum_state/2 is unused
+     │
+ 612 │   defp determine_quantum_state(key, value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:612:8: WarpEngine.WALOperations (module)
+
+     warning: function estimate_value_size/1 is unused
+     │
+ 332 │   defp estimate_value_size(value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:332:8: WarpEngine.WALOperations (module)
+
+     warning: function flush_process_wal_table/1 is unused
+     │
+ 708 │   defp flush_process_wal_table(wal_table) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:708:8: WarpEngine.WALOperations (module)
+
+     warning: function get_wormhole_metadata/2 is unused
+     │
+ 651 │   defp get_wormhole_metadata(_key, shard_id) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:651:8: WarpEngine.WALOperations (module)
+
+     warning: function populate_event_horizon_cache_async/4 is unused
+     │
+ 576 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:576:8: WarpEngine.WALOperations (module)
+
+     warning: function ultra_fast_route_data/3 is unused
+     │
+ 305 │   defp ultra_fast_route_data(key, _value, opts) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:305:8: WarpEngine.WALOperations (module)
+
+     warning: function update_access_patterns_async/3 is unused
+     │
+ 607 │   defp update_access_patterns_async(key, access_type, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:607:8: WarpEngine.WALOperations (module)
+
+     warning: function update_get_physics_intelligence_async/5 is unused
+     │
+ 479 │   defp update_get_physics_intelligence_async(key, _value, _shard_id, _cosmic_metadata, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:479:8: WarpEngine.WALOperations (module)
+
+     warning: function update_physics_intelligence_async/4 is unused
+     │
+ 448 │   defp update_physics_intelligence_async(key, _value, _cosmic_metadata, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:448:8: WarpEngine.WALOperations (module)
+
+     warning: function update_shard_statistics/4 is unused
+     │
+ 679 │   defp update_shard_statistics(shard, operation, _key, _value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:679:8: WarpEngine.WALOperations (module)
+
+     warning: function update_wormhole_usage_patterns/3 is unused
+     │
+ 669 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:669:8: WarpEngine.WALOperations (module)
 
     warning: module attribute @wal_sequence_ref_key_prefix was set but never used
     │
@@ -1121,36 +861,6 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
     │   ~
     │
     └─ lib/warp_engine/wal_operations.ex:28:3
-
-     warning: the following clause will never match:
-
-         {:error, _reason}
-
-     because it attempts to match on the result of:
-
-         WarpEngine.EventHorizonCache.get(cache, key)
-
-     which has type:
-
-         dynamic(
-           {:miss, %{..., performance_metrics: term()}} or
-             {:ok, term(), %{..., performance_metrics: term()},
-              %{
-                cache_level: term(),
-                data_decompressed: boolean(),
-                dilated_operation_time: integer(),
-                promoted: boolean(),
-                time_dilation_factor: term(),
-                wall_clock_time: float() or integer()
-              }}
-         )
-
-     typing violation found at:
-     │
- 505 │             {:error, _reason} -> nil
-     │             ~~~~~~~~~~~~~~~~~~~~~~~~
-     │
-     └─ lib/warp_engine/wal_operations.ex:505: WarpEngine.WALOperations.check_event_horizon_cache_v2/2
 
      warning: variable "key" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
@@ -1181,579 +891,522 @@ warning: struct :already_exists is undefined (module :already_exists is not avai
      └─ lib/warp_engine/intelligent_load_balancer.ex:109:5: WarpEngine.IntelligentLoadBalancer.route_operation/3
 
 
-17:17:11.724 [info] 🚀 Starting WarpEngine Database Application...
+09:16:05.740 [info] 🚀 Starting WarpEngine Database Application...
 
-17:17:11.727 [info] ⚙️  Application Configuration:
+09:16:05.742 [info] ⚙️  Application Configuration:
 
-17:17:11.737 [info]   data_root: "/home/travis/Projects/warp-engine/data"
+09:16:05.749 [info]   data_root: "/home/travis/Projects/warp-engine/data"
 
-17:17:11.737 [info]   Entanglement rules: using defaults
+09:16:05.749 [info]   Entanglement rules: using defaults
 
-17:17:11.737 [info] 🔧 Starting supervisor with 1 children
+09:16:05.749 [info] 🔧 Starting supervisor with 1 children
      warning: variable "item_num" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
- 286 │       items: Enum.map(1..:rand.uniform(5), fn item_num ->
+ 295 │       items: Enum.map(1..:rand.uniform(5), fn item_num ->
      │                                               ~
      │
-     └─ benchmarks/large_dataset_feature_validation.exs:286:47
+     └─ benchmarks/large_dataset_feature_validation.exs:295:47
 
      warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
- 363 │ test_intelligent_caching = fn worker_id, keys ->
+ 372 │ test_intelligent_caching = fn worker_id, keys ->
      │                               ~
      │
-     └─ benchmarks/large_dataset_feature_validation.exs:363:31
+     └─ benchmarks/large_dataset_feature_validation.exs:372:31
 
      warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
- 383 │ test_gravitational_routing = fn worker_id, keys ->
+ 392 │ test_gravitational_routing = fn worker_id, keys ->
      │                                            ~
      │
-     └─ benchmarks/large_dataset_feature_validation.exs:383:44
+     └─ benchmarks/large_dataset_feature_validation.exs:392:44
 
      warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
- 383 │ test_gravitational_routing = fn worker_id, keys ->
+ 392 │ test_gravitational_routing = fn worker_id, keys ->
      │                                 ~
      │
-     └─ benchmarks/large_dataset_feature_validation.exs:383:33
+     └─ benchmarks/large_dataset_feature_validation.exs:392:33
 
      warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
- 402 │ test_quantum_entanglement = fn worker_id, keys ->
+ 411 │ test_quantum_entanglement = fn worker_id, keys ->
      │                                           ~
      │
-     └─ benchmarks/large_dataset_feature_validation.exs:402:43
+     └─ benchmarks/large_dataset_feature_validation.exs:411:43
 
      warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
- 402 │ test_quantum_entanglement = fn worker_id, keys ->
+ 411 │ test_quantum_entanglement = fn worker_id, keys ->
      │                                ~
      │
-     └─ benchmarks/large_dataset_feature_validation.exs:402:32
+     └─ benchmarks/large_dataset_feature_validation.exs:411:32
 
      warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
- 419 │ test_entropy_monitoring = fn worker_id, keys ->
+ 428 │ test_entropy_monitoring = fn worker_id, keys ->
      │                                         ~
      │
-     └─ benchmarks/large_dataset_feature_validation.exs:419:41
+     └─ benchmarks/large_dataset_feature_validation.exs:428:41
 
      warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
- 419 │ test_entropy_monitoring = fn worker_id, keys ->
+ 428 │ test_entropy_monitoring = fn worker_id, keys ->
      │                              ~
      │
-     └─ benchmarks/large_dataset_feature_validation.exs:419:30
+     └─ benchmarks/large_dataset_feature_validation.exs:428:30
 
      warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
- 438 │ test_per_shard_wal = fn worker_id, keys ->
+ 447 │ test_per_shard_wal = fn worker_id, keys ->
      │                                    ~
      │
-     └─ benchmarks/large_dataset_feature_validation.exs:438:36
+     └─ benchmarks/large_dataset_feature_validation.exs:447:36
 
      warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
      │
- 438 │ test_per_shard_wal = fn worker_id, keys ->
+ 447 │ test_per_shard_wal = fn worker_id, keys ->
      │                         ~
      │
-     └─ benchmarks/large_dataset_feature_validation.exs:438:25
+     └─ benchmarks/large_dataset_feature_validation.exs:447:25
 
 🚀 Large Dataset Feature Validation Benchmark
 
-17:17:12.584 [info] ✨ All WarpEngine features enabled (using Phase 6.6 WAL system)
+09:16:06.584 [info] ✨ All WarpEngine features enabled (using Phase 6.6 WAL system)
 ================================================================================
-📊 Target Dataset: 0.001GB (100 keys)
+📊 Target Dataset: 0.0001GB (10 keys)
 🔧 Shards: 24
-⚡ Concurrency Levels: 1,2,4,6,12,24
+⚡ Concurrency Levels: 1,2,4,8,12
 ⏱️  Warmup: 5000ms, Measure: 10000ms, Trials: 1
 
-17:17:12.593 [error] ❌ WALCoordinator not running - Phase 9 per-shard WAL disabled!
+09:16:06.588 [error] ❌ WALCoordinator not running - Phase 9 per-shard WAL disabled!
 
-17:17:12.593 [error]    This will cause negative concurrency scaling
+09:16:06.588 [error]    This will cause negative concurrency scaling
 
-17:17:12.593 [error]    Check if bench_mode is properly set to false
+09:16:06.588 [error]    Check if bench_mode is properly set to false
 
-17:17:12.593 [error]    Current bench_mode: false
+09:16:06.588 [error]    Current bench_mode: false
 
-17:17:12.593 [error]    Current use_numbered_shards: true
+09:16:06.588 [error]    Current use_numbered_shards: true
 
-17:17:12.593 [info] 🔄 Attempting to start WAL system manually...
+09:16:06.588 [info] 🔄 Attempting to start WAL system manually...
 
-17:17:12.593 [info] 🚀 Initializing WAL Persistence Revolution...
+09:16:06.589 [info] 🚀 Initializing WAL Persistence Revolution...
 
-17:17:12.593 [info] 📁 WAL data_root: /home/travis/Projects/warp-engine/data
+09:16:06.589 [info] 📁 WAL data_root: /home/travis/Projects/warp-engine/data
 
-17:17:12.593 [info] 📁 Creating WAL directory: /home/travis/Projects/warp-engine/data/wal
+09:16:06.589 [info] 📁 Creating WAL directory: /home/travis/Projects/warp-engine/data/wal
 
-17:17:12.593 [info] 📄 Opening WAL file: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
+09:16:06.589 [info] 📄 Opening WAL file: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
 
-17:17:12.593 [info] ⚡ Setting up atomic counter...
+09:16:06.589 [info] ⚡ Setting up atomic counter...
 
-17:17:12.593 [info] 🏗️ Building WAL state...
+09:16:06.589 [info] 🏗️ Building WAL state...
 
-17:17:12.593 [info] ✅ WAL system initialized: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
+09:16:06.589 [info] ✅ WAL system initialized: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
 
-17:17:12.593 [info] ⚡ Ready for 250,000+ ops/second performance!
+09:16:06.589 [info] ⚡ Ready for 250,000+ ops/second performance!
 ⏳ Waiting for ETS tables...
 
-17:17:12.602 [info] ✅ WAL system started manually: #PID<0.437.0>
+09:16:06.597 [info] ✅ WAL system started manually: #PID<0.432.0>
 ✅ All 24 ETS tables ready in 0ms
 
-17:17:12.602 [info] 📦 Generating 0.001GB dataset (100 keys)...
+09:16:06.598 [info] 📦 Generating 0.0001GB dataset (10 keys)...
 
-17:17:12.613 [info] 📦 Dataset generated in 10.0ms
+09:16:06.608 [info] 📦 Dataset generated in 9.0ms
 
-17:17:12.613 [info] 📊 Total keys: 300
+09:16:06.608 [info] 📊 Total keys: 24
 
-17:17:12.613 [info] 💾 Estimated size: 0.0MB
+09:16:06.608 [info] 💾 Estimated size: 0.0MB
 
-17:17:12.613 [info] 🚀 Loading 300 keys into WarpEngine...
+09:16:06.608 [info] 🚀 Loading 24 keys into WarpEngine...
 
-17:17:12.616 [info] 💾 Memory before loading: 62.66MB
+09:16:06.612 [info] 💾 Memory before loading: 63.17MB
 
-17:17:12.627 [info] 📦 Loaded chunk 1/1 - Memory: 62.83MB
+09:16:06.622 [info] 📦 Loaded chunk 1/1 - Memory: 63.33MB
 
-17:17:12.895 [info] ✅ Dataset loaded in 281ms
+09:16:06.639 [info] ✅ Dataset loaded in 29ms
 
-17:17:12.895 [info] 💾 Memory after loading: 65.02MB
+09:16:06.639 [info] 💾 Memory after loading: 61.79MB
 
-17:17:12.896 [info] 💾 Memory increase: 2.36MB
+09:16:06.639 [info] 💾 Memory increase: -1.39MB
 
-17:17:12.896 [info] 🎯 Starting feature validation benchmarks...
+09:16:06.639 [info] 🎯 Starting feature validation benchmarks...
 
-17:17:12.897 [info] 🧹 Memory before benchmarks: 63.04MB
+09:16:06.640 [info] 🧹 Memory before benchmarks: 61.94MB
 
-17:17:12.897 [info] ⚛️  Quantum entanglement tests enabled
+09:16:06.640 [info] ⚛️  Quantum entanglement tests enabled
 
-17:17:12.897 [info] 🔗 Testing intelligent prefetching and entanglement collapse
+09:16:06.640 [info] 🔗 Testing intelligent prefetching and entanglement collapse
 
-17:17:12.897 [info] 🔧 Initializing quantum index system...
+09:16:06.640 [info] 🔧 Initializing quantum index system...
 
-17:17:12.898 [info] ⚛️  Initializing quantum entanglement system...
+09:16:06.640 [info] ⚛️  Initializing quantum entanglement system...
 
-17:17:12.898 [info] ✨ Quantum entanglement system ready for superposition
+09:16:06.644 [info] ✨ Quantum entanglement system ready for superposition
 
-17:17:12.898 [info] ✅ Quantum index system ready
+09:16:06.644 [info] ✅ Quantum index system ready
 
-17:17:12.898 [info] 🌊 Initializing entropy monitoring system...
+09:16:06.644 [info] 🌊 Initializing entropy monitoring system...
 
-17:17:12.907 [info] ✅ Entropy registry started
+09:16:06.650 [info] ✅ Entropy registry started
 
-17:17:12.907 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
+09:16:06.650 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
 
-17:17:12.911 [info] 💾 Entropy persistence initialized: /home/travis/Projects/warp-engine/data/entropy/cosmic_entropy
+09:16:06.651 [info] 💾 Entropy persistence initialized: /home/travis/Projects/warp-engine/data/entropy/cosmic_entropy
 
-17:17:12.911 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 30000ms
+09:16:06.651 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 30000ms
 
-17:17:12.911 [info] ✅ Entropy monitoring system ready
+09:16:06.651 [info] ✅ Entropy monitoring system ready
 
-17:17:12.911 [info] 
+09:16:06.651 [info] 
 == Testing with 1 processes ==
 
-17:17:12.911 [info]   Trial 1/1...
+09:16:06.651 [info]   Trial 1/1...
 
-17:17:28.080 [info]     Trial 1 Results:
+09:16:21.691 [info]     Trial 1 Results:
 
-17:17:28.080 [info]       Duration: 10084ms
+09:16:21.691 [info]       Duration: 10022ms
 
-17:17:28.080 [info]       Total Operations: 35200
+09:16:21.691 [info]       Total Operations: 472000
 
-17:17:28.080 [info]       Operations/sec: 3490
+09:16:21.691 [info]       Operations/sec: 47096
 
-17:17:28.080 [info]       Detailed Breakdown:
+09:16:21.691 [info]       Detailed Breakdown:
 
-17:17:28.080 [info]         Cache ops: 8800
+09:16:21.691 [info]         Cache ops: 118000
 
-17:17:28.080 [info]         Routing ops: 8800
+09:16:21.691 [info]         Routing ops: 118000
 
-17:17:28.080 [info]         Entanglement ops: 4400
+09:16:21.691 [info]         Entanglement ops: 59000
 
-17:17:28.080 [info]         Entropy ops: 8800
+09:16:21.691 [info]         Entropy ops: 118000
 
-17:17:28.080 [info]         WAL ops: 4400
+09:16:21.691 [info]         WAL ops: 59000
 
-17:17:28.080 [info]         Total counted: 35200
+09:16:21.691 [info]         Total counted: 472000
 
-17:17:28.080 [info]    • 1 processes: best 10084ms (3490 ops/sec)
+09:16:21.691 [info]    • 1 processes: best 10022ms (47096 ops/sec)
 
-17:17:28.080 [info]      median 3490 (p50 3490, p90 3490)
+09:16:21.691 [info]      median 47096 (p50 47096, p90 47096)
 
-17:17:28.080 [info]      Best trial detailed breakdown:
+09:16:21.691 [info]      Best trial detailed breakdown:
 
-17:17:28.080 [info]        Cache: 8800 ops
+09:16:21.691 [info]        Cache: 118000 ops
 
-17:17:28.080 [info]        Routing: 8800 ops
+09:16:21.691 [info]        Routing: 118000 ops
 
-17:17:28.080 [info]        Entanglement: 4400 ops
+09:16:21.691 [info]        Entanglement: 59000 ops
 
-17:17:28.080 [info]        Entropy: 8800 ops
+09:16:21.691 [info]        Entropy: 118000 ops
 
-17:17:28.080 [info]        WAL: 4400 ops
+09:16:21.691 [info]        WAL: 59000 ops
 
-17:17:28.080 [info]        Total counted: 35200
+09:16:21.691 [info]        Total counted: 472000
 
-17:17:28.080 [info]        vs Total reported: 35200
+09:16:21.691 [info]        vs Total reported: 472000
 
-17:17:28.080 [info]        Discrepancy: 0
+09:16:21.691 [info]        Discrepancy: 0
 
-17:17:29.083 [info] 
+09:16:22.692 [info] 
 == Testing with 2 processes ==
 
-17:17:29.083 [info]   Trial 1/1...
+09:16:22.692 [info]   Trial 1/1...
 
-17:17:42.840 [info]     Trial 1 Results:
+09:16:37.732 [info]     Trial 1 Results:
 
-17:17:42.840 [info]       Duration: 10263ms
+09:16:37.732 [info]       Duration: 10014ms
 
-17:17:42.840 [info]       Total Operations: 38400
+09:16:37.732 [info]       Total Operations: 592000
 
-17:17:42.840 [info]       Operations/sec: 3741
+09:16:37.732 [info]       Operations/sec: 59117
 
-17:17:42.840 [info]       Detailed Breakdown:
+09:16:37.732 [info]       Detailed Breakdown:
 
-17:17:42.840 [info]         Cache ops: 9600
+09:16:37.732 [info]         Cache ops: 148000
 
-17:17:42.840 [info]         Routing ops: 9600
+09:16:37.732 [info]         Routing ops: 148000
 
-17:17:42.840 [info]         Entanglement ops: 4800
+09:16:37.732 [info]         Entanglement ops: 74000
 
-17:17:42.840 [info]         Entropy ops: 9600
+09:16:37.732 [info]         Entropy ops: 148000
 
-17:17:42.840 [info]         WAL ops: 4800
+09:16:37.732 [info]         WAL ops: 74000
 
-17:17:42.840 [info]         Total counted: 38400
+09:16:37.732 [info]         Total counted: 592000
 
-17:17:42.840 [info]    • 2 processes: best 10263ms (3741 ops/sec)
+09:16:37.732 [info]    • 2 processes: best 10014ms (59117 ops/sec)
 
-17:17:42.840 [info]      median 3741 (p50 3741, p90 3741)
+09:16:37.732 [info]      median 59117 (p50 59117, p90 59117)
 
-17:17:42.840 [info]      Best trial detailed breakdown:
+09:16:37.732 [info]      Best trial detailed breakdown:
 
-17:17:42.840 [info]        Cache: 9600 ops
+09:16:37.732 [info]        Cache: 148000 ops
 
-17:17:42.840 [info]        Routing: 9600 ops
+09:16:37.732 [info]        Routing: 148000 ops
 
-17:17:42.840 [info]        Entanglement: 4800 ops
+09:16:37.732 [info]        Entanglement: 74000 ops
 
-17:17:42.840 [info]        Entropy: 9600 ops
+09:16:37.732 [info]        Entropy: 148000 ops
 
-17:17:42.840 [info]        WAL: 4800 ops
+09:16:37.732 [info]        WAL: 74000 ops
 
-17:17:42.840 [info]        Total counted: 38400
+09:16:37.732 [info]        Total counted: 592000
 
-17:17:42.840 [info]        vs Total reported: 38400
+09:16:37.732 [info]        vs Total reported: 592000
 
-17:17:42.840 [info]        Discrepancy: 0
+09:16:37.732 [info]        Discrepancy: 0
 
-17:17:43.841 [info] 
+09:16:38.733 [info] 
 == Testing with 4 processes ==
 
-17:17:43.841 [info]   Trial 1/1...
+09:16:38.733 [info]   Trial 1/1...
 
-17:17:59.793 [info]     Trial 1 Results:
+09:16:53.807 [info]     Trial 1 Results:
 
-17:17:59.793 [info]       Duration: 10926ms
+09:16:53.807 [info]       Duration: 10033ms
 
-17:17:59.793 [info]       Total Operations: 41600
+09:16:53.808 [info]       Total Operations: 604000
 
-17:17:59.793 [info]       Operations/sec: 3807
+09:16:53.808 [info]       Operations/sec: 60201
 
-17:17:59.793 [info]       Detailed Breakdown:
+09:16:53.808 [info]       Detailed Breakdown:
 
-17:17:59.793 [info]         Cache ops: 10400
+09:16:53.808 [info]         Cache ops: 151000
 
-17:17:59.793 [info]         Routing ops: 10400
+09:16:53.808 [info]         Routing ops: 151000
 
-17:17:59.793 [info]         Entanglement ops: 5200
+09:16:53.808 [info]         Entanglement ops: 75500
 
-17:17:59.793 [info]         Entropy ops: 10400
+09:16:53.808 [info]         Entropy ops: 151000
 
-17:17:59.793 [info]         WAL ops: 5200
+09:16:53.808 [info]         WAL ops: 75500
 
-17:17:59.793 [info]         Total counted: 41600
+09:16:53.808 [info]         Total counted: 604000
 
-17:17:59.793 [info]    • 4 processes: best 10926ms (3807 ops/sec)
+09:16:53.808 [info]    • 4 processes: best 10033ms (60201 ops/sec)
 
-17:17:59.793 [info]      median 3807 (p50 3807, p90 3807)
+09:16:53.808 [info]      median 60201 (p50 60201, p90 60201)
 
-17:17:59.793 [info]      Best trial detailed breakdown:
+09:16:53.808 [info]      Best trial detailed breakdown:
 
-17:17:59.793 [info]        Cache: 10400 ops
+09:16:53.808 [info]        Cache: 151000 ops
 
-17:17:59.794 [info]        Routing: 10400 ops
+09:16:53.808 [info]        Routing: 151000 ops
 
-17:17:59.794 [info]        Entanglement: 5200 ops
+09:16:53.808 [info]        Entanglement: 75500 ops
 
-17:17:59.794 [info]        Entropy: 10400 ops
+09:16:53.808 [info]        Entropy: 151000 ops
 
-17:17:59.794 [info]        WAL: 5200 ops
+09:16:53.808 [info]        WAL: 75500 ops
 
-17:17:59.794 [info]        Total counted: 41600
+09:16:53.808 [info]        Total counted: 604000
 
-17:17:59.795 [info]        vs Total reported: 41600
+09:16:53.808 [info]        vs Total reported: 604000
 
-17:17:59.795 [info]        Discrepancy: 0
+09:16:53.808 [info]        Discrepancy: 0
 
-17:17:59.795 [info]    🔍 Testing feature effectiveness...
+09:16:53.808 [info]    🔍 Testing feature effectiveness...
 
-17:18:00.219 [info]      📊 Cache hit rate: N/A
+09:16:54.230 [info]      📊 Cache hit rate: N/A
 
-17:18:00.219 [info]      🌊 Entropy score: 0.28385124474573153
+09:16:54.231 [info]      🌊 Entropy score: 0.8671389403536786
 
-17:18:00.219 [info]      🌌 Active entanglements: 25
+09:16:54.231 [info]      🌌 Active entanglements: 0
 
-17:18:01.223 [info] 
-== Testing with 6 processes ==
+09:16:55.232 [info] 
+== Testing with 8 processes ==
 
-17:18:01.223 [info]   Trial 1/1...
+09:16:55.232 [info]   Trial 1/1...
 
-17:18:15.788 [info]     Trial 1 Results:
+09:17:10.373 [info]     Trial 1 Results:
 
-17:18:15.788 [info]       Duration: 11125ms
+09:17:10.373 [info]       Duration: 10063ms
 
-17:18:15.788 [info]       Total Operations: 41600
+09:17:10.373 [info]       Total Operations: 582400
 
-17:18:15.788 [info]       Operations/sec: 3739
+09:17:10.373 [info]       Operations/sec: 57875
 
-17:18:15.789 [info]       Detailed Breakdown:
+09:17:10.373 [info]       Detailed Breakdown:
 
-17:18:15.789 [info]         Cache ops: 10400
+09:17:10.373 [info]         Cache ops: 145600
 
-17:18:15.789 [info]         Routing ops: 10400
+09:17:10.373 [info]         Routing ops: 145600
 
-17:18:15.789 [info]         Entanglement ops: 5200
+09:17:10.373 [info]         Entanglement ops: 72800
 
-17:18:15.789 [info]         Entropy ops: 10400
+09:17:10.374 [info]         Entropy ops: 145600
 
-17:18:15.789 [info]         WAL ops: 5200
+09:17:10.374 [info]         WAL ops: 72800
 
-17:18:15.789 [info]         Total counted: 41600
+09:17:10.374 [info]         Total counted: 582400
 
-17:18:15.789 [info]    • 6 processes: best 11125ms (3739 ops/sec)
+09:17:10.374 [info]    • 8 processes: best 10063ms (57875 ops/sec)
 
-17:18:15.789 [info]      median 3739 (p50 3739, p90 3739)
+09:17:10.374 [info]      median 57875 (p50 57875, p90 57875)
 
-17:18:15.789 [info]      Best trial detailed breakdown:
+09:17:10.374 [info]      Best trial detailed breakdown:
 
-17:18:15.789 [info]        Cache: 10400 ops
+09:17:10.374 [info]        Cache: 145600 ops
 
-17:18:15.789 [info]        Routing: 10400 ops
+09:17:10.374 [info]        Routing: 145600 ops
 
-17:18:15.789 [info]        Entanglement: 5200 ops
+09:17:10.374 [info]        Entanglement: 72800 ops
 
-17:18:15.789 [info]        Entropy: 10400 ops
+09:17:10.374 [info]        Entropy: 145600 ops
 
-17:18:15.789 [info]        WAL: 5200 ops
+09:17:10.374 [info]        WAL: 72800 ops
 
-17:18:15.789 [info]        Total counted: 41600
+09:17:10.374 [info]        Total counted: 582400
 
-17:18:15.789 [info]        vs Total reported: 41600
+09:17:10.374 [info]        vs Total reported: 582400
 
-17:18:15.789 [info]        Discrepancy: 0
+09:17:10.374 [info]        Discrepancy: 0
 
-17:18:15.789 [info]    🔍 Testing feature effectiveness...
+09:17:10.374 [info]    🔍 Testing feature effectiveness...
 
-17:18:16.171 [info]      📊 Cache hit rate: N/A
+09:17:10.767 [info]      📊 Cache hit rate: N/A
 
-17:18:16.172 [info]      🌊 Entropy score: 1.2023266428364725
+09:17:10.768 [info]      🌊 Entropy score: 0.5565056702662857
 
-17:18:16.172 [info]      🌌 Active entanglements: 25
+09:17:10.768 [info]      🌌 Active entanglements: 0
 
-17:18:17.174 [info] 
+09:17:11.769 [info] 
 == Testing with 12 processes ==
 
-17:18:17.175 [info]   Trial 1/1...
+09:17:11.769 [info]   Trial 1/1...
 
-17:18:34.278 [info]     Trial 1 Results:
+09:17:27.104 [info]     Trial 1 Results:
 
-17:18:34.278 [info]       Duration: 11448ms
+09:17:27.104 [info]       Duration: 10109ms
 
-17:18:34.278 [info]       Total Operations: 41600
+09:17:27.104 [info]       Total Operations: 499200
 
-17:18:34.279 [info]       Operations/sec: 3633
+09:17:27.104 [info]       Operations/sec: 49381
 
-17:18:34.279 [info]       Detailed Breakdown:
+09:17:27.104 [info]       Detailed Breakdown:
 
-17:18:34.279 [info]         Cache ops: 10400
+09:17:27.104 [info]         Cache ops: 124800
 
-17:18:34.279 [info]         Routing ops: 10400
+09:17:27.104 [info]         Routing ops: 124800
 
-17:18:34.279 [info]         Entanglement ops: 5200
+09:17:27.104 [info]         Entanglement ops: 62400
 
-17:18:34.279 [info]         Entropy ops: 10400
+09:17:27.104 [info]         Entropy ops: 124800
 
-17:18:34.279 [info]         WAL ops: 5200
+09:17:27.104 [info]         WAL ops: 62400
 
-17:18:34.279 [info]         Total counted: 41600
+09:17:27.104 [info]         Total counted: 499200
 
-17:18:34.279 [info]    • 12 processes: best 11448ms (3633 ops/sec)
+09:17:27.104 [info]    • 12 processes: best 10109ms (49381 ops/sec)
 
-17:18:34.279 [info]      median 3633 (p50 3633, p90 3633)
+09:17:27.104 [info]      median 49381 (p50 49381, p90 49381)
 
-17:18:34.279 [info]      Best trial detailed breakdown:
+09:17:27.104 [info]      Best trial detailed breakdown:
 
-17:18:34.279 [info]        Cache: 10400 ops
+09:17:27.104 [info]        Cache: 124800 ops
 
-17:18:34.279 [info]        Routing: 10400 ops
+09:17:27.104 [info]        Routing: 124800 ops
 
-17:18:34.279 [info]        Entanglement: 5200 ops
+09:17:27.104 [info]        Entanglement: 62400 ops
 
-17:18:34.279 [info]        Entropy: 10400 ops
+09:17:27.104 [info]        Entropy: 124800 ops
 
-17:18:34.279 [info]        WAL: 5200 ops
+09:17:27.104 [info]        WAL: 62400 ops
 
-17:18:34.279 [info]        Total counted: 41600
+09:17:27.104 [info]        Total counted: 499200
 
-17:18:34.279 [info]        vs Total reported: 41600
+09:17:27.104 [info]        vs Total reported: 499200
 
-17:18:34.279 [info]        Discrepancy: 0
+09:17:27.104 [info]        Discrepancy: 0
 
-17:18:34.279 [info]    🔍 Testing feature effectiveness...
+09:17:27.104 [info]    🔍 Testing feature effectiveness...
 
-17:18:34.659 [info]      📊 Cache hit rate: N/A
+09:17:27.495 [info]      📊 Cache hit rate: N/A
 
-17:18:34.659 [info]      🌊 Entropy score: 1.0172302435585105
+09:17:27.495 [info]      🌊 Entropy score: 0.31359276088686017
 
-17:18:34.660 [info]      🌌 Active entanglements: 25
+09:17:27.495 [info]      🌌 Active entanglements: 0
 
-17:18:35.664 [info] 
-== Testing with 24 processes ==
-
-17:18:35.664 [info]   Trial 1/1...
-
-17:18:54.195 [info]     Trial 1 Results:
-
-17:18:54.195 [info]       Duration: 13317ms
-
-17:18:54.195 [info]       Total Operations: 44800
-
-17:18:54.195 [info]       Operations/sec: 3364
-
-17:18:54.195 [info]       Detailed Breakdown:
-
-17:18:54.195 [info]         Cache ops: 11200
-
-17:18:54.195 [info]         Routing ops: 11200
-
-17:18:54.195 [info]         Entanglement ops: 5600
-
-17:18:54.195 [info]         Entropy ops: 11200
-
-17:18:54.195 [info]         WAL ops: 5600
-
-17:18:54.195 [info]         Total counted: 44800
-
-17:18:54.195 [info]    • 24 processes: best 13317ms (3364 ops/sec)
-
-17:18:54.195 [info]      median 3364 (p50 3364, p90 3364)
-
-17:18:54.195 [info]      Best trial detailed breakdown:
-
-17:18:54.195 [info]        Cache: 11200 ops
-
-17:18:54.195 [info]        Routing: 11200 ops
-
-17:18:54.195 [info]        Entanglement: 5600 ops
-
-17:18:54.195 [info]        Entropy: 11200 ops
-
-17:18:54.195 [info]        WAL: 5600 ops
-
-17:18:54.195 [info]        Total counted: 44800
-
-17:18:54.195 [info]        vs Total reported: 44800
-
-17:18:54.195 [info]        Discrepancy: 0
-
-17:18:54.195 [info]    🔍 Testing feature effectiveness...
-
-17:18:54.579 [info]      📊 Cache hit rate: N/A
-
-17:18:54.579 [info]      🌊 Entropy score: 0.33169163035311
-
-17:18:54.579 [info]      🌌 Active entanglements: 25
-
-17:18:55.585 [info] 
+09:17:28.496 [info] 
 🎯 Feature Validation Summary
 
-17:18:55.585 [info] ============================================================
+09:17:28.496 [info] ============================================================
 
-17:18:55.585 [info] 🧪 Testing individual features...
+09:17:28.496 [info] 🧪 Testing individual features...
 
-17:18:55.585 [info] 📊 Testing Event Horizon Cache...
+09:17:28.496 [info] 📊 Testing Event Horizon Cache...
 
-17:18:55.639 [info]    ✅ Cache test: 1000 operations in 53ms
+09:17:28.507 [info]    ✅ Cache test: 1000 operations in 11ms
 
-17:18:55.639 [info] 🌍 Testing Gravitational Routing...
+09:17:28.507 [info] 🌍 Testing Gravitational Routing...
 
-17:18:55.738 [info]    ✅ Routing test: 2000 operations in 100ms
+09:17:28.526 [info]    ✅ Routing test: 2000 operations in 19ms
 
-17:18:55.739 [info] 🌌 Testing Quantum Entanglement...
+09:17:28.526 [info] 🌌 Testing Quantum Entanglement...
 
-17:18:55.749 [info]    ✅ Entanglement test: 100 operations in 11ms
+09:17:28.527 [info]    ✅ Entanglement test: 100 operations in 1ms
 
-17:18:55.749 [info] 🌊 Testing Entropy Monitoring...
+09:17:28.527 [info] 🌊 Testing Entropy Monitoring...
 
-17:18:55.765 [info]    ✅ Entropy metrics: %{total_entropy: 0.3982258258530987, shannon_entropy: 0.6637097097551645, thermodynamic_entropy: 1.3123422475376496e-22, entropy_trend: :decreasing, system_temperature: 3.5100000000000002, last_calculated: 1756246735749, disorder_index: 0.15929033034123946, stability_metric: 0.9004435435367253, rebalancing_recommended: false, vacuum_stability: 0.99995}
+09:17:28.546 [info]    ✅ Entropy metrics: %{total_entropy: 0.7519438547967308, shannon_entropy: 1.2532397579945513, thermodynamic_entropy: 1.1805302436366167e-22, entropy_trend: :stable, system_temperature: 3.24, last_calculated: 1756390648527, disorder_index: 0.3007775419186923, stability_metric: 0.8120140363008173, rebalancing_recommended: false, vacuum_stability: 0.99995}
 
-17:18:55.765 [info] 📝 Testing Per-Shard WAL...
+09:17:28.546 [info] 📝 Testing Per-Shard WAL...
 
-17:18:56.608 [info]    ✅ WAL test: 1000 operations in 843ms
+09:17:28.588 [info]    ✅ WAL test: 1000 operations in 42ms
 
-17:18:56.608 [info] 
+09:17:28.588 [info] 
 🎉 Large Dataset Feature Validation Complete!
 
-17:18:56.608 [info] 📊 Dataset: 0.001GB (100 keys)
+09:17:28.588 [info] 📊 Dataset: 0.0001GB (10 keys)
 
-17:18:56.608 [info] 🔧 Features tested: Intelligent Caching, Gravitational Routing, Quantum Entanglement, Entropy Monitoring, Per-Shard WAL
+09:17:28.588 [info] 🔧 Features tested: Intelligent Caching, Gravitational Routing, Quantum Entanglement, Entropy Monitoring, Per-Shard WAL
 
-17:18:56.608 [info] 🚀 Ready for Phase 9.2 optimization!
+09:17:28.588 [info] 🚀 Ready for Phase 9.2 optimization!
 
-17:18:56.608 [info] 
+09:17:28.588 [info] 
 📊 COMPREHENSIVE PERFORMANCE ANALYSIS
 
-17:18:56.609 [info] ================================================================================
+09:17:28.588 [info] ================================================================================
 
-17:18:56.609 [info] 🔍 OPERATION COUNTING ANALYSIS:
+09:17:28.588 [info] 🔍 OPERATION COUNTING ANALYSIS:
 
-17:18:56.609 [info]    Expected operations per worker per iteration:
+09:17:28.588 [info]    Expected operations per worker per iteration:
 
-17:18:56.609 [info]      • Intelligent Caching: 4 operations (4 cosmic_get)
+09:17:28.588 [info]      • Intelligent Caching: 4 operations (4 cosmic_get)
 
-17:18:56.609 [info]      • Gravitational Routing: 4 operations (4 cosmic_get)
+09:17:28.588 [info]      • Gravitational Routing: 4 operations (4 cosmic_get)
 
-17:18:56.609 [info]      • Quantum Entanglement: 2 operations (1 quantum_get + 2 cosmic_get)
+09:17:28.588 [info]      • Quantum Entanglement: 2 operations (1 quantum_get + 2 cosmic_get)
 
-17:18:56.609 [info]      • Entropy Monitoring: 4 operations (4 cosmic_get)
+09:17:28.588 [info]      • Entropy Monitoring: 4 operations (4 cosmic_get)
 
-17:18:56.609 [info]      • Per-Shard WAL: 2 operations (2 cosmic_put)
+09:17:28.588 [info]      • Per-Shard WAL: 2 operations (2 cosmic_put)
 
-17:18:56.609 [info]      • TOTAL PER ITERATION: 16 operations
+09:17:28.588 [info]      • TOTAL PER ITERATION: 16 operations
 
-17:18:56.609 [info]    Expected operations per worker (50 iterations): 16 × 50 = 800 operations
+09:17:28.588 [info]    Expected operations per worker (50 iterations): 16 × 50 = 800 operations
 
-17:18:56.609 [info]    Expected operations for 24 workers: 800 × 24 = 19200 operations
+09:17:28.588 [info]    Expected operations for 12 workers: 800 × 12 = 9600 operations
 
-17:18:56.609 [info] 
+09:17:28.588 [info] 
 🎯 PERFORMANCE TARGETS:
 
-17:18:56.609 [info]    • Target: 25,000+ ops/sec per process
+09:17:28.588 [info]    • Target: 25,000+ ops/sec per process
 
-17:18:56.609 [info]    • Phase 9 Architecture: ✅ Enabled
+09:17:28.588 [info]    • Phase 9 Architecture: ✅ Enabled
 
-17:18:56.609 [info]    • WALCoordinator: ✅ Running
+09:17:28.588 [info]    • WALCoordinator: ✅ Running
 
-17:18:56.609 [info]    • Numbered Shards: ✅ 24 shards active
+09:17:28.588 [info]    • Numbered Shards: ✅ 24 shards active
 
-17:18:56.609 [info] 
+09:17:28.588 [info] 
 💡 TROUBLESHOOTING NOTES:
 
-17:18:56.609 [info]    • If discrepancy > 0: Some operations not being counted
+09:17:28.588 [info]    • If discrepancy > 0: Some operations not being counted
 
-17:18:56.609 [info]    • If discrepancy < 0: Operations being double-counted
+09:17:28.588 [info]    • If discrepancy < 0: Operations being double-counted
 
-17:18:56.609 [info]    • If performance < 25k ops/sec: Check workload complexity or system bottlenecks
+09:17:28.588 [info]    • If performance < 25k ops/sec: Check workload complexity or system bottlenecks
 
-17:18:56.609 [info]    • Phase 9 should provide linear scaling up to 24 processes
+09:17:28.588 [info]    • Phase 9 should provide linear scaling up to 24 processes

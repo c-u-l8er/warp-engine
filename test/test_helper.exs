@@ -1,12 +1,27 @@
 # Configure test environment BEFORE starting ExUnit and the application
 # This ensures the data_root is set before WarpEngine tries to initialize
 
+# --- Candlex/Nx CUDA setup for test runtime ---
+try do
+  System.put_env("CANDLEX_NIF_TARGET", System.get_env("CANDLEX_NIF_TARGET") || "cuda")
+  # Prefer visible GPU 0 in CI/WSL
+  System.put_env("CUDA_VISIBLE_DEVICES", System.get_env("CUDA_VISIBLE_DEVICES") || "0")
+
+  # Ensure Nx uses Candlex CUDA by default in tests
+  Application.put_env(:nx, :default_backend, {Candlex.Backend, device: :cuda})
+rescue
+  _ -> :ok
+end
+# ---------------------------------------------
+
 # Test environment configuration
 Application.put_env(:warp_engine, :test_mode, true)
 Application.put_env(:warp_engine, :data_root, "/tmp/warp_engine_test_data")
 # Ensure tests run in normal mode (not bench mode)
 Application.put_env(:warp_engine, :bench_mode, false)
 Application.put_env(:warp_engine, :force_ultra_fast_path, false)
+# Enable GPU in tests to avoid Candlex warnings
+Application.put_env(:warp_engine, :enable_gpu, true)
 
 # Ensure clean test environment before starting
 test_data_dir = "/tmp/warp_engine_test_data"

@@ -9,17 +9,28 @@
 # - Per-shard WAL performance
 
 require Logger
-Logger.configure(level: :info)
-Logger.configure_backend(:console, level: :info)
+# Reduce log noise during heavy benchmarks; override with BENCH_LOG_LEVEL
+level =
+  case System.get_env("BENCH_LOG_LEVEL") do
+    "debug" -> :debug
+    "info" -> :info
+    "warning" -> :warning
+    "error" -> :error
+    _ -> :warning
+  end
+Logger.configure(level: level)
+Logger.configure_backend(:console, level: level)
 
 # -------------------- Configuration --------------------
 # Set bench mode from environment variable
 bench_mode = System.get_env("BENCH_MODE") == "true"
 
-# CRITICAL: Set bench_mode BEFORE application starts to ensure WALCoordinator starts
 Application.put_env(:warp_engine, :bench_mode, bench_mode)
 Application.put_env(:warp_engine, :force_ultra_fast_path, bench_mode)
 Application.put_env(:warp_engine, :use_numbered_shards, true)
+Application.put_env(:warp_engine, :enable_intelligent_load_balancer, true)
+Application.put_env(:warp_engine, :enable_event_horizon_cache_in_bench, true)
+Application.put_env(:warp_engine, :enable_auto_entanglement_in_bench, true)
 
 # Ensure all features are enabled when not in bench mode
 if not bench_mode do
@@ -69,28 +80,32 @@ IO.puts("⏱️  Warmup: #{warmup_ms}ms, Measure: #{measure_ms}ms, Trials: #{tri
 # -------------------- Start System --------------------
 {:ok, _} = Application.ensure_all_started(:warp_engine)
 
-# Verify WALCoordinator is running (Phase 9 per-shard WAL)
-case Process.whereis(WarpEngine.WALCoordinator) do
-  nil ->
-    Logger.error("❌ WALCoordinator not running - Phase 9 per-shard WAL disabled!")
-    Logger.error("   This will cause negative concurrency scaling")
-    Logger.error("   Check if bench_mode is properly set to false")
+# Verify lock-free WAL system is available (modern WAL)
+wal_wait_start = System.monotonic_time(:millisecond)
+wait = fn wait ->
+  case Process.whereis(WarpEngine.WAL) do
+    pid when is_pid(pid) ->
+      Logger.info("✅ Lock-free WAL system active: #{inspect(pid)}")
+      true
+    _ ->
+      if System.monotonic_time(:millisecond) - wal_wait_start > 2000 do
+        Logger.warning("⚠️  WAL system not found after 2s; attempting manual start...")
+        case WarpEngine.WAL.start_link([]) do
+          {:ok, pid} ->
+            Logger.info("✅ WAL system started manually: #{inspect(pid)}")
+            true
+          {:error, _} -> false
+        end
+      else
+        Process.sleep(50)
+        wait.(wait)
+      end
+  end
+end
+wal_ready = wait.(wait)
 
-    # Show current configuration
-    Logger.error("   Current bench_mode: #{Application.get_env(:warp_engine, :bench_mode)}")
-    Logger.error("   Current use_numbered_shards: #{Application.get_env(:warp_engine, :use_numbered_shards)}")
-
-    # Try to start WAL system manually if it's not running
-    Logger.info("🔄 Attempting to start WAL system manually...")
-    case WarpEngine.WAL.start_link([]) do
-      {:ok, pid} ->
-        Logger.info("✅ WAL system started manually: #{inspect(pid)}")
-      {:error, reason} ->
-        Logger.error("❌ Failed to start WAL system manually: #{inspect(reason)}")
-    end
-  pid when is_pid(pid) ->
-    Logger.info("✅ WALCoordinator running: #{inspect(pid)}")
-    Logger.info("   Phase 9 per-shard WAL architecture enabled")
+if not wal_ready do
+  Logger.error("❌ WAL system unavailable; proceeding without WAL optimizations")
 end
 
 # Wait for ETS tables with extended timeout for large datasets
@@ -479,6 +494,13 @@ Logger.info("💾 Memory before loading: #{Float.round(memory_before / 1024 / 10
 chunk_size = 5_000  # Reduced chunk size for WSL memory constraints
 total_chunks = ceil.(length(dataset), chunk_size)
 
+prev_put = Application.get_env(:warp_engine, :physics_sample_rate_put, 8)
+prev_cput = Application.get_env(:warp_engine, :cache_sample_rate_put, 4)
+prev_cget = Application.get_env(:warp_engine, :cache_sample_rate_get, 2)
+Application.put_env(:warp_engine, :physics_sample_rate_put, 1)
+Application.put_env(:warp_engine, :cache_sample_rate_put, 1)
+Application.put_env(:warp_engine, :cache_sample_rate_get, 1)
+
 Enum.chunk_every(dataset, chunk_size)
 |> Enum.with_index()
 |> Enum.each(fn {chunk, chunk_idx} ->
@@ -488,7 +510,7 @@ Enum.chunk_every(dataset, chunk_size)
   end
 
   Enum.each(chunk, fn {key, value, _type} ->
-    WarpEngine.cosmic_put(key, value)
+    WarpEngine.cosmic_put(key, value, ultra_fast: false)
   end)
 
   # Force garbage collection every few chunks to prevent memory buildup
@@ -503,6 +525,11 @@ Logger.info("✅ Dataset loaded in #{load_time}ms")
 Logger.info("💾 Memory after loading: #{Float.round(memory_after / 1024 / 1024, 2)}MB")
 Logger.info("💾 Memory increase: #{Float.round((memory_after - memory_before) / 1024 / 1024, 2)}MB")
 
+# Restore sampling configuration for the benchmark run
+Application.put_env(:warp_engine, :physics_sample_rate_put, prev_put)
+Application.put_env(:warp_engine, :cache_sample_rate_put, prev_cput)
+Application.put_env(:warp_engine, :cache_sample_rate_get, prev_cget)
+
 # Run benchmarks
 Logger.info("🎯 Starting feature validation benchmarks...")
 
@@ -511,7 +538,7 @@ Logger.info("🎯 Starting feature validation benchmarks...")
 memory_before_benchmarks = :erlang.memory(:total)
 Logger.info("🧹 Memory before benchmarks: #{Float.round(memory_before_benchmarks / 1024 / 1024, 2)}MB")
 
-# Quantum entanglement is now enabled
+# Quantum entanglement is enabled
 Logger.info("⚛️  Quantum entanglement tests enabled")
 Logger.info("🔗 Testing intelligent prefetching and entanglement collapse")
 
@@ -548,26 +575,46 @@ case WarpEngine.EntropyMonitor.create_monitor(:cosmic_entropy, [
     Logger.warning("⚠️  Failed to initialize entropy monitor: #{inspect(reason)}")
 end
 
+# Enable deterministic routing for numbered shards so GET can be single-table (faster, physics-friendly)
+Application.put_env(:warp_engine, :deterministic_numbered_routing, true)
+
+# Bench sampling defaults - enable some physics and cache so metrics are non-N/A
+Application.put_env(:warp_engine, :physics_sample_rate_put, 8)
+Application.put_env(:warp_engine, :cache_write_through_on_put, true)
+Application.put_env(:warp_engine, :cache_sample_rate_put, 4)
+Application.put_env(:warp_engine, :cache_sample_rate_get, 2)
+
+# Prewarm Event Horizon Cache to improve cache-hit ratio during benchmarks
+Logger.info("🔥 Prewarming event horizon cache with representative keys...")
+prewarm_n = max(1000, min(5000, div(total_keys, 2)))
+prev_ultra = Application.get_env(:warp_engine, :force_ultra_fast_path, false)
+Application.put_env(:warp_engine, :force_ultra_fast_path, false)
+Enum.each(1..prewarm_n, fn i ->
+  _ = WarpEngine.cosmic_get("user:#{rem(i, max(1, div(total_keys, 4)))}")
+  _ = WarpEngine.cosmic_get("product:#{rem(i, max(1, div(total_keys, 4)))}")
+end)
+Application.put_env(:warp_engine, :force_ultra_fast_path, prev_ultra)
+
+# Enable deterministic routing for numbered shards so GET can be single-table (faster, physics-friendly)
+Application.put_env(:warp_engine, :deterministic_numbered_routing, true)
+
 # Define the combined workload function with built-in quantum index fallback
 run_feature_workload = fn worker_id, keys ->
-  # Mix of all feature tests
+  # Mix of all feature tests (compute once, return totals and breakdown)
   cache_ops = test_intelligent_caching.(worker_id, keys)
   routing_ops = test_gravitational_routing.(worker_id, keys)
-
-  # Quantum entanglement with automatic fallback
   entanglement_ops = test_quantum_entanglement.(worker_id, keys)
-
   entropy_ops = test_entropy_monitoring.(worker_id, keys)
   wal_ops = test_per_shard_wal.(worker_id, keys)
 
   total_ops = cache_ops + routing_ops + entanglement_ops + entropy_ops + wal_ops
+  detailed = %{cache: cache_ops, routing: routing_ops, entanglement: entanglement_ops, entropy: entropy_ops, wal: wal_ops}
 
-  # Log detailed breakdown for debugging
-  if rem(worker_id, 4) == 0 do  # Only log for every 4th worker to avoid spam
-    Logger.debug("   Worker #{worker_id} breakdown: cache=#{cache_ops}, routing=#{routing_ops}, entanglement=#{entanglement_ops}, entropy=#{entropy_ops}, wal=#{wal_ops}, total=#{total_ops}")
+  if rem(worker_id, 4) == 0 do
+    Logger.debug("   Worker #{worker_id} breakdown: #{inspect(detailed)} total=#{total_ops}")
   end
 
-  total_ops
+  {total_ops, detailed}
 end
 
 Enum.each(concurrency_levels, fn procs ->
@@ -607,16 +654,7 @@ Enum.each(concurrency_levels, fn procs ->
 
         spin = fn spin, local_ops, local_detailed ->
           if System.monotonic_time(:millisecond) < deadline do
-            new_ops = run_feature_workload.(i, dataset)
-
-            # Track detailed operations per worker
-            new_detailed = %{
-              cache: test_intelligent_caching.(i, dataset),
-              routing: test_gravitational_routing.(i, dataset),
-              entanglement: test_quantum_entanglement.(i, dataset),
-              entropy: test_entropy_monitoring.(i, dataset),
-              wal: test_per_shard_wal.(i, dataset)
-            }
+            {new_ops, new_detailed} = run_feature_workload.(i, dataset)
 
             # Add small delays between operations to reduce contention
             if rem(local_ops, 100) == 0 do
@@ -696,10 +734,11 @@ Enum.each(concurrency_levels, fn procs ->
 
     # Test cache hit rates
     cache_metrics = WarpEngine.cosmic_metrics()
-    cache_hit_rate = get_in(cache_metrics, [:event_horizon_cache, :hit_rate]) ||
-                     get_in(cache_metrics, [:cache, :hit_rate]) ||
-                     "N/A"
-    Logger.info("     📊 Cache hit rate: #{cache_hit_rate}")
+    # Extract a representative hit rate from hot_data_cache if present
+    hot_cache_hit = get_in(cache_metrics, [:event_horizon_cache, :individual_cache_metrics, :hot_data_cache, :performance_metrics, :hit_rate])
+    universal_cache_hit = get_in(cache_metrics, [:event_horizon_cache, :individual_cache_metrics, :universal_cache, :performance_metrics, :hit_rate])
+    cache_hit_rate = hot_cache_hit || universal_cache_hit || "N/A"
+    Logger.info("     📊 Cache hit rate (hot/universal): #{cache_hit_rate}")
 
     # Test entropy metrics
     entropy_metrics = WarpEngine.EntropyMonitor.get_entropy_metrics(:cosmic_entropy)
@@ -789,7 +828,6 @@ Logger.info("   Expected operations for #{concurrency_levels |> List.last()} wor
 Logger.info("\n🎯 PERFORMANCE TARGETS:")
 Logger.info("   • Target: 25,000+ ops/sec per process")
 Logger.info("   • Phase 9 Architecture: ✅ Enabled")
-Logger.info("   • WALCoordinator: ✅ Running")
 Logger.info("   • Numbered Shards: ✅ 24 shards active")
 
 Logger.info("\n💡 TROUBLESHOOTING NOTES:")

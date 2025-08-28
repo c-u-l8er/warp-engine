@@ -37,10 +37,10 @@ defmodule SimpleWeightedGraph do
   defproduct GraphNode do
     field id :: String.t()
     field label :: String.t()
-    field properties :: map(), physics: :quantum_entanglement_group
-    field importance_score :: float(), physics: :gravitational_mass
-    field activity_level :: float(), physics: :quantum_entanglement_potential
-    field created_at :: DateTime.t(), physics: :temporal_weight
+    field properties :: map(), physics: :quantum_entanglement_group, physics_offload: :cast
+    field importance_score :: float(), physics: :gravitational_mass, physics_offload: :cast
+    field activity_level :: float(), physics: :quantum_entanglement_potential, physics_offload: :cast
+    field created_at :: DateTime.t(), physics: :temporal_weight, physics_offload: :cast
     field node_type :: atom()
   end
 
@@ -55,12 +55,12 @@ defmodule SimpleWeightedGraph do
     field id :: String.t()
     field from_node :: String.t()
     field to_node :: String.t()
-    field weight :: float(), physics: :gravitational_mass
-    field frequency :: float(), physics: :quantum_entanglement_potential
+    field weight :: float(), physics: :gravitational_mass, physics_offload: :cast
+    field frequency :: float(), physics: :quantum_entanglement_potential, physics_offload: :cast
     field relationship_type :: atom()
-    field properties :: map(), physics: :quantum_entanglement_group
-    field created_at :: DateTime.t(), physics: :temporal_weight
-    field relationship_strength :: float(), physics: :quantum_entanglement_potential
+    field properties :: map(), physics: :quantum_entanglement_group, physics_offload: :cast
+    field created_at :: DateTime.t(), physics: :temporal_weight, physics_offload: :cast
+    field relationship_strength :: float(), physics: :quantum_entanglement_potential, physics_offload: :cast
   end
 
   # Weighted Graph Structure - Sum type representing different graph topologies
@@ -89,7 +89,7 @@ defmodule SimpleWeightedGraph do
     field nodes :: [GraphNode.t()]
     field internal_edges :: [GraphEdge.t()]
     field cluster_type :: atom()
-    field cohesion_score :: float(), physics: :quantum_entanglement_potential
+    field cohesion_score :: float(), physics: :quantum_entanglement_potential, physics_offload: :cast
   end
 
   # =============================================================================

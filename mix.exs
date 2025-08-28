@@ -27,7 +27,10 @@ defmodule WarpEngine.MixProject do
       {:benchee, "~> 1.1", only: :dev}, # Performance benchmarking
       {:ex_doc, "~> 0.29", only: :dev}, # Documentation generation
       {:dialyxir, "~> 1.3", only: :dev, runtime: false}, # Static analysis
-      {:credo, "~> 1.7", only: :dev}     # Code quality
+      {:credo, "~> 1.7", only: :dev},     # Code quality
+              {:nx, "~> 0.9"},                    # Numerical Elixir for GPU acceleration
+        {:candlex, "~> 0.1.10"},           # GPU acceleration backend for Nx
+        {:rustler, ">= 0.0.0", optional: true}  # Required for Candlex source compilation
     ]
   end
 

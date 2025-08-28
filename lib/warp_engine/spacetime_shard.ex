@@ -226,6 +226,25 @@ defmodule WarpEngine.SpacetimeShard do
 
         {:ok, value, updated_shard, retrieval_metadata}
 
+      [{^key, value, _cosmic_metadata}] ->
+        # Update access patterns for gravitational calculations
+        updated_shard = update_access_patterns(shard, key, :read)
+
+        # Update load metrics including read operations counter
+        updated_shard = update_load_metrics(updated_shard, :get)
+
+        end_time = :os.system_time(:microsecond)
+        operation_time = apply_time_dilation(end_time - start_time, shard.physics_laws.time_dilation)
+
+        retrieval_metadata = %{
+          shard_id: shard.shard_id,
+          operation_time: operation_time,
+          consistency_level: shard.physics_laws.consistency_model,
+          gravitational_influence: calculate_gravitational_influence(shard, key)
+        }
+
+        {:ok, value, updated_shard, retrieval_metadata}
+
       [] ->
         end_time = :os.system_time(:microsecond)
         operation_time = apply_time_dilation(end_time - start_time, shard.physics_laws.time_dilation)

@@ -283,24 +283,28 @@ mix run examples/weighted_graph_database.ex
 
 The example provides graph operations like `store_node/1`, `store_edge/1`, `traverse_graph/3`, and `generate_recommendations/2`.
 
+## Checking
+Run validation/checking test:
+
+```bash
+CANDLEX_NIF_TARGET=cuda mix test
+```
+
 ## Benchmarking
 
 Run performance tests:
 
 ```bash
-# Simple baseline
-mix run simple_benchmark.exs
-
 # Concurrency sweep (warmup + steady-state): prints best/median/p50/p90
-mix run benchmarks/optimal_concurrency_test
+mix run benchmarks/optimal_concurrency_test.exs
 mix run benchmarks/concurrency_sweep_heavy.exs
 
 # Concurrency sweep with settings and output to filesystem
-WAL_SAMPLE_RATE=16 KEYSET=500 CONC="1,2,3,4" TRIALS=5 MEASURE_MS=1500 OPS=100 MIX_ENV=prod mix run benchmarks/optimal_concurrency_test.exs &> benchmarks/optimal_concurrency_test.txt 
+WARP_GPU_BATCH_SIZE=1024 USE_GPU_PHYSICS=1 WAL_SAMPLE_RATE=16 KEYSET=500 CONC="1,2,3,4" TRIALS=5 MEASURE_MS=1500 OPS=100 MIX_ENV=prod mix run benchmarks/optimal_concurrency_test.exs &> benchmarks/optimal_concurrency_test.txt 
 CONC="1,2,3,4" KEYSET=10000 TRIALS=2 WARMUPS=1 MEASURE_MS=3000 SHARDS=24 mix run benchmarks/concurrency_sweep_heavy.exs &> benchmarks/concurrency_sweep_heavy.txt
 
 # Large dataset feature validation (tests all unique features)
-BENCH_MODE=false TARGET_GB=0.1 CONC="1,2,4,6,12,24" TRIALS=1 mix run benchmarks/large_dataset_feature_validation.exs &> benchmarks/large_dataset_feature_validation.txt
+BENCH_LOG_LEVEL=info BENCH_MODE=false TARGET_GB=0.1 CONC="1,2,4,8,12" TRIALS=1 mix run benchmarks/large_dataset_feature_validation.exs &> benchmarks/large_dataset_feature_validation_0_1_gb.txt
 
 # General benchmark
 mix run benchmarks/working_benchmark.exs &> benchmarks/working_benchmark.txt
@@ -311,8 +315,8 @@ mix run benchmarks/diagnose/test_shards_only.exs &> benchmarks/diagnose/test_sha
 mix run benchmarks/diagnose/test_memory_scaling.exs &> benchmarks/diagnose/test_memory_scaling.txt
 mix run benchmarks/diagnose/test_coordination_overhead.exs &> benchmarks/diagnose/test_coordination_overhead.txt
 
-# Multi-core scaling (additional scenarios)
-mix run multi_core_benchmark.exs
+# gpu benchmarks
+WE_DEBUG_GPU=true WE_PHYSICS_OPS=800000 WE_BATCH_OPS=1000000 WE_MIXED_OPS=500000 mix run benchmarks/gpu_benchmark.ex gpu
 
 # Graph database comparison (uses the example implementation)
 mix run benchmarks/simple_weighted_graph_benchmark.exs
@@ -324,12 +328,6 @@ mix run benchmarks/simple_weighted_graph_benchmark.exs
 mix test                    # Run all 175+ tests
 mix test --max-cases 1      # Run tests sequentially
 ```
-
-## Documentation
-
-- [Architecture Overview](docs/complete-roadmap.md)
-- [Performance Analysis](benchmarks/PERFORMANCE_REVIEW_vs_GRAPH_DATABASES.md) 
-- [Configuration Guide](docs/phase1-quick-start.md)
 
 ## Contributing
 

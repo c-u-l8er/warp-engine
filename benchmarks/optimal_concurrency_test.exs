@@ -1,4 +1,22 @@
+#!/usr/bin/env elixir
+
 # Polished benchmark runner: warmup + steady-state, median p50/p90
+
+# --- Candlex/Nx CUDA setup for benchmark runtime ---
+try do
+  System.put_env("CANDLEX_NIF_TARGET", System.get_env("CANDLEX_NIF_TARGET") || "cuda")
+  System.put_env("CUDA_VISIBLE_DEVICES", System.get_env("CUDA_VISIBLE_DEVICES") || "0")
+  Application.put_env(:nx, :default_backend, {Candlex.Backend, device: :cuda})
+  Application.put_env(:warp_engine, :enable_gpu, true)
+  Application.put_env(:candlex, :use_cuda, true)
+  # Optional: lower batch size for quicker batching under load; override via WARP_GPU_BATCH_SIZE
+  batch_size = case System.get_env("WARP_GPU_BATCH_SIZE") do
+    nil -> 256
+    v -> case Integer.parse(v) do {n, _} -> n; :error -> 256 end end
+  Application.put_env(:warp_engine, :gpu_batch_size, batch_size)
+rescue
+  _ -> :ok
+end
 
 # Disable bench mode to enable numbered shards and per-shard WAL (Phase 9)
 Application.put_env(:warp_engine, :bench_mode, false)
@@ -33,7 +51,7 @@ IO.puts("\n🎯 WarpEngine Benchmark (warmup #{warmup_ms}ms, measure #{measure_m
 
 # Define the wait function for ETS tables
 wait_for_ets_tables = fn shard_count ->
-  max_wait = 5000  # 5 seconds max wait
+  max_wait = 15000  # 15 seconds max wait for app initialization
   start_time = System.monotonic_time(:millisecond)
 
   wait_recursive = fn wait_recursive ->
@@ -60,10 +78,13 @@ wait_for_ets_tables = fn shard_count ->
   wait_recursive.(wait_recursive)
 end
 
-# Wait for ETS tables to be created (numbered shards require WALCoordinator)
+# Wait for ETS tables to be created
 IO.puts("⏳ Waiting for ETS tables to be created...")
 shard_count = Application.get_env(:warp_engine, :num_numbered_shards, 24)
-wait_for_ets_tables.(shard_count)
+_ = case wait_for_ets_tables.(shard_count) do
+  true -> :ok
+  false -> IO.puts("⚠️  Continuing without ETS readiness confirmation")
+end
 
 # Prime cached state once to avoid initial GenServer contention
 _ = (try do GenServer.call(WarpEngine, :get_current_state, 5000) rescue _ -> :ok end)
@@ -73,9 +94,16 @@ run_trial = fn procs ->
   tasks = for i <- 1..procs do
     Task.async(fn ->
       deadline = System.monotonic_time(:millisecond) + warmup_ms
+      use_gpu_physics = System.get_env("USE_GPU_PHYSICS") in ["1", "true"]
+      physics_opts = if use_gpu_physics do
+        [gravitational_routing: true, entropy_monitoring: true, data_mass: 1.0, shard_mass: 1.0, distance: 1.0]
+      else
+        []
+      end
+
       op = fn idx ->
         key_i = rem(idx, keyset)
-        WarpEngine.cosmic_put("warm:#{i}:#{key_i}", %{i: i, k: key_i})
+        WarpEngine.cosmic_put("warm:#{i}:#{key_i}", %{i: i, k: key_i}, physics_opts)
       end
       spin = fn spin, idx ->
         if System.monotonic_time(:millisecond) < deadline do
@@ -99,11 +127,18 @@ run_trial = fn procs ->
     Task.async(fn ->
       deadline = start + measure_ms
       chunk = min(iterations, 200)
+      # Configure physics options once per worker to exercise GPU path when enabled
+      use_gpu_physics = System.get_env("USE_GPU_PHYSICS") in ["1", "true"]
+      physics_opts = if use_gpu_physics do
+        [gravitational_routing: true, entropy_monitoring: true, data_mass: 1.0, shard_mass: 1.0, distance: 1.0]
+      else
+        []
+      end
       spin = fn spin, local_ops, idx ->
         if System.monotonic_time(:millisecond) < deadline do
           new_idx = Enum.reduce(1..chunk, idx, fn _c, acc ->
             key_i = rem(acc, keyset)
-            _ = WarpEngine.cosmic_put("bench:#{i}:#{key_i}", %{i: i, k: key_i})
+            _ = WarpEngine.cosmic_put("bench:#{i}:#{key_i}", %{i: i, k: key_i}, physics_opts)
             acc + 1
           end)
           # No WAL operations in bench mode

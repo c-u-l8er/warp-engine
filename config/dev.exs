@@ -18,6 +18,16 @@ config :warp_engine,
   # Debug shard routing for troubleshooting (set to true if needed)
   debug_shard_routing: false
 
+# Nx GPU configuration for CUDA acceleration using Candlex
+config :nx,
+  default_backend: {Candlex.Backend, device: :cuda}
+
+# WarpEngine with Candlex GPU backend
+config :warp_engine,
+  gpu_mode: :enabled,
+  gpu_fallback: :cpu_optimized,
+  use_candlex_backend: true
+
 # Enable more verbose logging in development
 config :logger,
   level: :info

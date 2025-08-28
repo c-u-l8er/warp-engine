@@ -1,0 +1,4518 @@
+Compiling 1 file (.ex)
+     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 272 │     Enum.each(operations, fn {_op_type, key, _value, opts} ->
+     │                                                      ~
+     │
+     └─ lib/warp_engine/operation_batcher.ex:272:54: WarpEngine.OperationBatcher.execute_operation_batch/3
+
+     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 279 │     Enum.each(operations, fn {_op_type, key, _value, opts} ->
+     │                                                      ~
+     │
+     └─ lib/warp_engine/operation_batcher.ex:279:54: WarpEngine.OperationBatcher.execute_operation_batch/3
+
+    warning: module attribute @default_fsync_strategy was set but never used
+    │
+ 30 │   @default_fsync_strategy :adaptive  # :immediate, :batch, :adaptive
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/modern_wal.ex:30: WarpEngine.ModernWAL (module)
+
+    warning: module attribute @max_shards was set but never used
+    │
+ 29 │   @max_shards 48  # Support up to 48 shards for maximum concurrency
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/modern_wal.ex:29: WarpEngine.ModernWAL (module)
+
+     warning: the underscored variable "_meta" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore
+     │
+ 548 │       {module_name, _meta, args}
+     │                     ~
+     │
+     └─ lib/enhanced_adt/bend.ex:548:21: EnhancedADT.Bend.transform_bend_adt_pattern/1
+
+     warning: function analyze_bend_clause/1 is unused
+     │
+ 115 │   defp analyze_bend_clause({:->, _, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:115:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_clauses/1 is unused
+     │
+ 108 │   defp analyze_bend_clauses(clauses) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:108:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_bend_pattern/1 is unused
+     │
+ 131 │   defp analyze_bend_pattern(pattern) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:131:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_fork_patterns/1 is unused
+     │
+ 409 │   defp analyze_fork_patterns(_calls), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:409:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_strength_indicators/1 is unused
+     │
+ 411 │   defp analyze_strength_indicators(_body), do: %{}
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:411:8: EnhancedADT.Bend (module)
+
+     warning: function analyze_wormhole_opportunities/2 is unused
+     │
+ 201 │   defp analyze_wormhole_opportunities(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:201:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_fork_connection_strength/3 is unused
+     │
+ 435 │   defp calculate_fork_connection_strength(_source, _target, _value) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:435:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_network_complexity/1 is unused
+     │
+ 211 │   defp calculate_network_complexity(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:211:8: EnhancedADT.Bend (module)
+
+     warning: function calculate_optimization_potential/2 is unused
+     │
+ 413 │   defp calculate_optimization_potential(_patterns, _body), do: 0.5
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:413:8: EnhancedADT.Bend (module)
+
+     warning: function classify_recursive_calls/1 is unused
+     │
+ 406 │   defp classify_recursive_calls(_calls), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:406:8: EnhancedADT.Bend (module)
+
+     warning: function contains_depth_check?/1 is unused
+     │
+ 419 │   defp contains_depth_check?(_guard), do: false
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:419:8: EnhancedADT.Bend (module)
+
+     warning: function count_fork_operations/1 is unused
+     │
+ 414 │   defp count_fork_operations(_body), do: 0
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:414:8: EnhancedADT.Bend (module)
+
+     warning: function detect_fork_operations/1 is unused
+     │
+ 191 │   defp detect_fork_operations(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:191:8: EnhancedADT.Bend (module)
+
+     warning: function detect_recursive_calls/1 is unused
+     │
+ 181 │   defp detect_recursive_calls(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:181:8: EnhancedADT.Bend (module)
+
+     warning: function determine_optimization_priority/2 is unused
+     │
+ 418 │   defp determine_optimization_priority(fork_count, depth), do: if(fork_count * depth > 10, do: :high, else: :normal)
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:418:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_bend_clause/2 is unused
+     │
+ 238 │   defp enhance_bend_clause({:->, meta, [pattern_list, body]}, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:238:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_bend_clauses/2 is unused
+     │
+ 225 │   defp enhance_bend_clauses(clauses, bend_analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:225:8: EnhancedADT.Bend (module)
+
+     warning: function enhance_body_with_network_tracking/2 is unused
+     │
+ 274 │   defp enhance_body_with_network_tracking(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:274:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_connection_count/1 is unused
+     │
+ 417 │   defp estimate_connection_count(fork_count), do: fork_count * 2
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:417:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_max_recursion_depth/1 is unused
+     │
+ 415 │   defp estimate_max_recursion_depth(_body), do: 1
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:415:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_node_count/2 is unused
+     │
+ 416 │   defp estimate_node_count(fork_count, depth), do: fork_count * depth
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:416:8: EnhancedADT.Bend (module)
+
+     warning: function estimate_recursion_depth/1 is unused
+     │
+ 407 │   defp estimate_recursion_depth(_calls), do: 1
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:407:8: EnhancedADT.Bend (module)
+
+     warning: function extract_topology_hints/2 is unused
+     │
+ 412 │   defp extract_topology_hints(_patterns, _body), do: %{}
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:412:8: EnhancedADT.Bend (module)
+
+     warning: function find_connection_points/2 is unused
+     │
+ 410 │   defp find_connection_points(_patterns, _body), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:410:8: EnhancedADT.Bend (module)
+
+     warning: function find_fork_calls_in_ast/1 is unused
+     │
+ 408 │   defp find_fork_calls_in_ast(_body), do: []
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:408:8: EnhancedADT.Bend (module)
+
+     warning: function find_recursive_calls_in_ast/1 is unused
+     │
+ 405 │   defp find_recursive_calls_in_ast(_body), do: []  # Simplified
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:405:8: EnhancedADT.Bend (module)
+
+     warning: function generate_unique_node_id/0 is unused
+     │
+ 423 │   defp generate_unique_node_id() do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:423:8: EnhancedADT.Bend (module)
+
+     warning: function get_bend_module_field_names/1 is unused
+     │
+ 558 │   defp get_bend_module_field_names(variant_name) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:558:8: EnhancedADT.Bend (module)
+
+     warning: function inject_fork_tracking/1 is unused
+     │
+ 283 │   defp inject_fork_tracking(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:283:8: EnhancedADT.Bend (module)
+
+     warning: function inject_network_generation/2 is unused
+     │
+ 245 │   defp inject_network_generation(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:245:8: EnhancedADT.Bend (module)
+
+     warning: function record_network_connections/3 is unused
+     │
+ 431 │   defp record_network_connections(context, _node_id, _result) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:431:8: EnhancedADT.Bend (module)
+
+     warning: function transform_bend_adt_pattern/1 is unused
+     │
+ 532 │   defp transform_bend_adt_pattern({module_name, _meta, args}) when is_atom(module_name) and is_list(args) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:532:8: EnhancedADT.Bend (module)
+
+     warning: function transform_elegant_adt_clauses_for_bend/1 is unused
+     │
+ 517 │   defp transform_elegant_adt_clauses_for_bend(clauses) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:517:8: EnhancedADT.Bend (module)
+
+     warning: function transform_elegant_bend_clause/1 is unused
+     │
+ 526 │   defp transform_elegant_bend_clause({:->, meta, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:526:8: EnhancedADT.Bend (module)
+
+     warning: function update_bend_context/2 is unused
+     │
+ 427 │   defp update_bend_context(context, updates) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/bend.ex:427:8: EnhancedADT.Bend (module)
+
+      warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+      │
+ 1235 │         missing_tables = [table_name | missing_tables]
+      │         ~
+      │
+      └─ lib/warp_engine.ex:1235:9: WarpEngine.verify_tables_created/1
+
+      warning: variable "missing_tables" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)
+      │
+ 1243 │         missing_tables = [table_name | missing_tables]
+      │         ~
+      │
+      └─ lib/warp_engine.ex:1243:9: WarpEngine.verify_tables_created/1
+
+      warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1821 │         {:ok, value, shard_id} ->
+      │                      ~
+      │
+      └─ lib/warp_engine.ex:1821:22: WarpEngine.handle_call_legacy_quantum_get/2
+
+      warning: defp initialize_phase10_gpu_system/0 is private, @doc attribute is always discarded for private functions/macros/types
+      │
+ 1981 │   @doc """
+      │   ~~~~~~~~
+      │
+      └─ lib/warp_engine.ex:1981: WarpEngine.initialize_phase10_gpu_system/0
+
+      warning: function refresh_cached_state/0 is unused
+      │
+ 1956 │   defp refresh_cached_state() do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1956:8: WarpEngine (module)
+
+      warning: function store_in_event_horizon_cache/5 is unused
+      │
+ 1478 │   defp store_in_event_horizon_cache(state, key, value, shard_id, opts) do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1478:8: WarpEngine (module)
+
+      warning: function update_quantum_metrics/3 is unused
+      │
+ 1396 │   defp update_quantum_metrics(_state, :quantum_observation, _quantum_metadata) do
+      │        ~
+      │
+      └─ lib/warp_engine.ex:1396:8: WarpEngine (module)
+
+warning: struct :already_exists is undefined (module :already_exists is not available or is yet to be defined)
+└─ lib/warp_engine.ex: WarpEngine.create_all_ets_tables_eagerly/0
+
+     warning: function calculate_entropy_cpu_fallback/1 is unused
+     │
+ 311 │   defp calculate_entropy_cpu_fallback(operations) do
+     │        ~
+     │
+     └─ lib/warp_engine/gpu/physics_engine.ex:311:8: WarpEngine.GPU.PhysicsEngine (module)
+
+     warning: function calculate_gravitational_cpu_fallback/1 is unused
+     │
+ 276 │   defp calculate_gravitational_cpu_fallback(operations) do
+     │        ~
+     │
+     └─ lib/warp_engine/gpu/physics_engine.ex:276:8: WarpEngine.GPU.PhysicsEngine (module)
+
+     warning: function calculate_quantum_cpu_fallback/1 is unused
+     │
+ 299 │   defp calculate_quantum_cpu_fallback(operations) do
+     │        ~
+     │
+     └─ lib/warp_engine/gpu/physics_engine.ex:299:8: WarpEngine.GPU.PhysicsEngine (module)
+
+     warning: function prepare_entropy_data_optimized/2 is unused
+     │
+ 253 │   defp prepare_entropy_data_optimized(operations, optimized_batch_size) do
+     │        ~
+     │
+     └─ lib/warp_engine/gpu/physics_engine.ex:253:8: WarpEngine.GPU.PhysicsEngine (module)
+
+     warning: function prepare_gravitational_data_optimized/2 is unused
+     │
+ 159 │   defp prepare_gravitational_data_optimized(operations, optimized_batch_size) do
+     │        ~
+     │
+     └─ lib/warp_engine/gpu/physics_engine.ex:159:8: WarpEngine.GPU.PhysicsEngine (module)
+
+     warning: function prepare_quantum_data_optimized/2 is unused
+     │
+ 220 │   defp prepare_quantum_data_optimized(operations, optimized_batch_size) do
+     │        ~
+     │
+     └─ lib/warp_engine/gpu/physics_engine.ex:220:8: WarpEngine.GPU.PhysicsEngine (module)
+
+     warning: function atomize_keys/1 is unused
+     │
+ 288 │   defp atomize_keys(map) when is_map(map) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_entry.ex:288:8: WarpEngine.WAL.Entry (module)
+
+      warning: variable "header" is unused (if the variable is not meant to be used, prefix it with an underscore)
+      │
+ 1082 │         <<batch_size::32, _timestamp::64, _shard_size::16, _shard_binary::binary>> = header ->
+      │                                                                                      ~
+      │
+      └─ lib/warp_engine/wal_shard.ex:1082:86: WarpEngine.WALShard.load_shard_wal_entries_from_file/1
+
+    warning: module attribute @max_buffer_ops was set but never used
+    │
+ 57 │   @max_buffer_ops 25000       # Maximum buffer size (increased from 8192)
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_shard.ex:57: WarpEngine.WALShard (module)
+
+    warning: module attribute @flush_batch_size was set but never used
+    │
+ 56 │   @flush_batch_size 1024
+    │   ~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_shard.ex:56: WarpEngine.WALShard (module)
+
+    warning: module attribute @write_batch_size was set but never used
+    │
+ 54 │   @write_batch_size 5000     # Operations per batch write (increased from 1000)
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_shard.ex:54: WarpEngine.WALShard (module)
+
+      warning: :file.position/3 is undefined or private. Did you mean:
+
+            * position/2
+
+      │
+ 1085 │           :ok = :file.position(file_handle, :cur, batch_size) # Move position forward
+      │                       ~
+      │
+      └─ lib/warp_engine/wal_shard.ex:1085:23: WarpEngine.WALShard.load_shard_wal_entries_from_file/1
+
+     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 178 │   def ultra_fast_get(key, opts \\ []) do
+     │                           ~~~~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:178:27: WarpEngine.UltraFastOperations.ultra_fast_get/2
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 262 │   defp get_ultra_fast_sequence(shard_id) do
+     │                                ~~~~~~~~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:262:32: WarpEngine.UltraFastOperations.get_ultra_fast_sequence/1
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 276 │   defp ultra_fast_wal_append(shard_id, wal_entry) do
+     │                              ~~~~~~~~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:276:30: WarpEngine.UltraFastOperations.ultra_fast_wal_append/2
+
+     warning: variable "shard_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 336 │   defp send_wal_entry_direct(shard_id, wal_entry) do
+     │                              ~~~~~~~~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:336:30: WarpEngine.UltraFastOperations.send_wal_entry_direct/2
+
+     warning: function get_shard_counter_ref/1 is unused
+     │
+ 303 │   defp get_shard_counter_ref(shard_id) do
+     │        ~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:303:8: WarpEngine.UltraFastOperations (module)
+
+     warning: function send_wal_entry_direct/2 is unused
+     │
+ 336 │   defp send_wal_entry_direct(shard_id, wal_entry) do
+     │        ~
+     │
+     └─ lib/warp_engine/ultra_fast_operations.ex:336:8: WarpEngine.UltraFastOperations (module)
+
+     warning: WarpEngine.WormholeRouter.find_route/2 is undefined or private. Did you mean:
+
+           * find_route/3
+           * find_route/4
+
+     │
+ 390 │     case WarpEngine.WormholeRouter.find_route(key, "*") do
+     │                                    ~
+     │
+     └─ lib/enhanced_adt/islab_integration.ex:390:36: EnhancedADT.WarpEngineIntegration.Translators.attempt_wormhole_retrieval/1
+
+     warning: WarpEngine.WormholeRouter.traverse_route_for_data/1 is undefined or private
+     │
+ 393 │         case WarpEngine.WormholeRouter.traverse_route_for_data(route) do
+     │                                        ~
+     │
+     └─ lib/enhanced_adt/islab_integration.ex:393:40: EnhancedADT.WarpEngineIntegration.Translators.attempt_wormhole_retrieval/1
+
+     warning: variable "meta1" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 162 │   defp transform_single_physics_field({:"::", meta1, [field_name, {:"::", meta2, [type_spec, [physics: physics_annotation]]}]}) do
+     │                                               ~~~~~
+     │
+     └─ lib/enhanced_adt.ex:162:47: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: variable "meta2" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 162 │   defp transform_single_physics_field({:"::", meta1, [field_name, {:"::", meta2, [type_spec, [physics: physics_annotation]]}]}) do
+     │                                                                           ~~~~~
+     │
+     └─ lib/enhanced_adt.ex:162:75: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: variable "meta" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 168 │   defp transform_single_physics_field({{:"::", meta, [field_name, type_spec]}, [physics: physics_annotation]}) do
+     │                                                ~~~~
+     │
+     └─ lib/enhanced_adt.ex:168:48: EnhancedADT.ProductType.transform_single_physics_field/1
+
+     warning: function extract_variant_name/1 is unused
+     │
+ 247 │   defp extract_variant_name({:__aliases__, _, [variant_name]}) when is_atom(variant_name), do: variant_name
+     │        ~
+     │
+     └─ lib/enhanced_adt.ex:247:8: EnhancedADT.ProductType (module)
+
+     warning: function parse_elegant_variant_fields/1 is unused
+     │
+ 465 │   defp parse_elegant_variant_fields(args) do
+     │        ~
+     │
+     └─ lib/enhanced_adt.ex:465:8: EnhancedADT.SumType (module)
+
+    warning: module attribute @max_buffer_size was set but never used
+    │
+ 30 │   @max_buffer_size 50000       # Large buffer for maximum batching
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/modern_wal_shard.ex:30: WarpEngine.ModernWALShard (module)
+
+    warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+    │
+ 60 │     defmacro fold(value, opts \\ [], do: clauses) do
+    │                          ~~~~
+    │
+    └─ lib/enhanced_adt/fold.ex:60:26: EnhancedADT.Fold.fold/3
+
+     warning: the underscored variable "_meta" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore
+     │
+ 433 │       {module_name, _meta, args}
+     │                     ~
+     │
+     └─ lib/enhanced_adt/fold.ex:433:21: EnhancedADT.Fold.transform_adt_pattern/1
+
+     warning: defp transform_adt_pattern/1 is private, @doc attribute is always discarded for private functions/macros/types
+     │
+ 411 │     @doc """
+     │     ~~~~~~~~
+     │
+     └─ lib/enhanced_adt/fold.ex:411: EnhancedADT.Fold.transform_adt_pattern/1
+
+     warning: function analyze_data_locality/2 is unused
+     │
+ 396 │   defp analyze_data_locality(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:396:8: EnhancedADT.Fold (module)
+
+    warning: function analyze_fold_clauses/1 is unused
+    │
+ 96 │   defp analyze_fold_clauses(clauses) do
+    │        ~
+    │
+    └─ lib/enhanced_adt/fold.ex:96:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_gravitational_hints/2 is unused
+     │
+ 406 │   defp analyze_gravitational_hints(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:406:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_pattern/1 is unused
+     │
+ 119 │   defp analyze_pattern(pattern) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:119:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_single_clause/1 is unused
+     │
+ 104 │   defp analyze_single_clause({:->, _, [pattern_list, body]}) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:104:8: EnhancedADT.Fold (module)
+
+     warning: function analyze_temporal_characteristics/1 is unused
+     │
+ 401 │   defp analyze_temporal_characteristics(_body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:401:8: EnhancedADT.Fold (module)
+
+     warning: function calculate_operation_complexity/1 is unused
+     │
+ 370 │   defp calculate_operation_complexity(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:370:8: EnhancedADT.Fold (module)
+
+     warning: function contains_cross_reference_patterns?/1 is unused
+     │
+ 362 │   defp contains_cross_reference_patterns?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:362:8: EnhancedADT.Fold (module)
+
+     warning: function contains_retrieval_calls?/1 is unused
+     │
+ 355 │   defp contains_retrieval_calls?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:355:8: EnhancedADT.Fold (module)
+
+     warning: function contains_storage_calls?/1 is unused
+     │
+ 347 │   defp contains_storage_calls?(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:347:8: EnhancedADT.Fold (module)
+
+     warning: function detect_adt_operations/1 is unused
+     │
+ 161 │   defp detect_adt_operations(body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:161:8: EnhancedADT.Fold (module)
+
+     warning: function detect_cross_references/2 is unused
+     │
+ 172 │   defp detect_cross_references(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:172:8: EnhancedADT.Fold (module)
+
+     warning: function determine_access_pattern/2 is unused
+     │
+ 391 │   defp determine_access_pattern(_patterns, _body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:391:8: EnhancedADT.Fold (module)
+
+     warning: function enhance_fold_clauses/3 is unused
+     │
+ 200 │   defp enhance_fold_clauses(clauses, clause_analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:200:8: EnhancedADT.Fold (module)
+
+     warning: function enhance_single_clause/3 is unused
+     │
+ 220 │   defp enhance_single_clause({:->, meta, [pattern_list, body]}, analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:220:8: EnhancedADT.Fold (module)
+
+     warning: function extract_body_references/1 is unused
+     │
+ 385 │   defp extract_body_references(_body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:385:8: EnhancedADT.Fold (module)
+
+     warning: function extract_pattern_types/1 is unused
+     │
+ 376 │   defp extract_pattern_types(patterns) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:376:8: EnhancedADT.Fold (module)
+
+     warning: function extract_physics_hints/2 is unused
+     │
+ 189 │   defp extract_physics_hints(patterns, body) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:189:8: EnhancedADT.Fold (module)
+
+     warning: function extract_types_from_pattern/1 is unused
+     │
+ 380 │   defp extract_types_from_pattern({module_name, _, _args}) when is_atom(module_name) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:380:8: EnhancedADT.Fold (module)
+
+     warning: function inject_quantum_correlation/2 is unused
+     │
+ 288 │   defp inject_quantum_correlation(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:288:8: EnhancedADT.Fold (module)
+
+     warning: function inject_warp_engine_operations/3 is unused
+     │
+ 256 │   defp inject_warp_engine_operations(body, analysis, config) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:256:8: EnhancedADT.Fold (module)
+
+     warning: function inject_wormhole_analysis/2 is unused
+     │
+ 273 │   defp inject_wormhole_analysis(body, analysis) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:273:8: EnhancedADT.Fold (module)
+
+     warning: function wrap_with_state_management/2 is unused
+     │
+ 303 │   defp wrap_with_state_management(body, mode) do
+     │        ~
+     │
+     └─ lib/enhanced_adt/fold.ex:303:8: EnhancedADT.Fold (module)
+
+    warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+    │
+ 69 │   def get(key, opts \\ []) do
+    │                ~~~~
+    │
+    └─ lib/warp_engine/fast_path.ex:69:16: WarpEngine.FastPath.get/2
+
+     warning: variable "opts" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 119 │   def delete(key, opts \\ []) do
+     │                   ~~~~
+     │
+     └─ lib/warp_engine/fast_path.ex:119:19: WarpEngine.FastPath.delete/2
+
+     warning: function cache_retrieved_value_async/5 is unused
+     │
+ 750 │   defp cache_retrieved_value_async(key, value, shard_id, _cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:750:8: WarpEngine.WALOperations (module)
+
+     warning: function calculate_cosmic_coordinates/2 is unused
+     │
+ 798 │   defp calculate_cosmic_coordinates(key, value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:798:8: WarpEngine.WALOperations (module)
+
+     warning: function calculate_entropy_impact/3 is unused
+     │
+ 784 │   defp calculate_entropy_impact(key, value, shard_id) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:784:8: WarpEngine.WALOperations (module)
+
+     warning: function create_cosmic_metadata/5 is unused
+     │
+ 547 │   defp create_cosmic_metadata(key, value, shard_id, routing_metadata, opts) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:547:8: WarpEngine.WALOperations (module)
+
+     warning: function determine_optimal_cache_level/1 is unused
+     │
+ 821 │   defp determine_optimal_cache_level(cosmic_metadata) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:821:8: WarpEngine.WALOperations (module)
+
+     warning: function determine_quantum_state/2 is unused
+     │
+ 773 │   defp determine_quantum_state(key, value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:773:8: WarpEngine.WALOperations (module)
+
+     warning: function estimate_value_size/1 is unused
+     │
+ 447 │   defp estimate_value_size(value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:447:8: WarpEngine.WALOperations (module)
+
+     warning: function flush_process_wal_table/1 is unused
+     │
+ 869 │   defp flush_process_wal_table(wal_table) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:869:8: WarpEngine.WALOperations (module)
+
+     warning: function get_wormhole_metadata/2 is unused
+     │
+ 812 │   defp get_wormhole_metadata(_key, shard_id) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:812:8: WarpEngine.WALOperations (module)
+
+     warning: function populate_event_horizon_cache_async/4 is unused
+     │
+ 737 │   defp populate_event_horizon_cache_async(key, value, cosmic_metadata, state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:737:8: WarpEngine.WALOperations (module)
+
+     warning: function ultra_fast_route_data/3 is unused
+     │
+ 420 │   defp ultra_fast_route_data(key, _value, opts) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:420:8: WarpEngine.WALOperations (module)
+
+     warning: function update_access_patterns_async/3 is unused
+     │
+ 768 │   defp update_access_patterns_async(key, access_type, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:768:8: WarpEngine.WALOperations (module)
+
+     warning: function update_get_physics_intelligence_async/5 is unused
+     │
+ 594 │   defp update_get_physics_intelligence_async(key, _value, _shard_id, _cosmic_metadata, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:594:8: WarpEngine.WALOperations (module)
+
+     warning: function update_physics_intelligence_async/4 is unused
+     │
+ 563 │   defp update_physics_intelligence_async(key, _value, _cosmic_metadata, _state) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:563:8: WarpEngine.WALOperations (module)
+
+     warning: function update_shard_statistics/4 is unused
+     │
+ 840 │   defp update_shard_statistics(shard, operation, _key, _value) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:840:8: WarpEngine.WALOperations (module)
+
+     warning: function update_wormhole_usage_patterns/3 is unused
+     │
+ 830 │   defp update_wormhole_usage_patterns(_key, _shard_id, _wormhole_network) do
+     │        ~
+     │
+     └─ lib/warp_engine/wal_operations.ex:830:8: WarpEngine.WALOperations (module)
+
+    warning: module attribute @wal_sequence_ref_key_prefix was set but never used
+    │
+ 31 │   @wal_sequence_ref_key_prefix :wal_shard_sequence_counter_cache
+    │   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    │
+    └─ lib/warp_engine/wal_operations.ex:31: WarpEngine.WALOperations (module)
+
+    warning: unused alias WALEntry
+    │
+ 28 │   alias WarpEngine.WAL.Entry, as: WALEntry
+    │   ~
+    │
+    └─ lib/warp_engine/wal_operations.ex:28:3
+
+     warning: variable "key" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 105 │   def route_operation(key, operation_type, metadata) do
+     │                       ~~~
+     │
+     └─ lib/warp_engine/intelligent_load_balancer.ex:105:23: WarpEngine.IntelligentLoadBalancer.route_operation/3
+
+     warning: variable "metadata" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 105 │   def route_operation(key, operation_type, metadata) do
+     │                                            ~~~~~~~~
+     │
+     └─ lib/warp_engine/intelligent_load_balancer.ex:105:44: WarpEngine.IntelligentLoadBalancer.route_operation/3
+
+     warning: variable "operation_type" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 105 │   def route_operation(key, operation_type, metadata) do
+     │                            ~~~~~~~~~~~~~~
+     │
+     └─ lib/warp_engine/intelligent_load_balancer.ex:105:28: WarpEngine.IntelligentLoadBalancer.route_operation/3
+
+     warning: variable "shard_ids" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 109 │     shard_ids = get_shard_ids()
+     │     ~~~~~~~~~
+     │
+     └─ lib/warp_engine/intelligent_load_balancer.ex:109:5: WarpEngine.IntelligentLoadBalancer.route_operation/3
+
+
+12:42:43.689 [info] 🚀 Starting WarpEngine Database Application...
+
+12:42:43.693 [info] ⚙️  Application Configuration:
+
+12:42:43.701 [info]   data_root: "/home/travis/Projects/warp-engine/data"
+
+12:42:43.701 [info]   Entanglement rules: using defaults
+
+12:42:43.702 [info] 🔧 Starting supervisor with 3 children
+     warning: variable "item_num" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 301 │       items: Enum.map(1..:rand.uniform(5), fn item_num ->
+     │                                               ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:301:47
+
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 378 │ test_intelligent_caching = fn worker_id, keys ->
+     │                               ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:378:31
+
+     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 398 │ test_gravitational_routing = fn worker_id, keys ->
+     │                                            ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:398:44
+
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 398 │ test_gravitational_routing = fn worker_id, keys ->
+     │                                 ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:398:33
+
+     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 417 │ test_quantum_entanglement = fn worker_id, keys ->
+     │                                           ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:417:43
+
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 417 │ test_quantum_entanglement = fn worker_id, keys ->
+     │                                ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:417:32
+
+     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 434 │ test_entropy_monitoring = fn worker_id, keys ->
+     │                                         ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:434:41
+
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 434 │ test_entropy_monitoring = fn worker_id, keys ->
+     │                              ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:434:30
+
+     warning: variable "keys" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 453 │ test_per_shard_wal = fn worker_id, keys ->
+     │                                    ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:453:36
+
+     warning: variable "worker_id" is unused (if the variable is not meant to be used, prefix it with an underscore)
+     │
+ 453 │ test_per_shard_wal = fn worker_id, keys ->
+     │                         ~
+     │
+     └─ benchmarks/large_dataset_feature_validation.exs:453:25
+
+🚀 Large Dataset Feature Validation Benchmark
+
+12:42:44.524 [info] ✨ All WarpEngine features enabled (using Phase 6.6 WAL system)
+================================================================================
+📊 Target Dataset: 0.1GB (10000 keys)
+🔧 Shards: 24
+⚡ Concurrency Levels: 1,2,4,8,12
+⏱️  Warmup: 5000ms, Measure: 10000ms, Trials: 1
+
+12:42:46.570 [warning] ⚠️  WAL system not found after 2s; attempting manual start...
+
+12:42:46.570 [info] 🚀 Initializing WAL Persistence Revolution...
+
+12:42:46.570 [info] 📁 WAL data_root: /home/travis/Projects/warp-engine/data
+
+12:42:46.570 [info] 📁 Creating WAL directory: /home/travis/Projects/warp-engine/data/wal
+
+12:42:46.570 [info] 📄 Opening WAL file: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
+
+12:42:46.570 [info] ⚡ Setting up atomic counter...
+
+12:42:46.571 [info] 🏗️ Building WAL state...
+
+12:42:46.571 [info] ✅ WAL system initialized: /home/travis/Projects/warp-engine/data/wal/cosmic.wal
+
+12:42:46.571 [info] ⚡ Ready for 250,000+ ops/second performance!
+⏳ Waiting for ETS tables...
+
+12:42:46.583 [info] ✅ WAL system started manually: #PID<0.446.0>
+✅ All 24 ETS tables ready in 0ms
+
+12:42:46.587 [info] 📦 Generating 0.1GB dataset (10000 keys)...
+
+12:42:47.294 [info] 📦 Dataset generated in 706.0ms
+
+12:42:47.294 [info] 📊 Total keys: 30000
+
+12:42:47.294 [info] 💾 Estimated size: 0.01MB
+
+12:42:47.294 [info] 🚀 Loading 30000 keys into WarpEngine...
+
+12:42:47.298 [info] 💾 Memory before loading: 106.93MB
+
+12:42:47.354 [info] 📦 Loaded chunk 1/6 - Memory: 130.52MB
+
+12:42:48.713 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.744 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:48.746 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.750 [info] ✅ Dataset loaded in 1453ms
+
+12:42:48.750 [info] 💾 Memory after loading: 316.16MB
+
+12:42:48.750 [info] 💾 Memory increase: 209.23MB
+
+12:42:48.750 [info] 🎯 Starting feature validation benchmarks...
+
+12:42:48.770 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:48.773 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.796 [info] 🧹 Memory before benchmarks: 252.06MB
+
+12:42:48.796 [info] ⚛️  Quantum entanglement tests enabled
+
+12:42:48.796 [info] 🔗 Testing intelligent prefetching and entanglement collapse
+
+12:42:48.797 [info] 🔧 Initializing quantum index system...
+
+12:42:48.798 [info] ⚛️  Initializing quantum entanglement system...
+
+12:42:48.805 [info] ✨ Quantum entanglement system ready for superposition
+
+12:42:48.806 [info] ✅ Quantum index system ready
+
+12:42:48.806 [info] 🌊 Initializing entropy monitoring system...
+
+12:42:48.816 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:48.824 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.833 [info] ✅ Entropy registry started
+
+12:42:48.833 [info] 🌡️  Initializing Phase 5: Entropy Monitor cosmic_entropy...
+
+12:42:48.833 [info] 💾 Entropy persistence initialized: /home/travis/Projects/warp-engine/data/entropy/cosmic_entropy
+
+12:42:48.833 [info] ✨ Entropy Monitor cosmic_entropy ready - monitoring every 30000ms
+
+12:42:48.833 [info] ✅ Entropy monitoring system ready
+
+12:42:48.834 [info] 🔥 Prewarming event horizon cache with representative keys...
+
+12:42:48.840 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:48.844 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.845 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.854 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:48.856 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:48.858 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.859 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.865 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:48.868 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:48.875 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.877 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.883 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:48.884 [info] ✨ Hawking radiation complete - evicted 7 items, freed 2KB
+
+12:42:48.885 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.886 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.893 [info] ✨ Hawking radiation complete - evicted 63 items, freed 16KB
+
+12:42:48.893 [info] ✨ Hawking radiation complete - evicted 96 items, freed 26KB
+
+12:42:48.896 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.897 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.902 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:48.904 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.905 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:48.915 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:48.919 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.921 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.927 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:48.931 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:48.934 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.935 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.945 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:48.946 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:48.949 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.950 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.957 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:48.957 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:48.959 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.960 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.966 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:48.968 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:42:48.972 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.973 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.983 [info] ✨ Hawking radiation complete - evicted 68 items, freed 19KB
+
+12:42:48.983 [info] ✨ Hawking radiation complete - evicted 98 items, freed 28KB
+
+12:42:48.986 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.986 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:48.993 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:48.995 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:42:49.001 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.002 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.010 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.009 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:49.013 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.014 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.020 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:49.020 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.023 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.024 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.033 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:49.033 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.035 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.036 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.043 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:49.044 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.046 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.047 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.053 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:49.054 [info] ✨ Hawking radiation complete - evicted 13 items, freed 2KB
+
+12:42:49.057 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.059 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.066 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:49.066 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.069 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.070 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.078 [info] ✨ Hawking radiation complete - evicted 89 items, freed 24KB
+
+12:42:49.078 [info] ✨ Hawking radiation complete - evicted 92 items, freed 25KB
+
+12:42:49.081 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.082 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.087 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:49.088 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:49.093 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.094 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.101 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:49.102 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:49.109 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.111 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.118 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:49.119 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:49.125 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.127 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.135 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:49.136 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.139 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.141 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.149 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:49.150 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.152 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.152 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.160 [info] ✨ Hawking radiation complete - evicted 98 items, freed 27KB
+
+12:42:49.160 [info] ✨ Hawking radiation complete - evicted 73 items, freed 19KB
+
+12:42:49.163 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.165 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.171 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:49.173 [info] ✨ Hawking radiation complete - evicted 73 items, freed 19KB
+
+12:42:49.175 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.176 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.182 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:49.185 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:49.192 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.194 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.202 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:49.202 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.205 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.205 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.212 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:49.214 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:42:49.218 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.221 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.227 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:49.230 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:42:49.234 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.235 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.242 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:42:49.243 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:49.259 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.260 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.269 [info] ✨ Hawking radiation complete - evicted 100 items, freed 34KB
+
+12:42:49.270 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.275 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.276 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.283 [info] ✨ Hawking radiation complete - evicted 100 items, freed 33KB
+
+12:42:49.283 [info] ✨ Hawking radiation complete - evicted 19 items, freed 5KB
+
+12:42:49.289 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.290 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.298 [info] ✨ Hawking radiation complete - evicted 100 items, freed 33KB
+
+12:42:49.299 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.305 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.305 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.312 [info] ✨ Hawking radiation complete - evicted 100 items, freed 33KB
+
+12:42:49.313 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:49.325 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.327 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.335 [info] ✨ Hawking radiation complete - evicted 100 items, freed 35KB
+
+12:42:49.336 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.342 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.342 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.351 [info] ✨ Hawking radiation complete - evicted 100 items, freed 31KB
+
+12:42:49.352 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:42:49.365 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.367 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.375 [info] ✨ Hawking radiation complete - evicted 100 items, freed 35KB
+
+12:42:49.377 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:49.388 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.390 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.398 [info] ✨ Hawking radiation complete - evicted 100 items, freed 37KB
+
+12:42:49.399 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.404 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.404 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.412 [info] ✨ Hawking radiation complete - evicted 100 items, freed 32KB
+
+12:42:49.412 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.417 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.418 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.425 [info] ✨ Hawking radiation complete - evicted 100 items, freed 34KB
+
+12:42:49.426 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:49.437 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.438 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.449 [info] ✨ Hawking radiation complete - evicted 100 items, freed 36KB
+
+12:42:49.452 [info] ✨ Hawking radiation complete - evicted 100 items, freed 31KB
+
+12:42:49.459 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.460 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.466 [info] ✨ Hawking radiation complete - evicted 100 items, freed 36KB
+
+12:42:49.467 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.473 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.474 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.481 [info] ✨ Hawking radiation complete - evicted 100 items, freed 31KB
+
+12:42:49.481 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.487 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.487 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.495 [info] ✨ Hawking radiation complete - evicted 100 items, freed 32KB
+
+12:42:49.495 [info] ✨ Hawking radiation complete - evicted 46 items, freed 13KB
+
+12:42:49.502 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.503 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.509 [info] ✨ Hawking radiation complete - evicted 20 items, freed 5KB
+
+12:42:49.510 [info] ✨ Hawking radiation complete - evicted 100 items, freed 31KB
+
+12:42:49.519 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.520 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.526 [info] ✨ Hawking radiation complete - evicted 100 items, freed 35KB
+
+12:42:49.526 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.534 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.535 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.543 [info] ✨ Hawking radiation complete - evicted 100 items, freed 35KB
+
+12:42:49.543 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.551 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.552 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.559 [info] ✨ Hawking radiation complete - evicted 100 items, freed 36KB
+
+12:42:49.559 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.571 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.571 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.578 [info] ✨ Hawking radiation complete - evicted 100 items, freed 35KB
+
+12:42:49.580 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:42:49.594 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.595 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.600 [info] ✨ Hawking radiation complete - evicted 100 items, freed 41KB
+
+12:42:49.600 [info] ✨ Hawking radiation complete - evicted 37 items, freed 14KB
+
+12:42:49.609 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.610 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.616 [info] ✨ Hawking radiation complete - evicted 100 items, freed 35KB
+
+12:42:49.617 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.624 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.625 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.631 [info] ✨ Hawking radiation complete - evicted 100 items, freed 35KB
+
+12:42:49.631 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.638 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.639 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.646 [info] ✨ Hawking radiation complete - evicted 100 items, freed 36KB
+
+12:42:49.646 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.653 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.654 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.661 [info] ✨ Hawking radiation complete - evicted 100 items, freed 36KB
+
+12:42:49.663 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:42:49.678 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.678 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.688 [info] ✨ Hawking radiation complete - evicted 98 items, freed 39KB
+
+12:42:49.688 [info] ✨ Hawking radiation complete - evicted 16 items, freed 5KB
+
+12:42:49.699 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.700 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.709 [info] ✨ Hawking radiation complete - evicted 100 items, freed 33KB
+
+12:42:49.710 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.719 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.719 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.730 [info] ✨ Hawking radiation complete - evicted 100 items, freed 36KB
+
+12:42:49.731 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:49.747 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.747 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.755 [info] ✨ Hawking radiation complete - evicted 100 items, freed 43KB
+
+12:42:49.756 [info] ✨ Hawking radiation complete - evicted 73 items, freed 20KB
+
+12:42:49.769 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.770 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.777 [info] ✨ Hawking radiation complete - evicted 100 items, freed 41KB
+
+12:42:49.777 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:42:49.786 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.786 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.795 [info] ✨ Hawking radiation complete - evicted 100 items, freed 35KB
+
+12:42:49.796 [info] ✨ Hawking radiation complete - evicted 100 items, freed 30KB
+
+12:42:49.832 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.842 [info] ✨ Hawking radiation complete - evicted 100 items, freed 36KB
+
+12:42:49.868 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.879 [info] ✨ Hawking radiation complete - evicted 100 items, freed 34KB
+
+12:42:49.901 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.914 [info] ✨ Hawking radiation complete - evicted 100 items, freed 33KB
+
+12:42:49.935 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.944 [info] ✨ Hawking radiation complete - evicted 100 items, freed 33KB
+
+12:42:49.965 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:49.974 [info] ✨ Hawking radiation complete - evicted 100 items, freed 33KB
+
+12:42:49.996 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.005 [info] ✨ Hawking radiation complete - evicted 100 items, freed 33KB
+
+12:42:50.026 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.035 [info] ✨ Hawking radiation complete - evicted 100 items, freed 33KB
+
+12:42:50.107 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.115 [info] ✨ Hawking radiation complete - evicted 100 items, freed 33KB
+
+12:42:50.139 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.147 [info] ✨ Hawking radiation complete - evicted 100 items, freed 33KB
+
+12:42:50.190 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.204 [info] ✨ Hawking radiation complete - evicted 100 items, freed 33KB
+
+12:42:50.232 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.243 [info] ✨ Hawking radiation complete - evicted 100 items, freed 33KB
+
+12:42:50.243 [info] 
+== Testing with 1 processes ==
+
+12:42:50.243 [info]   Trial 1/1...
+
+12:42:50.397 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.410 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:50.515 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.524 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:50.586 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.593 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:50.645 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.653 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:50.719 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.726 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:50.800 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.808 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:50.863 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.871 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:50.950 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:50.958 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:51.029 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:51.036 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:51.097 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:51.105 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:42:51.156 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:51.163 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:51.220 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:51.227 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:51.283 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:51.290 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:42:51.397 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:51.433 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:51.524 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:51.531 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:51.596 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:51.603 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:51.674 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:51.682 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:51.741 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:51.747 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:51.802 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:51.813 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:51.889 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:51.896 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:51.975 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:51.984 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:42:52.065 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:52.073 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:52.145 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:52.153 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:52.218 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:52.226 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:52.307 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:52.315 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:52.373 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:52.374 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:52.381 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:42:52.383 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:52.506 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:52.514 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:52.587 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:52.595 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:52.683 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:52.690 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:52.755 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:52.762 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:52.829 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:52.839 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:52.928 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:52.936 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:52.972 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:52.979 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:53.056 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:53.063 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:53.137 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:53.145 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:53.216 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:53.224 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:53.292 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:53.299 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:53.394 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:53.401 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:53.477 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:53.484 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:53.546 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:53.554 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:53.598 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:53.604 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:53.682 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:53.690 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:53.764 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:53.771 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:53.845 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:53.855 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:53.948 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:53.957 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:54.033 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:54.041 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:54.109 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:54.118 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:54.171 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:54.180 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:54.269 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:54.276 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:54.366 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:54.374 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:54.456 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:54.464 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:54.529 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:54.539 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:54.616 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:54.624 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:54.671 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:54.681 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:54.760 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:54.769 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:54.864 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:54.874 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:54.966 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:54.975 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:55.041 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:55.049 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:42:55.140 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:55.149 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:55.240 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:55.248 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:55.330 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:55.340 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:55.519 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:55.526 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:55.689 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:55.697 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:55.814 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:55.822 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:55.920 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:55.931 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:56.037 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:56.044 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:42:56.111 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:56.119 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:56.190 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:56.199 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:56.257 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:56.265 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:56.343 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:56.353 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:56.443 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:56.452 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:56.514 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:56.522 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:56.582 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:56.594 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:56.659 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:56.666 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:56.743 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:56.753 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:56.832 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:56.841 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:56.968 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:56.978 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:57.086 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:57.095 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:57.163 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:57.172 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:57.253 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:57.263 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:57.320 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:57.327 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:57.410 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:57.418 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:57.513 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:57.520 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:57.603 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:57.612 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:57.711 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:57.721 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:57.825 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:57.833 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:57.903 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:57.911 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:57.958 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:57.967 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:57.970 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:57.978 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:58.139 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:58.149 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:58.240 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:58.249 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:58.342 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:58.352 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:58.437 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:58.446 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:58.530 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:58.538 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:58.599 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:58.611 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:58.665 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:58.674 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:58.759 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:58.769 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:58.856 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:58.864 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:58.943 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:58.951 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:59.013 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:59.021 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:59.056 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:59.064 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:59.157 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:59.164 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:59.259 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:59.268 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:59.347 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:59.356 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:42:59.436 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:59.445 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:59.523 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:59.530 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:59.609 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:59.617 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:42:59.692 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:59.700 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:42:59.748 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:59.757 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:42:59.836 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:59.844 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:42:59.928 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:42:59.938 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:00.025 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:00.040 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:00.114 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:00.123 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:00.186 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:00.195 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:00.303 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:00.312 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:00.357 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:00.366 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:00.448 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:00.460 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:00.565 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:00.574 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:00.702 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:00.711 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:00.890 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:00.898 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:01.086 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:01.094 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:01.242 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:01.253 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:01.444 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:01.451 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:01.610 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:01.617 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:01.821 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:01.828 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:02.007 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:02.015 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:02.167 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:02.176 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:02.389 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:02.398 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:02.641 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:02.648 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:02.856 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:02.864 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:03.097 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:03.106 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:03.429 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:03.438 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:03.623 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:03.629 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:03.784 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:03.797 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:03.983 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:03.990 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:04.170 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:04.178 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:04.384 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:04.392 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:04.587 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:04.594 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:04.763 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:04.770 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:04.955 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:04.962 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:05.123 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:05.137 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:05.308 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:05.316 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:05.481 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:05.492 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:05.650 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:05.657 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:05.723 [info]     Trial 1 Results:
+
+12:43:05.723 [info]       Duration: 10177ms
+
+12:43:05.723 [info]       Total Operations: 56000
+
+12:43:05.723 [info]       Operations/sec: 5502
+
+12:43:05.723 [info]       Detailed Breakdown:
+
+12:43:05.723 [info]         Cache ops: 14000
+
+12:43:05.723 [info]         Routing ops: 14000
+
+12:43:05.723 [info]         Entanglement ops: 7000
+
+12:43:05.723 [info]         Entropy ops: 14000
+
+12:43:05.723 [info]         WAL ops: 7000
+
+12:43:05.723 [info]         Total counted: 56000
+
+12:43:05.723 [info]    • 1 processes: best 10177ms (5502 ops/sec)
+
+12:43:05.723 [info]      median 5502 (p50 5502, p90 5502)
+
+12:43:05.723 [info]      Best trial detailed breakdown:
+
+12:43:05.723 [info]        Cache: 14000 ops
+
+12:43:05.723 [info]        Routing: 14000 ops
+
+12:43:05.723 [info]        Entanglement: 7000 ops
+
+12:43:05.723 [info]        Entropy: 14000 ops
+
+12:43:05.723 [info]        WAL: 7000 ops
+
+12:43:05.723 [info]        Total counted: 56000
+
+12:43:05.723 [info]        vs Total reported: 56000
+
+12:43:05.723 [info]        Discrepancy: 0
+
+12:43:06.723 [info] 
+== Testing with 2 processes ==
+
+12:43:06.724 [info]   Trial 1/1...
+
+12:43:06.896 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:06.904 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:06.948 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:06.956 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:07.044 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.047 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.053 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:07.056 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:07.155 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.162 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:07.267 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.274 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:07.302 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.309 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:07.395 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.401 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:07.442 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.450 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:07.509 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.517 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:07.569 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.577 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:07.595 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.595 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.601 [info] ✨ Hawking radiation complete - evicted 100 items, freed 21KB
+
+12:43:07.602 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:07.711 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.719 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:07.785 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.792 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:07.839 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.847 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:07.907 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.913 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:07.974 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:07.983 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:08.001 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:08.031 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:08.202 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:08.210 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:08.239 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:08.246 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:08.306 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:08.313 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:08.361 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:08.368 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:08.441 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:08.449 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:08.528 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:08.535 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:08.566 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:08.577 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:08.657 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:08.664 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:08.681 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:08.688 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:08.774 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:08.781 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:08.843 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:08.850 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:08.921 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:08.928 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:08.996 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.004 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:09.024 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.031 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:09.139 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.146 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:09.176 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.183 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:09.265 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.272 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:09.347 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.354 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:09.375 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.381 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:09.483 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.489 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:09.511 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.518 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:09.593 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.600 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:09.637 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.644 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:09.710 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.716 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:09.768 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.776 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:09.840 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.841 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.848 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:43:09.848 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:09.909 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.917 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:09.935 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:09.942 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:10.019 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.027 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:10.064 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.070 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:10.129 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.136 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:10.206 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.214 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:10.238 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.239 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.245 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:10.246 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:10.374 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.382 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:10.475 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.483 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:10.525 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.533 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:10.596 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.603 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:10.670 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.678 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:10.702 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.705 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.710 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:10.713 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:10.829 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.837 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:10.960 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:10.968 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:11.011 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.021 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:11.090 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.100 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:11.154 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.162 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:11.182 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.191 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:11.280 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.289 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:11.319 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.327 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:11.408 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.414 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:11.465 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.476 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:11.529 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.537 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:11.598 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.605 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:11.620 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.628 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:11.720 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.729 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:11.759 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.767 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:11.860 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:11.870 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:12.091 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:12.101 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:12.162 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:12.171 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:12.253 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:12.255 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:12.261 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:12.261 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:43:12.334 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:12.344 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:12.381 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:12.386 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:12.388 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:12.395 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:12.493 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:12.494 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:12.500 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:12.503 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:12.636 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:12.645 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:12.717 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:12.727 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:12.773 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:12.783 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:12.972 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:12.980 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:13.027 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.035 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:13.095 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.103 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:13.166 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.175 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:13.194 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.203 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:13.276 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.285 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:13.332 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.341 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:13.401 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.411 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:13.466 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.476 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:13.496 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.504 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:13.587 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.595 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:13.623 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.632 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:13.703 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.711 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:13.757 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.767 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:13.808 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.816 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:13.888 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.897 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:13.915 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:13.922 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:14.018 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.027 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:14.065 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.074 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:14.150 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.159 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:14.215 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.223 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:14.247 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.253 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:14.331 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.338 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:14.366 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.373 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:14.487 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.494 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:14.538 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.546 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:14.619 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.625 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:14.678 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.687 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:14.763 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.771 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:14.866 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.875 [info] ✨ Hawking radiation complete - evicted 100 items, freed 30KB
+
+12:43:14.896 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:14.902 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:15.007 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.015 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:15.048 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.055 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:15.133 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.141 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:15.230 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.237 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:15.299 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.303 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.309 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:15.314 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:15.402 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.409 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:15.523 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.531 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:15.579 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.588 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:15.655 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.662 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:15.728 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.737 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:15.763 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.773 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:15.863 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.871 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:15.896 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:15.905 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:16.009 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.018 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:16.040 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.051 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:16.146 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.155 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:16.210 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.218 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:16.294 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.303 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:16.355 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.363 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:16.380 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.388 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:16.621 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.630 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:16.646 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.655 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:16.730 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.737 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:16.784 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.793 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:16.868 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.877 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:16.932 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.940 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:16.978 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:16.986 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:17.202 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:17.209 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:17.350 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:17.358 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:17.662 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:17.671 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:17.827 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:17.839 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:18.040 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:18.049 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:18.395 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:18.404 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:18.558 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:18.568 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:18.823 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:18.834 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:18.965 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:18.973 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:19.192 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:19.200 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:19.339 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:19.349 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:19.533 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:19.542 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:19.675 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:19.683 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:19.814 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:19.822 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:20.028 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:20.036 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:20.153 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:20.165 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:20.356 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:20.364 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:20.508 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:20.515 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:20.680 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:20.691 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:20.873 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:20.882 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:21.034 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:21.046 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:21.229 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:21.238 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:21.394 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:21.404 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:21.696 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:21.702 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:21.840 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:21.850 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:22.061 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:22.072 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:22.206 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:22.215 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:22.337 [info]     Trial 1 Results:
+
+12:43:22.337 [info]       Duration: 10361ms
+
+12:43:22.337 [info]       Total Operations: 67200
+
+12:43:22.337 [info]       Operations/sec: 6485
+
+12:43:22.337 [info]       Detailed Breakdown:
+
+12:43:22.337 [info]         Cache ops: 16800
+
+12:43:22.337 [info]         Routing ops: 16800
+
+12:43:22.337 [info]         Entanglement ops: 8400
+
+12:43:22.337 [info]         Entropy ops: 16800
+
+12:43:22.337 [info]         WAL ops: 8400
+
+12:43:22.337 [info]         Total counted: 67200
+
+12:43:22.337 [info]    • 2 processes: best 10361ms (6485 ops/sec)
+
+12:43:22.337 [info]      median 6485 (p50 6485, p90 6485)
+
+12:43:22.337 [info]      Best trial detailed breakdown:
+
+12:43:22.337 [info]        Cache: 16800 ops
+
+12:43:22.337 [info]        Routing: 16800 ops
+
+12:43:22.337 [info]        Entanglement: 8400 ops
+
+12:43:22.337 [info]        Entropy: 16800 ops
+
+12:43:22.337 [info]        WAL: 8400 ops
+
+12:43:22.337 [info]        Total counted: 67200
+
+12:43:22.337 [info]        vs Total reported: 67200
+
+12:43:22.337 [info]        Discrepancy: 0
+
+12:43:23.339 [info] 
+== Testing with 4 processes ==
+
+12:43:23.339 [info]   Trial 1/1...
+
+12:43:23.584 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:23.591 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:23.703 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:23.712 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:23.784 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:23.792 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:23.809 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:23.818 [info] ✨ Hawking radiation complete - evicted 100 items, freed 22KB
+
+12:43:23.833 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:23.843 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:24.057 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:24.067 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:24.252 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:24.261 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:24.284 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:24.292 [info] ✨ Hawking radiation complete - evicted 100 items, freed 30KB
+
+12:43:24.308 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:24.316 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:24.341 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:24.351 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:24.596 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:24.606 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:24.721 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:24.729 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:24.757 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:24.765 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:24.786 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:24.795 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:24.878 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:24.888 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:25.101 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:25.111 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:25.179 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:25.189 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:25.209 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:25.217 [info] ✨ Hawking radiation complete - evicted 100 items, freed 22KB
+
+12:43:25.249 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:25.255 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:25.259 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:25.266 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:25.550 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:25.559 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:25.583 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:25.591 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:25.607 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:25.614 [info] ✨ Hawking radiation complete - evicted 100 items, freed 22KB
+
+12:43:25.674 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:25.682 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:25.821 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:25.829 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:25.926 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:25.936 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:25.957 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:25.967 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:26.002 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:26.014 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:26.268 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:26.279 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:26.488 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:26.495 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:26.546 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:26.556 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:26.578 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:26.587 [info] ✨ Hawking radiation complete - evicted 100 items, freed 21KB
+
+12:43:26.641 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:26.642 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:26.650 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:26.651 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:43:26.917 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:26.926 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:27.014 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:27.023 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:27.056 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:27.063 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:27.085 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:27.094 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:27.230 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:27.241 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:27.419 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:27.428 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:27.485 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:27.493 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:27.517 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:27.525 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:27.562 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:27.570 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:27.575 [info] ✨ Hawking radiation complete - evicted 100 items, freed 22KB
+
+12:43:27.580 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:27.826 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:27.836 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:27.893 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:27.902 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:27.923 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:27.932 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:28.011 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:28.014 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:28.020 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:28.022 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:28.289 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:28.298 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:28.332 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:28.342 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:28.358 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:28.368 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:28.427 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:28.438 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:28.597 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:28.608 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:28.760 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:28.769 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:29.148 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:29.157 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:29.276 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:29.288 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:29.316 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:29.328 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:29.347 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:29.357 [info] ✨ Hawking radiation complete - evicted 100 items, freed 22KB
+
+12:43:29.491 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:29.499 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:29.746 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:29.755 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:29.834 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:29.842 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:29.868 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:29.878 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:29.896 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:29.905 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:30.026 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:30.034 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:30.152 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:30.162 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:30.228 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:30.236 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:30.254 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:30.262 [info] ✨ Hawking radiation complete - evicted 100 items, freed 20KB
+
+12:43:30.293 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:30.304 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:30.506 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:30.515 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:30.733 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:30.743 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:30.765 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:30.775 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:30.795 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:30.803 [info] ✨ Hawking radiation complete - evicted 100 items, freed 22KB
+
+12:43:30.971 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:30.979 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:31.225 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:31.235 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:31.354 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:31.362 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:31.389 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:31.397 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:31.416 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:31.424 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:31.649 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:31.657 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:31.835 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:31.844 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:31.863 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:31.872 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:31.891 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:31.899 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:31.998 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:32.007 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:32.205 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:32.214 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:32.266 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:32.275 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:32.294 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:32.303 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:32.341 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:32.360 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:32.537 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:32.546 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:32.754 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:32.762 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:32.779 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:32.786 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:32.803 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:32.811 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:32.915 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:32.924 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:33.110 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:33.118 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:33.174 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:33.184 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:33.207 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:33.217 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:33.240 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:33.241 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:33.249 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:33.250 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:33.546 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:33.557 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:33.590 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:33.598 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:33.623 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:33.631 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:33.747 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:33.756 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:34.103 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:34.113 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:34.378 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:34.387 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:34.540 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:34.550 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:34.643 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:34.654 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:34.912 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:34.922 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:35.289 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:35.298 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:35.458 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:35.469 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:35.586 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:35.594 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:35.742 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:35.752 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:36.061 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:36.069 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:36.374 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:36.383 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:36.554 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:36.562 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:36.703 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:36.713 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:37.065 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:37.075 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:37.438 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:37.446 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:37.608 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:37.615 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:37.749 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:37.758 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:38.015 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:38.024 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:38.349 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:38.360 [info] ✨ Hawking radiation complete - evicted 100 items, freed 30KB
+
+12:43:38.555 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:38.563 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:38.710 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:38.721 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:38.876 [info]     Trial 1 Results:
+
+12:43:38.876 [info]       Duration: 10051ms
+
+12:43:38.876 [info]       Total Operations: 48000
+
+12:43:38.876 [info]       Operations/sec: 4775
+
+12:43:38.876 [info]       Detailed Breakdown:
+
+12:43:38.876 [info]         Cache ops: 12000
+
+12:43:38.876 [info]         Routing ops: 12000
+
+12:43:38.876 [info]         Entanglement ops: 6000
+
+12:43:38.876 [info]         Entropy ops: 12000
+
+12:43:38.876 [info]         WAL ops: 6000
+
+12:43:38.876 [info]         Total counted: 48000
+
+12:43:38.876 [info]    • 4 processes: best 10051ms (4775 ops/sec)
+
+12:43:38.876 [info]      median 4775 (p50 4775, p90 4775)
+
+12:43:38.876 [info]      Best trial detailed breakdown:
+
+12:43:38.876 [info]        Cache: 12000 ops
+
+12:43:38.876 [info]        Routing: 12000 ops
+
+12:43:38.876 [info]        Entanglement: 6000 ops
+
+12:43:38.876 [info]        Entropy: 12000 ops
+
+12:43:38.876 [info]        WAL: 6000 ops
+
+12:43:38.876 [info]        Total counted: 48000
+
+12:43:38.876 [info]        vs Total reported: 48000
+
+12:43:38.876 [info]        Discrepancy: 0
+
+12:43:38.876 [info]    🔍 Testing feature effectiveness...
+
+12:43:39.452 [info]      📊 Cache hit rate (hot/universal): 0.0
+
+12:43:39.453 [info]      🌊 Entropy score: 0.521303180556486
+
+12:43:39.453 [info]      🌌 Active entanglements: 0
+
+12:43:40.454 [info] 
+== Testing with 8 processes ==
+
+12:43:40.454 [info]   Trial 1/1...
+
+12:43:40.917 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:40.928 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:41.226 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:41.235 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:41.503 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:41.511 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:41.735 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:41.742 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:41.761 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:41.768 [info] ✨ Hawking radiation complete - evicted 100 items, freed 30KB
+
+12:43:41.786 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:41.793 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:41.812 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:41.819 [info] ✨ Hawking radiation complete - evicted 100 items, freed 21KB
+
+12:43:41.835 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:41.844 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:41.860 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:41.873 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:42.118 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:42.127 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:42.431 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:42.439 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:42.757 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:42.769 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:42.967 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:42.975 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:43.004 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:43.013 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:43.033 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:43.043 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:43.063 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:43.071 [info] ✨ Hawking radiation complete - evicted 100 items, freed 20KB
+
+12:43:43.090 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:43.098 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:43.124 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:43.125 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:43.133 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:43.135 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:43.441 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:43.449 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:43.714 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:43.725 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:44.040 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:44.049 [info] ✨ Hawking radiation complete - evicted 100 items, freed 30KB
+
+12:43:44.198 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:44.208 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:44.226 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:44.234 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:44.252 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:44.260 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:44.281 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:44.290 [info] ✨ Hawking radiation complete - evicted 100 items, freed 21KB
+
+12:43:44.304 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:44.315 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:44.342 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:44.353 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:44.510 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:44.521 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:44.811 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:44.819 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:45.117 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:45.124 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:45.361 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:45.368 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:45.406 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:45.413 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:45.431 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:45.439 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:45.455 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:45.463 [info] ✨ Hawking radiation complete - evicted 100 items, freed 20KB
+
+12:43:45.479 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:45.486 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:45.528 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:45.529 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:45.536 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:45.536 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:46.015 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:46.023 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:46.337 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:46.345 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:46.517 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:46.525 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:46.650 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:46.659 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:46.811 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:46.820 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:46.950 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:46.959 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:47.664 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:47.672 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:48.070 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:48.078 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:48.398 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:48.405 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:48.506 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:48.514 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:48.536 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:48.547 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:48.572 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:48.579 [info] ✨ Hawking radiation complete - evicted 100 items, freed 19KB
+
+12:43:48.601 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:48.608 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:48.626 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:48.635 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:48.836 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:48.845 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:49.189 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:49.199 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:49.527 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:49.535 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:49.791 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:49.799 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:49.818 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:49.825 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:49.840 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:49.847 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:49.867 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:49.874 [info] ✨ Hawking radiation complete - evicted 100 items, freed 19KB
+
+12:43:49.891 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:49.899 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:49.918 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:49.925 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:50.018 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:50.024 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:50.026 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:50.033 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:50.651 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:50.658 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:50.989 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:50.998 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:51.058 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:51.065 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:51.086 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:51.094 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:51.170 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:51.180 [info] ✨ Hawking radiation complete - evicted 100 items, freed 21KB
+
+12:43:51.204 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:51.214 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:51.229 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:51.237 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:51.359 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:51.363 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:51.367 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:51.375 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:52.048 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:52.056 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:52.406 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:52.416 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:52.518 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:52.527 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:52.702 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:52.712 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:52.856 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:52.865 [info] ✨ Hawking radiation complete - evicted 100 items, freed 20KB
+
+12:43:53.004 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:53.014 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:53.136 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:53.146 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:43:53.354 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:53.364 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:53.797 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:53.806 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:54.216 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:54.227 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:54.600 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:54.610 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:43:54.821 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:54.830 [info] ✨ Hawking radiation complete - evicted 100 items, freed 30KB
+
+12:43:54.941 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:54.949 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:55.097 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:55.106 [info] ✨ Hawking radiation complete - evicted 100 items, freed 21KB
+
+12:43:55.210 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:55.219 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:55.341 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:55.353 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:55.647 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:55.655 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:43:56.101 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:56.109 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:56.515 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:56.524 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:56.914 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:56.923 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:43:57.108 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:57.116 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:43:57.251 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:57.261 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:57.398 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:57.408 [info] ✨ Hawking radiation complete - evicted 100 items, freed 19KB
+
+12:43:57.523 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:57.532 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:43:57.652 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:57.660 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:57.832 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:43:57.843 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:43:57.849 [info]     Trial 1 Results:
+
+12:43:57.849 [info]       Duration: 10795ms
+
+12:43:57.849 [info]       Total Operations: 38400
+
+12:43:57.849 [info]       Operations/sec: 3557
+
+12:43:57.849 [info]       Detailed Breakdown:
+
+12:43:57.849 [info]         Cache ops: 9600
+
+12:43:57.849 [info]         Routing ops: 9600
+
+12:43:57.849 [info]         Entanglement ops: 4800
+
+12:43:57.849 [info]         Entropy ops: 9600
+
+12:43:57.849 [info]         WAL ops: 4800
+
+12:43:57.849 [info]         Total counted: 38400
+
+12:43:57.849 [info]    • 8 processes: best 10795ms (3557 ops/sec)
+
+12:43:57.849 [info]      median 3557 (p50 3557, p90 3557)
+
+12:43:57.849 [info]      Best trial detailed breakdown:
+
+12:43:57.849 [info]        Cache: 9600 ops
+
+12:43:57.849 [info]        Routing: 9600 ops
+
+12:43:57.849 [info]        Entanglement: 4800 ops
+
+12:43:57.849 [info]        Entropy: 9600 ops
+
+12:43:57.849 [info]        WAL: 4800 ops
+
+12:43:57.850 [info]        Total counted: 38400
+
+12:43:57.850 [info]        vs Total reported: 38400
+
+12:43:57.850 [info]        Discrepancy: 0
+
+12:43:57.850 [info]    🔍 Testing feature effectiveness...
+
+12:43:58.196 [info]      📊 Cache hit rate (hot/universal): 0.0
+
+12:43:58.196 [info]      🌊 Entropy score: 0.8540229405629441
+
+12:43:58.196 [info]      🌌 Active entanglements: 0
+
+12:43:59.197 [info] 
+== Testing with 12 processes ==
+
+12:43:59.197 [info]   Trial 1/1...
+
+12:44:00.123 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:00.133 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:00.468 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:00.479 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:44:00.816 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:00.825 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:01.169 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:01.179 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:44:01.337 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:01.348 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:01.394 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:01.407 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:44:01.448 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:01.461 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:44:01.486 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:01.495 [info] ✨ Hawking radiation complete - evicted 100 items, freed 22KB
+
+12:44:01.521 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:01.530 [info] ✨ Hawking radiation complete - evicted 100 items, freed 19KB
+
+12:44:01.544 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:01.552 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:01.566 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:01.574 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:01.592 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:01.602 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:01.721 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:01.750 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:01.937 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:01.948 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:01.949 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:01.961 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:02.774 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:02.787 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:03.115 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:03.125 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:03.406 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:03.416 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:44:03.603 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:03.611 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:44:03.630 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:03.638 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:03.661 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:03.668 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:44:03.689 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:03.696 [info] ✨ Hawking radiation complete - evicted 100 items, freed 21KB
+
+12:44:03.719 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:03.728 [info] ✨ Hawking radiation complete - evicted 100 items, freed 20KB
+
+12:44:03.745 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:03.753 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:03.768 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:03.778 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:44:03.797 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:03.805 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:03.928 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:03.936 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:04.191 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:04.200 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:44:04.530 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:04.541 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:04.894 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:04.905 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:05.304 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:05.313 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:44:05.709 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:05.717 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:05.896 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:05.907 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:06.152 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:06.164 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:44:06.315 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:06.324 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:44:06.479 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:06.488 [info] ✨ Hawking radiation complete - evicted 100 items, freed 19KB
+
+12:44:06.629 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:06.639 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:44:06.788 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:06.800 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:44:06.927 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:06.937 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:07.072 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:07.080 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:07.648 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:07.661 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:07.957 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:07.971 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:08.270 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:08.278 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:44:08.594 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:08.603 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:44:08.893 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:08.901 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:44:09.094 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:09.101 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:09.120 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:09.128 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:44:09.145 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:09.153 [info] ✨ Hawking radiation complete - evicted 100 items, freed 30KB
+
+12:44:09.169 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:09.177 [info] ✨ Hawking radiation complete - evicted 100 items, freed 20KB
+
+12:44:09.200 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:09.210 [info] ✨ Hawking radiation complete - evicted 100 items, freed 19KB
+
+12:44:09.221 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:09.230 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:09.246 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:09.253 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:44:09.269 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:09.276 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:09.406 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:09.414 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:09.609 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:09.616 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:09.862 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:09.870 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:44:10.172 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:10.181 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:44:10.487 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:10.495 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:44:10.783 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:10.791 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:10.860 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:10.870 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:44:10.891 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:10.898 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:44:10.924 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:10.932 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:10.960 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:10.970 [info] ✨ Hawking radiation complete - evicted 100 items, freed 19KB
+
+12:44:10.989 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:10.998 [info] ✨ Hawking radiation complete - evicted 100 items, freed 19KB
+
+12:44:11.012 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:11.021 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:44:11.039 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:11.049 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:11.064 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:11.073 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:44:11.152 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:11.162 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:11.390 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:11.398 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:44:11.729 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:11.738 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:44:12.064 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:12.073 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:44:12.406 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:12.414 [info] ✨ Hawking radiation complete - evicted 100 items, freed 28KB
+
+12:44:12.797 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:12.806 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:44:13.050 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:13.058 [info] ✨ Hawking radiation complete - evicted 100 items, freed 30KB
+
+12:44:13.195 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:13.203 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:44:13.361 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:13.371 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:13.469 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:13.479 [info] ✨ Hawking radiation complete - evicted 100 items, freed 19KB
+
+12:44:13.619 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:13.628 [info] ✨ Hawking radiation complete - evicted 100 items, freed 21KB
+
+12:44:13.764 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:13.774 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:13.880 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:13.889 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:14.004 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:14.014 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:14.161 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:14.168 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:14.440 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:14.448 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:44:14.836 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:14.845 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:44:15.211 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:15.220 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:44:15.621 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:15.630 [info] ✨ Hawking radiation complete - evicted 100 items, freed 30KB
+
+12:44:15.921 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:15.931 [info] ✨ Hawking radiation complete - evicted 100 items, freed 27KB
+
+12:44:16.083 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:16.092 [info] ✨ Hawking radiation complete - evicted 100 items, freed 29KB
+
+12:44:16.229 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:16.238 [info] ✨ Hawking radiation complete - evicted 100 items, freed 30KB
+
+12:44:16.370 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:16.380 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:16.517 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:16.529 [info] ✨ Hawking radiation complete - evicted 100 items, freed 18KB
+
+12:44:16.656 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:16.666 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:16.794 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:16.804 [info] ✨ Hawking radiation complete - evicted 100 items, freed 23KB
+
+12:44:16.921 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:16.931 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:17.102 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:17.105 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:17.109 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:17.113 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:44:17.726 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:17.733 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:44:18.001 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:18.009 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:44:18.136 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:18.145 [info] ✨ Hawking radiation complete - evicted 100 items, freed 26KB
+
+12:44:18.265 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:18.272 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:18.387 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:18.388 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:18.396 [info] ✨ Hawking radiation complete - evicted 0 items, freed 0KB
+
+12:44:18.396 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
+
+12:44:18.460 [info]     Trial 1 Results:
+
+12:44:18.460 [info]       Duration: 11227ms
+
+12:44:18.460 [info]       Total Operations: 42400
+
+12:44:18.460 [info]       Operations/sec: 3776
+
+12:44:18.460 [info]       Detailed Breakdown:
+
+12:44:18.460 [info]         Cache ops: 10600
+
+12:44:18.460 [info]         Routing ops: 10600
+
+12:44:18.460 [info]         Entanglement ops: 5300
+
+12:44:18.460 [info]         Entropy ops: 10600
+
+12:44:18.460 [info]         WAL ops: 5300
+
+12:44:18.460 [info]         Total counted: 42400
+
+12:44:18.460 [info]    • 12 processes: best 11227ms (3776 ops/sec)
+
+12:44:18.460 [info]      median 3776 (p50 3776, p90 3776)
+
+12:44:18.460 [info]      Best trial detailed breakdown:
+
+12:44:18.460 [info]        Cache: 10600 ops
+
+12:44:18.460 [info]        Routing: 10600 ops
+
+12:44:18.460 [info]        Entanglement: 5300 ops
+
+12:44:18.460 [info]        Entropy: 10600 ops
+
+12:44:18.460 [info]        WAL: 5300 ops
+
+12:44:18.460 [info]        Total counted: 42400
+
+12:44:18.460 [info]        vs Total reported: 42400
+
+12:44:18.460 [info]        Discrepancy: 0
+
+12:44:18.460 [info]    🔍 Testing feature effectiveness...
+
+12:44:18.800 [info]      📊 Cache hit rate (hot/universal): 0.0
+
+12:44:18.800 [info]      🌊 Entropy score: 0.491061275736716
+
+12:44:18.800 [info]      🌌 Active entanglements: 0
+
+12:44:19.801 [info] 
+🎯 Feature Validation Summary
+
+12:44:19.801 [info] ============================================================
+
+12:44:19.801 [info] 🧪 Testing individual features...
+
+12:44:19.801 [info] 📊 Testing Event Horizon Cache...
+
+12:44:19.897 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:19.906 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:20.098 [info]    ✅ Cache test: 1000 operations in 297ms
+
+12:44:20.098 [info] 🌍 Testing Gravitational Routing...
+
+12:44:20.098 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:20.106 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:20.280 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:20.289 [info] ✨ Hawking radiation complete - evicted 100 items, freed 31KB
+
+12:44:20.427 [info]    ✅ Routing test: 2000 operations in 330ms
+
+12:44:20.428 [info] 🌌 Testing Quantum Entanglement...
+
+12:44:20.430 [info]    ✅ Entanglement test: 100 operations in 2ms
+
+12:44:20.430 [info] 🌊 Testing Entropy Monitoring...
+
+12:44:20.445 [info]    ✅ Entropy metrics: %{total_entropy: 0.05190234523287386, shannon_entropy: 0.08650390872145644, thermodynamic_entropy: 1.3123422475376496e-22, entropy_trend: :decreasing, system_temperature: 3.5100000000000002, last_calculated: 1756403060430, disorder_index: 0.020760938093149543, stability_metric: 0.9870244136917815, rebalancing_recommended: false, vacuum_stability: 0.99995}
+
+12:44:20.445 [info] 📝 Testing Per-Shard WAL...
+
+12:44:20.478 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:20.486 [info] ✨ Hawking radiation complete - evicted 100 items, freed 30KB
+
+12:44:20.587 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:20.593 [info] ✨ Hawking radiation complete - evicted 100 items, freed 24KB
+
+12:44:20.690 [info] 🌟 Emitting Hawking radiation at mild intensity
+
+12:44:20.692 [info]    ✅ WAL test: 1000 operations in 246ms
+
+12:44:20.692 [info] 
+🎉 Large Dataset Feature Validation Complete!
+
+12:44:20.692 [info] 📊 Dataset: 0.1GB (10000 keys)
+
+12:44:20.692 [info] 🔧 Features tested: Intelligent Caching, Gravitational Routing, Quantum Entanglement, Entropy Monitoring, Per-Shard WAL
+
+12:44:20.692 [info] 🚀 Ready for Phase 9.2 optimization!
+
+12:44:20.692 [info] 
+📊 COMPREHENSIVE PERFORMANCE ANALYSIS
+
+12:44:20.692 [info] ================================================================================
+
+12:44:20.692 [info] 🔍 OPERATION COUNTING ANALYSIS:
+
+12:44:20.692 [info]    Expected operations per worker per iteration:
+
+12:44:20.692 [info]      • Intelligent Caching: 4 operations (4 cosmic_get)
+
+12:44:20.692 [info]      • Gravitational Routing: 4 operations (4 cosmic_get)
+
+12:44:20.692 [info]      • Quantum Entanglement: 2 operations (1 quantum_get + 2 cosmic_get)
+
+12:44:20.692 [info]      • Entropy Monitoring: 4 operations (4 cosmic_get)
+
+12:44:20.693 [info]      • Per-Shard WAL: 2 operations (2 cosmic_put)
+
+12:44:20.693 [info]      • TOTAL PER ITERATION: 16 operations
+
+12:44:20.693 [info]    Expected operations per worker (50 iterations): 16 × 50 = 800 operations
+
+12:44:20.693 [info]    Expected operations for 12 workers: 800 × 12 = 9600 operations
+
+12:44:20.693 [info] 
+🎯 PERFORMANCE TARGETS:
+
+12:44:20.693 [info]    • Target: 25,000+ ops/sec per process
+
+12:44:20.693 [info]    • Phase 9 Architecture: ✅ Enabled
+
+12:44:20.693 [info]    • Numbered Shards: ✅ 24 shards active
+
+12:44:20.693 [info] 
+💡 TROUBLESHOOTING NOTES:
+
+12:44:20.693 [info]    • If discrepancy > 0: Some operations not being counted
+
+12:44:20.693 [info]    • If discrepancy < 0: Operations being double-counted
+
+12:44:20.693 [info]    • If performance < 25k ops/sec: Check workload complexity or system bottlenecks
+
+12:44:20.693 [info]    • Phase 9 should provide linear scaling up to 24 processes
+
+12:44:20.698 [info] ✨ Hawking radiation complete - evicted 100 items, freed 25KB
