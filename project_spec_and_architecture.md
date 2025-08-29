@@ -1,6 +1,8 @@
 # WarpEngine: Hybrid Geospatial Database
 ## Project Specification & Complete Architecture Guide
 
+> Note: See `docs/mvp_low_risk_design.md` for the current MVP (CPU-only, single-node) scope adopted to reduce execution risk. GPU/NIF, physics, clustering, and advanced real-time features are vNext behind feature flags.
+
 ### Executive Summary
 
 WarpEngine is a next-generation geospatial database that combines Elixir's distributed systems capabilities with Zig+CUDA computational performance. It serves as a high-performance alternative to Tile38 and Hivekit, designed for global-scale spatial data processing with real-time capabilities.
@@ -12,6 +14,18 @@ WarpEngine is a next-generation geospatial database that combines Elixir's distr
 - 100K+ concurrent geofence checks/second
 - Global distribution with <50ms cross-region latency
 - Support for 1M+ concurrent WebSocket connections
+
+---
+
+## Storage/Cache Adapter Strategy
+
+WarpEngine focuses on spatial computation, indexing, and real-time GIS. Durability and caching are provided via pluggable adapters:
+
+- Storage adapters (e.g., Postgres, ClickHouse) provide authoritative persistence and change data capture (CDC).
+- Cache adapters (e.g., Redis) provide read-through/write-behind acceleration and pub/sub invalidation.
+- In-memory shards and indices (ETS + GPU/CPU indices) are acceleration layers, not the source of truth.
+
+This separation reduces scope risk and enables flexible deployments without reworking the spatial engine.
 
 ---
 
@@ -70,9 +84,12 @@ apps/
 │   │   │   │       ├── quantum_entanglement.ex
 │   │   │   │       └── entropy_monitor.ex
 │   │   │   ├── storage/               # Data persistence
-│   │   │   │   ├── shard.ex           # Individual shard management
-│   │   │   │   ├── wal.ex             # Write-ahead logging
-│   │   │   │   └── recovery.ex        # Crash recovery
+│   │   │   │   ├── shard.ex           # In-memory shard/index management (acceleration)
+│   │   │   │   ├── adapter/           # Pluggable storage/cache adapters
+│   │   │   │   │   ├── behaviour.ex   # Storage/Cache behaviours
+│   │   │   │   │   ├── postgres.ex    # Storage adapter: Postgres (authoritative)
+│   │   │   │   │   └── redis.ex       # Cache adapter: Redis (read-through)
+│   │   │   │   └── cdc.ex             # CDC subscriber to keep indices warm
 │   │   │   └── nif/                   # Native interface
 │   │   │       ├── spatial_nif.ex     # Zig NIF wrapper
 │   │   │       └── gpu_coordinator.ex # CUDA operation coordinator
@@ -123,10 +140,8 @@ native/
 │   │   │   ├── gravitational.zig      # Gravitational routing
 │   │   │   ├── quantum.zig            # Quantum entanglement
 │   │   │   └── entropy.zig            # Entropy calculations
-│   │   └── storage/                   # Low-level storage
-│   │       ├── shard.zig              # Shard data structures
-│   │       ├── wal.zig                # Write-ahead log
-│   │       └── compression.zig        # Data compression
+│   │   └── storage/                   # (optional) Low-level storage primitives
+│   │       └── shard.zig              # Shard data structures used in-memory
 │   ├── cuda_kernels/                  # CUDA kernel implementations
 │   │   ├── spatial_query.cu           # Parallel spatial searches
 │   │   ├── geofence_check.cu          # Massive geofence checking

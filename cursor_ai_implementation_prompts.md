@@ -1,7 +1,9 @@
 # WarpEngine: Cursor AI Implementation Guide
 ## Step-by-Step Prompts for Cursor
 
-This document provides specific prompts to use with Cursor AI for implementing WarpEngine from scratch.
+> MVP notice: Execute Phase 1 with GPU/NIF, physics, clustering, and complex WebSockets disabled. Follow `docs/mvp_low_risk_design.md`. Use feature flags to defer advanced components.
+
+This document provides specific prompts to use with Cursor AI for implementing WarpEngine from scratch, positioning WarpEngine as a high-performance spatial compute/indexing engine. Durability and caching are provided via pluggable storage/cache adapters (e.g., Postgres + Redis), and indices/shards act as acceleration layers updated via CDC.
 
 ---
 
@@ -94,10 +96,10 @@ Make sure all functions have proper error handling and return {:ok, result} or {
 
 ## Phase 2: Core Storage Engine
 
-### Prompt 4: Implement Shard Management
+### Prompt 4: Implement Shard & Adapter Management
 
 ```
-Implement the core shard management system for WarpEngine:
+Implement the in-memory shard/index acceleration layer and storage/cache adapters:
 
 1. Create lib/warp_engine/storage/shard.ex with:
    - Shard GenServer that manages an ETS table
@@ -117,18 +119,29 @@ Implement the core shard management system for WarpEngine:
    - Distance-based routing decisions
    - Integration with shard selection logic
 
-4. Add configuration options for:
+4. Define storage/cache behaviours and adapters:
+   - lib/warp_engine/storage/adapter.ex: Storage behaviour (put/get/delete/batch, start_link)
+   - lib/warp_engine/storage/cache.ex: Cache behaviour (get/set/invalidate)
+   - lib/warp_engine/storage/adapters/postgres.ex: Authoritative storage via Ecto
+   - lib/warp_engine/storage/adapters/redis_cache.ex: Read-through cache
+
+5. Add CDC subscriber to keep indices warm:
+   - lib/warp_engine/storage/cdc_subscriber.ex: Subscribe to Postgres logical replication or Kafka; update indices
+
+6. Add configuration options for:
    - Number of shards (default: System.schedulers_online() * 2)
    - Physics optimization toggles
    - ETS table options (compressed, write_concurrency)
+   - Storage adapter selection and credentials
+   - Cache adapter selection and connection details
 
 Include proper supervision tree structure and crash recovery mechanisms.
 ```
 
-### Prompt 5: Spatial Indexing
+### Prompt 5: Spatial Indexing (CPU/GPU) with Cache-Aside
 
 ```
-Implement spatial indexing for efficient queries:
+Implement spatial indexing for efficient queries with cache-aside reads and CDC-driven updates:
 
 1. Create lib/warp_engine/spatial/index_manager.ex:
    - IndexManager GenServer for coordinating spatial indices
@@ -153,6 +166,7 @@ Implement spatial indexing for efficient queries:
    - Query result caching with TTL
    - Statistics collection for query performance
    - Automatic index rebuilding when performance degrades
+   - Cache-aside reads; write-behind updates to storage adapter
 
 Each function should support both CPU and GPU backends with automatic fallback.
 ```
@@ -196,11 +210,11 @@ All kernels should be optimized for modern GPU architectures (compute capability
 ### Prompt 7: GPU Integration Layer
 
 ```
-Create the integration layer between Elixir and CUDA kernels:
+Create the integration layer between Elixir and CUDA kernels. Emphasize batching, pinned buffers, and streams to amortize PCIe and NIF overhead:
 
 1. Implement native/warp_spatial_nif/src/cuda/kernels.zig:
    - Wrapper functions for all CUDA kernels
-   - Parameter marshaling between Elixir and CUDA
+   - Parameter marshaling between Elixir and CUDA (use page-locked host memory for large batches)
    - Stream-based asynchronous execution
    - Result collection and error handling
 

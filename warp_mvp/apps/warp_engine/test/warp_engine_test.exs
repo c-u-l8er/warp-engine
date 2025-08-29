@@ -6,10 +6,10 @@ defmodule WarpEngineTest do
   setup do
     # Start WarpEngine application for each test
     {:ok, _} = Application.ensure_all_started(:warp_engine)
-    
+
     # Ensure cleanup after each test
     on_exit(fn -> Application.stop(:warp_engine) end)
-    
+
     :ok
   end
 

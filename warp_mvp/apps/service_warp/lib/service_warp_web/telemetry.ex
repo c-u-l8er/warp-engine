@@ -12,9 +12,21 @@ defmodule ServiceWarpWeb.Telemetry do
 
   @impl true
   def init(_arg) do
+    port =
+      case System.get_env("PROMETHEUS_PORT") do
+        nil -> 9568
+        val ->
+          case Integer.parse(val) do
+            {num, _} -> num
+            :error -> 9568
+          end
+      end
+
     children = [
       {TelemetryMetricsPrometheus, [
-        metrics: metrics()
+        metrics: metrics(),
+        port: port,
+        plug_cowboy_opts: [ref: :prometheus_metrics, transport_options: [num_acceptors: 5]]
       ]}
     ]
 

@@ -1,1 +1,15 @@
-<%= @inner_content %>
+<div class="border-b bg-gray-50">
+  <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="text-lg font-semibold">
+      <a href={~p"/"} class="hover:underline">ServiceWarp</a>
+    </div>
+    <div class="space-x-4 text-sm">
+      <a href={~p"/"} class="text-gray-700 hover:text-black">Dashboard</a>
+      <a href={~p"/ai"} class="text-gray-700 hover:text-black">AI Agent</a>
+    </div>
+  </nav>
+  </div>
+
+<main class="container mx-auto px-4 py-6">
+  <%= @inner_content %>
+  </main>

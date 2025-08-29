@@ -18,4 +18,13 @@ defmodule WarpMvp.MixProject do
   defp deps do
     []
   end
+
+  # Configure which apps to include in the umbrella
+  def apps do
+    [
+      :warp_engine,
+      :warp_web,
+      :service_warp
+    ]
+  end
 end

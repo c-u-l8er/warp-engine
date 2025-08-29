@@ -19,7 +19,11 @@ defmodule ServiceWarpWeb.Router do
     pipe_through :browser
 
     # Main dashboard
-    live "/", DashboardLive, :index
+    live "/", DashboardLive
+    live "/dashboard", DashboardLive
+
+    # AI Agent Dashboard
+    live "/ai", AIAgentLive
 
     # Job management
     live "/jobs", JobsLive, :index

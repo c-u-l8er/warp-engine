@@ -1,6 +1,8 @@
 # WarpEngine: Code Templates & Examples
 ## Starter Code for Cursor AI Implementation
 
+> MVP notice: The active MVP scope is CPU-only, single-node. See `docs/mvp_low_risk_design.md`. GPU/NIF kernels, physics, clustering, and advanced real-time are vNext behind feature flags.
+
 This document provides concrete code templates and examples to accelerate WarpEngine development with Cursor AI.
 
 ---
@@ -176,18 +178,15 @@ defmodule WarpEngine.MixProject do
       
       # Clustering and distribution
       {:libcluster, "~> 3.3"},
-      {:phoenix_pubsub, "~> 2.1"},
       
       # Native interface
       {:zigler, "~> 0.13", runtime: false},
       
-      # Database (if needed for metadata)
+      # Storage/Cache adapters (pluggable)
       {:ecto_sql, "~> 3.6"},
       {:postgrex, ">= 0.0.0"},
-      
-      # Caching
       {:redix, "~> 1.2"},
-      {:nebulex, "~> 2.4"},
+      {:kafka_ex, "~> 0.12", optional: true},
       
       # Testing
       {:benchee, "~> 1.0", only: [:dev, :test]},
@@ -203,11 +202,11 @@ defmodule WarpEngine.MixProject do
   end
 
   defp compile_native(_) do
-    {result, _} = System.cmd("zig", ["build", "-Doptimize=ReleaseFast"], 
+    {output, status} = System.cmd("zig", ["build", "-Doptimize=ReleaseFast"], 
                              cd: Path.join(File.cwd!(), "../../native/warp_spatial_nif"))
-    
-    if result != 0 do
-      Mix.raise("Native compilation failed")
+
+    if status != 0 do
+      Mix.raise("Native compilation failed: #{output}")
     end
   end
 end
@@ -400,11 +399,11 @@ const cuda = if (cuda_enabled) @import("cuda/kernels.zig") else struct {};
 /// Validates geographic coordinates
 /// Returns {:ok, {lat, lon}} or {:error, reason}
 export fn validate_coordinates(env: beam.env, lat: f64, lon: f64) beam.term {
-    if (lat < -90.0 or lat > 90.0) {
+    if (lat < -90.0 || lat > 90.0) {
         return beam.make_error_atom(env, "invalid_latitude");
     }
     
-    if (lon < -180.0 or lon > 180.0) {
+    if (lon < -180.0 || lon > 180.0) {
         return beam.make_error_atom(env, "invalid_longitude");
     }
     
@@ -440,8 +439,8 @@ export fn haversine_distance(env: beam.env, lat1: f64, lon1: f64, lat2: f64, lon
 /// Checks if a point is within a bounding box
 export fn point_in_bbox(env: beam.env, point_lat: f64, point_lon: f64, 
                        min_lat: f64, min_lon: f64, max_lat: f64, max_lon: f64) beam.term {
-    const inside = point_lat >= min_lat and point_lat <= max_lat and
-                   point_lon >= min_lon and point_lon <= max_lon;
+    const inside = point_lat >= min_lat && point_lat <= max_lat &&
+                   point_lon >= min_lon && point_lon <= max_lon;
     
     return beam.make_bool(env, inside);
 }
@@ -718,7 +717,7 @@ defmodule WarpEngine.Application do
     Logger.info("GPU support: #{gpu_available}")
     
     children = [
-      # Core storage system
+      # In-memory shard/index acceleration layer
       {WarpEngine.Storage.ShardSupervisor, []},
       
       # Spatial indexing system
@@ -730,6 +729,9 @@ defmodule WarpEngine.Application do
       # GPU coordination (if available)
       gpu_supervisor(gpu_available),
       
+      # CDC subscriber (keeps indices warm via changefeeds)
+      {WarpEngine.Storage.CDCSubscriber, []},
+
       # Cluster coordination
       {WarpEngine.Cluster.Coordinator, []},
       
@@ -750,20 +752,18 @@ defmodule WarpEngine.Application do
   
   # Detect CUDA GPU support
   defp detect_gpu_support do
-    case System.get_env("CUDA_VISIBLE_DEVICES") do
-      nil -> false
-      "" -> false
-      _devices -> 
-        # Try to initialize GPU through NIF
-        case WarpEngine.SpatialNIF.init_gpu() do
-          {:ok, _info} -> true
-          {:error, _reason} -> false
-        end
+    with true <- System.get_env("CUDA_VISIBLE_DEVICES") not in [nil, ""],
+         {:ok, _info} <- WarpEngine.SpatialNIF.init_gpu() do
+      true
+    else
+      _ -> false
     end
   end
   
   defp physics_supervisor(gpu_available) do
-    if Application.get_env(:warp_engine, :physics)[:enable_physics_optimizations] do
+    physics = Application.get_env(:warp_engine, :physics, [])
+    features = [:enable_gravitational_routing, :enable_quantum_entanglement, :enable_entropy_monitoring]
+    if Enum.any?(features, &Keyword.get(physics, &1, false)) do
       {WarpEngine.Physics.Supervisor, [gpu_available: gpu_available]}
     else
       nil
@@ -814,6 +814,7 @@ defmodule WarpEngine do
   """
   
   alias WarpEngine.{GeoObject, Geofence, Storage, Spatial, Physics}
+  alias WarpEngine.Storage.{Adapter, Cache}
   
   @type object_id :: binary()
   @type coordinates :: {lat :: float(), lon :: float()}
@@ -849,7 +850,7 @@ defmodule WarpEngine do
   def cosmic_put(id, data, opts \\ []) do
     with {:ok, geo_object} <- build_geo_object(id, data),
          {:ok, optimal_shard} <- calculate_optimal_shard(geo_object, opts),
-         {:ok, result} <- Storage.store_object(optimal_shard, geo_object) do
+         {:ok, result} <- Adapter.put(geo_object, opts) do
       
       # Update physics metadata
       Physics.record_object_access(geo_object)
@@ -870,19 +871,19 @@ defmodule WarpEngine do
   @spec cosmic_get(object_id(), keyword()) :: 
     {:ok, GeoObject.t(), non_neg_integer(), non_neg_integer()} | {:error, term()}
   def cosmic_get(id, opts \\ []) do
-    with {:ok, shard_id} <- find_object_shard(id),
-         {:ok, geo_object, retrieval_time} <- Storage.get_object(shard_id, id) do
+    with {:ok, cached} <- Cache.get(id),
+         {:object, geo_object, retrieval_time} <- ensure_fetched(id, cached, opts) do
       
       # Update access metadata  
       updated_object = GeoObject.record_access(geo_object)
-      Storage.update_object_metadata(shard_id, updated_object)
+      Cache.set(updated_object)
       
       # Quantum entanglement prefetching (if enabled)
       if opts[:quantum_prefetch] != false do
         Task.start(fn -> Physics.quantum_prefetch(id) end)
       end
       
-      {:ok, updated_object, shard_id, retrieval_time}
+      {:ok, updated_object, Map.get(updated_object, :shard_id), retrieval_time}
     end
   end
   
@@ -897,15 +898,14 @@ defmodule WarpEngine do
          {:ok, optimal_shard} <- calculate_optimal_shard(updated_object, opts) do
       
       if optimal_shard == current_shard do
-        # Update in current shard
-        Storage.update_object(current_shard, updated_object)
+        Adapter.put(updated_object, opts)
       else
-        # Migrate to optimal shard
         migrate_object(updated_object, current_shard, optimal_shard)
       end
       
       # Broadcast update
-      broadcast_object_update(updated_object, :updated)
+      {:ok, :updated} = broadcast_object_update(updated_object, :updated)
+      {:ok, :updated, optimal_shard, 0}
     end
   end
   
@@ -1088,6 +1088,14 @@ defmodule WarpEngine do
       {:ok, geo_object}
     end
   end
+  # Adapter-backed fetch with cache-aside
+  defp ensure_fetched(id, {:hit, object}, _opts), do: {:object, object, 0}
+  defp ensure_fetched(id, :miss, opts) do
+    case Adapter.get(id, opts) do
+      {:ok, object} -> {:object, object, 0}
+      error -> error
+    end
+  end
   
   defp build_geo_object(_id, _data), do: {:error, :missing_coordinates}
   
@@ -1157,6 +1165,104 @@ defmodule WarpEngine do
   defp cluster_stats, do: %{nodes: length(Node.list()) + 1, healthy: true}
   defp performance_stats, do: %{avg_query_time: 0.0, throughput: 0.0}
 end
+---
+
+## Adapter Behaviours and Example Adapters
+
+### Storage Behaviour
+
+```elixir
+defmodule WarpEngine.Storage.Adapter do
+  @moduledoc """
+  Behaviour for storage backends that provide authoritative persistence.
+  """
+
+  @type id :: binary()
+  @type object :: WarpEngine.GeoObject.t()
+
+  @callback put(object, keyword()) :: {:ok, term()} | {:error, term()}
+  @callback get(id, keyword()) :: {:ok, object} | {:error, :not_found | term()}
+  @callback delete(id, keyword()) :: :ok | {:error, term()}
+  @callback batch_put([object], keyword()) :: {:ok, non_neg_integer()} | {:error, term()}
+  @callback start_link(keyword()) :: {:ok, pid()} | {:error, term()}
+end
+```
+
+### Cache Behaviour
+
+```elixir
+defmodule WarpEngine.Storage.Cache do
+  @moduledoc """
+  Behaviour for cache backends used for read-through/write-behind.
+  """
+
+  @type id :: binary()
+  @type object :: WarpEngine.GeoObject.t()
+
+  @callback get(id) :: {:hit, object} | :miss | {:error, term()}
+  @callback set(object) :: :ok | {:error, term()}
+  @callback invalidate(id) :: :ok | {:error, term()}
+end
+```
+
+### Postgres Storage Adapter (skeleton)
+
+```elixir
+defmodule WarpEngine.Storage.Adapters.Postgres do
+  @behaviour WarpEngine.Storage.Adapter
+  alias WarpEngine.GeoObject
+
+  def start_link(_opts), do: {:ok, self()}
+
+  def put(%GeoObject{} = object, _opts) do
+    # Persist via Ecto schema (omitted for brevity)
+    {:ok, :stored}
+  end
+
+  def get(id, _opts) do
+    # Load and decode to GeoObject (omitted)
+    {:error, :not_found}
+  end
+
+  def delete(_id, _opts), do: :ok
+  def batch_put(objects, _opts), do: {:ok, length(objects)}
+end
+```
+
+### Redis Cache Adapter (skeleton)
+
+```elixir
+defmodule WarpEngine.Storage.Adapters.RedisCache do
+  @behaviour WarpEngine.Storage.Cache
+  alias WarpEngine.GeoObject
+
+  def get(_id), do: :miss
+  def set(%GeoObject{}), do: :ok
+  def invalidate(_id), do: :ok
+end
+```
+
+### CDC Subscriber (skeleton)
+
+```elixir
+defmodule WarpEngine.Storage.CDCSubscriber do
+  use GenServer
+  require Logger
+
+  def start_link(opts), do: GenServer.start_link(__MODULE__, opts, name: __MODULE__)
+
+  def init(_opts) do
+    # Connect to changefeed (e.g., PG logical decoding or Kafka)
+    {:ok, %{}}
+  end
+
+  def handle_info({:change, change}, state) do
+    # Update in-memory indices/shards
+    Logger.debug("CDC change received: #{inspect(change)}")
+    {:noreply, state}
+  end
+end
+```
 ```
 
 ---

@@ -30,7 +30,10 @@ defmodule ServiceWarp.Application do
       ServiceWarp.Technicians.Supervisor,
 
       # Start the Global State Manager
-      ServiceWarp.GlobalState
+      ServiceWarp.GlobalState,
+
+      # Start the Repo
+      ServiceWarp.Repo
     ]
 
     opts = [strategy: :one_for_one, name: ServiceWarp.Supervisor]

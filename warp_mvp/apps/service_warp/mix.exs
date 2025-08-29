@@ -39,13 +39,20 @@ defmodule ServiceWarp.MixProject do
       {:jason, "~> 1.4"},
       {:plug_cowboy, "~> 2.6"},
 
+      # AI Agents
+      {:autogentic, "~> 1.0.0"},
+
+      # Database
+      {:ecto, "~> 3.10"},
+      {:postgrex, ">= 0.0.0"},
+
       # WarpEngine integration
       {:warp_engine, in_umbrella: true},
 
       # Development dependencies
-      {:esbuild, "~> 0.8", only: :dev},
-      {:tailwind, "~> 0.2.0", only: :dev},
-      {:finch, "~> 0.13", only: :dev},
+      {:esbuild, "~> 0.8"},
+      {:tailwind, "~> 0.2.0"},
+      {:finch, "~> 0.13"},
       {:telemetry_metrics_prometheus, "~> 1.1"},
       {:telemetry_metrics_prometheus_core, "~> 1.0"}
     ]
